@@ -1,0 +1,778 @@
+from __future__ import annotations
+
+import time
+from dataclasses import asdict
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+from ..parameters.results_params import ResultsParams
+from ..parameters.user_input import UserInput
+from ..preprocess import PreprocessData
+from ..preprocess.initial_boundary_conditions import temperature_gradient
+from ..statevariables import (
+    compute_error_for_convergence,
+    define_previous_statevariable,
+    initialize_statevariables,
+    overwrite_statevariables,
+    reset_error_for_while_loop,
+    set_statevariables,
+)
+from ..update_physical_values import (
+    update_enthalpy,
+    update_enthalpy_solid_state,
+    update_liquid_fraction,
+)
+from ..utils.helpers import t_total
+from ..utils.spyice_exceptions import ConvergenceError, InvalidPhaseError
+from .advection_diffusion import AdvectionDiffusion
+from .stefan_problem import StefanProblem
+
+# plt.style.use("spyice.utils.custom")
+# plt.rcParams.update(
+#     {
+#         "text.usetex": True,
+#     }
+# )
+plt.rcParams["text.latex.preamble"].join(
+    [
+        r"\usepackage{dashbox}",
+        r"\setmainfont{xcolor}",
+    ]
+)
+
+
+def locate_ice_ocean_interface(phi, dz, nz, **kwargs):
+    """Locate ice ocean interface, based on liquid fraction equivalent ice thickness
+
+    Args:
+        phi (array-like): Liquid fraction [-]
+        dz (float): Spatial discretization [m]
+        nz (int): Number of computational nodes
+        **kwargs: Additional keyword arguments
+            Stefan (bool): Validation with Stefan problem (default: True)
+    Returns:
+        tuple: A tuple containing:
+            - if_depth (float): Location of the ice-water interface/sea ice total thickness [m]
+            - if_depth_index (int): Index of the 'transition cell' from ice to ocean (freezing) or water to ice (melting)
+    """
+
+    # initialize variable for for-loop
+
+    is_stefan = kwargs.get("Stefan", True)
+    Z = (nz - 1) * dz
+    depth = np.linspace(dz, Z + dz, nz)
+    ice_depth_index = 0
+    ice_depth = 0
+
+    for i in range(nz):
+        if (
+            is_stefan and phi[i] < 0.95 or not is_stefan and phi[i] < 1
+        ):  # Simplified condition for Stefan problem
+            ice_depth = depth[i]
+            ice_depth_index = i + 1
+        else:
+            break
+    return ice_depth, ice_depth_index
+
+
+class SeaIceModel:
+    """SeaIceModelClass represents a class that models the behavior of sea ice."""
+
+    def __init__(self, dataclass: PreprocessData, user_dataclass: UserInput):
+        """
+        Args:
+            dataclass (PreprocessData): The preprocessed data for the model.
+            user_dataclass (UserInput): The user input data for the model.
+        """
+
+        self.mush_lowerbound = 0.1
+        self.mush_upperbound = 0.9
+        self.preprocess_data = dataclass
+        self.ui_data = dataclass
+        self.results = ResultsParams(dataclass.max_iterations, dataclass.nz)
+        self.results.store_results(
+            dataclass,
+            dataclass.temperature[0],
+            dataclass.salinity[0],
+            dataclass.liquid_fraction[0],
+            dataclass.enthalpy[0],
+            dataclass.solid_enthalpy[0],
+            dataclass.upwind_velocity[0],
+            dataclass.ice_thickness,
+            dataclass.time_passed,
+            0,
+        )
+
+    def bc_neumann(self, phi_k, nz, bc_condition=None):
+        """Apply Neumann boundary condition to the sea ice model.
+
+        Args:
+            phi_k (float): The value of phi at the k-th layer.
+            nz (int): The number of layers in the sea ice model.
+            bc_condition (str, optional): The type of boundary condition to apply. Defaults to None.
+        Returns:
+            None
+        """
+
+        if bc_condition == "Neumann":
+            self.preprocess_data.temp_grad = temperature_gradient(
+                phi_k, nz
+            )  # T_bottom - T_top / depth according to Buffo
+        else:
+            self.preprocess_data.temp_grad = None
+
+    def set_boundary_condition_type(self, critical_depth, bc_type="Neumann"):
+        """Sets the boundary condition type for the model. This method sets the boundary condition type for the model. It calculates the temperature gradient based on the given critical depth and boundary condition type. If the boundary condition type is "Neumann", the temperature gradient is calculated using the formula:
+        temp_grad = dz * (temperature_melt - boundary_top_temperature) / critical_depth
+        If the boundary condition type is not "Neumann", the temperature gradient is set to None.
+
+        Args:
+            critical_depth (float): The critical depth value.
+            bc_type (str, optional): The type of boundary condition. Defaults to "Neumann".
+
+        Example:
+            model.set_boundary_condition_type(10.0, "Neumann")
+        """
+
+        """Sets the boundary condition type for the model.
+        Parameters:
+        - critical_depth (float): The critical depth value.
+        - bc_type (str, optional): The type of boundary condition. Defaults to "Neumann".
+        Returns:
+        None
+        Description:
+        This method sets the boundary condition type for the model. It calculates the temperature gradient based on the given critical depth and boundary condition type. If the boundary condition type is "Neumann", the temperature gradient is calculated using the formula:
+        
+        """
+
+        if bc_type == "Neumann":
+            self.preprocess_data.temp_grad = (
+                self.preprocess_data.dz
+                * (
+                    self.preprocess_data.temperature_melt
+                    - self.preprocess_data.boundary_top_temperature
+                )
+                / critical_depth
+            )
+        else:
+            self.preprocess_data.temp_grad = None
+
+    def t_running(self, fig, ax1, t_stefan, t_k, t_k_buffo=None, count=0):
+        """Plot the temperature profile against depth.
+
+        Args:
+            fig (matplotlib.figure.Figure): The figure object to plot on.
+            ax1 (matplotlib.axes.Axes): The axes object to plot on.
+            t_stefan (numpy.ndarray): The temperature profile obtained analytically.
+            t_k (numpy.ndarray): The temperature profile obtained numerically.
+            t_k_buffo (numpy.ndarray, optional): The temperature profile obtained using Buffo method. Defaults to None.
+            count (int, optional): The count value. Defaults to 0.
+        Returns:
+            None
+        """
+        depth_arr = np.linspace(0, -self.preprocess_data.Z, self.preprocess_data.nz)
+        ax1.plot(t_k, depth_arr, "r--")
+        ax1.plot(t_stefan, depth_arr, "k")
+        if t_k_buffo is not None:
+            ax1.plot(t_k_buffo, depth_arr, "b-.", alpha=0.5)
+        ax1.set_ylabel("Depth [m]")
+        ax1.set_xlabel("Temperature [K]")
+        # ax1.set_yscale("log")
+        # fig.tight_layout()
+        if count == 1:
+            plt.legend(["Numerical", "Analytical", "Buffo"])
+        # display(fig)
+        # clear_output(wait=True)
+
+    def track_mush_for_parameter(self, phi_k_, param, param_iterlist):
+        """Track the mush for a given parameter.
+
+        Args:
+            phi_k_: numpy array representing the values of phi_k
+            param: numpy array representing the parameter values
+            param_iterlist: list to store the tracked mush values for the parameter
+            Updated list with the tracked mush values for the parameter
+        """
+
+        mush_cond = (phi_k_ >= self.mush_lowerbound) & (phi_k_ <= self.mush_upperbound)
+        if mush_cond.any():
+            mush_indx = np.where(mush_cond)[0][len(np.where(mush_cond)[0]) // 2] - 1
+        else:
+            mush_cond = phi_k_ > self.mush_upperbound
+            mush_indx = 0
+        param_iterlist.append(
+            [
+                param[phi_k_ < self.mush_lowerbound][0],
+                param[phi_k_ == phi_k_][mush_indx],
+                param[phi_k_ > self.mush_upperbound][-1],
+            ]
+        ) if param[phi_k_ < self.mush_lowerbound].size else param_iterlist.append(
+            [
+                param[mush_cond][mush_indx],
+                param[phi_k_ == phi_k_][mush_indx],
+                param[phi_k_ > self.mush_upperbound][-1],
+            ]
+        )
+        return param_iterlist
+
+    def phi_all_mush_list(self, phi_k_, phi_all_mush_list):
+        """Calculates the number of elements in phi_k_ that fall within the mush_lowerbound and mush_upperbound range.
+
+        Args:
+            phi_k_ (numpy.ndarray): The input array containing the values to be checked.
+            phi_all_mush_list (list): The list to which the count of elements within the range will be appended.
+        Returns:
+            list: The updated phi_all_mush_list with the count of elements within the range appended.
+        """
+
+        mush_cond = (phi_k_ >= self.mush_lowerbound) & (phi_k_ <= self.mush_upperbound)
+        phi_all_mush_list.append(np.count_nonzero(mush_cond))
+        return phi_all_mush_list
+
+    def convergence_loop_iteration(
+        self, t, t_km1, s_km1, phi_km1, buffo=False, stefan=False, temp_grad=None
+    ):
+        """Performs a single iteration of the convergence loop.
+
+        Args:
+            t (float): Current temperature.
+            t_km1 (float): Temperature at the previous time step.
+            s_km1 (float): Salinity at the previous time step.
+            phi_km1 (float): Porosity at the previous time step.
+            buffo (bool, optional): Flag indicating whether to use the buffo method. Defaults to False.
+            stefan (bool, optional): Flag indicating whether to use the Stefan method. Defaults to False.
+            temp_grad (float, optional): Temperature gradient. Defaults to None.
+        Returns:
+            tuple: A tuple containing the following values:
+                - t_k (float): Current temperature.
+                - t_prev (float): Temperature at the previous time step.
+                - s_k (float): Current salinity.
+                - s_prev (float): Salinity at the previous time step.
+                - phi_k (float): Current porosity.
+                - phi_prev (float): Porosity at the previous time step.
+                - h_k (float): Current heat flux.
+                - h_solid (float): Heat flux at the solid-liquid interface.
+                - thickness (float): Current thickness.
+                - thickness_index (int): Index of the thickness.
+                - t_km1 (float): Temperature at the previous time step.
+                - s_km1 (float): Salinity at the previous time step.
+                - phi_km1 (float): Porosity at the previous time step.
+        """
+        (
+            t_km1,
+            s_km1,
+            phi_km1,
+            temp_grad,
+            t_err,
+            s_err,
+            phi_err,
+            t_initial,
+            phi_initial,
+            t_source,
+            counter,
+        ) = self.reset_iteration_parameters(t, t_km1, s_km1, phi_km1)
+        (
+            t_km1,
+            s_km1,
+            phi_km1,
+            t_prev,
+            s_prev,
+            phi_prev,
+            h_k,
+            h_solid,
+            phi_k,
+            t_k,
+            s_k,
+            thickness,
+            thickness_index,
+        ) = self.run_while_convergence_iteration(
+            t,
+            t_km1,
+            s_km1,
+            phi_km1,
+            buffo,
+            stefan,
+            t_err,
+            s_err,
+            phi_err,
+            t_initial,
+            phi_initial,
+            t_source,
+            counter,
+        )
+        return (
+            t_k,
+            t_prev,
+            s_k,
+            s_prev,
+            phi_k,
+            phi_prev,
+            h_k,
+            h_solid,
+            thickness,
+            thickness_index,
+            t_km1,
+            s_km1,
+            phi_km1,
+        )
+
+    def run_while_convergence_iteration(
+        self,
+        t,
+        t_km1,
+        s_km1,
+        phi_km1,
+        buffo,
+        stefan,
+        t_err,
+        s_err,
+        phi_err,
+        t_initial,
+        phi_initial,
+        t_source,
+        counter,
+    ):
+        """Runs the convergence loop until convergence is reached.
+
+        Args:
+            t: Time step
+            t_km1: Previous temperature array
+            s_km1: Previous salinity array
+            phi_km1: Previous phi array
+            buffo: Flag for Buffo
+            stefan: Flag for Stefan
+            t_err: Temperature error
+            s_err: Salinity errorhatch
+            phi_err: Phi error
+            t_initial: Initial temperature
+            phi_initial: Initial phi
+            t_source: Temperature source
+            counter: Iteration counter
+
+        Returns:
+            Tuple of updated arrays and indices
+        """
+        while (
+            t_err > self.preprocess_data.temperature_tolerance
+            or s_err > self.preprocess_data.salinity_tolerance
+            or phi_err > self.preprocess_data.liquid_fraction_tolerance
+        ):
+            if counter > 1:
+                t_prev, s_prev, phi_prev = define_previous_statevariable(
+                    t_km1, s_km1, phi_km1
+                )
+            else:
+                t_prev, s_prev, phi_prev = t_initial, s_km1, phi_initial
+
+            h_k = update_enthalpy(t_km1, s_km1, phi_km1, self.preprocess_data.nz)
+            h_solid = update_enthalpy_solid_state(
+                s_km1,
+                self.preprocess_data.nz,
+                self.preprocess_data.liquidus_relation_type,
+            )
+            phi_k, t_km1 = update_liquid_fraction(
+                t_km1,
+                s_km1,
+                phi_km1,
+                h_k,
+                h_solid,
+                self.preprocess_data.nz,
+                _is_stefan=self.preprocess_data.is_stefan,
+            )
+            advection_diffusion_temp = AdvectionDiffusion(
+                "temperature",
+                t_km1,
+                t_source,
+                t_initial,
+                phi_k,
+                phi_initial,
+                self.preprocess_data.upwind_velocity,
+                self.preprocess_data.grid_timestep_dt,
+                self.preprocess_data.grid_resolution_dz,
+                self.preprocess_data.nz,
+                self.preprocess_data.time_passed,
+                self.preprocess_data.initial_salinity,
+                Stefan=stefan,
+                Buffo=buffo,
+                bc_neumann=self.preprocess_data.temp_grad,
+            )
+            t_k, x_wind_t, dt_t = advection_diffusion_temp.unknowns_matrix()
+            s_k = s_km1
+            thickness, thickness_index = locate_ice_ocean_interface(
+                phi_k,
+                self.preprocess_data.grid_resolution_dz,
+                self.preprocess_data.nz,
+                Stefan=self.preprocess_data.is_stefan,
+            )
+            t_km1, s_km1, phi_km1 = overwrite_statevariables(t_k, s_k, phi_k)
+            if t in [7, 36, 720, 7200, 14400, 21600] and stefan:
+                self.preprocess_data.t_k_iter = self.track_mush_for_parameter(
+                    phi_k, t_km1, self.preprocess_data.t_k_iter
+                )
+                self.preprocess_data.phi_k_iter = self.track_mush_for_parameter(
+                    phi_k, phi_k, self.preprocess_data.phi_k_iter
+                )
+                self.preprocess_data.all_phi_iter = self.phi_all_mush_list(
+                    phi_k, self.preprocess_data.all_phi_iter
+                )
+            self.preprocess_data.thickness_index_total[t] = thickness_index
+
+            if counter > 0:
+                t_err, t_err_full, s_err, s_err_full, phi_err, phi_err_full = (
+                    compute_error_for_convergence(
+                        t_k, t_prev, s_k, s_prev, phi_k, phi_prev
+                    )
+                )
+
+            if counter >= self.preprocess_data.counter_limit:
+                msg = f"Convergence not reached at time t = {t}"
+                raise ConvergenceError(msg)
+            counter += 1
+        return (
+            t_km1,
+            s_km1,
+            phi_km1,
+            t_prev,
+            s_prev,
+            phi_prev,
+            h_k,
+            h_solid,
+            phi_k,
+            t_k,
+            s_k,
+            thickness,
+            thickness_index,
+        )
+
+    def reset_iteration_parameters(self, t, tkm1, s_km1, phi_km1):
+        """Reset the iteration parameters for the sea ice model.
+
+        Args:
+            t (float): Current temperature.
+            tkm1 (float): Temperature at the previous time step.
+            s_km1 (float): Salinity at the previous time step.
+            phi_km1 (float): Liquid fraction at the previous time step.
+        Returns:
+            tuple: A tuple containing the following iteration parameters:
+                - t_km1 (float): Temperature at the previous time step.
+                - s_km1 (float): Salinity at the previous time step.
+                - phi_km1 (float): Liquid fraction at the previous time step.
+                - temp_grad (float): Temperature gradient.
+                - t_err (float): Temperature error.
+                - s_err (float): Salinity error.
+                - phi_err (float): Liquid fraction error.
+                - t_initial (float): Initial temperature.
+                - phi_initial (float): Initial liquid fraction.
+                - t_source (ndarray): Array of temperature sources.
+                - counter (int): Iteration counter.
+        """
+
+        t_err, s_err, phi_err = reset_error_for_while_loop(
+            self.preprocess_data.temperature_tolerance,
+            self.preprocess_data.salinity_tolerance,
+            self.preprocess_data.liquid_fraction_tolerance,
+        )
+        t_initial, t_km1, s_km1, phi_initial, phi_km1, temp_grad = (
+            self.initialize_state_variables(t, tkm1, s_km1, phi_km1)
+        )
+        t_source = np.zeros(self.preprocess_data.nz)
+        counter = 1
+        self.record_iteration_data()
+        return (
+            t_km1,
+            s_km1,
+            phi_km1,
+            temp_grad,
+            t_err,
+            s_err,
+            phi_err,
+            t_initial,
+            phi_initial,
+            t_source,
+            counter,
+        )
+
+    def record_iteration_data(self):
+        """Records the iteration data for temperature and phi values.
+        This method appends the temperature and phi values from the current iteration to the respective arrays.
+        The arrays are used to store the iteration data for further analysis.
+
+        Args:
+            None
+        Returns:
+            None
+        """
+
+        if np.array(self.preprocess_data.t_k_iter).any():
+            self.preprocess_data.t_k_iter_all = np.append(
+                self.preprocess_data.t_k_iter_all, self.preprocess_data.t_k_iter
+            )
+        if np.array(self.preprocess_data.phi_k_iter).any():
+            self.preprocess_data.phi_k_iter_all = np.append(
+                self.preprocess_data.phi_k_iter_all, self.preprocess_data.phi_k_iter
+            )
+        if np.array(self.preprocess_data.all_phi_iter).any():
+            self.preprocess_data.all_phi_iter_all = np.append(
+                self.preprocess_data.all_phi_iter_all, self.preprocess_data.all_phi_iter
+            )
+        (
+            self.preprocess_data.t_k_iter,
+            self.preprocess_data.phi_k_iter,
+            self.preprocess_data.all_phi_iter,
+        ) = [], [], []
+
+    def initialize_state_variables(self, t, t_km1, s_km1, phi_km1):
+        """Initializes the state variables for the sea ice model.
+
+        Args:
+            t (int): The current time step.
+            t_km1 (float): The temperature at the previous time step.
+            s_km1 (float): The salinity at the previous time step.
+            phi_km1 (float): The liquid fraction at the previous time step.
+        Returns:
+            tuple: A tuple containing the initialized state variables:
+                - t_initial (float): The initial temperature.
+                - t_km1 (float): The temperature at the previous time step.
+                - s_km1 (float): The salinity at the previous time step.
+                - phi_initial (float): The initial liquid fraction.
+                - phi_km1 (float): The liquid fraction at the previous time step.
+                - temp_grad (float): The temperature gradient.
+        """
+
+        if t == 1:
+            (
+                t_initial,
+                t_km1,
+                t_prev,
+                s_initial,
+                s_prev,
+                s_km1,
+                phi_initial,
+                phi_prev,
+                phi_km1,
+            ) = initialize_statevariables(
+                self.preprocess_data.temperature,
+                self.preprocess_data.salinity,
+                self.preprocess_data.liquid_fraction,
+            )
+
+        else:
+            t_initial, t_km1, s_km1, s_prev, phi_initial, phi_km1 = set_statevariables(
+                t_km1, s_km1, phi_km1
+            )
+        return (
+            t_initial,
+            t_km1,
+            s_km1,
+            phi_initial,
+            phi_km1,
+            self.preprocess_data.temp_grad,
+        )
+
+    def choose_phase_type_iteration(self, t):
+        """Choose the phase type iteration based on the one-phase and two-phase generalised Stefan Probem.
+
+        Args:
+            t (int): The time index.
+        Returns:
+            tuple: A tuple containing the following values:
+                - t_stefan (float): The Stefan temperature.
+                - error_depth_t (float): The error in depth.
+                - depth_stefan_t (float): The depth at time t.
+        Raises:
+            InvalidPhaseError: If the phase type is invalid (not 1 or 2).
+        """
+
+        if self.preprocess_data.phase_type == 1:
+            self.preprocess_data.depth_stefan_all = StefanProblem.stefan_problem(
+                self.results.all_t_passed, self.ui_data
+            )
+            depth_stefan_t = self.preprocess_data.depth_stefan_all[t]
+            t_stefan = StefanProblem.calculate_temperature_profile(
+                depth_stefan_t,
+                self.preprocess_data.time_passed,
+                self.preprocess_data.grid_resolution_dz,
+                self.preprocess_data.nz,
+                self.ui_data,
+            )
+        elif self.preprocess_data.phase_type == 2:
+            self.preprocess_data.depth_stefan_all = (
+                StefanProblem.stefan_problem_twophase(
+                    self.preprocess_data.all_t_passed, self.ui_data
+                )
+            )
+            depth_stefan_t = self.preprocess_data.depth_stefan_all[t]
+            t_stefan, c_stefan = StefanProblem.calculate_temperature_twophase_profiles(
+                depth_stefan_t,
+                self.preprocess_data.preprocess_data.time_passed,
+                self.preprocess_data.grid_resolution_dz,
+                self.preprocess_data.nz,
+                self.ui_data,
+            )
+        else:
+            msg = "Invalid phase type. Choose 1 or 2."
+            raise InvalidPhaseError(msg)
+
+        error_depth_t = np.abs(depth_stefan_t) - np.abs(self.results.all_thick[t])
+        return t_stefan, error_depth_t, depth_stefan_t
+
+    def run_sea_ice_model(self):
+        """Runs the sea ice model.
+
+        This function iterates over a specified number of time steps and performs calculations
+        to simulate the behavior of sea ice. It updates the results and saves a temperature profile
+        plot at the end.
+
+        Args:
+            None
+
+        Returns:
+            None
+        """
+
+        fig1, ax1 = plt.subplots(1, 1)
+        t_km1, s_km1, phi_km1 = np.array([]), np.array([]), np.array([])
+        t_km1_buffo, s_km1_buffo, phi_km1_buffo = (
+            np.array([]),
+            np.array([]),
+            np.array([]),
+        )
+        count = 0
+        # with alive_bar(self.preprocess_data.max_iterations, force_tty=True) as bar:
+        for t in range(1, self.preprocess_data.max_iterations):
+            # time.sleep(0.005)
+            if self.preprocess_data.is_buffo:
+                (
+                    t_k_buffo,
+                    t_prev_buffo,
+                    s_k_buffo,
+                    s_prev_buffo,
+                    phi_k_buffo,
+                    phi_prev_buffo,
+                    h_k_buffo,
+                    h_solid_buffo,
+                    thickness_buffo,
+                    thickness_index_buffo,
+                    t_km1_buffo,
+                    s_km1_buffo,
+                    phi_km1_buffo,
+                ) = self.convergence_loop_iteration(
+                    t,
+                    t_km1_buffo,
+                    s_km1_buffo,
+                    phi_km1_buffo,
+                    buffo=True,
+                    temp_grad=self.preprocess_data.temp_grad,
+                )
+
+            (
+                t_k,
+                t_prev,
+                s_k,
+                s_prev,
+                phi_k,
+                phi_prev,
+                h_k,
+                h_solid,
+                thickness,
+                thickness_index,
+                t_km1,
+                s_km1,
+                phi_km1,
+            ) = self.convergence_loop_iteration(
+                t,
+                t_km1,
+                s_km1,
+                phi_km1,
+                stefan=True,
+                temp_grad=self.preprocess_data.temp_grad,
+            )
+            self.preprocess_data.time_passed = t_total(
+                self.preprocess_data.time_passed,
+                self.preprocess_data.grid_timestep_dt,
+            )
+            self.results = self.results.store_results(
+                self.results,
+                t_k,
+                s_k,
+                phi_k,
+                h_k,
+                h_solid,
+                self.preprocess_data.upwind_velocity[0],
+                thickness,
+                self.preprocess_data.time_passed,
+                t,
+            )
+            self.bc_neumann(
+                phi_k,
+                self.preprocess_data.boundary_condition_type,
+                self.preprocess_data.nz,
+            )
+            t_stefan, error_depth_t, thickness_stefan = (
+                self.choose_phase_type_iteration(t)
+            )
+            self.results = self.results.store_results_for_iter_t(
+                self.results,
+                t,
+                thickness_index,
+                t_k,
+                t_stefan,
+                s_k,
+                s_k_buffo,
+                phi_k,
+                phi_k_buffo,
+                h_k,
+                h_solid,
+                thickness,
+                thickness_buffo,
+                thickness_stefan,
+                t_k_buffo,
+                buffo=self.preprocess_data.is_buffo,
+            )
+            # bar()
+
+            if t % 500 == 0:
+                count += 1
+                self.t_running(
+                    fig1, ax1, t_stefan, t_k=t_k, t_k_buffo=t_k_buffo, count=count
+                )
+
+        fig1.savefig(
+            f"{self.preprocess_data.dir_output_name}/TemperatureProfile.pdf",
+            backend="pgf",
+        )
+
+    @classmethod
+    def get_results(
+        cls, dataclass: PreprocessData, user_dataclass: UserInput
+    ) -> ResultsParams:
+        """Runs the sea ice model and returns the results.
+
+        Args:
+            cls (class): The class object.
+            dataclass (PreprocessData): The dataclass containing preprocessed data.
+            user_dataclass (UserInput): The dataclass containing user input.
+        Returns:
+            Results: The results dataclass object generated by running the sea ice model.
+        """
+        print("Running model...")
+        results_obj = cls(dataclass, user_dataclass)
+        results_obj.set_dataclass(dataclass)
+        results_obj.run_sea_ice_model()
+        print("Model run complete and Ready for Analysis.")
+
+        return results_obj.results
+
+    def set_dataclass(self, _dataclass):
+        """Sets the dataclass attributes of the object.
+
+        Args:
+            _dataclass: An instance of the dataclass.
+        Returns:
+            None
+        """
+
+        data_class_obj = _dataclass()
+        for key, value in asdict(data_class_obj).items():
+            setattr(self, key, value)

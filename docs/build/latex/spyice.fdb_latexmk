@@ -1,0 +1,9 @@
+# Fdb version 4
+["pdflatex"] 0 "spyice.tex" "spyice.pdf" "spyice" 0 -1
+  "spyice.aux" 0 -1 0 "pdflatex"
+  "spyice.tex" 0 -1 0 ""
+  (generated)
+  "spyice.aux"
+  "spyice.log"
+  "spyice.pdf"
+  (rewritten before read)

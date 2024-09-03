@@ -1,0 +1,97 @@
+#:schema https://json.schemastore.org/pyproject.json
+
+[build-system]
+  # requires      = ["hatch-requirements-txt", "hatch-semver", "hatchling"]
+  requires      = ["hatch-semver", "hatchling"]
+  build-backend = "hatchling.build"
+
+[project]
+  dependencies = [
+    "scipy",
+    "pandas",
+    "matplotlib",
+    "numpy",
+    "jupyterlab",
+    "hydra-core",
+    "ruff",
+    "pytest",
+    "alive-progress",
+    "hickle",
+  ]
+  name = "spyice"
+  dynamic = ["version"]
+  description = ''
+  readme = "README.rst"
+  requires-python = ">=3.10"
+  license = "Apache-2.0"
+  keywords = []
+  authors = [{ name = "Sneha Iyer", email = "sneha.iyer@rwth-aachen.de" }]
+  classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Programming Language :: Python :: Implementation :: PyPy",
+  ]
+
+
+[tool.hatch.version]
+  path = "src/spyice/__about__.py"
+
+[tool.hatch.envs.types]
+  extra-dependencies = ["mypy>=1.0.0"]
+
+[tool.hatch.envs.types.scripts]
+  check = "mypy --install-types --non-interactive {args:spyice tests}"
+
+[tool.coverage.run]
+  source_pkgs = ["spyice", "tests"]
+  branch      = true
+  parallel    = true
+  omit        = ["src/spyice/__about__.py"]
+
+  # [tool.coverage.paths]
+  #   spyice = ["spyice", "*/spyice/spyice"]
+  #   tests  = ["tests", "*/spyice/tests"]
+
+[tool.coverage.paths]
+  spyice = ["src/spyice", "*/spyicedir/src/spyice"]
+  tests  = ["tests", "*/spyicedir/tests"]
+
+[tool.coverage.report]
+  exclude_lines = ["no cov", "if __name__ == .__main__.:", "if TYPE_CHECKING:"]
+
+[tool.hatch.envs.docs]
+  dependencies = [
+    "pydata-sphinx-theme",
+    "sphinx",
+    "nbsphinx",
+    "sphinx-argparse",
+    "sphinx-copybutton",
+    "sphinx-design",
+    "myst-parser",
+    "sphinxcontrib-pseudocode",
+    "sphinx-favicon",
+    "fonttools",
+    "pygments",
+    "docutils",
+    "sphinx-autobuild",
+    "sphinxcontrib-bibtex",
+    "sphinx-automodapi",
+    "pydata-sphinx-theme",
+    "jupyter_sphinx",
+  ]
+
+  # [tool.hatch.envs.docs.env-vars]
+  #   SPHINX_APIDOC_OPTIONS = "members,no-undoc-members"
+
+[tool.hatch.envs.docs.scripts]
+  clean    = "make clean --directory=docs"
+  html     = "make html --directory=docs"
+  latexpdf = "make latexpdf --directory=docs"
+  serve    = "python -m http.server --directory=docs/build/html/"
+  build    = "make clean --directory=docs && make html --directory=docs"
+  apidoc   = "cd docs && sphinx-apidoc -H SpyIce -E -d 2 --tocfile _index --separate --implicit-namespaces  -o source/api/ ../src/spyice/"
+  # apidoc = "cd docs && sphinx-apidoc -H SpyIce -d 2 --tocfile _index --module-first --separate -o source/api/ ../src/spyice/"

@@ -1,0 +1,37 @@
+defaults:
+  - consts: real
+  - dt: dt47
+  - S_IC: S34
+  - iter_max: iter_max1000
+  - override hydra/help: config_param_help
+  - _self_
+
+hydra:
+  run:
+    dir: outputs/${now:%Y-%m-%d}/${now:%H%M%S}_${consts.constants}_${dt.dt}_${iter_max.iter_max}
+  sweep:
+    dir: outputs/${now:%Y-%m-%d}
+    subdir: ${now:%H%M%S}_${consts.constants}_${dt.dt}_${iter_max.iter_max}
+    # /${hydra.job.num}
+  sweeper:
+    params:
+      consts: real
+      dt: glob(*)
+      S_IC: S34
+      iter_max: iter_max1000
+  job_logging:
+    root:
+      handlers: [console, file]
+      level: INFO
+    formatters:
+      simple:
+        format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    handlers:
+      console:
+        class: logging.StreamHandler
+        formatter: simple
+        stream: ext://sys.stdout
+        level: DEBUG
+      file:
+        mode: w
+        # filename: ${hydra.runtime.output_dir}/${hydra.job.name}.log

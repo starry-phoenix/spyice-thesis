@@ -1,0 +1,64 @@
+import pytest
+from spyice.parameters import UserInput
+from spyice.parameters import Constants, RealConstants, DebugConstants
+
+# Helper function to validate dt stability
+def _dt_stability_validator(dz, dt):
+    if dz <= 0 or dt <= 0:
+        raise ValueError("Grid resolution and timestep must be positive.")
+
+@pytest.mark.parametrize(
+    "constants, max_iterations, is_stefan, is_buffo, liquidus_relation_type, grid_resolution_dz, boundary_condition_type, temperature_tolerance, salinity_tolerance, liquid_fraction_tolerance, initial_temperature, initial_salinity, initial_liquid_fraction, output_suffix, temperature_top_type, phase_type, grid_timestep_dt, dir_output_name, critical_liquid_fraction, expected_boundary_salinity, expected_boundary_top_temperature, expected_temperature_melt, expected_geometry_type",
+    [
+        # Happy path test cases
+        (Constants.REAL.value, 500, True, True, "Normal", 0.01, "Dirichlet", 0.01, 0.01, 0.001, "T(S)", "S34", "P1", "const_dens-mushfix", "Stefan", 1, 47.0, "Temperature_{S_IC}_{bc_condition}_{dz}_{dt}_{iter_max}_{cap_dens}", 0.1, 34.0, 265.0, 273.15 - 1.853 * 34.0 / 28.0, 2),
+        (Constants.DEBUG.value, 1000, False, False, "Frezchem", 0.02, "Neumann", 0.02, 0.02, 0.002, "T250", "S0", "P0", "output_test", "Dirichlet", 2, 50.0, "Output_{S_IC}_{bc_condition}_{dz}_{dt}_{iter_max}_{cap_dens}", 0.2, 0.0, -1.0, 0.0, 1),
+        
+        # Edge cases
+        (Constants.REAL.value, 1, True, True, "Normal", 0.0001, "Dirichlet", 0.0001, 0.0001, 0.00001, "T(S)", "S34", "P1", "const_dens-mushfix", "Stefan", 1, 0.1, "Temperature_{S_IC}_{bc_condition}_{dz}_{dt}_{iter_max}_{cap_dens}", 0.01, 34.0, 265.0, 273.15 - 1.853 * 34.0 / 28.0, 2),
+        (Constants.DEBUG.value, 1000000, False, False, "Frezchem", 100.0, "Neumann", 100.0, 100.0, 10.0, "T250", "S0", "P0", "output_test", "Dirichlet", 2, 1000.0, "Output_{S_IC}_{bc_condition}_{dz}_{dt}_{iter_max}_{cap_dens}", 10.0, 0.0, -1.0, 0.0, 1),
+        
+        # Error cases
+        pytest.param(Constants.REAL.value, 500, True, True, "Normal", -0.01, "Dirichlet", 0.01, 0.01, 0.001, "T(S)", "S34", "P1", "const_dens-mushfix", "Stefan", 1, 47.0, "Temperature_{S_IC}_{bc_condition}_{dz}_{dt}_{iter_max}_{cap_dens}", 0.1, 34.0, 265.0, 273.15 - 1.853 * 34.0 / 28.0, 2, marks=pytest.mark.xfail(raises=ValueError)),
+        pytest.param(Constants.DEBUG.value, 500, True, True, "Normal", 0.01, "Dirichlet", 0.01, 0.01, 0.001, "T(S)", "S34", "P1", "const_dens-mushfix", "Stefan", 1, -47.0, "Temperature_{S_IC}_{bc_condition}_{dz}_{dt}_{iter_max}_{cap_dens}", 0.1, 0.0, -1.0, 0.0, 1, marks=pytest.mark.xfail(raises=ValueError)),
+    ],
+    ids=[
+        "happy_path_real_constants",
+        "happy_path_debug_constants",
+        "edge_case_min_values",
+        "edge_case_max_values",
+        "error_case_negative_dz",
+        "error_case_negative_dt",
+    ]
+)
+def test_user_input(
+    constants, max_iterations, is_stefan, is_buffo, liquidus_relation_type, grid_resolution_dz, boundary_condition_type, temperature_tolerance, salinity_tolerance, liquid_fraction_tolerance, initial_temperature, initial_salinity, initial_liquid_fraction, output_suffix, temperature_top_type, phase_type, grid_timestep_dt, dir_output_name, critical_liquid_fraction, expected_boundary_salinity, expected_boundary_top_temperature, expected_temperature_melt, expected_geometry_type
+):
+    # Act
+    user_input = UserInput(
+        constants=constants,
+        max_iterations=max_iterations,
+        is_stefan=is_stefan,
+        is_buffo=is_buffo,
+        liquidus_relation_type=liquidus_relation_type,
+        grid_resolution_dz=grid_resolution_dz,
+        boundary_condition_type=boundary_condition_type,
+        temperature_tolerance=temperature_tolerance,
+        salinity_tolerance=salinity_tolerance,
+        liquid_fraction_tolerance=liquid_fraction_tolerance,
+        initial_temperature=initial_temperature,
+        initial_salinity=initial_salinity,
+        initial_liquid_fraction=initial_liquid_fraction,
+        output_suffix=output_suffix,
+        temperature_top_type=temperature_top_type,
+        phase_type=phase_type,
+        grid_timestep_dt=grid_timestep_dt,
+        dir_output_name=dir_output_name,
+        critical_liquid_fraction=critical_liquid_fraction,
+    )
+
+    # Assert
+    assert user_input.boundary_salinity == expected_boundary_salinity
+    assert user_input.boundary_top_temperature == expected_boundary_top_temperature
+    assert user_input.temperature_melt == expected_temperature_melt
+    assert user_input.geometry_type == expected_geometry_type

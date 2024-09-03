@@ -1,0 +1,16 @@
+**/__pycache__
+*/.pytest_cache/*
+*/.vscode/*
+*/.idea/*
+**/.mypy_cache/*
+*/.tox/*
+*/.coverage
+.mypy_cache
+*/.tox
+*/.coverage
+*/.DS_Store
+**/.vscode
+*/.idea 
+**/.hatch
+**/.venv
+dist

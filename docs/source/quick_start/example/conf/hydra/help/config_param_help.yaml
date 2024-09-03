@@ -1,0 +1,55 @@
+# App name, override to match the name your app is known by
+app_name: SPyIce
+
+# Help header, customize to describe your app to your users
+header: == ${hydra.help.app_name} ==
+
+footer: |-
+  Powered by Hydra (https://hydra.cc)
+  Use --hydra-help to view Hydra specific help
+
+# Basic Hydra flags:
+#   $FLAGS_HELP
+#
+# Config groups, choose one of:
+#   $APP_CONFIG_GROUPS: All config groups that does not start with hydra/.
+#   $HYDRA_CONFIG_GROUPS: All the Hydra config groups (starts with hydra/)
+#
+# Configuration generated with overrides:
+#   $CONFIG : Generated config
+#
+template: |-
+  ${hydra.help.header}
+
+  This is ${hydra.help.app_name}!
+  You can choose a parameter driver by appending
+  == Configuration groups ==
+  Compose your configuration from those groups:
+
+  $APP_CONFIG_GROUPS
+
+  == Config ==
+  This is the config generated for this run.
+
+  -- single run --
+  To run the app use the following command:
+  python main_config.py 
+
+  -- multirun --
+  You can use it in the multirun mode to run multiple configurations at once. 
+  To run the app for a defined configuration by running with multirun -m flag.:
+  1. python main_config.py -m consts=real dt=dt47 iter_max=iter_max1000 S_IC=S34
+  This will generate outputs for defined constants, dt, iter_max and S_IC.
+  
+  You can also run the app for a defined dt to give outputs for the other configurations by running:
+  2. python main_config.py -m dt=dt47
+
+  Similarly, you can run the app for a defined dt and S_IC to give outputs for other defined iter_max by running:
+  3. python config_param.py -m dt=dt47 S_IC=S34
+
+  The default settings are:
+  -------
+  $CONFIG
+  -------
+  
+  ${hydra.help.footer}
