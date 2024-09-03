@@ -54,7 +54,8 @@ Follow these steps to install Spyice and set up the environment using hatch:
 Setting up a new parameter to automate
 --------------------------
 
->!Note: The new parameter must belong to the already existing parameter directory which can be found in the `src/spyice/parameters/user_input.py`
+.. admonition::
+     Note: The new parameter must belong to the already existing parameter directory which can be found in the `src/spyice/parameters/user_input.py`
 
     .. code-block:: bash
     src/spyice
