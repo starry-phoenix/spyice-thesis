@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
+from ..utils.config_sort import read_omegaconfig
+
 from ..update_physical_values import (
     update_enthalpy,
     update_enthalpy_solid_state,
@@ -27,7 +29,7 @@ class PreprocessData:
 class PreProcess(UserInput, GeometrySettings, ResultsParams):
     """Class for preprocessing data before modeling."""
 
-    def __init__(self, config_data, output_dir):
+    def __init__(self, constants_type, config_data, output_dir):
         """Initialize the PreProcess class.
         Args:
             config_data (ConfigData): The configuration data object.
@@ -38,19 +40,17 @@ class PreProcess(UserInput, GeometrySettings, ResultsParams):
             None
         """
 
-        if config_data.constants_type == "real":
+        if constants_type == "real":
             UserInput.__init__(
                 self,
                 constants=Constants.REAL.value,
-                grid_timestep_dt=config_data.time_step,
-                initial_salinity=config_data.initial_salinity,
-                dir_output_name=output_dir,
-                max_iterations=config_data.max_iterations,
+                config_data=config_data,
+                output_dir=output_dir,
             )
             print("User Configuration Data Setup Complete...")
         else:
             super(UserInput, self).__init__(
-                Constants.DEBUG.value, grid_time_step=config_data.time_step
+                Constants.DEBUG.value, config_data=config_data
             )
 
         GeometrySettings.__init__(
@@ -103,7 +103,7 @@ class PreProcess(UserInput, GeometrySettings, ResultsParams):
 
     @classmethod
     def get_variables(
-        cls, config: dataclass, out_dir_final: str
+        cls, config, out_dir_final: str
     ) -> tuple[PreprocessData, UserInput]:
         """Retrieves variables and user input data after preprocessing.
 
@@ -116,7 +116,8 @@ class PreProcess(UserInput, GeometrySettings, ResultsParams):
         """
 
         print("Preprocessing...")
-        preprocess_obj = cls(config, out_dir_final)
+        constants_type = read_omegaconfig(config, "constants")
+        preprocess_obj = cls(constants_type, config, out_dir_final)
         preprocess_obj.preprocess()
         filtered_vars = dict(vars(preprocess_obj))
         userinput_data = preprocess_obj.get_userinput()

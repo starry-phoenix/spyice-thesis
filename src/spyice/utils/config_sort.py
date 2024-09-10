@@ -14,6 +14,20 @@ class ConfigData:
     setup = True
 
 
+def read_omegaconfig(config, parameter: str):
+    """Reads the parameter from the OmegaConf configuration.
+
+    Args:
+        parameter (str): The parameter to read.
+    Returns:
+        str: The value of the parameter.
+    Raises:
+        None
+    """
+
+    return config.get(parameter, {}).get(parameter, "default")
+
+
 class ConfigSort:
     def __init__(self, config: DictConfig):
         """A class that provides methods for retrieving configuration parameters.
@@ -40,10 +54,11 @@ class ConfigSort:
             None
         """
 
-        self.constants_type = config.get("consts", {}).get("constants", "default")
-        self.time_step = config.get("dt", {}).get("dt", "default")
-        self.initial_salinity = config.get("S_IC", {}).get("S_IC", "default")
-        self.max_iterations = config.get("iter_max", {}).get("iter_max", "default")
+        self.constants_type = read_omegaconfig("constants")
+        # self.time_step = self.read_omegaconfig("dt")
+        # self.initial_salinity = self.read_omegaconfig("S_IC")
+        # self.max_iterations = self.read_omegaconfig("iter_max")
+        # self.is_salinity_equation = self.read_omegaconfig("salinity")
 
     def get_ownconfig_params(self, config):
         """Retrieves the parameters from the given configuration dictionary.

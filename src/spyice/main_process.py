@@ -13,7 +13,7 @@ from .utils.config_sort import ConfigSort
 
 # TODO: Type hinting for all functions
 # TODO: Return type hinting for all functions
-class MainProcess:
+class haMainProcess:
     """Main class to run the model."""
 
     def __init__(
@@ -28,10 +28,10 @@ class MainProcess:
             hyd_output_dir (Path | str): The directory path for the hydraulic output. Defaults to the 'outputs' directory in the current working directory.
             project_path (Path | str): The project path. Defaults to the current working directory.
         """
-        self.config_raw: DictConfig = config
-        self.config = ConfigSort.getconfig_dataclass(
-            self.config_raw, config_type="default"
-        )
+        self.config: DictConfig = config
+        # self.config = ConfigSort.getconfig_dataclass(
+        #     self.config_raw, config_type="default"
+        # )
         self.project_path: Path | str = project_path
         self.out_dir_final = create_output_directory(hyd_output_dir)
 

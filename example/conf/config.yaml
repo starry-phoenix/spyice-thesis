@@ -1,8 +1,9 @@
 defaults:
-  - consts: real
+  - constants: real
   - dt: dt47
   - S_IC: S34
   - iter_max: iter_max1000
+  - salinity: no
   - override hydra/help: config_param_help
   - _self_
 
@@ -15,10 +16,11 @@ hydra:
     # /${hydra.job.num}
   sweeper:
     params:
-      consts: real
+      constants: real
       dt: glob(*)
       S_IC: S34
       iter_max: iter_max1000
+      salinity: no
   job_logging:
     root:
       handlers: [console, file]

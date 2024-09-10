@@ -5,6 +5,7 @@ from dataclasses import dataclass, field
 from .constants import Constants
 from .real_constants import RealConstants
 from .debug_constants import DebugConstants
+from ..utils.config_sort import read_omegaconfig
 
 
 def _dt_stability_validator(dz: float, dt: float) -> None:
@@ -72,12 +73,24 @@ class UserInput:
         __post_init__(): Performs post-initialization tasks.
     """
 
+    # grid_timestep_dt=config_data.time_step,
+    # initial_salinity=config_data.initial_salinity,
+    # dir_output_name=output_dir,
+    # max_iterations=config_data.max_iterations
+
+    # self.constants_type = self.read_omegaconfig("constants")
+    # self.time_step = self.read_omegaconfig("dt")
+    # self.initial_salinity = self.read_omegaconfig("S_IC")
+    # self.max_iterations = self.read_omegaconfig("iter_max")
+    # self.is_salinity_equation = self.read_omegaconfig("salinity")
     ...
 
     constants: RealConstants | DebugConstants = Constants.REAL.value
+    config_data = None
     max_iterations: int = 500
     is_stefan: bool = True
     is_buffo: bool = True
+    is_salinity_equation: bool = False
     liquidus_relation_type: str = "Normal"  # Normal or Frezchem
     grid_resolution_dz: float = 0.01
     boundary_condition_type: str = "Dirichlet"  # Neumann or Dirichlet
@@ -114,6 +127,14 @@ class UserInput:
             self.boundary_top_temperature = 265.0
             self.temperature_melt = 273.15 - 1.853 * self.boundary_salinity / 28.0
             self.geometry_type = 2
+            if self.config_data:
+                self.grid_timestep_dt = read_omegaconfig(self.config_data, "dt")
+                self.initial_salinity = read_omegaconfig(self.config_data, "S_IC")
+                self.max_iterations = read_omegaconfig(self.config_data, "iter_max")
+                self.is_salinity_equation = read_omegaconfig(
+                    self.config_data, "salinity"
+                )
+
         elif isinstance(self.constants, DebugConstants):
             self.boundary_salinity = 0.0
             self.boundary_top_temperature = -1.0

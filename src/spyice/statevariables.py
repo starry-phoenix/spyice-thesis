@@ -12,7 +12,14 @@ def set_statevariables(
         salinity_calculated (float): The calculated salinity.
         liquid_fraction_calculated (float): The calculated liquid fraction.
     Returns:
-        Tuple[float, float, float, float, float, float]: A tuple containing the initial and previous values of temperature, salinity, and liquid fraction.
+        tuple: A tuple containing the following state variables:
+            - temperature_initial (float): The initial temperature.
+            - temperature_previous (float): The previous temperature.
+            - salinity_initial (float): The initial salinity.
+            - salinity_previous (float): The previous salinity.
+            - phi_initial (float): The initial liquid fraction.
+            - phi_prev (float): The previous liquid fraction.
+
     """
 
     temperature_previous, temperature_initial = (
@@ -38,33 +45,6 @@ def set_statevariables(
     )
 
 
-# Function to define previous state variables
-def define_previous_statevariable(
-    temperature_calculated, salinity_calculated, liquid_fraction_calculated
-):
-    """Defines the previous state variables for iteration.
-
-    Args:
-        temperature_calculated (float): The calculated temperature.
-        salinity_calculated (float): The calculated salinity.
-        liquid_fraction_calculated (float): The calculated liquid fraction.
-    Returns:
-        tuple: A tuple containing the previous temperature, salinity, and liquid fraction.
-    """
-    temperature_previous = temperature_calculated
-    salinity_previous = salinity_calculated
-    liquid_fraction_previous = liquid_fraction_calculated
-
-    temperature_previous = (
-        temperature_calculated  # Set previous T as current T for iteration
-    )
-    salinity_previous = salinity_calculated  # Set previous S as current S for iteration
-    liquid_fraction_previous = (
-        liquid_fraction_calculated  # Set previous phi as current phi for iteration
-    )
-    return temperature_previous, salinity_previous, liquid_fraction_previous
-
-
 # Function to overwrite state variables
 def overwrite_statevariables(
     temperature_calculated, salinity_calculated, liquid_fraction_calculated
@@ -75,7 +55,10 @@ def overwrite_statevariables(
         salinity_calculated (float): The calculated salinity.
         liquid_fraction_calculated (float): The calculated liquid fraction.
     Returns:
-        tuple: A tuple containing the updated temperature, salinity, and liquid fraction.
+        tuple: A tuple containing the following state variables:
+            - temperature_new (float): The current temperature for iteration.
+            - salinity_new (float): The current salinity for iteration.
+            - liquid_fraction_new (float): The current liquid fraction for iteration.
     """
 
     temperature_new = (
@@ -172,7 +155,7 @@ def reset_error_for_while_loop(
 
 
 # Function to initialize state variables
-def initialize_statevariables(temperature, salinity, liquid_fraction):
+def set_initial_statevariables(temperature, salinity, liquid_fraction):
     """Initializes the state variables for the given temperature, salinity, and liquid fraction.
 
     Args:

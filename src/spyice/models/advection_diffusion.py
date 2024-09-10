@@ -1,3 +1,4 @@
+from __future__ import annotations
 import warnings
 
 import numpy as np
@@ -87,7 +88,7 @@ class AdvectionDiffusion:
         self.A = np.zeros([nz, nz], dtype=np.float64)
         self.X_new = np.zeros(nz, dtype=np.float64)
         self.factor1 = self.factor_1(argument, self.a, self.c, dt, dz, nz)
-        if argument == "salinity1":
+        if argument == "salinity":
             self.factor1_plus, self.factor1_minus = self.factor1
         self.factor2 = self.factor_2(self.a, self.b, dt, dz, nz)
         self.factor3 = self.factor_3(self.a, self.d, nz)
@@ -176,7 +177,7 @@ class AdvectionDiffusion:
 
         ### Set up tridiagonal matrix LHS for Salinity and Temperature
         for i in range(self.nz):
-            if self.argument == "salinity1":
+            if self.argument == "salinity":
                 self.main_A[i] = 1 + self.factor1_plus[i] + self.factor1_minus[i]
                 if i < self.nz - 1:
                     self.upper_A[i] = -self.factor1_minus[i]
@@ -268,7 +269,7 @@ class AdvectionDiffusion:
         else:
             warnings.filterwarnings("ignore")
             X_new = linalg.spsolve(self.A, B)
-        return X_new, X_wind, self.dt
+        return X_new, X_wind
 
     def factor_1(self, argument, a, c, dt, dz, nz):
         """Factor 1 and avoid zero divison error
@@ -282,15 +283,15 @@ class AdvectionDiffusion:
             nz (int): The value of 'nz'.
         Returns:
             numpy.ndarray or list: The calculated factor(s) based on the given argument.
-                If the argument is not "salinity1", returns a numpy.ndarray.
-                If the argument is "salinity1", returns a list containing two numpy.ndarrays.
+                If the argument is not "salinity", returns a numpy.ndarray.
+                If the argument is "salinity", returns a list containing two numpy.ndarrays.
 
         """
         const1 = dt / (dz**2)
         self.factor1 = np.zeros(nz, dtype=np.float64)
         self.factor1[np.nonzero(a)] = const1 * (c[np.nonzero(a)] / a[np.nonzero(a)])
 
-        if argument != "salinity1":
+        if argument != "salinity":
             return self.factor1
         factor1_plus = (self.factor1 + np.roll(self.factor1, 1)) / 2
         factor1_plus[0] = self.factor1[0]

@@ -12,20 +12,13 @@ from ..preprocess import PreprocessData
 from ..preprocess.initial_boundary_conditions import temperature_gradient
 from ..statevariables import (
     compute_error_for_convergence,
-    define_previous_statevariable,
-    initialize_statevariables,
     overwrite_statevariables,
     reset_error_for_while_loop,
     set_statevariables,
 )
-from ..update_physical_values import (
-    update_enthalpy,
-    update_enthalpy_solid_state,
-    update_liquid_fraction,
-)
+from ..update_physical_values import update_state_variables
 from ..utils.helpers import t_total
 from ..utils.spyice_exceptions import ConvergenceError, InvalidPhaseError
-from .advection_diffusion import AdvectionDiffusion
 from .stefan_problem import StefanProblem
 
 # plt.style.use("spyice.utils.custom")
@@ -231,10 +224,17 @@ class SeaIceModel:
         return phi_all_mush_list
 
     def convergence_loop_iteration(
-        self, t, t_km1, s_km1, phi_km1, buffo=False, stefan=False, temp_grad=None
+        self,
+        t,
+        t_km1,
+        s_km1,
+        phi_km1,
+        buffo=False,
+        stefan=False,
+        temp_grad=None,
+        salinity_equation=False,
     ):
-        """Performs a single iteration of the convergence loop.
-
+        """Performs a single iteration of the convergence loop by first resetting the parameters to their previous time step values and then running the convergence loop until convergence is reached.
         Args:
             t (float): Current temperature.
             t_km1 (float): Temperature at the previous time step.
@@ -243,6 +243,11 @@ class SeaIceModel:
             buffo (bool, optional): Flag indicating whether to use the buffo method. Defaults to False.
             stefan (bool, optional): Flag indicating whether to use the Stefan method. Defaults to False.
             temp_grad (float, optional): Temperature gradient. Defaults to None.
+
+        Methods called:
+            - reset_iteration_parameters: Resets the iteration parameters for the sea ice model with values at previous time steps.
+            - run_while_convergence_iteration: Runs the convergence loop until convergence is reached.
+
         Returns:
             tuple: A tuple containing the following values:
                 - t_k (float): Current temperature.
@@ -259,6 +264,7 @@ class SeaIceModel:
                 - s_km1 (float): Salinity at the previous time step.
                 - phi_km1 (float): Porosity at the previous time step.
         """
+
         (
             t_km1,
             s_km1,
@@ -268,8 +274,9 @@ class SeaIceModel:
             s_err,
             phi_err,
             t_initial,
+            s_initial,
             phi_initial,
-            t_source,
+            source_term_array,
             counter,
         ) = self.reset_iteration_parameters(t, t_km1, s_km1, phi_km1)
         (
@@ -296,10 +303,9 @@ class SeaIceModel:
             t_err,
             s_err,
             phi_err,
-            t_initial,
-            phi_initial,
-            t_source,
+            source_term_array,
             counter,
+            _is_salininty_equation=salinity_equation,
         )
         return (
             t_k,
@@ -320,18 +326,17 @@ class SeaIceModel:
     def run_while_convergence_iteration(
         self,
         t,
-        t_km1,
-        s_km1,
-        phi_km1,
+        t_initial,
+        s_initial,
+        phi_initial,
         buffo,
         stefan,
         t_err,
         s_err,
         phi_err,
-        t_initial,
-        phi_initial,
-        t_source,
+        source_term,
         counter,
+        _is_salinity_equation=False,
     ):
         """Runs the convergence loop until convergence is reached.
 
@@ -347,95 +352,83 @@ class SeaIceModel:
             phi_err: Phi error
             t_initial: Initial temperature
             phi_initial: Initial phi
-            t_source: Temperature source
+            source_term: RHS Source term of PDE equation
             counter: Iteration counter
 
+        Methods called:
+            - initialise_previous_statevariables: Defines the previous state variables for convergence iteration (temperature,salinity, liquid_fraction).
+            - update_state_variables: Update the state variables (Enthalpy, Enthalpy Solid, Liquid Fraction, Temperature, Salinity).
+            - locate_ice_ocean_interface: Locate the ice-ocean interface based on the liquid fraction.
+            - overwrite_statevariables:
+            - track_mush_for_parameter
+            - phi_all_mush_list
+            - check_convergence: computes error for convergence
+
         Returns:
-            Tuple of updated arrays and indices
+            tuple: A tuple containing the following values:
+                - t_km1 (float): Temperature at the previous time step.
+                - s_km1 (float): Salinity at the previous time step.
+                - phi_km1 (float): Liquid fraction at the previous time step.
+                - t_prev (float): Temperature at the previous time step.
+                - s_prev (float): Salinity at the previous time step.
+                - phi_prev (float): Liquid fraction at the previous time step.
+                - h_k (float): Current heat flux.
+                - h_solid (float): Heat flux at the solid-liquid interface.
+                - phi_k (float): Liquid fraction at the current time step.
+                - t_k (float): Current temperature.
+                - s_k (float): Current salinity.
+                - thickness (float): Current thickness.
+                - thickness_index (int): Index of the thickness
         """
+
+        # Set previous state variables temperature, salinity, liquid fraction respectively
+        t_prev, s_prev, phi_prev = overwrite_statevariables(
+            t_initial, s_initial, phi_initial
+        )
+        # Run the while loop until convergence is reached
         while (
             t_err > self.preprocess_data.temperature_tolerance
             or s_err > self.preprocess_data.salinity_tolerance
             or phi_err > self.preprocess_data.liquid_fraction_tolerance
         ):
-            if counter > 1:
-                t_prev, s_prev, phi_prev = define_previous_statevariable(
-                    t_km1, s_km1, phi_km1
-                )
-            else:
-                t_prev, s_prev, phi_prev = t_initial, s_km1, phi_initial
-
-            h_k = update_enthalpy(t_km1, s_km1, phi_km1, self.preprocess_data.nz)
-            h_solid = update_enthalpy_solid_state(
-                s_km1,
-                self.preprocess_data.nz,
-                self.preprocess_data.liquidus_relation_type,
-            )
-            phi_k, t_km1 = update_liquid_fraction(
-                t_km1,
-                s_km1,
-                phi_km1,
-                h_k,
-                h_solid,
-                self.preprocess_data.nz,
-                _is_stefan=self.preprocess_data.is_stefan,
-            )
-            advection_diffusion_temp = AdvectionDiffusion(
-                "temperature",
-                t_km1,
-                t_source,
+            # Update state variables Enthalpy, Enthalpy Solid, Liquid Fraction, Temperature, Salinity respectively
+            h_k, h_solid, phi_k, t_k, s_k = update_state_variables(
+                t_prev,
+                s_prev,
+                phi_prev,
+                buffo,
+                stefan,
                 t_initial,
-                phi_k,
+                s_initial,
                 phi_initial,
-                self.preprocess_data.upwind_velocity,
-                self.preprocess_data.grid_timestep_dt,
-                self.preprocess_data.grid_resolution_dz,
-                self.preprocess_data.nz,
-                self.preprocess_data.time_passed,
-                self.preprocess_data.initial_salinity,
-                Stefan=stefan,
-                Buffo=buffo,
-                bc_neumann=self.preprocess_data.temp_grad,
+                source_term,
+                _is_salinity_equation=_is_salinity_equation,
             )
-            t_k, x_wind_t, dt_t = advection_diffusion_temp.unknowns_matrix()
-            s_k = s_km1
+            # Locate ice-ocean interface based on liquid fraction
             thickness, thickness_index = locate_ice_ocean_interface(
                 phi_k,
                 self.preprocess_data.grid_resolution_dz,
                 self.preprocess_data.nz,
                 Stefan=self.preprocess_data.is_stefan,
             )
-            t_km1, s_km1, phi_km1 = overwrite_statevariables(t_k, s_k, phi_k)
-            if t in [7, 36, 720, 7200, 14400, 21600] and stefan:
-                self.preprocess_data.t_k_iter = self.track_mush_for_parameter(
-                    phi_k, t_km1, self.preprocess_data.t_k_iter
-                )
-                self.preprocess_data.phi_k_iter = self.track_mush_for_parameter(
-                    phi_k, phi_k, self.preprocess_data.phi_k_iter
-                )
-                self.preprocess_data.all_phi_iter = self.phi_all_mush_list(
-                    phi_k, self.preprocess_data.all_phi_iter
-                )
+            # Update state variables temperature, salinity, liquid fraction respectively
+            t_prev, s_prev, phi_prev = overwrite_statevariables(t_k, s_k, phi_k)
+            # Track mushy layer using liquid fraction for temperature and phi values
+            self.record_mushy_layer_data(t, t_prev, stefan, phi_prev)
+            # record thickness index at the given timestep t
             self.preprocess_data.thickness_index_total[t] = thickness_index
 
-            if counter > 0:
-                t_err, t_err_full, s_err, s_err_full, phi_err, phi_err_full = (
-                    compute_error_for_convergence(
-                        t_k, t_prev, s_k, s_prev, phi_k, phi_prev
-                    )
-                )
+            t_err, s_err, phi_err, counter = self.check_convergence(
+                t, counter, t_prev, s_prev, phi_prev, phi_k, t_k, s_k
+            )
 
-            if counter >= self.preprocess_data.counter_limit:
-                msg = f"Convergence not reached at time t = {t}"
-                raise ConvergenceError(msg)
-            counter += 1
         return (
-            t_km1,
-            s_km1,
-            phi_km1,
             t_prev,
             s_prev,
             phi_prev,
+            t_initial,
+            s_initial,
+            phi_initial,
             h_k,
             h_solid,
             phi_k,
@@ -444,6 +437,32 @@ class SeaIceModel:
             thickness,
             thickness_index,
         )
+
+    def check_convergence(self, t, counter, t_prev, s_prev, phi_prev, phi_k, t_k, s_k):
+        if counter > 0:
+            t_err, t_err_full, s_err, s_err_full, phi_err, phi_err_full = (
+                compute_error_for_convergence(t_k, t_prev, s_k, s_prev, phi_k, phi_prev)
+            )
+
+        if counter >= self.preprocess_data.counter_limit:
+            msg = f"Convergence not reached at time t = {t}"
+            raise ConvergenceError(msg)
+
+        counter += 1
+        return t_err, s_err, phi_err
+
+    def record_mushy_layer_data(self, t, t_km1, stefan, phi_k):
+        """Records the mushy layer data for temperature and phi values at time iterations t at specific time steps corresponding to initial stages, middle and final stages of the process."""
+        if t in [7, 36, 720, 7200, 14400, 21600] and stefan:
+            self.preprocess_data.t_k_iter = self.track_mush_for_parameter(
+                phi_k, t_km1, self.preprocess_data.t_k_iter
+            )
+            self.preprocess_data.phi_k_iter = self.track_mush_for_parameter(
+                phi_k, phi_k, self.preprocess_data.phi_k_iter
+            )
+            self.preprocess_data.all_phi_iter = self.phi_all_mush_list(
+                phi_k, self.preprocess_data.all_phi_iter
+            )
 
     def reset_iteration_parameters(self, t, tkm1, s_km1, phi_km1):
         """Reset the iteration parameters for the sea ice model.
@@ -463,20 +482,21 @@ class SeaIceModel:
                 - s_err (float): Salinity error.
                 - phi_err (float): Liquid fraction error.
                 - t_initial (float): Initial temperature.
+                - s_initial (float): Initial salinity.
                 - phi_initial (float): Initial liquid fraction.
-                - t_source (ndarray): Array of temperature sources.
+                - source_term_array (ndarray): Array of source-term values.
                 - counter (int): Iteration counter.
         """
-
         t_err, s_err, phi_err = reset_error_for_while_loop(
             self.preprocess_data.temperature_tolerance,
             self.preprocess_data.salinity_tolerance,
             self.preprocess_data.liquid_fraction_tolerance,
         )
-        t_initial, t_km1, s_km1, phi_initial, phi_km1, temp_grad = (
+        t_initial, t_km1, s_initial, s_km1, phi_initial, phi_km1 = (
             self.initialize_state_variables(t, tkm1, s_km1, phi_km1)
         )
-        t_source = np.zeros(self.preprocess_data.nz)
+        temp_grad = self.preprocess_data.temp_grad
+        source_term_array = np.zeros(self.preprocess_data.nz)
         counter = 1
         self.record_iteration_data()
         return (
@@ -488,8 +508,9 @@ class SeaIceModel:
             s_err,
             phi_err,
             t_initial,
+            s_initial,
             phi_initial,
-            t_source,
+            source_term_array,
             counter,
         )
 
@@ -544,30 +565,26 @@ class SeaIceModel:
             (
                 t_initial,
                 t_km1,
-                t_prev,
                 s_initial,
-                s_prev,
                 s_km1,
                 phi_initial,
-                phi_prev,
                 phi_km1,
-            ) = initialize_statevariables(
+            ) = set_statevariables(
                 self.preprocess_data.temperature,
                 self.preprocess_data.salinity,
                 self.preprocess_data.liquid_fraction,
             )
-
         else:
-            t_initial, t_km1, s_km1, s_prev, phi_initial, phi_km1 = set_statevariables(
-                t_km1, s_km1, phi_km1
+            t_initial, t_km1, s_initial, s_km1, phi_initial, phi_km1 = (
+                set_statevariables(t_km1, s_km1, phi_km1)
             )
         return (
             t_initial,
             t_km1,
+            s_initial,
             s_km1,
             phi_initial,
             phi_km1,
-            self.preprocess_data.temp_grad,
         )
 
     def choose_phase_type_iteration(self, t):
@@ -664,6 +681,7 @@ class SeaIceModel:
                     phi_km1_buffo,
                     buffo=True,
                     temp_grad=self.preprocess_data.temp_grad,
+                    salinity_equation=self.preprocess_data.is_salinity_equation,
                 )
 
             (
@@ -687,10 +705,19 @@ class SeaIceModel:
                 phi_km1,
                 stefan=True,
                 temp_grad=self.preprocess_data.temp_grad,
+                salinity_equation=self.preprocess_data.is_salinity_equation,
             )
             self.preprocess_data.time_passed = t_total(
                 self.preprocess_data.time_passed,
                 self.preprocess_data.grid_timestep_dt,
+            )
+            self.bc_neumann(
+                phi_k,
+                self.preprocess_data.boundary_condition_type,
+                self.preprocess_data.nz,
+            )
+            t_stefan, error_depth_t, thickness_stefan = (
+                self.choose_phase_type_iteration(t)
             )
             self.results = self.results.store_results(
                 self.results,
@@ -703,14 +730,6 @@ class SeaIceModel:
                 thickness,
                 self.preprocess_data.time_passed,
                 t,
-            )
-            self.bc_neumann(
-                phi_k,
-                self.preprocess_data.boundary_condition_type,
-                self.preprocess_data.nz,
-            )
-            t_stefan, error_depth_t, thickness_stefan = (
-                self.choose_phase_type_iteration(t)
             )
             self.results = self.results.store_results_for_iter_t(
                 self.results,
