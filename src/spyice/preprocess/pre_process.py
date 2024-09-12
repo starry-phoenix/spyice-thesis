@@ -45,7 +45,7 @@ class PreProcess(UserInput, GeometrySettings, ResultsParams):
                 self,
                 constants=Constants.REAL.value,
                 config_data=config_data,
-                dir_output_name=output_dir,
+                dir_output_name_hydra=output_dir,
             )
             print("User Configuration Data Setup Complete...")
         else:
@@ -142,6 +142,7 @@ class PreProcess(UserInput, GeometrySettings, ResultsParams):
             constants=self.constants,
             grid_timestep_dt=self.grid_timestep_dt,
             initial_salinity=self.initial_salinity,
+            dir_output_name_hydra=self.dir_output_name_hydra,
             dir_output_name=self.dir_output_name,
             max_iterations=self.max_iterations,
         )

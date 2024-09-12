@@ -1,10 +1,11 @@
 from __future__ import annotations
-from typing import TYPE_CHECKING
-import time
+
 from dataclasses import asdict, dataclass
+
 import matplotlib.pyplot as plt
 import numpy as np
 
+from src.spyice.models.stefan_problem import StefanProblem
 from src.spyice.parameters.results_params import ResultsParams
 from src.spyice.parameters.user_input import UserInput
 from src.spyice.preprocess.initial_boundary_conditions import temperature_gradient
@@ -17,9 +18,8 @@ from src.spyice.statevariables import (
 from src.spyice.update_physical_values import update_state_variables
 from src.spyice.utils.helpers import t_total
 from src.spyice.utils.spyice_exceptions import ConvergenceError, InvalidPhaseError
-from src.spyice.models.stefan_problem import StefanProblem
 
-plt.style.use("spyice.utils.custom")
+plt.style.use("src.spyice.utils.custom")
 # plt.rcParams.update(
 #     {
 #         "text.usetex": True,
@@ -185,10 +185,11 @@ class SeaIceModel:
             param_iterlist: list to store the tracked mush values for the parameter
             Updated list with the tracked mush values for the parameter
         """
-
+        # check for values of phi_k_ that fall between the mush_lowerbound and mush_upperbound range
         mush_cond = (phi_k_ >= self.mush_lowerbound) & (phi_k_ <= self.mush_upperbound)
+        # if there are values that fall within the range, get the index of the middle value
         if mush_cond.any():
-            mush_indx = np.where(mush_cond)[0][len(np.where(mush_cond)[0]) // 2] - 1
+            mush_indx = np.where(mush_cond)[0][len(np.where(mush_cond)[0]) // 2 - 1]
         else:
             mush_cond = phi_k_ > self.mush_upperbound
             mush_indx = 0
@@ -410,16 +411,15 @@ class SeaIceModel:
                 self.preprocess_data.nz,
                 Stefan=self.preprocess_data.is_stefan,
             )
+            t_err, s_err, phi_err, counter = self.check_convergence(
+                t, counter, t_prev, s_prev, phi_prev, phi_k, t_k, s_k
+            )
             # Update state variables temperature, salinity, liquid fraction respectively
             t_prev, s_prev, phi_prev = overwrite_statevariables(t_k, s_k, phi_k)
             # Track mushy layer using liquid fraction for temperature and phi values
             self.record_mushy_layer_data(t, t_prev, stefan, phi_prev)
             # record thickness index at the given timestep t
             self.preprocess_data.thickness_index_total[t - 1] = thickness_index
-
-            t_err, s_err, phi_err, counter = self.check_convergence(
-                t, counter, t_prev, s_prev, phi_prev, phi_k, t_k, s_k
-            )
 
         return (
             t_prev,
@@ -525,16 +525,12 @@ class SeaIceModel:
         """
 
         if np.array(self.preprocess_data.t_k_iter).any():
-            self.preprocess_data.t_k_iter_all = np.append(
-                self.preprocess_data.t_k_iter_all, self.preprocess_data.t_k_iter
-            )
+            self.preprocess_data.t_k_iter_all.append(self.preprocess_data.t_k_iter)
         if np.array(self.preprocess_data.phi_k_iter).any():
-            self.preprocess_data.phi_k_iter_all = np.append(
-                self.preprocess_data.phi_k_iter_all, self.preprocess_data.phi_k_iter
-            )
+            self.preprocess_data.phi_k_iter_all.append(self.preprocess_data.phi_k_iter)
         if np.array(self.preprocess_data.all_phi_iter).any():
-            self.preprocess_data.all_phi_iter_all = np.append(
-                self.preprocess_data.all_phi_iter_all, self.preprocess_data.all_phi_iter
+            self.preprocess_data.all_phi_iter_all.append(
+                self.preprocess_data.all_phi_iter
             )
         (
             self.preprocess_data.t_k_iter,
@@ -761,6 +757,13 @@ class SeaIceModel:
             backend="pgf",
         )
 
+    def add_new_parameter_results(self) -> None:
+        self.results.t_k_iter_all = self.preprocess_data.t_k_iter_all
+        self.results.phi_k_iter_all = self.preprocess_data.phi_k_iter_all
+        self.results.all_phi_iter_all = self.preprocess_data.all_phi_iter_all
+
+        return self.results
+
     @classmethod
     def get_results(
         cls, dataclass: dataclass, user_dataclass: UserInput
@@ -778,9 +781,10 @@ class SeaIceModel:
         results_obj = cls(dataclass, user_dataclass)
         results_obj.set_dataclass(dataclass)
         results_obj.run_sea_ice_model()
+        final_results = results_obj.add_new_parameter_results()
         print("Model run complete and Ready for Analysis.")
 
-        return results_obj.results
+        return final_results
 
     def set_dataclass(self, _dataclass):
         """Sets the dataclass attributes of the object.

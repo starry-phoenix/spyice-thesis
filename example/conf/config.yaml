@@ -1,3 +1,5 @@
+# add salinity_equation_option in defaults and hydra.sweeper.params and dir
+
 defaults:
   - constants: real
   - dt: dt47

@@ -76,9 +76,9 @@ class ResultsParams:
         self.t_k_iter = []
         self.phi_k_iter = []
         self.all_phi_iter = np.zeros((iter_max, nz))
-        self.t_k_iter_all = np.zeros((iter_max, nz))
-        self.phi_k_iter_all = np.zeros((iter_max, nz))
-        self.all_phi_iter_all = np.zeros((iter_max, nz))
+        self.t_k_iter_all = []
+        self.phi_k_iter_all = []
+        self.all_phi_iter_all = []
         self.all_t = np.zeros([iter_max, nz])
         self.all_s = np.zeros([iter_max, nz])
         self.all_phi = np.zeros([iter_max, nz])

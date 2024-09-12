@@ -9,7 +9,6 @@ from src.spyice.models.sea_ice_model import SeaIceModel
 from src.spyice.postprocess.analysis import Analysis
 from src.spyice.postprocess.visualise_model import VisualiseModel
 from src.spyice.preprocess.pre_process import PreProcess
-from src.spyice.utils.config_sort import ConfigSort
 
 
 # TODO: Type hinting for all functions
@@ -34,7 +33,7 @@ class MainProcess:
         #     self.config_raw, config_type="default"
         # )
         self.project_path: Path | str = project_path
-        self.out_dir_final = create_output_directory(hyd_output_dir)
+        self.out_dir_final = hyd_output_dir
 
     def run_model(self) -> None:
         """Runs the model using the provided configuration and output directory.
@@ -83,23 +82,5 @@ class MainProcess:
         model_visualization_object.plot_temperature(
             z_depth=0.1, savefig=True, Buffo_matlab=False
         )
+        model_visualization_object.plot_H_iter_all(savefig=True)
         print("Postprocessing done.")
-
-
-def create_output_directory(hyd_dir: str) -> str:
-    """Creates an output directory for storing temperature data.
-
-    Args:
-        hyd_dir (str): The directory path where the output directory will be created.
-    Returns:
-        str: The path of the created output directory.
-    Raises:
-        None
-    """
-
-    file_name = f"Temperature_{PreProcess.initial_salinity}_{PreProcess.boundary_condition_type}_{PreProcess.grid_resolution_dz}_{PreProcess.grid_timestep_dt}_{PreProcess.max_iterations}_{PreProcess.output_suffix}"
-    output_dir = os.path.join(hyd_dir, file_name)
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
-
-    return output_dir

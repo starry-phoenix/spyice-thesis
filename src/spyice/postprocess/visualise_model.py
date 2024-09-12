@@ -187,6 +187,7 @@ class VisualiseModel:
                 self.ui_object.dir_output_name + "/Temperature_error_num_and_ana",
                 backend="pgf",
             )
+        plt.close(fig1)
 
     # TODO Rename this here and in `plot_error_temp_diff` and `plot_error_temp`
     def _extracted_from_plot_error_temp_8(self, ax1, arg1):
@@ -263,6 +264,7 @@ class VisualiseModel:
                 self.ui_object.dir_output_name + "/Numerical_Analytical_Depth.pdf",
                 backend="pgf",
             )
+        plt.close(fig)
 
     def plot_temperature(
         self, z_depth: float, savefig: bool = True, Buffo_matlab: bool = False
@@ -360,6 +362,7 @@ class VisualiseModel:
                 + "m.pdf",
                 backend="pgf",
             )
+        plt.close(fig1)
 
         df_temp = pd.DataFrame(self.results_object.t_k_list)
         df_temp.to_csv(
@@ -368,6 +371,85 @@ class VisualiseModel:
             + str(self.ui_object.grid_resolution_dz)
             + ".csv"
         )
+
+    def plot_H_iter(self, h, t, param_name="Temperature", unit="K", savefig=False):
+        iters = h.shape[0]
+        iters_arr = np.linspace(0, iters - 1, iters)
+        plt.grid()
+        plt.plot(h[:, 0], label=r"cell Solid", color="turquoise")
+        plt.scatter(iters_arr, h[:, 0], color="turquoise")
+        plt.plot(h[:, 1], "--", label=r"cell Mushy", color="red", alpha=0.6)
+        plt.scatter(iters_arr, h[:, 1], color="red", alpha=0.6)
+        plt.plot(h[:, 2], ":", label=r"cell Liquid", color="teal")
+        plt.scatter(iters_arr, h[:, 2], color="teal")
+        plt.xlabel(r"iteration before convergence")
+        plt.ylabel(rf"{param_name} in {unit}")
+        plt.title(rf"{param_name} at t={t}H")
+        plt.legend()
+
+        if savefig:
+            plt.savefig(
+                self.ui_object.dir_output_name
+                + "/"
+                + param_name
+                + "_iter"
+                + cap_dens
+                + "_"
+                + str(t)
+                + "m.pdf",
+                backend="pgf",
+            )
+        plt.close()
+
+    def plot_all_phi_mush(self, phi_mush, t, savefig=False):
+        # plot all mush for len(phi_mush) iterations
+        iters = phi_mush.shape[0]
+        iters_arr = np.linspace(0, iters - 1, iters)
+        plt.grid()
+        plt.plot(phi_mush)
+        plt.scatter(iters_arr, phi_mush)
+        plt.xlabel(r"iteration before convergence")
+        plt.ylabel(r"No. of mushy cells")
+        plt.title(rf"Mushy Cells at t={t}H")
+
+        if savefig:
+            plt.savefig(
+                f"{self.ui_object.dir_output_name}/LiquidFractionMush_iter_{cap_dens}_{str(t)}m.pdf",
+                backend="pgf",
+            )
+        plt.close()
+
+    def plot_H_iter_all(self, savefig=False):
+        temperature_mushy_before_convergence = self.results_object.t_k_iter_all
+        liquidfraction_mushy_before_convergence = self.results_object.phi_k_iter_all
+        liquidfraction_before_convergence = self.results_object.all_phi_iter_all
+
+        for h, t in zip(
+            temperature_mushy_before_convergence,
+            [0.1, 0.5, 10, 100, 200, 300],
+            strict=False,
+        ):
+            self.plot_H_iter(np.array(h), t, savefig=savefig)
+
+        for phi, t in zip(
+            liquidfraction_mushy_before_convergence,
+            [0.1, 0.5, 10, 100, 200, 300],
+            strict=False,
+        ):
+            self.plot_H_iter(
+                np.array(phi),
+                t,
+                param_name="Liquid-Fraction",
+                unit="phi",
+                savefig=savefig,
+            )
+
+        for phi_mush, t in zip(
+            liquidfraction_before_convergence,
+            [0.1, 0.5, 10, 100, 200, 300],
+            strict=False,
+        ):
+            self.plot_all_phi_mush(np.array(phi_mush), t, savefig=savefig)
 
     # TODO: Add the following methods
     # def plot_phi(self, timestep, savefig=True):
@@ -453,49 +535,3 @@ class VisualiseModel:
     #     ax3.legend(loc=1)
     #     if savefig:
     #         fig1.savefig(self.dir_output_name + "/LiqVsTemp evolution at"+ str(timestep) +"h.png")
-
-    # def plot_H_iter(self,h,t, param_name='Temperature', unit='K', savefig=False):
-    #     iters = h.shape[0]
-    #     iters_arr = np.linspace(0,iters-1,iters)
-    #     plt.grid()
-    #     plt.plot(h[:,0], label='cell Solid', color='turquoise')
-    #     plt.scatter(iters_arr,h[:,0], color='turquoise')
-    #     plt.plot(h[:,1], '--',label='cell Mushy', color='red', alpha=0.6)
-    #     plt.scatter(iters_arr,h[:,1], color='red', alpha=0.6)
-    #     plt.plot(h[:,2], ':',label='cell Liquid', color='teal')
-    #     plt.scatter(iters_arr,h[:,2], color='teal')
-    #     plt.xlabel('iteration before convergence')
-    #     plt.ylabel(param_name + ' in ' + unit)
-    #     plt.title( param_name+f' at t={t}H')
-    #     plt.legend()
-
-    #     if savefig:
-    #         plt.savefig(self.dir_output_name + '/' + param_name +'_iter'+  cap_dens + '_' + str(t)+ 'H.png')
-
-    # def plot_all_phi_mush(self, phi_mush, t, savefig=False):
-    #     # plot all mush for len(phi_mush) iterations
-    #     iters = phi_mush.shape[0]
-    #     iters_arr = np.linspace(0,iters-1,iters)
-    #     plt.grid()
-    #     plt.plot(phi_mush)
-    #     plt.scatter(iters_arr,phi_mush)
-    #     plt.xlabel('iteration before convergence')
-    #     plt.ylabel('# of mushy cells')
-    #     plt.title(f'Mushy Cells at t={t}H')
-
-    #     if savefig:
-    #         plt.savefig(self.dir_output_name + '/LiquidFractionMush_iter'+  cap_dens + '_' + str(t)+ 'H.png')
-
-    # def plot_H_iter_all(self, savefig=False):
-    #     h_all = self.T_k_iter_all
-    #     phi_all = self.phi_k_iter_all
-    #     all_phi_mush = self.all_phi_iter_all
-
-    #     for h,t in zip(h_all, [0.1,0.5,10,100,200,300], strict=False):
-    #         self.plot_H_iter(np.array(h), t, savefig=savefig)
-
-    #     for phi,t in zip(phi_all, [0.1,0.5,10,100,200,300], strict=False):
-    #         self.plot_H_iter(np.array(phi), t, param_name='Liquid-Fraction', unit=r'$\phi$', savefig=savefig)
-
-    #     for phi_mush, t in zip(all_phi_mush, [0.1,0.5,10,100,200,300], strict=False):
-    #         self.plot_all_phi_mush(np.array(phi_mush), t, savefig=savefig)

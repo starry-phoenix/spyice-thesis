@@ -135,7 +135,7 @@ hydra:
     - path: ''
       schema: structured
       provider: schema
-    output_dir: C:\Users\sneha\Documents\MBDHiWi\MBDHiwi\spyicedir\spyicedir\outputs\2024-09-12\080230_real_47.0_1000
+    output_dir: C:\Users\sneha\Documents\MBDHiWi\MBDHiwi\spyicedir\spyicedir\outputs\2024-09-12\164439_real_47.0_1000
     choices:
       iter_max: iter_max1000
       S_IC: S34

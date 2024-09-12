@@ -7,6 +7,7 @@ from src.spyice.parameters.constants import Constants
 from src.spyice.parameters.real_constants import RealConstants
 from src.spyice.parameters.debug_constants import DebugConstants
 from src.spyice.utils.config_sort import read_omegaconfig
+from src.spyice.utils.create_directory import create_output_directory
 
 
 def _dt_stability_validator(dz: float, dt: float) -> None:
@@ -109,6 +110,9 @@ class UserInput:
     temperature_top_type: str = "Stefan"  # "Stefan" or "Dirichlet"
     phase_type: int = 1
     grid_timestep_dt: float = 47.0
+    dir_output_name_hydra: str = (
+        "Temperature_{S_IC}_{bc_condition}_{dz}_{dt}_{iter_max}_{cap_dens}"
+    )
     dir_output_name: str = (
         "Temperature_{S_IC}_{bc_condition}_{dz}_{dt}_{iter_max}_{cap_dens}"
     )
@@ -132,6 +136,16 @@ class UserInput:
                 self.grid_timestep_dt = read_omegaconfig(self.config_data, "dt")
                 self.initial_salinity = read_omegaconfig(self.config_data, "S_IC")
                 self.max_iterations = read_omegaconfig(self.config_data, "iter_max")
+                self.dir_output_name = create_output_directory(
+                    self.dir_output_name_hydra,
+                    self.initial_salinity,
+                    self.boundary_condition_type,
+                    self.grid_resolution_dz,
+                    self.grid_timestep_dt,
+                    self.max_iterations,
+                    self.output_suffix,
+                )
+
                 # self.is_salinity_equation = read_omegaconfig(
                 #     self.config_data, "salinity"
                 # )
