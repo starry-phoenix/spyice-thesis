@@ -3,16 +3,15 @@ defaults:
   - dt: dt47
   - S_IC: S34
   - iter_max: iter_max1000
-  - salinity: no
   - override hydra/help: config_param_help
   - _self_
 
 hydra:
   run:
-    dir: outputs/${now:%Y-%m-%d}/${now:%H%M%S}_${consts.constants}_${dt.dt}_${iter_max.iter_max}
+    dir: outputs/${now:%Y-%m-%d}/${now:%H%M%S}_${constants.constants}_${dt.dt}_${iter_max.iter_max}
   sweep:
     dir: outputs/${now:%Y-%m-%d}
-    subdir: ${now:%H%M%S}_${consts.constants}_${dt.dt}_${iter_max.iter_max}
+    subdir: ${now:%H%M%S}_${constants.constants}_${dt.dt}_${iter_max.iter_max}
     # /${hydra.job.num}
   sweeper:
     params:
@@ -20,7 +19,6 @@ hydra:
       dt: glob(*)
       S_IC: S34
       iter_max: iter_max1000
-      salinity: no
   job_logging:
     root:
       handlers: [console, file]

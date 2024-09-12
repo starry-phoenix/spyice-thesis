@@ -1,14 +1,12 @@
 from __future__ import annotations
-
+from typing import TYPE_CHECKING
 import time
-from dataclasses import asdict
-
+from dataclasses import asdict, dataclass
 import matplotlib.pyplot as plt
 import numpy as np
 
 from ..parameters.results_params import ResultsParams
 from ..parameters.user_input import UserInput
-from ..preprocess import PreprocessData
 from ..preprocess.initial_boundary_conditions import temperature_gradient
 from ..statevariables import (
     compute_error_for_convergence,
@@ -72,7 +70,7 @@ def locate_ice_ocean_interface(phi, dz, nz, **kwargs):
 class SeaIceModel:
     """SeaIceModelClass represents a class that models the behavior of sea ice."""
 
-    def __init__(self, dataclass: PreprocessData, user_dataclass: UserInput):
+    def __init__(self, dataclass: dataclass, user_dataclass: UserInput):
         """
         Args:
             dataclass (PreprocessData): The preprocessed data for the model.
@@ -305,7 +303,7 @@ class SeaIceModel:
             phi_err,
             source_term_array,
             counter,
-            _is_salininty_equation=salinity_equation,
+            salinity_equation,
         )
         return (
             t_k,
@@ -393,6 +391,7 @@ class SeaIceModel:
         ):
             # Update state variables Enthalpy, Enthalpy Solid, Liquid Fraction, Temperature, Salinity respectively
             h_k, h_solid, phi_k, t_k, s_k = update_state_variables(
+                self.preprocess_data,
                 t_prev,
                 s_prev,
                 phi_prev,
@@ -449,7 +448,7 @@ class SeaIceModel:
             raise ConvergenceError(msg)
 
         counter += 1
-        return t_err, s_err, phi_err
+        return t_err, s_err, phi_err, counter
 
     def record_mushy_layer_data(self, t, t_km1, stefan, phi_k):
         """Records the mushy layer data for temperature and phi values at time iterations t at specific time steps corresponding to initial stages, middle and final stages of the process."""
@@ -764,7 +763,7 @@ class SeaIceModel:
 
     @classmethod
     def get_results(
-        cls, dataclass: PreprocessData, user_dataclass: UserInput
+        cls, dataclass: dataclass, user_dataclass: UserInput
     ) -> ResultsParams:
         """Runs the sea ice model and returns the results.
 

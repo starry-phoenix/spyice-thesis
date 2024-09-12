@@ -45,7 +45,7 @@ class PreProcess(UserInput, GeometrySettings, ResultsParams):
                 self,
                 constants=Constants.REAL.value,
                 config_data=config_data,
-                output_dir=output_dir,
+                dir_output_name=output_dir,
             )
             print("User Configuration Data Setup Complete...")
         else:
@@ -147,18 +147,15 @@ class PreProcess(UserInput, GeometrySettings, ResultsParams):
         )
 
     @staticmethod
-    def set_dataclass(data_to_be_converted: dict, dataclass: dataclass):
-        def set_dataclass(
-            data_to_be_converted: dict, dataclass: dataclass
-        ) -> dataclass:
-            """Sets the attributes of a dataclass object using a dictionary.
+    def set_dataclass(data_to_be_converted: dict, dataclass: dataclass) -> dataclass:
+        """Sets the attributes of a dataclass object using a dictionary.
 
-            Args:
-                data_to_be_converted (dict): A dictionary containing the attribute names and values to be set.
-                dataclass (dataclass): The dataclass object to be modified.
-            Returns:
-                dataclass: The modified dataclass object with the attributes set.
-            """
+        Args:
+            data_to_be_converted (dict): A dictionary containing the attribute names and values to be set.
+            dataclass (dataclass): The dataclass object to be modified.
+        Returns:
+            dataclass: The modified dataclass object with the attributes set.
+        """
 
         for key, value in data_to_be_converted.items():
             setattr(dataclass, key, value)

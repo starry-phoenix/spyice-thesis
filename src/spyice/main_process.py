@@ -13,7 +13,7 @@ from .utils.config_sort import ConfigSort
 
 # TODO: Type hinting for all functions
 # TODO: Return type hinting for all functions
-class haMainProcess:
+class MainProcess:
     """Main class to run the model."""
 
     def __init__(

@@ -3,8 +3,9 @@ from __future__ import annotations
 import numpy as np
 from scipy.optimize import bisect, newton
 from typing import TYPE_CHECKING
-from parameters.user_input import UserInput
-from models.advection_diffusion import AdvectionDiffusion
+
+from .parameters.user_input import UserInput
+from .models.advection_diffusion import AdvectionDiffusion
 
 if TYPE_CHECKING:
     from preprocess.pre_process import PreprocessData
@@ -203,7 +204,7 @@ def update_temperature_and_salinity(
     )
     t_k, x_wind_t = advection_diffusion_temp.unknowns_matrix()
     # TODO: Add algae growth model here to salinity
-    if _is_salinity_equation:
+    if _is_salinity_equation is True:
         advection_diffusion_salinity = AdvectionDiffusion(
             "salinity",
             s_prev,
@@ -295,7 +296,7 @@ def update_state_variables(
         source_term,
         buffo,
         stefan,
-        _is_salinity_equation=_is_salinity_equation,
+        _is_salinity_equation,
     )
 
     return h_k, h_solid, phi_k, t_k, s_k

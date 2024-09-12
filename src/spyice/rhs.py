@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import numpy as np
 
-from parameters.user_input import UserInput
-from preprocess.initial_boundary_conditions import boundary_condition
+from .parameters.user_input import UserInput
+from .preprocess.initial_boundary_conditions import boundary_condition
 
 ui = UserInput()
 temperature_melt, temperature_top = ui.temperature_melt, ui.boundary_top_temperature

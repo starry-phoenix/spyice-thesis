@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
+from omegaconf import DictConfig
 from .constants import Constants
 from .real_constants import RealConstants
 from .debug_constants import DebugConstants
@@ -86,7 +87,7 @@ class UserInput:
     ...
 
     constants: RealConstants | DebugConstants = Constants.REAL.value
-    config_data = None
+    config_data: DictConfig = field(default_factory=dict)
     max_iterations: int = 500
     is_stefan: bool = True
     is_buffo: bool = True
