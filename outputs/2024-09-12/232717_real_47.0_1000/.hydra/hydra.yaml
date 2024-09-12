@@ -1,0 +1,153 @@
+hydra:
+  run:
+    dir: outputs/${now:%Y-%m-%d}/${now:%H%M%S}_${constants.constants}_${dt.dt}_${iter_max.iter_max}
+  sweep:
+    dir: outputs/${now:%Y-%m-%d}
+    subdir: ${now:%H%M%S}_${constants.constants}_${dt.dt}_${iter_max.iter_max}
+  launcher:
+    _target_: hydra._internal.core_plugins.basic_launcher.BasicLauncher
+  sweeper:
+    _target_: hydra._internal.core_plugins.basic_sweeper.BasicSweeper
+    max_batch_size: null
+    params:
+      constants: real
+      dt: glob(*)
+      S_IC: S34
+      iter_max: iter_max1000
+  help:
+    app_name: SPyIce
+    header: == ${hydra.help.app_name} ==
+    footer: 'Powered by Hydra (https://hydra.cc)
+
+      Use --hydra-help to view Hydra specific help'
+    template: "${hydra.help.header}\n\nThis is ${hydra.help.app_name}!\nYou can choose\
+      \ a parameter driver by appending\n== Configuration groups ==\nCompose your\
+      \ configuration from those groups:\n\n$APP_CONFIG_GROUPS\n\n== Config ==\nThis\
+      \ is the config generated for this run.\n\n-- single run --\nTo run the app\
+      \ use the following command:\npython main_config.py \n\n-- multirun --\nYou\
+      \ can use it in the multirun mode to run multiple configurations at once. \n\
+      To run the app for a defined configuration by running with multirun -m flag.:\n\
+      1. python main_config.py -m consts=real dt=dt47 iter_max=iter_max1000 S_IC=S34\n\
+      This will generate outputs for defined constants, dt, iter_max and S_IC.\n\n\
+      You can also run the app for a defined dt to give outputs for the other configurations\
+      \ by running:\n2. python main_config.py -m dt=dt47\n\nSimilarly, you can run\
+      \ the app for a defined dt and S_IC to give outputs for other defined iter_max\
+      \ by running:\n3. python config_param.py -m dt=dt47 S_IC=S34\n\nThe default\
+      \ settings are:\n-------\n$CONFIG\n-------\n\n${hydra.help.footer}"
+  hydra_help:
+    template: 'Hydra (${hydra.runtime.version})
+
+      See https://hydra.cc for more info.
+
+
+      == Flags ==
+
+      $FLAGS_HELP
+
+
+      == Configuration groups ==
+
+      Compose your configuration from those groups (For example, append hydra/job_logging=disabled
+      to command line)
+
+
+      $HYDRA_CONFIG_GROUPS
+
+
+      Use ''--cfg hydra'' to Show the Hydra config.
+
+      '
+    hydra_help: ???
+  hydra_logging:
+    version: 1
+    formatters:
+      simple:
+        format: '[%(asctime)s][HYDRA] %(message)s'
+    handlers:
+      console:
+        class: logging.StreamHandler
+        formatter: simple
+        stream: ext://sys.stdout
+    root:
+      level: INFO
+      handlers:
+      - console
+    loggers:
+      logging_example:
+        level: DEBUG
+    disable_existing_loggers: false
+  job_logging:
+    version: 1
+    formatters:
+      simple:
+        format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    handlers:
+      console:
+        class: logging.StreamHandler
+        formatter: simple
+        stream: ext://sys.stdout
+        level: DEBUG
+      file:
+        class: logging.FileHandler
+        formatter: simple
+        filename: ${hydra.runtime.output_dir}/${hydra.job.name}.log
+        mode: w
+    root:
+      level: INFO
+      handlers:
+      - console
+      - file
+    disable_existing_loggers: false
+  env: {}
+  mode: RUN
+  searchpath: []
+  callbacks: {}
+  output_subdir: .hydra
+  overrides:
+    hydra:
+    - hydra.mode=RUN
+    task: []
+  job:
+    name: main_config
+    chdir: null
+    override_dirname: ''
+    id: ???
+    num: ???
+    config_name: config
+    env_set: {}
+    env_copy: []
+    config:
+      override_dirname:
+        kv_sep: '='
+        item_sep: ','
+        exclude_keys: []
+  runtime:
+    version: 1.3.2
+    version_base: '1.3'
+    cwd: C:\Users\sneha\Documents\MBDHiWi\MBDHiwi\spyicedir\spyicedir
+    config_sources:
+    - path: hydra.conf
+      schema: pkg
+      provider: hydra
+    - path: C:\Users\sneha\Documents\MBDHiWi\MBDHiwi\spyicedir\spyicedir\example\conf
+      schema: file
+      provider: main
+    - path: ''
+      schema: structured
+      provider: schema
+    output_dir: C:\Users\sneha\Documents\MBDHiWi\MBDHiwi\spyicedir\spyicedir\outputs\2024-09-12\232717_real_47.0_1000
+    choices:
+      iter_max: iter_max1000
+      S_IC: S34
+      dt: dt47
+      constants: real
+      hydra/env: default
+      hydra/callbacks: null
+      hydra/job_logging: default
+      hydra/hydra_logging: default
+      hydra/hydra_help: default
+      hydra/help: config_param_help
+      hydra/sweeper: basic
+      hydra/launcher: basic
+      hydra/output: default
+  verbose: false

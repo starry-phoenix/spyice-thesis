@@ -401,6 +401,33 @@ class VisualiseModel:
             )
         plt.close()
 
+    def plot_H_iter_heatmap(
+        self, h, t, param_name="Temperature", unit="K", savefig=False
+    ):
+        iters = h.shape[0]
+        iters_arr = np.linspace(0, iters - 1, iters)
+        plt.grid()
+        Z = h.T
+        plt.imshow(Z, cmap="viridis", interpolation="bilinear")
+        plt.colorbar()
+        plt.xlabel(r"iteration before convergence")
+        plt.ylabel(rf"{param_name} in {unit}")
+        plt.title(rf"{param_name} at t={t}H")
+
+        if savefig:
+            plt.savefig(
+                self.ui_object.dir_output_name
+                + "/"
+                + param_name
+                + "_iter"
+                + cap_dens
+                + "_"
+                + str(t)
+                + "m_heatmap.pdf",
+                backend="pgf",
+            )
+        plt.close()
+
     def plot_all_phi_mush(self, phi_mush, t, savefig=False):
         # plot all mush for len(phi_mush) iterations
         iters = phi_mush.shape[0]
@@ -430,6 +457,7 @@ class VisualiseModel:
             strict=False,
         ):
             self.plot_H_iter(np.array(h), t, savefig=savefig)
+            self.plot_H_iter_heatmap(np.array(h), t, savefig=savefig)
 
         for phi, t in zip(
             liquidfraction_mushy_before_convergence,

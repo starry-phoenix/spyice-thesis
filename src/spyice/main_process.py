@@ -77,10 +77,10 @@ class MainProcess:
             results_dataclass=results_data,
             error_analysis_dataclass=analysis_data,
         )
-        model_visualization_object.plot_error_temp(100, norm="inf", savefig=False)
-        model_visualization_object.plot_depth_over_time(savefig=True)
-        model_visualization_object.plot_temperature(
-            z_depth=0.1, savefig=True, Buffo_matlab=False
-        )
+        # model_visualization_object.plot_error_temp(100, norm="inf", savefig=False)
+        # model_visualization_object.plot_depth_over_time(savefig=True)
+        # model_visualization_object.plot_temperature(
+        #     z_depth=0.1, savefig=True, Buffo_matlab=False
+        # )
         model_visualization_object.plot_H_iter_all(savefig=True)
         print("Postprocessing done.")
