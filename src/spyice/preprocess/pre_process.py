@@ -2,17 +2,17 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from ..utils.config_sort import read_omegaconfig
+from src.spyice.utils.config_sort import read_omegaconfig
 
-from ..update_physical_values import (
+from src.spyice.update_physical_values import (
     update_enthalpy,
     update_enthalpy_solid_state,
 )
-from ..parameters.constants import Constants
-from ..parameters.results_params import ResultsParams
-from ..parameters.user_input import UserInput
-from .geometry_settings import GeometrySettings
-from .initial_boundary_conditions import set_initial_conditions
+from src.spyice.parameters.constants import Constants
+from src.spyice.parameters.results_params import ResultsParams
+from src.spyice.parameters.user_input import UserInput
+from src.spyice.preprocess.geometry_settings import GeometrySettings
+from src.spyice.preprocess.initial_boundary_conditions import set_initial_conditions
 
 
 @dataclass

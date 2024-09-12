@@ -1,8 +1,0 @@
-constants:
-  constants: real
-dt:
-  dt: 47.0
-S_IC:
-  S_IC: S34
-iter_max:
-  iter_max: 1000

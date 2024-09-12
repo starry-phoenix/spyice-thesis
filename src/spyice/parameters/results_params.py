@@ -107,6 +107,14 @@ class ResultsParams:
             t: The t value to be stored.
         Returns:
             The updated results_dataclass with the stored results.
+            - all_t: The temperature values.
+            - all_s: The s_sw values.
+            - all_phi: The phi values.
+            - all_h: The h values.
+            - all_h_solid: The h_solid values.
+            - all_w: The w values.
+            - all_thick: The thickness values.
+            - all_t_passed: The t_passed values.
         """
 
         results_dataclass.all_t[t, :] = temp

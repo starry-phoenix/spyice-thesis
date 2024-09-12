@@ -4,8 +4,8 @@ import numpy as np
 from scipy.optimize import bisect, newton
 from typing import TYPE_CHECKING
 
-from .parameters.user_input import UserInput
-from .models.advection_diffusion import AdvectionDiffusion
+from src.spyice.parameters.user_input import UserInput
+from src.spyice.models.advection_diffusion import AdvectionDiffusion
 
 if TYPE_CHECKING:
     from preprocess.pre_process import PreprocessData

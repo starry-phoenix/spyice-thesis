@@ -9,7 +9,7 @@ import numpy as np
 import scipy.optimize as opt
 from scipy.special import erfc
 
-from ..parameters.user_input import UserInput
+from src.spyice.parameters.user_input import UserInput
 
 
 class StefanProblem:

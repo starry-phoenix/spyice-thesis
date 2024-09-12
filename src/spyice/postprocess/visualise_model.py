@@ -2,9 +2,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from ..parameters.results_params import ResultsParams
-from ..parameters.user_input import UserInput
-from .analysis import Analysis
+from src.spyice.parameters.results_params import ResultsParams
+from src.spyice.parameters.user_input import UserInput
+from src.spyice.postprocess.analysis import Analysis
 
 ui = UserInput()
 
@@ -17,7 +17,7 @@ Tm_w, S_sw, iter_max, dz, cap_dens = (
 )
 
 np.seterr(divide="ignore", invalid="ignore")
-plt.style.use("spyice.utils.custom")
+# .style.use("spyice.utils.custom")
 # plt.rcParams.update(
 #     {
 #         "text.usetex": True,

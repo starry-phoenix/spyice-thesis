@@ -4,9 +4,9 @@ import warnings
 import numpy as np
 from scipy.sparse import linalg
 
-from ..parameters.user_input import UserInput as ui
-from ..coefficients import update_coefficients
-from ..rhs import apply_boundary_condition, correct_for_brine_movement
+from src.spyice.parameters.user_input import UserInput as ui
+from src.spyice.coefficients import update_coefficients
+from src.spyice.rhs import apply_boundary_condition, correct_for_brine_movement
 
 top_temp = ui.temperature_top_type
 # TODO: Correct analytical solution

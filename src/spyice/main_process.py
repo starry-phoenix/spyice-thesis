@@ -5,10 +5,11 @@ from pathlib import Path
 
 from omegaconf import DictConfig
 
-from .models.sea_ice_model import SeaIceModel
-from .postprocess import Analysis, VisualiseModel
-from .preprocess import PreProcess
-from .utils.config_sort import ConfigSort
+from src.spyice.models.sea_ice_model import SeaIceModel
+from src.spyice.postprocess.analysis import Analysis
+from src.spyice.postprocess.visualise_model import VisualiseModel
+from src.spyice.preprocess.pre_process import PreProcess
+from src.spyice.utils.config_sort import ConfigSort
 
 
 # TODO: Type hinting for all functions

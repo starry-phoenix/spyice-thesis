@@ -3,10 +3,10 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 
 from omegaconf import DictConfig
-from .constants import Constants
-from .real_constants import RealConstants
-from .debug_constants import DebugConstants
-from ..utils.config_sort import read_omegaconfig
+from src.spyice.parameters.constants import Constants
+from src.spyice.parameters.real_constants import RealConstants
+from src.spyice.parameters.debug_constants import DebugConstants
+from src.spyice.utils.config_sort import read_omegaconfig
 
 
 def _dt_stability_validator(dz: float, dt: float) -> None:
@@ -132,9 +132,9 @@ class UserInput:
                 self.grid_timestep_dt = read_omegaconfig(self.config_data, "dt")
                 self.initial_salinity = read_omegaconfig(self.config_data, "S_IC")
                 self.max_iterations = read_omegaconfig(self.config_data, "iter_max")
-                self.is_salinity_equation = read_omegaconfig(
-                    self.config_data, "salinity"
-                )
+                # self.is_salinity_equation = read_omegaconfig(
+                #     self.config_data, "salinity"
+                # )
 
         elif isinstance(self.constants, DebugConstants):
             self.boundary_salinity = 0.0

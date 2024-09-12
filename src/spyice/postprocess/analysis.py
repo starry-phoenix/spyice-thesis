@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 import numpy as np
 
-from ..utils.error_norms import ErrorNorms
+from src.spyice.utils.error_norms import ErrorNorms
 
 
 @dataclass

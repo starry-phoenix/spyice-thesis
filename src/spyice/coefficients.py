@@ -1,6 +1,6 @@
 import numpy as np
 
-from .parameters.user_input import UserInput
+from src.spyice.parameters.user_input import UserInput
 
 ui = UserInput()
 (

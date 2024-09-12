@@ -1,7 +1,7 @@
 from enum import Enum
 
-from .debug_constants import DebugConstants
-from .real_constants import RealConstants
+from src.spyice.parameters.debug_constants import DebugConstants
+from src.spyice.parameters.real_constants import RealConstants
 
 
 class Constants(Enum):

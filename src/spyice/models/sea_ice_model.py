@@ -5,21 +5,21 @@ from dataclasses import asdict, dataclass
 import matplotlib.pyplot as plt
 import numpy as np
 
-from ..parameters.results_params import ResultsParams
-from ..parameters.user_input import UserInput
-from ..preprocess.initial_boundary_conditions import temperature_gradient
-from ..statevariables import (
+from src.spyice.parameters.results_params import ResultsParams
+from src.spyice.parameters.user_input import UserInput
+from src.spyice.preprocess.initial_boundary_conditions import temperature_gradient
+from src.spyice.statevariables import (
     compute_error_for_convergence,
     overwrite_statevariables,
     reset_error_for_while_loop,
     set_statevariables,
 )
-from ..update_physical_values import update_state_variables
-from ..utils.helpers import t_total
-from ..utils.spyice_exceptions import ConvergenceError, InvalidPhaseError
-from .stefan_problem import StefanProblem
+from src.spyice.update_physical_values import update_state_variables
+from src.spyice.utils.helpers import t_total
+from src.spyice.utils.spyice_exceptions import ConvergenceError, InvalidPhaseError
+from src.spyice.models.stefan_problem import StefanProblem
 
-# plt.style.use("spyice.utils.custom")
+plt.style.use("spyice.utils.custom")
 # plt.rcParams.update(
 #     {
 #         "text.usetex": True,
@@ -415,7 +415,7 @@ class SeaIceModel:
             # Track mushy layer using liquid fraction for temperature and phi values
             self.record_mushy_layer_data(t, t_prev, stefan, phi_prev)
             # record thickness index at the given timestep t
-            self.preprocess_data.thickness_index_total[t] = thickness_index
+            self.preprocess_data.thickness_index_total[t - 1] = thickness_index
 
             t_err, s_err, phi_err, counter = self.check_convergence(
                 t, counter, t_prev, s_prev, phi_prev, phi_k, t_k, s_k
@@ -604,7 +604,7 @@ class SeaIceModel:
             self.preprocess_data.depth_stefan_all = StefanProblem.stefan_problem(
                 self.results.all_t_passed, self.ui_data
             )
-            depth_stefan_t = self.preprocess_data.depth_stefan_all[t]
+            depth_stefan_t = self.preprocess_data.depth_stefan_all[t - 1]
             t_stefan = StefanProblem.calculate_temperature_profile(
                 depth_stefan_t,
                 self.preprocess_data.time_passed,
@@ -618,7 +618,7 @@ class SeaIceModel:
                     self.preprocess_data.all_t_passed, self.ui_data
                 )
             )
-            depth_stefan_t = self.preprocess_data.depth_stefan_all[t]
+            depth_stefan_t = self.preprocess_data.depth_stefan_all[t - 1]
             t_stefan, c_stefan = StefanProblem.calculate_temperature_twophase_profiles(
                 depth_stefan_t,
                 self.preprocess_data.preprocess_data.time_passed,
@@ -630,7 +630,7 @@ class SeaIceModel:
             msg = "Invalid phase type. Choose 1 or 2."
             raise InvalidPhaseError(msg)
 
-        error_depth_t = np.abs(depth_stefan_t) - np.abs(self.results.all_thick[t])
+        error_depth_t = np.abs(depth_stefan_t) - np.abs(self.results.all_thick[t - 1])
         return t_stefan, error_depth_t, depth_stefan_t
 
     def run_sea_ice_model(self):
