@@ -383,7 +383,7 @@ class VisualiseModel:
         plt.plot(h[:, 2], ":", label=r"cell Liquid", color="teal")
         plt.scatter(iters_arr, h[:, 2], color="teal")
         plt.xlabel(r"iteration before convergence")
-        plt.ylabel(rf"{param_name} in {unit}")
+        plt.ylabel(rf"{param_name} [{unit}]")
         plt.title(rf"{param_name} at t={t}H")
         plt.legend()
 
@@ -402,17 +402,36 @@ class VisualiseModel:
         plt.close()
 
     def plot_H_iter_heatmap(
-        self, h, t, param_name="Temperature", unit="K", savefig=False
+        self, h, p, t, param_name="Temperature", unit="K", savefig=False
     ):
         iters = h.shape[0]
         iters_arr = np.linspace(0, iters - 1, iters)
         plt.grid()
         Z = h.T
-        plt.imshow(Z, cmap="viridis", interpolation="bilinear")
-        plt.colorbar()
-        plt.xlabel(r"iteration before convergence")
-        plt.ylabel(rf"{param_name} in {unit}")
-        plt.title(rf"{param_name} at t={t}H")
+        fig1, (ax1) = plt.subplots()
+        heatmap = ax1.imshow(
+            Z,
+            cmap="viridis",
+            interpolation="bilinear",
+            aspect="auto",
+            extent=[0, iters - 1, 1, 0],
+        )
+        ax1.set_xlabel(r"iteration before convergence")
+        ax1.set_ylabel(r"Liquid Fraction $\phi$")
+        ax1.set_title(rf"{param_name} at t={t}H")
+        ax1.set_yticks([0, p[:, 1][-1], 1], ["Solid", "Mushy", "Liquid"])
+        fig1.colorbar(heatmap, ax=ax1, label=rf"{param_name} [{unit}]")
+        ax1.grid(None)
+        ax2 = ax1.twinx()
+        ax2.plot(p[:, 0])
+        ax2.scatter(iters_arr, p[:, 0])
+        ax2.plot(p[:, 1], "--", label=r"cell Mushy", color="black", alpha=0.6)
+        ax2.scatter(iters_arr, p[:, 1], color="black", alpha=0.6)
+        ax2.plot(p[:, 2], ":")
+        ax2.scatter(iters_arr, p[:, 2])
+        ax2.set_ylim(0, 1)
+        ax2.invert_yaxis()
+        ax2.grid(None)
 
         if savefig:
             plt.savefig(
@@ -426,7 +445,7 @@ class VisualiseModel:
                 + "m_heatmap.pdf",
                 backend="pgf",
             )
-        plt.close()
+        plt.close(fig1)
 
     def plot_all_phi_mush(self, phi_mush, t, savefig=False):
         # plot all mush for len(phi_mush) iterations
@@ -451,33 +470,34 @@ class VisualiseModel:
         liquidfraction_mushy_before_convergence = self.results_object.phi_k_iter_all
         liquidfraction_before_convergence = self.results_object.all_phi_iter_all
 
-        for h, t in zip(
+        for h, p, t in zip(
             temperature_mushy_before_convergence,
+            liquidfraction_mushy_before_convergence,
             [0.1, 0.5, 10, 100, 200, 300],
             strict=False,
         ):
             self.plot_H_iter(np.array(h), t, savefig=savefig)
-            self.plot_H_iter_heatmap(np.array(h), t, savefig=savefig)
+            self.plot_H_iter_heatmap(np.array(h), np.array(p), t, savefig=savefig)
 
-        for phi, t in zip(
+        for phi_mush, t in zip(
             liquidfraction_mushy_before_convergence,
             [0.1, 0.5, 10, 100, 200, 300],
             strict=False,
         ):
             self.plot_H_iter(
-                np.array(phi),
+                np.array(phi_mush),
                 t,
                 param_name="Liquid-Fraction",
                 unit="phi",
                 savefig=savefig,
             )
 
-        for phi_mush, t in zip(
+        for phi, t in zip(
             liquidfraction_before_convergence,
             [0.1, 0.5, 10, 100, 200, 300],
             strict=False,
         ):
-            self.plot_all_phi_mush(np.array(phi_mush), t, savefig=savefig)
+            self.plot_all_phi_mush(np.array(phi), t, savefig=savefig)
 
     # TODO: Add the following methods
     # def plot_phi(self, timestep, savefig=True):
