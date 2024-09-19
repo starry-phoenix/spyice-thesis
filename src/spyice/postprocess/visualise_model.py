@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import matplotlib.colors as colors
 import numpy as np
 import pandas as pd
 
@@ -212,8 +213,8 @@ class VisualiseModel:
         """
 
         print("Plotting Depth over time...")
-        x_axis_iter = np.arange(0, iter_max - 1, 1)
-        depth_mush = np.append(np.arange(0, 1, dz), 1.0)
+        x_axis_iter = np.arange(0, self.ui_object.max_iterations - 1, 1)
+        depth_mush = np.append(np.arange(0, 1, self.ui_object.grid_resolution_dz), 1.0)
         mush_list_y1 = np.array(
             [
                 [depth_mush[self.phi_slope(i)[0]], depth_mush[self.phi_slope(i)[-1]]]
@@ -266,6 +267,73 @@ class VisualiseModel:
             )
         plt.close(fig)
 
+    def plot_depth_over_time_heatmap(self, savefig: bool = False):
+        """Plots the depth over time.
+
+        Args:
+            savefig (bool, optional): Whether to save the figure. Defaults to False.
+        """
+
+        print("Plotting Heatmap Depth over time...")
+        x_axis_iter = np.arange(0, self.ui_object.max_iterations - 1, 1)
+        depth_mush = np.append(np.arange(0, 1, self.ui_object.grid_resolution_dz), 1.0)
+        mush_list_y1 = np.array(
+            [
+                [depth_mush[self.phi_slope(i)[0]], depth_mush[self.phi_slope(i)[-1]]]
+                for i in x_axis_iter
+            ]
+        )
+        heatmap_data = self.results_object.phi_k_list
+
+        fig, ax = plt.subplots()
+        cax = ax.imshow(
+            heatmap_data.T,
+            cmap="viridis",
+            aspect="auto",
+            interpolation="gaussian",
+            extent=[
+                0,
+                len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600,
+                self.results_object.depth_stefan_all[len(x_axis_iter) - 1],
+                0,
+            ],
+            norm=colors.LogNorm(),
+        )
+        ax.set_xlabel(r"$t$ [hours]")
+        ax.set_ylabel(r"Depth [$m$]")
+        fig.colorbar(cax, ax=ax, label="Thickness [m]")
+        # mush_list_y2 = [depth_mush[self.phi_slope(i)[-1]] for i in x_axis_iter]
+        ax1 = ax.twinx()
+        ax1.plot(
+            x_axis_iter * self.ui_object.grid_timestep_dt / 3600,
+            self.results_object.depth_stefan_all[: len(x_axis_iter)],
+            "k",
+            label="Analytical Depth",
+        )
+        ax1.plot(
+            x_axis_iter * self.ui_object.grid_timestep_dt / 3600,
+            self.results_object.thickness_list[: len(x_axis_iter)],
+            "k--",
+            label="Numerical Depth",
+        )
+        ax1.legend()
+        ax1.invert_yaxis()
+        ax1.set_yscale("log")
+        ax1.set_ylim(
+            self.results_object.depth_stefan_all[len(x_axis_iter) - 1],
+            self.results_object.depth_stefan_all[0],
+        )
+        ax1.set_title(r"Numerical Depth Vs Analytical Depth")
+        # ax1.set_yscale("log")
+
+        if savefig:
+            fig.savefig(
+                self.ui_object.dir_output_name
+                + "/Numerical_Analytical_Depth_heatmap.pdf",
+                backend="pgf",
+            )
+        plt.close(fig)
+
     def plot_temperature(
         self, z_depth: float, savefig: bool = True, Buffo_matlab: bool = False
     ):
@@ -278,7 +346,7 @@ class VisualiseModel:
         """
 
         print(f"Plotting Temperature evolution at {z_depth}m...")
-        x_axis_iter = np.arange(0, iter_max - 1, 1)[1:]
+        x_axis_iter = np.arange(0, self.ui_object.max_iterations - 1, 1)[1:]
         # x_axis_iter = np.arange(0,22970,1)
         T_k_ = self.results_object.t_k_list[
             :, int(z_depth * self.ui_object.grid_resolution_dz)
@@ -393,7 +461,7 @@ class VisualiseModel:
                 + "/"
                 + param_name
                 + "_iter"
-                + cap_dens
+                + self.ui_object.output_suffix
                 + "_"
                 + str(t)
                 + "m.pdf",
@@ -412,24 +480,26 @@ class VisualiseModel:
         heatmap = ax1.imshow(
             Z,
             cmap="viridis",
-            interpolation="bilinear",
             aspect="auto",
-            extent=[0, iters - 1, 1, 0],
+            interpolation="spline16",
+            extent=[0, iters - 1, h[:, 0][-1], h[:, 2][-1]],
         )
         ax1.set_xlabel(r"iteration before convergence")
         ax1.set_ylabel(r"Liquid Fraction $\phi$")
         ax1.set_title(rf"{param_name} at t={t}H")
-        ax1.set_yticks([0, p[:, 1][-1], 1], ["Solid", "Mushy", "Liquid"])
+        ax1.set_yticks(
+            [h[:, 2][-1], h[:, 1][-1], h[:, 0][-1]], ["Solid", "Mushy", "Liquid"]
+        )
         fig1.colorbar(heatmap, ax=ax1, label=rf"{param_name} [{unit}]")
         ax1.grid(None)
         ax2 = ax1.twinx()
-        ax2.plot(p[:, 0])
-        ax2.scatter(iters_arr, p[:, 0])
-        ax2.plot(p[:, 1], "--", label=r"cell Mushy", color="black", alpha=0.6)
-        ax2.scatter(iters_arr, p[:, 1], color="black", alpha=0.6)
-        ax2.plot(p[:, 2], ":")
-        ax2.scatter(iters_arr, p[:, 2])
-        ax2.set_ylim(0, 1)
+        ax2.plot(h[:, 0])
+        ax2.scatter(iters_arr, h[:, 0])
+        ax2.plot(h[:, 1], "--", label=r"cell Mushy", color="black", alpha=0.6)
+        ax2.scatter(iters_arr, h[:, 1], color="black", alpha=0.6)
+        ax2.plot(h[:, 2], ":")
+        ax2.scatter(iters_arr, h[:, 2])
+        ax2.set_ylim(h[:, 2][-1], h[:, 0][-1])
         ax2.invert_yaxis()
         ax2.grid(None)
 
@@ -439,7 +509,7 @@ class VisualiseModel:
                 + "/"
                 + param_name
                 + "_iter"
-                + cap_dens
+                + self.ui_object.output_suffix
                 + "_"
                 + str(t)
                 + "m_heatmap.pdf",
