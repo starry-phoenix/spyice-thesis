@@ -7,16 +7,6 @@ from src.spyice.parameters.results_params import ResultsParams
 from src.spyice.parameters.user_input import UserInput
 from src.spyice.postprocess.analysis import Analysis
 
-ui = UserInput()
-
-Tm_w, S_sw, iter_max, dz, cap_dens = (
-    ui.temperature_melt,
-    ui.boundary_salinity,
-    ui.max_iterations,
-    ui.grid_resolution_dz,
-    ui.output_suffix,
-)
-
 np.seterr(divide="ignore", invalid="ignore")
 # .style.use("spyice.utils.custom")
 # plt.rcParams.update(
@@ -283,12 +273,13 @@ class VisualiseModel:
                 for i in x_axis_iter
             ]
         )
-        heatmap_data = self.results_object.phi_k_list
-
+        depth = self.results_object.depth_stefan_all[len(x_axis_iter) - 1]
+        index = int(depth / self.ui_object.grid_resolution_dz) + 1
+        heatmap_data = self.results_object.phi_k_list[:, :index]
         fig, ax = plt.subplots()
         cax = ax.imshow(
             heatmap_data.T,
-            cmap="viridis",
+            cmap="Blues",
             aspect="auto",
             interpolation="gaussian",
             extent=[
@@ -297,7 +288,6 @@ class VisualiseModel:
                 self.results_object.depth_stefan_all[len(x_axis_iter) - 1],
                 0,
             ],
-            norm=colors.LogNorm(),
         )
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
@@ -310,19 +300,19 @@ class VisualiseModel:
             "k",
             label="Analytical Depth",
         )
-        ax1.plot(
-            x_axis_iter * self.ui_object.grid_timestep_dt / 3600,
-            self.results_object.thickness_list[: len(x_axis_iter)],
-            "k--",
-            label="Numerical Depth",
-        )
+        # ax1.plot(
+        #     x_axis_iter * self.ui_object.grid_timestep_dt / 3600,
+        #     self.results_object.thickness_list[: len(x_axis_iter)],
+        #     "k--",
+        #     label="Numerical Depth",
+        # )
         ax1.legend()
         ax1.invert_yaxis()
-        ax1.set_yscale("log")
         ax1.set_ylim(
             self.results_object.depth_stefan_all[len(x_axis_iter) - 1],
             self.results_object.depth_stefan_all[0],
         )
+        ax1.set_yticks([])
         ax1.set_title(r"Numerical Depth Vs Analytical Depth")
         # ax1.set_yscale("log")
 
@@ -479,7 +469,7 @@ class VisualiseModel:
         fig1, (ax1) = plt.subplots()
         heatmap = ax1.imshow(
             Z,
-            cmap="viridis",
+            cmap="Blues",
             aspect="auto",
             interpolation="spline16",
             extent=[0, iters - 1, h[:, 0][-1], h[:, 2][-1]],
@@ -488,7 +478,7 @@ class VisualiseModel:
         ax1.set_ylabel(r"Liquid Fraction $\phi$")
         ax1.set_title(rf"{param_name} at t={t}H")
         ax1.set_yticks(
-            [h[:, 2][-1], h[:, 1][-1], h[:, 0][-1]], ["Solid", "Mushy", "Liquid"]
+            [h[:, 2][-1], h[:, 1][0], h[:, 0][-1]], ["Solid", "Mushy", "Liquid"]
         )
         fig1.colorbar(heatmap, ax=ax1, label=rf"{param_name} [{unit}]")
         ax1.grid(None)
@@ -501,6 +491,7 @@ class VisualiseModel:
         ax2.scatter(iters_arr, h[:, 2])
         ax2.set_ylim(h[:, 2][-1], h[:, 0][-1])
         ax2.invert_yaxis()
+        ax2.set_yticks([])
         ax2.grid(None)
 
         if savefig:
@@ -530,7 +521,7 @@ class VisualiseModel:
 
         if savefig:
             plt.savefig(
-                f"{self.ui_object.dir_output_name}/LiquidFractionMush_iter_{cap_dens}_{str(t)}m.pdf",
+                f"{self.ui_object.dir_output_name}/LiquidFractionMush_iter_{self.ui_object.output_suffix}_{str(t)}m.pdf",
                 backend="pgf",
             )
         plt.close()
