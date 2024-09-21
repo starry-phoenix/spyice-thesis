@@ -507,12 +507,11 @@ class VisualiseModel:
         plt.close(fig1)
 
     def plot_H_iter_heatmap(
-        self, h, p, temp_all, t, param_name="Temperature", unit="K", savefig=False
+        self, h, p, temp_all, d, t, param_name="Temperature", unit="K", savefig=False
     ):
         iters = h.shape[0]
         iters_arr = np.linspace(0, iters - 1, iters)
         x_axis_iter = np.arange(0, self.ui_object.max_iterations - 1, 1)
-        plt.grid()
         # Z = h.T
         # fig1, (ax1) = plt.subplots()
         # heatmap = ax1.imshow(
@@ -522,7 +521,16 @@ class VisualiseModel:
         #     extent=[0, iters - 1, h[:, 2][-1], h[:, 0][-1]],
         # )
         depth = self.results_object.depth_stefan_all[len(x_axis_iter) - 1]
+        depth_mush = (d[0][0] - 1) * self.ui_object.grid_resolution_dz
         index = int(depth / self.ui_object.grid_resolution_dz) + 1
+        temp_mush_array = np.array(h[:, 1])
+        temp_mush_normalised = (
+            temp_mush_array
+            / (np.sqrt(temp_mush_array.T * temp_mush_array))
+            * depth_mush
+        )
+        plt.figure(figsize=(10, 8))
+        plt.grid()
         fig1, (ax1) = plt.subplots()
         heatmap = ax1.imshow(
             temp_all[:, :index].T,
@@ -536,21 +544,30 @@ class VisualiseModel:
             ],
         )
         ax1.set_xlabel(r"iteration before convergence")
-        ax1.set_ylabel(r"Depth [m]")
+        ax1.set_ylabel(r"Depth")
         ax1.set_title(rf"{param_name} at t={t}H")
-
+        ax1.set_yticks(
+            [
+                0.0,
+                depth_mush,
+                self.results_object.depth_stefan_all[len(x_axis_iter) - 1],
+            ],
+            ["Solid", "Mushy", "Liquid"],
+        )
         fig1.colorbar(heatmap, ax=ax1, label=rf"{param_name} [{unit}]")
         ax2 = ax1.twinx()
-        ax2.plot(h[:, 0])
-        ax2.scatter(iters_arr, h[:, 0])
-        ax2.plot(h[:, 1], "--", label=r"cell Mushy", color="black", alpha=0.6)
-        ax2.scatter(iters_arr, h[:, 1], color="black", alpha=0.6)
-        ax2.plot(h[:, 2], ":")
-        ax2.scatter(iters_arr, h[:, 2])
-        ax2.set_ylim(h[:, 2][-1], h[:, 0][-1])
-        ax2.set_yticks(
-            [h[:, 2][-1], h[:, 1][0], h[:, 0][-1]], ["Solid", "Mushy", "Liquid"]
+        # ax2.plot(h[:, 0])
+        # ax2.scatter(iters_arr, h[:, 0])
+        ax2.plot(
+            temp_mush_normalised, "--", label=r"cell Mushy", color="black", alpha=1.0
         )
+        ax2.scatter(iters_arr, temp_mush_normalised, color="red", alpha=0.6)
+        # ax2.plot(h[:, 2], ":")
+        # ax2.scatter(iters_arr, h[:, 2])
+        ax2.set_ylim(0, self.results_object.depth_stefan_all[len(x_axis_iter) - 1])
+        # ax2.set_yticks([h[:, 2][-1], h[:, 0][-1]], ["Solid", "Liquid"])
+        ax2.set_yticks([])
+        # ax2.legend()
         ax2.invert_yaxis()
         ax2.grid(None)
 
@@ -593,11 +610,13 @@ class VisualiseModel:
         temperature_all_before_convergence = (
             self.results_object.t_k_before_convergence_all
         )
+        depth_all = self.results_object.mush_indx_list_all
 
-        for h, p, temp_all, t in zip(
+        for h, p, temp_all, d, t in zip(
             temperature_mushy_before_convergence,
             liquidfraction_mushy_before_convergence,
             temperature_all_before_convergence,
+            depth_all,
             [0.1, 0.5, 10, 100, 200, 300],
             strict=False,
         ):
@@ -606,6 +625,7 @@ class VisualiseModel:
                 np.array(h),
                 np.array(p),
                 np.array(temp_all),
+                d,
                 t,
                 savefig=savefig,
             )
