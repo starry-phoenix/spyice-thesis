@@ -206,7 +206,7 @@ class SeaIceModel:
                 param[phi_k_ > self.mush_upperbound][-1],
             ]
         )
-        return param_iterlist
+        return param_iterlist, mush_indx
 
     def phi_all_mush_list(self, phi_k_, phi_all_mush_list):
         """Calculates the number of elements in phi_k_ that fall within the mush_lowerbound and mush_upperbound range.
@@ -453,15 +453,19 @@ class SeaIceModel:
     def record_mushy_layer_data(self, t, t_km1, stefan, phi_k):
         """Records the mushy layer data for temperature and phi values at time iterations t at specific time steps corresponding to initial stages, middle and final stages of the process."""
         if t in [7, 36, 720, 7200, 14400, 21600] and stefan:
-            self.preprocess_data.t_k_iter = self.track_mush_for_parameter(
+            self.preprocess_data.t_k_iter, t_mush_indx = self.track_mush_for_parameter(
                 phi_k, t_km1, self.preprocess_data.t_k_iter
             )
-            self.preprocess_data.phi_k_iter = self.track_mush_for_parameter(
-                phi_k, phi_k, self.preprocess_data.phi_k_iter
+            self.preprocess_data.phi_k_iter, phi_mush_indx = (
+                self.track_mush_for_parameter(
+                    phi_k, phi_k, self.preprocess_data.phi_k_iter
+                )
             )
             self.preprocess_data.all_phi_iter = self.phi_all_mush_list(
                 phi_k, self.preprocess_data.all_phi_iter
             )
+            self.preprocess_data.mush_indx_list.append([t_mush_indx, phi_mush_indx])
+            self.preprocess_data.t_k_before_convergence.append(t_km1)
 
     def reset_iteration_parameters(self, t, tkm1, s_km1, phi_km1):
         """Reset the iteration parameters for the sea ice model.
@@ -513,6 +517,24 @@ class SeaIceModel:
             counter,
         )
 
+    def check_and_reset_any_iteration_data(
+        self, parameter_list, parameter_all_list
+    ) -> None:
+        """Check the iteration data for temperature and phi values.
+        This method appends the temperature and phi values from the current iteration to the respective arrays.
+        The arrays are used to store the iteration data for further analysis.
+
+        Args:
+            parameter_list (list): The list of parameter values.
+            parameter_all_list (list): The list of all parameter values.
+        Returns:
+            None
+        """
+
+        if np.array(parameter_list).any():
+            parameter_all_list.append(parameter_list)
+        parameter_list = []
+
     def record_iteration_data(self):
         """Records the iteration data for temperature and phi values.
         This method appends the temperature and phi values from the current iteration to the respective arrays.
@@ -532,11 +554,38 @@ class SeaIceModel:
             self.preprocess_data.all_phi_iter_all.append(
                 self.preprocess_data.all_phi_iter
             )
+        if np.array(self.preprocess_data.t_k_before_convergence).any():
+            self.preprocess_data.t_k_before_convergence_all.append(
+                self.preprocess_data.t_k_before_convergence
+            )
+        if np.array(self.preprocess_data.mush_indx_list).any():
+            self.preprocess_data.mush_indx_list_all.append(
+                self.preprocess_data.mush_indx_list
+            )
         (
             self.preprocess_data.t_k_iter,
             self.preprocess_data.phi_k_iter,
             self.preprocess_data.all_phi_iter,
-        ) = [], [], []
+            self.preprocess_data.t_k_before_convergence,
+            self.preprocess_data.mush_indx_list,
+        ) = [], [], [], [], []
+
+        # parameter_to_record_and_reset_list = [
+        #     [self.preprocess_data.t_k_iter, self.preprocess_data.t_k_iter_all],
+        #     [self.preprocess_data.phi_k_iter, self.preprocess_data.phi_k_iter_all],
+        #     [self.preprocess_data.all_phi_iter, self.preprocess_data.all_phi_iter_all],
+        #     [
+        #         self.preprocess_data.t_k_before_convergence,
+        #         self.preprocess_data.t_k_before_convergence_all,
+        #     ],
+        #     [
+        #         self.preprocess_data.mush_indx_list,
+        #         self.preprocess_data.mush_indx_list_all,
+        #     ],
+        # ]
+
+        # for parameter_list, parameter_all_list in parameter_to_record_and_reset_list:
+        #     self.check_and_reset_any_iteration_data(parameter_list, parameter_all_list)
 
     def initialize_state_variables(self, t, t_km1, s_km1, phi_km1):
         """Initializes the state variables for the sea ice model.
@@ -761,6 +810,10 @@ class SeaIceModel:
         self.results.t_k_iter_all = self.preprocess_data.t_k_iter_all
         self.results.phi_k_iter_all = self.preprocess_data.phi_k_iter_all
         self.results.all_phi_iter_all = self.preprocess_data.all_phi_iter_all
+        self.results.t_k_before_convergence_all = (
+            self.preprocess_data.t_k_before_convergence_all
+        )
+        self.results.mush_indx_list_all = self.preprocess_data.mush_indx_list_all
 
         return self.results
 
