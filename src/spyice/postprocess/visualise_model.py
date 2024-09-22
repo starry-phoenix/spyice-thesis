@@ -521,12 +521,8 @@ class VisualiseModel:
         )
 
         # To save the animation using Pillow as a gif
-        # writer = animation.PillowWriter(fps=15)
-        # writer = animation.ImageMagickFileWriter()
-        # writer = animation.FFMpegWriter(fps=fps)
-        ani.save("test_new.gif", writer="imagemagick")
+        ani.save(self.ui_object.dir_output_name + "/test_new.gif", writer="imagemagick")
         # ani.save("test_new_html.html", writer="html")
-        # plt.show()
         plt.close(fig)
 
     def plot_H_iter(self, h, t, param_name="Temperature", unit="K", savefig=False):
