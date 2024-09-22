@@ -2,6 +2,9 @@ import matplotlib.pyplot as plt
 import matplotlib.colors as colors
 import numpy as np
 import pandas as pd
+import matplotlib.animation as animation
+from functools import partial
+from pathlib import Path
 
 from src.spyice.parameters.results_params import ResultsParams
 from src.spyice.parameters.user_input import UserInput
@@ -9,11 +12,22 @@ from src.spyice.postprocess.analysis import Analysis
 
 np.seterr(divide="ignore", invalid="ignore")
 # .style.use("spyice.utils.custom")
+plt.style.use("src.spyice.utils.custom")
 # plt.rcParams.update(
 #     {
 #         "text.usetex": True,
 #     }
 # )
+# plt.rcParams["pgf.texsystem"] = "pdflatex"
+plt.rcParams["text.latex.preamble"].join(
+    [
+        r"\usepackage{dashbox}",
+        r"\setmainfont{xcolor}",
+    ]
+)
+plt.rcParams["animation.convert_path"] = Path(
+    "C:/Program Files/ImageMagick-7.1.1-Q16-HDRI/magick.exe"
+)
 
 
 class VisualiseModel:
@@ -430,6 +444,91 @@ class VisualiseModel:
             + ".csv"
         )
 
+    def plot_temperature_heatmap(self, savefig: bool = True):
+        """Plots the temperature heatmap."""
+
+        print("Plotting Temperature heatmap...")
+        x_axis_iter = np.arange(0, self.ui_object.max_iterations - 1, 1)
+        heatmap_data = self.results_object.t_k_list[1:]
+        fig, ax = plt.subplots()
+        cax = ax.imshow(
+            heatmap_data.T,
+            cmap="Blues",
+            aspect="auto",
+            extent=[
+                0,
+                len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600,
+                1.0,
+                0,
+            ],
+        )
+        ax.set_xlabel(r"$t$ [hours]")
+        ax.set_ylabel(r"Depth [$m$]")
+        ax.set_title(r"Freezing Overtime")
+        fig.colorbar(cax, ax=ax, label="Temperature [K]")
+
+        if savefig:
+            fig.savefig(
+                self.ui_object.dir_output_name + "/Temperature_heatmap.pdf",
+                backend="pgf",
+            )
+        plt.close(fig)
+
+    def plot_temperature_heatmap_as_gif(self):
+        fps = 10
+        nseconds = 10
+        depth = self.results_object.depth_stefan_all[self.ui_object.max_iterations - 1]
+        index = int(depth / self.ui_object.grid_resolution_dz) + 1
+        fig, (ax) = plt.subplots()
+        data = self.results_object.t_k_list[:, :index]
+        frames_plot = int(self.ui_object.max_iterations / 1)
+        data = data.reshape(frames_plot, 1, index)
+        hmap = ax.imshow(
+            data[1].T,
+            cmap="Blues",
+            aspect="auto",
+            extent=[
+                0,
+                5 * 1 * self.ui_object.grid_timestep_dt / 3600,
+                depth,
+                0,
+            ],
+        )
+        ax.set_xlabel(r"$t$ [hours]")
+        ax.set_ylabel(r"Depth [m]")
+
+        def animation_function(i):
+            hmap.set_data(data[10 * i + 1].T)
+            hmap.set_extent(
+                [
+                    0,
+                    (10 * i + 1) * self.ui_object.grid_timestep_dt / 3600,
+                    depth,
+                    0,
+                ]
+            )
+
+            return [hmap]
+
+        fig.colorbar(hmap, ax=ax, label="Temperature [K]")
+
+        ani = animation.FuncAnimation(
+            fig,
+            animation_function,
+            repeat=True,
+            frames=(fps * nseconds) - 2,
+            interval=1000 / fps,
+        )
+
+        # To save the animation using Pillow as a gif
+        # writer = animation.PillowWriter(fps=15)
+        # writer = animation.ImageMagickFileWriter()
+        # writer = animation.FFMpegWriter(fps=fps)
+        ani.save("test_new.gif", writer="imagemagick")
+        # ani.save("test_new_html.html", writer="html")
+        # plt.show()
+        plt.close(fig)
+
     def plot_H_iter(self, h, t, param_name="Temperature", unit="K", savefig=False):
         iters = h.shape[0]
         iters_arr = np.linspace(0, iters - 1, iters)
@@ -512,14 +611,6 @@ class VisualiseModel:
         iters = h.shape[0]
         iters_arr = np.linspace(0, iters - 1, iters)
         x_axis_iter = np.arange(0, self.ui_object.max_iterations - 1, 1)
-        # Z = h.T
-        # fig1, (ax1) = plt.subplots()
-        # heatmap = ax1.imshow(
-        #     Z,
-        #     cmap="Blues",
-        #     aspect="auto",
-        #     extent=[0, iters - 1, h[:, 2][-1], h[:, 0][-1]],
-        # )
         depth = self.results_object.depth_stefan_all[len(x_axis_iter) - 1]
         depth_mush = (d[0][0] - 1) * self.ui_object.grid_resolution_dz
         index = int(depth / self.ui_object.grid_resolution_dz) + 1
