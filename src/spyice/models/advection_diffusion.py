@@ -32,17 +32,18 @@ class AdvectionDiffusion:
         S_IC,
         Stefan=False,
         Buffo=False,
+        Voller=False,
         bc_neumann=None,
     ):
         """
         Args:
             argument (str): The argument for the advection-diffusion equation. Must be either "temperature" or "salinity".
-            X (float): The value of X.
+            X (float): The value of X ( Field values T or S).
             source (float): The source value.
-            X_initial (float): The initial value of X.
-            W (float): The value of W.
-            W_initial (float): The initial value of W.
-            w (float): The value of w.
+            X_initial (float): The initial value of X (Field values T or S).
+            W (float): Liquid fraction current value.
+            W_initial (float): The initial value of Liquid fraction.
+            w (float): The value of w convective upwind velocity.
             dt (float): The time step size.
             dz (float): The spatial step size.
             nz (int): The number of spatial steps.
@@ -62,6 +63,7 @@ class AdvectionDiffusion:
         self.source = source
         self.Stefan = Stefan
         self.Buffo = Buffo
+        self.Voller = Voller
         self.temp_grad = bc_neumann
         assert (
             self.Stefan is not True or self.Buffo is not True
@@ -71,6 +73,7 @@ class AdvectionDiffusion:
         self.dz = dz
         self.X_initial = X_initial
         self.w = w
+        self.W = W
         self.t_passed = t_passed
         self.S_IC = S_IC
         self.S_bc_top = "Dirichlet"
@@ -210,9 +213,7 @@ class AdvectionDiffusion:
                 self.main_A[-1] = 2 * self.factor1[-1] + 1
                 self.lower_A[-1] = -1 * self.factor1[-1]
 
-        # self.main_A[0] = self.main_A[0]  #
-        # self.main_A[-1] = 0
-        ### Set up tridiagonal Matrix A and solve for new u
+    def assemble_tridiagonal(self):
         self.A = np.zeros([self.nz, self.nz])
         self.A = (
             np.diag(self.main_A, k=0)
@@ -220,7 +221,9 @@ class AdvectionDiffusion:
             + np.diag(self.upper_A, k=1)
         )
 
-        # return self.lower_A, self.main_A, self.upper_A
+    def modify_tridiagonal_voller_scheme(self):
+        mush_cond = (self.W >= 0.05) & (self.W <= 0.95)
+        self.main_A = np.where(mush_cond, 1e10, self.main_A)
 
     def unknowns_matrix(self):
         """Calculates the unknowns matrix for the advection-diffusion model.
@@ -233,6 +236,9 @@ class AdvectionDiffusion:
         # Rest of the code...
 
         self.set_up_tridiagonal()
+        if self.Voller is True:
+            self.modify_tridiagonal_voller_scheme()
+        self.assemble_tridiagonal()
 
         B = apply_boundary_condition(
             self.argument,
@@ -266,6 +272,8 @@ class AdvectionDiffusion:
             X_new = self.Buffosolver(
                 self.lower_A, self.upper_A, self.main_A, B
             )  # input: lower, upper, main diagonal, RHS-vector
+        elif self.Voller is True:
+            X_new = self.TDMAsolver(self.lower_A, self.main_A, self.upper_A, B)
         else:
             warnings.filterwarnings("ignore")
             X_new = linalg.spsolve(self.A, B)

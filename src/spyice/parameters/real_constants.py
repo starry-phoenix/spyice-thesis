@@ -59,12 +59,12 @@ class RealConstants:
     k_w: float = k_br  # 2.0
     D_s: float = 2 * 10 ** (-9)  # Diffusivity for Salt
     c_i: int = 2000  # Specific heat of ice
-    c_br: int = 3985  # Specific heat of seawater (J/kg/K)
-    c_w: int = 4200  # specific heat of water
+    c_br: int = 2000  # 3985  # Specific heat of seawater (J/kg/K)
+    c_w: int = 2000  # 4200  # specific heat of water
     L: int = 334774  # Latent heat of fusion ice<->water (J/Kg)
-    rho_br: int = 1028  # Density of Ocean (used in volume averaging - 1D grav. drainage uses delta S) 34ppt NaCl-1027
+    rho_br: int = 917  # 1028  # Density of Ocean (used in volume averaging - 1D grav. drainage uses delta S) 34ppt NaCl-1027
     rho_i: int = 917  # Density of Ice (Kg/m^3)                                     #  12.3ppt MgSO4-1012, 100pppt-1103, 282ppt-1323
-    rho_w: int = 1000
+    rho_w: int = 917  # 1000
     m: int = 2  # Cementation exponent for Archies equation
     g: float = 9.8  # Earth Gravity
     phi_c: float = 0.06823  # Critical Porosity

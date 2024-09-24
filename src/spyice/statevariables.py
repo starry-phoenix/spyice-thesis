@@ -47,7 +47,10 @@ def set_statevariables(
 
 # Function to overwrite state variables
 def overwrite_statevariables(
-    temperature_calculated, salinity_calculated, liquid_fraction_calculated
+    temperature_calculated,
+    salinity_calculated,
+    liquid_fraction_calculated,
+    a_p_temperature=None,
 ):
     """Overwrites the state variables with the calculated values.
     Args:
@@ -68,7 +71,11 @@ def overwrite_statevariables(
     liquid_fraction_new = (
         liquid_fraction_calculated  # Set current phi as previous phi for next iteration
     )
-    return temperature_new, salinity_new, liquid_fraction_new
+    if a_p_temperature is not None:
+        a_p_temperature = a_p_temperature
+    else:
+        a_p_temperature = np.ones(len(temperature_new)) * 0.0
+    return temperature_new, salinity_new, liquid_fraction_new, a_p_temperature
 
 
 # Function to compute errors for convergence
@@ -79,6 +86,8 @@ def compute_error_for_convergence(
     salinity_previous,
     liquid_fraction_calculated,
     liquid_fraction_previous,
+    voller=False,
+    **kwargs,
 ):
     """Computes the errors for convergence between the calculated and previous values of temperature, salinity, and liquid fraction.
 
@@ -118,6 +127,17 @@ def compute_error_for_convergence(
     liquid_fraction_error_all = (
         liquid_fraction_calculated - liquid_fraction_previous
     )  # Compute full phi error for convergence check
+    if voller:
+        residual = (
+            temperature_calculated
+            - temperature_previous
+            + kwargs["latent_heat"]
+            / kwargs["specific_heat"]
+            * (liquid_fraction_calculated - liquid_fraction_previous)
+        )
+        residual_sum = np.sum(np.abs(residual))
+    else:
+        residual_sum = 1e-12
     return (
         temperature_error_max,
         temperature_error_all,
@@ -125,6 +145,7 @@ def compute_error_for_convergence(
         salinity_err_all,
         liquid_fraction_error_max,
         liquid_fraction_error_all,
+        residual_sum,
     )
 
 

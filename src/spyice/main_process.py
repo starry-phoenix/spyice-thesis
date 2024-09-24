@@ -85,5 +85,5 @@ class MainProcess:
         # )
         model_visualization_object.plot_H_iter_all(savefig=True)
         model_visualization_object.plot_temperature_heatmap(savefig=True)
-        model_visualization_object.plot_temperature_heatmap_as_gif()
+        # model_visualization_object.plot_temperature_heatmap_as_gif()
         print("Postprocessing done.")
