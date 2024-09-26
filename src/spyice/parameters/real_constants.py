@@ -55,8 +55,8 @@ class RealConstants:
         -3
     )  # Linear coeff for Rayleigh number driven advection
     k_i: float = 2.0  # Thermal conductivity (ice) [W/m/K]
-    k_br: float = 0.6  # Thermal conductivity (brine) [W/m/K]
-    k_w: float = k_br  # 2.0
+    k_br: float = 2.0  # 0.6  # Thermal conductivity (brine) [W/m/K]
+    k_w: float = 2.0  # k_br  # 2.0
     D_s: float = 2 * 10 ** (-9)  # Diffusivity for Salt
     c_i: int = 2000  # Specific heat of ice
     c_br: int = 2000  # 3985  # Specific heat of seawater (J/kg/K)

@@ -195,16 +195,20 @@ class AdvectionDiffusion:
 
         if self.argument == "temperature":
             if self.Stefan is True:
-                self.lower_A[-1] = 0.0
-                self.main_A[-1] = 1.0
                 if self.temp_grad is not None:
+                    self.lower_A[-1] = 0.0
+                    self.main_A[-1] = 1.0
                     self.upper_A[0] = self.upper_A[0] - self.factor1[0]
                     self.main_A[0] = self.main_A[0]
                 else:
+                    self.lower_A[-1] = 0.0
+                    self.main_A[-1] = 1.0
                     self.main_A[0] = 1.0
                     self.upper_A[0] = 0.0
 
             elif self.Buffo is True:
+                self.upper_A[0] = self.upper_A[0] - self.factor1[0]
+            elif self.Voller is True:
                 self.upper_A[0] = self.upper_A[0] - self.factor1[0]
             else:
                 # non-pragmatic dirichlet RB like Buffo
@@ -221,11 +225,24 @@ class AdvectionDiffusion:
             + np.diag(self.upper_A, k=1)
         )
 
-    def modify_tridiagonal_voller_scheme(self):
-        mush_cond = (self.W >= 0.05) & (self.W <= 0.95)
-        self.main_A = np.where(mush_cond, 1e10, self.main_A)
+        return self.A
 
-    def unknowns_matrix(self):
+    def modify_tridiagonal_voller_scheme(self):
+        # set main diagonal element a_p to BIG for all indices other than the 0th (than the top-surface boundary) and phi values between 0.05 and 0.95
+        # set a_p to big by comparing enthalpy with enthalpy solid and latent heat
+        mush_cond = (self.W >= 0.05) & (self.W <= 0.95)
+        mush_cond[0] = False
+        self.main_A = np.where(mush_cond, 1e15, self.main_A)
+
+    def voller_X_array_set_zero_to_melt(self, X, X_boundary):
+        index_mush = np.where(X < 1)[0]
+        if index_mush.size > 0:
+            X[index_mush[0] + 1 :] = X_boundary
+        else:
+            pass
+        return X
+
+    def unknowns_matrix(self, temperature_melt):
         """Calculates the unknowns matrix for the advection-diffusion model.
         Returns:
             tuple: A tuple containing the following elements:
@@ -236,9 +253,10 @@ class AdvectionDiffusion:
         # Rest of the code...
 
         self.set_up_tridiagonal()
-        if self.Voller is True:
-            self.modify_tridiagonal_voller_scheme()
-        self.assemble_tridiagonal()
+        A_before_correction = self.assemble_tridiagonal()
+        # if self.Voller is True:
+        # self.modify_tridiagonal_voller_scheme()
+        A_after_correction = self.assemble_tridiagonal()
 
         B = apply_boundary_condition(
             self.argument,
@@ -255,6 +273,7 @@ class AdvectionDiffusion:
             self.top_temp,
             self.Stefan,
             self.Buffo,
+            self.Voller,
             self.temp_grad,
         )
 
@@ -273,11 +292,15 @@ class AdvectionDiffusion:
                 self.lower_A, self.upper_A, self.main_A, B
             )  # input: lower, upper, main diagonal, RHS-vector
         elif self.Voller is True:
-            X_new = self.TDMAsolver(self.lower_A, self.main_A, self.upper_A, B)
+            X_new = self.Buffosolver(self.lower_A, self.upper_A, self.main_A, B)
+            X_new = self.voller_X_array_set_zero_to_melt(X_new, temperature_melt)
         else:
             warnings.filterwarnings("ignore")
-            X_new = linalg.spsolve(self.A, B)
-        return X_new, X_wind
+            X_new = self.TDMAsolver(
+                self.lower_A, self.main_A, self.upper_A, B
+            )  # linalg.spsolve(A_after_correction, B)
+            # X_new = self.voller_X_array_set_zero_to_melt(X_new, temperature_melt)
+        return X_new, X_wind, A_before_correction
 
     def factor_1(self, argument, a, c, dt, dz, nz):
         """Factor 1 and avoid zero divison error

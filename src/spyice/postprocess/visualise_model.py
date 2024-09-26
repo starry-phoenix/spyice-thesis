@@ -299,8 +299,8 @@ class VisualiseModel:
             extent=[
                 0,
                 len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600,
-                self.results_object.depth_stefan_all[len(x_axis_iter) - 1],
-                0,
+                index * self.ui_object.grid_resolution_dz,
+                0.0,
             ],
         )
         ax.set_xlabel(r"$t$ [hours]")
@@ -314,17 +314,16 @@ class VisualiseModel:
             "k",
             label="Analytical Depth",
         )
-        # ax1.plot(
-        #     x_axis_iter * self.ui_object.grid_timestep_dt / 3600,
-        #     self.results_object.thickness_list[: len(x_axis_iter)],
-        #     "k--",
-        #     label="Numerical Depth",
-        # )
+        ax1.plot(
+            x_axis_iter * self.ui_object.grid_timestep_dt / 3600,
+            self.results_object.thickness_list[: len(x_axis_iter)],
+            "k--",
+            label="Numerical Depth",
+        )
         ax1.legend()
-        ax1.invert_yaxis()
         ax1.set_ylim(
-            self.results_object.depth_stefan_all[len(x_axis_iter) - 1],
-            self.results_object.depth_stefan_all[0],
+            index * self.ui_object.grid_resolution_dz,
+            0.0,
         )
         ax1.set_yticks([])
         ax1.set_title(r"Numerical Depth Vs Analytical Depth")

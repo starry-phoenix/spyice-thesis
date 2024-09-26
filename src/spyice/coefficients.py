@@ -111,5 +111,6 @@ def _effective_parameter(brine_coefficient, ice_coefficient, phi, nz):
 
     """
     eff = np.zeros(nz, dtype=np.float64)
+    # phi = np.where(phi < 0.5, 0, np.where(phi > 0.5, 1, phi))
     eff = phi * brine_coefficient + (1 - phi) * ice_coefficient
     return eff

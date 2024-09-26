@@ -91,7 +91,8 @@ class UserInput:
     config_data: DictConfig = field(default_factory=dict)
     max_iterations: int = 500
     is_stefan: bool = True
-    is_buffo: bool = True
+    is_buffo: bool = False
+    is_voller: bool = False
     is_salinity_equation: bool = False
     liquidus_relation_type: str = "Normal"  # Normal or Frezchem
     grid_resolution_dz: float = 0.01
@@ -109,7 +110,7 @@ class UserInput:
     output_suffix: str = "const_dens-mushfix"
     temperature_top_type: str = "Stefan"  # "Stefan" or "Dirichlet"
     phase_type: int = 1
-    grid_timestep_dt: float = 47.0
+    grid_timestep_dt: float = 10
     dir_output_name_hydra: str = (
         "Temperature_{S_IC}_{bc_condition}_{dz}_{dt}_{iter_max}_{cap_dens}"
     )

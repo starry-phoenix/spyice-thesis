@@ -51,6 +51,7 @@ def overwrite_statevariables(
     salinity_calculated,
     liquid_fraction_calculated,
     a_p_temperature=None,
+    temp_factor3=None,
 ):
     """Overwrites the state variables with the calculated values.
     Args:
@@ -73,9 +74,17 @@ def overwrite_statevariables(
     )
     if a_p_temperature is not None:
         a_p_temperature = a_p_temperature
+        temp_factor3 = temp_factor3
     else:
         a_p_temperature = np.ones(len(temperature_new)) * 0.0
-    return temperature_new, salinity_new, liquid_fraction_new, a_p_temperature
+        temp_factor3 = np.ones(len(temperature_new))
+    return (
+        temperature_new,
+        salinity_new,
+        liquid_fraction_new,
+        a_p_temperature,
+        temp_factor3,
+    )
 
 
 # Function to compute errors for convergence
@@ -127,17 +136,14 @@ def compute_error_for_convergence(
     liquid_fraction_error_all = (
         liquid_fraction_calculated - liquid_fraction_previous
     )  # Compute full phi error for convergence check
-    if voller:
-        residual = (
-            temperature_calculated
-            - temperature_previous
-            + kwargs["latent_heat"]
-            / kwargs["specific_heat"]
-            * (liquid_fraction_calculated - liquid_fraction_previous)
-        )
-        residual_sum = np.sum(np.abs(residual))
-    else:
-        residual_sum = 1e-12
+    residual_sum = voller_residual_scheme(
+        temperature_calculated,
+        temperature_previous,
+        liquid_fraction_calculated,
+        liquid_fraction_previous,
+        kwargs,
+    )
+
     return (
         temperature_error_max,
         temperature_error_all,
@@ -147,6 +153,30 @@ def compute_error_for_convergence(
         liquid_fraction_error_all,
         residual_sum,
     )
+
+
+def voller_residual_scheme(
+    temperature_calculated,
+    temperature_previous,
+    liquid_fraction_calculated,
+    liquid_fraction_previous,
+    kwargs,
+):
+    a_matrix = kwargs["A_matrix"]
+    a_matrix[0], a_matrix[-1] = 0, 0
+    a_res = a_matrix @ temperature_calculated
+    mush_cond = (liquid_fraction_calculated >= 0.05) & (
+        liquid_fraction_calculated <= 0.95
+    )
+    mush_indx = np.where(mush_cond)
+    phi_diff = kwargs["phi_initial"] - liquid_fraction_calculated
+    rhs_res = kwargs["t_initial"] + kwargs["temp_factor3"] * phi_diff
+    residual = a_res[1:-1] - rhs_res[1:-1]
+
+    residual_sum = np.sum(np.abs(residual))
+
+    residual_sum = np.sum(np.abs(residual))
+    return residual_sum
 
 
 # Function to reset errors for while loop

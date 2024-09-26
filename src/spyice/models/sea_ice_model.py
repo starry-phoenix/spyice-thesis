@@ -384,8 +384,8 @@ class SeaIceModel:
         """
 
         # Set previous state variables temperature, salinity, liquid fraction respectively
-        t_prev, s_prev, phi_prev, a_p_temperature = overwrite_statevariables(
-            t_initial, s_initial, phi_initial
+        t_prev, s_prev, phi_prev, a_p_temperature, temp_factor3 = (
+            overwrite_statevariables(t_initial, s_initial, phi_initial)
         )
         if voller:
             residual_voller = 1.0
@@ -393,35 +393,45 @@ class SeaIceModel:
                 residual_voller > self.preprocess_data.temperature_tolerance
             )
         else:
-            residual_voller = self.preprocess_data.temperature_tolerance
+            residual_voller = self.preprocess_data.temperature_tolerance * 100000
             convergence_criteria = (
                 t_err > self.preprocess_data.temperature_tolerance
                 or s_err > self.preprocess_data.salinity_tolerance
                 or phi_err > self.preprocess_data.liquid_fraction_tolerance
-                or residual_voller > self.preprocess_data.temperature_tolerance
+                or residual_voller > 1e-6
             )
         # Run the while loop until convergence is reached
         while (
-            t_err > self.preprocess_data.temperature_tolerance
-            or s_err > self.preprocess_data.salinity_tolerance
-            or phi_err > self.preprocess_data.liquid_fraction_tolerance
-            or residual_voller > self.preprocess_data.temperature_tolerance
+            # t_err > self.preprocess_data.temperature_tolerance
+            # or s_err > self.preprocess_data.salinity_tolerance
+            # or phi_err > self.preprocess_data.liquid_fraction_tolerance
+            # or
+            residual_voller > self.preprocess_data.temperature_tolerance
         ):
             # Update state variables Enthalpy, Enthalpy Solid, Liquid Fraction, Temperature, Salinity respectively
-            h_k, h_solid, phi_k, t_k, s_k, a_p_temperature = update_state_variables(
-                self.preprocess_data,
-                t_prev,
-                s_prev,
-                phi_prev,
-                buffo,
-                stefan,
-                voller,
-                t_initial,
-                s_initial,
-                phi_initial,
-                a_p_temperature,
-                source_term,
-                _is_salinity_equation=_is_salinity_equation,
+            h_k, h_solid, phi_k, t_k, s_k, t_k_A_LHS_matrix, temp_factor3 = (
+                update_state_variables(
+                    self.preprocess_data,
+                    t_prev,
+                    s_prev,
+                    phi_prev,
+                    buffo,
+                    stefan,
+                    voller,
+                    t_initial,
+                    s_initial,
+                    phi_initial,
+                    a_p_temperature,
+                    temp_factor3,
+                    source_term,
+                    _is_salinity_equation=_is_salinity_equation,
+                )
+            )
+
+            a_w_temperature, a_p_temperature, a_e_temperature = (
+                t_k_A_LHS_matrix.diagonal(-1),
+                t_k_A_LHS_matrix.diagonal(),
+                t_k_A_LHS_matrix.diagonal(1),
             )
             # Locate ice-ocean interface based on liquid fraction
             thickness, thickness_index = locate_ice_ocean_interface(
@@ -430,12 +440,26 @@ class SeaIceModel:
                 self.preprocess_data.nz,
                 Stefan=self.preprocess_data.is_stefan,
             )
+
             t_err, s_err, phi_err, counter, residual_voller = self.check_convergence(
-                t, counter, t_prev, s_prev, phi_prev, phi_k, t_k, s_k, voller=voller
+                t,
+                counter,
+                t_prev,
+                s_prev,
+                phi_prev,
+                phi_k,
+                t_k,
+                s_k,
+                t_initial,
+                phi_initial,
+                s_initial,
+                voller=voller,
+                A_matrix=t_k_A_LHS_matrix,
+                temp_factor3=temp_factor3,
             )
             # Update state variables temperature, salinity, liquid fraction respectively
-            t_prev, s_prev, phi_prev, a_p_temperature = overwrite_statevariables(
-                t_k, s_k, phi_k, a_p_temperature
+            t_prev, s_prev, phi_prev, a_p_temperature, temp_factor3 = (
+                overwrite_statevariables(t_k, s_k, phi_k, a_p_temperature, temp_factor3)
             )
             # Track mushy layer using liquid fraction for temperature and phi values
             self.record_mushy_layer_data(t, t_prev, stefan, phi_prev)
@@ -459,7 +483,20 @@ class SeaIceModel:
         )
 
     def check_convergence(
-        self, t, counter, t_prev, s_prev, phi_prev, phi_k, t_k, s_k, voller=False
+        self,
+        t,
+        counter,
+        t_prev,
+        s_prev,
+        phi_prev,
+        phi_k,
+        t_k,
+        s_k,
+        t_initial,
+        phi_initial,
+        s_initial,
+        voller=False,
+        **kwargs,
     ):
         if counter > 0:
             (
@@ -478,8 +515,11 @@ class SeaIceModel:
                 phi_k,
                 phi_prev,
                 voller,
-                latent_heat=self.preprocess_data.constants.L,
-                specific_heat=self.preprocess_data.constants.c_i,
+                temp_factor3=kwargs.get("temp_factor3"),
+                t_initial=t_initial,
+                phi_initial=phi_initial,
+                s_initial=s_initial,
+                A_matrix=kwargs.get("A_matrix"),
             )
 
         if counter >= self.preprocess_data.counter_limit:
@@ -766,7 +806,13 @@ class SeaIceModel:
                     temp_grad=self.preprocess_data.temp_grad,
                     salinity_equation=self.preprocess_data.is_salinity_equation,
                 )
-
+            elif not self.preprocess_data.is_buffo:
+                (t_k_buffo, s_k_buffo, phi_k_buffo, thickness_buffo) = (
+                    self.preprocess_data.t_k_buffo_list[0],
+                    self.preprocess_data.s_buffo_list[0],
+                    self.preprocess_data.phi_buffo_list[0],
+                    self.preprocess_data.thickness_list_buffo[0],
+                )
             (
                 t_k,
                 t_prev,
@@ -787,7 +833,8 @@ class SeaIceModel:
                 s_km1,
                 phi_km1,
                 stefan=True,
-                voller=True,
+                buffo=False,
+                voller=self.preprocess_data.is_voller,
                 temp_grad=self.preprocess_data.temp_grad,
                 salinity_equation=self.preprocess_data.is_salinity_equation,
             )
@@ -838,7 +885,7 @@ class SeaIceModel:
             if t % 500 == 0:
                 count += 1
                 self.t_running(
-                    fig1, ax1, t_stefan, t_k=t_k, t_k_buffo=t_k_buffo, count=count
+                    fig1, ax1, t_stefan, t_k=t_k, t_k_buffo=None, count=count
                 )
 
         fig1.savefig(

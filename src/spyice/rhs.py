@@ -24,6 +24,7 @@ def apply_boundary_condition(
     _temperature_top,
     is_stefan,
     is_buffo=False,
+    is_voller=False,
     bc_neumann=None,
 ):
     """Creates the right hand side of the matrix equation considering source terms.
@@ -66,6 +67,12 @@ def apply_boundary_condition(
                 rhs_matrix[0] = temperature_top
             rhs_matrix[-1] = temperature_melt  # Dirichlet
         elif is_buffo:
+            if bc_neumann is not None:
+                rhs_matrix[0] -= 2 * factor1[0] * bc_neumann
+            else:
+                rhs_matrix[0] = temperature_top
+            rhs_matrix[-1] += factor1[-1] * temperature_melt
+        elif is_voller:
             if bc_neumann is not None:
                 rhs_matrix[0] -= 2 * factor1[0] * bc_neumann
             else:
