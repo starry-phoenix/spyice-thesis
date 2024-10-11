@@ -16,7 +16,7 @@ from src.spyice.statevariables import (
     set_statevariables,
 )
 from src.spyice.update_physical_values import update_state_variables
-from src.spyice.utils.helpers import t_total
+from src.spyice.utils.helpers import t_total, export_residuals
 from src.spyice.utils.spyice_exceptions import ConvergenceError, InvalidPhaseError
 
 plt.style.use("src.spyice.utils.custom")
@@ -384,29 +384,16 @@ class SeaIceModel:
         """
 
         # Set previous state variables temperature, salinity, liquid fraction respectively
-        t_prev, s_prev, phi_prev, a_p_temperature, temp_factor3 = (
+        t_prev, s_prev, phi_prev, t_k_A_LHS_matrix, temp_factor3 = (
             overwrite_statevariables(t_initial, s_initial, phi_initial)
         )
-        if voller:
-            residual_voller = 1.0
-            convergence_criteria = (
-                residual_voller > self.preprocess_data.temperature_tolerance
-            )
-        else:
-            residual_voller = self.preprocess_data.temperature_tolerance * 100000
-            convergence_criteria = (
-                t_err > self.preprocess_data.temperature_tolerance
-                or s_err > self.preprocess_data.salinity_tolerance
-                or phi_err > self.preprocess_data.liquid_fraction_tolerance
-                or residual_voller > 1e-6
-            )
+        residual_voller = 1
         # Run the while loop until convergence is reached
         while (
-            # t_err > self.preprocess_data.temperature_tolerance
-            # or s_err > self.preprocess_data.salinity_tolerance
-            # or phi_err > self.preprocess_data.liquid_fraction_tolerance
-            # or
-            residual_voller > self.preprocess_data.temperature_tolerance
+            ((residual_voller > self.preprocess_data.temperature_tolerance) & (stefan))
+            or ((t_err > self.preprocess_data.temperature_tolerance) & (buffo))
+            or ((phi_err > self.preprocess_data.liquid_fraction_tolerance) & (buffo))
+            or (s_err > self.preprocess_data.salinity_tolerance)
         ):
             # Update state variables Enthalpy, Enthalpy Solid, Liquid Fraction, Temperature, Salinity respectively
             h_k, h_solid, phi_k, t_k, s_k, t_k_A_LHS_matrix, temp_factor3 = (
@@ -421,17 +408,11 @@ class SeaIceModel:
                     t_initial,
                     s_initial,
                     phi_initial,
-                    a_p_temperature,
+                    t_k_A_LHS_matrix,
                     temp_factor3,
                     source_term,
                     _is_salinity_equation=_is_salinity_equation,
                 )
-            )
-
-            a_w_temperature, a_p_temperature, a_e_temperature = (
-                t_k_A_LHS_matrix.diagonal(-1),
-                t_k_A_LHS_matrix.diagonal(),
-                t_k_A_LHS_matrix.diagonal(1),
             )
             # Locate ice-ocean interface based on liquid fraction
             thickness, thickness_index = locate_ice_ocean_interface(
@@ -458,13 +439,29 @@ class SeaIceModel:
                 temp_factor3=temp_factor3,
             )
             # Update state variables temperature, salinity, liquid fraction respectively
-            t_prev, s_prev, phi_prev, a_p_temperature, temp_factor3 = (
-                overwrite_statevariables(t_k, s_k, phi_k, a_p_temperature, temp_factor3)
+            t_prev, s_prev, phi_prev, t_k_A_LHS_matrix, temp_factor3 = (
+                overwrite_statevariables(
+                    t_k, s_k, phi_k, t_k_A_LHS_matrix, temp_factor3
+                )
             )
             # Track mushy layer using liquid fraction for temperature and phi values
-            self.record_mushy_layer_data(t, t_prev, stefan, phi_prev)
+            self.record_mushy_layer_data(
+                t, t_prev, stefan, phi_prev, residual_voller, s_prev
+            )
             # record thickness index at the given timestep t
             self.preprocess_data.thickness_index_total[t - 1] = thickness_index
+
+            if counter >= self.preprocess_data.counter_limit:
+                export_residuals(
+                    self,
+                    residuals=self.preprocess_data.residual_voller_all,
+                    temperature_mushy=self.preprocess_data.t_k_iter_all,
+                    phi_mushy=self.preprocess_data.all_phi_iter_all,
+                    salinity_mushy=self.preprocess_data.s_k_iter_all,
+                    output_dir=self.preprocess_data.dir_output_name,
+                )
+                msg = f"Convergence not reached at time t = {t}"
+                raise ConvergenceError(msg)
 
         return (
             t_prev,
@@ -522,16 +519,13 @@ class SeaIceModel:
                 A_matrix=kwargs.get("A_matrix"),
             )
 
-        if counter >= self.preprocess_data.counter_limit:
-            msg = f"Convergence not reached at time t = {t}"
-            raise ConvergenceError(msg)
-
         counter += 1
         return t_err, s_err, phi_err, counter, residual_voller
 
-    def record_mushy_layer_data(self, t, t_km1, stefan, phi_k):
+    def record_mushy_layer_data(self, t, t_km1, stefan, phi_k, residual_voller, s_prev):
         """Records the mushy layer data for temperature and phi values at time iterations t at specific time steps corresponding to initial stages, middle and final stages of the process."""
-        if t in [7, 36, 720, 7200, 14400, 21600] and stefan:
+        if stefan:
+            # if t in [7, 36, 720, 7200, 14400, 21600] and stefan:
             self.preprocess_data.t_k_iter, t_mush_indx = self.track_mush_for_parameter(
                 phi_k, t_km1, self.preprocess_data.t_k_iter
             )
@@ -545,6 +539,10 @@ class SeaIceModel:
             )
             self.preprocess_data.mush_indx_list.append([t_mush_indx, phi_mush_indx])
             self.preprocess_data.t_k_before_convergence.append(t_km1)
+            self.preprocess_data.residual_voller.append(residual_voller)
+            self.preprocess_data.s_k_iter.append(
+                [s_prev[0], s_prev[t_mush_indx], s_prev[-1]]
+            )
 
     def reset_iteration_parameters(self, t, tkm1, s_km1, phi_km1):
         """Reset the iteration parameters for the sea ice model.
@@ -641,13 +639,21 @@ class SeaIceModel:
             self.preprocess_data.mush_indx_list_all.append(
                 self.preprocess_data.mush_indx_list
             )
+        if np.array(self.preprocess_data.residual_voller).any():
+            self.preprocess_data.residual_voller_all.append(
+                self.preprocess_data.residual_voller
+            )
+        if np.array(self.preprocess_data.s_k_iter).any():
+            self.preprocess_data.s_k_iter_all.append(self.preprocess_data.s_k_iter)
         (
             self.preprocess_data.t_k_iter,
             self.preprocess_data.phi_k_iter,
             self.preprocess_data.all_phi_iter,
             self.preprocess_data.t_k_before_convergence,
             self.preprocess_data.mush_indx_list,
-        ) = [], [], [], [], []
+            self.preprocess_data.residual_voller,
+            self.preprocess_data.s_k_iter,
+        ) = [], [], [], [], [], [], []
 
         # parameter_to_record_and_reset_list = [
         #     [self.preprocess_data.t_k_iter, self.preprocess_data.t_k_iter_all],
@@ -885,7 +891,7 @@ class SeaIceModel:
             if t % 500 == 0:
                 count += 1
                 self.t_running(
-                    fig1, ax1, t_stefan, t_k=t_k, t_k_buffo=None, count=count
+                    fig1, ax1, t_stefan, t_k=t_k, t_k_buffo=t_k_buffo, count=count
                 )
 
         fig1.savefig(
@@ -901,6 +907,8 @@ class SeaIceModel:
             self.preprocess_data.t_k_before_convergence_all
         )
         self.results.mush_indx_list_all = self.preprocess_data.mush_indx_list_all
+        self.results.residual_voller_all = self.preprocess_data.residual_voller_all
+        self.results.s_k_iter_all = self.preprocess_data.s_k_iter_all
 
         return self.results
 

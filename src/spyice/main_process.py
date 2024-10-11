@@ -53,7 +53,13 @@ class MainProcess:
         # error analysis of results and get the analysis dataclass
 
         analysis_data = Analysis.get_error_results(
-            t_k_diff=results_data.t_k_diff, t_stefan_diff=results_data.t_stefan_diff
+            t_k_diff=results_data.t_k_diff,
+            t_stefan_diff=results_data.t_stefan_diff,
+            residual=results_data.residual_voller_all,
+            temperature_mushy=results_data.t_k_iter_all,
+            phi_mushy=results_data.all_phi_iter_all,
+            salinity_mushy=results_data.s_k_iter_all,
+            output_dir=self.out_dir_final,
         )
         # plot the sea ice model using the user input, results, and analysis dataclasses
         self.plot_model(userinput_data, results_data, analysis_data)
@@ -85,5 +91,7 @@ class MainProcess:
         # )
         model_visualization_object.plot_H_iter_all(savefig=True)
         model_visualization_object.plot_temperature_heatmap(savefig=True)
+        model_visualization_object.plot_salinity_heatmap(savefig=True)
+        model_visualization_object.plot_liquidfraction_heatmap(savefig=True)
         # model_visualization_object.plot_temperature_heatmap_as_gif()
         print("Postprocessing done.")

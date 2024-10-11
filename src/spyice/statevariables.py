@@ -50,7 +50,7 @@ def overwrite_statevariables(
     temperature_calculated,
     salinity_calculated,
     liquid_fraction_calculated,
-    a_p_temperature=None,
+    t_k_lhs_A_matrix=None,
     temp_factor3=None,
 ):
     """Overwrites the state variables with the calculated values.
@@ -72,17 +72,17 @@ def overwrite_statevariables(
     liquid_fraction_new = (
         liquid_fraction_calculated  # Set current phi as previous phi for next iteration
     )
-    if a_p_temperature is not None:
-        a_p_temperature = a_p_temperature
+    if t_k_lhs_A_matrix is not None:
+        t_k_lhs_A_matrix = t_k_lhs_A_matrix
         temp_factor3 = temp_factor3
     else:
-        a_p_temperature = np.ones(len(temperature_new)) * 0.0
+        t_k_lhs_A_matrix = np.zeros([101, 101], dtype=np.float64)
         temp_factor3 = np.ones(len(temperature_new))
     return (
         temperature_new,
         salinity_new,
         liquid_fraction_new,
-        a_p_temperature,
+        t_k_lhs_A_matrix,
         temp_factor3,
     )
 

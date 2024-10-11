@@ -46,7 +46,7 @@ class StefanProblem:
             - 2 * stefan_number * np.exp(-2 * x**2) / (np.pi * math.erf(x) ** 2)
             - 1
         )
-        lam_min = opt.newton(fx, 0.1, fprime=dfxdx, tol=0.0003)
+        lam_min = opt.newton(fx, 0.1, fprime=dfxdx, tol=0.0003, maxiter=100)
         alpha = ui.constants.k_i / (ui.constants.c_i * ui.constants.rho_i)
         return 2 * lam_min * np.sqrt(alpha * t)
 

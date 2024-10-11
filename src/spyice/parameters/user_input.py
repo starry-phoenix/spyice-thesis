@@ -91,9 +91,9 @@ class UserInput:
     config_data: DictConfig = field(default_factory=dict)
     max_iterations: int = 500
     is_stefan: bool = True
-    is_buffo: bool = False
+    is_buffo: bool = True
     is_voller: bool = False
-    is_salinity_equation: bool = False
+    is_salinity_equation: bool = True
     liquidus_relation_type: str = "Normal"  # Normal or Frezchem
     grid_resolution_dz: float = 0.01
     boundary_condition_type: str = "Dirichlet"  # Neumann or Dirichlet
@@ -107,7 +107,7 @@ class UserInput:
     initial_liquid_fraction: str = (
         "P1"  # "P_Stefan" or "P0" or "P1" or "PX" where X is a number
     )
-    output_suffix: str = "const_dens-mushfix"
+    output_suffix: str = "nonconst_dens-mushfix"
     temperature_top_type: str = "Stefan"  # "Stefan" or "Dirichlet"
     phase_type: int = 1
     grid_timestep_dt: float = 10
@@ -131,12 +131,18 @@ class UserInput:
         if isinstance(self.constants, RealConstants):
             self.boundary_salinity = 34.0
             self.boundary_top_temperature = 265.0
-            self.temperature_melt = 273.15 - 1.853 * self.boundary_salinity / 28.0
+            # self.temperature_melt = 273.15 - 1.853 * self.boundary_salinity / 28.0
+            self.temperature_melt = (
+                -(9.1969758 * (1e-05) * self.boundary_salinity**2)
+                - 0.03942059 * self.boundary_salinity
+                + 272.63617665
+            )
             self.geometry_type = 2
             if self.config_data:
                 self.grid_timestep_dt = read_omegaconfig(self.config_data, "dt")
                 self.initial_salinity = read_omegaconfig(self.config_data, "S_IC")
                 self.max_iterations = read_omegaconfig(self.config_data, "iter_max")
+                self.grid_resolution_dz = read_omegaconfig(self.config_data, "dz")
                 self.dir_output_name = create_output_directory(
                     self.dir_output_name_hydra,
                     self.initial_salinity,

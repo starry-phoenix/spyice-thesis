@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+import numpy as np
 
 
 def set_dataclass(data_to_be_converted: dict, dataclass: dataclass):
@@ -29,6 +30,29 @@ def t_total(t_passed, dt):
     """
 
     return t_passed + dt
+
+
+def export_residuals(
+    self, residuals: list, temperature_mushy, phi_mushy, salinity_mushy, output_dir
+):
+    """Exports the residuals to a file.
+
+    Args:
+        residuals (np.array): The residuals to export.
+        output_dir (str): The output directory to save the residuals to.
+    Returns:
+        None
+    """
+
+    residuals = np.array(residuals, dtype=object)
+    temperature_mushy = np.array(temperature_mushy, dtype=object)
+    phi_mushy = np.array(phi_mushy, dtype=object)
+    salinity_mushy = np.array(salinity_mushy, dtype=object)
+    np.save(output_dir + "/residuals.npy", residuals)
+    np.save(output_dir + "/temperature_mushy.npy", temperature_mushy)
+    np.save(output_dir + "/phi_mushy.npy", phi_mushy)
+    np.save(output_dir + "/salinity_mushy.npy", salinity_mushy)
+    print("Residuals exported successfully.")
 
 
 ### Initialize time step, starting time, end time

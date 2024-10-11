@@ -288,7 +288,7 @@ class VisualiseModel:
             ]
         )
         depth = self.results_object.depth_stefan_all[len(x_axis_iter) - 1]
-        index = int(depth / self.ui_object.grid_resolution_dz) + 1
+        index = int(depth / self.ui_object.grid_resolution_dz)
         heatmap_data = self.results_object.phi_k_list[:, :index]
         fig, ax = plt.subplots()
         cax = ax.imshow(
@@ -318,7 +318,13 @@ class VisualiseModel:
             x_axis_iter * self.ui_object.grid_timestep_dt / 3600,
             self.results_object.thickness_list[: len(x_axis_iter)],
             "k--",
-            label="Numerical Depth",
+            label="Voller Numerical Depth",
+        )
+        ax1.plot(
+            x_axis_iter * self.ui_object.grid_timestep_dt / 3600,
+            self.results_object.thickness_list_buffo[: len(x_axis_iter)],
+            "k:",
+            label="Buffo Numerical Depth",
         )
         ax1.legend()
         ax1.set_ylim(
@@ -473,6 +479,66 @@ class VisualiseModel:
             )
         plt.close(fig)
 
+    def plot_salinity_heatmap(self, savefig: bool = True):
+        """Plots the temperature heatmap."""
+
+        print("Plotting Temperature heatmap...")
+        x_axis_iter = np.arange(0, self.ui_object.max_iterations - 1, 1)
+        heatmap_data = self.results_object.s_k_list[1:]
+        fig, ax = plt.subplots()
+        cax = ax.imshow(
+            heatmap_data.T,
+            cmap="Blues",
+            aspect="auto",
+            extent=[
+                0,
+                len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600,
+                1.0,
+                0,
+            ],
+        )
+        ax.set_xlabel(r"$t$ [hours]")
+        ax.set_ylabel(r"Depth [$m$]")
+        ax.set_title(r"Freezing Overtime")
+        fig.colorbar(cax, ax=ax, label="Salinity in ppt")
+
+        if savefig:
+            fig.savefig(
+                self.ui_object.dir_output_name + "/Salinity_heatmap.pdf",
+                backend="pgf",
+            )
+        plt.close(fig)
+
+    def plot_liquidfraction_heatmap(self, savefig: bool = True):
+        """Plots the temperature heatmap."""
+
+        print("Plotting Temperature heatmap...")
+        x_axis_iter = np.arange(0, self.ui_object.max_iterations - 1, 1)
+        heatmap_data = self.results_object.phi_k_list[1:]
+        fig, ax = plt.subplots()
+        cax = ax.imshow(
+            heatmap_data.T,
+            cmap="Blues",
+            aspect="auto",
+            extent=[
+                0,
+                len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600,
+                1.0,
+                0,
+            ],
+        )
+        ax.set_xlabel(r"$t$ [hours]")
+        ax.set_ylabel(r"Depth [$m$]")
+        ax.set_title(r"Freezing Overtime")
+        fig.colorbar(cax, ax=ax, label=r"Liquid Fraction")
+
+        if savefig:
+            fig.savefig(
+                self.ui_object.dir_output_name + "/Liquidfraction.pdf",
+                backend="pgf",
+            )
+        plt.close(fig)
+
     def plot_temperature_heatmap_as_gif(self):
         fps = 10
         nseconds = 10
@@ -524,9 +590,16 @@ class VisualiseModel:
         # ani.save("test_new_html.html", writer="html")
         plt.close(fig)
 
-    def plot_H_iter(self, h, t, param_name="Temperature", unit="K", savefig=False):
+    def plot_H_iter(
+        self, h, t, s=None, param_name="Temperature", unit="K", savefig=False
+    ):
         iters = h.shape[0]
         iters_arr = np.linspace(0, iters - 1, iters)
+        if s is not None:
+            s_melt = s[:, 1]
+            t_melt = (
+                -(9.1969758 * (1e-05) * s_melt**2) - 0.03942059 * s_melt + 272.63617665
+            )
         plt.grid()
         plt.plot(h[:, 0], label=r"cell Solid", color="turquoise")
         plt.scatter(iters_arr, h[:, 0], color="turquoise")
@@ -534,6 +607,9 @@ class VisualiseModel:
         plt.scatter(iters_arr, h[:, 1], color="red", alpha=0.6)
         plt.plot(h[:, 2], ":", label=r"cell Liquid", color="teal")
         plt.scatter(iters_arr, h[:, 2], color="teal")
+        if s is not None:
+            plt.plot(t_melt, label=r"Temperature Melt", color="black", alpha=0.6)
+            plt.scatter(iters_arr, t_melt, color="black", alpha=0.6)
         plt.xlabel(r"iteration before convergence")
         plt.ylabel(rf"{param_name} [{unit}]")
         plt.title(rf"{param_name} at t={t}H")
@@ -696,17 +772,19 @@ class VisualiseModel:
         temperature_all_before_convergence = (
             self.results_object.t_k_before_convergence_all
         )
+        salinity_mushy_before_convergence = self.results_object.s_k_iter_all
         depth_all = self.results_object.mush_indx_list_all
 
-        for h, p, temp_all, d, t in zip(
+        for h, p, temp_all, s, d, t in zip(
             temperature_mushy_before_convergence,
             liquidfraction_mushy_before_convergence,
             temperature_all_before_convergence,
+            salinity_mushy_before_convergence,
             depth_all,
             [0.1, 0.5, 10, 100, 200, 300],
             strict=False,
         ):
-            self.plot_H_iter(np.array(h), t, savefig=savefig)
+            self.plot_H_iter(np.array(h), t, np.array(s), savefig=savefig)
             self.plot_H_iter_heatmap(
                 np.array(h),
                 np.array(p),
@@ -735,6 +813,50 @@ class VisualiseModel:
             strict=False,
         ):
             self.plot_all_phi_mush(np.array(phi), t, savefig=savefig)
+
+    def plot_response_pt1_pt2(self, tempmushPT1, tempmushPT2, savefig=False):
+        iter_arr = np.arange(0, len(tempmushPT2[1]), 1)
+        tempmushPT1_arr = np.array(tempmushPT1[1])[:, 1]
+        tempmushPT2_arr = np.array(tempmushPT2[1])[:, 1]
+        step_arr = np.ones(len(tempmushPT2_arr)) * tempmushPT1_arr[-1]
+        pt1_array_length = len(tempmushPT1_arr)
+        tempmushPT1_arr = np.append(tempmushPT1_arr, step_arr[pt1_array_length:])
+
+        plt.figure(figsize=(12, 10))
+        plt.grid()
+        plt.plot(step_arr, "--", label=r"$T_{melt}$", color="black", alpha=0.6)
+        plt.scatter(iter_arr, step_arr, color="black", alpha=0.6)
+        plt.plot(
+            tempmushPT1_arr,
+            "--",
+            label=r"$T_{mush} \text{ for } \phi_k = f(T_{k})$",
+            color="blue",
+            alpha=0.6,
+        )
+        plt.scatter(iter_arr, tempmushPT1_arr, color="blue", alpha=0.6)
+        plt.plot(
+            tempmushPT2_arr,
+            "--",
+            label=r"$T_{mush} \text{ for } \phi_k = f(T_{k-1})$",
+            color="red",
+            alpha=0.6,
+        )
+        plt.scatter(iter_arr, tempmushPT2_arr, color="red", alpha=0.6)
+        plt.xlabel(r"No. of Iterations")
+        plt.ylabel(r"Temperature [K]")
+        plt.title(r"Interface temperature at t=0.5H before convergence")
+        plt.legend()
+
+        if savefig:
+            plt.savefig(
+                f"{self.ui_object.dir_output_name}/Temperature_mush_response_{self.ui_object.output_suffix}.pdf",
+                backend="pgf",
+            )
+
+        plt.close()
+
+    # def residual_plot(self):
+    #     res_0p01_1000iter_voller1 = np.load("outputs/2024-09-26/123923_real_47.0_1000_0.01/residuals.npy", allow_pickle=True)
 
     # TODO: Add the following methods
     # def plot_phi(self, timestep, savefig=True):

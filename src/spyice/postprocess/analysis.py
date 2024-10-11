@@ -149,7 +149,14 @@ class Analysis:
 
     @classmethod
     def get_error_results(
-        cls, t_k_diff: np.array, t_stefan_diff: np.array
+        cls,
+        t_k_diff: np.array,
+        t_stefan_diff: np.array,
+        residual: np.array,
+        temperature_mushy: np.array,
+        phi_mushy: np.array,
+        salinity_mushy: np.array,
+        output_dir: str,
     ) -> AnalysisData:
         """Runs error analysis on the given temperature differences.
 
@@ -165,6 +172,9 @@ class Analysis:
         error_analysis_object = cls(t_k_diff, t_stefan_diff)
         error_analysis_object.set_analysis()
         error_analysis_object.error_analytical_numerical()
+        error_analysis_object.export_residuals(
+            residual, temperature_mushy, phi_mushy, salinity_mushy, output_dir
+        )
         all_vars = dict(vars(error_analysis_object))
         return cls.set_dataclass(all_vars, AnalysisData)
 
@@ -183,3 +193,25 @@ class Analysis:
             setattr(dataclass, key, value)
 
         return dataclass
+
+    def export_residuals(
+        self, residuals: list, temperature_mushy, phi_mushy, salinity_mushy, output_dir
+    ):
+        """Exports the residuals to a file.
+
+        Args:
+            residuals (np.array): The residuals to export.
+            output_dir (str): The output directory to save the residuals to.
+        Returns:
+            None
+        """
+
+        residuals = np.array(residuals, dtype=object)
+        temperature_mushy = np.array(temperature_mushy, dtype=object)
+        phi_mushy = np.array(phi_mushy, dtype=object)
+        salinity_mushy = np.array(salinity_mushy, dtype=object)
+        np.save(output_dir + "/residuals.npy", residuals)
+        np.save(output_dir + "/temperature_mushy.npy", temperature_mushy)
+        np.save(output_dir + "/phi_mushy.npy", phi_mushy)
+        np.save(output_dir + "/salinity_mushy.npy", salinity_mushy)
+        print("Residuals exported successfully.")

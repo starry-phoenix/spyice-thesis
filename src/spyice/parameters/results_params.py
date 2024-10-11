@@ -75,14 +75,18 @@ class ResultsParams:
         self.temp_interface = np.zeros(iter_max)
         self.t_k_iter = []
         self.phi_k_iter = []
+        self.s_k_iter = []
         self.all_phi_iter = []
         self.t_k_iter_all = []
         self.phi_k_iter_all = []
+        self.s_k_iter_all = []
         self.all_phi_iter_all = []
         self.mush_indx_list = []
         self.mush_indx_list_all = []
         self.t_k_before_convergence = []
         self.t_k_before_convergence_all = []
+        self.residual_voller = []
+        self.residual_voller_all = []
         self.all_t = np.zeros([iter_max, nz])
         self.all_s = np.zeros([iter_max, nz])
         self.all_phi = np.zeros([iter_max, nz])
@@ -200,7 +204,10 @@ class ResultsParams:
             phi_k_buffo,
             buffo,
         )
-        results_dataclass.temp_interface[t] = t_k[thickness_index]
+        if thickness_index > 0:
+            results_dataclass.temp_interface[t] = t_k[thickness_index - 1]
+        else:
+            results_dataclass.temp_interface[t] = t_k[0]
 
         return results_dataclass
 

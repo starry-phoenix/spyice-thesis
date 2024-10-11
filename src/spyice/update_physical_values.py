@@ -19,7 +19,7 @@ _specific_heat_ice, _latent_heat_water = _ui.constants.c_i, _ui.constants.L
 
 
 def calculate_melting_temperature_from_salinity(
-    _salinity, _temperature_melt=_temperature_melt, _liquid_relation="Normal"
+    _salinity, _temperature_melt=_temperature_melt, _liquid_relation="Frezchem"
 ):
     """Calculates the melting temperature of seawater based on salinity.
 
@@ -38,10 +38,11 @@ def calculate_melting_temperature_from_salinity(
     if _liquid_relation == "Normal":
         _melting_temperature_seawater = _temperature_melt * np.ones(_salinity.shape)
     elif _liquid_relation == "Frezchem":
-        _melting_temperature_seawater = _temperature_melt - (
-            -(9.1969758 * (1e-05) * _salinity**2)
-            - 0.03942059 * _salinity
-            + 272.63617665
+        # _melting_temperature_seawater = _temperature_melt + (
+        #     -(9.1969758 * (1e-05) * _salinity**2) - 0.03942059 * _salinity
+        # )
+        _melting_temperature_seawater = 272.63617665 + (
+            -(9.1969758 * (1e-05) * _salinity**2) - 0.03942059 * _salinity
         )
     return _melting_temperature_seawater
 
@@ -50,9 +51,12 @@ def update_liquid_fraction_buffo(
     _temperature,
     _salinity,
     _liquid_fraction,
+    _enthalpy,
+    _enthalpy_solid,
     _nz,
     _is_stefan=False,
     _method="likebuffo",
+    _pt2_system=False,
 ):
     """Updates the liquid fraction based on temperature, salinity, enthalpy, and other parameters.
 
@@ -73,25 +77,20 @@ def update_liquid_fraction_buffo(
     _phi = np.ones(_nz, dtype=np.float64)
     _alpha = 1.853 / 28.0
     _phi_km1 = _liquid_fraction
-    _temperature_difference = (
-        _temperature - calculate_melting_temperature_from_salinity(_salinity)
-    )
-    _enthalpy = _specific_heat_ice * _temperature + _latent_heat_water * _phi_km1
-    _enthalpy_solid = _specific_heat_ice * calculate_melting_temperature_from_salinity(
-        _salinity
-    )
-    _enthalpy_difference = _enthalpy - _enthalpy_solid
+
+    if _pt2_system is False:
+        _temperature_difference = (
+            _temperature - calculate_melting_temperature_from_salinity(_salinity)
+        )
+        _enthalpy = _specific_heat_ice * _temperature + _latent_heat_water * _phi_km1
+        _enthalpy_solid = (
+            _specific_heat_ice * calculate_melting_temperature_from_salinity(_salinity)
+        )
+        _enthalpy_difference = _enthalpy - _enthalpy_solid
+    else:
+        _enthalpy_difference = _enthalpy - _enthalpy_solid
 
     if _is_stefan:
-        # _phi = np.where(
-        #     _enthalpy <= _enthalpy_solid,
-        #     0,
-        #     np.where(
-        #         _enthalpy > (_enthalpy_solid + _latent_heat_water),
-        #         1,
-        #         _enthalpy_difference / _latent_heat_water,
-        #     ),
-        # )
         _phi = np.where(
             _enthalpy <= _enthalpy_solid,
             0,
@@ -121,49 +120,72 @@ def update_liquid_fraction_buffo(
 def update_liquid_fraction_voller_under_relaxation(
     _temperature,
     _salinity,
-    _liquid_fraction,
+    _temperature_initial,
+    _liquid_fraction_previous,
+    _temperature_previous,
+    _salinity_previous,
     _nz,
     temp_factor_3,
+    t_k_A_LHS_matrix,
+    t_k_A_LHS_matrix_previous,
     under_relaxation_factor,
     _is_stefan=False,
+    _pt2_system=False,
+    _nonconstant_physical_properties=False,
 ):
-    """Updates the liquid fraction based on temperature, salinity, enthalpy, and other parameters.
-
+    """
+    Update the liquid fraction using the Voller under-relaxation method.
     Args:
-        _temperature (float): The temperature value.
-        _salinity (float): The salinity value.
-        _liquid_fraction (float): The liquid fraction value.
-        _enthalpy (float): The enthalpy value.
-        _enthalpy_solid (float): The solid enthalpy value.
-        _nz (int): The number of vertical grid points.
-        _is_stefan (bool, optional): Whether to use Stefan condition. Defaults to False.
-        _method (str, optional): The method to use. Defaults to "likebuffo".
+        - _temperature (float): The temperature value.
+        - _salinity (float): The salinity value.
+        - _liquid_fraction (float): The liquid fraction value.
+        - _nz (int): The number of vertical grid points.
+        - temp_factor_3 (float): The temperature factor.
+        - under_relaxation_factor (float): The under-relaxation factor.
+        - _is_stefan (bool, optional): Whether to use Stefan condition. Defaults to False.
     Returns:
-        tuple: A tuple containing the updated liquid fraction values.
+        - numpy.ndarray: The updated liquid fraction values.
     Raises:
-        AssertionError: If the liquid fraction has a non-physical value.
+        - AssertionError: If the liquid fraction has a non-physical value
+
     """
     _phi = np.ones(_nz, dtype=np.float64)
-    _phi_km1 = _liquid_fraction
-    _temperature_difference = (
-        _temperature - calculate_melting_temperature_from_salinity(_salinity)
-    )
-    _enthalpy = _specific_heat_ice * _temperature + _latent_heat_water * _phi_km1
-    _enthalpy_solid = _specific_heat_ice * calculate_melting_temperature_from_salinity(
-        _salinity
-    )
-    _enthalpy_difference = _enthalpy - _enthalpy_solid
+    if _pt2_system is False:
+        _phi_km1 = _liquid_fraction_previous
+        _temperature_difference = (
+            _temperature - calculate_melting_temperature_from_salinity(_salinity)
+        )
+        _temperature_difference_previous = (
+            _temperature_initial
+            - calculate_melting_temperature_from_salinity(_salinity_previous)
+        )
+        _enthalpy = _specific_heat_ice * _temperature + _latent_heat_water * _phi_km1
+        _enthalpy_solid = (
+            _specific_heat_ice * calculate_melting_temperature_from_salinity(_salinity)
+        )
+        _enthalpy_difference = _enthalpy - _enthalpy_solid
+    else:
+        _phi_km1 = _liquid_fraction_previous
+        _temperature_difference = (
+            _temperature_previous
+            - calculate_melting_temperature_from_salinity(_salinity_previous)
+        )
+        _enthalpy = (
+            _specific_heat_ice * _temperature_previous + _latent_heat_water * _phi_km1
+        )
+        _enthalpy_solid = (
+            _specific_heat_ice
+            * calculate_melting_temperature_from_salinity(_salinity_previous)
+        )
+        _enthalpy_difference = _enthalpy - _enthalpy_solid
 
-    if _is_stefan:
-        # _phi = np.where(
-        #     _enthalpy <= _enthalpy_solid,
-        #     0,
-        #     np.where(
-        #         _enthalpy > (_enthalpy_solid + _latent_heat_water),
-        #         1,
-        #         _enthalpy_difference / _latent_heat_water,
-        #     ),
-        # )
+    a_w_temperature, a_p_temperature, a_e_temperature = (
+        t_k_A_LHS_matrix.diagonal(-1),
+        t_k_A_LHS_matrix.diagonal(),
+        t_k_A_LHS_matrix.diagonal(1),
+    )
+
+    if _is_stefan and not _nonconstant_physical_properties:
         _phi = np.where(
             _enthalpy <= _enthalpy_solid,
             0,
@@ -174,6 +196,19 @@ def update_liquid_fraction_voller_under_relaxation(
                 + under_relaxation_factor * _temperature_difference / temp_factor_3,
             ),
         )
+    elif _is_stefan and _nonconstant_physical_properties:
+        phi_difference = (
+            _temperature_difference_previous * (1 + a_p_temperature) / temp_factor_3
+        ) - (t_k_A_LHS_matrix @ (_temperature_difference / temp_factor_3))
+        _phi = np.where(
+            _enthalpy <= _enthalpy_solid,
+            0,
+            np.where(
+                _enthalpy > (_enthalpy_solid + _latent_heat_water),
+                1,
+                _phi_km1 + phi_difference,
+            ),
+        )
     else:
         _phi = np.where(
             _enthalpy <= _enthalpy_solid,
@@ -181,7 +216,8 @@ def update_liquid_fraction_voller_under_relaxation(
             np.where(
                 _enthalpy > (_enthalpy_solid + _latent_heat_water),
                 1,
-                _enthalpy_difference / _latent_heat_water,
+                _phi_km1
+                + under_relaxation_factor * _temperature_difference / temp_factor_3,
             ),
         )
         assert np.all(
@@ -310,6 +346,8 @@ def update_temperature_and_salinity(
     stefan: bool,
     voller: bool,
     _is_salinity_equation: bool = False,
+    _nonconstant_physical_properties: bool = False,
+    t_k_A_LHS_matrix_prev: np.ndarray = None,
 ):
     """
     Update the temperature and salinity based on the given parameters.
@@ -351,7 +389,7 @@ def update_temperature_and_salinity(
         bc_neumann=preprocess_data_object.temp_grad,
     )
     t_k, x_wind_t, A_before_correction = advection_diffusion_temp.unknowns_matrix(
-        _temperature_melt
+        _temperature_melt, _nonconstant_physical_properties
     )
     # TODO: Add algae growth model here to salinity
     if _is_salinity_equation is True:
@@ -373,7 +411,11 @@ def update_temperature_and_salinity(
             Voller=voller,
             bc_neumann=preprocess_data_object.temp_grad,
         )
-        s_k, x_wind_s = advection_diffusion_salinity.unknowns_matrix()
+        s_k, x_wind_s, S_before_correction = (
+            advection_diffusion_salinity.unknowns_matrix(
+                _temperature_melt, _nonconstant_physical_properties
+            )
+        )
     else:
         s_k = s_prev
     return t_k, s_k, A_before_correction, advection_diffusion_temp.factor3
@@ -390,7 +432,7 @@ def update_state_variables(
     t_initial,
     s_initial,
     phi_initial,
-    a_p_temperature,
+    t_k_A_LHS_matrix_prev,
     temp_factor_3,
     source_term,
     _is_salinity_equation=False,
@@ -431,22 +473,22 @@ def update_state_variables(
         preprocess_data_object.nz,
         preprocess_data_object.liquidus_relation_type,
     )
-    t_k, s_k, t_k_A_LHS_matrix, temp_factor_3 = update_temperature_and_salinity(
-        preprocess_data_object,
-        t_prev,
-        s_prev,
-        phi_prev,
-        t_initial,
-        s_initial,
-        phi_initial,
-        source_term,
-        buffo,
-        stefan,
-        voller,
-        _is_salinity_equation,
-    )
-    a_p_temperature = t_k_A_LHS_matrix.diagonal()
     if voller:
+        t_k, s_k, t_k_A_LHS_matrix, temp_factor_3 = update_temperature_and_salinity(
+            preprocess_data_object,
+            t_prev,
+            s_prev,
+            phi_prev,
+            t_initial,
+            s_initial,
+            phi_initial,
+            source_term,
+            buffo,
+            stefan,
+            voller,
+            _is_salinity_equation,
+        )
+        a_p_temperature = t_k_A_LHS_matrix.diagonal()
         phi_k = update_liquid_fraction_voller_continuous_thermal_properties(
             t_k,
             s_k,
@@ -455,14 +497,66 @@ def update_state_variables(
             temp_factor_3,
             _is_stefan=preprocess_data_object.is_stefan,
         )
-    else:
-        phi_k = update_liquid_fraction_buffo(
+    elif stefan:
+        t_k, s_k, t_k_A_LHS_matrix, temp_factor_3 = update_temperature_and_salinity(
+            preprocess_data_object,
+            t_prev,
+            s_prev,
+            phi_prev,
+            t_initial,
+            s_initial,
+            phi_initial,
+            source_term,
+            buffo,
+            stefan,
+            voller,
+            _is_salinity_equation,
+            t_k_A_LHS_matrix_prev=t_k_A_LHS_matrix_prev,
+        )
+        phi_k = update_liquid_fraction_voller_under_relaxation(
             t_k,
             s_k,
+            t_initial,
             phi_prev,
+            t_prev,
+            s_prev,
+            preprocess_data_object.nz,
+            temp_factor_3,
+            t_k_A_LHS_matrix,
+            t_k_A_LHS_matrix_prev,
+            1.4,
+            _is_stefan=preprocess_data_object.is_stefan,
+            _pt2_system=False,
+            _nonconstant_physical_properties=False,
+        )
+    elif buffo:
+        phi_k = update_liquid_fraction_buffo(
+            t_prev,
+            s_prev,
+            phi_prev,
+            h_k,
+            h_solid,
             preprocess_data_object.nz,
             _is_stefan=preprocess_data_object.is_stefan,
+            _method="likebuffo",
         )
+        t_k, s_k, t_k_A_LHS_matrix, temp_factor_3 = update_temperature_and_salinity(
+            preprocess_data_object,
+            t_prev,
+            s_prev,
+            phi_k,
+            t_initial,
+            s_initial,
+            phi_initial,
+            source_term,
+            buffo,
+            stefan,
+            voller,
+            _is_salinity_equation,
+        )
+    else:
+        AssertionError("No method selected for liquid fraction update")
+
     # Voller scheme: lower, main, upper diagonal of the matrix A of Ax = b
 
     return h_k, h_solid, phi_k, t_k, s_k, t_k_A_LHS_matrix, temp_factor_3

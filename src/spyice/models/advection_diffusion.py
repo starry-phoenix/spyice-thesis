@@ -90,9 +90,12 @@ class AdvectionDiffusion:
         self.upper_A = np.zeros(nz - 1, dtype=np.float64)
         self.A = np.zeros([nz, nz], dtype=np.float64)
         self.X_new = np.zeros(nz, dtype=np.float64)
-        self.factor1 = self.factor_1(argument, self.a, self.c, dt, dz, nz)
         if argument == "salinity":
-            self.factor1_plus, self.factor1_minus = self.factor1
+            self.factor1, self.factor1_plus, self.factor1_minus = self.factor_1(
+                argument, self.a, self.c, dt, dz, nz
+            )
+        else:
+            self.factor1 = self.factor_1(argument, self.a, self.c, dt, dz, nz)
         self.factor2 = self.factor_2(self.a, self.b, dt, dz, nz)
         self.factor3 = self.factor_3(self.a, self.d, nz)
 
@@ -185,7 +188,7 @@ class AdvectionDiffusion:
                 if i < self.nz - 1:
                     self.upper_A[i] = -self.factor1_minus[i]
                 if i > 0:
-                    self.lower_A[i] = -self.factor1_plus[i]
+                    self.lower_A[i - 1] = -self.factor1_plus[i]
             else:
                 self.main_A[i] = 2 * self.factor1[i] + 1.0
                 if i < self.nz - 1:
@@ -216,6 +219,9 @@ class AdvectionDiffusion:
                 self.main_A[0] = 2 * self.factor1[0] + 1
                 self.main_A[-1] = 2 * self.factor1[-1] + 1
                 self.lower_A[-1] = -1 * self.factor1[-1]
+        elif self.argument == "salinity":
+            if self.Buffo is True:
+                self.main_A[0] = 1 + self.factor1_minus[0]
 
     def assemble_tridiagonal(self):
         self.A = np.zeros([self.nz, self.nz])
@@ -242,7 +248,7 @@ class AdvectionDiffusion:
             pass
         return X
 
-    def unknowns_matrix(self, temperature_melt):
+    def unknowns_matrix(self, temperature_melt, non_constant_physical_properties=False):
         """Calculates the unknowns matrix for the advection-diffusion model.
         Returns:
             tuple: A tuple containing the following elements:
@@ -256,7 +262,7 @@ class AdvectionDiffusion:
         A_before_correction = self.assemble_tridiagonal()
         # if self.Voller is True:
         # self.modify_tridiagonal_voller_scheme()
-        A_after_correction = self.assemble_tridiagonal()
+        # A_after_correction = self.assemble_tridiagonal()
 
         B = apply_boundary_condition(
             self.argument,
@@ -328,7 +334,7 @@ class AdvectionDiffusion:
         factor1_plus[0] = self.factor1[0]
         factor1_minus = (self.factor1 + np.roll(self.factor1, -1)) / 2
         factor1_minus[-1] = self.factor1[-1]
-        return [factor1_plus, factor1_minus]
+        return [self.factor1, factor1_plus, factor1_minus]
 
     def factor_2(self, a, b, dt, dz, nz):
         """Calculates the factor2 array for advection-diffusion model.
