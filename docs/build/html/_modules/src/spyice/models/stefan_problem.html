@@ -1,0 +1,598 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" data-theme="auto">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>src.spyice.models.stefan_problem &#8212; SpyIce  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "auto";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "auto";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=b6ad3417" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/src/spyice/models/stefan_problem';</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.0.0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="auto">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">SpyIce  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../report/_index.html">
+    About
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../quick_start/_index.html">
+    How-to
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/_index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../report/_index.html">
+    About
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../quick_start/_index.html">
+    How-to
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/_index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">src.spyice.models.stefan_problem</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for src.spyice.models.stefan_problem</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="c1"># import matplotlib.pyplot as plt</span>
+
+<span class="c1"># ui = UserInput()</span>
+<span class="c1"># TODO: check if the concentration is dependent on previous iterations or vice-versa</span>
+<span class="c1"># TODO: implement mushy layer consideration with liquid fraction check paper</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.optimize</span> <span class="k">as</span> <span class="nn">opt</span>
+<span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">erfc</span>
+
+<span class="kn">from</span> <span class="nn">src.spyice.parameters.user_input</span> <span class="kn">import</span> <span class="n">UserInput</span>
+
+
+<div class="viewcode-block" id="StefanProblem">
+<a class="viewcode-back" href="../../../../api/spyice.models.stefan_problem.html#src.spyice.models.stefan_problem.StefanProblem">[docs]</a>
+<span class="k">class</span> <span class="nc">StefanProblem</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A class to solve the Stefan problem.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="StefanProblem.stefan_problem">
+<a class="viewcode-back" href="../../../../api/spyice.models.stefan_problem.html#src.spyice.models.stefan_problem.StefanProblem.stefan_problem">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">stefan_problem</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">ui</span><span class="p">:</span> <span class="n">UserInput</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculates the Stefan problem solution for a given time and user input.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            t (float): The time value.</span>
+<span class="sd">            ui (UserInput): An instance of the UserInput class containing the necessary input parameters.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: The calculated Stefan problem solution.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            None</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Rest of the code...</span>
+        <span class="n">stefan_number</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">c_i</span>
+            <span class="o">*</span> <span class="p">(</span><span class="n">ui</span><span class="o">.</span><span class="n">temperature_melt</span> <span class="o">-</span> <span class="n">ui</span><span class="o">.</span><span class="n">boundary_top_temperature</span><span class="p">)</span>
+            <span class="o">/</span> <span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">L</span>
+        <span class="p">)</span>
+        <span class="n">fx</span> <span class="o">=</span> <span class="p">(</span>  <span class="c1"># noqa: E731</span>
+            <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">stefan_number</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">erf</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+            <span class="o">-</span> <span class="n">x</span>
+        <span class="p">)</span>
+
+        <span class="n">dfxdx</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span>  <span class="c1"># noqa: E731</span>
+            <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">stefan_number</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> <span class="o">*</span> <span class="n">x</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">erf</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+            <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">stefan_number</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">erf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="o">-</span> <span class="mi">1</span>
+        <span class="p">)</span>
+        <span class="n">lam_min</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">newton</span><span class="p">(</span><span class="n">fx</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">fprime</span><span class="o">=</span><span class="n">dfxdx</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.0003</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">k_i</span> <span class="o">/</span> <span class="p">(</span><span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">c_i</span> <span class="o">*</span> <span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">rho_i</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">lam_min</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="StefanProblem.calculate_temperature_profile">
+<a class="viewcode-back" href="../../../../api/spyice.models.stefan_problem.html#src.spyice.models.stefan_problem.StefanProblem.calculate_temperature_profile">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">calculate_temperature_profile</span><span class="p">(</span><span class="n">depth_stefan</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">dz</span><span class="p">,</span> <span class="n">nz</span><span class="p">,</span> <span class="n">ui</span><span class="p">:</span> <span class="n">UserInput</span><span class="p">):</span>
+        <span class="c1"># sourcery skip: chain-compares</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculates the temperature profile for the Stefan problem.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            depth_stefan (float): The depth of the Stefan problem.</span>
+<span class="sd">            t (float): The time.</span>
+<span class="sd">            dz (float): The step size in the z-direction.</span>
+<span class="sd">            nz (int): The number of grid points in the z-direction.</span>
+<span class="sd">            ui (UserInput): An instance of the UserInput class containing the required constants and parameters.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: An array containing the temperature profile for the Stefan problem.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="o">...</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">k_i</span> <span class="o">/</span> <span class="p">(</span><span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">c_i</span> <span class="o">*</span> <span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">rho_i</span><span class="p">)</span>
+        <span class="n">nz_depth</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">absolute</span><span class="p">(</span><span class="n">depth_stefan</span><span class="p">)</span> <span class="o">/</span> <span class="n">dz</span><span class="p">)</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">absolute</span><span class="p">(</span><span class="n">depth_stefan</span><span class="p">),</span> <span class="n">nz_depth</span><span class="p">)</span>
+        <span class="n">temperature_stefan</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">nz</span><span class="p">)</span> <span class="o">*</span> <span class="n">ui</span><span class="o">.</span><span class="n">temperature_melt</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">absolute</span><span class="p">(</span><span class="n">depth_stefan</span><span class="p">)</span> <span class="o">!=</span> <span class="n">nz_depth</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">nz_depth</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nz_depth</span><span class="p">):</span>
+                <span class="n">erf_values</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">erf</span><span class="p">(</span><span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">t</span><span class="p">)))</span>
+                <span class="n">erf_depth</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">erf</span><span class="p">(</span><span class="n">depth_stefan</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">t</span><span class="p">)))</span>
+                <span class="n">temperature_stefan</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">boundary_top_temperature</span> <span class="o">-</span> <span class="p">(</span>
+                    <span class="n">ui</span><span class="o">.</span><span class="n">boundary_top_temperature</span> <span class="o">-</span> <span class="n">ui</span><span class="o">.</span><span class="n">temperature_melt</span>
+                <span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">erf_values</span> <span class="o">/</span> <span class="n">erf_depth</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">temperature_stefan</span></div>
+
+
+<div class="viewcode-block" id="StefanProblem.calculate_temperature_twophase_profiles">
+<a class="viewcode-back" href="../../../../api/spyice.models.stefan_problem.html#src.spyice.models.stefan_problem.StefanProblem.calculate_temperature_twophase_profiles">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">calculate_temperature_twophase_profiles</span><span class="p">(</span><span class="n">depth_stefan</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">dz</span><span class="p">,</span> <span class="n">nz</span><span class="p">,</span> <span class="n">ui</span><span class="p">:</span> <span class="n">UserInput</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate the temperature and salinity profiles for the Stefan problem in a two-phase system.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            depth_stefan (float): The depth of the Stefan problem.</span>
+<span class="sd">            t (float): The time.</span>
+<span class="sd">            dz (float): The grid spacing.</span>
+<span class="sd">            nz (int): The number of grid points.</span>
+<span class="sd">            ui (UserInput): An instance of the UserInput class containing the input parameters.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple: A tuple containing the temperature and salinity profiles as numpy arrays.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Function implementation goes here</span>
+        <span class="c1"># pass</span>
+        <span class="n">nz_depth</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">absolute</span><span class="p">(</span><span class="n">depth_stefan</span><span class="p">)</span> <span class="o">/</span> <span class="n">dz</span><span class="p">)</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">absolute</span><span class="p">(</span><span class="n">depth_stefan</span><span class="p">),</span> <span class="n">nz_depth</span><span class="p">)</span>
+        <span class="n">temperature</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">nz</span><span class="p">)</span> <span class="o">*</span> <span class="n">ui</span><span class="o">.</span><span class="n">temperature_melt</span>
+        <span class="n">salinity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nz</span><span class="p">)</span>
+        <span class="n">eta</span> <span class="o">=</span> <span class="n">z</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">D_s</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+        <span class="n">temperature_boundary</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">boundary_top_temperature</span>
+        <span class="n">temperature_bottom</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">temperature_melt</span>
+        <span class="n">eps</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">D_s</span> <span class="o">/</span> <span class="n">k</span><span class="p">)</span>  <span class="c1"># noqa: E731</span>
+        <span class="n">kappa_i</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">k_i</span> <span class="o">/</span> <span class="p">(</span><span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">rho_i</span> <span class="o">*</span> <span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">c_i</span><span class="p">)</span>
+        <span class="n">kappa_br</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">k_br</span> <span class="o">/</span> <span class="p">(</span><span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">rho_br</span> <span class="o">*</span> <span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">c_br</span><span class="p">)</span>
+        <span class="n">f_x</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">erfc</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># noqa: E731</span>
+        <span class="n">s_fi</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">lamb</span><span class="p">:</span> <span class="n">ui</span><span class="o">.</span><span class="n">boundary_salinity</span> <span class="o">*</span> <span class="n">f_x</span><span class="p">(</span><span class="n">lamb</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">f_x</span><span class="p">(</span><span class="n">lamb</span><span class="p">))</span>  <span class="c1"># noqa: E731</span>
+        <span class="n">salinity</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">boundary_salinity</span> <span class="o">+</span> <span class="n">s_fi</span><span class="p">(</span><span class="n">depth_stefan</span><span class="p">)</span>
+        <span class="n">temperature_interface</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">temperature_melt</span> <span class="o">-</span> <span class="mf">1.853</span> <span class="o">*</span> <span class="n">salinity</span> <span class="o">/</span> <span class="mf">28.0</span>
+        <span class="n">erf_values_solid</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">erf</span><span class="p">(</span><span class="n">eps</span><span class="p">(</span><span class="n">kappa_i</span><span class="p">)</span> <span class="o">*</span> <span class="n">eta</span><span class="p">)</span>
+        <span class="n">erf_depth_solid</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">erf</span><span class="p">(</span><span class="n">eps</span><span class="p">(</span><span class="n">kappa_i</span><span class="p">)</span> <span class="o">*</span> <span class="n">depth_stefan</span><span class="p">)</span>
+        <span class="n">erfc_values_liquid</span> <span class="o">=</span> <span class="n">erfc</span><span class="p">(</span><span class="n">eps</span><span class="p">(</span><span class="n">kappa_br</span><span class="p">)</span> <span class="o">*</span> <span class="n">eta</span><span class="p">)</span>
+        <span class="n">erfc_depth_liquid</span> <span class="o">=</span> <span class="n">erfc</span><span class="p">(</span><span class="n">eps</span><span class="p">(</span><span class="n">kappa_br</span><span class="p">)</span> <span class="o">*</span> <span class="n">depth_stefan</span><span class="p">)</span>
+        <span class="n">temperature</span><span class="p">[:</span><span class="n">nz_depth</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+            <span class="n">eta</span> <span class="o">&lt;</span> <span class="n">depth_stefan</span><span class="p">,</span>
+            <span class="n">temperature_boundary</span>
+            <span class="o">+</span> <span class="p">(</span><span class="n">temperature_interface</span> <span class="o">-</span> <span class="n">temperature_boundary</span><span class="p">)</span>
+            <span class="o">*</span> <span class="p">(</span><span class="n">erf_values_solid</span> <span class="o">/</span> <span class="n">erf_depth_solid</span><span class="p">),</span>
+            <span class="n">temperature_bottom</span>
+            <span class="o">+</span> <span class="p">(</span><span class="n">temperature_interface</span> <span class="o">-</span> <span class="n">temperature_bottom</span><span class="p">)</span>
+            <span class="o">*</span> <span class="p">(</span><span class="n">erfc_values_liquid</span> <span class="o">/</span> <span class="n">erfc_depth_liquid</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="n">salinity</span><span class="p">[:</span><span class="n">nz_depth</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+            <span class="n">eta</span> <span class="o">&gt;=</span> <span class="n">depth_stefan</span><span class="p">,</span>
+            <span class="n">ui</span><span class="o">.</span><span class="n">boundary_salinity</span>
+            <span class="o">+</span> <span class="p">(</span><span class="n">salinity</span> <span class="o">-</span> <span class="n">ui</span><span class="o">.</span><span class="n">boundary_salinity</span><span class="p">)</span> <span class="o">*</span> <span class="n">erfc</span><span class="p">(</span><span class="n">eta</span><span class="p">)</span> <span class="o">/</span> <span class="n">erfc</span><span class="p">(</span><span class="n">depth_stefan</span><span class="p">),</span>
+            <span class="n">salinity</span><span class="p">[:</span><span class="n">nz_depth</span><span class="p">],</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">temperature</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">salinity</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="StefanProblem.stefan_problem_twophase">
+<a class="viewcode-back" href="../../../../api/spyice.models.stefan_problem.html#src.spyice.models.stefan_problem.StefanProblem.stefan_problem_twophase">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">stefan_problem_twophase</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">ui</span><span class="p">:</span> <span class="n">UserInput</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Solves the Stefan problem for a two-phase system.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            t (float): Time parameter.</span>
+<span class="sd">            ui (UserInput): User input object containing boundary conditions and constants.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            float: The result of the Stefan problem calculation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Rest of the code...</span>
+
+        <span class="n">gamma</span> <span class="o">=</span> <span class="mf">1.853</span> <span class="o">/</span> <span class="mf">28.0</span>
+        <span class="n">s_0</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">boundary_salinity</span>
+        <span class="n">f_x</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">erfc</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># noqa: E731</span>
+        <span class="n">g_x</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">**</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">erf</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># noqa: E731</span>
+        <span class="n">eps</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">D_s</span> <span class="o">/</span> <span class="n">k</span><span class="p">)</span>  <span class="c1"># noqa: E731</span>
+        <span class="n">temperature_boundary</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">boundary_top_temperature</span>
+        <span class="n">temperature_bottom</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">temperature_melt</span>
+        <span class="n">t_l</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">temperature_melt</span> <span class="o">-</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">ui</span><span class="o">.</span><span class="n">boundary_salinity</span>
+        <span class="n">temperature_diff</span> <span class="o">=</span> <span class="n">t_l</span> <span class="o">-</span> <span class="n">temperature_boundary</span>
+        <span class="n">t_0</span> <span class="o">=</span> <span class="n">temperature_bottom</span> <span class="o">-</span> <span class="n">t_l</span>
+        <span class="n">kappa_i</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">k_i</span> <span class="o">/</span> <span class="p">(</span><span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">rho_i</span> <span class="o">*</span> <span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">c_i</span><span class="p">)</span>
+        <span class="n">kappa_br</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">k_br</span> <span class="o">/</span> <span class="p">(</span><span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">rho_br</span> <span class="o">*</span> <span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">c_br</span><span class="p">)</span>
+        <span class="n">beta</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">rho_br</span>
+            <span class="o">*</span> <span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">c_br</span>
+            <span class="o">/</span> <span class="p">(</span><span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">rho_i</span> <span class="o">*</span> <span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">c_i</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">s_fi</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">lamb</span><span class="p">:</span> <span class="n">gamma</span> <span class="o">*</span> <span class="n">s_0</span> <span class="o">*</span> <span class="n">f_x</span><span class="p">(</span><span class="n">lamb</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">f_x</span><span class="p">(</span><span class="n">lamb</span><span class="p">))</span>  <span class="c1"># noqa: E731</span>
+        <span class="n">root_fx_lhs</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">lamb</span><span class="p">:</span> <span class="n">s_fi</span><span class="p">(</span><span class="n">lamb</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span>  <span class="c1"># noqa: E731</span>
+            <span class="n">beta</span> <span class="o">/</span> <span class="n">f_x</span><span class="p">(</span><span class="n">eps</span><span class="p">(</span><span class="n">kappa_br</span><span class="p">)</span> <span class="o">*</span> <span class="n">lamb</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">g_x</span><span class="p">(</span><span class="n">eps</span><span class="p">(</span><span class="n">kappa_i</span><span class="p">)</span> <span class="o">*</span> <span class="n">lamb</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">root_fx_rhs</span> <span class="o">=</span> <span class="p">(</span>  <span class="c1"># noqa: E731</span>
+            <span class="k">lambda</span> <span class="n">lamb</span><span class="p">:</span> <span class="n">temperature_diff</span> <span class="o">/</span> <span class="n">g_x</span><span class="p">(</span><span class="n">eps</span><span class="p">(</span><span class="n">kappa_i</span><span class="p">)</span> <span class="o">*</span> <span class="n">lamb</span><span class="p">)</span>
+            <span class="o">-</span> <span class="n">beta</span> <span class="o">*</span> <span class="n">t_0</span> <span class="o">/</span> <span class="n">f_x</span><span class="p">(</span><span class="n">eps</span><span class="p">(</span><span class="n">kappa_br</span><span class="p">)</span> <span class="o">*</span> <span class="n">lamb</span><span class="p">)</span>
+            <span class="o">-</span> <span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">L</span> <span class="o">/</span> <span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">c_i</span>
+        <span class="p">)</span>
+        <span class="n">root_fx</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">lamb</span><span class="p">:</span> <span class="n">root_fx_lhs</span><span class="p">(</span><span class="n">lamb</span><span class="p">)</span> <span class="o">-</span> <span class="n">root_fx_rhs</span><span class="p">(</span><span class="n">lamb</span><span class="p">)</span>  <span class="c1"># noqa: E731</span>
+        <span class="n">lambda_stefan</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">newton</span><span class="p">(</span><span class="n">root_fx</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">maxiter</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">lambda_stefan</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">D_s</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span></div>
+</div>
+
+
+
+<span class="c1"># def _plot_stefan_temp_twophase(z_depth=0.5):</span>
+<span class="c1">#     dt = ui.grid_timestep_dt</span>
+<span class="c1">#     t_passed = 0</span>
+<span class="c1">#     temperature_array = []</span>
+<span class="c1">#     salinity_arr = []</span>
+<span class="c1">#     t_pass_arr = []</span>
+<span class="c1">#     depth_stefan_arr = []</span>
+<span class="c1">#     Z = 1</span>
+<span class="c1">#     nc = int(Z / ui.grid_resolution_dz)</span>
+<span class="c1">#     nz = int(nc + 1)</span>
+<span class="c1">#     for t in range(ui.max_iterations):</span>
+<span class="c1">#         t_passed += dt</span>
+<span class="c1">#         depth_stefan = StefanProblem.stefan_problem_twophase(t_passed)</span>
+<span class="c1">#         T, C = StefanProblem.stefan_temperature_twophase(depth_stefan, t, ui.grid_resolution_dz, nz)</span>
+<span class="c1">#         depth_stefan_arr.append(depth_stefan)</span>
+<span class="c1">#         temperature_array.append(T)</span>
+<span class="c1">#         salinity_arr.append(C)</span>
+<span class="c1">#         t_pass_arr.append(t_passed)</span>
+<span class="c1">#     z = int(z_depth * nz)</span>
+<span class="c1">#     temperature_array = np.array(temperature_array)</span>
+<span class="c1">#     T_z = temperature_array[:, z]</span>
+<span class="c1">#     plt.grid()</span>
+<span class="c1">#     plt.plot(np.array(t_pass_arr) / 3600, T_z, label=&quot;Temperature&quot;)</span>
+<span class="c1">#     plt.xlabel(&quot;Time in h&quot;)</span>
+<span class="c1">#     plt.ylabel(&quot;Temperature&quot;)</span>
+<span class="c1">#     plt.show()</span>
+<span class="c1">#     return temperature_array, salinity_arr</span>
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Sneha Iyer.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1284 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" data-theme="auto">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>src.spyice.update_physical_values &#8212; SpyIce  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "auto";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "auto";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=b6ad3417" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/src/spyice/update_physical_values';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.0.0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="auto">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">SpyIce  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../report/_index.html">
+    About
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../quick_start/_index.html">
+    How-to
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api/_index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../report/_index.html">
+    About
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../quick_start/_index.html">
+    How-to
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api/_index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">src.spyice.update_physical_values</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for src.spyice.update_physical_values</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">bisect</span><span class="p">,</span> <span class="n">newton</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
+
+<span class="kn">from</span> <span class="nn">src.spyice.parameters.user_input</span> <span class="kn">import</span> <span class="n">UserInput</span>
+<span class="kn">from</span> <span class="nn">src.spyice.models.advection_diffusion</span> <span class="kn">import</span> <span class="n">AdvectionDiffusion</span>
+
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">preprocess.pre_process</span> <span class="kn">import</span> <span class="n">PreprocessData</span>
+
+<span class="n">_ui</span> <span class="o">=</span> <span class="n">UserInput</span><span class="p">()</span>
+<span class="n">_temperature_melt</span><span class="p">,</span> <span class="n">_boundary_top_temperature</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">_ui</span><span class="o">.</span><span class="n">temperature_melt</span><span class="p">,</span>
+    <span class="n">_ui</span><span class="o">.</span><span class="n">boundary_top_temperature</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">_specific_heat_ice</span><span class="p">,</span> <span class="n">_specific_heat_brine</span><span class="p">,</span> <span class="n">_latent_heat_water</span> <span class="o">=</span> <span class="n">_ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">c_i</span><span class="p">,</span> <span class="n">_ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">c_br</span> <span class="p">,</span><span class="n">_ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">L</span>
+<span class="n">_rho_ice</span><span class="p">,</span> <span class="n">_rho_brine</span> <span class="o">=</span> <span class="n">_ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">rho_i</span><span class="p">,</span> <span class="n">_ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">rho_br</span>
+
+<div class="viewcode-block" id="calculate_melting_temperature_from_salinity">
+<a class="viewcode-back" href="../../../api/spyice.update_physical_values.html#src.spyice.update_physical_values.calculate_melting_temperature_from_salinity">[docs]</a>
+<span class="k">def</span> <span class="nf">calculate_melting_temperature_from_salinity</span><span class="p">(</span>
+    <span class="n">_salinity</span><span class="p">,</span> <span class="n">_temperature_melt</span><span class="o">=</span><span class="n">_temperature_melt</span><span class="p">,</span> <span class="n">_liquid_relation</span><span class="o">=</span><span class="s2">&quot;Frezchem&quot;</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates the melting temperature of seawater based on salinity.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        _salinity (numpy.ndarray): Array of salinity values.</span>
+<span class="sd">        _temperature_melt (float, optional): Melting temperature. Defaults to _temperature_melt.</span>
+<span class="sd">        _liquid_relation (str, optional): Liquid relation type. Must be either &quot;Normal&quot; or &quot;Frezchem&quot;. Defaults to &quot;Normal&quot;.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        numpy.ndarray: Array of melting temperature values.</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If _liquid_relation is not &quot;Normal&quot; or &quot;Frezchem&quot;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">_liquid_relation</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Normal&quot;</span><span class="p">,</span> <span class="s2">&quot;Frezchem&quot;</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Liquid relation not available&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">_liquid_relation</span> <span class="o">==</span> <span class="s2">&quot;Normal&quot;</span><span class="p">:</span>
+        <span class="n">_melting_temperature_seawater</span> <span class="o">=</span> <span class="n">_temperature_melt</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">_salinity</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">_liquid_relation</span> <span class="o">==</span> <span class="s2">&quot;Frezchem&quot;</span><span class="p">:</span>
+        <span class="c1"># _melting_temperature_seawater = _temperature_melt + (</span>
+        <span class="c1">#     -(9.1969758 * (1e-05) * _salinity**2) - 0.03942059 * _salinity</span>
+        <span class="c1"># )</span>
+        <span class="n">_melting_temperature_seawater</span> <span class="o">=</span> <span class="mf">272.63617665</span> <span class="o">+</span> <span class="p">(</span>
+            <span class="o">-</span><span class="p">(</span><span class="mf">9.1969758</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1e-05</span><span class="p">)</span> <span class="o">*</span> <span class="n">_salinity</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.03942059</span> <span class="o">*</span> <span class="n">_salinity</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">_melting_temperature_seawater</span></div>
+
+
+
+<div class="viewcode-block" id="update_liquid_fraction_buffo">
+<a class="viewcode-back" href="../../../api/spyice.update_physical_values.html#src.spyice.update_physical_values.update_liquid_fraction_buffo">[docs]</a>
+<span class="k">def</span> <span class="nf">update_liquid_fraction_buffo</span><span class="p">(</span>
+    <span class="n">_temperature</span><span class="p">,</span>
+    <span class="n">_salinity</span><span class="p">,</span>
+    <span class="n">_liquid_fraction</span><span class="p">,</span>
+    <span class="n">_enthalpy</span><span class="p">,</span>
+    <span class="n">_enthalpy_solid</span><span class="p">,</span>
+    <span class="n">_nz</span><span class="p">,</span>
+    <span class="n">_is_stefan</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">_method</span><span class="o">=</span><span class="s2">&quot;likebuffo&quot;</span><span class="p">,</span>
+    <span class="n">_pt2_system</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Updates the liquid fraction based on temperature, salinity, enthalpy, and other parameters.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        _temperature (float): The temperature value.</span>
+<span class="sd">        _salinity (float): The salinity value.</span>
+<span class="sd">        _liquid_fraction (float): The liquid fraction value.</span>
+<span class="sd">        _enthalpy (float): The enthalpy value.</span>
+<span class="sd">        _enthalpy_solid (float): The solid enthalpy value.</span>
+<span class="sd">        _nz (int): The number of vertical grid points.</span>
+<span class="sd">        _is_stefan (bool, optional): Whether to use Stefan condition. Defaults to False.</span>
+<span class="sd">        _method (str, optional): The method to use. Defaults to &quot;likebuffo&quot;.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: A tuple containing the updated liquid fraction values.</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        AssertionError: If the liquid fraction has a non-physical value.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">_nz</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">_alpha</span> <span class="o">=</span> <span class="mf">1.853</span> <span class="o">/</span> <span class="mf">28.0</span>
+    <span class="n">_phi_km1</span> <span class="o">=</span> <span class="n">_liquid_fraction</span>
+
+    <span class="k">if</span> <span class="n">_pt2_system</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="n">_temperature_difference</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">_temperature</span> <span class="o">-</span> <span class="n">calculate_melting_temperature_from_salinity</span><span class="p">(</span><span class="n">_salinity</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">_enthalpy</span> <span class="o">=</span> <span class="n">_specific_heat_ice</span> <span class="o">*</span> <span class="n">_temperature</span> <span class="o">+</span> <span class="n">_latent_heat_water</span> <span class="o">*</span> <span class="n">_phi_km1</span>
+        <span class="n">_enthalpy_solid</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">_specific_heat_ice</span> <span class="o">*</span> <span class="n">calculate_melting_temperature_from_salinity</span><span class="p">(</span><span class="n">_salinity</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">_enthalpy_difference</span> <span class="o">=</span> <span class="n">_enthalpy</span> <span class="o">-</span> <span class="n">_enthalpy_solid</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">_enthalpy_difference</span> <span class="o">=</span> <span class="n">_enthalpy</span> <span class="o">-</span> <span class="n">_enthalpy_solid</span>
+
+    <span class="k">if</span> <span class="n">_is_stefan</span><span class="p">:</span>
+        <span class="n">_phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+            <span class="n">_enthalpy</span> <span class="o">&lt;=</span> <span class="n">_enthalpy_solid</span><span class="p">,</span>
+            <span class="mi">0</span><span class="p">,</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+                <span class="n">_enthalpy</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">_enthalpy_solid</span> <span class="o">+</span> <span class="n">_latent_heat_water</span><span class="p">),</span>
+                <span class="mi">1</span><span class="p">,</span>
+                <span class="n">_enthalpy_difference</span> <span class="o">/</span> <span class="n">_latent_heat_water</span><span class="p">,</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">_phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+            <span class="n">_enthalpy</span> <span class="o">&lt;=</span> <span class="n">_enthalpy_solid</span><span class="p">,</span>
+            <span class="mi">0</span><span class="p">,</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+                <span class="n">_enthalpy</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">_enthalpy_solid</span> <span class="o">+</span> <span class="n">_latent_heat_water</span><span class="p">),</span>
+                <span class="mi">1</span><span class="p">,</span>
+                <span class="n">_enthalpy_difference</span> <span class="o">/</span> <span class="n">_latent_heat_water</span><span class="p">,</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+        <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">_phi</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">_phi</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="p">),</span> <span class="s2">&quot;liquid fraction has non-physical value&quot;</span>
+
+    <span class="k">return</span> <span class="n">_phi</span> <span class="o">*</span> <span class="n">phi_control_for_infinite_values</span><span class="p">(</span><span class="n">_phi</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="update_liquid_fraction_voller_under_relaxation">
+<a class="viewcode-back" href="../../../api/spyice.update_physical_values.html#src.spyice.update_physical_values.update_liquid_fraction_voller_under_relaxation">[docs]</a>
+<span class="k">def</span> <span class="nf">update_liquid_fraction_voller_under_relaxation</span><span class="p">(</span>
+    <span class="n">_temperature</span><span class="p">,</span>
+    <span class="n">_salinity</span><span class="p">,</span>
+    <span class="n">_temperature_initial</span><span class="p">,</span>
+    <span class="n">_liquid_fraction_previous</span><span class="p">,</span>
+    <span class="n">_temperature_previous</span><span class="p">,</span>
+    <span class="n">_salinity_previous</span><span class="p">,</span>
+    <span class="n">_nz</span><span class="p">,</span>
+    <span class="n">temp_factor_3</span><span class="p">,</span>
+    <span class="n">t_k_A_LHS_matrix</span><span class="p">,</span>
+    <span class="n">t_k_A_LHS_matrix_previous</span><span class="p">,</span>
+    <span class="n">under_relaxation_factor</span><span class="p">,</span>
+    <span class="n">_is_stefan</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">_pt2_system</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">_nonconstant_physical_properties</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Update the liquid fraction using the Voller under-relaxation method.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        - _temperature (float): The temperature value.</span>
+<span class="sd">        - _salinity (float): The salinity value.</span>
+<span class="sd">        - _liquid_fraction (float): The liquid fraction value.</span>
+<span class="sd">        - _nz (int): The number of vertical grid points.</span>
+<span class="sd">        - temp_factor_3 (float): The temperature factor.</span>
+<span class="sd">        - under_relaxation_factor (float): The under-relaxation factor.</span>
+<span class="sd">        - _is_stefan (bool, optional): Whether to use Stefan condition. Defaults to False.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        - numpy.ndarray: The updated liquid fraction values.</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        - AssertionError: If the liquid fraction has a non-physical value</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">_nz</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">_pt2_system</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="n">_phi_km1</span> <span class="o">=</span> <span class="n">_liquid_fraction_previous</span>
+        <span class="n">_temperature_difference</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">_temperature</span> <span class="o">-</span> <span class="n">calculate_melting_temperature_from_salinity</span><span class="p">(</span><span class="n">_salinity</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">_temperature_difference_previous</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">_temperature_initial</span>
+            <span class="o">-</span> <span class="n">calculate_melting_temperature_from_salinity</span><span class="p">(</span><span class="n">_salinity_previous</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">_enthalpy</span> <span class="o">=</span> <span class="n">_specific_heat_ice</span> <span class="o">*</span> <span class="n">_temperature</span> <span class="o">+</span> <span class="n">_latent_heat_water</span> <span class="o">*</span> <span class="n">_phi_km1</span>
+        <span class="n">_enthalpy_solid</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">_specific_heat_ice</span> <span class="o">*</span> <span class="n">calculate_melting_temperature_from_salinity</span><span class="p">(</span><span class="n">_salinity</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">_enthalpy_difference</span> <span class="o">=</span> <span class="n">_enthalpy</span> <span class="o">-</span> <span class="n">_enthalpy_solid</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">_phi_km1</span> <span class="o">=</span> <span class="n">_liquid_fraction_previous</span>
+        <span class="n">_temperature_difference</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">_temperature_previous</span>
+            <span class="o">-</span> <span class="n">calculate_melting_temperature_from_salinity</span><span class="p">(</span><span class="n">_salinity_previous</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">_enthalpy</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">_specific_heat_ice</span> <span class="o">*</span> <span class="n">_temperature_previous</span> <span class="o">+</span> <span class="n">_latent_heat_water</span> <span class="o">*</span> <span class="n">_phi_km1</span>
+        <span class="p">)</span>
+        <span class="n">_enthalpy_solid</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">_specific_heat_ice</span>
+            <span class="o">*</span> <span class="n">calculate_melting_temperature_from_salinity</span><span class="p">(</span><span class="n">_salinity_previous</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">_enthalpy_difference</span> <span class="o">=</span> <span class="n">_enthalpy</span> <span class="o">-</span> <span class="n">_enthalpy_solid</span>
+
+    <span class="n">a_w_temperature</span><span class="p">,</span> <span class="n">a_p_temperature</span><span class="p">,</span> <span class="n">a_e_temperature</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">t_k_A_LHS_matrix</span><span class="o">.</span><span class="n">diagonal</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span>
+        <span class="n">t_k_A_LHS_matrix</span><span class="o">.</span><span class="n">diagonal</span><span class="p">(),</span>
+        <span class="n">t_k_A_LHS_matrix</span><span class="o">.</span><span class="n">diagonal</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">_is_stefan</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">_nonconstant_physical_properties</span><span class="p">:</span>
+        <span class="n">_phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+            <span class="n">_enthalpy</span> <span class="o">&lt;=</span> <span class="n">_enthalpy_solid</span><span class="p">,</span>
+            <span class="mi">0</span><span class="p">,</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+                <span class="n">_enthalpy</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">_enthalpy_solid</span> <span class="o">+</span> <span class="n">_latent_heat_water</span><span class="p">),</span>
+                <span class="mi">1</span><span class="p">,</span>
+                <span class="n">_phi_km1</span>
+                <span class="o">+</span> <span class="n">under_relaxation_factor</span> <span class="o">*</span> <span class="n">_temperature_difference</span> <span class="o">/</span> <span class="n">temp_factor_3</span><span class="p">,</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">_is_stefan</span> <span class="ow">and</span> <span class="n">_nonconstant_physical_properties</span><span class="p">:</span>
+        <span class="n">phi_difference</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">_temperature_difference_previous</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">a_p_temperature</span><span class="p">)</span> <span class="o">/</span> <span class="n">temp_factor_3</span>
+        <span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">t_k_A_LHS_matrix</span> <span class="o">@</span> <span class="p">(</span><span class="n">_temperature_difference</span> <span class="o">/</span> <span class="n">temp_factor_3</span><span class="p">))</span>
+        <span class="n">_phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+            <span class="n">_enthalpy</span> <span class="o">&lt;=</span> <span class="n">_enthalpy_solid</span><span class="p">,</span>
+            <span class="mi">0</span><span class="p">,</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+                <span class="n">_enthalpy</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">_enthalpy_solid</span> <span class="o">+</span> <span class="n">_latent_heat_water</span><span class="p">),</span>
+                <span class="mi">1</span><span class="p">,</span>
+                <span class="n">_phi_km1</span> <span class="o">+</span> <span class="n">phi_difference</span><span class="p">,</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">_phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+            <span class="n">_enthalpy</span> <span class="o">&lt;=</span> <span class="n">_enthalpy_solid</span><span class="p">,</span>
+            <span class="mi">0</span><span class="p">,</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+                <span class="n">_enthalpy</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">_enthalpy_solid</span> <span class="o">+</span> <span class="n">_latent_heat_water</span><span class="p">),</span>
+                <span class="mi">1</span><span class="p">,</span>
+                <span class="n">_phi_km1</span>
+                <span class="o">+</span> <span class="n">under_relaxation_factor</span> <span class="o">*</span> <span class="n">_temperature_difference</span> <span class="o">/</span> <span class="n">temp_factor_3</span><span class="p">,</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+        <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">_phi</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">_phi</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="p">),</span> <span class="s2">&quot;liquid fraction has non-physical value&quot;</span>
+
+    <span class="k">return</span> <span class="n">_phi</span> <span class="o">*</span> <span class="n">phi_control_for_infinite_values</span><span class="p">(</span><span class="n">_phi</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="update_liquid_fraction_mixture_with_under_relaxation">
+<a class="viewcode-back" href="../../../api/spyice.update_physical_values.html#src.spyice.update_physical_values.update_liquid_fraction_mixture_with_under_relaxation">[docs]</a>
+<span class="k">def</span> <span class="nf">update_liquid_fraction_mixture_with_under_relaxation</span><span class="p">(</span>
+    <span class="n">_temperature</span><span class="p">,</span>
+    <span class="n">_salinity</span><span class="p">,</span>
+    <span class="n">_liquid_fraction_previous</span><span class="p">,</span>
+    <span class="n">under_relaxation_factor</span><span class="p">,</span>
+    <span class="n">_is_stefan</span><span class="o">=</span><span class="kc">False</span><span class="p">,)</span> <span class="p">:</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Update the liquid fraction mixture using under-relaxation.</span>
+<span class="sd">    Parameters:</span>
+<span class="sd">        _temperature (float): The current temperature.</span>
+<span class="sd">        _salinity (float): The salinity of the mixture.</span>
+<span class="sd">        _liquid_fraction_previous (float): The previous liquid fraction.</span>
+<span class="sd">        under_relaxation_factor (float): The under-relaxation factor to be applied.</span>
+<span class="sd">        _is_stefan (bool, optional): Flag to indicate if the Stefan condition should be applied. Defaults to False.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        float: The updated liquid fraction mixture.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_temperature_liquidus</span> <span class="p">,</span> <span class="n">_temperature_solidus</span> <span class="o">=</span> <span class="n">calculate_liquidus_temperature</span><span class="p">(</span><span class="n">_salinity</span><span class="p">)</span>
+    <span class="n">_phi_km1</span> <span class="o">=</span> <span class="n">_liquid_fraction_previous</span>
+    <span class="n">_temperature_effective</span> <span class="o">=</span> <span class="p">(</span><span class="n">_temperature_liquidus</span> <span class="o">-</span> <span class="n">_temperature_solidus</span><span class="p">)</span><span class="o">*</span> <span class="n">_phi_km1</span><span class="o">*</span><span class="n">_rho_brine</span><span class="o">/</span><span class="n">_rho_ice</span> <span class="o">+</span> <span class="n">_temperature_solidus</span>
+    <span class="n">_temperature_difference</span> <span class="o">=</span> <span class="n">_temperature</span> <span class="o">-</span> <span class="n">_temperature_effective</span>
+    <span class="n">_specific_heat_effective</span> <span class="o">=</span> <span class="n">_specific_heat_ice</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">_phi_km1</span><span class="p">)</span> <span class="o">+</span> <span class="n">_specific_heat_brine</span> <span class="o">*</span> <span class="n">_phi_km1</span>    <span class="c1"># TODO: if not this use averaged specific heat capacities </span>
+    <span class="n">_specific_heat_effective</span> <span class="o">=</span> <span class="p">(</span><span class="n">_specific_heat_ice</span> <span class="o">+</span> <span class="n">_specific_heat_brine</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">_salinity</span><span class="p">))</span>
+    <span class="n">_specific_heat_effective_by_L</span> <span class="o">=</span> <span class="n">_specific_heat_effective</span> <span class="o">/</span> <span class="n">_latent_heat_water</span>
+
+    <span class="n">_enthalpy</span> <span class="o">=</span> <span class="n">_specific_heat_ice</span> <span class="o">*</span> <span class="n">_temperature</span> <span class="o">+</span> <span class="n">_latent_heat_water</span> <span class="o">*</span> <span class="n">_phi_km1</span>
+    <span class="n">_enthalpy_solid</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">_specific_heat_ice</span> <span class="o">*</span> <span class="n">calculate_melting_temperature_from_salinity</span><span class="p">(</span><span class="n">_salinity</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">_is_stefan</span><span class="p">:</span>
+        <span class="n">_phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+            <span class="n">_enthalpy</span> <span class="o">&lt;=</span> <span class="n">_enthalpy_solid</span><span class="p">,</span>
+            <span class="mi">0</span><span class="p">,</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+                <span class="n">_enthalpy</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">_enthalpy_solid</span> <span class="o">+</span> <span class="n">_latent_heat_water</span><span class="p">),</span>
+                <span class="mi">1</span><span class="p">,</span>
+                <span class="n">_phi_km1</span>
+                <span class="o">+</span> <span class="n">under_relaxation_factor</span> <span class="o">*</span> <span class="n">_temperature_difference</span> <span class="o">*</span> <span class="n">_specific_heat_effective_by_L</span><span class="p">,</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">_phi</span> <span class="o">*</span> <span class="n">phi_control_for_infinite_values</span><span class="p">(</span><span class="n">_phi</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="update_liquid_fraction_mixture_with_enthalpy_equation">
+<a class="viewcode-back" href="../../../api/spyice.update_physical_values.html#src.spyice.update_physical_values.update_liquid_fraction_mixture_with_enthalpy_equation">[docs]</a>
+<span class="k">def</span> <span class="nf">update_liquid_fraction_mixture_with_enthalpy_equation</span><span class="p">(</span>
+    <span class="n">_temperature</span><span class="p">,</span>
+    <span class="n">_salinity</span><span class="p">,</span>
+    <span class="n">_liquid_fraction_previous</span><span class="p">,</span>
+    <span class="n">under_relaxation_factor</span><span class="p">,</span>
+    <span class="n">_is_stefan</span><span class="o">=</span><span class="kc">False</span><span class="p">,)</span> <span class="p">:</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Update the liquid fraction mixture using under-relaxation.</span>
+<span class="sd">    Parameters:</span>
+<span class="sd">        _temperature (float): The current temperature.</span>
+<span class="sd">        _salinity (float): The salinity of the mixture.</span>
+<span class="sd">        _liquid_fraction_previous (float): The previous liquid fraction.</span>
+<span class="sd">        under_relaxation_factor (float): The under-relaxation factor to be applied.</span>
+<span class="sd">        _is_stefan (bool, optional): Flag to indicate if the Stefan condition should be applied. Defaults to False.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        float: The updated liquid fraction mixture.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_temperature_liquidus</span> <span class="p">,</span> <span class="n">_temperature_solidus</span> <span class="o">=</span> <span class="n">calculate_liquidus_temperature</span><span class="p">(</span><span class="n">_salinity</span><span class="p">)</span>
+    <span class="n">_phi_km1</span> <span class="o">=</span> <span class="n">_liquid_fraction_previous</span>
+    <span class="n">_alpha</span> <span class="o">=</span> <span class="n">_rho_brine</span><span class="o">*</span><span class="n">_specific_heat_brine</span><span class="o">/</span><span class="p">(</span><span class="n">_rho_ice</span><span class="o">*</span><span class="n">_specific_heat_ice</span><span class="p">)</span>
+    <span class="n">_coef</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">_alpha</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">_temperature_difference</span> <span class="o">=</span> <span class="n">_temperature_liquidus</span> <span class="o">-</span> <span class="n">_temperature_solidus</span>
+    <span class="n">_temperature_numerator</span> <span class="o">=</span> <span class="n">_temperature</span> <span class="o">-</span> <span class="n">_temperature_difference</span>
+    <span class="n">_temperature_denominator</span> <span class="o">=</span> <span class="n">_temperature</span> <span class="o">-</span> <span class="n">_coef</span> <span class="o">*</span> <span class="n">_temperature_difference</span>
+    <span class="n">_enthalpy</span> <span class="o">=</span> <span class="n">_specific_heat_ice</span> <span class="o">*</span> <span class="n">_temperature</span> <span class="o">+</span> <span class="n">_latent_heat_water</span> <span class="o">*</span> <span class="n">_phi_km1</span>
+    <span class="n">_enthalpy_solid</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">_specific_heat_ice</span> <span class="o">*</span> <span class="n">calculate_melting_temperature_from_salinity</span><span class="p">(</span><span class="n">_salinity</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">_is_stefan</span><span class="p">:</span>
+        <span class="n">_phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+            <span class="n">_enthalpy</span> <span class="o">&lt;=</span> <span class="n">_enthalpy_solid</span><span class="p">,</span>
+            <span class="mi">0</span><span class="p">,</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+                <span class="n">_enthalpy</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">_enthalpy_solid</span> <span class="o">+</span> <span class="n">_latent_heat_water</span><span class="p">),</span>
+                <span class="mi">1</span><span class="p">,</span>
+                <span class="n">_phi_km1</span>
+                <span class="o">+</span> <span class="n">_phi_km1</span> <span class="o">*</span> <span class="n">_temperature_numerator</span> <span class="o">/</span> <span class="n">_temperature_denominator</span><span class="p">,</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">_phi</span> <span class="o">*</span> <span class="n">phi_control_for_infinite_values</span><span class="p">(</span><span class="n">_phi</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="calculate_liquidus_temperature">
+<a class="viewcode-back" href="../../../api/spyice.update_physical_values.html#src.spyice.update_physical_values.calculate_liquidus_temperature">[docs]</a>
+<span class="k">def</span> <span class="nf">calculate_liquidus_temperature</span><span class="p">(</span><span class="n">_salinity</span><span class="p">):</span>
+    <span class="n">S_br</span> <span class="o">=</span> <span class="mf">233.0</span>  <span class="c1"># brine salinity in ppt</span>
+    <span class="n">T_m</span> <span class="o">=</span> <span class="mf">273.15</span> <span class="c1"># melt temperature as solidus temperature</span>
+    <span class="n">T_s</span> <span class="o">=</span> <span class="mf">252.05</span> <span class="c1"># eutectic temperature for Sbr = 233ppt </span>
+    <span class="n">T_l</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">S</span><span class="p">:</span> <span class="p">(</span><span class="n">T_m</span> <span class="o">+</span> <span class="p">(</span><span class="n">T_s</span> <span class="o">-</span> <span class="n">T_m</span><span class="p">)</span><span class="o">/</span><span class="n">S_br</span><span class="o">*</span><span class="n">S</span><span class="p">)</span>  <span class="c1"># liquidus temperature at salinity S  # noqa: E731</span>
+    <span class="n">T_l_S</span> <span class="o">=</span> <span class="n">T_l</span><span class="p">(</span><span class="n">_salinity</span><span class="p">)</span>  <span class="c1"># liquidus temperature at salinity S</span>
+
+    <span class="k">return</span> <span class="n">T_l_S</span><span class="p">,</span> <span class="n">T_s</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">_salinity</span><span class="p">))</span></div>
+
+
+
+<div class="viewcode-block" id="update_liquid_fraction_voller_continuous_thermal_properties">
+<a class="viewcode-back" href="../../../api/spyice.update_physical_values.html#src.spyice.update_physical_values.update_liquid_fraction_voller_continuous_thermal_properties">[docs]</a>
+<span class="k">def</span> <span class="nf">update_liquid_fraction_voller_continuous_thermal_properties</span><span class="p">(</span>
+    <span class="n">_temperature</span><span class="p">,</span>
+    <span class="n">_salinity</span><span class="p">,</span>
+    <span class="n">_phi</span><span class="p">,</span>
+    <span class="n">_enthalpy</span><span class="p">,</span>
+    <span class="n">_enthalpy_solid</span><span class="p">,</span>
+    <span class="n">a_p_temperature</span><span class="p">,</span>
+    <span class="n">temp_factor_3</span><span class="p">,</span>
+    <span class="n">_is_stefan</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">_method</span><span class="o">=</span><span class="s2">&quot;likebuffo&quot;</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Updates the liquid fraction based on temperature, salinity, enthalpy, and other parameters.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        _temperature (float): The temperature value.</span>
+<span class="sd">        _salinity (float): The salinity value.</span>
+<span class="sd">        _liquid_fraction (float): The liquid fraction value.</span>
+<span class="sd">        _enthalpy (float): The enthalpy value.</span>
+<span class="sd">        _enthalpy_solid (float): The solid enthalpy value.</span>
+<span class="sd">        _nz (int): The number of vertical grid points.</span>
+<span class="sd">        _is_stefan (bool, optional): Whether to use Stefan condition. Defaults to False.</span>
+<span class="sd">        _method (str, optional): The method to use. Defaults to &quot;likebuffo&quot;.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: A tuple containing the updated liquid fraction values.</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        AssertionError: If the liquid fraction has a non-physical value.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_alpha</span> <span class="o">=</span> <span class="mf">1.853</span> <span class="o">/</span> <span class="mf">28.0</span>
+
+    <span class="n">_temperature_difference</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">_temperature</span> <span class="o">-</span> <span class="n">calculate_melting_temperature_from_salinity</span><span class="p">(</span><span class="n">_salinity</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">_is_stefan</span><span class="p">:</span>
+        <span class="n">_phi_kp1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+            <span class="n">_enthalpy</span> <span class="o">&lt;=</span> <span class="n">_enthalpy_solid</span><span class="p">,</span>
+            <span class="mi">0</span><span class="p">,</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+                <span class="n">_enthalpy</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">_enthalpy_solid</span> <span class="o">+</span> <span class="n">_latent_heat_water</span><span class="p">),</span>
+                <span class="mi">1</span><span class="p">,</span>
+                <span class="n">_phi</span> <span class="o">+</span> <span class="n">a_p_temperature</span> <span class="o">*</span> <span class="n">_temperature_difference</span> <span class="o">/</span> <span class="p">(</span><span class="n">temp_factor_3</span><span class="p">),</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">_phi_kp1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+            <span class="n">_enthalpy</span> <span class="o">&lt;=</span> <span class="n">_enthalpy_solid</span><span class="p">,</span>
+            <span class="mi">0</span><span class="p">,</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+                <span class="n">_enthalpy</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">_enthalpy_solid</span> <span class="o">+</span> <span class="n">_latent_heat_water</span><span class="p">),</span>
+                <span class="mi">1</span><span class="p">,</span>
+                <span class="n">_phi</span> <span class="o">+</span> <span class="n">a_p_temperature</span> <span class="o">*</span> <span class="n">_temperature_difference</span> <span class="o">/</span> <span class="p">(</span><span class="n">temp_factor_3</span><span class="p">),</span>
+            <span class="p">),</span>
+        <span class="p">)</span>
+        <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">_phi_kp1</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">_phi_kp1</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="p">),</span> <span class="s2">&quot;liquid fraction has non-physical value&quot;</span>
+
+    <span class="k">return</span> <span class="n">_phi_kp1</span> <span class="o">*</span> <span class="n">phi_control_for_infinite_values</span><span class="p">(</span><span class="n">_phi_kp1</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="update_enthalpy_solid_state">
+<a class="viewcode-back" href="../../../api/spyice.update_physical_values.html#src.spyice.update_physical_values.update_enthalpy_solid_state">[docs]</a>
+<span class="k">def</span> <span class="nf">update_enthalpy_solid_state</span><span class="p">(</span>
+    <span class="n">_salinity</span><span class="p">,</span> <span class="n">_nz</span><span class="p">,</span> <span class="n">_liq_rel</span><span class="o">=</span><span class="s2">&quot;Normal&quot;</span><span class="p">,</span> <span class="n">_temperature_melt</span><span class="o">=</span><span class="n">_temperature_melt</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Updates the enthalpy in the solid state based on the given parameters.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        _salinity (float): The salinity value.</span>
+<span class="sd">        _nz (int): The nz value.</span>
+<span class="sd">        _liq_rel (str, optional): The liquid relation. Defaults to &quot;Normal&quot;.</span>
+<span class="sd">        _temperature_melt (float, optional): The melting temperature. Defaults to _temperature_melt.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        float: The updated enthalpy in the solid state.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_temperature_fromsalinity</span> <span class="o">=</span> <span class="n">calculate_melting_temperature_from_salinity</span><span class="p">(</span>
+        <span class="n">_salinity</span><span class="p">,</span> <span class="n">_liquid_relation</span><span class="o">=</span><span class="n">_liq_rel</span><span class="p">,</span> <span class="n">_temperature_melt</span><span class="o">=</span><span class="n">_temperature_melt</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">_specific_heat_ice</span> <span class="o">*</span> <span class="n">_temperature_fromsalinity</span></div>
+
+
+
+<div class="viewcode-block" id="update_enthalpy">
+<a class="viewcode-back" href="../../../api/spyice.update_physical_values.html#src.spyice.update_physical_values.update_enthalpy">[docs]</a>
+<span class="k">def</span> <span class="nf">update_enthalpy</span><span class="p">(</span>
+    <span class="n">_temperature</span><span class="p">,</span> <span class="n">_salinity</span><span class="p">,</span> <span class="n">_liquid_fraction</span><span class="p">,</span> <span class="n">_nz</span><span class="p">,</span> <span class="n">_method</span><span class="o">=</span><span class="s2">&quot;likebuffo&quot;</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Updates the enthalpy based on the given parameters.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        _temperature (float): The temperature value.</span>
+<span class="sd">        _salinity (float): The salinity value.</span>
+<span class="sd">        _liquid_fraction (float): The liquid fraction value.</span>
+<span class="sd">        _nz (int): The nz value.</span>
+<span class="sd">        _method (str, optional): The method used for calculating enthalpy. Defaults to &quot;likebuffo&quot;.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        float: The updated enthalpy value.</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        TypeError: If the given method is not available.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">_method</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;likebuffo&quot;</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;method for enthalpy not available&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">_method</span> <span class="o">==</span> <span class="s2">&quot;likebuffo&quot;</span><span class="p">:</span>
+        <span class="n">_enthalpy</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">_latent_heat_water</span> <span class="o">*</span> <span class="n">_liquid_fraction</span> <span class="o">+</span> <span class="n">_specific_heat_ice</span> <span class="o">*</span> <span class="n">_temperature</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">_enthalpy</span></div>
+
+
+
+<div class="viewcode-block" id="update_temperature_and_salinity">
+<a class="viewcode-back" href="../../../api/spyice.update_physical_values.html#src.spyice.update_physical_values.update_temperature_and_salinity">[docs]</a>
+<span class="k">def</span> <span class="nf">update_temperature_and_salinity</span><span class="p">(</span>
+    <span class="n">preprocess_data_object</span><span class="p">:</span> <span class="n">PreprocessData</span><span class="p">,</span>
+    <span class="n">t_prev</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">s_prev</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">phi_k</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">t_initial</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">s_initial</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">phi_initial</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">source_term</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">buffo</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">stefan</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">voller</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">_is_salinity_equation</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">_nonconstant_physical_properties</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">t_k_A_LHS_matrix_prev</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Update the temperature and salinity based on the given parameters.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        preprocess_data_object (PreprocessData): The preprocess data object.</span>
+<span class="sd">        t_prev (numpy.ndarray): The previous temperature values.</span>
+<span class="sd">        s_prev (numpy.ndarray): The previous salinity values.</span>
+<span class="sd">        phi_k (numpy.ndarray): The liquid fraction values.</span>
+<span class="sd">        t_initial (numpy.ndarray): The initial temperature values.</span>
+<span class="sd">        s_initial (numpy.ndarray): The initial salinity values.</span>
+<span class="sd">        phi_initial (numpy.ndarray): The initial liquid fraction values.</span>
+<span class="sd">        source_term (numpy.ndarray): The source term values.</span>
+<span class="sd">        buffo (bool): The buffo flag.</span>
+<span class="sd">        stefan (bool): The stefan flag.</span>
+<span class="sd">        _is_salinity_equation (bool, optional): Whether to consider the salinity equation. Defaults to False.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: A tuple containing the updated temperature and salinity values.</span>
+<span class="sd">        a_p: The main diagonal of the matrix A for the Voller scheme liquid fraction update</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">advection_diffusion_temp</span> <span class="o">=</span> <span class="n">AdvectionDiffusion</span><span class="p">(</span>
+        <span class="s2">&quot;temperature&quot;</span><span class="p">,</span>
+        <span class="n">t_prev</span><span class="p">,</span>
+        <span class="n">source_term</span><span class="p">,</span>
+        <span class="n">t_initial</span><span class="p">,</span>
+        <span class="n">phi_k</span><span class="p">,</span>
+        <span class="n">phi_initial</span><span class="p">,</span>
+        <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">upwind_velocity</span><span class="p">,</span>
+        <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">grid_timestep_dt</span><span class="p">,</span>
+        <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">grid_resolution_dz</span><span class="p">,</span>
+        <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">nz</span><span class="p">,</span>
+        <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">time_passed</span><span class="p">,</span>
+        <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">initial_salinity</span><span class="p">,</span>
+        <span class="n">Stefan</span><span class="o">=</span><span class="n">stefan</span><span class="p">,</span>
+        <span class="n">Buffo</span><span class="o">=</span><span class="n">buffo</span><span class="p">,</span>
+        <span class="n">Voller</span><span class="o">=</span><span class="n">voller</span><span class="p">,</span>
+        <span class="n">bc_neumann</span><span class="o">=</span><span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">temp_grad</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">t_k</span><span class="p">,</span> <span class="n">x_wind_t</span><span class="p">,</span> <span class="n">A_before_correction</span> <span class="o">=</span> <span class="n">advection_diffusion_temp</span><span class="o">.</span><span class="n">unknowns_matrix</span><span class="p">(</span>
+        <span class="n">_temperature_melt</span><span class="p">,</span> <span class="n">_nonconstant_physical_properties</span>
+    <span class="p">)</span>
+    <span class="c1"># TODO: Add algae growth model here to salinity</span>
+    <span class="k">if</span> <span class="n">_is_salinity_equation</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">advection_diffusion_salinity</span> <span class="o">=</span> <span class="n">AdvectionDiffusion</span><span class="p">(</span>
+            <span class="s2">&quot;salinity&quot;</span><span class="p">,</span>
+            <span class="n">s_prev</span><span class="p">,</span>
+            <span class="n">source_term</span><span class="p">,</span>
+            <span class="n">s_initial</span><span class="p">,</span>
+            <span class="n">phi_k</span><span class="p">,</span>
+            <span class="n">phi_initial</span><span class="p">,</span>
+            <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">upwind_velocity</span><span class="p">,</span>
+            <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">grid_timestep_dt</span><span class="p">,</span>
+            <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">grid_resolution_dz</span><span class="p">,</span>
+            <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">nz</span><span class="p">,</span>
+            <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">time_passed</span><span class="p">,</span>
+            <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">initial_salinity</span><span class="p">,</span>
+            <span class="n">Stefan</span><span class="o">=</span><span class="n">stefan</span><span class="p">,</span>
+            <span class="n">Buffo</span><span class="o">=</span><span class="n">buffo</span><span class="p">,</span>
+            <span class="n">Voller</span><span class="o">=</span><span class="n">voller</span><span class="p">,</span>
+            <span class="n">bc_neumann</span><span class="o">=</span><span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">temp_grad</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">s_k</span><span class="p">,</span> <span class="n">x_wind_s</span><span class="p">,</span> <span class="n">S_before_correction</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">advection_diffusion_salinity</span><span class="o">.</span><span class="n">unknowns_matrix</span><span class="p">(</span>
+                <span class="n">_temperature_melt</span><span class="p">,</span> <span class="n">_nonconstant_physical_properties</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">s_k</span> <span class="o">=</span> <span class="n">s_prev</span>
+    <span class="k">return</span> <span class="n">t_k</span><span class="p">,</span> <span class="n">s_k</span><span class="p">,</span> <span class="n">A_before_correction</span><span class="p">,</span> <span class="n">advection_diffusion_temp</span><span class="o">.</span><span class="n">factor3</span></div>
+
+
+
+<div class="viewcode-block" id="update_state_variables">
+<a class="viewcode-back" href="../../../api/spyice.update_physical_values.html#src.spyice.update_physical_values.update_state_variables">[docs]</a>
+<span class="k">def</span> <span class="nf">update_state_variables</span><span class="p">(</span>
+    <span class="n">preprocess_data_object</span><span class="p">:</span> <span class="n">PreprocessData</span><span class="p">,</span>
+    <span class="n">t_prev</span><span class="p">,</span>
+    <span class="n">s_prev</span><span class="p">,</span>
+    <span class="n">phi_prev</span><span class="p">,</span>
+    <span class="n">buffo</span><span class="p">,</span>
+    <span class="n">stefan</span><span class="p">,</span>
+    <span class="n">voller</span><span class="p">,</span>
+    <span class="n">t_initial</span><span class="p">,</span>
+    <span class="n">s_initial</span><span class="p">,</span>
+    <span class="n">phi_initial</span><span class="p">,</span>
+    <span class="n">t_k_A_LHS_matrix_prev</span><span class="p">,</span>
+    <span class="n">temp_factor_3</span><span class="p">,</span>
+    <span class="n">source_term</span><span class="p">,</span>
+    <span class="n">_is_salinity_equation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Update the state variables Temperature, Salinity, Liquid Fraction, Enthalpy and Enthalpy of solid based on the given parameters.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        preprocess_data_object (PreprocessData): The preprocess data object.</span>
+<span class="sd">        t_km1 (numpy.ndarray): The previous temperature values.</span>
+<span class="sd">        s_km1 (numpy.ndarray): The previous salinity values.</span>
+<span class="sd">        phi_km1 (numpy.ndarray): The previous liquid fraction values.</span>
+<span class="sd">        buffo (bool): The buffo flag.</span>
+<span class="sd">        stefan (bool): The stefan flag.</span>
+<span class="sd">        t_initial (numpy.ndarray): The initial temperature values.</span>
+<span class="sd">        s_initial (numpy.ndarray): The initial salinity values.</span>
+<span class="sd">        phi_initial (numpy.ndarray): The initial liquid fraction values.</span>
+<span class="sd">        source_term (numpy.ndarray): The source term values.</span>
+
+<span class="sd">    Methods called:</span>
+<span class="sd">        Updates the state variables based on the given parameters.</span>
+<span class="sd">            - update_enthalpy: Update the enthalpy of the system with previous temperature, salinity, liquid fraction.</span>
+<span class="sd">            - update_enthalpy_solid_state: Update the enthalpy of the solid state with previous salinity using the liquidus relation.</span>
+<span class="sd">            - update_liquid_fraction: Update the liquid fraction of the system with previous temperature, salinity, enthalpy, solid enthalpy.</span>
+<span class="sd">            - update_temperature_and_salinity: Update the temperature and salinity of the system with updated liquid fraction and previous temperature, salinity, initial temperature, initial salinity, initial liquid fraction, source term, buffo, stefan.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: A tuple containing the following updated values:</span>
+<span class="sd">            - h_k (numpy.ndarray): The updated enthalpy values.</span>
+<span class="sd">            - h_solid (numpy.ndarray): The updated solid enthalpy values.</span>
+<span class="sd">            - phi_k (numpy.ndarray): The updated liquid fraction values.</span>
+<span class="sd">            - t_k (numpy.ndarray): The updated temperature values.</span>
+<span class="sd">            - s_k (numpy.ndarray): The updated salinity values.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">h_k</span> <span class="o">=</span> <span class="n">update_enthalpy</span><span class="p">(</span><span class="n">t_prev</span><span class="p">,</span> <span class="n">s_prev</span><span class="p">,</span> <span class="n">phi_prev</span><span class="p">,</span> <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">nz</span><span class="p">)</span>
+    <span class="n">h_solid</span> <span class="o">=</span> <span class="n">update_enthalpy_solid_state</span><span class="p">(</span>
+        <span class="n">s_prev</span><span class="p">,</span>
+        <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">nz</span><span class="p">,</span>
+        <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">liquidus_relation_type</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">voller</span><span class="p">:</span>
+        <span class="n">t_k</span><span class="p">,</span> <span class="n">s_k</span><span class="p">,</span> <span class="n">t_k_A_LHS_matrix</span><span class="p">,</span> <span class="n">temp_factor_3</span> <span class="o">=</span> <span class="n">update_temperature_and_salinity</span><span class="p">(</span>
+            <span class="n">preprocess_data_object</span><span class="p">,</span>
+            <span class="n">t_prev</span><span class="p">,</span>
+            <span class="n">s_prev</span><span class="p">,</span>
+            <span class="n">phi_prev</span><span class="p">,</span>
+            <span class="n">t_initial</span><span class="p">,</span>
+            <span class="n">s_initial</span><span class="p">,</span>
+            <span class="n">phi_initial</span><span class="p">,</span>
+            <span class="n">source_term</span><span class="p">,</span>
+            <span class="n">buffo</span><span class="p">,</span>
+            <span class="n">stefan</span><span class="p">,</span>
+            <span class="n">voller</span><span class="p">,</span>
+            <span class="n">_is_salinity_equation</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">a_p_temperature</span> <span class="o">=</span> <span class="n">t_k_A_LHS_matrix</span><span class="o">.</span><span class="n">diagonal</span><span class="p">()</span>
+        <span class="n">phi_k</span> <span class="o">=</span> <span class="n">update_liquid_fraction_voller_continuous_thermal_properties</span><span class="p">(</span>
+            <span class="n">t_k</span><span class="p">,</span>
+            <span class="n">s_k</span><span class="p">,</span>
+            <span class="n">phi_prev</span><span class="p">,</span>
+            <span class="n">a_p_temperature</span><span class="p">,</span>
+            <span class="n">temp_factor_3</span><span class="p">,</span>
+            <span class="n">_is_stefan</span><span class="o">=</span><span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">is_stefan</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">stefan</span><span class="p">:</span>
+        <span class="n">t_k</span><span class="p">,</span> <span class="n">s_k</span><span class="p">,</span> <span class="n">t_k_A_LHS_matrix</span><span class="p">,</span> <span class="n">temp_factor_3</span> <span class="o">=</span> <span class="n">update_temperature_and_salinity</span><span class="p">(</span>
+            <span class="n">preprocess_data_object</span><span class="p">,</span>
+            <span class="n">t_prev</span><span class="p">,</span>
+            <span class="n">s_prev</span><span class="p">,</span>
+            <span class="n">phi_prev</span><span class="p">,</span>
+            <span class="n">t_initial</span><span class="p">,</span>
+            <span class="n">s_initial</span><span class="p">,</span>
+            <span class="n">phi_initial</span><span class="p">,</span>
+            <span class="n">source_term</span><span class="p">,</span>
+            <span class="n">buffo</span><span class="p">,</span>
+            <span class="n">stefan</span><span class="p">,</span>
+            <span class="n">voller</span><span class="p">,</span>
+            <span class="n">_is_salinity_equation</span><span class="p">,</span>
+            <span class="n">t_k_A_LHS_matrix_prev</span><span class="o">=</span><span class="n">t_k_A_LHS_matrix_prev</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="c1"># phi_k = update_liquid_fraction_voller_under_relaxation(</span>
+        <span class="c1">#     t_k,</span>
+        <span class="c1">#     s_k,</span>
+        <span class="c1">#     t_initial,</span>
+        <span class="c1">#     phi_prev,</span>
+        <span class="c1">#     t_prev,</span>
+        <span class="c1">#     s_prev,</span>
+        <span class="c1">#     preprocess_data_object.nz,</span>
+        <span class="c1">#     temp_factor_3,</span>
+        <span class="c1">#     t_k_A_LHS_matrix,</span>
+        <span class="c1">#     t_k_A_LHS_matrix_prev,</span>
+        <span class="c1">#     1.4,</span>
+        <span class="c1">#     _is_stefan=preprocess_data_object.is_stefan,</span>
+        <span class="c1">#     _pt2_system=False,</span>
+        <span class="c1">#     _nonconstant_physical_properties=False,</span>
+        <span class="c1"># )</span>
+
+        <span class="n">phi_k</span> <span class="o">=</span> <span class="n">update_liquid_fraction_mixture_with_enthalpy_equation</span><span class="p">(</span>
+            <span class="n">t_k</span><span class="p">,</span>
+            <span class="n">s_k</span><span class="p">,</span>
+            <span class="n">phi_prev</span><span class="p">,</span>
+            <span class="mf">1.0</span><span class="p">,</span>
+            <span class="n">_is_stefan</span><span class="o">=</span><span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">is_stefan</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">buffo</span><span class="p">:</span>
+        <span class="n">phi_k</span> <span class="o">=</span> <span class="n">update_liquid_fraction_buffo</span><span class="p">(</span>
+            <span class="n">t_prev</span><span class="p">,</span>
+            <span class="n">s_prev</span><span class="p">,</span>
+            <span class="n">phi_prev</span><span class="p">,</span>
+            <span class="n">h_k</span><span class="p">,</span>
+            <span class="n">h_solid</span><span class="p">,</span>
+            <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">nz</span><span class="p">,</span>
+            <span class="n">_is_stefan</span><span class="o">=</span><span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">is_stefan</span><span class="p">,</span>
+            <span class="n">_method</span><span class="o">=</span><span class="s2">&quot;likebuffo&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">t_k</span><span class="p">,</span> <span class="n">s_k</span><span class="p">,</span> <span class="n">t_k_A_LHS_matrix</span><span class="p">,</span> <span class="n">temp_factor_3</span> <span class="o">=</span> <span class="n">update_temperature_and_salinity</span><span class="p">(</span>
+            <span class="n">preprocess_data_object</span><span class="p">,</span>
+            <span class="n">t_prev</span><span class="p">,</span>
+            <span class="n">s_prev</span><span class="p">,</span>
+            <span class="n">phi_k</span><span class="p">,</span>
+            <span class="n">t_initial</span><span class="p">,</span>
+            <span class="n">s_initial</span><span class="p">,</span>
+            <span class="n">phi_initial</span><span class="p">,</span>
+            <span class="n">source_term</span><span class="p">,</span>
+            <span class="n">buffo</span><span class="p">,</span>
+            <span class="n">stefan</span><span class="p">,</span>
+            <span class="n">voller</span><span class="p">,</span>
+            <span class="n">_is_salinity_equation</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="ne">AssertionError</span><span class="p">(</span><span class="s2">&quot;No method selected for liquid fraction update&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Voller scheme: lower, main, upper diagonal of the matrix A of Ax = b</span>
+
+    <span class="k">return</span> <span class="n">h_k</span><span class="p">,</span> <span class="n">h_solid</span><span class="p">,</span> <span class="n">phi_k</span><span class="p">,</span> <span class="n">t_k</span><span class="p">,</span> <span class="n">s_k</span><span class="p">,</span> <span class="n">t_k_A_LHS_matrix</span><span class="p">,</span> <span class="n">temp_factor_3</span></div>
+
+
+
+<div class="viewcode-block" id="phi_control_for_infinite_values">
+<a class="viewcode-back" href="../../../api/spyice.update_physical_values.html#src.spyice.update_physical_values.phi_control_for_infinite_values">[docs]</a>
+<span class="k">def</span> <span class="nf">phi_control_for_infinite_values</span><span class="p">(</span><span class="n">_phi</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates the control values for infinite phi values.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        _phi (numpy.ndarray): The input array of phi values.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        numpy.ndarray: The control values for the given phi values.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_phi_not_low</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">_phi</span> <span class="o">&gt;</span> <span class="mf">0.000001</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">_phi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
+    <span class="n">_phi_control</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">_phi</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">_phi_control</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isinf</span><span class="p">(</span><span class="n">_phi_not_low</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">_phi_control</span></div>
+
+
+
+<div class="viewcode-block" id="H_function">
+<a class="viewcode-back" href="../../../api/spyice.update_physical_values.html#src.spyice.update_physical_values.H_function">[docs]</a>
+<span class="k">def</span> <span class="nf">H_function</span><span class="p">(</span><span class="n">_self</span><span class="p">,</span> <span class="n">_temperature</span><span class="p">,</span> <span class="n">_enthalpy_s1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates the value of H function.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        _self (float): The value of self.</span>
+<span class="sd">        _temperature (float): The temperature.</span>
+<span class="sd">        _enthalpy_s1 (float): The enthalpy.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        float: The calculated value of H function.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_a</span> <span class="o">=</span> <span class="mf">0.0000059</span>
+    <span class="n">_b</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">_a</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">_temperature</span> <span class="o">*</span> <span class="n">_specific_heat_ice</span>
+        <span class="o">+</span> <span class="n">_latent_heat_water</span>
+        <span class="o">*</span> <span class="mf">0.5</span>
+        <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">_a</span> <span class="o">*</span> <span class="n">_self</span> <span class="o">-</span> <span class="p">(</span><span class="n">_enthalpy_s1</span> <span class="o">+</span> <span class="n">_latent_heat_water</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">_b</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="o">-</span> <span class="n">_self</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="H_function_derivate">
+<a class="viewcode-back" href="../../../api/spyice.update_physical_values.html#src.spyice.update_physical_values.H_function_derivate">[docs]</a>
+<span class="k">def</span> <span class="nf">H_function_derivate</span><span class="p">(</span><span class="n">_x</span><span class="p">,</span> <span class="n">_enthalpy_s1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates the derivative of the H function.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        _x (float): The value of x.</span>
+<span class="sd">        _enthalpy_s1 (float): The value of enthalpy_s1.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        float: The derivative of the H function.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_a</span> <span class="o">=</span> <span class="mf">0.0000059</span>
+    <span class="n">_b</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">_a</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">_a</span> <span class="o">*</span> <span class="n">_latent_heat_water</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">cosh</span><span class="p">(</span><span class="n">_a</span> <span class="o">*</span> <span class="n">_x</span> <span class="o">-</span> <span class="p">(</span><span class="n">_latent_heat_water</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">_enthalpy_s1</span><span class="p">)</span> <span class="o">/</span> <span class="n">_b</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="p">)</span> <span class="o">-</span> <span class="mi">1</span></div>
+
+
+
+<div class="viewcode-block" id="H_newton_iteration">
+<a class="viewcode-back" href="../../../api/spyice.update_physical_values.html#src.spyice.update_physical_values.H_newton_iteration">[docs]</a>
+<span class="k">def</span> <span class="nf">H_newton_iteration</span><span class="p">(</span><span class="n">_temperature</span><span class="p">,</span> <span class="n">_enthalpy_s1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Performs Newton iteration to find the root of the H_function.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        _temperature (float): The temperature value.</span>
+<span class="sd">        _enthalpy_s1 (float): The enthalpy value.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        float: The root of the H_function.</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_x</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">newton</span><span class="p">(</span>
+        <span class="n">H_function</span><span class="p">,</span>
+        <span class="n">x0</span><span class="o">=</span><span class="n">_x</span><span class="p">,</span>
+        <span class="n">fprime</span><span class="o">=</span><span class="n">H_function_derivate</span><span class="p">,</span>
+        <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">_temperature</span><span class="p">,</span> <span class="n">_enthalpy_s1</span><span class="p">),</span>
+        <span class="n">maxiter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="phi_func">
+<a class="viewcode-back" href="../../../api/spyice.update_physical_values.html#src.spyice.update_physical_values.phi_func">[docs]</a>
+<span class="k">def</span> <span class="nf">phi_func</span><span class="p">(</span><span class="n">_enthalpy_k1</span><span class="p">,</span> <span class="n">_enthalpy_s1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates the phi value based on the given enthalpy values.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        _enthalpy_k1 (float): The enthalpy value for k1.</span>
+<span class="sd">        _enthalpy_s1 (float): The enthalpy value for s1.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        float: The calculated phi value.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_a</span> <span class="o">=</span> <span class="mf">0.0000059</span>
+    <span class="n">_b</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">_a</span>
+    <span class="k">return</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">_a</span> <span class="o">*</span> <span class="n">_enthalpy_k1</span> <span class="o">-</span> <span class="p">(</span><span class="n">_enthalpy_s1</span> <span class="o">+</span> <span class="n">_latent_heat_water</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">_b</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="p">)</span></div>
+
+
+
+<span class="k">def</span> <span class="nf">_H_update</span><span class="p">(</span><span class="n">_temperature</span><span class="p">,</span> <span class="n">_enthalpy_solid</span><span class="p">,</span> <span class="n">_nz</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Updates the enthalpy values using Newton&#39;s iteration method.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        _temperature (list): A list of temperatures.</span>
+<span class="sd">        _enthalpy_solid (list): A list of solid enthalpy values.</span>
+<span class="sd">        _nz (int): The number of elements.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        numpy.ndarray: An array of updated enthalpy values.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">H_newton_iteration</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">_temperature</span><span class="p">[</span><span class="n">k</span><span class="p">]),</span> <span class="n">_enthalpy_solid</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">_nz</span><span class="p">)</span>
+        <span class="p">]</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_H_newton_manual</span><span class="p">(</span><span class="n">_temperature</span><span class="p">,</span> <span class="n">_enthalpy_s1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates the new value of _x using Newton&#39;s method.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        _temperature (float): The temperature value.</span>
+<span class="sd">        _enthalpy_s1 (float): The enthalpy value.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        float: The new value of _x.</span>
+<span class="sd">    Raises:</span>
+<span class="sd">        None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># code implementation</span>
+    <span class="o">...</span>
+
+    <span class="n">_x</span> <span class="o">=</span> <span class="n">_temperature</span> <span class="o">*</span> <span class="n">_specific_heat_ice</span> <span class="o">+</span> <span class="n">_latent_heat_water</span>
+    <span class="n">_x_new</span> <span class="o">=</span> <span class="n">_x</span> <span class="o">+</span> <span class="mi">1000</span>
+    <span class="k">while</span> <span class="n">np</span><span class="o">.</span><span class="n">absolute</span><span class="p">(</span><span class="n">_x</span> <span class="o">-</span> <span class="n">_x_new</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.0003</span><span class="p">:</span>
+        <span class="n">_x</span> <span class="o">=</span> <span class="n">_x_new</span>
+        <span class="n">_fx</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">_temperature</span> <span class="o">*</span> <span class="n">_specific_heat_ice</span>
+            <span class="o">+</span> <span class="n">_latent_heat_water</span>
+            <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">piecewise</span><span class="p">(</span>
+                <span class="n">_x</span><span class="p">,</span>
+                <span class="p">[</span>
+                    <span class="n">_x</span> <span class="o">&lt;</span> <span class="n">_enthalpy_s1</span><span class="p">,</span>
+                    <span class="n">_enthalpy_s1</span> <span class="o">+</span> <span class="n">_latent_heat_water</span> <span class="o">&gt;=</span> <span class="n">_x</span> <span class="o">&gt;=</span> <span class="n">_enthalpy_s1</span><span class="p">,</span>
+                    <span class="n">_x</span> <span class="o">&gt;</span> <span class="n">_enthalpy_s1</span> <span class="o">+</span> <span class="n">_latent_heat_water</span><span class="p">,</span>
+                <span class="p">],</span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">_x</span><span class="p">:</span> <span class="p">(</span><span class="n">_x</span> <span class="o">-</span> <span class="n">_enthalpy_s1</span><span class="p">)</span> <span class="o">/</span> <span class="n">_latent_heat_water</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+            <span class="p">)</span>
+            <span class="o">-</span> <span class="n">_x</span>
+        <span class="p">)</span>
+        <span class="n">_dfxdx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">piecewise</span><span class="p">(</span>
+            <span class="n">_x</span><span class="p">,</span>
+            <span class="p">[</span>
+                <span class="n">_x</span> <span class="o">&lt;</span> <span class="n">_enthalpy_s1</span><span class="p">,</span>
+                <span class="n">_enthalpy_s1</span> <span class="o">+</span> <span class="n">_latent_heat_water</span> <span class="o">&gt;=</span> <span class="n">_x</span> <span class="o">&gt;=</span> <span class="n">_enthalpy_s1</span><span class="p">,</span>
+                <span class="n">_x</span> <span class="o">&gt;</span> <span class="n">_enthalpy_s1</span> <span class="o">+</span> <span class="n">_latent_heat_water</span><span class="p">,</span>
+            <span class="p">],</span>
+            <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+        <span class="p">)</span>
+        <span class="n">_x_new</span> <span class="o">=</span> <span class="n">_x</span> <span class="o">-</span> <span class="n">_fx</span> <span class="o">/</span> <span class="n">_dfxdx</span>
+    <span class="k">return</span> <span class="n">_x_new</span>
+
+
+<span class="k">def</span> <span class="nf">_H_bisect_search</span><span class="p">(</span><span class="n">_temperature</span><span class="p">,</span> <span class="n">_enthalpy_s1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Performs a bisection search to find the root of the H_function within the given temperature range.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        _temperature (float): The temperature value.</span>
+<span class="sd">        _enthalpy_s1 (float): The enthalpy value.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        float: The root of the H_function within the given temperature range.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># code implementation</span>
+
+    <span class="n">_x1</span> <span class="o">=</span> <span class="n">_temperature</span> <span class="o">*</span> <span class="n">_specific_heat_ice</span> <span class="o">+</span> <span class="n">_latent_heat_water</span> <span class="o">*</span> <span class="mi">0</span>
+    <span class="n">_x2</span> <span class="o">=</span> <span class="n">_temperature</span> <span class="o">*</span> <span class="n">_specific_heat_ice</span> <span class="o">+</span> <span class="n">_latent_heat_water</span> <span class="o">*</span> <span class="mi">1</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_root</span> <span class="o">=</span> <span class="n">bisect</span><span class="p">(</span>
+            <span class="n">H_function</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">_x1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">_x2</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">_temperature</span><span class="p">,</span> <span class="n">_enthalpy_s1</span><span class="p">),</span> <span class="n">xtol</span><span class="o">=</span><span class="mf">0.1</span>
+        <span class="p">)</span>
+    <span class="k">except</span> <span class="ne">RuntimeError</span><span class="p">:</span>
+        <span class="n">_low</span> <span class="o">=</span> <span class="n">H_function</span><span class="p">(</span><span class="n">_x1</span><span class="p">,</span> <span class="n">_temperature</span><span class="p">,</span> <span class="n">_enthalpy_s1</span><span class="p">)</span>
+        <span class="n">_high</span> <span class="o">=</span> <span class="n">H_function</span><span class="p">(</span><span class="n">_x2</span><span class="p">,</span> <span class="n">_temperature</span><span class="p">,</span> <span class="n">_enthalpy_s1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">_low</span> <span class="o">&lt;</span> <span class="n">_high</span><span class="p">:</span>
+            <span class="n">_root</span> <span class="o">=</span> <span class="n">_x1</span>
+        <span class="k">elif</span> <span class="n">_high</span> <span class="o">&lt;</span> <span class="n">_low</span><span class="p">:</span>
+            <span class="n">_root</span> <span class="o">=</span> <span class="n">_x2</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">_root</span><span class="p">)</span>
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Sneha Iyer.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

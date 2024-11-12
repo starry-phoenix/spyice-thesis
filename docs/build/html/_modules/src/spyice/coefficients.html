@@ -1,0 +1,500 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" data-theme="auto">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>src.spyice.coefficients &#8212; SpyIce  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "auto";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "auto";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=b6ad3417" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/src/spyice/coefficients';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.0.0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="auto">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">SpyIce  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../report/_index.html">
+    About
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../quick_start/_index.html">
+    How-to
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api/_index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../report/_index.html">
+    About
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../quick_start/_index.html">
+    How-to
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api/_index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">src.spyice.coefficients</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for src.spyice.coefficients</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">src.spyice.parameters.user_input</span> <span class="kn">import</span> <span class="n">UserInput</span>
+
+<span class="n">ui</span> <span class="o">=</span> <span class="n">UserInput</span><span class="p">()</span>
+<span class="p">(</span>
+    <span class="n">rho_br</span><span class="p">,</span>
+    <span class="n">rho_i</span><span class="p">,</span>
+    <span class="n">c_br</span><span class="p">,</span>
+    <span class="n">c_i</span><span class="p">,</span>
+    <span class="n">k_i</span><span class="p">,</span>
+    <span class="n">k_br</span><span class="p">,</span>
+    <span class="n">porosity_solid</span><span class="p">,</span>
+    <span class="n">L</span><span class="p">,</span>
+    <span class="n">diffusivity_solid</span><span class="p">,</span>
+    <span class="n">m</span><span class="p">,</span>
+    <span class="n">rho_w</span><span class="p">,</span>
+    <span class="n">c_w</span><span class="p">,</span>
+    <span class="n">k_w</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">rho_br</span><span class="p">,</span>
+    <span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">rho_i</span><span class="p">,</span>
+    <span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">c_br</span><span class="p">,</span>
+    <span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">c_i</span><span class="p">,</span>
+    <span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">k_i</span><span class="p">,</span>
+    <span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">k_br</span><span class="p">,</span>
+    <span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">P_s</span><span class="p">,</span>
+    <span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">L</span><span class="p">,</span>
+    <span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">D_s</span><span class="p">,</span>
+    <span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">m</span><span class="p">,</span>
+    <span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">rho_w</span><span class="p">,</span>
+    <span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">c_w</span><span class="p">,</span>
+    <span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">k_w</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="update_coefficients">
+<a class="viewcode-back" href="../../../api/spyice.coefficients.html#src.spyice.coefficients.update_coefficients">[docs]</a>
+<span class="k">def</span> <span class="nf">update_coefficients</span><span class="p">(</span><span class="n">argument</span><span class="p">,</span> <span class="n">x_initial</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">nz</span><span class="p">,</span> <span class="n">salinity_initial</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Updates of coefficients required to solve the Advection Reaction Diffusion Equation for each time step for temperature or salinity</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        argument (str): Either &#39;temperature&#39; or &#39;salinity&#39;</span>
+<span class="sd">        x_initial (float): Initial value for salinity or temperature [ppt] or [K]</span>
+<span class="sd">        w (float): Brine velocity [ms-1]</span>
+<span class="sd">        phi (float): Liquid fraction [-]</span>
+<span class="sd">        nz (int): Number of computational nodes</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: A tuple containing the following coefficients:</span>
+<span class="sd">            - a (numpy.ndarray): &#39;temperature&#39;: heat capacity | &#39;salinity&#39;: liquid fraction</span>
+<span class="sd">            - b (numpy.ndarray): Brine velocity [ms-1]</span>
+<span class="sd">            - c (numpy.ndarray): &#39;temperature&#39;: thermal conductivity | &#39;salinity&#39;: salt diffusivity</span>
+<span class="sd">            - d (numpy.ndarray): &#39;temperature&#39;: latent heat | &#39;salinity&#39;: factor to determine salinity increase due to liquid fraction decrease</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="n">argument</span> <span class="ow">in</span> <span class="p">[</span>
+        <span class="s2">&quot;temperature&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;salinity&quot;</span><span class="p">,</span>
+    <span class="p">],</span> <span class="s2">&quot;invalid input for argument in `update coefficients`&quot;</span>
+
+    <span class="k">if</span> <span class="n">argument</span> <span class="o">==</span> <span class="s2">&quot;temperature&quot;</span><span class="p">:</span>
+        <span class="n">temperature_initial</span> <span class="o">=</span> <span class="n">x_initial</span>  <span class="c1"># noqa: F841</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">nz</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">rho_i</span> <span class="o">*</span> <span class="n">L</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">salinity_initial</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;S0&quot;</span><span class="p">,</span> <span class="s2">&quot;S1&quot;</span><span class="p">]:</span>  <span class="c1"># no brine</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">nz</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span> <span class="o">*</span> <span class="n">_effective_parameter</span><span class="p">(</span>
+                <span class="n">rho_w</span> <span class="o">*</span> <span class="n">c_w</span><span class="p">,</span> <span class="n">rho_i</span> <span class="o">*</span> <span class="n">c_i</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">nz</span>
+            <span class="p">)</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">nz</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span> <span class="o">*</span> <span class="n">rho_w</span> <span class="o">*</span> <span class="n">c_w</span> <span class="o">*</span> <span class="n">w</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">nz</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span> <span class="o">*</span> <span class="n">_effective_parameter</span><span class="p">(</span><span class="n">k_w</span><span class="p">,</span> <span class="n">k_i</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">nz</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">nz</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span> <span class="o">*</span> <span class="n">_effective_parameter</span><span class="p">(</span>
+                <span class="n">rho_br</span> <span class="o">*</span> <span class="n">c_br</span><span class="p">,</span> <span class="n">rho_i</span> <span class="o">*</span> <span class="n">c_i</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">nz</span>
+            <span class="p">)</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">nz</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span> <span class="o">*</span> <span class="n">rho_br</span> <span class="o">*</span> <span class="n">c_br</span> <span class="o">*</span> <span class="n">w</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">nz</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span> <span class="o">*</span> <span class="n">_effective_parameter</span><span class="p">(</span><span class="n">k_br</span><span class="p">,</span> <span class="n">k_i</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">nz</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">argument</span> <span class="o">==</span> <span class="s2">&quot;salinity&quot;</span><span class="p">:</span>
+        <span class="n">salinity_initial</span> <span class="o">=</span> <span class="n">x_initial</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">nz</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span> <span class="o">*</span> <span class="n">phi</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">nz</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span> <span class="o">*</span> <span class="n">w</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">nz</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span> <span class="o">*</span> <span class="n">_salt_diffusivity</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">nz</span><span class="p">)</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">nz</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span> <span class="o">*</span> <span class="n">salinity_initial</span> <span class="o">*</span> <span class="n">rho_i</span> <span class="o">/</span> <span class="n">rho_br</span>
+        <span class="p">)</span>  <span class="c1"># * (1 - P_s)</span>
+
+    <span class="k">return</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span></div>
+
+
+
+<span class="k">def</span> <span class="nf">_salt_diffusivity</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">nz</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes effective diffusion coefficient of salt based on Archies law</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        phi (float): Ice volume fraction [-]</span>
+<span class="sd">        nz (int): Number of computational nodes</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        numpy.ndarray: Effective diffusion coefficient [s2m-1]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">diffusion_effective</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nz</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nz</span><span class="p">):</span>
+        <span class="n">diffusion_effective</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">diffusivity_solid</span> <span class="o">*</span> <span class="n">phi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">**</span> <span class="n">m</span>  <span class="c1"># Archies law</span>
+    <span class="k">return</span> <span class="n">diffusion_effective</span>
+
+
+<span class="k">def</span> <span class="nf">_effective_parameter</span><span class="p">(</span><span class="n">brine_coefficient</span><span class="p">,</span> <span class="n">ice_coefficient</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">nz</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Equation for effective parameters based on brine and ice physical properties based on liquid fraction</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        brine_coefficient (float): Brine property coefficient</span>
+<span class="sd">        ice_coefficient (float): Ice property coefficient</span>
+<span class="sd">        phi (float): Liquid fraction</span>
+<span class="sd">        nz (int): Number of computational nodes</span>
+<span class="sd">        float: Effective coefficient</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">eff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nz</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="c1"># phi = np.where(phi &lt; 0.5, 0, np.where(phi &gt; 0.5, 1, phi))</span>
+    <span class="n">eff</span> <span class="o">=</span> <span class="n">phi</span> <span class="o">*</span> <span class="n">brine_coefficient</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">phi</span><span class="p">)</span> <span class="o">*</span> <span class="n">ice_coefficient</span>
+    <span class="k">return</span> <span class="n">eff</span>
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Sneha Iyer.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

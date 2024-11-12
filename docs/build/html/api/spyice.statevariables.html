@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>&lt;no title&gt; &#8212; SpyIce  documentation</title>
+    <title>src.spyice.statevariables &#8212; SpyIce  documentation</title>
   
   
   
@@ -16,52 +16,40 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "auto";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "auto";
   </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/thebelab.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=b6ad3417" />
   
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
     <script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/thebelab-helper.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/spyice.statevariables';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="spyice.update_physical_values.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="spyice.rhs.html" />
+    <link rel="next" title="src.spyice.update_physical_values" href="spyice.update_physical_values.html" />
+    <link rel="prev" title="src.spyice.rhs" href="spyice.rhs.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.0.0" />
   </head>
   
   
@@ -77,19 +65,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -97,7 +74,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search the docs ..."
          aria-label="Search the docs ..."
          autocomplete="off"
@@ -105,8 +81,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -180,29 +156,21 @@
         <div class="navbar-item navbar-persistent--container">
           
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
         </div>
       
       
         <div class="navbar-item">
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script></div>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
       
     </div>
     
@@ -211,15 +179,11 @@ document.write(`
   
     <div class="navbar-persistent--mobile">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
     </div>
   
 
@@ -238,7 +202,8 @@ document.write(`
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -285,15 +250,11 @@ document.write(`
         
           <div class="navbar-item">
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script></div>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
         
       </div>
     
@@ -304,23 +265,48 @@ document.write(`
 <nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="spyice.html">spyice package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.models.html">spyice.models package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="spyice.html">spyice package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.models.html">spyice.models package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.advection_diffusion.html">src.spyice.models.advection_diffusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.sea_ice_model.html">src.spyice.models.sea_ice_model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.stefan_problem.html">src.spyice.models.stefan_problem</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.parameters.html">spyice.parameters package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.parameters.html">spyice.parameters package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.constants.html">src.spyice.parameters.constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.debug_constants.html">src.spyice.parameters.debug_constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.real_constants.html">src.spyice.parameters.real_constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.results_params.html">src.spyice.parameters.results_params</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.user_input.html">src.spyice.parameters.user_input</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.postprocess.html">spyice.postprocess package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.postprocess.html">spyice.postprocess package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="spyice.postprocess.analysis.html">src.spyice.postprocess.analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.postprocess.visualise_model.html">src.spyice.postprocess.visualise_model</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.preprocess.html">spyice.preprocess package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.preprocess.html">spyice.preprocess package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.geometry_settings.html">src.spyice.preprocess.geometry_settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.initial_boundary_conditions.html">src.spyice.preprocess.initial_boundary_conditions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.modify_initial_boundary.html">src.spyice.preprocess.modify_initial_boundary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.pre_process.html">src.spyice.preprocess.pre_process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.store.html">src.spyice.preprocess.store</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.utils.html">spyice.utils package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.utils.html">spyice.utils package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.config_sort.html">src.spyice.utils.config_sort</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.error_norms.html">src.spyice.utils.error_norms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.helpers.html">src.spyice.utils.helpers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.spyice_exceptions.html">src.spyice.utils.spyice_exceptions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.spyice_logger.html">src.spyice.utils.spyice_logger</a></li>
 </ul>
 </details></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.coefficients.html">src.spyice.coefficients</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.main_process.html">src.spyice.main_process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.rhs.html">src.spyice.rhs</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">src.spyice.statevariables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html">src.spyice.update_physical_values</a></li>
 </ul>
 </details></li>
 </ul>
@@ -350,8 +336,6 @@ document.write(`
       
         <div class="header-article-item">
 
-
-
 <nav aria-label="Breadcrumb" class="d-print-none">
   <ul class="bd-breadcrumbs">
     
@@ -366,7 +350,7 @@ document.write(`
     
     <li class="breadcrumb-item"><a href="spyice.html" class="nav-link">spyice package</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">&lt;no title&gt;</li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">src.spyice.statevariables</span></li>
   </ul>
 </nav>
 </div>
@@ -383,7 +367,199 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  
+  <section id="module-src.spyice.statevariables">
+<span id="src-spyice-statevariables"></span><h1>src.spyice.statevariables<a class="headerlink" href="#module-src.spyice.statevariables" title="Link to this heading">#</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="src.spyice.statevariables.compute_error_for_convergence">
+<span class="sig-prename descclassname"><span class="pre">src.spyice.statevariables.</span></span><span class="sig-name descname"><span class="pre">compute_error_for_convergence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temperature_calculated</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature_previous</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">salinity_calculated</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">salinity_previous</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">liquid_fraction_calculated</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">liquid_fraction_previous</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">voller</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/statevariables.html#compute_error_for_convergence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.statevariables.compute_error_for_convergence" title="Link to this definition">#</a></dt>
+<dd><p>Computes the errors for convergence between the calculated and previous values of temperature, salinity, and liquid fraction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>temperature_calculated</strong> (<em>numpy.ndarray</em>) – Array of calculated temperature values.</p></li>
+<li><p><strong>temperature_previous</strong> (<em>numpy.ndarray</em>) – Array of previous temperature values.</p></li>
+<li><p><strong>salinity_calculated</strong> (<em>numpy.ndarray</em>) – Array of calculated salinity values.</p></li>
+<li><p><strong>salinity_previous</strong> (<em>numpy.ndarray</em>) – Array of previous salinity values.</p></li>
+<li><p><strong>liquid_fraction_calculated</strong> (<em>numpy.ndarray</em>) – Array of calculated liquid fraction values.</p></li>
+<li><p><strong>liquid_fraction_previous</strong> (<em>numpy.ndarray</em>) – Array of previous liquid fraction values.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A tuple containing the following error values:</dt><dd><ul class="simple">
+<li><p>temperature_error_max (float): Maximum temperature error for convergence check.</p></li>
+<li><p>temperature_error_all (numpy.ndarray): Full temperature error for convergence check.</p></li>
+<li><p>salinity_error_max (float): Maximum salinity error for convergence check.</p></li>
+<li><p>salinity_err_all (numpy.ndarray): Full salinity error for convergence check.</p></li>
+<li><p>liquid_fraction_error_max (float): Maximum liquid fraction error for convergence check.</p></li>
+<li><p>liquid_fraction_error_all (numpy.ndarray): Full liquid fraction error for convergence check.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.spyice.statevariables.overwrite_statevariables">
+<span class="sig-prename descclassname"><span class="pre">src.spyice.statevariables.</span></span><span class="sig-name descname"><span class="pre">overwrite_statevariables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temperature_calculated</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">salinity_calculated</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">liquid_fraction_calculated</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_k_lhs_A_matrix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp_factor3</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/statevariables.html#overwrite_statevariables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.statevariables.overwrite_statevariables" title="Link to this definition">#</a></dt>
+<dd><p>Overwrites the state variables with the calculated values.
+:param temperature_calculated: The calculated temperature.
+:type temperature_calculated: float
+:param salinity_calculated: The calculated salinity.
+:type salinity_calculated: float
+:param liquid_fraction_calculated: The calculated liquid fraction.
+:type liquid_fraction_calculated: float</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>A tuple containing the following state variables:</dt><dd><ul class="simple">
+<li><p>temperature_new (float): The current temperature for iteration.</p></li>
+<li><p>salinity_new (float): The current salinity for iteration.</p></li>
+<li><p>liquid_fraction_new (float): The current liquid fraction for iteration.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.spyice.statevariables.reset_error_for_while_loop">
+<span class="sig-prename descclassname"><span class="pre">src.spyice.statevariables.</span></span><span class="sig-name descname"><span class="pre">reset_error_for_while_loop</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temperature_tolerance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">salinity_tolerance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">liquid_fraction_tolerance</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/statevariables.html#reset_error_for_while_loop"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.statevariables.reset_error_for_while_loop" title="Link to this definition">#</a></dt>
+<dd><p>Resets the error values for a while loop based on the given tolerances.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>temperature_tolerance</strong> (<em>float</em>) – The tolerance for temperature error.</p></li>
+<li><p><strong>salinity_tolerance</strong> (<em>float</em>) – The tolerance for salinity error.</p></li>
+<li><p><strong>liquid_fraction_tolerance</strong> (<em>float</em>) – The tolerance for liquid fraction error.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple containing the reset error values for temperature, salinity, and liquid fraction.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.spyice.statevariables.set_initial_statevariables">
+<span class="sig-prename descclassname"><span class="pre">src.spyice.statevariables.</span></span><span class="sig-name descname"><span class="pre">set_initial_statevariables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">salinity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">liquid_fraction</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/statevariables.html#set_initial_statevariables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.statevariables.set_initial_statevariables" title="Link to this definition">#</a></dt>
+<dd><p>Initializes the state variables for the given temperature, salinity, and liquid fraction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>temperature</strong> (<em>float</em>) – The initial temperature.</p></li>
+<li><p><strong>salinity</strong> (<em>float</em>) – The initial salinity.</p></li>
+<li><p><strong>liquid_fraction</strong> (<em>float</em>) – The initial liquid fraction.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A tuple containing the initialized state variables:</dt><dd><ul class="simple">
+<li><p>temperature_initial (float): The initial temperature.</p></li>
+<li><p>temperature_new (float): The current temperature for iteration.</p></li>
+<li><p>temperature_previous (float): The previous temperature for initialization.</p></li>
+<li><p>salinity_initial (float): The initial salinity.</p></li>
+<li><p>salinity_new (float): The current salinity for iteration.</p></li>
+<li><p>salinity_previous (float): The previous salinity for initialization.</p></li>
+<li><p>phi_initial (float): The initial liquid fraction.</p></li>
+<li><p>liquid_fraction_new (float): The current liquid fraction for iteration.</p></li>
+<li><p>phi_prev (float): The previous liquid fraction for initialization.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.spyice.statevariables.set_statevariables">
+<span class="sig-prename descclassname"><span class="pre">src.spyice.statevariables.</span></span><span class="sig-name descname"><span class="pre">set_statevariables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temperature_calculated</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">salinity_calculated</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">liquid_fraction_calculated</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/statevariables.html#set_statevariables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.statevariables.set_statevariables" title="Link to this definition">#</a></dt>
+<dd><p>Set the state variables for temperature, salinity, and liquid fraction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>temperature_calculated</strong> (<em>float</em>) – The calculated temperature.</p></li>
+<li><p><strong>salinity_calculated</strong> (<em>float</em>) – The calculated salinity.</p></li>
+<li><p><strong>liquid_fraction_calculated</strong> (<em>float</em>) – The calculated liquid fraction.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A tuple containing the following state variables:</dt><dd><ul class="simple">
+<li><p>temperature_initial (float): The initial temperature.</p></li>
+<li><p>temperature_previous (float): The previous temperature.</p></li>
+<li><p>salinity_initial (float): The initial salinity.</p></li>
+<li><p>salinity_previous (float): The previous salinity.</p></li>
+<li><p>phi_initial (float): The initial liquid fraction.</p></li>
+<li><p>phi_prev (float): The previous liquid fraction.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.spyice.statevariables.voller_residual_scheme">
+<span class="sig-prename descclassname"><span class="pre">src.spyice.statevariables.</span></span><span class="sig-name descname"><span class="pre">voller_residual_scheme</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temperature_calculated</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature_previous</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">liquid_fraction_calculated</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">liquid_fraction_previous</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/statevariables.html#voller_residual_scheme"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.statevariables.voller_residual_scheme" title="Link to this definition">#</a></dt>
+<dd><p>Calculate the residual sum for the Voller residual scheme.
+This function computes the residual sum based on the calculated and previous
+temperature and liquid fraction values, along with additional parameters
+provided in the kwargs dictionary. The residual sum is used to assess the
+convergence of the numerical scheme. (RHS - LHS matrix)
+Parameters:
+———–
+temperature_calculated : array-like</p>
+<blockquote>
+<div><p>The calculated temperature values at the current iteration.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>temperature_previous<span class="classifier">array-like</span></dt><dd><p>The temperature values from the previous iteration.</p>
+</dd>
+<dt>liquid_fraction_calculated<span class="classifier">array-like</span></dt><dd><p>The calculated liquid fraction values at the current iteration.</p>
+</dd>
+<dt>liquid_fraction_previous<span class="classifier">array-like</span></dt><dd><p>The liquid fraction values from the previous iteration.</p>
+</dd>
+<dt>kwargs<span class="classifier">dict</span></dt><dd><p>A dictionary containing additional parameters required for the computation.
+Expected keys are:
+- “A_matrix”: The coefficient matrix for the temperature calculation.
+- “phi_initial”: The initial liquid fraction values.
+- “t_initial”: The initial temperature values.
+- “temp_factor3”: A factor used in the residual calculation.</p>
+</dd>
+</dl>
+<section id="returns">
+<h2>Returns:<a class="headerlink" href="#returns" title="Link to this heading">#</a></h2>
+<dl class="simple">
+<dt>residual_sum<span class="classifier">float</span></dt><dd><p>The sum of the absolute values of the residuals.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+
 
                 </article>
               
@@ -400,7 +576,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title">src.spyice.rhs</p>
       </div>
     </a>
     <a class="right-next"
@@ -408,7 +584,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title">src.spyice.update_physical_values</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -419,7 +595,8 @@ document.write(`
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -429,9 +606,14 @@ document.write(`
     <i class="fa-solid fa-list"></i> On this page
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="simple visible nav section-nav flex-column">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.statevariables.compute_error_for_convergence"><code class="docutils literal notranslate"><span class="pre">compute_error_for_convergence()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.statevariables.overwrite_statevariables"><code class="docutils literal notranslate"><span class="pre">overwrite_statevariables()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.statevariables.reset_error_for_while_loop"><code class="docutils literal notranslate"><span class="pre">reset_error_for_while_loop()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.statevariables.set_initial_statevariables"><code class="docutils literal notranslate"><span class="pre">set_initial_statevariables()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.statevariables.set_statevariables"><code class="docutils literal notranslate"><span class="pre">set_statevariables()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.statevariables.voller_residual_scheme"><code class="docutils literal notranslate"><span class="pre">voller_residual_scheme()</span></code></a></li>
 </ul>
-
   </nav></div>
 
   <div class="sidebar-secondary-item">
@@ -456,8 +638,8 @@ document.write(`
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -477,7 +659,7 @@ document.write(`
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     <br/>
   </p>
 </div>
@@ -490,7 +672,7 @@ document.write(`
       
         <div class="footer-item">
 <p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
 </p></div>
       
     </div>

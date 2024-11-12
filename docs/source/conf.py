@@ -5,6 +5,10 @@
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
+import sys, os
+
+sys.path.insert(0, os.path.abspath('../..'))
+
 project = "SpyIce"
 copyright = "2024, Sneha Iyer"
 author = "Sneha Iyer"
@@ -21,25 +25,25 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.autosummary",
     "sphinx.ext.intersphinx",
-    "sphinxarg.ext",
-    "sphinx_copybutton",
+    # "sphinxarg.ext",
+    # "sphinx_copybutton",
     "sphinx.ext.viewcode",
-    "sphinxcontrib.pseudocode",
+    # "sphinxcontrib.pseudocode",
     # "sphinx_proof",
-    "sphinx_design",
-    "jupyter_sphinx",
-    "myst_parser",
-    "sphinx_favicon",
-    "nbsphinx",
-    "sphinx.ext.todo",
-    "sphinx.ext.coverage",
-    "sphinx_automodapi.automodapi",
-    "sphinx.ext.mathjax",
-    "sphinx.ext.inheritance_diagram",
-    "sphinx.ext.graphviz",
-    "sphinx.ext.intersphinx",
-    "sphinx.ext.duration",
-    "sphinx.ext.doctest",
+    # "sphinx_design",
+    # "jupyter_sphinx",
+    # "myst_parser",
+    # "sphinx_favicon",
+    # "nbsphinx",
+    # "sphinx.ext.todo",
+    # "sphinx.ext.coverage",
+    # "sphinx_automodapi.automodapi",
+    # "sphinx.ext.mathjax",
+    # "sphinx.ext.inheritance_diagram",
+    # "sphinx.ext.graphviz",
+    # "sphinx.ext.intersphinx",
+    # "sphinx.ext.duration",
+    # "sphinx.ext.doctest",
     "sphinx.ext.autodoc",
     # "sphinxcontrib.bibtex",
 ]

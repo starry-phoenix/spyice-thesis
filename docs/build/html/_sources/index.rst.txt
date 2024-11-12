@@ -12,8 +12,6 @@ The SPyIce package is a software tool that enables 1D finite difference simulati
   How-to <quick_start/_index>
   API <api/_index>
 
-
-
 Indices and tables
 ==================
 

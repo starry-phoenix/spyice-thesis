@@ -16,45 +16,32 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "auto";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "auto";
   </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/thebelab.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=b6ad3417" />
   
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
     <script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/thebelab-helper.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/spyice';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -62,6 +49,7 @@
     <link rel="prev" title="SpyIce" href="_index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.0.0" />
   </head>
   
   
@@ -77,19 +65,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -97,7 +74,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search the docs ..."
          aria-label="Search the docs ..."
          autocomplete="off"
@@ -105,8 +81,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -180,29 +156,21 @@
         <div class="navbar-item navbar-persistent--container">
           
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
         </div>
       
       
         <div class="navbar-item">
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script></div>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
       
     </div>
     
@@ -211,15 +179,11 @@ document.write(`
   
     <div class="navbar-persistent--mobile">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
     </div>
   
 
@@ -238,7 +202,8 @@ document.write(`
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -285,15 +250,11 @@ document.write(`
         
           <div class="navbar-item">
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script></div>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
         
       </div>
     
@@ -306,21 +267,46 @@ document.write(`
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">spyice package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.models.html">spyice.models package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.models.html">spyice.models package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.advection_diffusion.html">src.spyice.models.advection_diffusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.sea_ice_model.html">src.spyice.models.sea_ice_model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.stefan_problem.html">src.spyice.models.stefan_problem</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.parameters.html">spyice.parameters package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.parameters.html">spyice.parameters package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.constants.html">src.spyice.parameters.constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.debug_constants.html">src.spyice.parameters.debug_constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.real_constants.html">src.spyice.parameters.real_constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.results_params.html">src.spyice.parameters.results_params</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.user_input.html">src.spyice.parameters.user_input</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.postprocess.html">spyice.postprocess package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.postprocess.html">spyice.postprocess package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="spyice.postprocess.analysis.html">src.spyice.postprocess.analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.postprocess.visualise_model.html">src.spyice.postprocess.visualise_model</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.preprocess.html">spyice.preprocess package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.preprocess.html">spyice.preprocess package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.geometry_settings.html">src.spyice.preprocess.geometry_settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.initial_boundary_conditions.html">src.spyice.preprocess.initial_boundary_conditions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.modify_initial_boundary.html">src.spyice.preprocess.modify_initial_boundary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.pre_process.html">src.spyice.preprocess.pre_process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.store.html">src.spyice.preprocess.store</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.utils.html">spyice.utils package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.utils.html">spyice.utils package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.config_sort.html">src.spyice.utils.config_sort</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.error_norms.html">src.spyice.utils.error_norms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.helpers.html">src.spyice.utils.helpers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.spyice_exceptions.html">src.spyice.utils.spyice_exceptions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.spyice_logger.html">src.spyice.utils.spyice_logger</a></li>
 </ul>
 </details></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.coefficients.html">src.spyice.coefficients</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.main_process.html">src.spyice.main_process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.rhs.html">src.spyice.rhs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.statevariables.html">src.spyice.statevariables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html">src.spyice.update_physical_values</a></li>
 </ul>
 </details></li>
 </ul>
@@ -350,8 +336,6 @@ document.write(`
       
         <div class="header-article-item">
 
-
-
 <nav aria-label="Breadcrumb" class="d-print-none">
   <ul class="bd-breadcrumbs">
     
@@ -363,7 +347,7 @@ document.write(`
     
     <li class="breadcrumb-item"><a href="_index.html" class="nav-link">SpyIce</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">spyice package</li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">spyice package</span></li>
   </ul>
 </nav>
 </div>
@@ -388,27 +372,27 @@ document.write(`
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="spyice.models.html">spyice.models package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="spyice.models.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="spyice.models.html#module-contents">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.models.html#module-src.spyice.models">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="spyice.parameters.html">spyice.parameters package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="spyice.parameters.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="spyice.parameters.html#module-contents">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.parameters.html#module-src.spyice.parameters">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="spyice.postprocess.html">spyice.postprocess package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="spyice.postprocess.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="spyice.postprocess.html#module-contents">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.postprocess.html#module-src.spyice.postprocess">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="spyice.preprocess.html">spyice.preprocess package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="spyice.preprocess.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="spyice.preprocess.html#module-contents">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.preprocess.html#module-src.spyice.preprocess">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="spyice.utils.html">spyice.utils package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="spyice.utils.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="spyice.utils.html#module-contents">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.utils.html#module-src.spyice.utils">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -417,10 +401,53 @@ document.write(`
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
 <div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="spyice.coefficients.html">src.spyice.coefficients</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="spyice.coefficients.html#src.spyice.coefficients.update_coefficients"><code class="docutils literal notranslate"><span class="pre">update_coefficients()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="spyice.main_process.html">src.spyice.main_process</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="spyice.main_process.html#src.spyice.main_process.MainProcess"><code class="docutils literal notranslate"><span class="pre">MainProcess</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="spyice.rhs.html">src.spyice.rhs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="spyice.rhs.html#src.spyice.rhs.apply_boundary_condition"><code class="docutils literal notranslate"><span class="pre">apply_boundary_condition()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.rhs.html#src.spyice.rhs.correct_for_brine_movement"><code class="docutils literal notranslate"><span class="pre">correct_for_brine_movement()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="spyice.statevariables.html">src.spyice.statevariables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="spyice.statevariables.html#src.spyice.statevariables.compute_error_for_convergence"><code class="docutils literal notranslate"><span class="pre">compute_error_for_convergence()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.statevariables.html#src.spyice.statevariables.overwrite_statevariables"><code class="docutils literal notranslate"><span class="pre">overwrite_statevariables()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.statevariables.html#src.spyice.statevariables.reset_error_for_while_loop"><code class="docutils literal notranslate"><span class="pre">reset_error_for_while_loop()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.statevariables.html#src.spyice.statevariables.set_initial_statevariables"><code class="docutils literal notranslate"><span class="pre">set_initial_statevariables()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.statevariables.html#src.spyice.statevariables.set_statevariables"><code class="docutils literal notranslate"><span class="pre">set_statevariables()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.statevariables.html#src.spyice.statevariables.voller_residual_scheme"><code class="docutils literal notranslate"><span class="pre">voller_residual_scheme()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="spyice.update_physical_values.html">src.spyice.update_physical_values</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html#src.spyice.update_physical_values.H_function"><code class="docutils literal notranslate"><span class="pre">H_function()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html#src.spyice.update_physical_values.H_function_derivate"><code class="docutils literal notranslate"><span class="pre">H_function_derivate()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html#src.spyice.update_physical_values.H_newton_iteration"><code class="docutils literal notranslate"><span class="pre">H_newton_iteration()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html#src.spyice.update_physical_values.calculate_liquidus_temperature"><code class="docutils literal notranslate"><span class="pre">calculate_liquidus_temperature()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html#src.spyice.update_physical_values.calculate_melting_temperature_from_salinity"><code class="docutils literal notranslate"><span class="pre">calculate_melting_temperature_from_salinity()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html#src.spyice.update_physical_values.phi_control_for_infinite_values"><code class="docutils literal notranslate"><span class="pre">phi_control_for_infinite_values()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html#src.spyice.update_physical_values.phi_func"><code class="docutils literal notranslate"><span class="pre">phi_func()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html#src.spyice.update_physical_values.update_enthalpy"><code class="docutils literal notranslate"><span class="pre">update_enthalpy()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html#src.spyice.update_physical_values.update_enthalpy_solid_state"><code class="docutils literal notranslate"><span class="pre">update_enthalpy_solid_state()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html#src.spyice.update_physical_values.update_liquid_fraction_buffo"><code class="docutils literal notranslate"><span class="pre">update_liquid_fraction_buffo()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html#src.spyice.update_physical_values.update_liquid_fraction_mixture_with_enthalpy_equation"><code class="docutils literal notranslate"><span class="pre">update_liquid_fraction_mixture_with_enthalpy_equation()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html#src.spyice.update_physical_values.update_liquid_fraction_mixture_with_under_relaxation"><code class="docutils literal notranslate"><span class="pre">update_liquid_fraction_mixture_with_under_relaxation()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html#src.spyice.update_physical_values.update_liquid_fraction_voller_continuous_thermal_properties"><code class="docutils literal notranslate"><span class="pre">update_liquid_fraction_voller_continuous_thermal_properties()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html#src.spyice.update_physical_values.update_liquid_fraction_voller_under_relaxation"><code class="docutils literal notranslate"><span class="pre">update_liquid_fraction_voller_under_relaxation()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html#src.spyice.update_physical_values.update_state_variables"><code class="docutils literal notranslate"><span class="pre">update_state_variables()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html#src.spyice.update_physical_values.update_temperature_and_salinity"><code class="docutils literal notranslate"><span class="pre">update_temperature_and_salinity()</span></code></a></li>
+</ul>
+</li>
+</ul>
 </div>
 </section>
-<section id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Link to this heading">#</a></h2>
+<section id="module-src.spyice">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-src.spyice" title="Link to this heading">#</a></h2>
 </section>
 </section>
 
@@ -459,7 +486,8 @@ document.write(`
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -472,7 +500,7 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#subpackages">Subpackages</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-contents">Module contents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-src.spyice">Module contents</a></li>
 </ul>
   </nav></div>
 
@@ -498,8 +526,8 @@ document.write(`
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -519,7 +547,7 @@ document.write(`
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     <br/>
   </p>
 </div>
@@ -532,7 +560,7 @@ document.write(`
       
         <div class="footer-item">
 <p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
 </p></div>
       
     </div>

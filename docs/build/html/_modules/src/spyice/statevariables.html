@@ -1,0 +1,678 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" data-theme="auto">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>src.spyice.statevariables &#8212; SpyIce  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "auto";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "auto";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/custom.css?v=b6ad3417" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/src/spyice/statevariables';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.0.0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="auto">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">SpyIce  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../report/_index.html">
+    About
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../quick_start/_index.html">
+    How-to
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api/_index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../report/_index.html">
+    About
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../quick_start/_index.html">
+    How-to
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api/_index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">src.spyice.statevariables</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for src.spyice.statevariables</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<span class="c1"># Function to set state variables</span>
+<div class="viewcode-block" id="set_statevariables">
+<a class="viewcode-back" href="../../../api/spyice.statevariables.html#src.spyice.statevariables.set_statevariables">[docs]</a>
+<span class="k">def</span> <span class="nf">set_statevariables</span><span class="p">(</span>
+    <span class="n">temperature_calculated</span><span class="p">,</span> <span class="n">salinity_calculated</span><span class="p">,</span> <span class="n">liquid_fraction_calculated</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the state variables for temperature, salinity, and liquid fraction.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        temperature_calculated (float): The calculated temperature.</span>
+<span class="sd">        salinity_calculated (float): The calculated salinity.</span>
+<span class="sd">        liquid_fraction_calculated (float): The calculated liquid fraction.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: A tuple containing the following state variables:</span>
+<span class="sd">            - temperature_initial (float): The initial temperature.</span>
+<span class="sd">            - temperature_previous (float): The previous temperature.</span>
+<span class="sd">            - salinity_initial (float): The initial salinity.</span>
+<span class="sd">            - salinity_previous (float): The previous salinity.</span>
+<span class="sd">            - phi_initial (float): The initial liquid fraction.</span>
+<span class="sd">            - phi_prev (float): The previous liquid fraction.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">temperature_previous</span><span class="p">,</span> <span class="n">temperature_initial</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">temperature_calculated</span><span class="p">,</span>
+        <span class="n">temperature_calculated</span><span class="p">,</span>
+    <span class="p">)</span>  <span class="c1"># Set previous T as current T for initialization, # Store initial T for later use</span>
+    <span class="n">salinity_previous</span><span class="p">,</span> <span class="n">salinity_initial</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">salinity_calculated</span><span class="p">,</span>
+        <span class="n">salinity_calculated</span><span class="p">,</span>
+    <span class="p">)</span>  <span class="c1"># Set previous S as current S for initialization, # Store initial S for later use</span>
+    <span class="n">phi_prev</span><span class="p">,</span> <span class="n">phi_initial</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">liquid_fraction_calculated</span><span class="p">,</span>
+        <span class="n">liquid_fraction_calculated</span><span class="p">,</span>
+    <span class="p">)</span>  <span class="c1"># Set previous phi as current phi for initialization, # Store initial phi for later use</span>
+
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">temperature_initial</span><span class="p">,</span>
+        <span class="n">temperature_previous</span><span class="p">,</span>
+        <span class="n">salinity_initial</span><span class="p">,</span>
+        <span class="n">salinity_previous</span><span class="p">,</span>
+        <span class="n">phi_initial</span><span class="p">,</span>
+        <span class="n">phi_prev</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<span class="c1"># Function to overwrite state variables</span>
+<div class="viewcode-block" id="overwrite_statevariables">
+<a class="viewcode-back" href="../../../api/spyice.statevariables.html#src.spyice.statevariables.overwrite_statevariables">[docs]</a>
+<span class="k">def</span> <span class="nf">overwrite_statevariables</span><span class="p">(</span>
+    <span class="n">temperature_calculated</span><span class="p">,</span>
+    <span class="n">salinity_calculated</span><span class="p">,</span>
+    <span class="n">liquid_fraction_calculated</span><span class="p">,</span>
+    <span class="n">t_k_lhs_A_matrix</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">temp_factor3</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Overwrites the state variables with the calculated values.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        temperature_calculated (float): The calculated temperature.</span>
+<span class="sd">        salinity_calculated (float): The calculated salinity.</span>
+<span class="sd">        liquid_fraction_calculated (float): The calculated liquid fraction.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: A tuple containing the following state variables:</span>
+<span class="sd">            - temperature_new (float): The current temperature for iteration.</span>
+<span class="sd">            - salinity_new (float): The current salinity for iteration.</span>
+<span class="sd">            - liquid_fraction_new (float): The current liquid fraction for iteration.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">temperature_new</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">temperature_calculated</span>  <span class="c1"># Set current T as previous T for next iteration</span>
+    <span class="p">)</span>
+    <span class="n">salinity_new</span> <span class="o">=</span> <span class="n">salinity_calculated</span>  <span class="c1"># Set current S as previous S for next iteration</span>
+    <span class="n">liquid_fraction_new</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">liquid_fraction_calculated</span>  <span class="c1"># Set current phi as previous phi for next iteration</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">t_k_lhs_A_matrix</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">t_k_lhs_A_matrix</span> <span class="o">=</span> <span class="n">t_k_lhs_A_matrix</span>
+        <span class="n">temp_factor3</span> <span class="o">=</span> <span class="n">temp_factor3</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">t_k_lhs_A_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">101</span><span class="p">,</span> <span class="mi">101</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">temp_factor3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">temperature_new</span><span class="p">))</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">temperature_new</span><span class="p">,</span>
+        <span class="n">salinity_new</span><span class="p">,</span>
+        <span class="n">liquid_fraction_new</span><span class="p">,</span>
+        <span class="n">t_k_lhs_A_matrix</span><span class="p">,</span>
+        <span class="n">temp_factor3</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<span class="c1"># Function to compute errors for convergence</span>
+<div class="viewcode-block" id="compute_error_for_convergence">
+<a class="viewcode-back" href="../../../api/spyice.statevariables.html#src.spyice.statevariables.compute_error_for_convergence">[docs]</a>
+<span class="k">def</span> <span class="nf">compute_error_for_convergence</span><span class="p">(</span>
+    <span class="n">temperature_calculated</span><span class="p">,</span>
+    <span class="n">temperature_previous</span><span class="p">,</span>
+    <span class="n">salinity_calculated</span><span class="p">,</span>
+    <span class="n">salinity_previous</span><span class="p">,</span>
+    <span class="n">liquid_fraction_calculated</span><span class="p">,</span>
+    <span class="n">liquid_fraction_previous</span><span class="p">,</span>
+    <span class="n">voller</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes the errors for convergence between the calculated and previous values of temperature, salinity, and liquid fraction.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        temperature_calculated (numpy.ndarray): Array of calculated temperature values.</span>
+<span class="sd">        temperature_previous (numpy.ndarray): Array of previous temperature values.</span>
+<span class="sd">        salinity_calculated (numpy.ndarray): Array of calculated salinity values.</span>
+<span class="sd">        salinity_previous (numpy.ndarray): Array of previous salinity values.</span>
+<span class="sd">        liquid_fraction_calculated (numpy.ndarray): Array of calculated liquid fraction values.</span>
+<span class="sd">        liquid_fraction_previous (numpy.ndarray): Array of previous liquid fraction values.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: A tuple containing the following error values:</span>
+<span class="sd">            - temperature_error_max (float): Maximum temperature error for convergence check.</span>
+<span class="sd">            - temperature_error_all (numpy.ndarray): Full temperature error for convergence check.</span>
+<span class="sd">            - salinity_error_max (float): Maximum salinity error for convergence check.</span>
+<span class="sd">            - salinity_err_all (numpy.ndarray): Full salinity error for convergence check.</span>
+<span class="sd">            - liquid_fraction_error_max (float): Maximum liquid fraction error for convergence check.</span>
+<span class="sd">            - liquid_fraction_error_all (numpy.ndarray): Full liquid fraction error for convergence check.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Function implementation goes here</span>
+
+    <span class="n">temperature_error_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span>
+        <span class="nb">abs</span><span class="p">(</span><span class="n">temperature_calculated</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">temperature_previous</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="p">)</span>  <span class="c1"># Compute maximum T error for convergence check</span>
+    <span class="n">temperature_error_all</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span>
+        <span class="n">temperature_calculated</span> <span class="o">-</span> <span class="n">temperature_previous</span>
+    <span class="p">)</span>  <span class="c1"># Compute full T error for convergence check</span>
+    <span class="n">salinity_error_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span>
+        <span class="n">salinity_calculated</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">salinity_previous</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="p">)</span>  <span class="c1"># Compute maximum S error for convergence check</span>
+    <span class="n">salinity_err_all</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">salinity_calculated</span> <span class="o">-</span> <span class="n">salinity_previous</span>
+    <span class="p">)</span>  <span class="c1"># Compute full S error for convergence check</span>
+    <span class="n">liquid_fraction_error_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span>
+        <span class="n">liquid_fraction_calculated</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">liquid_fraction_previous</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="p">)</span>  <span class="c1"># Compute maximum phi error for convergence check</span>
+    <span class="n">liquid_fraction_error_all</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">liquid_fraction_calculated</span> <span class="o">-</span> <span class="n">liquid_fraction_previous</span>
+    <span class="p">)</span>  <span class="c1"># Compute full phi error for convergence check</span>
+    <span class="n">residual_sum</span> <span class="o">=</span> <span class="n">voller_residual_scheme</span><span class="p">(</span>
+        <span class="n">temperature_calculated</span><span class="p">,</span>
+        <span class="n">temperature_previous</span><span class="p">,</span>
+        <span class="n">liquid_fraction_calculated</span><span class="p">,</span>
+        <span class="n">liquid_fraction_previous</span><span class="p">,</span>
+        <span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">)</span>   <span class="c1"># Compute residual sum for convergence check</span>
+
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">temperature_error_max</span><span class="p">,</span>
+        <span class="n">temperature_error_all</span><span class="p">,</span>
+        <span class="n">salinity_error_max</span><span class="p">,</span>
+        <span class="n">salinity_err_all</span><span class="p">,</span>
+        <span class="n">liquid_fraction_error_max</span><span class="p">,</span>
+        <span class="n">liquid_fraction_error_all</span><span class="p">,</span>
+        <span class="n">residual_sum</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="voller_residual_scheme">
+<a class="viewcode-back" href="../../../api/spyice.statevariables.html#src.spyice.statevariables.voller_residual_scheme">[docs]</a>
+<span class="k">def</span> <span class="nf">voller_residual_scheme</span><span class="p">(</span>
+    <span class="n">temperature_calculated</span><span class="p">,</span>
+    <span class="n">temperature_previous</span><span class="p">,</span>
+    <span class="n">liquid_fraction_calculated</span><span class="p">,</span>
+    <span class="n">liquid_fraction_previous</span><span class="p">,</span>
+    <span class="n">kwargs</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the residual sum for the Voller residual scheme.</span>
+<span class="sd">    This function computes the residual sum based on the calculated and previous</span>
+<span class="sd">    temperature and liquid fraction values, along with additional parameters</span>
+<span class="sd">    provided in the kwargs dictionary. The residual sum is used to assess the</span>
+<span class="sd">    convergence of the numerical scheme. (RHS - LHS matrix)</span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    -----------</span>
+<span class="sd">    temperature_calculated : array-like</span>
+<span class="sd">        The calculated temperature values at the current iteration.</span>
+<span class="sd">    temperature_previous : array-like</span>
+<span class="sd">        The temperature values from the previous iteration.</span>
+<span class="sd">    liquid_fraction_calculated : array-like</span>
+<span class="sd">        The calculated liquid fraction values at the current iteration.</span>
+<span class="sd">    liquid_fraction_previous : array-like</span>
+<span class="sd">        The liquid fraction values from the previous iteration.</span>
+<span class="sd">    kwargs : dict</span>
+<span class="sd">        A dictionary containing additional parameters required for the computation.</span>
+<span class="sd">        Expected keys are:</span>
+<span class="sd">        - &quot;A_matrix&quot;: The coefficient matrix for the temperature calculation.</span>
+<span class="sd">        - &quot;phi_initial&quot;: The initial liquid fraction values.</span>
+<span class="sd">        - &quot;t_initial&quot;: The initial temperature values.</span>
+<span class="sd">        - &quot;temp_factor3&quot;: A factor used in the residual calculation.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">    --------</span>
+<span class="sd">    residual_sum : float</span>
+<span class="sd">        The sum of the absolute values of the residuals.</span>
+<span class="sd">    &quot;&quot;&quot;</span>  
+      
+    <span class="n">a_matrix</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;A_matrix&quot;</span><span class="p">]</span>
+    <span class="n">a_matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">a_matrix</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="n">a_res</span> <span class="o">=</span> <span class="n">a_matrix</span> <span class="o">@</span> <span class="n">temperature_calculated</span>
+    <span class="n">mush_cond</span> <span class="o">=</span> <span class="p">(</span><span class="n">liquid_fraction_calculated</span> <span class="o">&gt;=</span> <span class="mf">0.05</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span>
+        <span class="n">liquid_fraction_calculated</span> <span class="o">&lt;=</span> <span class="mf">0.95</span>
+    <span class="p">)</span>
+    <span class="n">mush_indx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">mush_cond</span><span class="p">)</span>
+    <span class="n">phi_diff</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;phi_initial&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">liquid_fraction_calculated</span>
+    <span class="n">rhs_res</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;t_initial&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;temp_factor3&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">phi_diff</span>
+    <span class="n">residual</span> <span class="o">=</span> <span class="n">a_res</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">rhs_res</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">residual_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">residual</span><span class="p">))</span>
+
+    <span class="n">residual_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">residual</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">residual_sum</span></div>
+
+
+
+<span class="c1"># Function to reset errors for while loop</span>
+<div class="viewcode-block" id="reset_error_for_while_loop">
+<a class="viewcode-back" href="../../../api/spyice.statevariables.html#src.spyice.statevariables.reset_error_for_while_loop">[docs]</a>
+<span class="k">def</span> <span class="nf">reset_error_for_while_loop</span><span class="p">(</span>
+    <span class="n">temperature_tolerance</span><span class="p">,</span> <span class="n">salinity_tolerance</span><span class="p">,</span> <span class="n">liquid_fraction_tolerance</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Resets the error values for a while loop based on the given tolerances.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        temperature_tolerance (float): The tolerance for temperature error.</span>
+<span class="sd">        salinity_tolerance (float): The tolerance for salinity error.</span>
+<span class="sd">        liquid_fraction_tolerance (float): The tolerance for liquid fraction error.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: A tuple containing the reset error values for temperature, salinity, and liquid fraction.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">temperature_error</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="mi">1</span> <span class="o">+</span> <span class="n">temperature_tolerance</span>
+    <span class="p">)</span>  <span class="c1"># Set initial T error to value greater than tolerance</span>
+    <span class="n">salinity_error</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="mi">1</span> <span class="o">+</span> <span class="n">salinity_tolerance</span>
+    <span class="p">)</span>  <span class="c1"># Set initial S error to value greater than tolerance</span>
+    <span class="n">liquid_fraction_error</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="mi">1</span> <span class="o">+</span> <span class="n">liquid_fraction_tolerance</span>
+    <span class="p">)</span>  <span class="c1"># Set initial phi error to value greater than tolerance</span>
+    <span class="k">return</span> <span class="n">temperature_error</span><span class="p">,</span> <span class="n">salinity_error</span><span class="p">,</span> <span class="n">liquid_fraction_error</span></div>
+
+
+
+<span class="c1"># Function to initialize state variables</span>
+<div class="viewcode-block" id="set_initial_statevariables">
+<a class="viewcode-back" href="../../../api/spyice.statevariables.html#src.spyice.statevariables.set_initial_statevariables">[docs]</a>
+<span class="k">def</span> <span class="nf">set_initial_statevariables</span><span class="p">(</span><span class="n">temperature</span><span class="p">,</span> <span class="n">salinity</span><span class="p">,</span> <span class="n">liquid_fraction</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initializes the state variables for the given temperature, salinity, and liquid fraction.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        temperature (float): The initial temperature.</span>
+<span class="sd">        salinity (float): The initial salinity.</span>
+<span class="sd">        liquid_fraction (float): The initial liquid fraction.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        tuple: A tuple containing the initialized state variables:</span>
+<span class="sd">            - temperature_initial (float): The initial temperature.</span>
+<span class="sd">            - temperature_new (float): The current temperature for iteration.</span>
+<span class="sd">            - temperature_previous (float): The previous temperature for initialization.</span>
+<span class="sd">            - salinity_initial (float): The initial salinity.</span>
+<span class="sd">            - salinity_new (float): The current salinity for iteration.</span>
+<span class="sd">            - salinity_previous (float): The previous salinity for initialization.</span>
+<span class="sd">            - phi_initial (float): The initial liquid fraction.</span>
+<span class="sd">            - liquid_fraction_new (float): The current liquid fraction for iteration.</span>
+<span class="sd">            - phi_prev (float): The previous liquid fraction for initialization.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">phi_initial</span> <span class="o">=</span> <span class="n">liquid_fraction</span>  <span class="c1"># Store initial phi for later use</span>
+    <span class="n">liquid_fraction_new</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">liquid_fraction</span>  <span class="c1"># Set previous phi as current phi for iteration</span>
+    <span class="p">)</span>
+    <span class="n">phi_prev</span> <span class="o">=</span> <span class="n">liquid_fraction</span>  <span class="c1"># Set previous phi as current phi for initialization</span>
+    <span class="n">temperature_initial</span> <span class="o">=</span> <span class="n">temperature</span>  <span class="c1"># Store initial T for later use</span>
+    <span class="n">temperature_previous</span> <span class="o">=</span> <span class="n">temperature</span>  <span class="c1"># Set previous T as current T for initialization</span>
+    <span class="n">temperature_new</span> <span class="o">=</span> <span class="n">temperature</span>  <span class="c1"># Set current T as previous T for iteration</span>
+    <span class="n">salinity_initial</span> <span class="o">=</span> <span class="n">salinity</span>  <span class="c1"># Store initial S for later use</span>
+    <span class="n">salinity_new</span> <span class="o">=</span> <span class="n">salinity</span>  <span class="c1"># Set current S as previous S for initialization</span>
+    <span class="n">salinity_previous</span> <span class="o">=</span> <span class="n">salinity</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">temperature_initial</span><span class="p">,</span>
+        <span class="n">temperature_new</span><span class="p">,</span>
+        <span class="n">temperature_previous</span><span class="p">,</span>
+        <span class="n">salinity_initial</span><span class="p">,</span>
+        <span class="n">salinity_new</span><span class="p">,</span>
+        <span class="n">salinity_previous</span><span class="p">,</span>
+        <span class="n">phi_initial</span><span class="p">,</span>
+        <span class="n">liquid_fraction_new</span><span class="p">,</span>
+        <span class="n">phi_prev</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Sneha Iyer.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

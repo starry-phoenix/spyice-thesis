@@ -142,7 +142,7 @@ def compute_error_for_convergence(
         liquid_fraction_calculated,
         liquid_fraction_previous,
         kwargs,
-    )
+    )   # Compute residual sum for convergence check
 
     return (
         temperature_error_max,
@@ -162,6 +162,35 @@ def voller_residual_scheme(
     liquid_fraction_previous,
     kwargs,
 ):
+    """
+    Calculate the residual sum for the Voller residual scheme.
+    This function computes the residual sum based on the calculated and previous
+    temperature and liquid fraction values, along with additional parameters
+    provided in the kwargs dictionary. The residual sum is used to assess the
+    convergence of the numerical scheme. (RHS - LHS matrix)
+    Parameters:
+    -----------
+    temperature_calculated : array-like
+        The calculated temperature values at the current iteration.
+    temperature_previous : array-like
+        The temperature values from the previous iteration.
+    liquid_fraction_calculated : array-like
+        The calculated liquid fraction values at the current iteration.
+    liquid_fraction_previous : array-like
+        The liquid fraction values from the previous iteration.
+    kwargs : dict
+        A dictionary containing additional parameters required for the computation.
+        Expected keys are:
+        - "A_matrix": The coefficient matrix for the temperature calculation.
+        - "phi_initial": The initial liquid fraction values.
+        - "t_initial": The initial temperature values.
+        - "temp_factor3": A factor used in the residual calculation.
+    Returns:
+    --------
+    residual_sum : float
+        The sum of the absolute values of the residuals.
+    """  
+      
     a_matrix = kwargs["A_matrix"]
     a_matrix[0], a_matrix[-1] = 0, 0
     a_res = a_matrix @ temperature_calculated
@@ -175,7 +204,6 @@ def voller_residual_scheme(
 
     residual_sum = np.sum(np.abs(residual))
 
-    residual_sum = np.sum(np.abs(residual))
     return residual_sum
 
 

@@ -13,7 +13,7 @@ Submodules
 Module contents
 ---------------
 
-.. automodule:: spyice.postprocess
+.. automodule:: src.spyice.postprocess
    :members:
    :undoc-members:
    :show-inheritance:

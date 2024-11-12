@@ -1,0 +1,58 @@
+\babel@toc {english}{}\relax 
+\contentsline {chapter}{\numberline {1}SpyIce}{2}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Introduction}{2}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Problem Statement}{3}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Implementation}{4}{section.1.3}%
+\contentsline {chapter}{\numberline {2}Quickstart}{5}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Installation Guide}{5}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Prerequisites}{5}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Installation Steps}{5}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Viewing the documentation}{5}{subsection.2.1.3}%
+\contentsline {chapter}{\numberline {3}SpyIce}{7}{chapter.3}%
+\contentsline {section}{\numberline {3.1}spyice package}{7}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Subpackages}{7}{subsection.3.1.1}%
+\contentsline {subsubsection}{spyice.models package}{7}{subsubsection*.3}%
+\contentsline {paragraph}{Submodules}{7}{paragraph*.4}%
+\contentsline {subparagraph}{src.spyice.models.advection\_diffusion}{7}{subparagraph*.5}%
+\contentsline {subparagraph}{src.spyice.models.sea\_ice\_model}{11}{subparagraph*.19}%
+\contentsline {subparagraph}{src.spyice.models.stefan\_problem}{18}{subparagraph*.41}%
+\contentsline {paragraph}{Module contents}{19}{paragraph*.47}%
+\contentsline {subsubsection}{spyice.parameters package}{19}{subsubsection*.48}%
+\contentsline {paragraph}{Submodules}{19}{paragraph*.49}%
+\contentsline {subparagraph}{src.spyice.parameters.constants}{19}{subparagraph*.50}%
+\contentsline {subparagraph}{src.spyice.parameters.debug\_constants}{20}{subparagraph*.54}%
+\contentsline {subparagraph}{src.spyice.parameters.real\_constants}{22}{subparagraph*.81}%
+\contentsline {subparagraph}{src.spyice.parameters.results\_params}{25}{subparagraph*.110}%
+\contentsline {subparagraph}{src.spyice.parameters.user\_input}{30}{subparagraph*.115}%
+\contentsline {paragraph}{Module contents}{34}{paragraph*.148}%
+\contentsline {subsubsection}{spyice.postprocess package}{34}{subsubsection*.149}%
+\contentsline {paragraph}{Submodules}{34}{paragraph*.150}%
+\contentsline {subparagraph}{src.spyice.postprocess.analysis}{34}{subparagraph*.151}%
+\contentsline {subparagraph}{src.spyice.postprocess.visualise\_model}{37}{subparagraph*.164}%
+\contentsline {paragraph}{Module contents}{39}{paragraph*.183}%
+\contentsline {subsubsection}{spyice.preprocess package}{39}{subsubsection*.184}%
+\contentsline {paragraph}{Submodules}{39}{paragraph*.185}%
+\contentsline {subparagraph}{src.spyice.preprocess.geometry\_settings}{39}{subparagraph*.186}%
+\contentsline {subparagraph}{src.spyice.preprocess.initial\_boundary\_conditions}{40}{subparagraph*.189}%
+\contentsline {subparagraph}{src.spyice.preprocess.modify\_initial\_boundary}{44}{subparagraph*.203}%
+\contentsline {subparagraph}{src.spyice.preprocess.pre\_process}{45}{subparagraph*.208}%
+\contentsline {subparagraph}{src.spyice.preprocess.store}{47}{subparagraph*.220}%
+\contentsline {paragraph}{Module contents}{47}{paragraph*.221}%
+\contentsline {subsubsection}{spyice.utils package}{47}{subsubsection*.222}%
+\contentsline {paragraph}{Submodules}{47}{paragraph*.223}%
+\contentsline {subparagraph}{src.spyice.utils.config\_sort}{47}{subparagraph*.224}%
+\contentsline {subparagraph}{src.spyice.utils.error\_norms}{49}{subparagraph*.238}%
+\contentsline {subparagraph}{src.spyice.utils.helpers}{51}{subparagraph*.245}%
+\contentsline {subparagraph}{src.spyice.utils.spyice\_exceptions module}{52}{subparagraph*.249}%
+\contentsline {subparagraph}{src.spyice.utils.spyice\_logger}{52}{subparagraph*.253}%
+\contentsline {paragraph}{Module contents}{53}{paragraph*.258}%
+\contentsline {subsection}{\numberline {3.1.2}Submodules}{53}{subsection.3.1.2}%
+\contentsline {subsubsection}{src.spyice.coefficients}{53}{subsubsection*.259}%
+\contentsline {subsubsection}{src.spyice.main\_process}{54}{subsubsection*.261}%
+\contentsline {subsubsection}{src.spyice.rhs}{55}{subsubsection*.266}%
+\contentsline {subsubsection}{src.spyice.statevariables}{56}{subsubsection*.269}%
+\contentsline {paragraph}{Returns:}{59}{paragraph*.276}%
+\contentsline {subsubsection}{src.spyice.update\_physical\_values}{59}{subsubsection*.277}%
+\contentsline {subsection}{\numberline {3.1.3}Module contents}{67}{subsection.3.1.3}%
+\contentsline {chapter}{\numberline {4}Indices and tables}{68}{chapter.4}%
+\contentsline {chapter}{Python Module Index}{69}{section*.294}%

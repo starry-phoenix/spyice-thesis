@@ -16,7 +16,7 @@ Submodules
 Module contents
 ---------------
 
-.. automodule:: spyice.parameters
+.. automodule:: src.spyice.parameters
    :members:
    :undoc-members:
    :show-inheritance:

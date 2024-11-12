@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>&lt;no title&gt; &#8212; SpyIce  documentation</title>
+    <title>src.spyice.preprocess.initial_boundary_conditions &#8212; SpyIce  documentation</title>
   
   
   
@@ -16,52 +16,40 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "auto";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "auto";
   </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/thebelab.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=b6ad3417" />
   
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
     <script src="../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=f281be69"></script>
-    <script src="../_static/thebelab-helper.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/pseudocode@latest/build/pseudocode.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js"></script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/spyice.preprocess.initial_boundary_conditions';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="spyice.preprocess.modify_initial_boundary.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="spyice.preprocess.geometry_settings.html" />
+    <link rel="next" title="src.spyice.preprocess.modify_initial_boundary" href="spyice.preprocess.modify_initial_boundary.html" />
+    <link rel="prev" title="src.spyice.preprocess.geometry_settings" href="spyice.preprocess.geometry_settings.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.0.0" />
   </head>
   
   
@@ -77,19 +65,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="../search.html"
       method="get">
@@ -97,7 +74,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search the docs ..."
          aria-label="Search the docs ..."
          autocomplete="off"
@@ -105,8 +81,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -180,29 +156,21 @@
         <div class="navbar-item navbar-persistent--container">
           
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
         </div>
       
       
         <div class="navbar-item">
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script></div>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
       
     </div>
     
@@ -211,15 +179,11 @@ document.write(`
   
     <div class="navbar-persistent--mobile">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
     </div>
   
 
@@ -238,7 +202,8 @@ document.write(`
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -285,15 +250,11 @@ document.write(`
         
           <div class="navbar-item">
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script></div>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
         
       </div>
     
@@ -304,23 +265,48 @@ document.write(`
 <nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="spyice.html">spyice package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.models.html">spyice.models package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="spyice.html">spyice package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.models.html">spyice.models package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.advection_diffusion.html">src.spyice.models.advection_diffusion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.sea_ice_model.html">src.spyice.models.sea_ice_model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.stefan_problem.html">src.spyice.models.stefan_problem</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.parameters.html">spyice.parameters package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.parameters.html">spyice.parameters package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.constants.html">src.spyice.parameters.constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.debug_constants.html">src.spyice.parameters.debug_constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.real_constants.html">src.spyice.parameters.real_constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.results_params.html">src.spyice.parameters.results_params</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.user_input.html">src.spyice.parameters.user_input</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.postprocess.html">spyice.postprocess package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.postprocess.html">spyice.postprocess package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="spyice.postprocess.analysis.html">src.spyice.postprocess.analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.postprocess.visualise_model.html">src.spyice.postprocess.visualise_model</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.preprocess.html">spyice.preprocess package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="spyice.preprocess.html">spyice.preprocess package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.geometry_settings.html">src.spyice.preprocess.geometry_settings</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">src.spyice.preprocess.initial_boundary_conditions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.modify_initial_boundary.html">src.spyice.preprocess.modify_initial_boundary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.pre_process.html">src.spyice.preprocess.pre_process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.store.html">src.spyice.preprocess.store</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.utils.html">spyice.utils package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="simple">
+<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.utils.html">spyice.utils package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.config_sort.html">src.spyice.utils.config_sort</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.error_norms.html">src.spyice.utils.error_norms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.helpers.html">src.spyice.utils.helpers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.spyice_exceptions.html">src.spyice.utils.spyice_exceptions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.spyice_logger.html">src.spyice.utils.spyice_logger</a></li>
 </ul>
 </details></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.coefficients.html">src.spyice.coefficients</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.main_process.html">src.spyice.main_process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.rhs.html">src.spyice.rhs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.statevariables.html">src.spyice.statevariables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html">src.spyice.update_physical_values</a></li>
 </ul>
 </details></li>
 </ul>
@@ -350,10 +336,6 @@ document.write(`
       
         <div class="header-article-item">
 
-
-
-
-
 <nav aria-label="Breadcrumb" class="d-print-none">
   <ul class="bd-breadcrumbs">
     
@@ -366,12 +348,12 @@ document.write(`
     <li class="breadcrumb-item"><a href="_index.html" class="nav-link">SpyIce</a></li>
     
     
-    <li class="breadcrumb-item"><i class="fa-solid fa-ellipsis"></i></li>
+    <li class="breadcrumb-item"><a href="spyice.html" class="nav-link">spyice package</a></li>
     
     
     <li class="breadcrumb-item"><a href="spyice.preprocess.html" class="nav-link">spyice.preprocess package</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">&lt;no title&gt;</li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">src.spyice.preprocess.initial_boundary_conditions</span></li>
   </ul>
 </nav>
 </div>
@@ -388,7 +370,280 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  
+  <section id="module-src.spyice.preprocess.initial_boundary_conditions">
+<span id="src-spyice-preprocess-initial-boundary-conditions"></span><h1>src.spyice.preprocess.initial_boundary_conditions<a class="headerlink" href="#module-src.spyice.preprocess.initial_boundary_conditions" title="Link to this heading">#</a></h1>
+<dl class="py exception">
+<dt class="sig sig-object py" id="src.spyice.preprocess.initial_boundary_conditions.SalinityUnavailableError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.spyice.preprocess.initial_boundary_conditions.</span></span><span class="sig-name descname"><span class="pre">SalinityUnavailableError</span></span><a class="reference internal" href="../_modules/src/spyice/preprocess/initial_boundary_conditions.html#SalinityUnavailableError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.preprocess.initial_boundary_conditions.SalinityUnavailableError" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Exception raised when the S_IC option is not available in initial conditions.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.spyice.preprocess.initial_boundary_conditions.boundary_condition">
+<span class="sig-prename descclassname"><span class="pre">src.spyice.preprocess.initial_boundary_conditions.</span></span><span class="sig-name descname"><span class="pre">boundary_condition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">argument</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_passed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_salinity</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/preprocess/initial_boundary_conditions.html#boundary_condition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.preprocess.initial_boundary_conditions.boundary_condition" title="Link to this definition">#</a></dt>
+<dd><p>Calculates the boundary conditions for temperature or salinity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>argument</strong> (<em>str</em>) – The argument specifying whether to calculate temperature or salinity.</p></li>
+<li><p><strong>t_passed</strong> (<em>float</em>) – The time passed.</p></li>
+<li><p><strong>initial_salinity</strong> (<em>float</em>) – The initial salinity value.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple containing the boundary conditions for temperature or salinity.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>None</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.spyice.preprocess.initial_boundary_conditions.calculate_boundary_salinity">
+<span class="sig-prename descclassname"><span class="pre">src.spyice.preprocess.initial_boundary_conditions.</span></span><span class="sig-name descname"><span class="pre">calculate_boundary_salinity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">initial_salinity</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/preprocess/initial_boundary_conditions.html#calculate_boundary_salinity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.preprocess.initial_boundary_conditions.calculate_boundary_salinity" title="Link to this definition">#</a></dt>
+<dd><p>Calculates the boundary salinity values based on the initial salinity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>initial_salinity</strong> (<em>str</em>) – The initial salinity value.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple containing the bottom and top salinity values.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>SalinityException</strong> – If the initial salinity value is not valid.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.spyice.preprocess.initial_boundary_conditions.calculate_boundary_temperature">
+<span class="sig-prename descclassname"><span class="pre">src.spyice.preprocess.initial_boundary_conditions.</span></span><span class="sig-name descname"><span class="pre">calculate_boundary_temperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t_passed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_salinity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/preprocess/initial_boundary_conditions.html#calculate_boundary_temperature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.preprocess.initial_boundary_conditions.calculate_boundary_temperature" title="Link to this definition">#</a></dt>
+<dd><p>Calculates the boundary temperature based on the given parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t_passed</strong> (<em>float</em>) – The time passed.</p></li>
+<li><p><strong>initial_salinity</strong> (<em>str</em>) – The initial salinity value.</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em>) – Additional keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple containing the bottom temperature and the top temperature.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.spyice.preprocess.initial_boundary_conditions.compute_melting_temperature_from_salinity">
+<span class="sig-prename descclassname"><span class="pre">src.spyice.preprocess.initial_boundary_conditions.</span></span><span class="sig-name descname"><span class="pre">compute_melting_temperature_from_salinity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">initial_salinity</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/preprocess/initial_boundary_conditions.html#compute_melting_temperature_from_salinity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.preprocess.initial_boundary_conditions.compute_melting_temperature_from_salinity" title="Link to this definition">#</a></dt>
+<dd><p>Computes the melting temperature from the given initial salinity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>initial_salinity</strong> (<em>float</em>) – The initial salinity value.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The computed melting temperature.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.spyice.preprocess.initial_boundary_conditions.raise_salinity_exception">
+<span class="sig-prename descclassname"><span class="pre">src.spyice.preprocess.initial_boundary_conditions.</span></span><span class="sig-name descname"><span class="pre">raise_salinity_exception</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">salinity_value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/preprocess/initial_boundary_conditions.html#raise_salinity_exception"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.preprocess.initial_boundary_conditions.raise_salinity_exception" title="Link to this definition">#</a></dt>
+<dd><p>Raises a custom exception if the salinity value is empty.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>salinity_value</strong> (<em>str</em>) – The salinity value.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#src.spyice.preprocess.initial_boundary_conditions.SalinityUnavailableError" title="src.spyice.preprocess.initial_boundary_conditions.SalinityUnavailableError"><strong>SalinityUnavailableError</strong></a> – If the salinity value is empty.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.spyice.preprocess.initial_boundary_conditions.set_boundary_temperature">
+<span class="sig-prename descclassname"><span class="pre">src.spyice.preprocess.initial_boundary_conditions.</span></span><span class="sig-name descname"><span class="pre">set_boundary_temperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t_passed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature_bottom</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/preprocess/initial_boundary_conditions.html#set_boundary_temperature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.preprocess.initial_boundary_conditions.set_boundary_temperature" title="Link to this definition">#</a></dt>
+<dd><p>Sets the boundary temperature based on the given parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t_passed</strong> (<em>float</em>) – The time passed.</p></li>
+<li><p><strong>temperature_bottom</strong> (<em>float</em>) – The bottom temperature.</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple containing the top temperature and the bottom temperature.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.spyice.preprocess.initial_boundary_conditions.set_inital_salinity">
+<span class="sig-prename descclassname"><span class="pre">src.spyice.preprocess.initial_boundary_conditions.</span></span><span class="sig-name descname"><span class="pre">set_inital_salinity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">initial_salinity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary_salinity</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/preprocess/initial_boundary_conditions.html#set_inital_salinity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.preprocess.initial_boundary_conditions.set_inital_salinity" title="Link to this definition">#</a></dt>
+<dd><p>Sets the initial salinity values for each layer in the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>initial_salinity</strong> (<em>str</em>) – The type of initial salinity distribution.</p></li>
+<li><p><strong>nz</strong> (<em>int</em>) – The number of layers in the model.</p></li>
+<li><p><strong>boundary_salinity</strong> (<em>float</em>) – The salinity value at the boundary.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An array of initial salinity values for each layer.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>SalinityException</strong> – If the initial_salinity value is not recognized.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.spyice.preprocess.initial_boundary_conditions.set_inital_temperature">
+<span class="sig-prename descclassname"><span class="pre">src.spyice.preprocess.initial_boundary_conditions.</span></span><span class="sig-name descname"><span class="pre">set_inital_temperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">initial_temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary_salinity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary_top_temperature</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/preprocess/initial_boundary_conditions.html#set_inital_temperature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.preprocess.initial_boundary_conditions.set_inital_temperature" title="Link to this definition">#</a></dt>
+<dd><p>Sets the initial temperature profile based on the given parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>initial_temperature</strong> (<em>str</em>) – The type of initial temperature profile to set.</p></li>
+<li><p><strong>nz</strong> (<em>int</em>) – The number of vertical grid points.</p></li>
+<li><p><strong>boundary_salinity</strong> (<em>float</em>) – The salinity at the boundary.</p></li>
+<li><p><strong>boundary_top_temperature</strong> (<em>float</em>) – The temperature at the top boundary.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The initial temperature profile as a 1D numpy array.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>None</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.spyice.preprocess.initial_boundary_conditions.set_initial_conditions">
+<span class="sig-prename descclassname"><span class="pre">src.spyice.preprocess.initial_boundary_conditions.</span></span><span class="sig-name descname"><span class="pre">set_initial_conditions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary_salinity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_temperature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'T0'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_salinity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'S1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">initial_liquid_fraction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'P1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary_top_temperature</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">265.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/preprocess/initial_boundary_conditions.html#set_initial_conditions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.preprocess.initial_boundary_conditions.set_initial_conditions" title="Link to this definition">#</a></dt>
+<dd><p>Sets the initial conditions for the simulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nz</strong> (<em>int</em>) – Number of vertical grid points.</p></li>
+<li><p><strong>boundary_salinity</strong> (<em>float</em>) – Salinity value at the boundary.</p></li>
+<li><p><strong>initial_temperature</strong> (<em>str</em><em>, </em><em>optional</em>) – Initial temperature profile. Defaults to “T0”.</p></li>
+<li><p><strong>initial_salinity</strong> (<em>str</em><em>, </em><em>optional</em>) – Initial salinity profile. Defaults to “S1”.</p></li>
+<li><p><strong>initial_liquid_fraction</strong> (<em>str</em><em>, </em><em>optional</em>) – Initial liquid fraction profile. Defaults to “P1”.</p></li>
+<li><p><strong>boundary_top_temperature</strong> (<em>float</em><em>, </em><em>optional</em>) – Temperature value at the top boundary. Defaults to 265.0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple containing the temperature, salinity, liquid fraction, and upwind velocity arrays.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.spyice.preprocess.initial_boundary_conditions.set_initial_liquidfraction">
+<span class="sig-prename descclassname"><span class="pre">src.spyice.preprocess.initial_boundary_conditions.</span></span><span class="sig-name descname"><span class="pre">set_initial_liquidfraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">initial_liquid_fraction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nz</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/preprocess/initial_boundary_conditions.html#set_initial_liquidfraction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.preprocess.initial_boundary_conditions.set_initial_liquidfraction" title="Link to this definition">#</a></dt>
+<dd><p>Sets the initial liquid fraction based on the given input.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>initial_liquid_fraction</strong> (<em>str</em>) – The initial liquid fraction type.</p></li>
+<li><p><strong>nz</strong> (<em>int</em>) – The number of grid points.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The array representing the initial liquid fraction.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>None</strong> – </p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">set_initial_liquidfraction</span><span class="p">(</span><span class="s2">&quot;P1&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="go">array([1., 1., 1., 1., 1., 1., 1., 1., 1., 1.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">set_initial_liquidfraction</span><span class="p">(</span><span class="s2">&quot;P_Stefan&quot;</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="go">array([0., 0., 0., 0., 0.])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">set_initial_liquidfraction</span><span class="p">(</span><span class="s2">&quot;P0&quot;</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="go">array([0., 0., 0., 0., 0., 0., 0., 0.])</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.spyice.preprocess.initial_boundary_conditions.t_w3">
+<span class="sig-prename descclassname"><span class="pre">src.spyice.preprocess.initial_boundary_conditions.</span></span><span class="sig-name descname"><span class="pre">t_w3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/preprocess/initial_boundary_conditions.html#t_w3"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.preprocess.initial_boundary_conditions.t_w3" title="Link to this definition">#</a></dt>
+<dd><p>Calculates the top boundary temperature and freeze date.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dt</strong> (<em>float</em>) – The time step.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple containing the top boundary temperature array and the freeze date.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.spyice.preprocess.initial_boundary_conditions.temperature_gradient">
+<span class="sig-prename descclassname"><span class="pre">src.spyice.preprocess.initial_boundary_conditions.</span></span><span class="sig-name descname"><span class="pre">temperature_gradient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nz</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/preprocess/initial_boundary_conditions.html#temperature_gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.preprocess.initial_boundary_conditions.temperature_gradient" title="Link to this definition">#</a></dt>
+<dd><p>Calculates the temperature gradient based on the given potential temperature profile and number of vertical levels.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>phi</strong> (<em>list</em>) – The potential temperature profile.</p></li>
+<li><p><strong>nz</strong> (<em>int</em>) – The number of vertical levels.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The calculated temperature gradient.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>None</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
 
                 </article>
               
@@ -405,7 +660,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title">src.spyice.preprocess.geometry_settings</p>
       </div>
     </a>
     <a class="right-next"
@@ -413,7 +668,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title">src.spyice.preprocess.modify_initial_boundary</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -424,7 +679,8 @@ document.write(`
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
   <div class="sidebar-secondary-item">
@@ -434,9 +690,21 @@ document.write(`
     <i class="fa-solid fa-list"></i> On this page
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="simple visible nav section-nav flex-column">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.preprocess.initial_boundary_conditions.SalinityUnavailableError"><code class="docutils literal notranslate"><span class="pre">SalinityUnavailableError</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.preprocess.initial_boundary_conditions.boundary_condition"><code class="docutils literal notranslate"><span class="pre">boundary_condition()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.preprocess.initial_boundary_conditions.calculate_boundary_salinity"><code class="docutils literal notranslate"><span class="pre">calculate_boundary_salinity()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.preprocess.initial_boundary_conditions.calculate_boundary_temperature"><code class="docutils literal notranslate"><span class="pre">calculate_boundary_temperature()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.preprocess.initial_boundary_conditions.compute_melting_temperature_from_salinity"><code class="docutils literal notranslate"><span class="pre">compute_melting_temperature_from_salinity()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.preprocess.initial_boundary_conditions.raise_salinity_exception"><code class="docutils literal notranslate"><span class="pre">raise_salinity_exception()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.preprocess.initial_boundary_conditions.set_boundary_temperature"><code class="docutils literal notranslate"><span class="pre">set_boundary_temperature()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.preprocess.initial_boundary_conditions.set_inital_salinity"><code class="docutils literal notranslate"><span class="pre">set_inital_salinity()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.preprocess.initial_boundary_conditions.set_inital_temperature"><code class="docutils literal notranslate"><span class="pre">set_inital_temperature()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.preprocess.initial_boundary_conditions.set_initial_conditions"><code class="docutils literal notranslate"><span class="pre">set_initial_conditions()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.preprocess.initial_boundary_conditions.set_initial_liquidfraction"><code class="docutils literal notranslate"><span class="pre">set_initial_liquidfraction()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.preprocess.initial_boundary_conditions.t_w3"><code class="docutils literal notranslate"><span class="pre">t_w3()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.preprocess.initial_boundary_conditions.temperature_gradient"><code class="docutils literal notranslate"><span class="pre">temperature_gradient()</span></code></a></li>
 </ul>
-
   </nav></div>
 
   <div class="sidebar-secondary-item">
@@ -461,8 +729,8 @@ document.write(`
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -482,7 +750,7 @@ document.write(`
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
     <br/>
   </p>
 </div>
@@ -495,7 +763,7 @@ document.write(`
       
         <div class="footer-item">
 <p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.4.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
 </p></div>
       
     </div>

@@ -193,19 +193,32 @@ class SeaIceModel:
         else:
             mush_cond = phi_k_ > self.mush_upperbound
             mush_indx = 0
-        param_iterlist.append(
+
+        if param[phi_k_ < self.mush_lowerbound].size & param[phi_k_ > self.mush_upperbound].size:
+            param_iterlist.append(
             [
                 param[phi_k_ < self.mush_lowerbound][0],
                 param[phi_k_ == phi_k_][mush_indx],
                 param[phi_k_ > self.mush_upperbound][-1],
             ]
-        ) if param[phi_k_ < self.mush_lowerbound].size else param_iterlist.append(
-            [
-                param[mush_cond][mush_indx],
-                param[phi_k_ == phi_k_][mush_indx],
-                param[phi_k_ > self.mush_upperbound][-1],
-            ]
         )
+        elif param[phi_k_ > self.mush_upperbound].size:
+            param_iterlist.append(
+                [
+                    param[phi_k_ == phi_k_][mush_indx],
+                    param[phi_k_ == phi_k_][mush_indx],
+                    param[phi_k_ > self.mush_upperbound][-1],
+                ]
+            )
+        else:
+            param_iterlist.append(
+                [
+                    param[phi_k_ == phi_k_][mush_indx],
+                    param[phi_k_ == phi_k_][mush_indx],
+                    param[phi_k_ == phi_k_][mush_indx],
+                ]
+            )
+    
         return param_iterlist, mush_indx
 
     def phi_all_mush_list(self, phi_k_, phi_all_mush_list):
@@ -389,11 +402,13 @@ class SeaIceModel:
         )
         residual_voller = 1
         # Run the while loop until convergence is reached
+        # FIXME: tolerance check and change for new enthalpy update for inhomognoeus physical values
+        # TODO: Document Voller method on overleaf 
         while (
-            ((residual_voller > self.preprocess_data.temperature_tolerance) & (stefan))
-            or ((t_err > self.preprocess_data.temperature_tolerance) & (buffo))
-            or ((phi_err > self.preprocess_data.liquid_fraction_tolerance) & (buffo))
-            or (s_err > self.preprocess_data.salinity_tolerance)
+            ((residual_voller > self.preprocess_data.temperature_tolerance) & (stefan)) or
+            ((t_err > self.preprocess_data.temperature_tolerance))
+            or ((phi_err > self.preprocess_data.liquid_fraction_tolerance) )
+            or ((s_err > self.preprocess_data.salinity_tolerance) )
         ):
             # Update state variables Enthalpy, Enthalpy Solid, Liquid Fraction, Temperature, Salinity respectively
             h_k, h_solid, phi_k, t_k, s_k, t_k_A_LHS_matrix, temp_factor3 = (
@@ -422,6 +437,7 @@ class SeaIceModel:
                 Stefan=self.preprocess_data.is_stefan,
             )
 
+            # Check for convergence
             t_err, s_err, phi_err, counter, residual_voller = self.check_convergence(
                 t,
                 counter,

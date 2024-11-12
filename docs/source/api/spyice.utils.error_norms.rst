@@ -1,4 +1,7 @@
-.. automodule:: spyice.utils.error_norms
+src.spyice.utils.error_norms
+=============================
+
+.. automodule:: src.spyice.utils.error_norms
    :members:
    :undoc-members:
    :show-inheritance:

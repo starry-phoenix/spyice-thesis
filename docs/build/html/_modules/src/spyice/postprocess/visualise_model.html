@@ -1,0 +1,1379 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" data-theme="auto">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>src.spyice.postprocess.visualise_model &#8212; SpyIce  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "auto";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "auto";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=b6ad3417" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/src/spyice/postprocess/visualise_model';</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.0.0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="auto">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">SpyIce  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../report/_index.html">
+    About
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../quick_start/_index.html">
+    How-to
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/_index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../report/_index.html">
+    About
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../quick_start/_index.html">
+    How-to
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api/_index.html">
+    API
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">src.spyice.postprocess.visualise_model</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for src.spyice.postprocess.visualise_model</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.colors</span> <span class="k">as</span> <span class="nn">colors</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.animation</span> <span class="k">as</span> <span class="nn">animation</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">from</span> <span class="nn">src.spyice.parameters.results_params</span> <span class="kn">import</span> <span class="n">ResultsParams</span>
+<span class="kn">from</span> <span class="nn">src.spyice.parameters.user_input</span> <span class="kn">import</span> <span class="n">UserInput</span>
+<span class="kn">from</span> <span class="nn">src.spyice.postprocess.analysis</span> <span class="kn">import</span> <span class="n">Analysis</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">seterr</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">invalid</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="c1"># .style.use(&quot;spyice.utils.custom&quot;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;src.spyice.utils.custom&quot;</span><span class="p">)</span>
+<span class="c1"># plt.rcParams.update(</span>
+<span class="c1">#     {</span>
+<span class="c1">#         &quot;text.usetex&quot;: True,</span>
+<span class="c1">#     }</span>
+<span class="c1"># )</span>
+<span class="c1"># plt.rcParams[&quot;pgf.texsystem&quot;] = &quot;pdflatex&quot;</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;text.latex.preamble&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="sa">r</span><span class="s2">&quot;\usepackage</span><span class="si">{dashbox}</span><span class="s2">&quot;</span><span class="p">,</span>
+        <span class="sa">r</span><span class="s2">&quot;\setmainfont</span><span class="si">{xcolor}</span><span class="s2">&quot;</span><span class="p">,</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;animation.convert_path&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span>
+    <span class="s2">&quot;C:/Program Files/ImageMagick-7.1.1-Q16-HDRI/magick.exe&quot;</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="VisualiseModel">
+<a class="viewcode-back" href="../../../../api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel">[docs]</a>
+<span class="k">class</span> <span class="nc">VisualiseModel</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A class for visualizing sea ice model results.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="VisualiseModel.__init__">
+<a class="viewcode-back" href="../../../../api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.__init__">[docs]</a>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">user_input_dataclass</span><span class="p">:</span> <span class="n">UserInput</span><span class="p">,</span>
+        <span class="n">results_dataclass</span><span class="p">:</span> <span class="n">ResultsParams</span><span class="p">,</span>
+        <span class="n">error_analysis_dataclass</span><span class="p">:</span> <span class="n">Analysis</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            user_input_dataclass (UserInput): An instance of the UserInput class containing user input data.</span>
+<span class="sd">            results_dataclass (ResultsParams): An instance of the ResultsParams class containing results data.</span>
+<span class="sd">            error_analysis_dataclass (Analysis): An instance of the Analysis class containing error analysis data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">results_object</span> <span class="o">=</span> <span class="n">results_dataclass</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_analysis_object</span> <span class="o">=</span> <span class="n">error_analysis_dataclass</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span> <span class="o">=</span> <span class="n">user_input_dataclass</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Visualisation object created...&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="VisualiseModel.phi_slope">
+<a class="viewcode-back" href="../../../../api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.phi_slope">[docs]</a>
+    <span class="k">def</span> <span class="nf">phi_slope</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">iteration</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculates the indices of the mushy regions based on the phi values.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            iteration (int): The iteration number.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The indices of the mushy regions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">phi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">phi_k_list</span><span class="p">[</span><span class="n">iteration</span><span class="p">]</span>
+        <span class="n">mush_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">intersect1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">phi</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">phi</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">mush_idx</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">phi</span><span class="o">.</span><span class="n">any</span><span class="p">()</span> <span class="o">==</span> <span class="mf">1.0</span><span class="p">:</span>
+            <span class="n">mush_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">phi</span> <span class="o">==</span> <span class="mf">1.0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">mush_idx</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">phi</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
+            <span class="n">mush_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">phi</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">mush_idx</span></div>
+
+
+<div class="viewcode-block" id="VisualiseModel.plot_error_temp_diff">
+<a class="viewcode-back" href="../../../../api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_error_temp_diff">[docs]</a>
+    <span class="k">def</span> <span class="nf">plot_error_temp_diff</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zoom_x</span><span class="p">,</span> <span class="n">savefig</span><span class="o">=</span><span class="s2">&quot;True&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Plots the temperature differences between two consecutive iterations.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            zoom_x (int): The maximum value for the x-axis.</span>
+<span class="sd">            savefig (str, optional): Indicates whether to save the figure or not. Defaults to &quot;True&quot;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Plotting Temperature differences between two consecutive iterations...&quot;</span><span class="p">)</span>
+        <span class="n">x_axis_iter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">zoom_x</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># fig, ax1 = plt.subplots(figsize=(10, 6))</span>
+        <span class="n">fig</span><span class="p">,</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+        <span class="c1"># plt.grid()</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="n">x_axis_iter</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_timestep_dt</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_analysis_object</span><span class="o">.</span><span class="n">t_k_stefan_diff_l2norm</span><span class="p">[</span><span class="n">x_axis_iter</span><span class="p">],</span>
+            <span class="s2">&quot;k&quot;</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$L_2$&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_extracted_from_plot_error_temp_8</span><span class="p">(</span>
+            <span class="n">ax1</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$\lvert T_\text</span><span class="si">{Stefan}</span><span class="s2"> - T_k \rvert$&quot;</span>
+        <span class="p">)</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+        <span class="n">ax2</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;teal&quot;</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="n">x_axis_iter</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_timestep_dt</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">thickness_list</span><span class="p">[:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_axis_iter</span><span class="p">)],</span>
+            <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Thickness in m&quot;</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+            <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Depth in m&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">labelcolor</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">autoscale</span><span class="p">()</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">autoscale</span><span class="p">()</span>
+        <span class="c1"># fig.tight_layout()</span>
+
+        <span class="k">if</span> <span class="n">savefig</span><span class="p">:</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">dir_output_name</span> <span class="o">+</span> <span class="s2">&quot;/Temperature_error_diff_num_ana.pdf&quot;</span><span class="p">,</span>
+                <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;pgf&quot;</span><span class="p">,</span>
+            <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="VisualiseModel.plot_error_temp">
+<a class="viewcode-back" href="../../../../api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_error_temp">[docs]</a>
+    <span class="k">def</span> <span class="nf">plot_error_temp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zoom_x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">norm</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;inf&quot;</span><span class="p">,</span> <span class="n">savefig</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Plots the temperature errors using the specified norm.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            zoom_x (int): The maximum value for the x-axis.</span>
+<span class="sd">            norm (str, optional): The norm to be used for plotting. Defaults to &quot;inf&quot;.</span>
+<span class="sd">            savefig (bool, optional): Whether to save the figure. Defaults to True.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Plotting Temperature errors using </span><span class="si">{</span><span class="n">norm</span><span class="si">}</span><span class="s2"> norm...&quot;</span><span class="p">)</span>
+        <span class="c1"># fig1, (ax1) = plt.subplots(figsize=(10, 6))</span>
+        <span class="n">fig1</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+        <span class="c1"># plt.grid()</span>
+        <span class="n">x_axis_iter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">zoom_x</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># plt.figure(figsize=(10,10))</span>
+        <span class="k">if</span> <span class="n">norm</span> <span class="o">==</span> <span class="s2">&quot;inf&quot;</span><span class="p">:</span>
+            <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+                <span class="n">x_axis_iter</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_timestep_dt</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">error_analysis_object</span><span class="o">.</span><span class="n">t_stefan_diff_infnorm</span><span class="p">[</span><span class="n">x_axis_iter</span><span class="p">],</span>
+                <span class="s2">&quot;r--&quot;</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$L_\infty$ Analytical&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+                <span class="n">x_axis_iter</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_timestep_dt</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">error_analysis_object</span><span class="o">.</span><span class="n">t_k_diff_infnorm</span><span class="p">[</span><span class="n">x_axis_iter</span><span class="p">],</span>
+                <span class="s2">&quot;k&quot;</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$L_\infty$ Numerical&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="n">norm</span> <span class="o">==</span> <span class="s2">&quot;2&quot;</span><span class="p">:</span>
+            <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+                <span class="n">x_axis_iter</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_timestep_dt</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">error_analysis_object</span><span class="o">.</span><span class="n">t_stefan_diff_l2norm</span><span class="p">[</span><span class="n">x_axis_iter</span><span class="p">],</span>
+                <span class="s2">&quot;r--&quot;</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$L_2$ Analytical&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+                <span class="n">x_axis_iter</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_timestep_dt</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">error_analysis_object</span><span class="o">.</span><span class="n">t_k_diff_l2norm</span><span class="p">[</span><span class="n">x_axis_iter</span><span class="p">],</span>
+                <span class="s2">&quot;k&quot;</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$L_2$ Numerical&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+                <span class="n">x_axis_iter</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_timestep_dt</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">error_analysis_object</span><span class="o">.</span><span class="n">t_stefan_diff_l1norm</span><span class="p">[</span><span class="n">x_axis_iter</span><span class="p">],</span>
+                <span class="s2">&quot;r--&quot;</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$L_1$ Analytical&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+                <span class="n">x_axis_iter</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_timestep_dt</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">error_analysis_object</span><span class="o">.</span><span class="n">t_k_diff_l1norm</span><span class="p">[</span><span class="n">x_axis_iter</span><span class="p">],</span>
+                <span class="s2">&quot;k&quot;</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$L_1$ Numerical&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_extracted_from_plot_error_temp_8</span><span class="p">(</span>
+            <span class="n">ax1</span><span class="p">,</span> <span class="s2">&quot;Temperature Error of Analytical and Numerical Results&quot;</span>
+        <span class="p">)</span>
+
+        <span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;blue&quot;</span>
+        <span class="n">ax3</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+        <span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="n">x_axis_iter</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_timestep_dt</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">thickness_list</span><span class="p">[:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_axis_iter</span><span class="p">)],</span>
+            <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="c1"># ax3.set_ylabel(&quot;Thickness in m&quot;)</span>
+        <span class="n">ax3</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">labelcolor</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+
+        <span class="c1"># fig1.tight_layout()</span>
+
+        <span class="k">if</span> <span class="n">savefig</span><span class="p">:</span>
+            <span class="n">fig1</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">dir_output_name</span> <span class="o">+</span> <span class="s2">&quot;/Temperature_error_num_and_ana&quot;</span><span class="p">,</span>
+                <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;pgf&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig1</span><span class="p">)</span></div>
+
+
+    <span class="c1"># TODO Rename this here and in `plot_error_temp_diff` and `plot_error_temp`</span>
+    <span class="k">def</span> <span class="nf">_extracted_from_plot_error_temp_8</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ax1</span><span class="p">,</span> <span class="n">arg1</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the x-label, y-label, and title of the given axis.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            ax1 (matplotlib.axes.Axes): The axis to set the labels and title for.</span>
+<span class="sd">            arg1 (str): The title of the plot.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$t$ [hours]&quot;</span><span class="p">)</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\Delta T$&quot;</span><span class="p">)</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">arg1</span><span class="p">)</span>
+
+<div class="viewcode-block" id="VisualiseModel.plot_depth_over_time">
+<a class="viewcode-back" href="../../../../api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_depth_over_time">[docs]</a>
+    <span class="k">def</span> <span class="nf">plot_depth_over_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">savefig</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Plots the depth over time.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            savefig (bool, optional): Whether to save the figure. Defaults to False.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Plotting Depth over time...&quot;</span><span class="p">)</span>
+        <span class="n">x_axis_iter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">max_iterations</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">depth_mush</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_resolution_dz</span><span class="p">),</span> <span class="mf">1.0</span><span class="p">)</span>
+        <span class="n">mush_list_y1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="p">[</span><span class="n">depth_mush</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">phi_slope</span><span class="p">(</span><span class="n">i</span><span class="p">)[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">depth_mush</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">phi_slope</span><span class="p">(</span><span class="n">i</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]]</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x_axis_iter</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+        <span class="c1"># mush_list_y2 = [depth_mush[self.phi_slope(i)[-1]] for i in x_axis_iter]</span>
+        <span class="n">depth</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">thickness_list_buffo</span><span class="p">[:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_axis_iter</span><span class="p">)])</span>
+        <span class="c1"># fig, ax = plt.subplots(figsize=(10, 6))</span>
+        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+        <span class="c1"># ax.grid()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="n">x_axis_iter</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_timestep_dt</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">thickness_list</span><span class="p">[:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_axis_iter</span><span class="p">)],</span>
+            <span class="s2">&quot;r--&quot;</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Numerical Depth&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="n">x_axis_iter</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_timestep_dt</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">depth_stefan_all</span><span class="p">[:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_axis_iter</span><span class="p">)],</span>
+            <span class="s2">&quot;k&quot;</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Analytical Depth&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">is_buffo</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+                <span class="n">x_axis_iter</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_timestep_dt</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">thickness_list_buffo</span><span class="p">[:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_axis_iter</span><span class="p">)],</span>
+                <span class="s2">&quot;b-.&quot;</span><span class="p">,</span>
+                <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Buffo Depth&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
+            <span class="n">x_axis_iter</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_timestep_dt</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">,</span>
+            <span class="n">mush_list_y1</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span>
+            <span class="n">mush_list_y1</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span>
+            <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Mushy Layer&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$t$ [hours]&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Depth [$m$]&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Numerical Depth Vs Analytical Depth&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">savefig</span><span class="p">:</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">dir_output_name</span> <span class="o">+</span> <span class="s2">&quot;/Numerical_Analytical_Depth.pdf&quot;</span><span class="p">,</span>
+                <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;pgf&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="VisualiseModel.plot_depth_over_time_heatmap">
+<a class="viewcode-back" href="../../../../api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_depth_over_time_heatmap">[docs]</a>
+    <span class="k">def</span> <span class="nf">plot_depth_over_time_heatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">savefig</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Plots the depth over time.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            savefig (bool, optional): Whether to save the figure. Defaults to False.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Plotting Heatmap Depth over time...&quot;</span><span class="p">)</span>
+        <span class="n">x_axis_iter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">max_iterations</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">depth_mush</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_resolution_dz</span><span class="p">),</span> <span class="mf">1.0</span><span class="p">)</span>
+        <span class="n">mush_list_y1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="p">[</span><span class="n">depth_mush</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">phi_slope</span><span class="p">(</span><span class="n">i</span><span class="p">)[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">depth_mush</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">phi_slope</span><span class="p">(</span><span class="n">i</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]]</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x_axis_iter</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+        <span class="n">depth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">depth_stefan_all</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">x_axis_iter</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">depth</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_resolution_dz</span><span class="p">)</span>
+        <span class="n">heatmap_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">phi_k_list</span><span class="p">[:,</span> <span class="p">:</span><span class="n">index</span><span class="p">]</span>
+        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+        <span class="n">cax</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span>
+            <span class="n">heatmap_data</span><span class="o">.</span><span class="n">T</span><span class="p">,</span>
+            <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">,</span>
+            <span class="n">aspect</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+            <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;gaussian&quot;</span><span class="p">,</span>
+            <span class="n">extent</span><span class="o">=</span><span class="p">[</span>
+                <span class="mi">0</span><span class="p">,</span>
+                <span class="nb">len</span><span class="p">(</span><span class="n">x_axis_iter</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_timestep_dt</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">,</span>
+                <span class="n">index</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_resolution_dz</span><span class="p">,</span>
+                <span class="mf">0.0</span><span class="p">,</span>
+            <span class="p">],</span>
+        <span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$t$ [hours]&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Depth [$m$]&quot;</span><span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cax</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Thickness [m]&quot;</span><span class="p">)</span>
+        <span class="c1"># mush_list_y2 = [depth_mush[self.phi_slope(i)[-1]] for i in x_axis_iter]</span>
+        <span class="n">ax1</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="n">x_axis_iter</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_timestep_dt</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">depth_stefan_all</span><span class="p">[:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_axis_iter</span><span class="p">)],</span>
+            <span class="s2">&quot;k&quot;</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Analytical Depth&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="n">x_axis_iter</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_timestep_dt</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">thickness_list</span><span class="p">[:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_axis_iter</span><span class="p">)],</span>
+            <span class="s2">&quot;k--&quot;</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Voller Numerical Depth&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="n">x_axis_iter</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_timestep_dt</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">thickness_list_buffo</span><span class="p">[:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_axis_iter</span><span class="p">)],</span>
+            <span class="s2">&quot;k:&quot;</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Buffo Numerical Depth&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span>
+            <span class="n">index</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_resolution_dz</span><span class="p">,</span>
+            <span class="mf">0.0</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Numerical Depth Vs Analytical Depth&quot;</span><span class="p">)</span>
+        <span class="c1"># ax1.set_yscale(&quot;log&quot;)</span>
+
+        <span class="k">if</span> <span class="n">savefig</span><span class="p">:</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">dir_output_name</span>
+                <span class="o">+</span> <span class="s2">&quot;/Numerical_Analytical_Depth_heatmap.pdf&quot;</span><span class="p">,</span>
+                <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;pgf&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="VisualiseModel.plot_temperature">
+<a class="viewcode-back" href="../../../../api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_temperature">[docs]</a>
+    <span class="k">def</span> <span class="nf">plot_temperature</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">z_depth</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">savefig</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">Buffo_matlab</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Plots the temperature evolution at a given depth.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            z_depth (float): The depth at which to plot the temperature evolution.</span>
+<span class="sd">            savefig (bool, optional): Whether to save the figure. Defaults to True.</span>
+<span class="sd">            Buffo_matlab (bool, optional): Whether to include Buffo-matlab data in the plot. Defaults to False.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Plotting Temperature evolution at </span><span class="si">{</span><span class="n">z_depth</span><span class="si">}</span><span class="s2">m...&quot;</span><span class="p">)</span>
+        <span class="n">x_axis_iter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">max_iterations</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="c1"># x_axis_iter = np.arange(0,22970,1)</span>
+        <span class="n">T_k_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">t_k_list</span><span class="p">[</span>
+            <span class="p">:,</span> <span class="nb">int</span><span class="p">(</span><span class="n">z_depth</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_resolution_dz</span><span class="p">)</span>
+        <span class="p">]</span>
+        <span class="n">T_stefan_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">t_stefan_list</span><span class="p">[</span>
+            <span class="p">:,</span> <span class="nb">int</span><span class="p">(</span><span class="n">z_depth</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_resolution_dz</span><span class="p">)</span>
+        <span class="p">]</span>
+        <span class="n">T_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">T_k_</span> <span class="o">-</span> <span class="n">T_stefan_</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">is_buffo</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">T_k_buffo_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">t_k_buffo_list</span><span class="p">[</span>
+                <span class="p">:,</span> <span class="nb">int</span><span class="p">(</span><span class="n">z_depth</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_resolution_dz</span><span class="p">)</span>
+            <span class="p">]</span>
+            <span class="n">T_err_buffo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">T_k_</span> <span class="o">-</span> <span class="n">T_k_buffo_</span><span class="p">)</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">z_depth</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_resolution_dz</span>
+        <span class="k">if</span> <span class="n">Buffo_matlab</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;MatlabData/temp_dirichletSalinity01.csv&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+            <span class="n">df_depth</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+                <span class="n">df</span><span class="p">[</span>
+                    <span class="nb">int</span><span class="p">(</span><span class="n">z_depth</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_resolution_dz</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">:</span> <span class="nb">int</span><span class="p">(</span>
+                        <span class="n">z_depth</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_resolution_dz</span>
+                    <span class="p">)</span>
+                <span class="p">]</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">25000</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># fig1, (ax1) = plt.subplots(figsize=(10, 6))</span>
+        <span class="n">fig1</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+        <span class="c1"># plt.grid()</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="n">x_axis_iter</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_timestep_dt</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">,</span>
+            <span class="n">T_k_</span><span class="p">[</span><span class="n">x_axis_iter</span><span class="p">],</span>
+            <span class="s2">&quot;r--&quot;</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Numerical Temperature&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="n">x_axis_iter</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_timestep_dt</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">,</span>
+            <span class="n">T_stefan_</span><span class="p">[</span><span class="n">x_axis_iter</span><span class="p">],</span>
+            <span class="s2">&quot;k&quot;</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Analytical Temperature&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">is_buffo</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+                <span class="n">x_axis_iter</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_timestep_dt</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">,</span>
+                <span class="n">T_k_buffo_</span><span class="p">[</span><span class="n">x_axis_iter</span><span class="p">],</span>
+                <span class="s2">&quot;b--&quot;</span><span class="p">,</span>
+                <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Buffo&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="n">Buffo_matlab</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+                <span class="n">x_axis_iter</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_timestep_dt</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">,</span>
+                <span class="n">df_depth</span><span class="p">[:</span><span class="mi">24999</span><span class="p">],</span>
+                <span class="s2">&quot;b&quot;</span><span class="p">,</span>
+                <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Buffo-matlab&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$t$ [hours]&quot;</span><span class="p">)</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Temperature [K]&quot;</span><span class="p">)</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+        <span class="c1"># ax1.legend()</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">rf</span><span class="s2">&quot;Temperature evolution at </span><span class="si">{</span><span class="n">z_depth</span><span class="si">}</span><span class="s2">m&quot;</span><span class="p">)</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;gray&quot;</span>
+        <span class="n">ax3</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+        <span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="n">x_axis_iter</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_timestep_dt</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">,</span>
+            <span class="n">T_err</span><span class="p">[</span><span class="n">x_axis_iter</span><span class="p">],</span>
+            <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\lvertT_\text</span><span class="si">{Numerical}</span><span class="s2">-T_\text</span><span class="si">{Analytical}</span><span class="s2">\rvert$&quot;</span><span class="p">,</span>
+            <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">,</span>
+            <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">ax3</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">labelcolor</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+        <span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$T_k-T_Stefan$&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+        <span class="n">ax3</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s2">&quot;log&quot;</span><span class="p">)</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+        <span class="c1"># fig1.tight_layout()</span>
+        <span class="k">if</span> <span class="n">savefig</span><span class="p">:</span>
+            <span class="n">fig1</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">dir_output_name</span>
+                <span class="o">+</span> <span class="s2">&quot;/Temperature evolution at&quot;</span>
+                <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">z_depth</span><span class="p">)</span>
+                <span class="o">+</span> <span class="s2">&quot;m.pdf&quot;</span><span class="p">,</span>
+                <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;pgf&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig1</span><span class="p">)</span>
+
+        <span class="n">df_temp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">t_k_list</span><span class="p">)</span>
+        <span class="n">df_temp</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">dir_output_name</span>
+            <span class="o">+</span> <span class="s2">&quot;/Temperature&quot;</span>
+            <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_resolution_dz</span><span class="p">)</span>
+            <span class="o">+</span> <span class="s2">&quot;.csv&quot;</span>
+        <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="VisualiseModel.plot_temperature_heatmap">
+<a class="viewcode-back" href="../../../../api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_temperature_heatmap">[docs]</a>
+    <span class="k">def</span> <span class="nf">plot_temperature_heatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">savefig</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Plots the temperature heatmap.&quot;&quot;&quot;</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Plotting Temperature heatmap...&quot;</span><span class="p">)</span>
+        <span class="n">x_axis_iter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">max_iterations</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">heatmap_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">t_k_list</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+        <span class="n">cax</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span>
+            <span class="n">heatmap_data</span><span class="o">.</span><span class="n">T</span><span class="p">,</span>
+            <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">,</span>
+            <span class="n">aspect</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+            <span class="n">extent</span><span class="o">=</span><span class="p">[</span>
+                <span class="mi">0</span><span class="p">,</span>
+                <span class="nb">len</span><span class="p">(</span><span class="n">x_axis_iter</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_timestep_dt</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">,</span>
+                <span class="mf">1.0</span><span class="p">,</span>
+                <span class="mi">0</span><span class="p">,</span>
+            <span class="p">],</span>
+        <span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$t$ [hours]&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Depth [$m$]&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Freezing Overtime&quot;</span><span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cax</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Temperature [K]&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">savefig</span><span class="p">:</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">dir_output_name</span> <span class="o">+</span> <span class="s2">&quot;/Temperature_heatmap.pdf&quot;</span><span class="p">,</span>
+                <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;pgf&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="VisualiseModel.plot_salinity_heatmap">
+<a class="viewcode-back" href="../../../../api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_salinity_heatmap">[docs]</a>
+    <span class="k">def</span> <span class="nf">plot_salinity_heatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">savefig</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Plots the temperature heatmap.&quot;&quot;&quot;</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Plotting Temperature heatmap...&quot;</span><span class="p">)</span>
+        <span class="n">x_axis_iter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">max_iterations</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">heatmap_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">s_k_list</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+        <span class="n">cax</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span>
+            <span class="n">heatmap_data</span><span class="o">.</span><span class="n">T</span><span class="p">,</span>
+            <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">,</span>
+            <span class="n">aspect</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+            <span class="n">extent</span><span class="o">=</span><span class="p">[</span>
+                <span class="mi">0</span><span class="p">,</span>
+                <span class="nb">len</span><span class="p">(</span><span class="n">x_axis_iter</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_timestep_dt</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">,</span>
+                <span class="mf">1.0</span><span class="p">,</span>
+                <span class="mi">0</span><span class="p">,</span>
+            <span class="p">],</span>
+        <span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$t$ [hours]&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Depth [$m$]&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Freezing Overtime&quot;</span><span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cax</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Salinity in ppt&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">savefig</span><span class="p">:</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">dir_output_name</span> <span class="o">+</span> <span class="s2">&quot;/Salinity_heatmap.pdf&quot;</span><span class="p">,</span>
+                <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;pgf&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="VisualiseModel.plot_liquidfraction_heatmap">
+<a class="viewcode-back" href="../../../../api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_liquidfraction_heatmap">[docs]</a>
+    <span class="k">def</span> <span class="nf">plot_liquidfraction_heatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">savefig</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Plots the temperature heatmap.&quot;&quot;&quot;</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Plotting Temperature heatmap...&quot;</span><span class="p">)</span>
+        <span class="n">x_axis_iter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">max_iterations</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">heatmap_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">phi_k_list</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+        <span class="n">cax</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span>
+            <span class="n">heatmap_data</span><span class="o">.</span><span class="n">T</span><span class="p">,</span>
+            <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">,</span>
+            <span class="n">aspect</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+            <span class="n">extent</span><span class="o">=</span><span class="p">[</span>
+                <span class="mi">0</span><span class="p">,</span>
+                <span class="nb">len</span><span class="p">(</span><span class="n">x_axis_iter</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_timestep_dt</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">,</span>
+                <span class="mf">1.0</span><span class="p">,</span>
+                <span class="mi">0</span><span class="p">,</span>
+            <span class="p">],</span>
+        <span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$t$ [hours]&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Depth [$m$]&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Freezing Overtime&quot;</span><span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cax</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Liquid Fraction&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">savefig</span><span class="p">:</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">dir_output_name</span> <span class="o">+</span> <span class="s2">&quot;/Liquidfraction.pdf&quot;</span><span class="p">,</span>
+                <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;pgf&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="VisualiseModel.plot_temperature_heatmap_as_gif">
+<a class="viewcode-back" href="../../../../api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_temperature_heatmap_as_gif">[docs]</a>
+    <span class="k">def</span> <span class="nf">plot_temperature_heatmap_as_gif</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">fps</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="n">nseconds</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="n">depth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">depth_stefan_all</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">max_iterations</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">depth</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_resolution_dz</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">t_k_list</span><span class="p">[:,</span> <span class="p">:</span><span class="n">index</span><span class="p">]</span>
+        <span class="n">frames_plot</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">max_iterations</span> <span class="o">/</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">frames_plot</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+        <span class="n">hmap</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span>
+            <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span>
+            <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">,</span>
+            <span class="n">aspect</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+            <span class="n">extent</span><span class="o">=</span><span class="p">[</span>
+                <span class="mi">0</span><span class="p">,</span>
+                <span class="mi">5</span> <span class="o">*</span> <span class="mi">1</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_timestep_dt</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">,</span>
+                <span class="n">depth</span><span class="p">,</span>
+                <span class="mi">0</span><span class="p">,</span>
+            <span class="p">],</span>
+        <span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$t$ [hours]&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Depth [m]&quot;</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">animation_function</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+            <span class="n">hmap</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">10</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+            <span class="n">hmap</span><span class="o">.</span><span class="n">set_extent</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="mi">0</span><span class="p">,</span>
+                    <span class="p">(</span><span class="mi">10</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_timestep_dt</span> <span class="o">/</span> <span class="mi">3600</span><span class="p">,</span>
+                    <span class="n">depth</span><span class="p">,</span>
+                    <span class="mi">0</span><span class="p">,</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
+
+            <span class="k">return</span> <span class="p">[</span><span class="n">hmap</span><span class="p">]</span>
+
+        <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">hmap</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Temperature [K]&quot;</span><span class="p">)</span>
+
+        <span class="n">ani</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span>
+            <span class="n">fig</span><span class="p">,</span>
+            <span class="n">animation_function</span><span class="p">,</span>
+            <span class="n">repeat</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">frames</span><span class="o">=</span><span class="p">(</span><span class="n">fps</span> <span class="o">*</span> <span class="n">nseconds</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="n">interval</span><span class="o">=</span><span class="mi">1000</span> <span class="o">/</span> <span class="n">fps</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># To save the animation using Pillow as a gif</span>
+        <span class="n">ani</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">dir_output_name</span> <span class="o">+</span> <span class="s2">&quot;/test_new.gif&quot;</span><span class="p">,</span> <span class="n">writer</span><span class="o">=</span><span class="s2">&quot;imagemagick&quot;</span><span class="p">)</span>
+        <span class="c1"># ani.save(&quot;test_new_html.html&quot;, writer=&quot;html&quot;)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="VisualiseModel.plot_H_iter">
+<a class="viewcode-back" href="../../../../api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_H_iter">[docs]</a>
+    <span class="k">def</span> <span class="nf">plot_H_iter</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">param_name</span><span class="o">=</span><span class="s2">&quot;Temperature&quot;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;K&quot;</span><span class="p">,</span> <span class="n">savefig</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">):</span>
+        <span class="n">iters</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">iters_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">iters</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">iters</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">s</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">s_melt</span> <span class="o">=</span> <span class="n">s</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="n">t_melt</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="o">-</span><span class="p">(</span><span class="mf">9.1969758</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1e-05</span><span class="p">)</span> <span class="o">*</span> <span class="n">s_melt</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.03942059</span> <span class="o">*</span> <span class="n">s_melt</span> <span class="o">+</span> <span class="mf">272.63617665</span>
+            <span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;cell Solid&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;turquoise&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">iters_arr</span><span class="p">,</span> <span class="n">h</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;turquoise&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;cell Mushy&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">iters_arr</span><span class="p">,</span> <span class="n">h</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;cell Liquid&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;teal&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">iters_arr</span><span class="p">,</span> <span class="n">h</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;teal&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">s</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_melt</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Temperature Melt&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">iters_arr</span><span class="p">,</span> <span class="n">t_melt</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;iteration before convergence&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">rf</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">param_name</span><span class="si">}</span><span class="s2"> [</span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">rf</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">param_name</span><span class="si">}</span><span class="s2"> at t=</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">H&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">savefig</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">dir_output_name</span>
+                <span class="o">+</span> <span class="s2">&quot;/&quot;</span>
+                <span class="o">+</span> <span class="n">param_name</span>
+                <span class="o">+</span> <span class="s2">&quot;_iter&quot;</span>
+                <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">output_suffix</span>
+                <span class="o">+</span> <span class="s2">&quot;_&quot;</span>
+                <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+                <span class="o">+</span> <span class="s2">&quot;m.pdf&quot;</span><span class="p">,</span>
+                <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;pgf&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="VisualiseModel.plot_H_iter_heatmap_mushy">
+<a class="viewcode-back" href="../../../../api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_H_iter_heatmap_mushy">[docs]</a>
+    <span class="k">def</span> <span class="nf">plot_H_iter_heatmap_mushy</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">temp_all</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">param_name</span><span class="o">=</span><span class="s2">&quot;Temperature&quot;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;K&quot;</span><span class="p">,</span> <span class="n">savefig</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">):</span>
+        <span class="n">iters</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">iters_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">iters</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">iters</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+        <span class="n">Z</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">fig1</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+        <span class="n">heatmap</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span>
+            <span class="n">Z</span><span class="p">,</span>
+            <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">,</span>
+            <span class="n">aspect</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+            <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">iters</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">h</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">h</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span>
+        <span class="p">)</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;iteration before convergence&quot;</span><span class="p">)</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Depth [m]&quot;</span><span class="p">)</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">rf</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">param_name</span><span class="si">}</span><span class="s2"> at t=</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">H&quot;</span><span class="p">)</span>
+
+        <span class="n">fig1</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">heatmap</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">rf</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">param_name</span><span class="si">}</span><span class="s2"> [</span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+        <span class="n">ax2</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">iters_arr</span><span class="p">,</span> <span class="n">h</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;cell Mushy&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">iters_arr</span><span class="p">,</span> <span class="n">h</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">h</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="s2">&quot;:&quot;</span><span class="p">)</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">iters_arr</span><span class="p">,</span> <span class="n">h</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">h</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">h</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">h</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">h</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">h</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="p">[</span><span class="s2">&quot;Solid&quot;</span><span class="p">,</span> <span class="s2">&quot;Mushy&quot;</span><span class="p">,</span> <span class="s2">&quot;Liquid&quot;</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">savefig</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">dir_output_name</span>
+                <span class="o">+</span> <span class="s2">&quot;/&quot;</span>
+                <span class="o">+</span> <span class="n">param_name</span>
+                <span class="o">+</span> <span class="s2">&quot;_iter&quot;</span>
+                <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">output_suffix</span>
+                <span class="o">+</span> <span class="s2">&quot;_&quot;</span>
+                <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+                <span class="o">+</span> <span class="s2">&quot;m_heatmap_mushonly.pdf&quot;</span><span class="p">,</span>
+                <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;pgf&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig1</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="VisualiseModel.plot_H_iter_heatmap">
+<a class="viewcode-back" href="../../../../api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_H_iter_heatmap">[docs]</a>
+    <span class="k">def</span> <span class="nf">plot_H_iter_heatmap</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">temp_all</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">param_name</span><span class="o">=</span><span class="s2">&quot;Temperature&quot;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;K&quot;</span><span class="p">,</span> <span class="n">savefig</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">):</span>
+        <span class="n">iters</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">iters_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">iters</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">iters</span><span class="p">)</span>
+        <span class="n">x_axis_iter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">max_iterations</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">depth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">depth_stefan_all</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">x_axis_iter</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">depth_mush</span> <span class="o">=</span> <span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_resolution_dz</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">depth</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_resolution_dz</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">temp_mush_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">h</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="n">temp_mush_normalised</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">temp_mush_array</span>
+            <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">temp_mush_array</span><span class="o">.</span><span class="n">T</span> <span class="o">*</span> <span class="n">temp_mush_array</span><span class="p">))</span>
+            <span class="o">*</span> <span class="n">depth_mush</span>
+        <span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+        <span class="n">fig1</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+        <span class="n">heatmap</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span>
+            <span class="n">temp_all</span><span class="p">[:,</span> <span class="p">:</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span>
+            <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;Blues&quot;</span><span class="p">,</span>
+            <span class="n">aspect</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+            <span class="n">extent</span><span class="o">=</span><span class="p">[</span>
+                <span class="mi">0</span><span class="p">,</span>
+                <span class="n">iters</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">depth_stefan_all</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">x_axis_iter</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span>
+                <span class="mi">0</span><span class="p">,</span>
+            <span class="p">],</span>
+        <span class="p">)</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;iteration before convergence&quot;</span><span class="p">)</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Depth&quot;</span><span class="p">)</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">rf</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">param_name</span><span class="si">}</span><span class="s2"> at t=</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">H&quot;</span><span class="p">)</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="mf">0.0</span><span class="p">,</span>
+                <span class="n">depth_mush</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">depth_stefan_all</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">x_axis_iter</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span>
+            <span class="p">],</span>
+            <span class="p">[</span><span class="s2">&quot;Solid&quot;</span><span class="p">,</span> <span class="s2">&quot;Mushy&quot;</span><span class="p">,</span> <span class="s2">&quot;Liquid&quot;</span><span class="p">],</span>
+        <span class="p">)</span>
+        <span class="n">fig1</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">heatmap</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">rf</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">param_name</span><span class="si">}</span><span class="s2"> [</span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+        <span class="n">ax2</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+        <span class="c1"># ax2.plot(h[:, 0])</span>
+        <span class="c1"># ax2.scatter(iters_arr, h[:, 0])</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="n">temp_mush_normalised</span><span class="p">,</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;cell Mushy&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span>
+        <span class="p">)</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">iters_arr</span><span class="p">,</span> <span class="n">temp_mush_normalised</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+        <span class="c1"># ax2.plot(h[:, 2], &quot;:&quot;)</span>
+        <span class="c1"># ax2.scatter(iters_arr, h[:, 2])</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">depth_stefan_all</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">x_axis_iter</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="c1"># ax2.set_yticks([h[:, 2][-1], h[:, 0][-1]], [&quot;Solid&quot;, &quot;Liquid&quot;])</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+        <span class="c1"># ax2.legend()</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">savefig</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">dir_output_name</span>
+                <span class="o">+</span> <span class="s2">&quot;/&quot;</span>
+                <span class="o">+</span> <span class="n">param_name</span>
+                <span class="o">+</span> <span class="s2">&quot;_iter&quot;</span>
+                <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">output_suffix</span>
+                <span class="o">+</span> <span class="s2">&quot;_&quot;</span>
+                <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+                <span class="o">+</span> <span class="s2">&quot;m_heatmap.pdf&quot;</span><span class="p">,</span>
+                <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;pgf&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig1</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="VisualiseModel.plot_all_phi_mush">
+<a class="viewcode-back" href="../../../../api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_all_phi_mush">[docs]</a>
+    <span class="k">def</span> <span class="nf">plot_all_phi_mush</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phi_mush</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">savefig</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="c1"># plot all mush for len(phi_mush) iterations</span>
+        <span class="n">iters</span> <span class="o">=</span> <span class="n">phi_mush</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">iters_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">iters</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">iters</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">phi_mush</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">iters_arr</span><span class="p">,</span> <span class="n">phi_mush</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;iteration before convergence&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;No. of mushy cells&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">rf</span><span class="s2">&quot;Mushy Cells at t=</span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">H&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">savefig</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">dir_output_name</span><span class="si">}</span><span class="s2">/LiquidFractionMush_iter_</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">output_suffix</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="si">}</span><span class="s2">m.pdf&quot;</span><span class="p">,</span>
+                <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;pgf&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="VisualiseModel.plot_H_iter_all">
+<a class="viewcode-back" href="../../../../api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_H_iter_all">[docs]</a>
+    <span class="k">def</span> <span class="nf">plot_H_iter_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">savefig</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="n">temperature_mushy_before_convergence</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">t_k_iter_all</span>
+        <span class="n">liquidfraction_mushy_before_convergence</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">phi_k_iter_all</span>
+        <span class="n">liquidfraction_before_convergence</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">all_phi_iter_all</span>
+        <span class="n">temperature_all_before_convergence</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">t_k_before_convergence_all</span>
+        <span class="p">)</span>
+        <span class="n">salinity_mushy_before_convergence</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">s_k_iter_all</span>
+        <span class="n">depth_all</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">mush_indx_list_all</span>
+
+        <span class="k">for</span> <span class="n">h</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">temp_all</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>
+            <span class="n">temperature_mushy_before_convergence</span><span class="p">,</span>
+            <span class="n">liquidfraction_mushy_before_convergence</span><span class="p">,</span>
+            <span class="n">temperature_all_before_convergence</span><span class="p">,</span>
+            <span class="n">salinity_mushy_before_convergence</span><span class="p">,</span>
+            <span class="n">depth_all</span><span class="p">,</span>
+            <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">],</span>
+            <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">plot_H_iter</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">h</span><span class="p">),</span> <span class="n">t</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">savefig</span><span class="o">=</span><span class="n">savefig</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">plot_H_iter_heatmap</span><span class="p">(</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">h</span><span class="p">),</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">p</span><span class="p">),</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">temp_all</span><span class="p">),</span>
+                <span class="n">d</span><span class="p">,</span>
+                <span class="n">t</span><span class="p">,</span>
+                <span class="n">savefig</span><span class="o">=</span><span class="n">savefig</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">phi_mush</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>
+            <span class="n">liquidfraction_mushy_before_convergence</span><span class="p">,</span>
+            <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">],</span>
+            <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">plot_H_iter</span><span class="p">(</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">phi_mush</span><span class="p">),</span>
+                <span class="n">t</span><span class="p">,</span>
+                <span class="n">param_name</span><span class="o">=</span><span class="s2">&quot;Liquid-Fraction&quot;</span><span class="p">,</span>
+                <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;phi&quot;</span><span class="p">,</span>
+                <span class="n">savefig</span><span class="o">=</span><span class="n">savefig</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">phi</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span>
+            <span class="n">liquidfraction_before_convergence</span><span class="p">,</span>
+            <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">],</span>
+            <span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">plot_all_phi_mush</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">phi</span><span class="p">),</span> <span class="n">t</span><span class="p">,</span> <span class="n">savefig</span><span class="o">=</span><span class="n">savefig</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="VisualiseModel.plot_response_pt1_pt2">
+<a class="viewcode-back" href="../../../../api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_response_pt1_pt2">[docs]</a>
+    <span class="k">def</span> <span class="nf">plot_response_pt1_pt2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tempmushPT1</span><span class="p">,</span> <span class="n">tempmushPT2</span><span class="p">,</span> <span class="n">savefig</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="n">iter_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">tempmushPT2</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">tempmushPT1_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">tempmushPT1</span><span class="p">[</span><span class="mi">1</span><span class="p">])[:,</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">tempmushPT2_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">tempmushPT2</span><span class="p">[</span><span class="mi">1</span><span class="p">])[:,</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">step_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tempmushPT2_arr</span><span class="p">))</span> <span class="o">*</span> <span class="n">tempmushPT1_arr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">pt1_array_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tempmushPT1_arr</span><span class="p">)</span>
+        <span class="n">tempmushPT1_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tempmushPT1_arr</span><span class="p">,</span> <span class="n">step_arr</span><span class="p">[</span><span class="n">pt1_array_length</span><span class="p">:])</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">step_arr</span><span class="p">,</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$T_</span><span class="si">{melt}</span><span class="s2">$&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">iter_arr</span><span class="p">,</span> <span class="n">step_arr</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="n">tempmushPT1_arr</span><span class="p">,</span>
+            <span class="s2">&quot;--&quot;</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$T_</span><span class="si">{mush}</span><span class="s2"> \text{ for } \phi_k = f(T_</span><span class="si">{k}</span><span class="s2">)$&quot;</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">iter_arr</span><span class="p">,</span> <span class="n">tempmushPT1_arr</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+            <span class="n">tempmushPT2_arr</span><span class="p">,</span>
+            <span class="s2">&quot;--&quot;</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$T_</span><span class="si">{mush}</span><span class="s2"> \text{ for } \phi_k = f(T_{k-1})$&quot;</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">iter_arr</span><span class="p">,</span> <span class="n">tempmushPT2_arr</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;No. of Iterations&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Temperature [K]&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Interface temperature at t=0.5H before convergence&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">savefig</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">dir_output_name</span><span class="si">}</span><span class="s2">/Temperature_mush_response_</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">output_suffix</span><span class="si">}</span><span class="s2">.pdf&quot;</span><span class="p">,</span>
+                <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;pgf&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+</div>
+
+
+    <span class="c1"># def residual_plot(self):</span>
+    <span class="c1">#     res_0p01_1000iter_voller1 = np.load(&quot;outputs/2024-09-26/123923_real_47.0_1000_0.01/residuals.npy&quot;, allow_pickle=True)</span>
+
+    <span class="c1"># TODO: Add the following methods</span>
+    <span class="c1"># def plot_phi(self, timestep, savefig=True):</span>
+    <span class="c1">#     print(f&quot;Plotting Liquid Fraction evolution at {timestep}H...&quot;)</span>
+    <span class="c1">#     x_axis_iter = np.arange(0,self.nz,1)</span>
+    <span class="c1">#     #x_axis_iter = np.arange(0,22970,1)</span>
+    <span class="c1">#     index = timestep*3600/self.ui_object.grid_timestep_dt</span>
+    <span class="c1">#     phi_k = self.phi_k_list[int(index)]</span>
+    <span class="c1">#     if self.is_buffo is True:</span>
+    <span class="c1">#         phi_buffo = self.phi_buffo_list[int(index)]</span>
+
+    <span class="c1">#     fig1,(ax1) = plt.subplots(figsize=(10,6))</span>
+    <span class="c1">#     plt.grid()</span>
+    <span class="c1">#     ax1.plot(x_axis_iter*self.ui_object.grid_timestep_dt/3600, phi_k, &#39;r--&#39;,label=&#39;Numerical Temperature&#39;)</span>
+    <span class="c1">#     if self.is_buffo is True:</span>
+    <span class="c1">#         ax1.plot(x_axis_iter*self.ui_object.grid_timestep_dt/3600, phi_buffo, &#39;b--&#39;,alpha=0.5,label=&#39;Buffo&#39;)</span>
+    <span class="c1">#     ax1.set_xlabel(&quot;depth in nodes&quot;)</span>
+    <span class="c1">#     ax1.set_ylabel(&quot;Phi&quot;)</span>
+    <span class="c1">#     #ax1.legend()</span>
+    <span class="c1">#     ax1.set_title(f&quot;Temperature evolution at {timestep}H&quot;)</span>
+    <span class="c1">#     color = &#39;gray&#39;</span>
+    <span class="c1">#     ax1.legend()</span>
+    <span class="c1">#     fig1.tight_layout()</span>
+    <span class="c1">#     if savefig:</span>
+    <span class="c1">#         fig1.savefig(self.dir_output_name + &quot;/Liquid Fraction evolution at&quot;+ str(timestep) +&quot;s.png&quot;)</span>
+
+    <span class="c1"># def plot_salinity(self, z_depth, savefig=True):</span>
+    <span class="c1">#     x_axis_iter = np.arange(0, iter_max-1,1)</span>
+    <span class="c1">#     index = z_depth*self.nz</span>
+    <span class="c1">#     S_k = self.S_k_list[:,int(index)]</span>
+    <span class="c1">#     if self.is_buffo is True:</span>
+    <span class="c1">#         S_buffo = self.S_buffo_list[:,int(index)]</span>
+    <span class="c1">#     fig1,(ax1) = plt.subplots(figsize=(10,6))</span>
+    <span class="c1">#     plt.grid()</span>
+    <span class="c1">#     ax1.plot(x_axis_iter*self.ui_object.grid_timestep_dt/3600, S_k[x_axis_iter], &#39;r--&#39;,label=&#39;Numerical Temperature&#39;)</span>
+    <span class="c1">#     if self.is_buffo is True:</span>
+    <span class="c1">#         ax1.plot(x_axis_iter*self.ui_object.grid_timestep_dt/3600, S_buffo[x_axis_iter], &#39;b--&#39;,alpha=0.5,label=&#39;Buffo&#39;)</span>
+    <span class="c1">#     ax1.set_xlabel(&quot;t in hours&quot;)</span>
+    <span class="c1">#     ax1.set_ylabel(&quot;Salinity in ppt&quot;)</span>
+    <span class="c1">#     #ax1.legend()</span>
+    <span class="c1">#     ax1.set_title(f&quot;Salinity evolution at {z_depth}m&quot;)</span>
+    <span class="c1">#     color = &#39;gray&#39;</span>
+    <span class="c1">#     ax1.legend()</span>
+    <span class="c1">#     fig1.tight_layout()</span>
+    <span class="c1">#     if savefig:</span>
+    <span class="c1">#         fig1.savefig(self.dir_output_name + &quot;/Salinity evolution at&quot;+ str(z_depth) +&quot;m.png&quot;)</span>
+
+    <span class="c1"># def plot_enthalpy(self, timestep, savefig=False):</span>
+    <span class="c1">#     print(f&quot;Plotting Liquid Fraction Vs Temperature at {timestep}H...&quot;)</span>
+    <span class="c1">#     x_axis_iter = np.arange(0, iter_max-1,1)</span>
+    <span class="c1">#     index = timestep*3600/self.ui_object.grid_timestep_dt</span>
+    <span class="c1">#     mush = self.phi_slope(int(index))</span>
+    <span class="c1">#     phi = self.phi_k_list[int(index)]</span>
+    <span class="c1">#     H_k = self.H_k_list[int(index)]</span>
+    <span class="c1">#     H_solid = self.H_solid_list[int(index)]</span>
+    <span class="c1">#     T_k = self.T_k_list[int(index)]</span>
+    <span class="c1">#     H = (H_k - H_solid)/334774</span>
+    <span class="c1">#     T_melt = Tm_w</span>
+    <span class="c1">#     T_interface = self.Temp_interface[int(index)]</span>
+    <span class="c1">#     fig1,(ax1) = plt.subplots(figsize=(10,6))</span>
+    <span class="c1">#     plt.grid()</span>
+    <span class="c1">#     ax1.plot(T_k,phi, &#39;r--&#39;,label=&#39;Phi&#39;)</span>
+    <span class="c1">#     ax1.fill_betweenx(H, T_k[mush][0], T_k[mush][-1], color=&#39;gray&#39;, alpha=0.2, label=&#39;Mushy Layer&#39;)</span>
+    <span class="c1">#     ax1.set_xlabel(&quot;Temperature in K&quot;)</span>
+    <span class="c1">#     ax1.set_ylabel(r&quot;Liquid Fraction $\phi$&quot;)</span>
+    <span class="c1">#     ax1.set_title(f&quot;Liquid Fraction Vs Temperature at {timestep}h&quot;)</span>
+    <span class="c1">#     color = &#39;gray&#39;</span>
+    <span class="c1">#     ax3 = ax1.twinx()</span>
+    <span class="c1">#     ax3.axvline(</span>
+    <span class="c1">#         T_melt,</span>
+    <span class="c1">#         color=&#39;b&#39;,</span>
+    <span class="c1">#         linestyle=&#39;dashed&#39;,</span>
+    <span class="c1">#         label=f&#39;T_melt:{str(round(T_melt, 2))}&#39;,</span>
+    <span class="c1">#     )</span>
+    <span class="c1">#     ax3.axvline(</span>
+    <span class="c1">#         T_interface,</span>
+    <span class="c1">#         color=&#39;g&#39;,</span>
+    <span class="c1">#         linestyle=&#39;dashed&#39;,</span>
+    <span class="c1">#         label=f&#39;T_interface:{str(round(T_interface, 2))}&#39;,</span>
+    <span class="c1">#     )</span>
+    <span class="c1">#     fig1.tight_layout()</span>
+    <span class="c1">#     ax1.legend(loc=0)</span>
+    <span class="c1">#     ax3.legend(loc=1)</span>
+    <span class="c1">#     if savefig:</span>
+    <span class="c1">#         fig1.savefig(self.dir_output_name + &quot;/LiqVsTemp evolution at&quot;+ str(timestep) +&quot;h.png&quot;)</span>
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Sneha Iyer.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

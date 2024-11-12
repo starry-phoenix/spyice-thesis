@@ -16,7 +16,7 @@ Submodules
 Module contents
 ---------------
 
-.. automodule:: spyice.preprocess
+.. automodule:: src.spyice.preprocess
    :members:
    :undoc-members:
    :show-inheritance:
