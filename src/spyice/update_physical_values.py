@@ -19,7 +19,7 @@ _specific_heat_ice, _specific_heat_brine, _latent_heat_water = _ui.constants.c_i
 _rho_ice, _rho_brine = _ui.constants.rho_i, _ui.constants.rho_br
 
 def calculate_melting_temperature_from_salinity(
-    _salinity, _temperature_melt=_temperature_melt, _liquid_relation="Frezchem"
+    _salinity, _temperature_melt=_temperature_melt, _liquid_relation="Normal"
 ):
     """Calculates the melting temperature of seawater based on salinity.
 
@@ -36,7 +36,10 @@ def calculate_melting_temperature_from_salinity(
     if _liquid_relation not in ["Normal", "Frezchem"]:
         raise TypeError("Liquid relation not available")
     if _liquid_relation == "Normal":
-        _melting_temperature_seawater = _temperature_melt * np.ones(_salinity.shape)
+        T_m = _temperature_melt # melt temperature as solidus temperature
+        T_s = 252.05 # eutectic temperature for Sbr = 233ppt
+        S_br = 233.0  # brine salinity in ppt
+        _melting_temperature_seawater = _temperature_melt * np.ones(_salinity.shape) + (T_s - T_m)*_salinity/S_br
     elif _liquid_relation == "Frezchem":
         # _melting_temperature_seawater = _temperature_melt + (
         #     -(9.1969758 * (1e-05) * _salinity**2) - 0.03942059 * _salinity
@@ -324,10 +327,16 @@ def update_liquid_fraction_mixture_with_enthalpy_equation(
     
     return _phi * phi_control_for_infinite_values(_phi)
 
-def calculate_liquidus_temperature(_salinity):
+def calculate_liquidus_temperature(_salinity, _liquid_relation="Normal"):
     S_br = 233.0  # brine salinity in ppt
-    T_m = 273.15 # melt temperature as solidus temperature
-    T_s = 252.05 # eutectic temperature for Sbr = 233ppt 
+    
+    if _liquid_relation == "Normal":
+        T_m = _temperature_melt # melt temperature as solidus temperature
+        T_s = 252.05 # eutectic temperature for Sbr = 233ppt
+    elif _liquid_relation == "Frezchem":
+        T_m = _temperature_melt
+        T_s = 252.05 # eutectic temperature for Sbr = 233ppt
+
     T_l = lambda S: (T_m + (T_s - T_m)/S_br*S)  # liquidus temperature at salinity S  # noqa: E731
     T_l_S = T_l(_salinity)  # liquidus temperature at salinity S
 
@@ -448,11 +457,12 @@ def update_temperature_and_salinity(
     t_initial: np.ndarray,
     s_initial: np.ndarray,
     phi_initial: np.ndarray,
+    t_melt: np.ndarray,
     source_term: np.ndarray,
     buffo: bool,
     stefan: bool,
     voller: bool,
-    _is_salinity_equation: bool = False,
+    _is_salinity_equation: bool,
     _nonconstant_physical_properties: bool = False,
     t_k_A_LHS_matrix_prev: np.ndarray = None,
 ):
@@ -496,7 +506,7 @@ def update_temperature_and_salinity(
         bc_neumann=preprocess_data_object.temp_grad,
     )
     t_k, x_wind_t, A_before_correction = advection_diffusion_temp.unknowns_matrix(
-        _temperature_melt, _nonconstant_physical_properties
+        t_melt, _nonconstant_physical_properties
     )
     # TODO: Add algae growth model here to salinity
     if _is_salinity_equation is True:
@@ -520,7 +530,7 @@ def update_temperature_and_salinity(
         )
         s_k, x_wind_s, S_before_correction = (
             advection_diffusion_salinity.unknowns_matrix(
-                _temperature_melt, _nonconstant_physical_properties
+                t_melt, _nonconstant_physical_properties
             )
         )
     else:
@@ -539,10 +549,11 @@ def update_state_variables(
     t_initial,
     s_initial,
     phi_initial,
+    t_k_melt,
     t_k_A_LHS_matrix_prev,
     temp_factor_3,
     source_term,
-    _is_salinity_equation=False,
+    _is_salinity_equation,
 ):
     """
     Update the state variables Temperature, Salinity, Liquid Fraction, Enthalpy and Enthalpy of solid based on the given parameters.
@@ -589,6 +600,7 @@ def update_state_variables(
             t_initial,
             s_initial,
             phi_initial,
+            t_k_melt,
             source_term,
             buffo,
             stefan,
@@ -604,6 +616,7 @@ def update_state_variables(
             temp_factor_3,
             _is_stefan=preprocess_data_object.is_stefan,
         )
+        t_k_melt = calculate_melting_temperature_from_salinity(s_k)
     elif stefan:
 
         # phi update for a mixture using enthalpy equation
@@ -652,6 +665,7 @@ def update_state_variables(
             t_initial,
             s_initial,
             phi_initial,
+            t_k_melt,
             source_term,
             buffo,
             stefan,
@@ -659,6 +673,8 @@ def update_state_variables(
             _is_salinity_equation,
             t_k_A_LHS_matrix_prev=t_k_A_LHS_matrix_prev,
         )
+
+        t_k_melt = calculate_melting_temperature_from_salinity(s_k)
 
     elif buffo:
         phi_k = update_liquid_fraction_buffo(
@@ -679,18 +695,20 @@ def update_state_variables(
             t_initial,
             s_initial,
             phi_initial,
+            t_k_melt,
             source_term,
             buffo,
             stefan,
             voller,
-            _is_salinity_equation,
+            _is_salinity_equation=_is_salinity_equation,
         )
+        t_k_melt = calculate_melting_temperature_from_salinity(s_k)
     else:
         AssertionError("No method selected for liquid fraction update")
 
     # Voller scheme: lower, main, upper diagonal of the matrix A of Ax = b
 
-    return h_k, h_solid, phi_k, t_k, s_k, t_k_A_LHS_matrix, temp_factor_3
+    return h_k, h_solid, phi_k, t_k, s_k, t_k_A_LHS_matrix, temp_factor_3, t_k_melt
 
 
 def phi_control_for_infinite_values(_phi):

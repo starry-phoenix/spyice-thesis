@@ -131,12 +131,19 @@ class UserInput:
         if isinstance(self.constants, RealConstants):
             self.boundary_salinity = 34.0
             self.boundary_top_temperature = 265.0
-            # self.temperature_melt = 273.15 - 1.853 * self.boundary_salinity / 28.0
-            self.temperature_melt = (
-                -(9.1969758 * (1e-05) * self.boundary_salinity**2)
-                - 0.03942059 * self.boundary_salinity
-                + 272.63617665
-            )
+
+            # melt temperature affects the liquid relation: Frezchem or Normal in src/update_physical_values.py script
+            # self.temperature_melt = 273.15 - 1.853 * self.boundary_salinity / 28.0 
+            T_m = 273.15 # melt temperature as solidus temperature
+            T_s = 252.05 # eutectic temperature for Sbr = 233ppt
+            S_br = 233.0  # brine salinity in ppt
+            self.temperature_melt = 273.15 + (T_s - T_m)*self.boundary_salinity/S_br
+            # self.temperature_melt = (
+            #     -(9.1969758 * (1e-05) * self.boundary_salinity**2)
+            #     - 0.03942059 * self.boundary_salinity
+            #     + 272.63617665
+            # )
+
             self.geometry_type = 2
             if self.config_data:
                 self.grid_timestep_dt = read_omegaconfig(self.config_data, "dt")

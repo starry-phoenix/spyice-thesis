@@ -397,7 +397,7 @@ class SeaIceModel:
         """
 
         # Set previous state variables temperature, salinity, liquid fraction respectively
-        t_prev, s_prev, phi_prev, t_k_A_LHS_matrix, temp_factor3 = (
+        t_prev, s_prev, phi_prev, t_k_melt, t_k_A_LHS_matrix, temp_factor3 = (
             overwrite_statevariables(t_initial, s_initial, phi_initial)
         )
         residual_voller = 1
@@ -411,7 +411,7 @@ class SeaIceModel:
             or ((s_err > self.preprocess_data.salinity_tolerance) )
         ):
             # Update state variables Enthalpy, Enthalpy Solid, Liquid Fraction, Temperature, Salinity respectively
-            h_k, h_solid, phi_k, t_k, s_k, t_k_A_LHS_matrix, temp_factor3 = (
+            h_k, h_solid, phi_k, t_k, s_k, t_k_A_LHS_matrix, temp_factor3, t_k_melt = (
                 update_state_variables(
                     self.preprocess_data,
                     t_prev,
@@ -423,6 +423,7 @@ class SeaIceModel:
                     t_initial,
                     s_initial,
                     phi_initial,
+                    t_k_melt,
                     t_k_A_LHS_matrix,
                     temp_factor3,
                     source_term,
@@ -455,9 +456,9 @@ class SeaIceModel:
                 temp_factor3=temp_factor3,
             )
             # Update state variables temperature, salinity, liquid fraction respectively
-            t_prev, s_prev, phi_prev, t_k_A_LHS_matrix, temp_factor3 = (
+            t_prev, s_prev, phi_prev, t_k_melt, t_k_A_LHS_matrix, temp_factor3 = (
                 overwrite_statevariables(
-                    t_k, s_k, phi_k, t_k_A_LHS_matrix, temp_factor3
+                    t_k, s_k, phi_k, t_k_melt, t_k_A_LHS_matrix, temp_factor3
                 )
             )
             # Track mushy layer using liquid fraction for temperature and phi values

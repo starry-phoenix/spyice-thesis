@@ -1,5 +1,6 @@
 import numpy as np
 
+from src.spyice.update_physical_values import calculate_melting_temperature_from_salinity
 
 # Function to set state variables
 def set_statevariables(
@@ -50,6 +51,7 @@ def overwrite_statevariables(
     temperature_calculated,
     salinity_calculated,
     liquid_fraction_calculated,
+    temperature_melt=None,
     t_k_lhs_A_matrix=None,
     temp_factor3=None,
 ):
@@ -72,6 +74,11 @@ def overwrite_statevariables(
     liquid_fraction_new = (
         liquid_fraction_calculated  # Set current phi as previous phi for next iteration
     )
+    if temperature_melt is None:
+        temperature_melt =  calculate_melting_temperature_from_salinity(salinity_new) # Store the calculated T_melt for later use
+    else:
+        temperature_melt = temperature_melt
+        
     if t_k_lhs_A_matrix is not None:
         t_k_lhs_A_matrix = t_k_lhs_A_matrix
         temp_factor3 = temp_factor3
@@ -82,6 +89,7 @@ def overwrite_statevariables(
         temperature_new,
         salinity_new,
         liquid_fraction_new,
+        temperature_melt,
         t_k_lhs_A_matrix,
         temp_factor3,
     )
