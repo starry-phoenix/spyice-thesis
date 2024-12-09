@@ -47,7 +47,7 @@ class DebugConstants:
     k_i: int = 1  # Thermal conductivity (ice) [W/m/K]
     k_br: int = 1  # Thermal conductivity (brine) [W/m/K]
     k_w: int = 1
-    D_s: int = 0  # Diffusivity for Salt
+    D_s: int = 1e-4  # Diffusivity for Salt
     c_br: int = 1  # Specific heat of seawater (J/kg/K)
     c_i: int = 1  # Specific heat of ice
     c_w: int = 1  # specific heat of water

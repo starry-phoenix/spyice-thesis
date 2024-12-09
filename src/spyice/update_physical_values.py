@@ -275,7 +275,7 @@ def update_liquid_fraction_mixture_with_under_relaxation(
             ),
         )
     
-    return _phi * phi_control_for_infinite_values(_phi)
+    return _phi * phi_control_for_infinite_values(_phi), _temperature_liquidus, _temperature_solidus
 
 def update_liquid_fraction_mixture_with_enthalpy_equation(
     _temperature,
@@ -617,6 +617,8 @@ def update_state_variables(
             _is_stefan=preprocess_data_object.is_stefan,
         )
         t_k_melt = calculate_melting_temperature_from_salinity(s_k)
+        temperature_solidus = 0.0
+        temperature_liquidus = 0.0
     elif stefan:
 
         # phi update for a mixture using enthalpy equation
@@ -632,12 +634,12 @@ def update_state_variables(
         # )
 
         # phi update for a mixture using Faden method from paper "An optimum Enthalpy Approach for Melting and Solidification with Volume Change"
-        phi_k = update_liquid_fraction_mixture_with_under_relaxation(
+        phi_k, temperature_liquidus, temperature_solidus = update_liquid_fraction_mixture_with_under_relaxation(
             t_prev,
             s_prev,
             phi_prev,
             1.0,
-            _is_stefan=preprocess_data_object.is_stefan,)
+            _is_stefan=preprocess_data_object.is_stefan,)  # returns an array of [phi, T_l, T_s]
 
         # # phi update for a mixture using Voller method with under-relaxation
         # phi_k = update_liquid_fraction_voller_under_relaxation(
@@ -703,12 +705,15 @@ def update_state_variables(
             _is_salinity_equation=_is_salinity_equation,
         )
         t_k_melt = calculate_melting_temperature_from_salinity(s_k)
+        temperature_liquidus = 0.0
+        temperature_solidus = 0.0
     else:
         AssertionError("No method selected for liquid fraction update")
 
     # Voller scheme: lower, main, upper diagonal of the matrix A of Ax = b
 
-    return h_k, h_solid, phi_k, t_k, s_k, t_k_A_LHS_matrix, temp_factor_3, t_k_melt
+
+    return h_k, h_solid, phi_k, t_k, s_k, t_k_A_LHS_matrix, temp_factor_3, t_k_melt, temperature_liquidus, temperature_solidus
 
 
 def phi_control_for_infinite_values(_phi):

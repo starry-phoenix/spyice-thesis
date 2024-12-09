@@ -9,7 +9,9 @@ from src.spyice.coefficients import update_coefficients
 from src.spyice.rhs import apply_boundary_condition, correct_for_brine_movement
 
 top_temp = ui.temperature_top_type
+
 # TODO: Correct analytical solution
+
 """Solves for X in Advection- Diffusion- Equation of the form : a * (dU/dt) +  b * (dU/dz) + d/dz(c * dU/dz) + d * (dW/dt) = 0 """
 
 

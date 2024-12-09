@@ -855,6 +855,60 @@ class VisualiseModel:
 
         plt.close()
 
+    def plot_temperature_liquid_solid_evolution(self, z_depth: float, savefig=False):
+        """Plots the temperature evolution at a given depth.
+
+        Args:
+            z_depth (float): The depth at which to plot the temperature evolution.
+            savefig (bool, optional): Whether to save the figure. Defaults to True.
+            Buffo_matlab (bool, optional): Whether to include Buffo-matlab data in the plot. Defaults to False.
+        """
+
+        print(f"Plotting Liqiudus-Solidus Temperature evolution at {z_depth}m...")
+        x_axis_iter = np.arange(0, self.ui_object.max_iterations - 1, 1)[1:]
+        # x_axis_iter = np.arange(0,22970,1)
+        T_k_liquid = self.results_object.temperature_liquid[
+            :, int(z_depth * self.ui_object.grid_resolution_dz)
+        ]
+        T_k_solid = self.results_object.temperature_solid[
+            :, int(z_depth * self.ui_object.grid_resolution_dz)
+        ]
+        index = z_depth * self.ui_object.grid_resolution_dz
+
+        # fig1, (ax1) = plt.subplots(figsize=(10, 6))
+        fig1, (ax1) = plt.subplots()
+        # plt.grid()
+        ax1.plot(
+            x_axis_iter * self.ui_object.grid_timestep_dt / 3600,
+            T_k_solid[x_axis_iter],
+            "k--",
+            label=r"Solidus Temperature",
+        )
+        ax1.plot(
+            x_axis_iter * self.ui_object.grid_timestep_dt / 3600,
+            T_k_liquid[x_axis_iter],
+            "k:",
+            label=r"Liquidus Temperature",
+        )
+
+        ax1.set_xlabel(r"$t$ [hours]")
+        ax1.set_ylabel(r"Temperature [K]")
+        ax1.set_yscale("log")
+        # ax1.legend()
+        ax1.set_title(rf"Liqduius-Solidus Temperature evolution at {z_depth}m")
+        color = "gray"
+        ax1.legend()
+        # fig1.tight_layout()
+        if savefig:
+            fig1.savefig(
+                self.ui_object.dir_output_name
+                + "/Liquidus-Solidus Temperature evolution at"
+                + str(z_depth)
+                + "m.pdf",
+                backend="pgf",
+            )
+        plt.close(fig1)
+
     # def residual_plot(self):
     #     res_0p01_1000iter_voller1 = np.load("outputs/2024-09-26/123923_real_47.0_1000_0.01/residuals.npy", allow_pickle=True)
 

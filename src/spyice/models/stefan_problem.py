@@ -1,8 +1,7 @@
 import math
 
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
-# ui = UserInput()
 # TODO: check if the concentration is dependent on previous iterations or vice-versa
 # TODO: implement mushy layer consideration with liquid fraction check paper
 import numpy as np
@@ -10,6 +9,8 @@ import scipy.optimize as opt
 from scipy.special import erfc
 
 from src.spyice.parameters.user_input import UserInput
+
+ui = UserInput()
 
 
 class StefanProblem:
@@ -174,30 +175,33 @@ class StefanProblem:
         return 2 * lambda_stefan * np.sqrt(ui.constants.D_s * t)
 
 
-    # def _plot_stefan_temp_twophase(z_depth=0.5):
-    #     dt = ui.grid_timestep_dt
-    #     t_passed = 0
-    #     temperature_array = []
-    #     salinity_arr = []
-    #     t_pass_arr = []
-    #     depth_stefan_arr = []
-    #     Z = 1
-    #     nc = int(Z / ui.grid_resolution_dz)
-    #     nz = int(nc + 1)
-    #     for t in range(ui.max_iterations):
-    #         t_passed += dt
-    #         depth_stefan = StefanProblem.stefan_problem_twophase(t_passed)
-    #         T, C = StefanProblem.stefan_temperature_twophase(depth_stefan, t, ui.grid_resolution_dz, nz)
-    #         depth_stefan_arr.append(depth_stefan)
-    #         temperature_array.append(T)
-    #         salinity_arr.append(C)
-    #         t_pass_arr.append(t_passed)
-    #     z = int(z_depth * nz)
-    #     temperature_array = np.array(temperature_array)
-    #     T_z = temperature_array[:, z]
-    #     plt.grid()
-    #     plt.plot(np.array(t_pass_arr) / 3600, T_z, label="Temperature")
-    #     plt.xlabel("Time in h")
-    #     plt.ylabel("Temperature")
-    #     plt.show()
-    #     return temperature_array, salinity_arr
+    def _plot_stefan_temp_twophase(z_depth=0.5):
+        dt = ui.grid_timestep_dt
+        t_passed = 0
+        temperature_array = []
+        salinity_arr = []
+        t_pass_arr = []
+        depth_stefan_arr = []
+        Z = 1
+        nc = int(Z / ui.grid_resolution_dz)
+        nz = int(nc + 1)
+        for t in range(ui.max_iterations):
+            t_passed += dt
+            depth_stefan = StefanProblem.stefan_problem_twophase(t_passed)
+            T, C = StefanProblem.calculate_temperature_twophase_profiles(depth_stefan, t, ui.grid_resolution_dz, nz)
+            depth_stefan_arr.append(depth_stefan)
+            temperature_array.append(T)
+            salinity_arr.append(C)
+            t_pass_arr.append(t_passed)
+        z = int(z_depth * nz)
+        temperature_array = np.array(temperature_array)
+        T_z = temperature_array[:, z]
+        plt.grid()
+        plt.plot(np.array(t_pass_arr) / 3600, T_z, label="Temperature")
+        plt.xlabel("Time in h")
+        plt.ylabel("Temperature")
+        plt.show()
+        return temperature_array, salinity_arr
+
+if __name__ == "__main__":
+    StefanProblem._plot_stefan_temp_twophase()

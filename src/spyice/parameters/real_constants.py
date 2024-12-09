@@ -57,7 +57,7 @@ class RealConstants:
         -3
     )  # Linear coeff for Rayleigh number driven advection
     L: int = 334774  # Latent heat of fusion ice<->water (J/Kg)
-    D_s: float = 2 * 10 ** (-9)  # Diffusivity for Salt
+    D_s: float = 2 * 10 ** (-9) # 2 * 10 ** (-9)  # Diffusivity for Salt
     if not param_const:
         k_i: float = 2.0  # Thermal conductivity (ice) [W/m/K]
         k_br: float = 0.6  # Thermal conductivity (brine) [W/m/K]

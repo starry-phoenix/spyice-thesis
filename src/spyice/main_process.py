@@ -93,5 +93,8 @@ class MainProcess:
         model_visualization_object.plot_temperature_heatmap(savefig=True)
         model_visualization_object.plot_salinity_heatmap(savefig=True)
         model_visualization_object.plot_liquidfraction_heatmap(savefig=True)
+        model_visualization_object.plot_temperature_liquid_solid_evolution(
+            z_depth=0.1, savefig=True
+        )
         # model_visualization_object.plot_temperature_heatmap_as_gif()
         print("Postprocessing done.")

@@ -95,10 +95,21 @@ class ResultsParams:
         self.all_w = np.zeros([iter_max, nz])
         self.all_thick = np.zeros([iter_max])
         self.all_t_passed = np.zeros(iter_max)
+        self.temperature_solid = np.zeros([iter_max, nz])
+        self.temperature_liquid = np.zeros([iter_max, nz])
 
     @staticmethod
     def store_results(
-        results_dataclass, temp, s_sw, phi, h, h_solid, w, thickness, t_passed, t
+        results_dataclass,
+        temp,
+        s_sw,
+        phi,
+        h,
+        h_solid,
+        w,
+        thickness,
+        t_passed,
+        t,
     ):
         """Stores the results of the simulation in the given results_dataclass.
 
@@ -153,6 +164,8 @@ class ResultsParams:
         thickness_buffo,
         thickness_stefan,
         t_k_buffo,
+        temperature_liquid,
+        temperature_solid,
         buffo=False,
     ):
         """Stores the results for a given iteration 't' in the 'results_dataclass'.
@@ -202,6 +215,8 @@ class ResultsParams:
             thickness_stefan,
             t_k_buffo,
             phi_k_buffo,
+            temperature_liquid,
+            temperature_solid,            
             buffo,
         )
         if thickness_index > 0:
@@ -242,6 +257,8 @@ class ResultsParams:
         thickness_stefan,
         t_k_buffo,
         phi_k_buffo,
+        temperature_liquid,
+        temperature_solid,
         buffo,
     ):
         """Appends the given parameters to the respective lists.
@@ -275,3 +292,5 @@ class ResultsParams:
         self.s_buffo_list[t, :] = s_k_buffo
         self.h_k_list[t, :] = h_k
         self.h_solid_list[t, :] = h_solid
+        self.temperature_liquid[t, :] = temperature_liquid
+        self.temperature_solid[t, :] = temperature_solid

@@ -165,7 +165,7 @@ class UserInput:
                 # )
 
         elif isinstance(self.constants, DebugConstants):
-            self.boundary_salinity = 0.0
+            self.boundary_salinity = 1.0
             self.boundary_top_temperature = -1.0
             self.temperature_melt = 0.0
             self.geometry_type = 1

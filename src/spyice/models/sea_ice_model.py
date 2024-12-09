@@ -276,6 +276,8 @@ class SeaIceModel:
                 - t_km1 (float): Temperature at the previous time step.
                 - s_km1 (float): Salinity at the previous time step.
                 - phi_km1 (float): Porosity at the previous time step.
+                - temperature_liquidus (float): Liquidus temperature.
+                - temperature_solidus (float): Solidus temperature.
         """
 
         (
@@ -306,6 +308,8 @@ class SeaIceModel:
             s_k,
             thickness,
             thickness_index,
+            temperature_liquidus,
+            temperature_solidus,
         ) = self.run_while_convergence_iteration(
             t,
             t_km1,
@@ -335,6 +339,8 @@ class SeaIceModel:
             t_km1,
             s_km1,
             phi_km1,
+            temperature_liquidus,
+            temperature_solidus,
         )
 
     def run_while_convergence_iteration(
@@ -408,10 +414,10 @@ class SeaIceModel:
             ((residual_voller > self.preprocess_data.temperature_tolerance) & (stefan)) or
             ((t_err > self.preprocess_data.temperature_tolerance))
             or ((phi_err > self.preprocess_data.liquid_fraction_tolerance) )
-            or ((s_err > self.preprocess_data.salinity_tolerance) )
+            or ((s_err > self.preprocess_data.salinity_tolerance))
         ):
             # Update state variables Enthalpy, Enthalpy Solid, Liquid Fraction, Temperature, Salinity respectively
-            h_k, h_solid, phi_k, t_k, s_k, t_k_A_LHS_matrix, temp_factor3, t_k_melt = (
+            h_k, h_solid, phi_k, t_k, s_k, t_k_A_LHS_matrix, temp_factor3, t_k_melt, temperature_liquidus, temperature_solidus = (
                 update_state_variables(
                     self.preprocess_data,
                     t_prev,
@@ -494,6 +500,8 @@ class SeaIceModel:
             s_k,
             thickness,
             thickness_index,
+            temperature_liquidus,
+            temperature_solidus,
         )
 
     def check_convergence(
@@ -820,6 +828,8 @@ class SeaIceModel:
                     t_km1_buffo,
                     s_km1_buffo,
                     phi_km1_buffo,
+                    temperature_liquidus_buffo,
+                    temperature_solidus_buffo,
                 ) = self.convergence_loop_iteration(
                     t,
                     t_km1_buffo,
@@ -850,6 +860,8 @@ class SeaIceModel:
                 t_km1,
                 s_km1,
                 phi_km1,
+                temperature_liquidus,
+                temperature_solidus,
             ) = self.convergence_loop_iteration(
                 t,
                 t_km1,
@@ -901,11 +913,13 @@ class SeaIceModel:
                 thickness_buffo,
                 thickness_stefan,
                 t_k_buffo,
+                temperature_liquidus,
+                temperature_solidus,
                 buffo=self.preprocess_data.is_buffo,
             )
             # bar()
 
-            if t % 500 == 0:
+            if t % 1000 == 0:
                 count += 1
                 self.t_running(
                     fig1, ax1, t_stefan, t_k=t_k, t_k_buffo=t_k_buffo, count=count
