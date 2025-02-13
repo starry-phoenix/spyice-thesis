@@ -1086,8 +1086,8 @@ class SeaIceModel:
             (
                 radiative_source_term,
                 salinity_source_term,
-                carbon_concentration,
-                nutrient_concentration_atinterface,
+                carbon_cc,
+                nutrient_cn_k,
                 photosynthetic_rate_mu,
                 radiation_algae,
                 chla_bulk,
@@ -1103,6 +1103,8 @@ class SeaIceModel:
                 algae_model_depth_type="all",
             )
 
+            nutrient_cn_km1 = nutrient_cn_k
+            
             self.results = self.results.store_results(
                 self.results,
                 t_k,
@@ -1136,8 +1138,8 @@ class SeaIceModel:
                 t_k_buffo,
                 temperature_liquidus,
                 temperature_solidus,
-                carbon_concentration,
-                nutrient_concentration_atinterface,
+                carbon_cc[thickness_index],
+                nutrient_cn_k[thickness_index],
                 photosynthetic_rate_mu,
                 radiation_algae,
                 chla_bulk,

@@ -349,17 +349,16 @@ class ResultsParams:
         self.temperature_liquid[t, :] = temperature_liquid
         self.temperature_solid[t, :] = temperature_solid
         # algae model
-        if len(carbon_concentration) == 1:
-            self.carbon_concentration[t] = carbon_concentration
-            self.nutrient_concentration[t] = nutrient_concentration
-            self.photosynthetic_rate[t] = photosynthetic_rate
-            self.radiation_algae[t] = radiation_algae
-            self.chla_bulk[t] = chla_bulk
-        else:
-            self.carbon_concentration_multiplelayers[t,:] = carbon_concentration
-            self.nutrient_concentration_multiplelayers[t,:] = nutrient_concentration
-            self.photosynthetic_rate_multiplelayers[t,:] = photosynthetic_rate
-            self.radiation_algae_multiplelayers[t,:] = radiation_algae
-            self.chla_bulk_multiplelayers[t,:] = chla_bulk
+        self.carbon_concentration[t] = carbon_concentration
+        self.nutrient_concentration[t] = nutrient_concentration
+
+        # TODO: correct self.radiation_algae[t] and self.chla_bulk[t] for single float value of radiation_algae 
+        self.radiation_algae[t] = radiation_algae[thickness_index]
+        self.chla_bulk[t] = chla_bulk[thickness_index]
+        self.photosynthetic_rate[t] = photosynthetic_rate[thickness_index]
+
+        self.photosynthetic_rate_multiplelayers[t,:] = photosynthetic_rate
+        self.radiation_algae_multiplelayers[t,:] = radiation_algae
+        self.chla_bulk_multiplelayers[t,:] = chla_bulk
 
 
