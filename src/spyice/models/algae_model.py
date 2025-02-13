@@ -1,12 +1,14 @@
 # import packages
 
-import numpy as np
 import warnings
+
+import numpy as np
 
 # Suppress runtime warnings
 warnings.filterwarnings("ignore", category=RuntimeWarning)
 
-# salinity function 
+
+# salinity function
 def fs_salinity(s_br_array):
     """
     Calculate the salinity function f_s as a function of salinity.
@@ -14,7 +16,7 @@ def fs_salinity(s_br_array):
     - a = 8.3 * 10 ** (-5) * s ** 2.11
     - b = 0.55 * log(s)
     - s is the salinity in g kg^-1
-    
+
     Parameters:
     s_min (float): Minimum salinity in g kg^-1.
     s_max (float): Maximum salinity in g kg^-1.
@@ -28,6 +30,7 @@ def fs_salinity(s_br_array):
 
     return f_s
 
+
 # temperature function
 def ft_temperature(t_c_array):
     """
@@ -39,15 +42,16 @@ def ft_temperature(t_c_array):
 
     Returns:
     numpy.ndarray: Temperature function f_t
-    
+
     """
     r_g = 0.0633
-    f_t = np.exp(r_g * (t_c_array-273.15))
+    f_t = np.exp(r_g * (t_c_array - 273.15))
 
     return f_t
 
+
 # nutrient function
-def ln_nutrient(c_n_array, k:float):
+def ln_nutrient(c_n_array, k: float):
     """A function to calculate the nutrient function as a function of nutrient concentration.
     The equation used is l_n = c_n / (k_n + c_n), where:
     - c_n is the nutrient concentration in mmol m^-3
@@ -76,7 +80,9 @@ def ln_nutrient(c_n_array, k:float):
 
     return l_random
 
+
 # light function
+
 
 # PAR function
 def photosynthetic_active_radiation(z, kappa=1.5, i_0=0.17, albedo=0.58, F_s_w=5):
@@ -106,11 +112,13 @@ def photosynthetic_active_radiation(z, kappa=1.5, i_0=0.17, albedo=0.58, F_s_w=5
 
     return PAR
 
+
 def irradiance(z, kappa=1.5, i_0=0.17, albedo=0.58, F_s_w=5):
     I_0 = i_0 * (1 - albedo) * F_s_w
     I_array = I_0 * np.exp(-kappa * z)  # z is the depth in ice
 
     return I_array
+
 
 # chlorophyll to carbon ratio function
 def cholorophyl_to_C_ratio_par(PAR, ln, E=0.5, r_chl_c_max=0.05, r_chl_c_min=0.01):
@@ -134,7 +142,8 @@ def cholorophyl_to_C_ratio_par(PAR, ln, E=0.5, r_chl_c_max=0.05, r_chl_c_min=0.0
     float: Chlorophyll to carbon ratio r_chl_c_par at the given depth in ice.
     """
 
-    return r_chl_c_max - (r_chl_c_max - r_chl_c_min) * np.min([np.min(PAR / E),1]) * ln
+    return r_chl_c_max - (r_chl_c_max - r_chl_c_min) * np.min([np.min(PAR / E), 1]) * ln
+
 
 # maximum photosynthesis rate function
 def Photosynthesis_rate_maximum_light(mu_m, fs, ft, ln, r_chl_c_par):
@@ -159,8 +168,9 @@ def Photosynthesis_rate_maximum_light(mu_m, fs, ft, ln, r_chl_c_par):
     """
     return mu_m * fs * ft * ln / r_chl_c_par
 
+
 def Ek_light(Photosynthesis_rate, alpha):
-    """ 
+    """
     Calculate the light limitation Ek as a function of depth in ice.
     The equation used is Ek = P_m / alpha, where:
     - P_m = mu_m * fs * ft * ln / r_chl_c_par
@@ -186,9 +196,10 @@ def Ek_light(Photosynthesis_rate, alpha):
 
     return Photosynthesis_rate / alpha
 
-def Ek_light_tanh(PAR_arr:np.array, Ek_arr:np.array):
-    """ 
-    
+
+def Ek_light_tanh(PAR_arr: np.array, Ek_arr: np.array):
+    """
+
     Calculate the light limitation Ek as a function of depth in ice.
     The equation used is Ek = P_m / alpha, where:
     - P_m = mu_m * fs * ft * ln / r_chl_c_par
@@ -210,10 +221,11 @@ def Ek_light_tanh(PAR_arr:np.array, Ek_arr:np.array):
 
     Returns:
     - np.array: Light limitation Ek at the given depth in ice.
-    
+
     """
 
     return np.tanh(PAR_arr / Ek_arr)
+
 
 # photosynthetic rate function
 def photosynthetic_rate(max_mu, fs, ft, ln, lpar):
@@ -255,6 +267,7 @@ def photosynthetic_rate(max_mu, fs, ft, ln, lpar):
     """
     return max_mu * fs * ft * ln * lpar
 
+
 # f_s * f_t function
 def fs_ft(f_s, f_t):
     """
@@ -275,6 +288,7 @@ def fs_ft(f_s, f_t):
     """
     return f_t * f_s
 
+
 def fs_ft_ln(f_s, f_t, l_n):
     """
     Calculate the salinity x temperature x nutrient function f_s * f_t * l_n.
@@ -293,7 +307,7 @@ def fs_ft_ln(f_s, f_t, l_n):
         - k_n = 1.6 micrometers
 
     Parameters:
-    s_min (float): Minimum salinity in g kg^-1. 
+    s_min (float): Minimum salinity in g kg^-1.
     s_max (float): Maximum salinity in g kg^-1.
     t_min (float): Minimum temperature in degrees Celsius.
     t_max (float): Maximum temperature in degrees Celsius.
@@ -307,10 +321,28 @@ def fs_ft_ln(f_s, f_t, l_n):
 
     return f_s * f_t * l_n
 
-def model_algae_processes(s_br_array, t_c_array, c_n_array, z_array, k=1.6, mu_m=0.86/(3600*24), alpha=1e-4, r_chl_c_max=0.05, r_chl_c_min=0.01, r_const = True, r_n_c=0.12, i_0=0.17, E=0.5, kappa=1.5, F_s_w=5, albedo=0.58):
-    """ 
+
+def model_algae_processes(
+    s_br_array,
+    t_c_array,
+    c_n_array,
+    z_array,
+    k=1.6,
+    mu_m=0.86 / (3600 * 24),
+    alpha=1e-4,
+    r_chl_c_max=0.05,
+    r_chl_c_min=0.01,
+    r_const=True,
+    r_n_c=0.12,
+    i_0=0.17,
+    E=0.5,
+    kappa=1.5,
+    F_s_w=5,
+    albedo=0.58,
+):
+    """
     Model the algae processes in sea ice.
-    
+
     Parameters:
     - s_br_array (np.array): Salinity in g kg^-1.
     - t_c_array (np.array): Temperature in degrees Celsius.
@@ -337,22 +369,37 @@ def model_algae_processes(s_br_array, t_c_array, c_n_array, z_array, k=1.6, mu_m
     temperature_function = ft_temperature(t_c_array)
     nutrient_function = ln_nutrient(c_n_array, k)
 
-    # light function
+    # light function dependent on z_array
     PAR = photosynthetic_active_radiation(z_array, kappa, i_0, albedo, F_s_w)
+
     if r_const:
         r_chl_c_par = r_chl_c_max
     else:
         r_chl_c_par = cholorophyl_to_C_ratio_par(PAR, nutrient_function)
-    P_m = Photosynthesis_rate_maximum_light(mu_m, salinity_function, temperature_function, nutrient_function, r_chl_c_par)
+    P_m = Photosynthesis_rate_maximum_light(
+        mu_m, salinity_function, temperature_function, nutrient_function, r_chl_c_par
+    )
     Ek = Ek_light(P_m, alpha)
     l_PAR = Ek_light_tanh(PAR, Ek)
 
     # photosynthetic rate
-    mu = photosynthetic_rate(mu_m, salinity_function, temperature_function, nutrient_function, l_PAR)
+    mu = photosynthetic_rate(
+        mu_m, salinity_function, temperature_function, nutrient_function, l_PAR
+    )
 
     return mu, PAR, nutrient_function
 
-def ode_update_carbon_nutrient_uptake(dt, salinity_list, temperature_list, nutrient_list,depth_list, cc_old, cn_old, r_n_c=0.12):
+
+def ode_update_carbon_nutrient_uptake(
+    dt,
+    salinity_list,
+    temperature_list,
+    nutrient_list,
+    depth_list,
+    cc_old,
+    cn_old,
+    r_n_c=0.12,
+):
     """
     Perform an ODE update for carbon and nutrient uptake in algae.
 
@@ -367,51 +414,93 @@ def ode_update_carbon_nutrient_uptake(dt, salinity_list, temperature_list, nutri
     - r_n_c (float): Nutrient to carbon ratio in mmol m^-3. Here nutrient is dissolved silica. [Vancoppennolle et al. 2010 case of dissolved silica]
 
     """
-    
+
     # cc = 1  # TODO: find value - one algal group concentration in mmol m-3
     # cn = 15  # nutrient concentration in mmol m-3 as per Vancoppenoelle et al. 2010
     f = 1  # nutrient conservation
-    lambda_ = 0.15/(3600*24) # carbon loss rate in s-1
+    lambda_ = 0.15 / (3600 * 24)  # carbon loss rate in s-1
 
-    mu, PAR, _ = model_algae_processes(salinity_list, temperature_list, nutrient_list, depth_list)
+    mu, PAR, _ = model_algae_processes(
+        salinity_list, temperature_list, nutrient_list, depth_list
+    )
 
-    if dt>0:
-        cc_tp1 = cc_old + dt*(mu - lambda_)*cc_old
-        cn_tp1 = cn_old + dt*(-mu + f*lambda_)*cc_old*r_n_c
-        mu, PAR, _ = model_algae_processes(salinity_list, temperature_list, cn_tp1, depth_list)
+    if dt > 0:
+        cc_tp1 = cc_old + dt * (mu - lambda_) * cc_old
+        cn_tp1 = cn_old + dt * (-mu + f * lambda_) * cc_old * r_n_c
+        mu, PAR, _ = model_algae_processes(
+            salinity_list, temperature_list, cn_tp1, depth_list
+        )
 
     return cc_tp1, cn_tp1, mu, PAR
 
+
 def chla_algae(PAR, nutrient_function, c_bulk_tracer):
-    carbon_molar_mass = 12 # g mol-1
+    carbon_molar_mass = 12  # g mol-1
     r_chl_c_par = cholorophyl_to_C_ratio_par(PAR, nutrient_function)
     chla_bulk = c_bulk_tracer * r_chl_c_par * carbon_molar_mass
 
     return chla_bulk
 
+
 def radiation_algae(chla_bulk_z, I_array):
-    absorption_coefficient = 0.008  # m-1 (mg Chla m-3)-1 (Arrigo et. al 1991) of ice algae
+    absorption_coefficient = (
+        0.008  # m-1 (mg Chla m-3)-1 (Arrigo et. al 1991) of ice algae
+    )
     # absorption_coefficient = 0.02   # m-1 (mg Chla m-3)-1 (Lavoie et. al 2005) of ice algae
-    return chla_bulk_z * I_array*absorption_coefficient
+    return chla_bulk_z * I_array * absorption_coefficient
+
 
 def get_bulk_tracer_concentration(liquid_fraction, brine_concentration):
-
     return liquid_fraction * brine_concentration
 
-def biogeochemical_model(temperature, salinity, liquid_fraction, nutrient_concentration, carbon_concentration, dt, thickness_index, thickness):
+
+def biogeochemical_model(
+    temperature,
+    salinity,
+    liquid_fraction,
+    nutrient_concentration,
+    carbon_concentration,
+    dt,
+    thickness_index,
+    thickness,
+):
     # biogeochemical model for single BAL at interface
-    # calculate photosynthetic rate 
+    # calculate photosynthetic rate
     # biologically active layer at a fixed region in ice which is at the interface of ice and ocean
     biologically_active_layer = int(thickness_index)
     # TODO: model for a dynamic BAL
-    algae_salinity, algae_temperature, algae_liquid_fraction = salinity[biologically_active_layer], temperature[biologically_active_layer], liquid_fraction[biologically_active_layer]
+    algae_salinity, algae_temperature, algae_liquid_fraction = (
+        salinity[biologically_active_layer],
+        temperature[biologically_active_layer],
+        liquid_fraction[biologically_active_layer],
+    )
     nutrient_concentration_at_interface = nutrient_concentration
 
-    photosynthetic_rate_mu, PAR, nutrient_function = model_algae_processes(algae_salinity, algae_temperature, nutrient_concentration_at_interface, thickness)
+    photosynthetic_rate_mu, PAR, nutrient_function = model_algae_processes(
+        algae_salinity,
+        algae_temperature,
+        nutrient_concentration_at_interface,
+        thickness,
+    )
     # update carbon and nutrient uptake
-    carbon_concentration, nutrient_concentration_at_interface, photosynthetic_rate_mu, PAR = ode_update_carbon_nutrient_uptake(dt, algae_salinity, algae_temperature, nutrient_concentration_at_interface, thickness, carbon_concentration, nutrient_concentration_at_interface)
-    # calculate bulk concentration in ice 
-    bulk_tracer_concentration = get_bulk_tracer_concentration(algae_liquid_fraction, nutrient_concentration)
+    (
+        carbon_concentration,
+        nutrient_concentration_at_interface,
+        photosynthetic_rate_mu,
+        PAR,
+    ) = ode_update_carbon_nutrient_uptake(
+        dt,
+        algae_salinity,
+        algae_temperature,
+        nutrient_concentration_at_interface,
+        thickness,
+        carbon_concentration,
+        nutrient_concentration_at_interface,
+    )
+    # calculate bulk concentration in ice
+    bulk_tracer_concentration = get_bulk_tracer_concentration(
+        algae_liquid_fraction, nutrient_concentration
+    )
     # calculate chla concentration
     # TODO: is chla bulk dependent on bulk tracer or carbon??
     chla_bulk = chla_algae(PAR, nutrient_function, bulk_tracer_concentration)
@@ -421,4 +510,72 @@ def biogeochemical_model(temperature, salinity, liquid_fraction, nutrient_concen
 
     nutrient_concentration = nutrient_concentration_at_interface
 
-    return carbon_concentration, nutrient_concentration, photosynthetic_rate_mu, radiation, chla_bulk
+    return (
+        carbon_concentration,
+        nutrient_concentration,
+        photosynthetic_rate_mu,
+        radiation,
+        chla_bulk,
+    )
+
+
+def biogeochemical_model_at_alldepths(
+    temperature,
+    salinity,
+    liquid_fraction,
+    nutrient_concentration,
+    carbon_concentration,
+    dt,
+    thickness,
+):
+    # biogeochemical model for single BAL at interface
+    # calculate photosynthetic rate
+    # TODO: model for a dynamic BAL
+    algae_salinity, algae_temperature, algae_liquid_fraction = (
+        salinity,
+        temperature,
+        liquid_fraction,
+    )
+    nutrient_concentration_at_interface = nutrient_concentration
+
+    photosynthetic_rate_mu, PAR, nutrient_function = model_algae_processes(
+        algae_salinity,
+        algae_temperature,
+        nutrient_concentration_at_interface,
+        thickness,
+    )
+    # update carbon and nutrient uptake
+    (
+        carbon_concentration,
+        nutrient_concentration_at_interface,
+        photosynthetic_rate_mu,
+        PAR,
+    ) = ode_update_carbon_nutrient_uptake(
+        dt,
+        algae_salinity,
+        algae_temperature,
+        nutrient_concentration_at_interface,
+        thickness,
+        carbon_concentration,
+        nutrient_concentration_at_interface,
+    )
+    # calculate bulk concentration in ice
+    bulk_tracer_concentration = get_bulk_tracer_concentration(
+        algae_liquid_fraction, nutrient_concentration
+    )
+    # calculate chla concentration
+    # TODO: is chla bulk dependent on bulk tracer or carbon??
+    chla_bulk = chla_algae(PAR, nutrient_function, bulk_tracer_concentration)
+    I_array = irradiance(thickness)
+    radiation = radiation_algae(chla_bulk, I_array)
+    # TODO: radiation/(rho_i*c_i)
+
+    nutrient_concentration = nutrient_concentration_at_interface
+
+    return (
+        carbon_concentration,
+        nutrient_concentration,
+        photosynthetic_rate_mu,
+        radiation,
+        chla_bulk,
+    )

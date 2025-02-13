@@ -951,6 +951,38 @@ class VisualiseModel:
             )
         plt.close(fig)
 
+    def plot_carbon_concentration_multiplelayers(self, savefig: bool = True):
+        carbon_concentration = self.results_object.carbon_concentration_multiplelayers
+        depth = self.results_object.thickness_list[-1]
+        depth_index = int(self.results_object.thickness_index_total[-1]) + 1
+
+        print("Plotting carbon concentration multiple layers...")
+        x_axis_iter = np.arange(0, self.ui_object.max_iterations - 1, 1)
+        heatmap_data = carbon_concentration[1:, :(depth_index)]
+        fig, ax = plt.subplots()
+        cax = ax.imshow(
+            heatmap_data.T,
+            cmap="Greens",
+            aspect="auto",
+            extent=[
+                0,
+                len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600,
+                depth,
+                0,
+            ],
+        )
+        ax.set_xlabel(r"$t$ [hours]")
+        ax.set_ylabel(r"Depth [$m$]")
+        ax.set_title(r"Freezing Overtime")
+        fig.colorbar(cax, ax=ax, label=r"carbon concentration $[mmol/m^3]$")
+
+        if savefig:
+            fig.savefig(
+                self.ui_object.dir_output_name + "/carbon_concentration_multiplelayers.pdf",
+                backend="pgf",
+            )
+        plt.close(fig)
+
     def plot_chla_bulk_concentration(self, savefig: bool = True):
         chla_bulk_concentration = self.create_2d_array(self.results_object.chla_bulk)
         depth = self.results_object.thickness_list[-1]
@@ -979,6 +1011,38 @@ class VisualiseModel:
         if savefig:
             fig.savefig(
                 self.ui_object.dir_output_name + "/chla_bulk_concentration.pdf",
+                backend="pgf",
+            )
+        plt.close(fig)
+
+    def plot_chla_bulk_concentration_multiplelayers(self, savefig: bool = True):
+        chla_bulk_concentration = self.results_object.chla_bulk_multiplelayers
+        depth = self.results_object.thickness_list[-1]
+        depth_index = int(self.results_object.thickness_index_total[-1]) + 1
+
+        print("Plotting chla concentration multiple layers...")
+        x_axis_iter = np.arange(0, self.ui_object.max_iterations - 1, 1)
+        heatmap_data = chla_bulk_concentration[1:, :(depth_index)]
+        fig, ax = plt.subplots()
+        cax = ax.imshow(
+            heatmap_data.T,
+            cmap="Greens",
+            aspect="auto",
+            extent=[
+                0,
+                len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600,
+                depth,
+                0,
+            ],
+        )
+        ax.set_xlabel(r"$t$ [hours]")
+        ax.set_ylabel(r"Depth [$m$]")
+        ax.set_title(r"Freezing Overtime")
+        fig.colorbar(cax, ax=ax, label=r"Chla bulk concentration $[mg/m^3]$")
+
+        if savefig:
+            fig.savefig(
+                self.ui_object.dir_output_name + "/chla_bulk_concentration_multiplelayers.pdf",
                 backend="pgf",
             )
         plt.close(fig)
@@ -1077,6 +1141,38 @@ class VisualiseModel:
                 backend="pgf",
             )
         plt.close(fig)
+    
+    def plot_photosynthetic_rate_multiplelayers(self, savefig: bool = True):
+        photosynthetic_rate_T_S_PAR = self.results_object.photosynthetic_rate_multiplelayers
+        depth = self.results_object.thickness_list[-1]
+        depth_index = int(self.results_object.thickness_index_total[-1]) + 1
+
+        print("Plotting photosynthetic rate multiple layers...")
+        x_axis_iter = np.arange(0, self.ui_object.max_iterations - 1, 1)
+        heatmap_data = photosynthetic_rate_T_S_PAR[1:, :depth_index]
+        fig, ax = plt.subplots()
+        cax = ax.imshow(
+            heatmap_data.T,
+            cmap="Reds",
+            aspect="auto",
+            extent=[
+                0,
+                len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600,
+                depth,
+                0,
+            ],
+        )
+        ax.set_xlabel(r"$t$ [hours]")
+        ax.set_ylabel(r"Depth [$m$]")
+        ax.set_title(r"Freezing Overtime")
+        fig.colorbar(cax, ax=ax, label=r"photosynthetic rate $[mmol/m^3/s]$")
+
+        if savefig:
+            fig.savefig(
+                self.ui_object.dir_output_name + "/photosynthetic_rate_multiplelayers.pdf",
+                backend="pgf",
+            )
+        plt.close(fig)
 
     def plot_radiation_algae(self, savefig: bool = True):
         radiation_algae = self.create_2d_array(self.results_object.radiation_algae)
@@ -1107,6 +1203,39 @@ class VisualiseModel:
         if savefig:
             fig.savefig(
                 self.ui_object.dir_output_name + "/algae_radiation.pdf",
+                backend="pgf",
+            )
+        plt.close(fig)
+    
+    def plot_radiation_algae_multiplelayers(self, savefig: bool = True):
+        radiation_algae = self.results_object.radiation_algae_multiplelayers
+
+        depth = self.results_object.thickness_list[-1]
+        depth_index = int(self.results_object.thickness_index_total[-1]) + 1
+
+        print("Plotting algae radiation multiple layers...")
+        x_axis_iter = np.arange(0, self.ui_object.max_iterations - 1, 1)
+        heatmap_data = radiation_algae[1:, :depth_index]
+        fig, ax = plt.subplots()
+        cax = ax.imshow(
+            heatmap_data.T,
+            cmap="Reds",
+            aspect="auto",
+            extent=[
+                0,
+                len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600,
+                depth,
+                0,
+            ],
+        )
+        ax.set_xlabel(r"$t$ [hours]")
+        ax.set_ylabel(r"Depth [$m$]")
+        ax.set_title(r"Freezing Overtime")
+        fig.colorbar(cax, ax=ax, label=r"algae radiation $[W/m^2]$")
+
+        if savefig:
+            fig.savefig(
+                self.ui_object.dir_output_name + "/algae_radiation_multiplelayers.pdf",
                 backend="pgf",
             )
         plt.close(fig)
@@ -1172,7 +1301,7 @@ class VisualiseModel:
 
         if savefig:
             fig.savefig(
-                self.ui_object.dir_output_name + "/radiation_all_heatmap.pdf",
+                self.ui_object.dir_output_name + "/radiation_algae_heatmap_multiplelayers.pdf",
                 backend="pgf",
             )
         plt.close(fig)
@@ -1185,7 +1314,7 @@ class VisualiseModel:
         
         plt.grid()
         plt.plot(self.results_object.nutrient_concentration_multiplelayers[5, :], depth_, ':',label=r't=5s', color='black', linewidth=1)
-        plt.plot(self.results_object.nutrient_concentration_multiplelayers[int(time/2), :], depth_, label=rf't={time/2}s', color='black', linewidth=1)
+        plt.plot(self.results_object.nutrient_concentration_multiplelayers[int(time/2), :], depth_, label=rf't={int(time/2)}s', color='black', linewidth=1)
         plt.plot(self.results_object.nutrient_concentration_multiplelayers[int(time -5), :], depth_, '--',label=rf't={time-5}s', color='black', linewidth=1)
         plt.gca().invert_yaxis()
         plt.xlabel(r'nutrient concentration [mmol m^{-3}]')
@@ -1205,7 +1334,7 @@ class VisualiseModel:
         plt.figure()
         plt.grid()
         plt.plot(self.results_object.s_k_list[5, :], depth_, ':',label=r't=5s', color='black', linewidth=1)
-        plt.plot(self.results_object.s_k_list[int(time/2), :], depth_, label=rf't={time/2}s', color='black', linewidth=1)
+        plt.plot(self.results_object.s_k_list[int(time/2), :], depth_, label=rf't={int(time/2)}s', color='black', linewidth=1)
         plt.plot(self.results_object.s_k_list[int(time -5), :], depth_, '--',label=rf't={time-5}s', color='black', linewidth=1)
         plt.gca().invert_yaxis()
         plt.xlabel(r'salinity concentration [ppt]')
@@ -1225,7 +1354,7 @@ class VisualiseModel:
         plt.figure(figsize=(4, 4))
         plt.grid()
         plt.plot(self.results_object.phi_k_list[5, :], depth_, ':',label=r't=5s', color='black', linewidth=1)
-        plt.plot(self.results_object.phi_k_list[int(time/2), :], depth_, label=rf't={time/2}s', color='black', linewidth=1)
+        plt.plot(self.results_object.phi_k_list[int(time/2), :], depth_, label=rf't={int(time/2)}s', color='black', linewidth=1)
         plt.plot(self.results_object.phi_k_list[int(time -5), :], depth_, '--',label=rf't={time-5}s', color='black', linewidth=1)
         plt.gca().invert_yaxis()
         plt.xlabel(r'liquid fraction')
@@ -1245,7 +1374,7 @@ class VisualiseModel:
         plt.figure(figsize=(4, 4))
         plt.grid()
         plt.plot(self.results_object.t_k_list[5, :], depth_, ':',label=r't=5s', color='black', linewidth=1)
-        plt.plot(self.results_object.t_k_list[int(time/2), :], depth_, label=rf't={time/2}s', color='black', linewidth=1)
+        plt.plot(self.results_object.t_k_list[int(time/2), :], depth_, label=rf't={int(time/2)}s', color='black', linewidth=1)
         plt.plot(self.results_object.t_k_list[int(time -5), :], depth_, '--',label=rf't={time-5}s', color='black', linewidth=1)
         plt.gca().invert_yaxis()
         plt.xlabel(r'Temperature [K]')
@@ -1266,7 +1395,7 @@ class VisualiseModel:
         plt.figure(figsize=(4, 4))
         plt.grid()
         plt.plot(self.results_object.carbon_concentration_multiplelayers[5, :], depth_, ':',label=r't=5s', color='black', linewidth=1)
-        plt.plot(self.results_object.carbon_concentration_multiplelayers[int(time/2), :], depth_, label=rf't={time/2}s', color='black', linewidth=1)
+        plt.plot(self.results_object.carbon_concentration_multiplelayers[int(time/2), :], depth_, label=rf't={int(time/2)}s', color='black', linewidth=1)
         plt.plot(self.results_object.carbon_concentration_multiplelayers[int(time -5), :], depth_, '--',label=rf't={time-5}s', color='black', linewidth=1)
         plt.gca().invert_yaxis()
         plt.xlabel(r'carbon concentration [mmol m^{-3}]')
@@ -1288,7 +1417,7 @@ class VisualiseModel:
         plt.figure(figsize=(4, 4))
         plt.grid()
         plt.plot(self.results_object.salinity_source_term[5, :], depth_, ':',label=r't=5s', color='black', linewidth=1)
-        plt.plot(self.results_object.salinity_source_term[int(time/2), :], depth_, label=rf't={time/2}s', color='black', linewidth=1)
+        plt.plot(self.results_object.salinity_source_term[int(time/2), :], depth_, label=rf't={int(time/2)}s', color='black', linewidth=1)
         plt.plot(self.results_object.salinity_source_term[int(time -5), :], depth_, '--',label=rf't={time-5}s', color='black', linewidth=1)
         plt.gca().invert_yaxis()
         plt.xlabel(r'Salinity source term [kg]')
@@ -1309,7 +1438,7 @@ class VisualiseModel:
         plt.figure(figsize=(4, 4))
         plt.grid()
         plt.plot(self.results_object.radiation_multiplelayers[5, :], depth_, ':',label=r't=5s', color='black', linewidth=1)
-        plt.plot(self.results_object.radiation_multiplelayers[int(time/2), :], depth_, label=rf't={time/2}s', color='black', linewidth=1)
+        plt.plot(self.results_object.radiation_multiplelayers[int(time/2), :], depth_, label=rf't={int(time/2)}s', color='black', linewidth=1)
         plt.plot(self.results_object.radiation_multiplelayers[int(time -5), :], depth_, '--',label=rf't={time-5}s', color='black', linewidth=1)
         plt.gca().invert_yaxis()
         plt.xlabel(r'radiation [W/m^2]')
@@ -1330,7 +1459,7 @@ class VisualiseModel:
         plt.figure()
         plt.grid()
         plt.plot(liquid_salinity[5, :], depth_, ':',label=r't=5s', color='black', linewidth=1)
-        plt.plot(liquid_salinity[int(time/2), :], depth_, label=rf't={time/2}s', color='black', linewidth=1)
+        plt.plot(liquid_salinity[int(time/2), :], depth_, label=rf't={int(time/2)}s', color='black', linewidth=1)
         plt.plot(liquid_salinity[int(time -5), :], depth_, '--',label=rf't={time-5}s', color='black', linewidth=1)
         plt.gca().invert_yaxis()
         plt.xlabel(r'salinity concentration [ppt]')
@@ -1351,7 +1480,7 @@ class VisualiseModel:
         plt.figure(figsize=(4, 4))
         plt.grid()
         plt.plot(self.results_object.brine_velocity_list[5, :], depth_, ':',label=r't=5s', color='black', linewidth=1)
-        plt.plot(self.results_object.brine_velocity_list[int(time/2), :], depth_, label=rf't={time/2}s', color='black', linewidth=1)
+        plt.plot(self.results_object.brine_velocity_list[int(time/2), :], depth_, label=rf't={int(time/2)}s', color='black', linewidth=1)
         plt.plot(self.results_object.brine_velocity_list[int(time -5), :], depth_, '--',label=rf't={time-5}s', color='black', linewidth=1)
         plt.gca().invert_yaxis()
         plt.xlabel(r'Brine velocity [m/s]')

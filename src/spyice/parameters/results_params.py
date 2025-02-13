@@ -108,6 +108,9 @@ class ResultsParams:
         self.nutrient_concentration_multiplelayers = np.ones([iter_max, nz])
         self.carbon_concentration_multiplelayers = np.ones([iter_max, nz])
         self.radiation_multiplelayers = np.zeros([iter_max, nz])
+        self.radiation_algae_multiplelayers = np.zeros([iter_max, nz])
+        self.photosynthetic_rate_multiplelayers = np.zeros([iter_max, nz])
+        self.chla_bulk_multiplelayers = np.zeros([iter_max, nz])
         # salinity souce term
         self.salinity_source_term = np.zeros([iter_max, nz])
 
@@ -346,9 +349,17 @@ class ResultsParams:
         self.temperature_liquid[t, :] = temperature_liquid
         self.temperature_solid[t, :] = temperature_solid
         # algae model
-        self.carbon_concentration[t] = carbon_concentration
-        self.nutrient_concentration[t] = nutrient_concentration
-        self.photosynthetic_rate[t] = photosynthetic_rate
-        self.radiation_algae[t] = radiation_algae
-        self.chla_bulk[t] = chla_bulk
+        if len(carbon_concentration) == 1:
+            self.carbon_concentration[t] = carbon_concentration
+            self.nutrient_concentration[t] = nutrient_concentration
+            self.photosynthetic_rate[t] = photosynthetic_rate
+            self.radiation_algae[t] = radiation_algae
+            self.chla_bulk[t] = chla_bulk
+        else:
+            self.carbon_concentration_multiplelayers[t,:] = carbon_concentration
+            self.nutrient_concentration_multiplelayers[t,:] = nutrient_concentration
+            self.photosynthetic_rate_multiplelayers[t,:] = photosynthetic_rate
+            self.radiation_algae_multiplelayers[t,:] = radiation_algae
+            self.chla_bulk_multiplelayers[t,:] = chla_bulk
+
 

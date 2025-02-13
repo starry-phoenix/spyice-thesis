@@ -102,12 +102,17 @@ class MainProcess:
         # algae model
         model_visualization_object.plot_carbon_concentration(savefig=True)
         model_visualization_object.plot_nutrient_concentration(savefig=True)
-        model_visualization_object.plot_nutrient_concentration_multiplelayers(savefig=True)
         model_visualization_object.plot_photosynthetic_rate(savefig=True)
         model_visualization_object.plot_radiation_algae(savefig=True)
         model_visualization_object.plot_radiation_algae_dt_by_rho_c(savefig=True)
         model_visualization_object.plot_chla_bulk_concentration(savefig=True)
         model_visualization_object.plot_radiation_all(savefig=True)
+        # plot algae model multiple layers
+        model_visualization_object.plot_nutrient_concentration_multiplelayers(savefig=True)
+        model_visualization_object.plot_carbon_concentration_multiplelayers(savefig=True)
+        model_visualization_object.plot_photosynthetic_rate_multiplelayers(savefig=True)
+        model_visualization_object.plot_radiation_algae_multiplelayers(savefig=True)
+        model_visualization_object.plot_chla_bulk_concentration_multiplelayers(savefig=True)
         # plot vertical profiles of algae model
         model_visualization_object.plot_nutrient_cn_profile(savefig=True)
         model_visualization_object.plot_carbon_concentration_profile(savefig=True)
