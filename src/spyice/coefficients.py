@@ -33,7 +33,6 @@ ui = UserInput()
     ui.constants.k_w,
 )
 
-
 def update_coefficients(argument, x_initial, w, phi, nz, salinity_initial):
     """Updates of coefficients required to solve the Advection Reaction Diffusion Equation for each time step for temperature or salinity
 
@@ -114,3 +113,4 @@ def _effective_parameter(brine_coefficient, ice_coefficient, phi, nz):
     # phi = np.where(phi < 0.5, 0, np.where(phi > 0.5, 1, phi))
     eff = phi * brine_coefficient + (1 - phi) * ice_coefficient
     return eff
+

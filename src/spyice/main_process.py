@@ -85,16 +85,38 @@ class MainProcess:
         )
         # model_visualization_object.plot_error_temp(100, norm="inf", savefig=False)
         # model_visualization_object.plot_depth_over_time(savefig=True)
-        model_visualization_object.plot_depth_over_time_heatmap(savefig=True)
-        # model_visualization_object.plot_temperature(
-        #     z_depth=0.1, savefig=True, Buffo_matlab=False
-        # )
-        model_visualization_object.plot_H_iter_all(savefig=True)
+
+        # uncomment from here for physical model
+        # model_visualization_object.plot_depth_over_time_heatmap(savefig=True)
+        # # model_visualization_object.plot_temperature(
+        # #     z_depth=0.1, savefig=True, Buffo_matlab=False
+        # # )
+        # model_visualization_object.plot_H_iter_all(savefig=True)
         model_visualization_object.plot_temperature_heatmap(savefig=True)
         model_visualization_object.plot_salinity_heatmap(savefig=True)
         model_visualization_object.plot_liquidfraction_heatmap(savefig=True)
         model_visualization_object.plot_temperature_liquid_solid_evolution(
             z_depth=0.1, savefig=True
         )
-        # model_visualization_object.plot_temperature_heatmap_as_gif()
+
+        # algae model
+        model_visualization_object.plot_carbon_concentration(savefig=True)
+        model_visualization_object.plot_nutrient_concentration(savefig=True)
+        model_visualization_object.plot_nutrient_concentration_multiplelayers(savefig=True)
+        model_visualization_object.plot_photosynthetic_rate(savefig=True)
+        model_visualization_object.plot_radiation_algae(savefig=True)
+        model_visualization_object.plot_radiation_algae_dt_by_rho_c(savefig=True)
+        model_visualization_object.plot_chla_bulk_concentration(savefig=True)
+        model_visualization_object.plot_radiation_all(savefig=True)
+        # plot vertical profiles of algae model
+        model_visualization_object.plot_nutrient_cn_profile(savefig=True)
+        model_visualization_object.plot_carbon_concentration_profile(savefig=True)
+        model_visualization_object.plot_salinity_profile(savefig=True)
+        model_visualization_object.plot_liquid_fraction_profile(savefig=True)
+        model_visualization_object.plot_temperature_profile(savefig=True)
+        model_visualization_object.plot_radiation_profile(savefig=True)
+        model_visualization_object.plot_salinity_sourceterm_profile(savefig=True)
+        model_visualization_object.plot_liquid_salinity_profile(savefig=True)
+        model_visualization_object.plot_brinevelocity_profile(savefig=True)
+        #model_visualization_object.plot_temperature_heatmap_as_gif()
         print("Postprocessing done.")

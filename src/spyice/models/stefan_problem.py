@@ -68,10 +68,10 @@ class StefanProblem:
         """
         ...
         alpha = ui.constants.k_i / (ui.constants.c_i * ui.constants.rho_i)
-        nz_depth = int(np.absolute(depth_stefan) / dz)
+        nz_depth = int(np.absolute(depth_stefan) / dz) 
         z = np.linspace(0, np.absolute(depth_stefan), nz_depth)
         temperature_stefan = np.ones(nz) * ui.temperature_melt
-        if (np.absolute(depth_stefan) != nz_depth) and (nz_depth != 0):
+        if (np.absolute(depth_stefan) != nz_depth) and (nz_depth != 0) and (nz_depth<nz):
             for i in range(nz_depth):
                 erf_values = math.erf(z[i] / (2 * np.sqrt(alpha * t)))
                 erf_depth = math.erf(depth_stefan / (2 * np.sqrt(alpha * t)))

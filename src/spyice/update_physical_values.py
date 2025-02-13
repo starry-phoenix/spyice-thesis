@@ -49,7 +49,6 @@ def calculate_melting_temperature_from_salinity(
         )
     return _melting_temperature_seawater
 
-
 def update_liquid_fraction_buffo(
     _temperature,
     _salinity,
@@ -263,6 +262,7 @@ def update_liquid_fraction_mixture_with_under_relaxation(
         _specific_heat_ice * calculate_melting_temperature_from_salinity(_salinity)
     )
 
+    # TODO: original phi condition
     if _is_stefan:
         _phi = np.where(
             _enthalpy <= _enthalpy_solid,
@@ -274,6 +274,18 @@ def update_liquid_fraction_mixture_with_under_relaxation(
                 + under_relaxation_factor * _temperature_difference * _specific_heat_effective_by_L,
             ),
         )
+    # TODO: modified with temperatures of previous step
+    # if _is_stefan:
+    #     _phi = np.where(
+    #         _temperature <= _temperature_liquidus,
+    #         0,
+    #         np.where(
+    #             _enthalpy > (_enthalpy_solid + _latent_heat_water),
+    #             1,
+    #             _phi_km1
+    #             + under_relaxation_factor * _temperature_difference * _specific_heat_effective_by_L,
+    #         ),
+    #     )
     
     return _phi * phi_control_for_infinite_values(_phi), _temperature_liquidus, _temperature_solidus
 
@@ -448,17 +460,81 @@ def update_enthalpy(
         )
     return _enthalpy
 
+def calculate_brine_velocity_upwindscheme(phi, phi_initial, dz, dt, nz, rho_i, rho_br, thickness_index_prev):
+        '''
+        compute brine velocity (no gravity) according to upwind scheme
+
+        Arguments------------------------------------------------------------------
+            phi_initial initial liquid fraction, computed in previous time step [-]
+            phi
+            lastly updated liquid fraction in convergence scheme of
+            the present time step [-]
+            dz
+            dt
+            nz
+            spatial discretization [m]
+            time discretization [s]
+            number of computational nodes
+        Results---------------
+            wkm1
+            brine velocity updated [ms-1]
+        '''
+        w_km1 = np.zeros(nz)
+        # initial velocity zero constant in space
+        e = (rho_i/rho_br)- 1
+        nu = e*dz/dt
+        
+        for i in range(1,nz,1):
+            w_km1[i] = w_km1[i-1] + nu*(phi[i] - phi_initial[i])
+
+        return w_km1
+
+def calculate_brine_velocity_darcyscheme(phi, phi_initial, dz, dt, nz, rho_i, rho_br, thickness_index_prev):
+        '''
+        compute brine velocity (no gravity)
+
+        Arguments------------------------------------------------------------------
+            phi_initial initial liquid fraction, computed in previous time step [-]
+            phi
+            lastly updated liquid fraction in convergence scheme of
+            the present time step [-]
+            dz
+            dt
+            nz
+            spatial discretization [m]
+            time discretization [s]
+            number of computational nodes
+        Results---------------
+            wkm1
+            brine velocity updated [ms-1]
+        '''
+        dt_phi = np.zeros(nz)
+        w_km1 = np.zeros(nz)
+        # initial velocity zero constant in space
+        dt_phi= (phi - phi_initial)/dt
+        # time derivative of phi
+        dt_phi_dz = dt_phi[:] * dz
+        dt_phi_integrated = np.cumsum(dt_phi_dz)
+        e = (rho_i/rho_br)- 1
+        w_km1 = e * dt_phi_integrated  # * 0.25 #*phi_zero
+
+        return w_km1
 
 def update_temperature_and_salinity(
     preprocess_data_object: PreprocessData,
     t_prev: np.ndarray,
     s_prev: np.ndarray,
     phi_k: np.ndarray,
+    brine_velocity_prev: np.ndarray,
+    thickness_index_prev: float,
     t_initial: np.ndarray,
     s_initial: np.ndarray,
     phi_initial: np.ndarray,
     t_melt: np.ndarray,
-    source_term: np.ndarray,
+    source_term_temperature: np.ndarray,
+    source_term_salinity: np.ndarray,
+    x_wind_temperature: np.ndarray,
+    x_wind_salinity: np.ndarray,
     buffo: bool,
     stefan: bool,
     voller: bool,
@@ -490,11 +566,12 @@ def update_temperature_and_salinity(
     advection_diffusion_temp = AdvectionDiffusion(
         "temperature",
         t_prev,
-        source_term,
+        source_term_temperature,
         t_initial,
         phi_k,
         phi_initial,
-        preprocess_data_object.upwind_velocity,
+        thickness_index_prev,
+        brine_velocity_prev,
         preprocess_data_object.grid_timestep_dt,
         preprocess_data_object.grid_resolution_dz,
         preprocess_data_object.nz,
@@ -508,16 +585,17 @@ def update_temperature_and_salinity(
     t_k, x_wind_t, A_before_correction = advection_diffusion_temp.unknowns_matrix(
         t_melt, _nonconstant_physical_properties
     )
-    # TODO: Add algae growth model here to salinity
+    
     if _is_salinity_equation is True:
         advection_diffusion_salinity = AdvectionDiffusion(
             "salinity",
             s_prev,
-            source_term,
+            source_term_salinity,
             s_initial,
             phi_k,
             phi_initial,
-            preprocess_data_object.upwind_velocity,
+            thickness_index_prev,
+            brine_velocity_prev,
             preprocess_data_object.grid_timestep_dt,
             preprocess_data_object.grid_resolution_dz,
             preprocess_data_object.nz,
@@ -535,24 +613,73 @@ def update_temperature_and_salinity(
         )
     else:
         s_k = s_prev
-    return t_k, s_k, A_before_correction, advection_diffusion_temp.factor3
+    return t_k, s_k, A_before_correction, advection_diffusion_temp.factor3, x_wind_t, x_wind_s
+
+def update_algae_transport(    
+    preprocess_data_object: PreprocessData,
+    nutrient_cn_prev: np.ndarray,
+    phi_k: np.ndarray,
+    brine_velocity_prev: np.ndarray,
+    thickness_index_prev: float,
+    nutrient_cn_initial: np.ndarray,
+    phi_initial: np.ndarray,
+    t_melt: np.ndarray,
+    source_term: np.ndarray,
+    buffo: bool,
+    stefan: bool,
+    voller: bool,
+    _nonconstant_physical_properties: bool = False,):
+
+    advection_diffusion_algae = AdvectionDiffusion(
+        "salinity",
+        nutrient_cn_prev,
+        source_term,
+        nutrient_cn_initial,
+        phi_k,
+        phi_initial,
+        thickness_index_prev,
+        brine_velocity_prev,
+        preprocess_data_object.grid_timestep_dt,
+        preprocess_data_object.grid_resolution_dz,
+        preprocess_data_object.nz,
+        preprocess_data_object.time_passed,
+        preprocess_data_object.initial_salinity,
+        Stefan=stefan,
+        Buffo=buffo,
+        Voller=voller,
+        bc_neumann=preprocess_data_object.temp_grad,
+    )
+    nutrient_cn, x_wind_cn, _ = (
+        advection_diffusion_algae.unknowns_matrix(
+            t_melt, _nonconstant_physical_properties
+        )
+    )
+
+    return nutrient_cn
 
 
 def update_state_variables(
     preprocess_data_object: PreprocessData,
     t_prev,
     s_prev,
+    brine_velocity_prev,
+    nutrient_cn_prev,
     phi_prev,
+    thickness_index_prev,
     buffo,
     stefan,
     voller,
     t_initial,
     s_initial,
+    nutrient_cn_initial,
     phi_initial,
     t_k_melt,
     t_k_A_LHS_matrix_prev,
     temp_factor_3,
-    source_term,
+    source_term_temperature,
+    source_term_salinity,
+    x_wind_temperature,
+    x_wind_salinity,
     _is_salinity_equation,
 ):
     """
@@ -562,13 +689,15 @@ def update_state_variables(
         preprocess_data_object (PreprocessData): The preprocess data object.
         t_km1 (numpy.ndarray): The previous temperature values.
         s_km1 (numpy.ndarray): The previous salinity values.
+        nutrient_cn (numpy.ndarray): The previous nutrient concentration values
         phi_km1 (numpy.ndarray): The previous liquid fraction values.
         buffo (bool): The buffo flag.
         stefan (bool): The stefan flag.
         t_initial (numpy.ndarray): The initial temperature values.
         s_initial (numpy.ndarray): The initial salinity values.
+        nutrient_cn_initial (numpy.ndarray): The initial nutrient concentration values
         phi_initial (numpy.ndarray): The initial liquid fraction values.
-        source_term (numpy.ndarray): The source term values.
+        source_term (numpy.ndarray): The source term values like radiation ocean flux, algae, etc.
 
     Methods called:
         Updates the state variables based on the given parameters.
@@ -576,6 +705,7 @@ def update_state_variables(
             - update_enthalpy_solid_state: Update the enthalpy of the solid state with previous salinity using the liquidus relation.
             - update_liquid_fraction: Update the liquid fraction of the system with previous temperature, salinity, enthalpy, solid enthalpy.
             - update_temperature_and_salinity: Update the temperature and salinity of the system with updated liquid fraction and previous temperature, salinity, initial temperature, initial salinity, initial liquid fraction, source term, buffo, stefan.
+            - update_algae_transport: Update the nutrient concentration of the system 
     Returns:
         tuple: A tuple containing the following updated values:
             - h_k (numpy.ndarray): The updated enthalpy values.
@@ -583,6 +713,7 @@ def update_state_variables(
             - phi_k (numpy.ndarray): The updated liquid fraction values.
             - t_k (numpy.ndarray): The updated temperature values.
             - s_k (numpy.ndarray): The updated salinity values.
+            - nutrient_cn (numpy.ndarray): The updated nutrient values 
     """
 
     h_k = update_enthalpy(t_prev, s_prev, phi_prev, preprocess_data_object.nz)
@@ -592,16 +723,21 @@ def update_state_variables(
         preprocess_data_object.liquidus_relation_type,
     )
     if voller:
-        t_k, s_k, t_k_A_LHS_matrix, temp_factor_3 = update_temperature_and_salinity(
+        t_k, s_k, t_k_A_LHS_matrix, temp_factor_3, x_wind_temperature, x_wind_salinity = update_temperature_and_salinity(
             preprocess_data_object,
             t_prev,
             s_prev,
             phi_prev,
+            brine_velocity_prev,
+            thickness_index_prev,
             t_initial,
             s_initial,
             phi_initial,
             t_k_melt,
-            source_term,
+            source_term_temperature,
+            source_term_salinity,
+            x_wind_temperature,
+            x_wind_salinity,
             buffo,
             stefan,
             voller,
@@ -659,22 +795,45 @@ def update_state_variables(
         #     _nonconstant_physical_properties=False,
         # )
         
-        t_k, s_k, t_k_A_LHS_matrix, temp_factor_3 = update_temperature_and_salinity(
+        t_k, s_k, t_k_A_LHS_matrix, temp_factor_3, x_wind_temperature, x_wind_salinity = update_temperature_and_salinity(
             preprocess_data_object,
             t_prev,
             s_prev,
             phi_k,
+            brine_velocity_prev,
+            thickness_index_prev,
             t_initial,
             s_initial,
             phi_initial,
             t_k_melt,
-            source_term,
+            source_term_temperature,
+            source_term_salinity,
+            x_wind_temperature,
+            x_wind_salinity,
             buffo,
             stefan,
             voller,
             _is_salinity_equation,
             t_k_A_LHS_matrix_prev=t_k_A_LHS_matrix_prev,
         )
+
+        nutrient_cn = update_algae_transport(
+            preprocess_data_object,
+            nutrient_cn_prev,
+            phi_k,
+            brine_velocity_prev,
+            thickness_index_prev,
+            nutrient_cn_initial,
+            phi_initial,
+            t_k_melt,
+            source_term_salinity,
+            buffo,
+            stefan,
+            voller,
+        )
+
+        # switch algae transport off
+        # nutrient_cn = 0.0*nutrient_cn
 
         t_k_melt = calculate_melting_temperature_from_salinity(s_k)
 
@@ -689,16 +848,21 @@ def update_state_variables(
             _is_stefan=preprocess_data_object.is_stefan,
             _method="likebuffo",
         )
-        t_k, s_k, t_k_A_LHS_matrix, temp_factor_3 = update_temperature_and_salinity(
+        t_k, s_k, t_k_A_LHS_matrix, temp_factor_3, x_wind_temperature, x_wind_salinity = update_temperature_and_salinity(
             preprocess_data_object,
             t_prev,
             s_prev,
             phi_k,
+            brine_velocity_prev,
+            thickness_index_prev,
             t_initial,
             s_initial,
             phi_initial,
             t_k_melt,
-            source_term,
+            source_term_temperature,
+            source_term_salinity,
+            x_wind_temperature,
+            x_wind_salinity,
             buffo,
             stefan,
             voller,
@@ -707,13 +871,17 @@ def update_state_variables(
         t_k_melt = calculate_melting_temperature_from_salinity(s_k)
         temperature_liquidus = 0.0
         temperature_solidus = 0.0
+        nutrient_cn = 0.0
     else:
         AssertionError("No method selected for liquid fraction update")
 
     # Voller scheme: lower, main, upper diagonal of the matrix A of Ax = b
 
+    # calculate brine velocity
+    brine_velocity = calculate_brine_velocity_upwindscheme(phi_k, phi_initial, preprocess_data_object.grid_resolution_dz, preprocess_data_object.grid_timestep_dt, preprocess_data_object.nz, _rho_ice, _rho_brine, thickness_index_prev)
 
-    return h_k, h_solid, phi_k, t_k, s_k, t_k_A_LHS_matrix, temp_factor_3, t_k_melt, temperature_liquidus, temperature_solidus
+
+    return h_k, h_solid, phi_k, t_k, s_k, brine_velocity, nutrient_cn, t_k_A_LHS_matrix, temp_factor_3, t_k_melt, temperature_liquidus, temperature_solidus, x_wind_temperature, x_wind_salinity
 
 
 def phi_control_for_infinite_values(_phi):

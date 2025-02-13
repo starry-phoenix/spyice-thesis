@@ -50,7 +50,11 @@ def set_statevariables(
 def overwrite_statevariables(
     temperature_calculated,
     salinity_calculated,
+    brine_velocity_calculated,
+    nutrient_calculated,
     liquid_fraction_calculated,
+    x_wind_temperature,
+    x_wind_salinity,
     temperature_melt=None,
     t_k_lhs_A_matrix=None,
     temp_factor3=None,
@@ -74,6 +78,8 @@ def overwrite_statevariables(
     liquid_fraction_new = (
         liquid_fraction_calculated  # Set current phi as previous phi for next iteration
     )
+    nutrient_cn_new = nutrient_calculated
+
     if temperature_melt is None:
         temperature_melt =  calculate_melting_temperature_from_salinity(salinity_new) # Store the calculated T_melt for later use
     else:
@@ -88,10 +94,14 @@ def overwrite_statevariables(
     return (
         temperature_new,
         salinity_new,
+        brine_velocity_calculated,
+        nutrient_cn_new,
         liquid_fraction_new,
         temperature_melt,
         t_k_lhs_A_matrix,
         temp_factor3,
+        x_wind_temperature,
+        x_wind_salinity,
     )
 
 

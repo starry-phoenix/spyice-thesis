@@ -13,7 +13,9 @@ def apply_boundary_condition(
     argument,
     x_initial,
     source,
+    thickness_index,
     factor1,
+    factor2,
     factor3,
     a,
     delta_upwind,
@@ -49,16 +51,20 @@ def apply_boundary_condition(
     """
     rhs_matrix = x_initial - factor3 * delta_upwind
 
+    # TODO: modified the boundary condition to the moving boundary condition
     if argument == "salinity":
         salinity_bc_top, salinity_bc_bottom = boundary_condition(
-            argument, t_passed, salinity_initial
-        )
-        rhs_matrix[-1] += factor1[-1] * x_initial[-1]  # Dirichlet
+                    argument, t_passed, salinity_initial)
+        if w[-1] < 0:
+            rhs_matrix[-1] += factor1[-1] * salinity_bc_bottom + factor2[-1]*salinity_bc_bottom
+        else:
+            rhs_matrix[-1] += factor1[-1] * salinity_bc_bottom  # Dirichlet
 
     elif argument == "temperature":
         temperature_bc_top, temperature_bc_bottom = boundary_condition(
             argument, t_passed, salinity_initial, top_temp=_temperature_top
         )
+        rhs_matrix = rhs_matrix + source
 
         if is_stefan:
             if bc_neumann is not None:
@@ -87,7 +93,6 @@ def apply_boundary_condition(
     return rhs_matrix
 
 
-# not relevant for our topic
 def correct_for_brine_movement(
     argument, x_initial, w, t_passed, nz, salinity_initial, top_temp
 ):
@@ -106,6 +111,7 @@ def correct_for_brine_movement(
     Raises:
         None
     """
+    # TODO: where tp use x_upwind 
 
     x_upwind = np.zeros(nz)
     for i in range(1, nz - 1):

@@ -97,6 +97,19 @@ class ResultsParams:
         self.all_t_passed = np.zeros(iter_max)
         self.temperature_solid = np.zeros([iter_max, nz])
         self.temperature_liquid = np.zeros([iter_max, nz])
+        self.brine_velocity_list = np.zeros([iter_max, nz])
+        # biogeochemical process single layer
+        self.carbon_concentration = np.ones(iter_max)*0.01
+        self.nutrient_concentration = np.ones(iter_max)*19.90
+        self.photosynthetic_rate = np.zeros(iter_max)
+        self.radiation_algae = np.zeros(iter_max)
+        self.chla_bulk = np.zeros(iter_max)
+        # biogeochemical process multiple layer
+        self.nutrient_concentration_multiplelayers = np.ones([iter_max, nz])
+        self.carbon_concentration_multiplelayers = np.ones([iter_max, nz])
+        self.radiation_multiplelayers = np.zeros([iter_max, nz])
+        # salinity souce term
+        self.salinity_source_term = np.zeros([iter_max, nz])
 
     @staticmethod
     def store_results(
@@ -156,6 +169,9 @@ class ResultsParams:
         t_stefan,
         s_k,
         s_k_buffo,
+        brine_velocity_k,
+        nutrient_cn_multiple_layers,
+        carbon_cc_multiple_layers,
         phi_k,
         phi_k_buffo,
         h_k,
@@ -166,6 +182,13 @@ class ResultsParams:
         t_k_buffo,
         temperature_liquid,
         temperature_solid,
+        carbon_concentration,
+        nutrient_concentration,
+        photosynthetic_rate,
+        radiation_algae,
+        chla_bulk,
+        radiation_all,
+        salinity_source_term,
         buffo=False,
     ):
         """Stores the results for a given iteration 't' in the 'results_dataclass'.
@@ -207,16 +230,27 @@ class ResultsParams:
             t_stefan,
             s_k,
             s_k_buffo,
+            brine_velocity_k,
+            nutrient_cn_multiple_layers,
+            carbon_cc_multiple_layers,
             phi_k,
             h_k,
             h_solid,
             thickness,
             thickness_buffo,
             thickness_stefan,
+            thickness_index,
             t_k_buffo,
             phi_k_buffo,
             temperature_liquid,
-            temperature_solid,            
+            temperature_solid,
+            carbon_concentration,
+            nutrient_concentration,
+            photosynthetic_rate,
+            radiation_algae, 
+            chla_bulk,
+            radiation_all,    
+            salinity_source_term,       
             buffo,
         )
         if thickness_index > 0:
@@ -249,16 +283,27 @@ class ResultsParams:
         t_stefan,
         s_k,
         s_k_buffo,
+        brine_velocity_k,
+        nutrient_cn_multiplelayers,
+        carbon_cc_multiplelayers,
         phi_k,
         h_k,
         h_solid,
         thickness,
         thickness_buffo,
         thickness_stefan,
+        thickness_index,
         t_k_buffo,
         phi_k_buffo,
         temperature_liquid,
         temperature_solid,
+        carbon_concentration,
+        nutrient_concentration,
+        photosynthetic_rate,
+        radiation_algae,
+        chla_bulk,
+        radiation_all,
+        salinity_source_term,
         buffo,
     ):
         """Appends the given parameters to the respective lists.
@@ -287,10 +332,23 @@ class ResultsParams:
             self.phi_buffo_list[t, :] = phi_k_buffo
         self.thickness_list[t] = thickness
         self.depth_stefan_all[t] = thickness_stefan
+        self.thickness_index_total[t] = thickness_index
         self.phi_k_list[t, :] = phi_k
         self.s_k_list[t, :] = s_k
         self.s_buffo_list[t, :] = s_k_buffo
+        self.brine_velocity_list[t, :] = brine_velocity_k
+        self.salinity_source_term[t, :] = salinity_source_term
+        self.nutrient_concentration_multiplelayers[t, :] = nutrient_cn_multiplelayers
+        self.carbon_concentration_multiplelayers[t, :] = carbon_cc_multiplelayers
+        self.radiation_multiplelayers[t, :] = radiation_all
         self.h_k_list[t, :] = h_k
         self.h_solid_list[t, :] = h_solid
         self.temperature_liquid[t, :] = temperature_liquid
         self.temperature_solid[t, :] = temperature_solid
+        # algae model
+        self.carbon_concentration[t] = carbon_concentration
+        self.nutrient_concentration[t] = nutrient_concentration
+        self.photosynthetic_rate[t] = photosynthetic_rate
+        self.radiation_algae[t] = radiation_algae
+        self.chla_bulk[t] = chla_bulk
+

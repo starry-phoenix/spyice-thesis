@@ -6,6 +6,7 @@ from omegaconf import DictConfig
 from src.spyice.parameters.constants import Constants
 from src.spyice.parameters.real_constants import RealConstants
 from src.spyice.parameters.debug_constants import DebugConstants
+from src.spyice.parameters.algae_constants import nutrient_cn_dsi_ice, nutrient_cn_dsi_water, carbon_cc_ice_initial, carbon_cc_water_initial
 from src.spyice.utils.config_sort import read_omegaconfig
 from src.spyice.utils.create_directory import create_output_directory
 
@@ -22,7 +23,7 @@ def _dt_stability_validator(dz: float, dt: float) -> None:
         None
     """
 
-    fourier_criteria = int(50 * (dz / 0.01) ** 2)
+    fourier_criteria = int(121 * (dz / 0.01) ** 2)
     if dt > fourier_criteria:
         raise ValueError(
             "Time-step not following Fourier stability criteria, choose dt < "
@@ -89,7 +90,7 @@ class UserInput:
 
     constants: RealConstants | DebugConstants = Constants.REAL.value
     config_data: DictConfig = field(default_factory=dict)
-    max_iterations: int = 500
+    max_iterations: int = 25000
     is_stefan: bool = True
     is_buffo: bool = True
     is_voller: bool = False
@@ -99,7 +100,7 @@ class UserInput:
     boundary_condition_type: str = "Dirichlet"  # Neumann or Dirichlet
     temperature_tolerance: float = 0.01
     salinity_tolerance: float = 0.01
-    liquid_fraction_tolerance: float = 0.001
+    liquid_fraction_tolerance: float = 0.01
     initial_temperature: str = "T(S)"  # "T_Stefan" or  "T271.25" or "T250" or "Tm_w"
     initial_salinity: str = (
         "S34"  # "S_linear" or "S34" or "S0" or "SX" where X is a number
@@ -110,7 +111,7 @@ class UserInput:
     output_suffix: str = "nonconst_dens-mushfix"
     temperature_top_type: str = "Stefan"  # "Stefan" or "Dirichlet"
     phase_type: int = 1
-    grid_timestep_dt: float = 10
+    grid_timestep_dt: float = 47  # in seconds
     dir_output_name_hydra: str = (
         "Temperature_{S_IC}_{bc_condition}_{dz}_{dt}_{iter_max}_{cap_dens}"
     )
@@ -125,12 +126,18 @@ class UserInput:
     geometry_type: int = field(init=False)
     counter_limit: int = 100000
 
+    # algae model 
+    nutrient_cn_dsi_water: float = nutrient_cn_dsi_water
+    nutrient_cn_dsi_ice: float = nutrient_cn_dsi_ice
+    carbon_cc_ice_initial: float = carbon_cc_ice_initial
+    carbon_cc_water_initial: float = carbon_cc_water_initial
+
     def __post_init__(self):
         _dt_stability_validator(self.grid_resolution_dz, self.grid_timestep_dt)
 
         if isinstance(self.constants, RealConstants):
             self.boundary_salinity = 34.0
-            self.boundary_top_temperature = 265.0
+            self.boundary_top_temperature = 260.0
 
             # melt temperature affects the liquid relation: Frezchem or Normal in src/update_physical_values.py script
             # self.temperature_melt = 273.15 - 1.853 * self.boundary_salinity / 28.0 

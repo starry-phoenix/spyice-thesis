@@ -131,8 +131,10 @@ def set_initial_liquidfraction(initial_liquid_fraction, nz):
     phi = np.zeros(nz, dtype=np.float64)
     if initial_liquid_fraction == "P1":
         phi = np.ones(nz, dtype=np.float64) * 1
+        phi[0] = 0.0
     elif initial_liquid_fraction in ["P_Stefan", "P0"]:
         phi = np.zeros(nz, dtype=np.float64)
+        phi[0] = 1.0
 
     return phi
 
@@ -204,8 +206,8 @@ def set_boundary_temperature(t_passed, temperature_bottom, **kwargs):
     if top_temp == "T_const_250":
         temperature_top = 250.0
     if top_temp == "Stefan":
-        temperature_top = -1
-        temperature_bottom = 0
+        temperature_top = boundary_top_temperature
+        temperature_bottom = temperature_bottom
     elif top_temp == "T_const_260":
         temperature_top = 260.0
     elif top_temp == "T_const_265":
@@ -297,16 +299,16 @@ def calculate_boundary_temperature(t_passed, initial_salinity, kwargs):
 
     salinity_value = re.findall("[0-9]+$", initial_salinity)
     if len(salinity_value) == 0:
-        temeperature_bottom = 271.25
+        temperature_bottom = 271.25
     else:
-        temeperature_bottom = compute_melting_temperature_from_salinity(
+        temperature_bottom = compute_melting_temperature_from_salinity(
             float(salinity_value[0])
         )
 
-    temperature_top, temeperature_bottom = set_boundary_temperature(
-        t_passed, temeperature_bottom, **kwargs
+    temperature_top, temperature_bottom = set_boundary_temperature(
+        t_passed, temperature_bottom, **kwargs
     )
-    return temeperature_bottom, temperature_top
+    return temperature_bottom, temperature_top
 
 
 def raise_salinity_exception(salinity_value):
