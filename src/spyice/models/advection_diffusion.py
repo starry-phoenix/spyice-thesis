@@ -189,24 +189,40 @@ class AdvectionDiffusion:
         ### Set up tridiagonal matrix LHS for Salinity and Temperature
         for i in range(self.nz):
             if self.argument == "salinity":
-                if self.w[i] > 0:
-                    self.main_A[i] = 1 + self.factor1_plus[i] + self.factor1_minus[i] + self.factor2[i]
+                if self.w[i] > 0 and i < self.thickness_index:
+                    self.main_A[i] = (
+                        1
+                        + self.factor1_plus[i]
+                        + self.factor1_minus[i]
+                        + self.factor2[i]
+                    )
                     if i < self.nz - 1:
                         self.upper_A[i] = -self.factor1_minus[i]
                     if i > 0:
-                        self.lower_A[i - 1] = -self.factor1_plus[i]        
-                elif self.w[i] == 0:
-                    self.main_A[i] = 1 + self.factor1_plus[i] + self.factor1_minus[i] 
+                        self.lower_A[i - 1] = -self.factor1_plus[i]
+                elif self.w[i] == 0 and i < self.thickness_index:
+                    self.main_A[i] = 1 + self.factor1_plus[i] + self.factor1_minus[i]
                     if i < self.nz - 1:
-                        self.upper_A[i] = -self.factor1_minus[i] 
+                        self.upper_A[i] = -self.factor1_minus[i]
                     if i > 0:
-                        self.lower_A[i - 1] = -self.factor1_plus[i]                            
-                else:
-                    self.main_A[i] = 1 + self.factor1_plus[i] + self.factor1_minus[i] - self.factor2[i]
+                        self.lower_A[i - 1] = -self.factor1_plus[i]
+                elif self.w[i] < 0 and i < self.thickness_index:
+                    self.main_A[i] = (
+                        1
+                        + self.factor1_plus[i]
+                        + self.factor1_minus[i]
+                        - self.factor2[i]
+                    )
                     if i < self.nz - 1:
                         self.upper_A[i] = -self.factor1_minus[i] + self.factor2[i]
                     if i > 0:
                         self.lower_A[i - 1] = -self.factor1_plus[i]
+                else:
+                    self.main_A[i] = (
+                        1
+                        + self.factor1_plus[i]
+                        + self.factor1_minus[i]
+                    )
             else:
                 self.main_A[i] = 2 * self.factor1[i] + 1.0 - self.factor2[i]
                 if i < self.nz - 1:
@@ -265,14 +281,13 @@ class AdvectionDiffusion:
         else:
             pass
         return X
-    
+
     def set_source_term(self):
         # TODO: check if *dt is necessary for temperature
         if self.argument == "temperature":
-            return self.source*self.dt/(self.a)
+            return self.source * self.dt / (self.a)
         elif self.argument == "salinity":
-            return self.source/self.a
-        
+            return self.source / self.a
 
     def unknowns_matrix(self, temperature_melt, non_constant_physical_properties=False):
         """Calculates the unknowns matrix for the advection-diffusion model.
@@ -312,7 +327,7 @@ class AdvectionDiffusion:
             self.temp_grad,
         )
 
-        # TODO: is X_wind necessary? since advective term is considered in the assemble_tridiagonal() matrix 
+        # TODO: is X_wind necessary? since advective term is considered in the assemble_tridiagonal() matrix
         X_wind = correct_for_brine_movement(
             self.argument,
             self.X_initial,
@@ -322,7 +337,6 @@ class AdvectionDiffusion:
             self.S_IC,
             self.top_temp,
         )
-
 
         # Calculate X_new = A^-1 * B
         if self.Buffo is True:

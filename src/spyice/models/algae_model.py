@@ -474,7 +474,8 @@ def biogeochemical_model(
         temperature[biologically_active_layer],
         liquid_fraction[biologically_active_layer],
     )
-    nutrient_concentration_at_interface = nutrient_concentration
+    nutrient_concentration_at_interface = nutrient_concentration[biologically_active_layer]
+    carbon_concentration_at_interface = carbon_concentration[biologically_active_layer]
 
     photosynthetic_rate_mu, PAR, nutrient_function = model_algae_processes(
         algae_salinity,
@@ -484,7 +485,7 @@ def biogeochemical_model(
     )
     # update carbon and nutrient uptake
     (
-        carbon_concentration,
+        carbon_concentration_at_interface,
         nutrient_concentration_at_interface,
         photosynthetic_rate_mu,
         PAR,
@@ -494,12 +495,12 @@ def biogeochemical_model(
         algae_temperature,
         nutrient_concentration_at_interface,
         thickness,
-        carbon_concentration,
+        carbon_concentration_at_interface,
         nutrient_concentration_at_interface,
     )
     # calculate bulk concentration in ice
     bulk_tracer_concentration = get_bulk_tracer_concentration(
-        algae_liquid_fraction, nutrient_concentration
+        algae_liquid_fraction, nutrient_concentration_at_interface
     )
     # calculate chla concentration
     # TODO: is chla bulk dependent on bulk tracer or carbon??
@@ -508,14 +509,20 @@ def biogeochemical_model(
     radiation = radiation_algae(chla_bulk, I_array)
     # TODO: radiation/(rho_i*c_i)
 
-    nutrient_concentration = nutrient_concentration_at_interface
+    # reset the values and map to interface
+    photosynthetic_rate_mu_all, radiation_all, chla_bulk_all = np.zeros(len(nutrient_concentration)),np.zeros(len(nutrient_concentration)),np.zeros(len(nutrient_concentration))
+    nutrient_concentration[thickness_index] = nutrient_concentration_at_interface
+    carbon_concentration[thickness_index] = carbon_concentration_at_interface
+    photosynthetic_rate_mu_all[thickness_index] = photosynthetic_rate_mu
+    radiation_all[thickness_index] = radiation
+    chla_bulk_all[thickness_index] = chla_bulk
 
     return (
         carbon_concentration,
         nutrient_concentration,
-        photosynthetic_rate_mu,
-        radiation,
-        chla_bulk,
+        photosynthetic_rate_mu_all,
+        radiation_all,
+        chla_bulk_all,
     )
 
 
@@ -527,50 +534,69 @@ def biogeochemical_model_at_alldepths(
     carbon_concentration,
     dt,
     thickness,
+    thickness_index,
 ):
     # biogeochemical model for single BAL at interface
     # calculate photosynthetic rate
     # TODO: model for a dynamic BAL
-    algae_salinity, algae_temperature, algae_liquid_fraction = (
-        salinity,
-        temperature,
-        liquid_fraction,
+    (
+        algae_salinity,
+        algae_temperature,
+        algae_liquid_fraction,
+        photosynthetic_rate_mu,
+        chla_bulk,
+        radiation,
+    ) = (
+        salinity[:thickness_index],
+        temperature[:thickness_index],
+        liquid_fraction[:thickness_index],
+        np.zeros(len(thickness)),
+        np.zeros(len(thickness)),
+        np.zeros(len(thickness)),
     )
-    nutrient_concentration_at_interface = nutrient_concentration
+    nutrient_concentration_at_interface = nutrient_concentration[:thickness_index]
+    carbon_concentration_at_interface = carbon_concentration[:thickness_index]
 
-    photosynthetic_rate_mu, PAR, nutrient_function = model_algae_processes(
+    photosynthetic_rate_mu_at_interface, PAR, nutrient_function = model_algae_processes(
         algae_salinity,
         algae_temperature,
         nutrient_concentration_at_interface,
-        thickness,
+        thickness[:thickness_index],
     )
     # update carbon and nutrient uptake
     (
-        carbon_concentration,
+        carbon_concentration_at_interface,
         nutrient_concentration_at_interface,
-        photosynthetic_rate_mu,
+        photosynthetic_rate_mu_at_interface,
         PAR,
     ) = ode_update_carbon_nutrient_uptake(
         dt,
         algae_salinity,
         algae_temperature,
         nutrient_concentration_at_interface,
-        thickness,
-        carbon_concentration,
+        thickness[:thickness_index],
+        carbon_concentration_at_interface,
         nutrient_concentration_at_interface,
     )
     # calculate bulk concentration in ice
     bulk_tracer_concentration = get_bulk_tracer_concentration(
-        algae_liquid_fraction, nutrient_concentration
+        algae_liquid_fraction, nutrient_concentration_at_interface
     )
     # calculate chla concentration
     # TODO: is chla bulk dependent on bulk tracer or carbon??
-    chla_bulk = chla_algae(PAR, nutrient_function, bulk_tracer_concentration)
-    I_array = irradiance(thickness)
-    radiation = radiation_algae(chla_bulk, I_array)
+    chla_bulk_at_interface = chla_algae(
+        PAR, nutrient_function, bulk_tracer_concentration
+    )
+    I_array = irradiance(thickness[:thickness_index])
+    radiation_at_interface = radiation_algae(chla_bulk_at_interface, I_array)
     # TODO: radiation/(rho_i*c_i)
 
-    nutrient_concentration = nutrient_concentration_at_interface
+    # reset the values of the field arrays
+    nutrient_concentration[:thickness_index] = nutrient_concentration_at_interface
+    carbon_concentration[:thickness_index] = carbon_concentration_at_interface
+    photosynthetic_rate_mu[:thickness_index] = photosynthetic_rate_mu_at_interface
+    chla_bulk[:thickness_index] = chla_bulk_at_interface
+    radiation[:thickness_index] = radiation_at_interface
 
     return (
         carbon_concentration,

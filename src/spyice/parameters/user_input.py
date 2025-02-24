@@ -150,7 +150,7 @@ class UserInput:
             #     - 0.03942059 * self.boundary_salinity
             #     + 272.63617665
             # )
-
+            
             self.geometry_type = 2
             if self.config_data:
                 self.grid_timestep_dt = read_omegaconfig(self.config_data, "dt")

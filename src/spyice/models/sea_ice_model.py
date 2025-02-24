@@ -324,6 +324,7 @@ class SeaIceModel:
             source_term_temperature,
             source_term_salinity,
         )
+        # TODO: truncate field variables until boundary (thickness_index)
         (
             t_km1,
             s_km1,
@@ -1182,7 +1183,7 @@ class SeaIceModel:
         if kwargs.get("algae_model_depth_type") == "single":
             (
                 carbon_concentration,
-                nutrient_concentration_atinterface,
+                nutrient_concentration,
                 photosynthetic_rate_mu,
                 radiation_algae,
                 chla_bulk,
@@ -1190,13 +1191,12 @@ class SeaIceModel:
                 t_k,
                 s_k,
                 phi_k,
-                nutrient_cn_k[thickness_index],
-                carbon_cc[thickness_index],
+                nutrient_cn_k,
+                carbon_cc,
                 self.preprocess_data.grid_timestep_dt,
                 thickness_index,
                 thickness,
             )
-            nutrient_concentration = nutrient_concentration_atinterface
         elif kwargs.get("algae_model_depth_type") == "all":
             (
                 carbon_concentration,
@@ -1212,6 +1212,7 @@ class SeaIceModel:
                 carbon_cc,
                 self.preprocess_data.grid_timestep_dt,
                 depth,
+                thickness_index
             )
         else:
             raise ValueError("Invalid algae model depth type.")

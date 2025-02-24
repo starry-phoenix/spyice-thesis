@@ -59,7 +59,7 @@ def calculate_radiative_terms(
     # calculate for single layer BAL
     radiative_algae_all_depth = np.zeros(len(depth))
     if algae_model_depth_type == "single":
-        radiative_algae_all_depth[thickness_index] = radiative_algae
+        radiative_algae_all_depth = radiative_algae
     elif algae_model_depth_type == "all":
         radiative_algae_all_depth = radiative_algae
     else:

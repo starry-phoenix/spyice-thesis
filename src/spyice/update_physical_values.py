@@ -880,7 +880,8 @@ def update_state_variables(
     # calculate brine velocity
     brine_velocity = calculate_brine_velocity_upwindscheme(phi_k, phi_initial, preprocess_data_object.grid_resolution_dz, preprocess_data_object.grid_timestep_dt, preprocess_data_object.nz, _rho_ice, _rho_brine, thickness_index_prev)
 
-
+    # TODO: investigate values of T_k, s_k, brine_velocity, nutrient_cn, t_k_A_LHS_matrix, temp_factor_3, t_k_melt, temperature_liquidus, temperature_solidus, x_wind_temperature, x_wind_salinity
+    # TODO: if T_k, s_k change then the initial values need to change 
     return h_k, h_solid, phi_k, t_k, s_k, brine_velocity, nutrient_cn, t_k_A_LHS_matrix, temp_factor_3, t_k_melt, temperature_liquidus, temperature_solidus, x_wind_temperature, x_wind_salinity
 
 

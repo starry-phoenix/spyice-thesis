@@ -55,10 +55,11 @@ def apply_boundary_condition(
     if argument == "salinity":
         salinity_bc_top, salinity_bc_bottom = boundary_condition(
                     argument, t_passed, salinity_initial)
-        if w[-1] < 0:
-            rhs_matrix[-1] += factor1[-1] * salinity_bc_bottom + factor2[-1]*salinity_bc_bottom
+        bottom_index = thickness_index
+        if w[bottom_index] < 0:
+            rhs_matrix[bottom_index:] += factor1[bottom_index:] * salinity_bc_bottom + factor2[bottom_index:]*salinity_bc_bottom
         else:
-            rhs_matrix[-1] += factor1[-1] * salinity_bc_bottom  # Dirichlet
+            rhs_matrix[bottom_index:] += factor1[bottom_index:] * salinity_bc_bottom + factor2[bottom_index:]*salinity_bc_bottom # Dirichlet
 
     elif argument == "temperature":
         temperature_bc_top, temperature_bc_bottom = boundary_condition(
