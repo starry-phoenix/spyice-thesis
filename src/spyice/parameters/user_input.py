@@ -95,6 +95,7 @@ class UserInput:
     is_buffo: bool = True
     is_voller: bool = False
     is_salinity_equation: bool = True
+    is_diffusiononly_equation: bool = False
     liquidus_relation_type: str = "Normal"  # Normal or Frezchem
     grid_resolution_dz: float = 0.01
     boundary_condition_type: str = "Dirichlet"  # Neumann or Dirichlet

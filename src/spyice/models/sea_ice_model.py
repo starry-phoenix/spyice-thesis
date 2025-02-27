@@ -264,6 +264,7 @@ class SeaIceModel:
         voller=False,
         temp_grad=None,
         salinity_equation=False,
+        diffusiononly_equation=False,
     ):
         """Performs a single iteration of the convergence loop by first resetting the parameters to their previous time step values and then running the convergence loop until convergence is reached.
         Args:
@@ -366,6 +367,7 @@ class SeaIceModel:
             x_wind_salinity,
             counter,
             salinity_equation,
+            diffusiononly_equation,
         )
         return (
             t_k,
@@ -411,6 +413,7 @@ class SeaIceModel:
         x_wind_salinity,
         counter,
         _is_salinity_equation=False,
+        _is_diffusiononly_equation=False,
     ):
         """Runs the convergence loop until convergence is reached.
 
@@ -525,6 +528,7 @@ class SeaIceModel:
                 x_wind_temperature_prev,
                 x_wind_salinity_prev,
                 _is_salinity_equation=_is_salinity_equation,
+                _is_diffusiononly_equation=_is_diffusiononly_equation,
             )
             # Locate ice-ocean interface based on liquid fraction
             thickness, thickness_index = locate_ice_ocean_interface(
@@ -1022,6 +1026,7 @@ class SeaIceModel:
                     buffo=False,
                     temp_grad=self.preprocess_data.temp_grad,
                     salinity_equation=self.preprocess_data.is_salinity_equation,
+                    diffusiononly_equation=self.preprocess_data.is_diffusiononly_equation,
                 )
             elif not self.preprocess_data.is_buffo:
                 (t_k_buffo, s_k_buffo, phi_k_buffo, thickness_buffo) = (
@@ -1068,6 +1073,7 @@ class SeaIceModel:
                 voller=self.preprocess_data.is_voller,
                 temp_grad=self.preprocess_data.temp_grad,
                 salinity_equation=self.preprocess_data.is_salinity_equation,
+                diffusiononly_equation=self.preprocess_data.is_diffusiononly_equation,
             )
             self.preprocess_data.time_passed = t_total(
                 self.preprocess_data.time_passed,
@@ -1101,7 +1107,7 @@ class SeaIceModel:
                 nutrient_cn_k,
                 phi_k,
                 thickness,
-                algae_model_depth_type="all",
+                algae_model_depth_type="single",
             )
 
             nutrient_cn_km1 = nutrient_cn_k
