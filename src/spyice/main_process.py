@@ -33,7 +33,7 @@ class MainProcess:
         #     self.config_raw, config_type="default"
         # )
         self.project_path: Path | str = project_path
-        self.out_dir_final = hyd_output_dir
+        self.out_dir_final : Path | str = hyd_output_dir
 
     def run_model(self) -> None:
         """Runs the model using the provided configuration and output directory.
