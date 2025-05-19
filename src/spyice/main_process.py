@@ -18,10 +18,10 @@ class MainProcess:
 
     def __init__(
         self,
-        config,
+        config : DictConfig,
         hyd_output_dir: Path | str = Path(os.path.join(os.getcwd(), "outputs")),
         project_path=os.getcwd(),
-    ):
+    ) -> None:
         """
         Args:
             config: The configuration object.
