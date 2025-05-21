@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-
+from pathlib import Path
 from src.spyice.utils.config_sort import read_omegaconfig
 
 from src.spyice.update_physical_values import (
@@ -103,7 +103,7 @@ class PreProcess(UserInput, GeometrySettings, ResultsParams):
 
     @classmethod
     def get_variables(
-        cls, config, out_dir_final: str
+        cls, config, out_dir_final: Path | str
     ) -> tuple[PreprocessData, UserInput]:
         """Retrieves variables and user input data after preprocessing.
 

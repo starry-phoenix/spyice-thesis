@@ -8,9 +8,6 @@ _temperature_melt, _boundary_top_temperature = (
     ui.temperature_melt,
     ui.boundary_top_temperature,
 )
-_specific_heat_ice, _specific_heat_brine, _latent_heat_water = ui.constants.c_i, ui.constants.c_br ,ui.constants.L
-_rho_ice, _rho_brine = ui.constants.rho_i, ui.constants.rho_br
-
 
 def calculate_melting_temperature_from_salinity(
     _salinity, _temperature_melt=_temperature_melt, _liquid_relation="Normal"

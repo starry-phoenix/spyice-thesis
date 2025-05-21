@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 import numpy as np
-
+from pathlib import Path
 from src.spyice.utils.error_norms import ErrorNorms
 
 
@@ -150,13 +150,13 @@ class Analysis:
     @classmethod
     def get_error_results(
         cls,
-        t_k_diff: np.array,
-        t_stefan_diff: np.array,
-        residual: np.array,
-        temperature_mushy: np.array,
-        phi_mushy: np.array,
-        salinity_mushy: np.array,
-        output_dir: str,
+        t_k_diff: np.ndarray,
+        t_stefan_diff: np.ndarray,
+        residual: np.ndarray,
+        temperature_mushy: np.ndarray,
+        phi_mushy: np.ndarray,
+        salinity_mushy: np.ndarray,
+        output_dir: Path | str,
     ) -> AnalysisData:
         """Runs error analysis on the given temperature differences.
 
@@ -174,7 +174,7 @@ class Analysis:
         error_analysis_object.error_analytical_numerical()
         error_analysis_object.export_residuals(
             residual, temperature_mushy, phi_mushy, salinity_mushy, output_dir
-        )
+        ) 
         all_vars = dict(vars(error_analysis_object))
         return cls.set_dataclass(all_vars, AnalysisData)
 

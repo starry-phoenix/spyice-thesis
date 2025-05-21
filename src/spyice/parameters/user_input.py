@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from enum import Enum
 
 from omegaconf import DictConfig
 from src.spyice.parameters.constants import Constants
@@ -9,7 +10,11 @@ from src.spyice.parameters.debug_constants import DebugConstants
 from src.spyice.parameters.algae_constants import nutrient_cn_dsi_ice, nutrient_cn_dsi_water, carbon_cc_ice_initial, carbon_cc_water_initial
 from src.spyice.utils.config_sort import read_omegaconfig
 from src.spyice.utils.create_directory import create_output_directory
+from src.spyice.utils.initial_userinput import (
+    calculate_initial_melt_temperature,)
 
+#TODO: Add docstrings to the functions and classes
+# TODO: DEBUG this script for new enum classes.
 
 def _dt_stability_validator(dz: float, dt: float) -> None:
     """Validates the time-step (dt) based on the Fourier stability criteria.
@@ -42,6 +47,109 @@ def fourier_number_timestep(constants):
     """
     return 0.5 * constants.rho_br * constants.c_br * constants.dz**2 / constants.k_br
 
+class LiquidusRelation(str, Enum):
+    """Represents the liquidus relation type.
+
+    Attributes:
+        NORMAL (str): Normal liquidus relation.
+        FREZCHEM (str): Frezchem liquidus relation.
+    """
+    NORMAL = "Normal"
+    FREZCHEM = "Frezchem"
+
+class BoundaryConditionType(str, Enum):
+    """Represents the type of boundary condition.
+
+    Attributes:
+        NEUMANN (str): Neumann boundary condition.
+        DIRICHLET (str): Dirichlet boundary condition.
+    """
+    NEUMANN = "Neumann"
+    DIRICHLET = "Dirichlet"
+
+class InitialSalinity(str, Enum):
+    """Represents the type of initial salinity. User can add more salinity option SX where X is a number.
+    The salinity is in parts per thousand (ppt).
+
+    Attributes:
+        S34 (str): Initial salinity of 34 ppt.
+        S0 (str): Initial salinity of 0 ppt.
+        S1 (str): Initial salinity of 1 ppt.
+        S2 (str): Initial salinity of 2 ppt.
+        S3 (str): Initial salinity of 3 ppt.
+        S_LINEAR (str): Linear initial salinity.
+
+    """
+    S34 = "S34"
+    S0 = "S0"
+    S1 = "S1"
+    S2 = "S2"
+    S3 = "S3"
+    S_LINEAR = "S_linear"
+
+
+class InitialTemperature(str, Enum):
+    """Represents the type of initial temperature.
+
+    Attributes:
+        T_Stefan (str): Initial temperature based on Stefan condition.
+        T271p25 (str): Initial temperature of 271.25 K.
+        T250 (str): Initial temperature of 250 K.
+        T_MELT (str): Initial temperature at which the material melts.
+        T_S (str): Initial temperature based on salinity.
+    """
+    T_STEFAN = "T_Stefan"
+    T271p25 = "T271.25"
+    T250 = "T250"
+    T_MELT = "Tm_w"
+    T_S = "T(S)"
+
+class InitialMeltTemperature(str, Enum):
+    """Represents the type of initial melt temperature.
+
+    Attributes:
+        T_MELT (str): Initial melt temperature.
+        T_S (str): Initial temperature based on salinity.
+    """
+    ONEPHASE = "onephase"
+    FREZCHEM = "Frezchem"
+    TWOPHASE = "twophase"
+
+class InitialLiquidFraction(str, Enum):
+    """Represents the type of initial liquid fraction.
+
+    Attributes:
+        P0 (str): Initial liquid fraction of 0.
+        P1 (str): Initial liquid fraction of 1.
+        P_Stefan (str): Initial liquid fraction based on Stefan condition.
+        PX (str): Initial liquid fraction based on a custom profile.
+    """
+    P0 = "P0"
+    P1 = "P1"
+    P_Stefan = "P_Stefan"
+    PX = "PX"  # where X is a number
+
+class FileNameSuffix(str, Enum):
+    """Represents the suffix for the output file name.
+
+    Attributes:
+        NON_CONST_DENS_MUSHFIX (str): Non-constant density mush-fix.
+        NON_CONST_DENS (str): Non-constant density.
+        CONST_DENS (str): Constant density.
+    """
+    NON_CONST_DENS_MUSHFIX = "nonconst_dens-mushfix"
+    NON_CONST_DENS = "nonconst_dens"
+    CONST_DENS = "const_dens"
+
+class TopTemperatureType(str, Enum):
+    """Represents the type of top temperature condition.
+
+    Attributes:
+        STEFAN (str): Stefan condition.
+        DIRICHLET (str): Dirichlet condition.
+    """
+    STEFAN = "Stefan"
+    DIRICHLET = "Dirichlet"
 
 @dataclass
 class UserInput:
@@ -88,46 +196,58 @@ class UserInput:
     # self.is_salinity_equation = self.read_omegaconfig("salinity")
     ...
 
+    # --- Constants and Config ---
     constants: RealConstants | DebugConstants = Constants.REAL.value
     config_data: DictConfig = field(default_factory=dict)
-    max_iterations: int = 25000
+
+    # --- Model Switches ---
     is_stefan: bool = True
     is_buffo: bool = True
     is_voller: bool = False
     is_salinity_equation: bool = True
     is_diffusiononly_equation: bool = False
-    liquidus_relation_type: str = "Normal"  # Normal or Frezchem
+
+    # --- Iteration and Limits ---
+    max_iterations: int = 25000
+    counter_limit: int = 100000
+
+    # --- Grid and Time Step ---
     grid_resolution_dz: float = 0.01
-    boundary_condition_type: str = "Dirichlet"  # Neumann or Dirichlet
+    grid_timestep_dt: float = 47  # in seconds
+
+    # --- Boundary and Geometry ---
+    boundary_condition_type: BoundaryConditionType = BoundaryConditionType.DIRICHLET.value
+    geometry_type: int = field(init=False)
+    boundary_salinity: float = field(init=False)
+    boundary_top_temperature: float = field(init=False)
+    temperature_top_type: TopTemperatureType = TopTemperatureType.STEFAN.value
+
+    # --- Tolerances ---
     temperature_tolerance: float = 0.01
     salinity_tolerance: float = 0.01
     liquid_fraction_tolerance: float = 0.01
-    initial_temperature: str = "T(S)"  # "T_Stefan" or  "T271.25" or "T250" or "Tm_w"
-    initial_salinity: str = (
-        "S34"  # "S_linear" or "S34" or "S0" or "SX" where X is a number
-    )
-    initial_liquid_fraction: str = (
-        "P1"  # "P_Stefan" or "P0" or "P1" or "PX" where X is a number
-    )
-    output_suffix: str = "nonconst_dens-mushfix"
-    temperature_top_type: str = "Stefan"  # "Stefan" or "Dirichlet"
+
+    # --- Initial Conditions ---
+    initial_temperature: InitialTemperature = InitialTemperature.T_S.value
+    initial_salinity: InitialSalinity = InitialSalinity.S34.value
+    initial_liquid_fraction: InitialLiquidFraction = InitialLiquidFraction.P1.value
+    critical_liquid_fraction: float = 0.1
+    temperature_melt: float = field(init=False)
+
+    # --- Phase and Liquidus ---
     phase_type: int = 1
-    grid_timestep_dt: float = 47  # in seconds
+    liquidus_relation_type: LiquidusRelation = LiquidusRelation.NORMAL.value
+
+    # --- Output and Directory ---
+    output_suffix: FileNameSuffix = FileNameSuffix.NON_CONST_DENS_MUSHFIX.value
     dir_output_name_hydra: str = (
         "Temperature_{S_IC}_{bc_condition}_{dz}_{dt}_{iter_max}_{cap_dens}"
     )
     dir_output_name: str = (
         "Temperature_{S_IC}_{bc_condition}_{dz}_{dt}_{iter_max}_{cap_dens}"
     )
-    critical_liquid_fraction: float = 0.1
 
-    boundary_salinity: float = field(init=False)
-    temperature_melt: float = field(init=False)
-    boundary_top_temperature: float = field(init=False)
-    geometry_type: int = field(init=False)
-    counter_limit: int = 100000
-
-    # algae model 
+    # --- Algae Model Parameters ---
     nutrient_cn_dsi_water: float = nutrient_cn_dsi_water
     nutrient_cn_dsi_ice: float = nutrient_cn_dsi_ice
     carbon_cc_ice_initial: float = carbon_cc_ice_initial
@@ -141,17 +261,9 @@ class UserInput:
             self.boundary_top_temperature = 260.0
 
             # melt temperature affects the liquid relation: Frezchem or Normal in src/update_physical_values.py script
-            # self.temperature_melt = 273.15 - 1.853 * self.boundary_salinity / 28.0 
-            T_m = 273.15 # melt temperature as solidus temperature
-            T_s = 252.05 # eutectic temperature for Sbr = 233ppt
-            S_br = 233.0  # brine salinity in ppt
-            self.temperature_melt = 273.15 + (T_s - T_m)*self.boundary_salinity/S_br
-            # self.temperature_melt = (
-            #     -(9.1969758 * (1e-05) * self.boundary_salinity**2)
-            #     - 0.03942059 * self.boundary_salinity
-            #     + 272.63617665
-            # )
-            
+            method = InitialMeltTemperature.TWOPHASE.value
+            self.temperature_melt = calculate_initial_melt_temperature(self.boundary_salinity, method)
+
             self.geometry_type = 2
             if self.config_data:
                 self.grid_timestep_dt = read_omegaconfig(self.config_data, "dt")
@@ -167,10 +279,6 @@ class UserInput:
                     self.max_iterations,
                     self.output_suffix,
                 )
-
-                # self.is_salinity_equation = read_omegaconfig(
-                #     self.config_data, "salinity"
-                # )
 
         elif isinstance(self.constants, DebugConstants):
             self.boundary_salinity = 1.0
