@@ -131,3 +131,12 @@ Enter the project directory and run the following command in the terminal to vie
    ```console
    hatch run types:check
    ```
+
+## To run Jupyter Notebooks:
+
+Enter into the spyice virtual environment using hatch (mentioned in the previous steps) and enter the following commands on the terminal. You can now find the spyice package renamed as spyice-jupyter as a kernel option. 
+
+   ```console
+   $pip install ipykernel
+   $python -m ipykernel install --user --name spyice --display-name "Python (spyice-jupyter)"
+   ```
