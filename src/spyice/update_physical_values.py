@@ -681,6 +681,7 @@ def update_state_variables(
     x_wind_temperature,
     x_wind_salinity,
     _is_salinity_equation,
+    _is_algae_equation,
     _is_diffusiononly_equation=False,
 ):
     """
@@ -818,20 +819,24 @@ def update_state_variables(
             t_k_A_LHS_matrix_prev=t_k_A_LHS_matrix_prev,
         )
 
-        nutrient_cn = update_algae_transport(
-            preprocess_data_object,
-            nutrient_cn_prev,
-            phi_k,
-            brine_velocity_prev,
-            thickness_index_prev,
-            nutrient_cn_initial,
-            phi_initial,
-            t_k_melt,
-            source_term_salinity,
-            buffo,
-            stefan,
-            voller,
-        )
+        if _is_algae_equation:
+            nutrient_cn = update_algae_transport(
+                preprocess_data_object,
+                nutrient_cn_prev,
+                phi_k,
+                brine_velocity_prev,
+                thickness_index_prev,
+                nutrient_cn_initial,
+                phi_initial,
+                t_k_melt,
+                source_term_salinity,
+                buffo,
+                stefan,
+                voller,
+            )
+        else:
+            nutrient_cn = np.zeros(len(nutrient_cn_prev))
+
 
         # switch algae transport off
         # nutrient_cn = 0.0*nutrient_cn

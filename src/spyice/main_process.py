@@ -93,11 +93,11 @@ class MainProcess:
         # # )
         # model_visualization_object.plot_H_iter_all(savefig=True)
         model_visualization_object.plot_temperature_heatmap(savefig=True)
-        model_visualization_object.plot_salinity_heatmap(savefig=True)
-        model_visualization_object.plot_liquidfraction_heatmap(savefig=True)
-        model_visualization_object.plot_temperature_liquid_solid_evolution(
-            z_depth=0.1, savefig=True
-        )
+        # model_visualization_object.plot_salinity_heatmap(savefig=True)
+        # model_visualization_object.plot_liquidfraction_heatmap(savefig=True)
+        # model_visualization_object.plot_temperature_liquid_solid_evolution(
+        #     z_depth=0.1, savefig=True
+        # )
 
         # # algae model
         # model_visualization_object.plot_carbon_concentration(savefig=True)
@@ -124,4 +124,8 @@ class MainProcess:
         # model_visualization_object.plot_liquid_salinity_profile(savefig=True)
         # model_visualization_object.plot_brinevelocity_profile(savefig=True)
         # model_visualization_object.plot_temperature_heatmap_as_gif()
+
+        # 3d plots
+        model_visualization_object.plot_temperature_3D(savefig=True)
+        # model_visualization_object.plot_temperature_3d_contours(savefig=True)
         print("Postprocessing done.")

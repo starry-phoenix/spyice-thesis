@@ -265,6 +265,7 @@ class SeaIceModel:
         temp_grad=None,
         salinity_equation=False,
         diffusiononly_equation=False,
+        algae_equation=False
     ):
         """Performs a single iteration of the convergence loop by first resetting the parameters to their previous time step values and then running the convergence loop until convergence is reached.
         Args:
@@ -368,6 +369,7 @@ class SeaIceModel:
             counter,
             salinity_equation,
             diffusiononly_equation,
+            algae_equation,
         )
         return (
             t_k,
@@ -414,6 +416,7 @@ class SeaIceModel:
         counter,
         _is_salinity_equation=False,
         _is_diffusiononly_equation=False,
+        _is_algae_equation=False
     ):
         """Runs the convergence loop until convergence is reached.
 
@@ -528,6 +531,7 @@ class SeaIceModel:
                 x_wind_temperature_prev,
                 x_wind_salinity_prev,
                 _is_salinity_equation=_is_salinity_equation,
+                _is_algae_equation=_is_algae_equation,
                 _is_diffusiononly_equation=_is_diffusiononly_equation,
             )
             # Locate ice-ocean interface based on liquid fraction
@@ -1027,6 +1031,7 @@ class SeaIceModel:
                     temp_grad=self.preprocess_data.temp_grad,
                     salinity_equation=self.preprocess_data.is_salinity_equation,
                     diffusiononly_equation=self.preprocess_data.is_diffusiononly_equation,
+                    algae_equation=self.preprocess_data.is_algae_equation,
                 )
             elif not self.preprocess_data.is_buffo:
                 (t_k_buffo, s_k_buffo, phi_k_buffo, thickness_buffo) = (
@@ -1074,6 +1079,7 @@ class SeaIceModel:
                 temp_grad=self.preprocess_data.temp_grad,
                 salinity_equation=self.preprocess_data.is_salinity_equation,
                 diffusiononly_equation=self.preprocess_data.is_diffusiononly_equation,
+                algae_equation=self.preprocess_data.is_algae_equation,
             )
             self.preprocess_data.time_passed = t_total(
                 self.preprocess_data.time_passed,
@@ -1107,6 +1113,9 @@ class SeaIceModel:
                 nutrient_cn_k,
                 phi_k,
                 thickness,
+                salinity_equation=self.preprocess_data.is_salinity_equation,
+                algae_equation=self.preprocess_data.is_algae_equation,
+                radiation_equation=self.preprocess_data.is_radiation_equation,
                 algae_model_depth_type="single",
             )
 
@@ -1177,8 +1186,16 @@ class SeaIceModel:
         nutrient_cn_k,
         phi_k,
         thickness,
+        salinity_equation=False,
+        algae_equation=False,
+        radiation_equation=False,
         **kwargs,
     ):
+        # Initialize source terms
+        salinity_source_term, radiative_source_term, radiation_algae = 0.0, np.zeros(len(carbon_cc)), np.zeros(len(carbon_cc))
+        carbon_concentration, nutrient_concentration, chla_bulk = np.zeros(len(carbon_cc)), np.zeros(len(nutrient_cn_k)), np.zeros(len(nutrient_cn_k))
+        photosynthetic_rate_mu = np.zeros(len(nutrient_cn_k))
+
         Z = (self.preprocess_data.nz - 1) * self.preprocess_data.grid_resolution_dz
         depth = np.linspace(
             self.preprocess_data.grid_resolution_dz,
@@ -1186,7 +1203,7 @@ class SeaIceModel:
             self.preprocess_data.nz,
         )
 
-        if kwargs.get("algae_model_depth_type") == "single":
+        if kwargs.get("algae_model_depth_type") == "single" and algae_equation:
             (
                 carbon_concentration,
                 nutrient_concentration,
@@ -1203,7 +1220,7 @@ class SeaIceModel:
                 thickness_index,
                 thickness,
             )
-        elif kwargs.get("algae_model_depth_type") == "all":
+        elif kwargs.get("algae_model_depth_type") == "all" and algae_equation:
             (
                 carbon_concentration,
                 nutrient_concentration,
@@ -1221,23 +1238,27 @@ class SeaIceModel:
                 thickness_index
             )
         else:
-            raise ValueError("Invalid algae model depth type.")
+            if algae_equation:
+                raise ValueError("Invalid algae model depth type.")
 
         self.results.thickness_list[t] = thickness
         # salinity source term using gravity drainage
-        salinity_source_term = get_salinity_source_term(
-            int(thickness_index + 1),
-            self.results.thickness_list,
-            s_k,
-            phi_k,
+        if salinity_equation:
+            salinity_source_term = get_salinity_source_term(
+                int(thickness_index + 1),
+                self.results.thickness_list,
+                s_k,
+                phi_k,
             self.preprocess_data.grid_timestep_dt,
             self.preprocess_data.grid_resolution_dz,
         )
 
+        if radiation_equation:
         # get radiative terms all
-        radiative_source_term = calculate_radiative_terms(
-            depth, thickness_index, radiation_algae, kwargs.get("algae_model_depth_type")
-        )
+            radiative_source_term = calculate_radiative_terms(
+                depth, thickness_index, radiation_algae, kwargs.get("algae_model_depth_type")
+            )
+        
         return (
             radiative_source_term,
             salinity_source_term,

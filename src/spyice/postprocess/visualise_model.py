@@ -3,6 +3,7 @@ import matplotlib.colors as colors
 import numpy as np
 import pandas as pd
 import matplotlib.animation as animation
+from mpl_toolkits.mplot3d import Axes3D  # Add this import at the top of your file
 from functools import partial
 from pathlib import Path
 
@@ -467,6 +468,19 @@ class VisualiseModel:
                 0,
             ],
         )
+        # Add contour lines
+        X = np.linspace(0, len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600, heatmap_data.shape[0])
+        Y = np.linspace(0, 1.0, heatmap_data.shape[1])
+        X, Y = np.meshgrid(X, Y)
+        contour = ax.contour(
+            X,
+            Y,
+            heatmap_data.T,
+            colors='k',
+            linewidths=0.5,
+        )
+        ax.clabel(contour, fmt="%.1f", inline=True, fontsize=5, use_clabeltext=True)
+
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
         ax.set_title(r"Freezing Overtime")
@@ -497,6 +511,20 @@ class VisualiseModel:
                 0,
             ],
         )
+
+                # Add contour lines
+        X = np.linspace(0, len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600, heatmap_data.shape[0])
+        Y = np.linspace(0, 1.0, heatmap_data.shape[1])
+        X, Y = np.meshgrid(X, Y)
+        contour = ax.contour(
+            X,
+            Y,
+            heatmap_data.T,
+            colors='k',
+            linewidths=0.5,
+        )
+        ax.clabel(contour, fmt="%.1f", inline=True, fontsize=5, use_clabeltext=True)
+
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
         ax.set_title(r"Freezing Overtime")
@@ -527,6 +555,19 @@ class VisualiseModel:
                 0,
             ],
         )
+        # Add contour lines
+        X = np.linspace(0, len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600, heatmap_data.shape[0])
+        Y = np.linspace(0, 1.0, heatmap_data.shape[1])
+        X, Y = np.meshgrid(X, Y)
+        contour = ax.contour(
+            X,
+            Y,
+            heatmap_data.T,
+            colors='k',
+            linewidths=0.5,
+        )
+        ax.clabel(contour, fmt="%.1f", inline=True, fontsize=5, use_clabeltext=True)
+
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
         ax.set_title(r"Freezing Overtime")
@@ -939,6 +980,19 @@ class VisualiseModel:
                 0,
             ],
         )
+        # Add contour lines
+        X = np.linspace(0, len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600, heatmap_data.shape[0])
+        Y = np.linspace(0, 1.0, heatmap_data.shape[1])
+        X, Y = np.meshgrid(X, Y)
+        contour = ax.contour(
+            X,
+            Y,
+            heatmap_data.T,
+            colors='k',
+            linewidths=0.5,
+        )
+        ax.clabel(contour, fmt="%.1f", inline=True, fontsize=5, use_clabeltext=True)
+
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
         ax.set_title(r"Freezing Overtime")
@@ -971,6 +1025,20 @@ class VisualiseModel:
                 0,
             ],
         )
+
+        # Add contour lines
+        X = np.linspace(0, len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600, heatmap_data.shape[0])
+        Y = np.linspace(0, 1.0, heatmap_data.shape[1])
+        X, Y = np.meshgrid(X, Y)
+        contour = ax.contour(
+            X,
+            Y,
+            heatmap_data.T,
+            colors='k',
+            linewidths=0.5,
+        )
+        ax.clabel(contour, fmt="%.1f", inline=True, fontsize=5, use_clabeltext=True)
+
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
         ax.set_title(r"Freezing Overtime")
@@ -1003,6 +1071,19 @@ class VisualiseModel:
                 0,
             ],
         )
+        # Add contour lines
+        X = np.linspace(0, len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600, heatmap_data.shape[0])
+        Y = np.linspace(0, 1.0, heatmap_data.shape[1])
+        X, Y = np.meshgrid(X, Y)
+        contour = ax.contour(
+            X,
+            Y,
+            heatmap_data.T,
+            colors='k',
+            linewidths=0.5,
+        )
+        ax.clabel(contour, fmt="%.1f", inline=True, fontsize=5, use_clabeltext=True)
+
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
         ax.set_title(r"Freezing Overtime")
@@ -1035,6 +1116,19 @@ class VisualiseModel:
                 0,
             ],
         )
+        # Add contour lines
+        X = np.linspace(0, len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600, heatmap_data.shape[0])
+        Y = np.linspace(0, 1.0, heatmap_data.shape[1])
+        X, Y = np.meshgrid(X, Y)
+        contour = ax.contour(
+            X,
+            Y,
+            heatmap_data.T,
+            colors='k',
+            linewidths=0.5,
+        )
+        ax.clabel(contour, fmt="%.1f", inline=True, fontsize=5, use_clabeltext=True)
+
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
         ax.set_title(r"Freezing Overtime")
@@ -1067,6 +1161,20 @@ class VisualiseModel:
                 0,
             ],
         )
+
+        # Add contour lines
+        X = np.linspace(0, len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600, heatmap_data.shape[0])
+        Y = np.linspace(0, 1.0, heatmap_data.shape[1])
+        X, Y = np.meshgrid(X, Y)
+        contour = ax.contour(
+            X,
+            Y,
+            heatmap_data.T,
+            colors='k',
+            linewidths=0.5,
+        )
+        ax.clabel(contour, fmt="%.1f", inline=True, fontsize=5, use_clabeltext=True)
+
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
         ax.set_title(r"Freezing Overtime")
@@ -1097,6 +1205,19 @@ class VisualiseModel:
                 0,
             ],
         )
+        # Add contour lines
+        X = np.linspace(0, len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600, heatmap_data.shape[0])
+        Y = np.linspace(0, 1.0, heatmap_data.shape[1])
+        X, Y = np.meshgrid(X, Y)
+        contour = ax.contour(
+            X,
+            Y,
+            heatmap_data.T,
+            colors='k',
+            linewidths=0.5,
+        )
+        ax.clabel(contour, fmt="%.1f", inline=True, fontsize=5, use_clabeltext=True)
+
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
         ax.set_title(r"Freezing Overtime")
@@ -1130,6 +1251,19 @@ class VisualiseModel:
                 0,
             ],
         )
+        # Add contour lines
+        X = np.linspace(0, len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600, heatmap_data.shape[0])
+        Y = np.linspace(0, 1.0, heatmap_data.shape[1])
+        X, Y = np.meshgrid(X, Y)
+        contour = ax.contour(
+            X,
+            Y,
+            heatmap_data.T,
+            colors='k',
+            linewidths=0.5,
+        )
+        ax.clabel(contour, fmt="%.1f", inline=True, fontsize=5, use_clabeltext=True)
+
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
         ax.set_title(r"Freezing Overtime")
@@ -1162,6 +1296,19 @@ class VisualiseModel:
                 0,
             ],
         )
+        # Add contour lines
+        X = np.linspace(0, len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600, heatmap_data.shape[0])
+        Y = np.linspace(0, 1.0, heatmap_data.shape[1])
+        X, Y = np.meshgrid(X, Y)
+        contour = ax.contour(
+            X,
+            Y,
+            heatmap_data.T,
+            colors='k',
+            linewidths=0.5,
+        )
+        ax.clabel(contour, fmt="%.1f", inline=True, fontsize=5, use_clabeltext=True)
+
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
         ax.set_title(r"Freezing Overtime")
@@ -1195,6 +1342,19 @@ class VisualiseModel:
                 0,
             ],
         )
+        # Add contour lines
+        X = np.linspace(0, len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600, heatmap_data.shape[0])
+        Y = np.linspace(0, 1.0, heatmap_data.shape[1])
+        X, Y = np.meshgrid(X, Y)
+        contour = ax.contour(
+            X,
+            Y,
+            heatmap_data.T,
+            colors='k',
+            linewidths=0.5,
+        )
+        ax.clabel(contour, fmt="%.1f", inline=True, fontsize=5, use_clabeltext=True)
+
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
         ax.set_title(r"Freezing Overtime")
@@ -1228,6 +1388,19 @@ class VisualiseModel:
                 0,
             ],
         )
+        # Add contour lines
+        X = np.linspace(0, len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600, heatmap_data.shape[0])
+        Y = np.linspace(0, 1.0, heatmap_data.shape[1])
+        X, Y = np.meshgrid(X, Y)
+        contour = ax.contour(
+            X,
+            Y,
+            heatmap_data.T,
+            colors='k',
+            linewidths=0.5,
+        )
+        ax.clabel(contour, fmt="%.1f", inline=True, fontsize=5, use_clabeltext=True)
+
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
         ax.set_title(r"Freezing Overtime")
@@ -1264,6 +1437,19 @@ class VisualiseModel:
                 0,
             ],
         )
+        # Add contour lines
+        X = np.linspace(0, len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600, heatmap_data.shape[0])
+        Y = np.linspace(0, 1.0, heatmap_data.shape[1])
+        X, Y = np.meshgrid(X, Y)
+        contour = ax.contour(
+            X,
+            Y,
+            heatmap_data.T,
+            colors='k',
+            linewidths=0.5,
+        )
+        ax.clabel(contour, fmt="%.1f", inline=True, fontsize=5, use_clabeltext=True)
+
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
         ax.set_title(r"Freezing Overtime")
@@ -1294,6 +1480,19 @@ class VisualiseModel:
                 0,
             ],
         )
+        # Add contour lines
+        X = np.linspace(0, len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600, heatmap_data.shape[0])
+        Y = np.linspace(0, 1.0, heatmap_data.shape[1])
+        X, Y = np.meshgrid(X, Y)
+        contour = ax.contour(
+            X,
+            Y,
+            heatmap_data.T,
+            colors='k',
+            linewidths=0.5,
+        )
+        ax.clabel(contour, fmt="%.1f", inline=True, fontsize=5, use_clabeltext=True)
+
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
         ax.set_title(r"Freezing Overtime")
@@ -1491,7 +1690,75 @@ class VisualiseModel:
                 self.ui_object.dir_output_name + "/brinevelocity_vertical_profile.pdf",
                 backend="pgf",
             )
-        plt.close()      
+        plt.close()     
+
+    def plot_temperature_3D(self, savefig:bool = True):
+        time = len(self.results_object.t_k_list[1:])
+        depth_ = np.append(np.arange(0, 1, self.ui_object.grid_resolution_dz), 1.0)
+        t_k_arr = np.array(self.results_object.t_k_list[1:])
+
+        # Take every 100th time step
+        t_k_arr = t_k_arr[::100, :]
+        time_indices = np.arange(0, time, 100)
+        D, T = np.meshgrid(depth_, time_indices)
+
+        fig = plt.figure(figsize=(8, 6))
+        ax = fig.add_subplot(111, projection='3d')
+        surf = ax.plot_surface(
+            D, T, t_k_arr, cmap='Blues', edgecolor='black', alpha=0.9
+        )
+        ax.set_ylabel(r'$t$ hours')
+        ax.set_xlabel('Depth $[m]$')
+        ax.set_zlabel('Temperature [K]')
+        fig.colorbar(surf, ax=ax, shrink=0.5, aspect=10, label='Temperature [K]')
+
+        ax.set_xlim(ax.get_xlim()[::-1])
+        ax.set_ylim(ax.get_ylim()[::-1])
+
+        if savefig:
+            plt.savefig(
+                self.ui_object.dir_output_name + "/temperature_3d_surface_profile.pdf",
+                backend="pgf",
+            )
+        plt.close(fig)
+
+    def plot_temperature_3d_contours(self, savefig=True):
+        time = len(self.results_object.t_k_list[1:])
+        depth_ = np.append(np.arange(0, 1, self.ui_object.grid_resolution_dz), 1.0)
+        t_k_arr = np.array(self.results_object.t_k_list[1:])
+
+        # Take every 100th time step
+        t_k_arr = t_k_arr[::100, :]
+        time_indices = np.arange(0, time, 100)
+        T, D = np.meshgrid(time_indices, depth_)
+
+        fig = plt.figure(figsize=(8, 6))
+        ax = fig.add_subplot(111, projection='3d')
+
+        # Choose contour levels (e.g., 10 evenly spaced between min and max)
+        levels = np.linspace(np.nanmin(t_k_arr), np.nanmax(t_k_arr), 10)
+
+        # Plot 3D contours
+        contours = ax.contour3D(
+            T, D, t_k_arr, levels=levels, cmap='viridis', linewidths=2
+        )
+
+        ax.set_ylabel('Depth [m]')
+        ax.set_xlabel('Time step')
+        ax.set_zlabel('Temperature [K]')
+        ax.set_title('Temperature 3D contours (all time steps)')
+
+        fig.colorbar(contours, ax=ax, shrink=0.5, aspect=10, label='Temperature [K]')
+
+        ax.set_xlim(ax.get_xlim()[::-1])
+        ax.set_ylim(ax.get_ylim()[::-1])
+
+        if savefig:
+            plt.savefig(
+                self.ui_object.dir_output_name + "/temperature_3d_contour_profile.pdf",
+                backend="pgf",
+            )
+        plt.close(fig)
 
 
     # def residual_plot(self):

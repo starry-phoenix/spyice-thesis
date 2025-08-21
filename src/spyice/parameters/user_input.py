@@ -205,7 +205,9 @@ class UserInput:
     is_buffo: bool = True
     is_voller: bool = False
     is_salinity_equation: bool = True
-    is_diffusiononly_equation: bool = False
+    is_diffusiononly_equation: bool = True
+    is_algae_equation: bool = False
+    is_radiation_equation: bool = False
 
     # --- Iteration and Limits ---
     max_iterations: int = 25000
