@@ -13,8 +13,10 @@ from src.spyice.utils.create_directory import create_output_directory
 from src.spyice.utils.initial_userinput import (
     calculate_initial_melt_temperature,)
 
-#TODO: Add docstrings to the functions and classes
+# TODO: Add docstrings to the functions and classes
 # TODO: DEBUG this script for new enum classes.
+# TODO: const parameters and varied parameters difference show
+# TODO: liquidus relationship status is always "normal" in script update physical values in function calculate_melting_temperature_from_salinity
 
 def _dt_stability_validator(dz: float, dt: float) -> None:
     """Validates the time-step (dt) based on the Fourier stability criteria.
@@ -204,7 +206,7 @@ class UserInput:
     is_stefan: bool = True
     is_buffo: bool = True
     is_voller: bool = False
-    is_salinity_equation: bool = True
+    is_salinity_equation: bool = False
     is_diffusiononly_equation: bool = True
     is_algae_equation: bool = False
     is_radiation_equation: bool = False
@@ -263,7 +265,7 @@ class UserInput:
             self.boundary_top_temperature = 260.0
 
             # melt temperature affects the liquid relation: Frezchem or Normal in src/update_physical_values.py script
-            method = InitialMeltTemperature.TWOPHASE.value
+            method = InitialMeltTemperature.ONEPHASE.value
             self.temperature_melt = calculate_initial_melt_temperature(self.boundary_salinity, method)
 
             self.geometry_type = 2

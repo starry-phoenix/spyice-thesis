@@ -1648,7 +1648,7 @@ class VisualiseModel:
                 self.ui_object.dir_output_name + "/radiation_vertical_profile.pdf",
                 backend="pgf",
             )
-        plt.close()     
+        plt.close()    
     
     def plot_liquid_salinity_profile(self, savefig: bool = True):
         time = len(self.results_object.s_k_list)
@@ -1699,15 +1699,17 @@ class VisualiseModel:
 
         # Take every 100th time step
         t_k_arr = t_k_arr[::100, :]
+        dt = self.ui_object.grid_timestep_dt  # time step in seconds
         time_indices = np.arange(0, time, 100)
-        D, T = np.meshgrid(depth_, time_indices)
+        time_hours = time_indices * dt / 3600  # convert to hours
+        D, T = np.meshgrid(depth_, time_hours)
 
         fig = plt.figure(figsize=(8, 6))
         ax = fig.add_subplot(111, projection='3d')
         surf = ax.plot_surface(
             D, T, t_k_arr, cmap='Blues', edgecolor='black', alpha=0.9
         )
-        ax.set_ylabel(r'$t$ hours')
+        ax.set_ylabel(r'$t$ [hours]')
         ax.set_xlabel('Depth $[m]$')
         ax.set_zlabel('Temperature [K]')
         fig.colorbar(surf, ax=ax, shrink=0.5, aspect=10, label='Temperature [K]')

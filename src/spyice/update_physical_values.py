@@ -40,6 +40,8 @@ def calculate_melting_temperature_from_salinity(
         T_s = 252.05 # eutectic temperature for Sbr = 233ppt
         S_br = 233.0  # brine salinity in ppt
         _melting_temperature_seawater = _temperature_melt * np.ones(_salinity.shape) + (T_s - T_m)*_salinity/S_br
+        # _melting_temperature_seawater = 273.15 - 1.853 * _salinity / 28.0
+
     elif _liquid_relation == "Frezchem":
         # _melting_temperature_seawater = _temperature_melt + (
         #     -(9.1969758 * (1e-05) * _salinity**2) - 0.03942059 * _salinity
@@ -613,6 +615,7 @@ def update_temperature_and_salinity(
         )
     else:
         s_k = s_prev
+        x_wind_s = np.zeros(len(t_k))
     return t_k, s_k, A_before_correction, advection_diffusion_temp.factor3, x_wind_t, x_wind_s
 
 def update_algae_transport(    
