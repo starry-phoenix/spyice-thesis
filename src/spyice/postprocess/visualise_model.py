@@ -104,7 +104,7 @@ class VisualiseModel:
             alpha=0.7,
             linestyle="dashed",
         )
-        ax2.set_ylabel("Depth in m", color=color)
+        ax2.set_ylabel("Depth m", color=color)
         ax2.tick_params(axis="y", labelcolor=color)
         ax1.autoscale()
         ax2.autoscale()
@@ -262,7 +262,6 @@ class VisualiseModel:
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
         ax.legend()
-        ax.set_title(r"Numerical Depth Vs Analytical Depth")
         ax.set_yscale("log")
 
         if savefig:
@@ -291,7 +290,7 @@ class VisualiseModel:
         depth = self.results_object.depth_stefan_all[len(x_axis_iter) - 1]
         index = int(depth / self.ui_object.grid_resolution_dz)
         heatmap_data = self.results_object.phi_k_list[:, :index]
-        fig, ax = plt.subplots()
+        fig, ax = plt.subplots(figsize=(8, 6))
         cax = ax.imshow(
             heatmap_data.T,
             cmap="Blues",
@@ -306,7 +305,7 @@ class VisualiseModel:
         )
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
-        fig.colorbar(cax, ax=ax, label="Thickness [m]")
+        fig.colorbar(cax, ax=ax, label="Thickness [$m$]")
         # mush_list_y2 = [depth_mush[self.phi_slope(i)[-1]] for i in x_axis_iter]
         ax1 = ax.twinx()
         ax1.plot(
@@ -333,7 +332,6 @@ class VisualiseModel:
             0.0,
         )
         ax1.set_yticks([])
-        ax1.set_title(r"Numerical Depth Vs Analytical Depth")
         # ax1.set_yscale("log")
 
         if savefig:
@@ -416,7 +414,6 @@ class VisualiseModel:
         ax1.set_ylabel(r"Temperature [K]")
         ax1.set_yscale("log")
         # ax1.legend()
-        ax1.set_title(rf"Temperature evolution at {z_depth}m")
         color = "gray"
         ax3 = ax1.twinx()
         ax3.plot(
@@ -483,7 +480,6 @@ class VisualiseModel:
 
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
-        ax.set_title(r"Freezing Overtime")
         fig.colorbar(cax, ax=ax, label="Temperature [K]")
 
         if savefig:
@@ -533,7 +529,6 @@ class VisualiseModel:
 
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
-        ax.set_title(r"Freezing Overtime")
         fig.colorbar(cax, ax=ax, label="Salinity in ppt")
 
         if savefig:
@@ -576,7 +571,6 @@ class VisualiseModel:
 
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
-        ax.set_title(r"Freezing Overtime")
         fig.colorbar(cax, ax=ax, label=r"Liquid Fraction")
 
         if savefig:
@@ -607,7 +601,7 @@ class VisualiseModel:
             ],
         )
         ax.set_xlabel(r"$t$ [hours]")
-        ax.set_ylabel(r"Depth [m]")
+        ax.set_ylabel(r"Depth [$m$]")
 
         def animation_function(i):
             hmap.set_data(data[10 * i + 1].T)
@@ -659,7 +653,6 @@ class VisualiseModel:
             plt.scatter(iters_arr, t_melt, color="black", alpha=0.6)
         plt.xlabel(r"iteration before convergence")
         plt.ylabel(rf"{param_name} [{unit}]")
-        plt.title(rf"{param_name} at t={t}H")
         plt.legend()
 
         if savefig:
@@ -691,8 +684,7 @@ class VisualiseModel:
             extent=[0, iters - 1, h[:, 2][-1], h[:, 0][-1]],
         )
         ax1.set_xlabel(r"iteration before convergence")
-        ax1.set_ylabel(r"Depth [m]")
-        ax1.set_title(rf"{param_name} at t={t}H")
+        ax1.set_ylabel(r"Depth [$m$]")
 
         fig1.colorbar(heatmap, ax=ax1, label=rf"{param_name} [{unit}]")
         ax2 = ax1.twinx()
@@ -754,7 +746,6 @@ class VisualiseModel:
         )
         ax1.set_xlabel(r"iteration before convergence")
         ax1.set_ylabel(r"Depth")
-        ax1.set_title(rf"{param_name} at t={t}H")
         ax1.set_yticks(
             [
                 0.0,
@@ -803,7 +794,6 @@ class VisualiseModel:
         plt.scatter(iters_arr, phi_mush)
         plt.xlabel(r"iteration before convergence")
         plt.ylabel(r"No. of mushy cells")
-        plt.title(rf"Mushy Cells at t={t}H")
 
         if savefig:
             plt.savefig(
@@ -891,7 +881,6 @@ class VisualiseModel:
         plt.scatter(iter_arr, tempmushPT2_arr, color="red", alpha=0.6)
         plt.xlabel(r"No. of Iterations")
         plt.ylabel(r"Temperature [K]")
-        plt.title(r"Interface temperature at t=0.5H before convergence")
         plt.legend()
 
         if savefig:
@@ -942,7 +931,6 @@ class VisualiseModel:
         ax1.set_ylabel(r"Temperature [K]")
         ax1.set_yscale("log")
         # ax1.legend()
-        ax1.set_title(rf"Liqduius-Solidus Temperature evolution at {z_depth}m")
         color = "gray"
         ax1.legend()
         # fig1.tight_layout()
@@ -1001,7 +989,6 @@ class VisualiseModel:
 
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
-        ax.set_title(r"Freezing Overtime")
         fig.colorbar(cax, ax=ax, label=r"carbon concentration $[mmol/m^3]$")
 
         if savefig:
@@ -1047,7 +1034,6 @@ class VisualiseModel:
 
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
-        ax.set_title(r"Freezing Overtime")
         fig.colorbar(cax, ax=ax, label=r"carbon concentration $[mmol/m^3]$")
 
         if savefig:
@@ -1092,7 +1078,6 @@ class VisualiseModel:
 
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
-        ax.set_title(r"Freezing Overtime")
         fig.colorbar(cax, ax=ax, label=r"Chla bulk concentration $[mg/m^3]$")
 
         if savefig:
@@ -1137,7 +1122,6 @@ class VisualiseModel:
 
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
-        ax.set_title(r"Freezing Overtime")
         fig.colorbar(cax, ax=ax, label=r"Chla bulk concentration $[mg/m^3]$")
 
         if savefig:
@@ -1183,7 +1167,6 @@ class VisualiseModel:
 
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
-        ax.set_title(r"Freezing Overtime")
         fig.colorbar(cax, ax=ax, label=r"Nutrient concentration $[mmol/m^3]$")
 
         if savefig:
@@ -1226,7 +1209,6 @@ class VisualiseModel:
 
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
-        ax.set_title(r"Freezing Overtime")
         fig.colorbar(cax, ax=ax, label=r"Nutrient concentration $[mmol/m^3]$")
 
         if savefig:
@@ -1272,7 +1254,6 @@ class VisualiseModel:
 
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
-        ax.set_title(r"Freezing Overtime")
         fig.colorbar(cax, ax=ax, label=r"photosynthetic rate $[mmol/m^3/s]$")
 
         if savefig:
@@ -1317,7 +1298,6 @@ class VisualiseModel:
 
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
-        ax.set_title(r"Freezing Overtime")
         fig.colorbar(cax, ax=ax, label=r"photosynthetic rate $[mmol/m^3/s]$")
 
         if savefig:
@@ -1363,7 +1343,6 @@ class VisualiseModel:
 
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
-        ax.set_title(r"Freezing Overtime")
         fig.colorbar(cax, ax=ax, label=r"algae radiation $[W/m^2]$")
 
         if savefig:
@@ -1409,7 +1388,6 @@ class VisualiseModel:
 
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
-        ax.set_title(r"Freezing Overtime")
         fig.colorbar(cax, ax=ax, label=r"algae radiation $[W/m^2]$")
 
         if savefig:
@@ -1458,7 +1436,6 @@ class VisualiseModel:
 
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
-        ax.set_title(r"Freezing Overtime")
         fig.colorbar(cax, ax=ax, label=r"algal-induced radiative heating $[K s^{-1}]$")
 
         if savefig:
@@ -1501,7 +1478,6 @@ class VisualiseModel:
 
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
-        ax.set_title(r"Freezing Overtime")
         fig.colorbar(cax, ax=ax, label=r"radiation ice and algae $[W/m^2]$")
 
         if savefig:
@@ -1523,7 +1499,7 @@ class VisualiseModel:
         plt.plot(self.results_object.nutrient_concentration_multiplelayers[int(time -5), :], depth_, '--',label=rf't={time-5}s', color='black', linewidth=1)
         plt.gca().invert_yaxis()
         plt.xlabel(r'nutrient concentration [mmol m^{-3}]')
-        plt.ylabel(r'depth in [m]')
+        plt.ylabel(r'Depth [$m$]')
         plt.legend()
         if savefig:
             plt.savefig(
@@ -1543,7 +1519,7 @@ class VisualiseModel:
         plt.plot(self.results_object.s_k_list[int(time -5), :], depth_, '--',label=rf't={time-5}s', color='black', linewidth=1)
         plt.gca().invert_yaxis()
         plt.xlabel(r'salinity concentration [ppt]')
-        plt.ylabel(r'depth in [m]')
+        plt.ylabel(r'Depth [$m$]')
         plt.legend()
         if savefig:
             plt.savefig(
@@ -1563,7 +1539,7 @@ class VisualiseModel:
         plt.plot(self.results_object.phi_k_list[int(time -5), :], depth_, '--',label=rf't={time-5}s', color='black', linewidth=1)
         plt.gca().invert_yaxis()
         plt.xlabel(r'liquid fraction')
-        plt.ylabel(r'depth in [m]')
+        plt.ylabel(r'Depth [$m$]')
         plt.legend()
         if savefig:
             plt.savefig(
@@ -1583,7 +1559,7 @@ class VisualiseModel:
         plt.plot(self.results_object.t_k_list[int(time -5), :], depth_, '--',label=rf't={time-5}s', color='black', linewidth=1)
         plt.gca().invert_yaxis()
         plt.xlabel(r'Temperature [K]')
-        plt.ylabel(r'depth in [m]')
+        plt.ylabel(r'Depth [$m$]')
         plt.legend()
         if savefig:
             plt.savefig(
@@ -1604,7 +1580,7 @@ class VisualiseModel:
         plt.plot(self.results_object.carbon_concentration_multiplelayers[int(time -5), :], depth_, '--',label=rf't={time-5}s', color='black', linewidth=1)
         plt.gca().invert_yaxis()
         plt.xlabel(r'carbon concentration [mmol m^{-3}]')
-        plt.ylabel(r'depth in [m]')
+        plt.ylabel(r'Depth [$m$]')
         plt.legend()
         if savefig:
             plt.savefig(
@@ -1626,7 +1602,7 @@ class VisualiseModel:
         plt.plot(self.results_object.salinity_source_term[int(time -5), :], depth_, '--',label=rf't={time-5}s', color='black', linewidth=1)
         plt.gca().invert_yaxis()
         plt.xlabel(r'Salinity source term [kg]')
-        plt.ylabel(r'depth in [m]')
+        plt.ylabel(r'Depth [$m$]')
         plt.legend()
         if savefig:
             plt.savefig(
@@ -1647,7 +1623,7 @@ class VisualiseModel:
         plt.plot(self.results_object.radiation_multiplelayers[int(time -5), :], depth_, '--',label=rf't={time-5}s', color='black', linewidth=1)
         plt.gca().invert_yaxis()
         plt.xlabel(r'radiation [W/m^2]')
-        plt.ylabel(r'depth in [m]')
+        plt.ylabel(r'Depth [$m$]')
         plt.legend()
         if savefig:
             plt.savefig(
@@ -1668,7 +1644,7 @@ class VisualiseModel:
         plt.plot(liquid_salinity[int(time -5), :], depth_, '--',label=rf't={time-5}s', color='black', linewidth=1)
         plt.gca().invert_yaxis()
         plt.xlabel(r'salinity concentration [ppt]')
-        plt.ylabel(r'depth in [m]')
+        plt.ylabel(r'Depth [$m$]')
         plt.legend()
         if savefig:
             plt.savefig(
@@ -1689,7 +1665,7 @@ class VisualiseModel:
         plt.plot(self.results_object.brine_velocity_list[int(time -5), :], depth_, '--',label=rf't={time-5}s', color='black', linewidth=1)
         plt.gca().invert_yaxis()
         plt.xlabel(r'Brine velocity [m/s]')
-        plt.ylabel(r'depth in [m]')
+        plt.ylabel(r'Depth [$m$]')
         plt.legend()
         if savefig:
             plt.savefig(
@@ -1710,13 +1686,13 @@ class VisualiseModel:
         time_hours = time_indices * dt / 3600  # convert to hours
         D, T = np.meshgrid(depth_, time_hours)
 
-        fig = plt.figure(figsize=(8, 6))
+        fig = plt.figure(figsize=(10, 8))
         ax = fig.add_subplot(111, projection='3d')
         surf = ax.plot_surface(
             D, T, t_k_arr, cmap='Blues', edgecolor='black', alpha=0.9
         )
         ax.set_ylabel(r'$t$ [hours]')
-        ax.set_xlabel('Depth $[m]$')
+        ax.set_xlabel('Depth $[$m$]$')
         ax.set_zlabel('Temperature [K]')
         fig.colorbar(surf, ax=ax, shrink=0.5, aspect=10, label='Temperature [K]')
 
@@ -1751,10 +1727,9 @@ class VisualiseModel:
             T, D, t_k_arr, levels=levels, cmap='viridis', linewidths=2
         )
 
-        ax.set_ylabel('Depth [m]')
+        ax.set_ylabel('Depth [$m$]')
         ax.set_xlabel('Time step')
         ax.set_zlabel('Temperature [K]')
-        ax.set_title('Temperature 3D contours (all time steps)')
 
         fig.colorbar(contours, ax=ax, shrink=0.5, aspect=10, label='Temperature [K]')
 
@@ -1787,10 +1762,9 @@ class VisualiseModel:
     #     ax1.plot(x_axis_iter*self.ui_object.grid_timestep_dt/3600, phi_k, 'r--',label='Numerical Temperature')
     #     if self.is_buffo is True:
     #         ax1.plot(x_axis_iter*self.ui_object.grid_timestep_dt/3600, phi_buffo, 'b--',alpha=0.5,label='Buffo')
-    #     ax1.set_xlabel("depth in nodes")
+    #     ax1.set_xlabel("Depth nodes")
     #     ax1.set_ylabel("Phi")
     #     #ax1.legend()
-    #     ax1.set_title(f"Temperature evolution at {timestep}H")
     #     color = 'gray'
     #     ax1.legend()
     #     fig1.tight_layout()
@@ -1811,7 +1785,6 @@ class VisualiseModel:
     #     ax1.set_xlabel("t in hours")
     #     ax1.set_ylabel("Salinity in ppt")
     #     #ax1.legend()
-    #     ax1.set_title(f"Salinity evolution at {z_depth}m")
     #     color = 'gray'
     #     ax1.legend()
     #     fig1.tight_layout()
@@ -1836,7 +1809,6 @@ class VisualiseModel:
     #     ax1.fill_betweenx(H, T_k[mush][0], T_k[mush][-1], color='gray', alpha=0.2, label='Mushy Layer')
     #     ax1.set_xlabel("Temperature in K")
     #     ax1.set_ylabel(r"Liquid Fraction $\phi$")
-    #     ax1.set_title(f"Liquid Fraction Vs Temperature at {timestep}h")
     #     color = 'gray'
     #     ax3 = ax1.twinx()
     #     ax3.axvline(

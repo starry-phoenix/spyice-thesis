@@ -2,8 +2,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 from pathlib import Path
 
-# .style.use("spyice.utils.custom")
-plt.style.use("jupyternotebooks/custom.mplstyle")
+plt.style.use("spyice.utils.custom")
+# plt.style.use("jupyternotebooks/custom.mplstyle")
 # plt.rcParams.update(
 #     {
 #         "text.usetex": True,
