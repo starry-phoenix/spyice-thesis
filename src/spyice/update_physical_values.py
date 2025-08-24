@@ -19,7 +19,7 @@ _specific_heat_ice, _latent_heat_water = _ui.constants.c_i, _ui.constants.L
 
 
 def calculate_melting_temperature_from_salinity(
-    _salinity, _temperature_melt=_temperature_melt, _liquid_relation="Frezchem"
+    _salinity, _temperature_melt=_temperature_melt, _liquid_relation="Normal"
 ):
     """Calculates the melting temperature of seawater based on salinity.
 
@@ -524,7 +524,7 @@ def update_state_variables(
             temp_factor_3,
             t_k_A_LHS_matrix,
             t_k_A_LHS_matrix_prev,
-            1.4,
+            0.4,
             _is_stefan=preprocess_data_object.is_stefan,
             _pt2_system=False,
             _nonconstant_physical_properties=False,

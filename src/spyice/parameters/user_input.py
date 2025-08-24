@@ -93,7 +93,7 @@ class UserInput:
     is_stefan: bool = True
     is_buffo: bool = True
     is_voller: bool = False
-    is_salinity_equation: bool = True
+    is_salinity_equation: bool = False
     liquidus_relation_type: str = "Normal"  # Normal or Frezchem
     grid_resolution_dz: float = 0.01
     boundary_condition_type: str = "Dirichlet"  # Neumann or Dirichlet
@@ -131,12 +131,12 @@ class UserInput:
         if isinstance(self.constants, RealConstants):
             self.boundary_salinity = 34.0
             self.boundary_top_temperature = 265.0
-            # self.temperature_melt = 273.15 - 1.853 * self.boundary_salinity / 28.0
-            self.temperature_melt = (
-                -(9.1969758 * (1e-05) * self.boundary_salinity**2)
-                - 0.03942059 * self.boundary_salinity
-                + 272.63617665
-            )
+            self.temperature_melt = 273.15 - 1.853 * self.boundary_salinity / 28.0
+            # self.temperature_melt = (
+            #     -(9.1969758 * (1e-05) * self.boundary_salinity**2)
+            #     - 0.03942059 * self.boundary_salinity
+            #     + 272.63617665
+            # )
             self.geometry_type = 2
             if self.config_data:
                 self.grid_timestep_dt = read_omegaconfig(self.config_data, "dt")

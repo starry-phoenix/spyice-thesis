@@ -162,17 +162,19 @@ class SeaIceModel:
         Returns:
             None
         """
-        depth_arr = np.linspace(0, -self.preprocess_data.Z, self.preprocess_data.nz)
-        ax1.plot(t_k, depth_arr, "r--")
-        ax1.plot(t_stefan, depth_arr, "k")
+        fig.set_size_inches(4, 4)
+        depth_arr = np.linspace(0, self.preprocess_data.Z, self.preprocess_data.nz)
+        ax1.plot(t_stefan, depth_arr, "k", linewidth=1, alpha=1.0)
+        ax1.plot(t_k, depth_arr, "k--", linewidth=1, alpha=1.0)
         if t_k_buffo is not None:
-            ax1.plot(t_k_buffo, depth_arr, "b-.", alpha=0.5)
+            ax1.plot(t_k_buffo, depth_arr, "k-.", alpha=1.0, linewidth=1)
         ax1.set_ylabel("Depth [m]")
         ax1.set_xlabel("Temperature [K]")
+        ax1.invert_yaxis()
         # ax1.set_yscale("log")
         # fig.tight_layout()
         if count == 1:
-            plt.legend(["Numerical", "Analytical", "Buffo"])
+            plt.legend(["Analytical", "Voller", "Buffo"])
         # display(fig)
         # clear_output(wait=True)
 

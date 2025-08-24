@@ -5,6 +5,7 @@ defaults:
   - dt: dt47
   - S_IC: S34
   - iter_max: iter_max1000
+  - dz: dz0p01
   - override hydra/help: config_param_help
   - _self_
 
