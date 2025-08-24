@@ -294,6 +294,9 @@ INPUT C:\Users\sneha\AppData\Local\Programs\MiKTeX\tex\latex\tocloft\tocloft.sty
 OUTPUT spyice.idx
 INPUT C:\Users\sneha\AppData\Local\Programs\MiKTeX\tex\latex\l3backend\l3backend-pdftex.def
 INPUT C:\Users\sneha\AppData\Local\Programs\MiKTeX\tex\latex\l3backend\l3backend-pdftex.def
+INPUT .\spyice.aux
+INPUT .\spyice.aux
+INPUT spyice.aux
 OUTPUT spyice.aux
 INPUT C:\Users\sneha\AppData\Local\Programs\MiKTeX\tex\latex\kpfonts\omljkp.fd
 INPUT C:\Users\sneha\AppData\Local\Programs\MiKTeX\tex\latex\kpfonts\omljkp.fd

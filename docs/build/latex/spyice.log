@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.11.7)  24 AUG 2025 07:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.11.7)  24 AUG 2025 19:48
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1060,13 +1060,12 @@ Writing index file spyice.idx
 File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count330
 \l__pdf_internal_box=\box122
-)
-No file spyice.aux.
+) (spyice.aux)
 \openout1 = `spyice.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/jkp/m/it on input line 90.
 LaTeX Font Info:    Trying to load font information for OML+jkp on input line 90.
-(C:\Users\sneha\AppData\Local\Programs\MiKTeX\tex/latex/kpfonts\omljkp.fd
+ (C:\Users\sneha\AppData\Local\Programs\MiKTeX\tex/latex/kpfonts\omljkp.fd
 File: omljkp.fd 2006/08/15 v1.0
 )
 LaTeX Font Info:    ... okay on input line 90.
@@ -3503,10 +3502,10 @@ Package rerunfilecheck Info: Checksums for `spyice.out':
 (rerunfilecheck)             After:  ED2846165AB9526B463DF44664336038;5705.
  ) 
 Here is how much of TeX's memory you used:
- 22614 strings out of 474486
- 417752 string characters out of 5743755
+ 22617 strings out of 474486
+ 417873 string characters out of 5743755
  1964542 words of memory out of 5000000
- 44023 multiletter control sequences out of 15000+600000
+ 44024 multiletter control sequences out of 15000+600000
  655965 words of font info for 139 fonts, out of 8000000 for 9000
  1142 hyphenation exceptions out of 8191
  72i,18n,85p,3018b,954s stack positions out of 10000i,1000n,20000p,200000b,200000s

@@ -4,7 +4,7 @@ figure.autolayout: True # Automatic figure layout
 figure.subplot.left: 0.5
 figure.dpi: 120
 savefig.bbox: tight # Always save as 'tight'
-figure.figsize: 5.93, 3.67
+figure.figsize: 6.5, 5
 savefig.format: pdf
 pgf.rcfonts: True 
 pgf.texsystem: pdflatex
@@ -14,7 +14,7 @@ pgf.preamble: \usepackage{lmodern} \usepackage[utf8]{inputenc} \usepackage[T1]{f
 axes.prop_cycle: (cycler('color', ['k', 'b', 'g','r' ]) + cycler('ls', ['-', '--', ':', '-.'])) # Set color and style cycle
 
 # Typography
-font.size: 10 # General font size
+font.size: 18 # General font size
 text.usetex: True
 font.family: sans-serif # Font type
 # font.sans-serif: Computer Modern Sans Serif # Sans-serif font
@@ -30,7 +30,7 @@ ytick.major.width: 0.25 # y ticks major linewidth
 ytick.minor.width: 0.25 # y ticks minor linewidth
 
 # Plots
-lines.linewidth: 0.5 # Width of plotted lines
+lines.linewidth: 2.0 # Width of plotted lines
 lines.markersize: 2 # Size of plotted markers
 
 # Ticks
@@ -49,13 +49,13 @@ legend.fancybox: False
 
 
 # Title
-figure.titlesize: 10
+figure.titlesize: 18
 figure.titleweight: bold
-axes.titlesize: 12 # Title font size
+axes.titlesize: 18 # Title font size
 axes.titleweight: normal # Title font weight
 
 # Axes
-axes.labelsize: 10 # x and y labels font size
+axes.labelsize: 18 # x and y labels font size
 axes.labelweight: normal # x and y labels font weight
 axes.grid: True
 grid.linestyle: :
@@ -63,8 +63,8 @@ grid.alpha: 0.4
 
 
 # Ticks
-xtick.labelsize: 9 # x ticks font size
-ytick.labelsize: 9 # y ticks font size
+xtick.labelsize: 18 # x ticks font size
+ytick.labelsize: 9=18 # y ticks font size
 xtick.major.size: 3
 ytick.major.size: 3
 xtick.minor.size: 1.5

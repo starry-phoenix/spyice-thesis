@@ -31,7 +31,12 @@ plt.rcParams["text.latex.preamble"].join(
         r"\setmainfont{xcolor}",
     ]
 )
-
+plt.rcParams.update({'font.size': 18})
+plt.rcParams['axes.labelsize'] = 18
+plt.rcParams['axes.titlesize'] = 18
+plt.rcParams['xtick.labelsize'] = 18
+plt.rcParams['ytick.labelsize'] = 18
+plt.rcParams.update({'lines.linewidth': 2})
 
 def locate_ice_ocean_interface(phi, dz, nz, **kwargs):
     """Locate ice ocean interface, based on liquid fraction equivalent ice thickness
@@ -162,14 +167,14 @@ class SeaIceModel:
         Returns:
             None
         """
-        fig.set_size_inches(4, 4)
+        fig.set_size_inches(6.5, 5)
         depth_arr = np.linspace(0, self.preprocess_data.Z, self.preprocess_data.nz)
         ax1.plot(t_stefan, depth_arr, "k", linewidth=1, alpha=1.0)
         ax1.plot(t_k, depth_arr, "k--", linewidth=1, alpha=1.0)
         if t_k_buffo is not None:
-            ax1.plot(t_k_buffo, depth_arr, "k-.", alpha=1.0, linewidth=1)
-        ax1.set_ylabel("Depth [m]")
-        ax1.set_xlabel("Temperature [K]")
+            ax1.plot(t_k_buffo, depth_arr, "k-.", alpha=1.0, linewidth=2)
+        ax1.set_ylabel(r"Depth [$m$]")
+        ax1.set_xlabel(r"Temperature [K]")
         ax1.invert_yaxis()
         # ax1.set_yscale("log")
         # fig.tight_layout()
