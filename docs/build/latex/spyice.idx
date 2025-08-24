@@ -1,0 +1,278 @@
+\indexentry{module@\spxentry{module}!spyice.models.advection\_diffusion@\spxentry{spyice.models.advection\_diffusion}|hyperpage}{14}
+\indexentry{spyice.models.advection\_diffusion@\spxentry{spyice.models.advection\_diffusion}!module@\spxentry{module}|hyperpage}{14}
+\indexentry{AdvectionDiffusion (class in spyice.models.advection\_diffusion)@\spxentry{AdvectionDiffusion}\spxextra{class in spyice.models.advection\_diffusion}|hyperpage}{14}
+\indexentry{Buffosolver() (spyice.models.advection\_diffusion.AdvectionDiffusion method)@\spxentry{Buffosolver()}\spxextra{spyice.models.advection\_diffusion.AdvectionDiffusion method}|hyperpage}{15}
+\indexentry{TDMAsolver() (spyice.models.advection\_diffusion.AdvectionDiffusion method)@\spxentry{TDMAsolver()}\spxextra{spyice.models.advection\_diffusion.AdvectionDiffusion method}|hyperpage}{15}
+\indexentry{\_\_init\_\_() (spyice.models.advection\_diffusion.AdvectionDiffusion method)@\spxentry{\_\_init\_\_()}\spxextra{spyice.models.advection\_diffusion.AdvectionDiffusion method}|hyperpage}{15}
+\indexentry{factor\_1() (spyice.models.advection\_diffusion.AdvectionDiffusion method)@\spxentry{factor\_1()}\spxextra{spyice.models.advection\_diffusion.AdvectionDiffusion method}|hyperpage}{16}
+\indexentry{factor\_2() (spyice.models.advection\_diffusion.AdvectionDiffusion method)@\spxentry{factor\_2()}\spxextra{spyice.models.advection\_diffusion.AdvectionDiffusion method}|hyperpage}{16}
+\indexentry{factor\_3() (spyice.models.advection\_diffusion.AdvectionDiffusion method)@\spxentry{factor\_3()}\spxextra{spyice.models.advection\_diffusion.AdvectionDiffusion method}|hyperpage}{17}
+\indexentry{set\_up\_tridiagonal() (spyice.models.advection\_diffusion.AdvectionDiffusion method)@\spxentry{set\_up\_tridiagonal()}\spxextra{spyice.models.advection\_diffusion.AdvectionDiffusion method}|hyperpage}{17}
+\indexentry{unknowns\_matrix() (spyice.models.advection\_diffusion.AdvectionDiffusion method)@\spxentry{unknowns\_matrix()}\spxextra{spyice.models.advection\_diffusion.AdvectionDiffusion method}|hyperpage}{17}
+\indexentry{top\_temp (in module spyice.models.advection\_diffusion)@\spxentry{top\_temp}\spxextra{in module spyice.models.advection\_diffusion}|hyperpage}{17}
+\indexentry{module@\spxentry{module}!spyice.models.sea\_ice\_model@\spxentry{spyice.models.sea\_ice\_model}|hyperpage}{17}
+\indexentry{spyice.models.sea\_ice\_model@\spxentry{spyice.models.sea\_ice\_model}!module@\spxentry{module}|hyperpage}{17}
+\indexentry{SeaIceModel (class in spyice.models.sea\_ice\_model)@\spxentry{SeaIceModel}\spxextra{class in spyice.models.sea\_ice\_model}|hyperpage}{17}
+\indexentry{\_\_init\_\_() (spyice.models.sea\_ice\_model.SeaIceModel method)@\spxentry{\_\_init\_\_()}\spxextra{spyice.models.sea\_ice\_model.SeaIceModel method}|hyperpage}{18}
+\indexentry{bc\_neumann() (spyice.models.sea\_ice\_model.SeaIceModel method)@\spxentry{bc\_neumann()}\spxextra{spyice.models.sea\_ice\_model.SeaIceModel method}|hyperpage}{18}
+\indexentry{choose\_phase\_type\_iteration() (spyice.models.sea\_ice\_model.SeaIceModel method)@\spxentry{choose\_phase\_type\_iteration()}\spxextra{spyice.models.sea\_ice\_model.SeaIceModel method}|hyperpage}{18}
+\indexentry{convergence\_loop\_iteration() (spyice.models.sea\_ice\_model.SeaIceModel method)@\spxentry{convergence\_loop\_iteration()}\spxextra{spyice.models.sea\_ice\_model.SeaIceModel method}|hyperpage}{18}
+\indexentry{get\_results() (spyice.models.sea\_ice\_model.SeaIceModel class method)@\spxentry{get\_results()}\spxextra{spyice.models.sea\_ice\_model.SeaIceModel class method}|hyperpage}{19}
+\indexentry{initialize\_state\_variables() (spyice.models.sea\_ice\_model.SeaIceModel method)@\spxentry{initialize\_state\_variables()}\spxextra{spyice.models.sea\_ice\_model.SeaIceModel method}|hyperpage}{20}
+\indexentry{phi\_all\_mush\_list() (spyice.models.sea\_ice\_model.SeaIceModel method)@\spxentry{phi\_all\_mush\_list()}\spxextra{spyice.models.sea\_ice\_model.SeaIceModel method}|hyperpage}{20}
+\indexentry{record\_iteration\_data() (spyice.models.sea\_ice\_model.SeaIceModel method)@\spxentry{record\_iteration\_data()}\spxextra{spyice.models.sea\_ice\_model.SeaIceModel method}|hyperpage}{20}
+\indexentry{reset\_iteration\_parameters() (spyice.models.sea\_ice\_model.SeaIceModel method)@\spxentry{reset\_iteration\_parameters()}\spxextra{spyice.models.sea\_ice\_model.SeaIceModel method}|hyperpage}{21}
+\indexentry{run\_sea\_ice\_model() (spyice.models.sea\_ice\_model.SeaIceModel method)@\spxentry{run\_sea\_ice\_model()}\spxextra{spyice.models.sea\_ice\_model.SeaIceModel method}|hyperpage}{21}
+\indexentry{run\_while\_convergence\_iteration() (spyice.models.sea\_ice\_model.SeaIceModel method)@\spxentry{run\_while\_convergence\_iteration()}\spxextra{spyice.models.sea\_ice\_model.SeaIceModel method}|hyperpage}{21}
+\indexentry{set\_boundary\_condition\_type() (spyice.models.sea\_ice\_model.SeaIceModel method)@\spxentry{set\_boundary\_condition\_type()}\spxextra{spyice.models.sea\_ice\_model.SeaIceModel method}|hyperpage}{22}
+\indexentry{set\_dataclass() (spyice.models.sea\_ice\_model.SeaIceModel method)@\spxentry{set\_dataclass()}\spxextra{spyice.models.sea\_ice\_model.SeaIceModel method}|hyperpage}{22}
+\indexentry{t\_running() (spyice.models.sea\_ice\_model.SeaIceModel method)@\spxentry{t\_running()}\spxextra{spyice.models.sea\_ice\_model.SeaIceModel method}|hyperpage}{22}
+\indexentry{track\_mush\_for\_parameter() (spyice.models.sea\_ice\_model.SeaIceModel method)@\spxentry{track\_mush\_for\_parameter()}\spxextra{spyice.models.sea\_ice\_model.SeaIceModel method}|hyperpage}{23}
+\indexentry{locate\_ice\_ocean\_interface() (in module spyice.models.sea\_ice\_model)@\spxentry{locate\_ice\_ocean\_interface()}\spxextra{in module spyice.models.sea\_ice\_model}|hyperpage}{23}
+\indexentry{module@\spxentry{module}!spyice.models.stefan\_problem@\spxentry{spyice.models.stefan\_problem}|hyperpage}{23}
+\indexentry{spyice.models.stefan\_problem@\spxentry{spyice.models.stefan\_problem}!module@\spxentry{module}|hyperpage}{23}
+\indexentry{StefanProblem (class in spyice.models.stefan\_problem)@\spxentry{StefanProblem}\spxextra{class in spyice.models.stefan\_problem}|hyperpage}{23}
+\indexentry{calculate\_temperature\_profile() (spyice.models.stefan\_problem.StefanProblem static method)@\spxentry{calculate\_temperature\_profile()}\spxextra{spyice.models.stefan\_problem.StefanProblem static method}|hyperpage}{24}
+\indexentry{calculate\_temperature\_twophase\_profiles() (spyice.models.stefan\_problem.StefanProblem static method)@\spxentry{calculate\_temperature\_twophase\_profiles()}\spxextra{spyice.models.stefan\_problem.StefanProblem static method}|hyperpage}{24}
+\indexentry{stefan\_problem() (spyice.models.stefan\_problem.StefanProblem static method)@\spxentry{stefan\_problem()}\spxextra{spyice.models.stefan\_problem.StefanProblem static method}|hyperpage}{24}
+\indexentry{stefan\_problem\_twophase() (spyice.models.stefan\_problem.StefanProblem static method)@\spxentry{stefan\_problem\_twophase()}\spxextra{spyice.models.stefan\_problem.StefanProblem static method}|hyperpage}{25}
+\indexentry{module@\spxentry{module}!spyice.models@\spxentry{spyice.models}|hyperpage}{25}
+\indexentry{spyice.models@\spxentry{spyice.models}!module@\spxentry{module}|hyperpage}{25}
+\indexentry{module@\spxentry{module}!spyice.parameters.constants@\spxentry{spyice.parameters.constants}|hyperpage}{25}
+\indexentry{spyice.parameters.constants@\spxentry{spyice.parameters.constants}!module@\spxentry{module}|hyperpage}{25}
+\indexentry{Constants (class in spyice.parameters.constants)@\spxentry{Constants}\spxextra{class in spyice.parameters.constants}|hyperpage}{25}
+\indexentry{DEBUG (spyice.parameters.constants.Constants attribute)@\spxentry{DEBUG}\spxextra{spyice.parameters.constants.Constants attribute}|hyperpage}{25}
+\indexentry{REAL (spyice.parameters.constants.Constants attribute)@\spxentry{REAL}\spxextra{spyice.parameters.constants.Constants attribute}|hyperpage}{25}
+\indexentry{module@\spxentry{module}!spyice.parameters.debug\_constants@\spxentry{spyice.parameters.debug\_constants}|hyperpage}{25}
+\indexentry{spyice.parameters.debug\_constants@\spxentry{spyice.parameters.debug\_constants}!module@\spxentry{module}|hyperpage}{25}
+\indexentry{DebugConstants (class in spyice.parameters.debug\_constants)@\spxentry{DebugConstants}\spxextra{class in spyice.parameters.debug\_constants}|hyperpage}{25}
+\indexentry{\_\_init\_\_() (spyice.parameters.debug\_constants.DebugConstants method)@\spxentry{\_\_init\_\_()}\spxextra{spyice.parameters.debug\_constants.DebugConstants method}|hyperpage}{26}
+\indexentry{D\_s (spyice.parameters.debug\_constants.DebugConstants attribute)@\spxentry{D\_s}\spxextra{spyice.parameters.debug\_constants.DebugConstants attribute}|hyperpage}{27}
+\indexentry{L (spyice.parameters.debug\_constants.DebugConstants attribute)@\spxentry{L}\spxextra{spyice.parameters.debug\_constants.DebugConstants attribute}|hyperpage}{27}
+\indexentry{P\_s (spyice.parameters.debug\_constants.DebugConstants attribute)@\spxentry{P\_s}\spxextra{spyice.parameters.debug\_constants.DebugConstants attribute}|hyperpage}{27}
+\indexentry{Ra\_c (spyice.parameters.debug\_constants.DebugConstants attribute)@\spxentry{Ra\_c}\spxextra{spyice.parameters.debug\_constants.DebugConstants attribute}|hyperpage}{27}
+\indexentry{a\_phi (spyice.parameters.debug\_constants.DebugConstants attribute)@\spxentry{a\_phi}\spxextra{spyice.parameters.debug\_constants.DebugConstants attribute}|hyperpage}{27}
+\indexentry{alpha (spyice.parameters.debug\_constants.DebugConstants attribute)@\spxentry{alpha}\spxextra{spyice.parameters.debug\_constants.DebugConstants attribute}|hyperpage}{27}
+\indexentry{b\_phi (spyice.parameters.debug\_constants.DebugConstants attribute)@\spxentry{b\_phi}\spxextra{spyice.parameters.debug\_constants.DebugConstants attribute}|hyperpage}{27}
+\indexentry{beta (spyice.parameters.debug\_constants.DebugConstants attribute)@\spxentry{beta}\spxextra{spyice.parameters.debug\_constants.DebugConstants attribute}|hyperpage}{27}
+\indexentry{c\_br (spyice.parameters.debug\_constants.DebugConstants attribute)@\spxentry{c\_br}\spxextra{spyice.parameters.debug\_constants.DebugConstants attribute}|hyperpage}{27}
+\indexentry{c\_i (spyice.parameters.debug\_constants.DebugConstants attribute)@\spxentry{c\_i}\spxextra{spyice.parameters.debug\_constants.DebugConstants attribute}|hyperpage}{27}
+\indexentry{c\_w (spyice.parameters.debug\_constants.DebugConstants attribute)@\spxentry{c\_w}\spxextra{spyice.parameters.debug\_constants.DebugConstants attribute}|hyperpage}{27}
+\indexentry{g (spyice.parameters.debug\_constants.DebugConstants attribute)@\spxentry{g}\spxextra{spyice.parameters.debug\_constants.DebugConstants attribute}|hyperpage}{27}
+\indexentry{k\_br (spyice.parameters.debug\_constants.DebugConstants attribute)@\spxentry{k\_br}\spxextra{spyice.parameters.debug\_constants.DebugConstants attribute}|hyperpage}{27}
+\indexentry{k\_i (spyice.parameters.debug\_constants.DebugConstants attribute)@\spxentry{k\_i}\spxextra{spyice.parameters.debug\_constants.DebugConstants attribute}|hyperpage}{27}
+\indexentry{k\_w (spyice.parameters.debug\_constants.DebugConstants attribute)@\spxentry{k\_w}\spxextra{spyice.parameters.debug\_constants.DebugConstants attribute}|hyperpage}{27}
+\indexentry{kappa (spyice.parameters.debug\_constants.DebugConstants attribute)@\spxentry{kappa}\spxextra{spyice.parameters.debug\_constants.DebugConstants attribute}|hyperpage}{27}
+\indexentry{m (spyice.parameters.debug\_constants.DebugConstants attribute)@\spxentry{m}\spxextra{spyice.parameters.debug\_constants.DebugConstants attribute}|hyperpage}{28}
+\indexentry{mu (spyice.parameters.debug\_constants.DebugConstants attribute)@\spxentry{mu}\spxextra{spyice.parameters.debug\_constants.DebugConstants attribute}|hyperpage}{28}
+\indexentry{phi\_c (spyice.parameters.debug\_constants.DebugConstants attribute)@\spxentry{phi\_c}\spxextra{spyice.parameters.debug\_constants.DebugConstants attribute}|hyperpage}{28}
+\indexentry{phi\_ini (spyice.parameters.debug\_constants.DebugConstants attribute)@\spxentry{phi\_ini}\spxextra{spyice.parameters.debug\_constants.DebugConstants attribute}|hyperpage}{28}
+\indexentry{phi\_ini\_Stefan (spyice.parameters.debug\_constants.DebugConstants attribute)@\spxentry{phi\_ini\_Stefan}\spxextra{spyice.parameters.debug\_constants.DebugConstants attribute}|hyperpage}{28}
+\indexentry{rho\_br (spyice.parameters.debug\_constants.DebugConstants attribute)@\spxentry{rho\_br}\spxextra{spyice.parameters.debug\_constants.DebugConstants attribute}|hyperpage}{28}
+\indexentry{rho\_i (spyice.parameters.debug\_constants.DebugConstants attribute)@\spxentry{rho\_i}\spxextra{spyice.parameters.debug\_constants.DebugConstants attribute}|hyperpage}{28}
+\indexentry{rho\_w (spyice.parameters.debug\_constants.DebugConstants attribute)@\spxentry{rho\_w}\spxextra{spyice.parameters.debug\_constants.DebugConstants attribute}|hyperpage}{28}
+\indexentry{module@\spxentry{module}!spyice.parameters.real\_constants@\spxentry{spyice.parameters.real\_constants}|hyperpage}{28}
+\indexentry{spyice.parameters.real\_constants@\spxentry{spyice.parameters.real\_constants}!module@\spxentry{module}|hyperpage}{28}
+\indexentry{RealConstants (class in spyice.parameters.real\_constants)@\spxentry{RealConstants}\spxextra{class in spyice.parameters.real\_constants}|hyperpage}{28}
+\indexentry{\_\_init\_\_() (spyice.parameters.real\_constants.RealConstants method)@\spxentry{\_\_init\_\_()}\spxextra{spyice.parameters.real\_constants.RealConstants method}|hyperpage}{29}
+\indexentry{D\_s (spyice.parameters.real\_constants.RealConstants attribute)@\spxentry{D\_s}\spxextra{spyice.parameters.real\_constants.RealConstants attribute}|hyperpage}{30}
+\indexentry{L (spyice.parameters.real\_constants.RealConstants attribute)@\spxentry{L}\spxextra{spyice.parameters.real\_constants.RealConstants attribute}|hyperpage}{30}
+\indexentry{P\_s (spyice.parameters.real\_constants.RealConstants attribute)@\spxentry{P\_s}\spxextra{spyice.parameters.real\_constants.RealConstants attribute}|hyperpage}{30}
+\indexentry{Ra\_c (spyice.parameters.real\_constants.RealConstants attribute)@\spxentry{Ra\_c}\spxextra{spyice.parameters.real\_constants.RealConstants attribute}|hyperpage}{30}
+\indexentry{a\_phi (spyice.parameters.real\_constants.RealConstants attribute)@\spxentry{a\_phi}\spxextra{spyice.parameters.real\_constants.RealConstants attribute}|hyperpage}{30}
+\indexentry{alpha (spyice.parameters.real\_constants.RealConstants attribute)@\spxentry{alpha}\spxextra{spyice.parameters.real\_constants.RealConstants attribute}|hyperpage}{30}
+\indexentry{b\_phi (spyice.parameters.real\_constants.RealConstants attribute)@\spxentry{b\_phi}\spxextra{spyice.parameters.real\_constants.RealConstants attribute}|hyperpage}{30}
+\indexentry{beta (spyice.parameters.real\_constants.RealConstants attribute)@\spxentry{beta}\spxextra{spyice.parameters.real\_constants.RealConstants attribute}|hyperpage}{30}
+\indexentry{c\_br (spyice.parameters.real\_constants.RealConstants attribute)@\spxentry{c\_br}\spxextra{spyice.parameters.real\_constants.RealConstants attribute}|hyperpage}{30}
+\indexentry{c\_i (spyice.parameters.real\_constants.RealConstants attribute)@\spxentry{c\_i}\spxextra{spyice.parameters.real\_constants.RealConstants attribute}|hyperpage}{30}
+\indexentry{c\_w (spyice.parameters.real\_constants.RealConstants attribute)@\spxentry{c\_w}\spxextra{spyice.parameters.real\_constants.RealConstants attribute}|hyperpage}{30}
+\indexentry{critical\_depth (spyice.parameters.real\_constants.RealConstants attribute)@\spxentry{critical\_depth}\spxextra{spyice.parameters.real\_constants.RealConstants attribute}|hyperpage}{30}
+\indexentry{g (spyice.parameters.real\_constants.RealConstants attribute)@\spxentry{g}\spxextra{spyice.parameters.real\_constants.RealConstants attribute}|hyperpage}{30}
+\indexentry{k\_br (spyice.parameters.real\_constants.RealConstants attribute)@\spxentry{k\_br}\spxextra{spyice.parameters.real\_constants.RealConstants attribute}|hyperpage}{30}
+\indexentry{k\_i (spyice.parameters.real\_constants.RealConstants attribute)@\spxentry{k\_i}\spxextra{spyice.parameters.real\_constants.RealConstants attribute}|hyperpage}{30}
+\indexentry{k\_w (spyice.parameters.real\_constants.RealConstants attribute)@\spxentry{k\_w}\spxextra{spyice.parameters.real\_constants.RealConstants attribute}|hyperpage}{30}
+\indexentry{kappa (spyice.parameters.real\_constants.RealConstants attribute)@\spxentry{kappa}\spxextra{spyice.parameters.real\_constants.RealConstants attribute}|hyperpage}{30}
+\indexentry{m (spyice.parameters.real\_constants.RealConstants attribute)@\spxentry{m}\spxextra{spyice.parameters.real\_constants.RealConstants attribute}|hyperpage}{30}
+\indexentry{mu (spyice.parameters.real\_constants.RealConstants attribute)@\spxentry{mu}\spxextra{spyice.parameters.real\_constants.RealConstants attribute}|hyperpage}{30}
+\indexentry{phi\_c (spyice.parameters.real\_constants.RealConstants attribute)@\spxentry{phi\_c}\spxextra{spyice.parameters.real\_constants.RealConstants attribute}|hyperpage}{30}
+\indexentry{phi\_ini (spyice.parameters.real\_constants.RealConstants attribute)@\spxentry{phi\_ini}\spxextra{spyice.parameters.real\_constants.RealConstants attribute}|hyperpage}{30}
+\indexentry{phi\_ini\_Stefan (spyice.parameters.real\_constants.RealConstants attribute)@\spxentry{phi\_ini\_Stefan}\spxextra{spyice.parameters.real\_constants.RealConstants attribute}|hyperpage}{30}
+\indexentry{rho\_br (spyice.parameters.real\_constants.RealConstants attribute)@\spxentry{rho\_br}\spxextra{spyice.parameters.real\_constants.RealConstants attribute}|hyperpage}{30}
+\indexentry{rho\_i (spyice.parameters.real\_constants.RealConstants attribute)@\spxentry{rho\_i}\spxextra{spyice.parameters.real\_constants.RealConstants attribute}|hyperpage}{30}
+\indexentry{rho\_w (spyice.parameters.real\_constants.RealConstants attribute)@\spxentry{rho\_w}\spxextra{spyice.parameters.real\_constants.RealConstants attribute}|hyperpage}{30}
+\indexentry{module@\spxentry{module}!spyice.parameters.results\_params@\spxentry{spyice.parameters.results\_params}|hyperpage}{30}
+\indexentry{spyice.parameters.results\_params@\spxentry{spyice.parameters.results\_params}!module@\spxentry{module}|hyperpage}{30}
+\indexentry{ResultsParams (class in spyice.parameters.results\_params)@\spxentry{ResultsParams}\spxextra{class in spyice.parameters.results\_params}|hyperpage}{30}
+\indexentry{\_\_init\_\_() (spyice.parameters.results\_params.ResultsParams method)@\spxentry{\_\_init\_\_()}\spxextra{spyice.parameters.results\_params.ResultsParams method}|hyperpage}{32}
+\indexentry{store\_results() (spyice.parameters.results\_params.ResultsParams static method)@\spxentry{store\_results()}\spxextra{spyice.parameters.results\_params.ResultsParams static method}|hyperpage}{34}
+\indexentry{store\_results\_for\_iter\_t() (spyice.parameters.results\_params.ResultsParams static method)@\spxentry{store\_results\_for\_iter\_t()}\spxextra{spyice.parameters.results\_params.ResultsParams static method}|hyperpage}{35}
+\indexentry{module@\spxentry{module}!spyice.parameters.user\_input@\spxentry{spyice.parameters.user\_input}|hyperpage}{35}
+\indexentry{spyice.parameters.user\_input@\spxentry{spyice.parameters.user\_input}!module@\spxentry{module}|hyperpage}{35}
+\indexentry{UserInput (class in spyice.parameters.user\_input)@\spxentry{UserInput}\spxextra{class in spyice.parameters.user\_input}|hyperpage}{35}
+\indexentry{\_\_post\_init\_\_() (spyice.parameters.user\_input.UserInput method)@\spxentry{\_\_post\_init\_\_()}\spxextra{spyice.parameters.user\_input.UserInput method}|hyperpage}{36}
+\indexentry{\_\_init\_\_() (spyice.parameters.user\_input.UserInput method)@\spxentry{\_\_init\_\_()}\spxextra{spyice.parameters.user\_input.UserInput method}|hyperpage}{36}
+\indexentry{boundary\_condition\_type (spyice.parameters.user\_input.UserInput attribute)@\spxentry{boundary\_condition\_type}\spxextra{spyice.parameters.user\_input.UserInput attribute}|hyperpage}{37}
+\indexentry{boundary\_salinity (spyice.parameters.user\_input.UserInput attribute)@\spxentry{boundary\_salinity}\spxextra{spyice.parameters.user\_input.UserInput attribute}|hyperpage}{37}
+\indexentry{boundary\_top\_temperature (spyice.parameters.user\_input.UserInput attribute)@\spxentry{boundary\_top\_temperature}\spxextra{spyice.parameters.user\_input.UserInput attribute}|hyperpage}{38}
+\indexentry{constants (spyice.parameters.user\_input.UserInput attribute)@\spxentry{constants}\spxextra{spyice.parameters.user\_input.UserInput attribute}|hyperpage}{38}
+\indexentry{counter\_limit (spyice.parameters.user\_input.UserInput attribute)@\spxentry{counter\_limit}\spxextra{spyice.parameters.user\_input.UserInput attribute}|hyperpage}{38}
+\indexentry{critical\_liquid\_fraction (spyice.parameters.user\_input.UserInput attribute)@\spxentry{critical\_liquid\_fraction}\spxextra{spyice.parameters.user\_input.UserInput attribute}|hyperpage}{38}
+\indexentry{dir\_output\_name (spyice.parameters.user\_input.UserInput attribute)@\spxentry{dir\_output\_name}\spxextra{spyice.parameters.user\_input.UserInput attribute}|hyperpage}{38}
+\indexentry{geometry\_type (spyice.parameters.user\_input.UserInput attribute)@\spxentry{geometry\_type}\spxextra{spyice.parameters.user\_input.UserInput attribute}|hyperpage}{38}
+\indexentry{grid\_resolution\_dz (spyice.parameters.user\_input.UserInput attribute)@\spxentry{grid\_resolution\_dz}\spxextra{spyice.parameters.user\_input.UserInput attribute}|hyperpage}{38}
+\indexentry{grid\_timestep\_dt (spyice.parameters.user\_input.UserInput attribute)@\spxentry{grid\_timestep\_dt}\spxextra{spyice.parameters.user\_input.UserInput attribute}|hyperpage}{38}
+\indexentry{initial\_liquid\_fraction (spyice.parameters.user\_input.UserInput attribute)@\spxentry{initial\_liquid\_fraction}\spxextra{spyice.parameters.user\_input.UserInput attribute}|hyperpage}{38}
+\indexentry{initial\_salinity (spyice.parameters.user\_input.UserInput attribute)@\spxentry{initial\_salinity}\spxextra{spyice.parameters.user\_input.UserInput attribute}|hyperpage}{38}
+\indexentry{initial\_temperature (spyice.parameters.user\_input.UserInput attribute)@\spxentry{initial\_temperature}\spxextra{spyice.parameters.user\_input.UserInput attribute}|hyperpage}{38}
+\indexentry{is\_buffo (spyice.parameters.user\_input.UserInput attribute)@\spxentry{is\_buffo}\spxextra{spyice.parameters.user\_input.UserInput attribute}|hyperpage}{38}
+\indexentry{is\_stefan (spyice.parameters.user\_input.UserInput attribute)@\spxentry{is\_stefan}\spxextra{spyice.parameters.user\_input.UserInput attribute}|hyperpage}{38}
+\indexentry{liquid\_fraction\_tolerance (spyice.parameters.user\_input.UserInput attribute)@\spxentry{liquid\_fraction\_tolerance}\spxextra{spyice.parameters.user\_input.UserInput attribute}|hyperpage}{38}
+\indexentry{liquidus\_relation\_type (spyice.parameters.user\_input.UserInput attribute)@\spxentry{liquidus\_relation\_type}\spxextra{spyice.parameters.user\_input.UserInput attribute}|hyperpage}{38}
+\indexentry{max\_iterations (spyice.parameters.user\_input.UserInput attribute)@\spxentry{max\_iterations}\spxextra{spyice.parameters.user\_input.UserInput attribute}|hyperpage}{38}
+\indexentry{output\_suffix (spyice.parameters.user\_input.UserInput attribute)@\spxentry{output\_suffix}\spxextra{spyice.parameters.user\_input.UserInput attribute}|hyperpage}{38}
+\indexentry{phase\_type (spyice.parameters.user\_input.UserInput attribute)@\spxentry{phase\_type}\spxextra{spyice.parameters.user\_input.UserInput attribute}|hyperpage}{38}
+\indexentry{salinity\_tolerance (spyice.parameters.user\_input.UserInput attribute)@\spxentry{salinity\_tolerance}\spxextra{spyice.parameters.user\_input.UserInput attribute}|hyperpage}{38}
+\indexentry{temperature\_melt (spyice.parameters.user\_input.UserInput attribute)@\spxentry{temperature\_melt}\spxextra{spyice.parameters.user\_input.UserInput attribute}|hyperpage}{38}
+\indexentry{temperature\_tolerance (spyice.parameters.user\_input.UserInput attribute)@\spxentry{temperature\_tolerance}\spxextra{spyice.parameters.user\_input.UserInput attribute}|hyperpage}{38}
+\indexentry{temperature\_top\_type (spyice.parameters.user\_input.UserInput attribute)@\spxentry{temperature\_top\_type}\spxextra{spyice.parameters.user\_input.UserInput attribute}|hyperpage}{38}
+\indexentry{fourier\_number\_timestep() (in module spyice.parameters.user\_input)@\spxentry{fourier\_number\_timestep()}\spxextra{in module spyice.parameters.user\_input}|hyperpage}{38}
+\indexentry{module@\spxentry{module}!spyice.parameters@\spxentry{spyice.parameters}|hyperpage}{39}
+\indexentry{spyice.parameters@\spxentry{spyice.parameters}!module@\spxentry{module}|hyperpage}{39}
+\indexentry{module@\spxentry{module}!spyice.postprocess.analysis@\spxentry{spyice.postprocess.analysis}|hyperpage}{39}
+\indexentry{spyice.postprocess.analysis@\spxentry{spyice.postprocess.analysis}!module@\spxentry{module}|hyperpage}{39}
+\indexentry{Analysis (class in spyice.postprocess.analysis)@\spxentry{Analysis}\spxextra{class in spyice.postprocess.analysis}|hyperpage}{39}
+\indexentry{\_\_init\_\_() (spyice.postprocess.analysis.Analysis method)@\spxentry{\_\_init\_\_()}\spxextra{spyice.postprocess.analysis.Analysis method}|hyperpage}{39}
+\indexentry{calculate\_errors() (spyice.postprocess.analysis.Analysis method)@\spxentry{calculate\_errors()}\spxextra{spyice.postprocess.analysis.Analysis method}|hyperpage}{39}
+\indexentry{error\_analytical\_numerical() (spyice.postprocess.analysis.Analysis method)@\spxentry{error\_analytical\_numerical()}\spxextra{spyice.postprocess.analysis.Analysis method}|hyperpage}{39}
+\indexentry{get\_error\_results() (spyice.postprocess.analysis.Analysis class method)@\spxentry{get\_error\_results()}\spxextra{spyice.postprocess.analysis.Analysis class method}|hyperpage}{40}
+\indexentry{set\_analysis() (spyice.postprocess.analysis.Analysis method)@\spxentry{set\_analysis()}\spxextra{spyice.postprocess.analysis.Analysis method}|hyperpage}{40}
+\indexentry{set\_dataclass() (spyice.postprocess.analysis.Analysis static method)@\spxentry{set\_dataclass()}\spxextra{spyice.postprocess.analysis.Analysis static method}|hyperpage}{41}
+\indexentry{store\_field\_errors() (spyice.postprocess.analysis.Analysis method)@\spxentry{store\_field\_errors()}\spxextra{spyice.postprocess.analysis.Analysis method}|hyperpage}{41}
+\indexentry{AnalysisData (class in spyice.postprocess.analysis)@\spxentry{AnalysisData}\spxextra{class in spyice.postprocess.analysis}|hyperpage}{41}
+\indexentry{\_\_init\_\_() (spyice.postprocess.analysis.AnalysisData method)@\spxentry{\_\_init\_\_()}\spxextra{spyice.postprocess.analysis.AnalysisData method}|hyperpage}{42}
+\indexentry{all\_variables (spyice.postprocess.analysis.AnalysisData attribute)@\spxentry{all\_variables}\spxextra{spyice.postprocess.analysis.AnalysisData attribute}|hyperpage}{42}
+\indexentry{module@\spxentry{module}!spyice.postprocess.visualise\_model@\spxentry{spyice.postprocess.visualise\_model}|hyperpage}{42}
+\indexentry{spyice.postprocess.visualise\_model@\spxentry{spyice.postprocess.visualise\_model}!module@\spxentry{module}|hyperpage}{42}
+\indexentry{VisualiseModel (class in spyice.postprocess.visualise\_model)@\spxentry{VisualiseModel}\spxextra{class in spyice.postprocess.visualise\_model}|hyperpage}{42}
+\indexentry{\_\_init\_\_() (spyice.postprocess.visualise\_model.VisualiseModel method)@\spxentry{\_\_init\_\_()}\spxextra{spyice.postprocess.visualise\_model.VisualiseModel method}|hyperpage}{42}
+\indexentry{phi\_slope() (spyice.postprocess.visualise\_model.VisualiseModel method)@\spxentry{phi\_slope()}\spxextra{spyice.postprocess.visualise\_model.VisualiseModel method}|hyperpage}{42}
+\indexentry{plot\_depth\_over\_time() (spyice.postprocess.visualise\_model.VisualiseModel method)@\spxentry{plot\_depth\_over\_time()}\spxextra{spyice.postprocess.visualise\_model.VisualiseModel method}|hyperpage}{42}
+\indexentry{plot\_error\_temp() (spyice.postprocess.visualise\_model.VisualiseModel method)@\spxentry{plot\_error\_temp()}\spxextra{spyice.postprocess.visualise\_model.VisualiseModel method}|hyperpage}{43}
+\indexentry{plot\_error\_temp\_diff() (spyice.postprocess.visualise\_model.VisualiseModel method)@\spxentry{plot\_error\_temp\_diff()}\spxextra{spyice.postprocess.visualise\_model.VisualiseModel method}|hyperpage}{43}
+\indexentry{plot\_temperature() (spyice.postprocess.visualise\_model.VisualiseModel method)@\spxentry{plot\_temperature()}\spxextra{spyice.postprocess.visualise\_model.VisualiseModel method}|hyperpage}{43}
+\indexentry{module@\spxentry{module}!spyice.postprocess@\spxentry{spyice.postprocess}|hyperpage}{43}
+\indexentry{spyice.postprocess@\spxentry{spyice.postprocess}!module@\spxentry{module}|hyperpage}{43}
+\indexentry{module@\spxentry{module}!spyice.preprocess.geometry\_settings@\spxentry{spyice.preprocess.geometry\_settings}|hyperpage}{43}
+\indexentry{spyice.preprocess.geometry\_settings@\spxentry{spyice.preprocess.geometry\_settings}!module@\spxentry{module}|hyperpage}{43}
+\indexentry{GeometrySettings (class in spyice.preprocess.geometry\_settings)@\spxentry{GeometrySettings}\spxextra{class in spyice.preprocess.geometry\_settings}|hyperpage}{43}
+\indexentry{\_\_init\_\_() (spyice.preprocess.geometry\_settings.GeometrySettings method)@\spxentry{\_\_init\_\_()}\spxextra{spyice.preprocess.geometry\_settings.GeometrySettings method}|hyperpage}{44}
+\indexentry{module@\spxentry{module}!spyice.preprocess.initial\_boundary\_conditions@\spxentry{spyice.preprocess.initial\_boundary\_conditions}|hyperpage}{44}
+\indexentry{spyice.preprocess.initial\_boundary\_conditions@\spxentry{spyice.preprocess.initial\_boundary\_conditions}!module@\spxentry{module}|hyperpage}{44}
+\indexentry{SalinityUnavailableError@\spxentry{SalinityUnavailableError}|hyperpage}{44}
+\indexentry{boundary\_condition() (in module spyice.preprocess.initial\_boundary\_conditions)@\spxentry{boundary\_condition()}\spxextra{in module spyice.preprocess.initial\_boundary\_conditions}|hyperpage}{44}
+\indexentry{calculate\_boundary\_salinity() (in module spyice.preprocess.initial\_boundary\_conditions)@\spxentry{calculate\_boundary\_salinity()}\spxextra{in module spyice.preprocess.initial\_boundary\_conditions}|hyperpage}{44}
+\indexentry{calculate\_boundary\_temperature() (in module spyice.preprocess.initial\_boundary\_conditions)@\spxentry{calculate\_boundary\_temperature()}\spxextra{in module spyice.preprocess.initial\_boundary\_conditions}|hyperpage}{45}
+\indexentry{compute\_melting\_temperature\_from\_salinity() (in module spyice.preprocess.initial\_boundary\_conditions)@\spxentry{compute\_melting\_temperature\_from\_salinity()}\spxextra{in module spyice.preprocess.initial\_boundary\_conditions}|hyperpage}{45}
+\indexentry{raise\_salinity\_exception() (in module spyice.preprocess.initial\_boundary\_conditions)@\spxentry{raise\_salinity\_exception()}\spxextra{in module spyice.preprocess.initial\_boundary\_conditions}|hyperpage}{45}
+\indexentry{set\_boundary\_temperature() (in module spyice.preprocess.initial\_boundary\_conditions)@\spxentry{set\_boundary\_temperature()}\spxextra{in module spyice.preprocess.initial\_boundary\_conditions}|hyperpage}{45}
+\indexentry{set\_inital\_salinity() (in module spyice.preprocess.initial\_boundary\_conditions)@\spxentry{set\_inital\_salinity()}\spxextra{in module spyice.preprocess.initial\_boundary\_conditions}|hyperpage}{46}
+\indexentry{set\_inital\_temperature() (in module spyice.preprocess.initial\_boundary\_conditions)@\spxentry{set\_inital\_temperature()}\spxextra{in module spyice.preprocess.initial\_boundary\_conditions}|hyperpage}{46}
+\indexentry{set\_initial\_conditions() (in module spyice.preprocess.initial\_boundary\_conditions)@\spxentry{set\_initial\_conditions()}\spxextra{in module spyice.preprocess.initial\_boundary\_conditions}|hyperpage}{46}
+\indexentry{set\_initial\_liquidfraction() (in module spyice.preprocess.initial\_boundary\_conditions)@\spxentry{set\_initial\_liquidfraction()}\spxextra{in module spyice.preprocess.initial\_boundary\_conditions}|hyperpage}{47}
+\indexentry{t\_w3() (in module spyice.preprocess.initial\_boundary\_conditions)@\spxentry{t\_w3()}\spxextra{in module spyice.preprocess.initial\_boundary\_conditions}|hyperpage}{48}
+\indexentry{temperature\_gradient() (in module spyice.preprocess.initial\_boundary\_conditions)@\spxentry{temperature\_gradient()}\spxextra{in module spyice.preprocess.initial\_boundary\_conditions}|hyperpage}{48}
+\indexentry{module@\spxentry{module}!spyice.preprocess.modify\_initial\_boundary@\spxentry{spyice.preprocess.modify\_initial\_boundary}|hyperpage}{48}
+\indexentry{spyice.preprocess.modify\_initial\_boundary@\spxentry{spyice.preprocess.modify\_initial\_boundary}!module@\spxentry{module}|hyperpage}{48}
+\indexentry{ModifyInitialBoundary (class in spyice.preprocess.modify\_initial\_boundary)@\spxentry{ModifyInitialBoundary}\spxextra{class in spyice.preprocess.modify\_initial\_boundary}|hyperpage}{48}
+\indexentry{\_\_init\_\_() (spyice.preprocess.modify\_initial\_boundary.ModifyInitialBoundary method)@\spxentry{\_\_init\_\_()}\spxextra{spyice.preprocess.modify\_initial\_boundary.ModifyInitialBoundary method}|hyperpage}{48}
+\indexentry{bc\_neumann() (spyice.preprocess.modify\_initial\_boundary.ModifyInitialBoundary method)@\spxentry{bc\_neumann()}\spxextra{spyice.preprocess.modify\_initial\_boundary.ModifyInitialBoundary method}|hyperpage}{48}
+\indexentry{set\_boundary\_condition\_type() (spyice.preprocess.modify\_initial\_boundary.ModifyInitialBoundary method)@\spxentry{set\_boundary\_condition\_type()}\spxextra{spyice.preprocess.modify\_initial\_boundary.ModifyInitialBoundary method}|hyperpage}{49}
+\indexentry{module@\spxentry{module}!spyice.preprocess.pre\_process@\spxentry{spyice.preprocess.pre\_process}|hyperpage}{49}
+\indexentry{spyice.preprocess.pre\_process@\spxentry{spyice.preprocess.pre\_process}!module@\spxentry{module}|hyperpage}{49}
+\indexentry{PreProcess (class in spyice.preprocess.pre\_process)@\spxentry{PreProcess}\spxextra{class in spyice.preprocess.pre\_process}|hyperpage}{49}
+\indexentry{\_\_init\_\_() (spyice.preprocess.pre\_process.PreProcess method)@\spxentry{\_\_init\_\_()}\spxextra{spyice.preprocess.pre\_process.PreProcess method}|hyperpage}{49}
+\indexentry{get\_userinput() (spyice.preprocess.pre\_process.PreProcess method)@\spxentry{get\_userinput()}\spxextra{spyice.preprocess.pre\_process.PreProcess method}|hyperpage}{49}
+\indexentry{get\_variables() (spyice.preprocess.pre\_process.PreProcess class method)@\spxentry{get\_variables()}\spxextra{spyice.preprocess.pre\_process.PreProcess class method}|hyperpage}{50}
+\indexentry{preprocess() (spyice.preprocess.pre\_process.PreProcess method)@\spxentry{preprocess()}\spxextra{spyice.preprocess.pre\_process.PreProcess method}|hyperpage}{50}
+\indexentry{set\_dataclass() (spyice.preprocess.pre\_process.PreProcess static method)@\spxentry{set\_dataclass()}\spxextra{spyice.preprocess.pre\_process.PreProcess static method}|hyperpage}{50}
+\indexentry{set\_preprocess() (spyice.preprocess.pre\_process.PreProcess method)@\spxentry{set\_preprocess()}\spxextra{spyice.preprocess.pre\_process.PreProcess method}|hyperpage}{50}
+\indexentry{PreprocessData (class in spyice.preprocess.pre\_process)@\spxentry{PreprocessData}\spxextra{class in spyice.preprocess.pre\_process}|hyperpage}{50}
+\indexentry{\_\_init\_\_() (spyice.preprocess.pre\_process.PreprocessData method)@\spxentry{\_\_init\_\_()}\spxextra{spyice.preprocess.pre\_process.PreprocessData method}|hyperpage}{50}
+\indexentry{is\_preprocessing (spyice.preprocess.pre\_process.PreprocessData attribute)@\spxentry{is\_preprocessing}\spxextra{spyice.preprocess.pre\_process.PreprocessData attribute}|hyperpage}{51}
+\indexentry{set\_up\_iter() (in module spyice.preprocess.pre\_process)@\spxentry{set\_up\_iter()}\spxextra{in module spyice.preprocess.pre\_process}|hyperpage}{51}
+\indexentry{module@\spxentry{module}!spyice.preprocess@\spxentry{spyice.preprocess}|hyperpage}{51}
+\indexentry{spyice.preprocess@\spxentry{spyice.preprocess}!module@\spxentry{module}|hyperpage}{51}
+\indexentry{module@\spxentry{module}!spyice.utils.config\_sort@\spxentry{spyice.utils.config\_sort}|hyperpage}{51}
+\indexentry{spyice.utils.config\_sort@\spxentry{spyice.utils.config\_sort}!module@\spxentry{module}|hyperpage}{51}
+\indexentry{ConfigData (class in spyice.utils.config\_sort)@\spxentry{ConfigData}\spxextra{class in spyice.utils.config\_sort}|hyperpage}{51}
+\indexentry{\_\_init\_\_() (spyice.utils.config\_sort.ConfigData method)@\spxentry{\_\_init\_\_()}\spxextra{spyice.utils.config\_sort.ConfigData method}|hyperpage}{51}
+\indexentry{setup (spyice.utils.config\_sort.ConfigData attribute)@\spxentry{setup}\spxextra{spyice.utils.config\_sort.ConfigData attribute}|hyperpage}{51}
+\indexentry{ConfigSort (class in spyice.utils.config\_sort)@\spxentry{ConfigSort}\spxextra{class in spyice.utils.config\_sort}|hyperpage}{51}
+\indexentry{get\_ownconfig\_params() (spyice.utils.config\_sort.ConfigSort method)@\spxentry{get\_ownconfig\_params()}\spxextra{spyice.utils.config\_sort.ConfigSort method}|hyperpage}{51}
+\indexentry{getconfig\_dataclass() (spyice.utils.config\_sort.ConfigSort method)@\spxentry{getconfig\_dataclass()}\spxextra{spyice.utils.config\_sort.ConfigSort method}|hyperpage}{51}
+\indexentry{\_\_init\_\_() (spyice.utils.config\_sort.ConfigSort method)@\spxentry{\_\_init\_\_()}\spxextra{spyice.utils.config\_sort.ConfigSort method}|hyperpage}{52}
+\indexentry{get\_ownconfig\_params() (spyice.utils.config\_sort.ConfigSort method)@\spxentry{get\_ownconfig\_params()}\spxextra{spyice.utils.config\_sort.ConfigSort method}|hyperpage}{52}
+\indexentry{getconfig\_dataclass() (spyice.utils.config\_sort.ConfigSort method)@\spxentry{getconfig\_dataclass()}\spxextra{spyice.utils.config\_sort.ConfigSort method}|hyperpage}{52}
+\indexentry{get\_config\_params() (spyice.utils.config\_sort.ConfigSort method)@\spxentry{get\_config\_params()}\spxextra{spyice.utils.config\_sort.ConfigSort method}|hyperpage}{52}
+\indexentry{get\_ownconfig\_params() (spyice.utils.config\_sort.ConfigSort method)@\spxentry{get\_ownconfig\_params()}\spxextra{spyice.utils.config\_sort.ConfigSort method}|hyperpage}{52}
+\indexentry{getconfig\_dataclass() (spyice.utils.config\_sort.ConfigSort class method)@\spxentry{getconfig\_dataclass()}\spxextra{spyice.utils.config\_sort.ConfigSort class method}|hyperpage}{52}
+\indexentry{module@\spxentry{module}!spyice.utils.error\_norms@\spxentry{spyice.utils.error\_norms}|hyperpage}{53}
+\indexentry{spyice.utils.error\_norms@\spxentry{spyice.utils.error\_norms}!module@\spxentry{module}|hyperpage}{53}
+\indexentry{ErrorNorms (class in spyice.utils.error\_norms)@\spxentry{ErrorNorms}\spxextra{class in spyice.utils.error\_norms}|hyperpage}{53}
+\indexentry{\_\_init\_\_() (spyice.utils.error\_norms.ErrorNorms method)@\spxentry{\_\_init\_\_()}\spxextra{spyice.utils.error\_norms.ErrorNorms method}|hyperpage}{53}
+\indexentry{infinity\_norm() (spyice.utils.error\_norms.ErrorNorms method)@\spxentry{infinity\_norm()}\spxextra{spyice.utils.error\_norms.ErrorNorms method}|hyperpage}{53}
+\indexentry{numerical\_analytical\_diff() (spyice.utils.error\_norms.ErrorNorms method)@\spxentry{numerical\_analytical\_diff()}\spxextra{spyice.utils.error\_norms.ErrorNorms method}|hyperpage}{54}
+\indexentry{one\_norm() (spyice.utils.error\_norms.ErrorNorms method)@\spxentry{one\_norm()}\spxextra{spyice.utils.error\_norms.ErrorNorms method}|hyperpage}{54}
+\indexentry{two\_norm() (spyice.utils.error\_norms.ErrorNorms method)@\spxentry{two\_norm()}\spxextra{spyice.utils.error\_norms.ErrorNorms method}|hyperpage}{54}
+\indexentry{module@\spxentry{module}!spyice.utils.helpers@\spxentry{spyice.utils.helpers}|hyperpage}{54}
+\indexentry{spyice.utils.helpers@\spxentry{spyice.utils.helpers}!module@\spxentry{module}|hyperpage}{54}
+\indexentry{set\_dataclass() (in module spyice.utils.helpers)@\spxentry{set\_dataclass()}\spxextra{in module spyice.utils.helpers}|hyperpage}{54}
+\indexentry{t\_total() (in module spyice.utils.helpers)@\spxentry{t\_total()}\spxextra{in module spyice.utils.helpers}|hyperpage}{55}
+\indexentry{module@\spxentry{module}!spyice.utils.spyice\_exceptions@\spxentry{spyice.utils.spyice\_exceptions}|hyperpage}{55}
+\indexentry{spyice.utils.spyice\_exceptions@\spxentry{spyice.utils.spyice\_exceptions}!module@\spxentry{module}|hyperpage}{55}
+\indexentry{ConvergenceError@\spxentry{ConvergenceError}|hyperpage}{55}
+\indexentry{\_\_init\_\_() (spyice.utils.spyice\_exceptions.ConvergenceError method)@\spxentry{\_\_init\_\_()}\spxextra{spyice.utils.spyice\_exceptions.ConvergenceError method}|hyperpage}{55}
+\indexentry{InvalidPhaseError@\spxentry{InvalidPhaseError}|hyperpage}{55}
+\indexentry{module@\spxentry{module}!spyice.utils.spyice\_logger@\spxentry{spyice.utils.spyice\_logger}|hyperpage}{55}
+\indexentry{spyice.utils.spyice\_logger@\spxentry{spyice.utils.spyice\_logger}!module@\spxentry{module}|hyperpage}{55}
+\indexentry{SpyiceLogger (class in spyice.utils.spyice\_logger)@\spxentry{SpyiceLogger}\spxextra{class in spyice.utils.spyice\_logger}|hyperpage}{55}
+\indexentry{\_\_init\_\_() (spyice.utils.spyice\_logger.SpyiceLogger method)@\spxentry{\_\_init\_\_()}\spxextra{spyice.utils.spyice\_logger.SpyiceLogger method}|hyperpage}{55}
+\indexentry{flush() (spyice.utils.spyice\_logger.SpyiceLogger method)@\spxentry{flush()}\spxextra{spyice.utils.spyice\_logger.SpyiceLogger method}|hyperpage}{55}
+\indexentry{write() (spyice.utils.spyice\_logger.SpyiceLogger method)@\spxentry{write()}\spxextra{spyice.utils.spyice\_logger.SpyiceLogger method}|hyperpage}{56}
+\indexentry{module@\spxentry{module}!spyice.utils@\spxentry{spyice.utils}|hyperpage}{56}
+\indexentry{spyice.utils@\spxentry{spyice.utils}!module@\spxentry{module}|hyperpage}{56}
+\indexentry{module@\spxentry{module}!spyice.coefficients@\spxentry{spyice.coefficients}|hyperpage}{56}
+\indexentry{spyice.coefficients@\spxentry{spyice.coefficients}!module@\spxentry{module}|hyperpage}{56}
+\indexentry{update\_coefficients() (in module spyice.coefficients)@\spxentry{update\_coefficients()}\spxextra{in module spyice.coefficients}|hyperpage}{56}
+\indexentry{module@\spxentry{module}!spyice.main\_process@\spxentry{spyice.main\_process}|hyperpage}{56}
+\indexentry{spyice.main\_process@\spxentry{spyice.main\_process}!module@\spxentry{module}|hyperpage}{56}
+\indexentry{MainProcess (class in spyice.main\_process)@\spxentry{MainProcess}\spxextra{class in spyice.main\_process}|hyperpage}{56}
+\indexentry{\_\_init\_\_() (spyice.main\_process.MainProcess method)@\spxentry{\_\_init\_\_()}\spxextra{spyice.main\_process.MainProcess method}|hyperpage}{57}
+\indexentry{plot\_model() (spyice.main\_process.MainProcess method)@\spxentry{plot\_model()}\spxextra{spyice.main\_process.MainProcess method}|hyperpage}{57}
+\indexentry{run\_model() (spyice.main\_process.MainProcess method)@\spxentry{run\_model()}\spxextra{spyice.main\_process.MainProcess method}|hyperpage}{57}
+\indexentry{create\_output\_directory() (in module spyice.main\_process)@\spxentry{create\_output\_directory()}\spxextra{in module spyice.main\_process}|hyperpage}{57}
+\indexentry{module@\spxentry{module}!spyice.rhs@\spxentry{spyice.rhs}|hyperpage}{58}
+\indexentry{spyice.rhs@\spxentry{spyice.rhs}!module@\spxentry{module}|hyperpage}{58}
+\indexentry{apply\_boundary\_condition() (in module spyice.rhs)@\spxentry{apply\_boundary\_condition()}\spxextra{in module spyice.rhs}|hyperpage}{58}
+\indexentry{correct\_for\_brine\_movement() (in module spyice.rhs)@\spxentry{correct\_for\_brine\_movement()}\spxextra{in module spyice.rhs}|hyperpage}{58}
+\indexentry{module@\spxentry{module}!spyice.statevariables@\spxentry{spyice.statevariables}|hyperpage}{59}
+\indexentry{spyice.statevariables@\spxentry{spyice.statevariables}!module@\spxentry{module}|hyperpage}{59}
+\indexentry{compute\_error\_for\_convergence() (in module spyice.statevariables)@\spxentry{compute\_error\_for\_convergence()}\spxextra{in module spyice.statevariables}|hyperpage}{59}
+\indexentry{define\_previous\_statevariable() (in module spyice.statevariables)@\spxentry{define\_previous\_statevariable()}\spxextra{in module spyice.statevariables}|hyperpage}{60}
+\indexentry{initialize\_statevariables() (in module spyice.statevariables)@\spxentry{initialize\_statevariables()}\spxextra{in module spyice.statevariables}|hyperpage}{60}
+\indexentry{overwrite\_statevariables() (in module spyice.statevariables)@\spxentry{overwrite\_statevariables()}\spxextra{in module spyice.statevariables}|hyperpage}{61}
+\indexentry{reset\_error\_for\_while\_loop() (in module spyice.statevariables)@\spxentry{reset\_error\_for\_while\_loop()}\spxextra{in module spyice.statevariables}|hyperpage}{61}
+\indexentry{set\_statevariables() (in module spyice.statevariables)@\spxentry{set\_statevariables()}\spxextra{in module spyice.statevariables}|hyperpage}{61}
+\indexentry{module@\spxentry{module}!spyice.update\_physical\_values@\spxentry{spyice.update\_physical\_values}|hyperpage}{62}
+\indexentry{spyice.update\_physical\_values@\spxentry{spyice.update\_physical\_values}!module@\spxentry{module}|hyperpage}{62}
+\indexentry{H\_function() (in module spyice.update\_physical\_values)@\spxentry{H\_function()}\spxextra{in module spyice.update\_physical\_values}|hyperpage}{62}
+\indexentry{H\_function\_derivate() (in module spyice.update\_physical\_values)@\spxentry{H\_function\_derivate()}\spxextra{in module spyice.update\_physical\_values}|hyperpage}{62}
+\indexentry{H\_newton\_iteration() (in module spyice.update\_physical\_values)@\spxentry{H\_newton\_iteration()}\spxextra{in module spyice.update\_physical\_values}|hyperpage}{62}
+\indexentry{calculate\_melting\_temperature\_from\_salinity() (in module spyice.update\_physical\_values)@\spxentry{calculate\_melting\_temperature\_from\_salinity()}\spxextra{in module spyice.update\_physical\_values}|hyperpage}{62}
+\indexentry{phi\_control\_for\_infinite\_values() (in module spyice.update\_physical\_values)@\spxentry{phi\_control\_for\_infinite\_values()}\spxextra{in module spyice.update\_physical\_values}|hyperpage}{63}
+\indexentry{phi\_func() (in module spyice.update\_physical\_values)@\spxentry{phi\_func()}\spxextra{in module spyice.update\_physical\_values}|hyperpage}{63}
+\indexentry{update\_enthalpy() (in module spyice.update\_physical\_values)@\spxentry{update\_enthalpy()}\spxextra{in module spyice.update\_physical\_values}|hyperpage}{63}
+\indexentry{update\_enthalpy\_solid\_state() (in module spyice.update\_physical\_values)@\spxentry{update\_enthalpy\_solid\_state()}\spxextra{in module spyice.update\_physical\_values}|hyperpage}{64}
+\indexentry{update\_liquid\_fraction() (in module spyice.update\_physical\_values)@\spxentry{update\_liquid\_fraction()}\spxextra{in module spyice.update\_physical\_values}|hyperpage}{64}
+\indexentry{module@\spxentry{module}!spyice@\spxentry{spyice}|hyperpage}{65}
+\indexentry{spyice@\spxentry{spyice}!module@\spxentry{module}|hyperpage}{65}
