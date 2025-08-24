@@ -14,7 +14,7 @@ pgf.preamble: \usepackage{lmodern} \usepackage[utf8]{inputenc} \usepackage[T1]{f
 axes.prop_cycle: (cycler('color', ['k', 'b', 'g','r' ]) + cycler('ls', ['-', '--', ':', '-.'])) # Set color and style cycle
 
 # Typography
-font.size: 18 # General font size
+font.size: 22 # General font size
 text.usetex: True
 font.family: sans-serif # Font type
 # font.sans-serif: Computer Modern Sans Serif # Sans-serif font
@@ -49,13 +49,13 @@ legend.fancybox: False
 
 
 # Title
-figure.titlesize: 18
+figure.titlesize: 22
 figure.titleweight: bold
-axes.titlesize: 18 # Title font size
+axes.titlesize: 22 # Title font size
 axes.titleweight: normal # Title font weight
 
 # Axes
-axes.labelsize: 18 # x and y labels font size
+axes.labelsize: 22 # x and y labels font size
 axes.labelweight: normal # x and y labels font weight
 axes.grid: True
 grid.linestyle: :
@@ -63,8 +63,8 @@ grid.alpha: 0.4
 
 
 # Ticks
-xtick.labelsize: 18 # x ticks font size
-ytick.labelsize: 9=18 # y ticks font size
+xtick.labelsize: 22 # x ticks font size
+ytick.labelsize: 22 # y ticks font size
 xtick.major.size: 3
 ytick.major.size: 3
 xtick.minor.size: 1.5

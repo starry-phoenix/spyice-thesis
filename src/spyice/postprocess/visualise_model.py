@@ -290,7 +290,7 @@ class VisualiseModel:
         depth = self.results_object.depth_stefan_all[len(x_axis_iter) - 1]
         index = int(depth / self.ui_object.grid_resolution_dz)
         heatmap_data = self.results_object.phi_k_list[:, :index]
-        fig, ax = plt.subplots()
+        fig, ax = plt.subplots(figsize=(10,6))
         cax = ax.imshow(
             heatmap_data.T,
             cmap="Blues",
@@ -305,7 +305,7 @@ class VisualiseModel:
         )
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
-        fig.colorbar(cax, ax=ax, label="Thickness [m]")
+        fig.colorbar(cax, ax=ax, label=r"Thickness [$m$]")
         # mush_list_y2 = [depth_mush[self.phi_slope(i)[-1]] for i in x_axis_iter]
         ax1 = ax.twinx()
         ax1.plot(
@@ -332,7 +332,6 @@ class VisualiseModel:
             0.0,
         )
         ax1.set_yticks([])
-        ax1.set_title(r"Numerical Depth Vs Analytical Depth")
         # ax1.set_yscale("log")
 
         if savefig:
