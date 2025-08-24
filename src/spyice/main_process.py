@@ -92,7 +92,7 @@ class MainProcess:
         # #     z_depth=0.1, savefig=True, Buffo_matlab=False
         # # )
         # model_visualization_object.plot_H_iter_all(savefig=True)
-        model_visualization_object.plot_temperature_heatmap(savefig=True)
+        model_visualization_object.plot_temperature_heatmap(savefig=True, export_csv=True)
         model_visualization_object.plot_salinity_heatmap(savefig=True)
         model_visualization_object.plot_liquidfraction_heatmap(savefig=True)
         # model_visualization_object.plot_temperature_liquid_solid_evolution(

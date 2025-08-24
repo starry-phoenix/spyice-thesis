@@ -262,7 +262,7 @@ class UserInput:
 
         if isinstance(self.constants, RealConstants):
             self.boundary_salinity = 34.0
-            self.boundary_top_temperature = 260.0
+            self.boundary_top_temperature = 265.0
 
             # melt temperature affects the liquid relation: Frezchem or Normal in src/update_physical_values.py script
             method = InitialMeltTemperature.ONEPHASE.value

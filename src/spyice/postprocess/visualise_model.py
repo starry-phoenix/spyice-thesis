@@ -450,7 +450,7 @@ class VisualiseModel:
             + ".csv"
         )
 
-    def plot_temperature_heatmap(self, savefig: bool = True):
+    def plot_temperature_heatmap(self, savefig: bool = True, export_csv=False):
         """Plots the temperature heatmap."""
 
         print("Plotting Temperature heatmap...")
@@ -490,6 +490,12 @@ class VisualiseModel:
             fig.savefig(
                 self.ui_object.dir_output_name + "/Temperature_heatmap.pdf",
                 backend="pgf",
+            )
+        if export_csv:
+            df_heatmap = pd.DataFrame(heatmap_data)
+            df_heatmap.to_csv(
+                self.ui_object.dir_output_name + "/Temperature.csv",
+                index=False,
             )
         plt.close(fig)
 
