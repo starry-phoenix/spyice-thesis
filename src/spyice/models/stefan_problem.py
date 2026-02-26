@@ -8,7 +8,7 @@ import numpy as np
 import scipy.optimize as opt
 from scipy.special import erfc
 
-from src.spyice.parameters.user_input import UserInput
+from spyice.parameters.user_input import UserInput
 
 ui = UserInput()
 

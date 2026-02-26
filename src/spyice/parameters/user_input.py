@@ -4,13 +4,13 @@ from dataclasses import dataclass, field
 from enum import Enum
 
 from omegaconf import DictConfig
-from src.spyice.parameters.constants import Constants
-from src.spyice.parameters.real_constants import RealConstants
-from src.spyice.parameters.debug_constants import DebugConstants
-from src.spyice.parameters.algae_constants import nutrient_cn_dsi_ice, nutrient_cn_dsi_water, carbon_cc_ice_initial, carbon_cc_water_initial
-from src.spyice.utils.config_sort import read_omegaconfig
-from src.spyice.utils.create_directory import create_output_directory
-from src.spyice.utils.initial_userinput import (
+from .constants import Constants
+from .real_constants import RealConstants
+from .debug_constants import DebugConstants
+from .algae_constants import nutrient_cn_dsi_ice, nutrient_cn_dsi_water, carbon_cc_ice_initial, carbon_cc_water_initial
+from spyice.utils.config_sort import read_omegaconfig
+from spyice.utils.create_directory import create_output_directory
+from spyice.utils.initial_userinput import (
     calculate_initial_melt_temperature,)
 
 # TODO: Add docstrings to the functions and classes
@@ -206,10 +206,12 @@ class UserInput:
     is_stefan: bool = True
     is_buffo: bool = True
     is_voller: bool = False
-    is_salinity_equation: bool = False
-    is_diffusiononly_equation: bool = True
-    is_algae_equation: bool = False
-    is_radiation_equation: bool = False
+    
+    is_salinity_equation: bool = True
+    is_diffusiononly_equation: bool = False
+    is_algae_equation: bool = True
+    is_radiation_equation: bool = True
+    algae_model_BAL_type: str = "all"   # or "all" or "single"
 
     # --- Iteration and Limits ---
     max_iterations: int = 25000
@@ -217,7 +219,7 @@ class UserInput:
 
     # --- Grid and Time Step ---
     grid_resolution_dz: float = 0.01
-    grid_timestep_dt: float = 47  # in seconds
+    grid_timestep_dt: float = 100  # in seconds
 
     # --- Boundary and Geometry ---
     boundary_condition_type: BoundaryConditionType = BoundaryConditionType.DIRICHLET.value

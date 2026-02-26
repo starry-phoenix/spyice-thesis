@@ -4,8 +4,8 @@ import sys
 import hydra
 from omegaconf import DictConfig
 
-from src.spyice.main_process import MainProcess
-from src.spyice.utils.spyice_logger import SpyiceLogger
+from spyice.main_process import MainProcess
+from spyice.utils.spyice_logger import SpyiceLogger
 
 """
 This script is used to configure and run a main process for SeaIce application.

@@ -265,7 +265,11 @@ def photosynthetic_rate(max_mu, fs, ft, ln, lpar):
     Returns:
     - float: Photosynthetic rate at the given depth in ice.
     """
-    return max_mu * fs * ft * ln * lpar
+    # mu_nutrient = max_mu * ln
+    # mu_salinity = max_mu * fs * ft * ln
+    # mu_nutrient_par = max_mu * ln * lpar
+    mu_all = max_mu * fs * ft * ln * lpar
+    return mu_all
 
 
 # f_s * f_t function

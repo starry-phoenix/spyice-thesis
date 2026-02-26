@@ -5,29 +5,29 @@ from dataclasses import asdict, dataclass
 import matplotlib.pyplot as plt
 import numpy as np
 
-from src.spyice.models.algae_model import (
+from spyice.models.algae_model import (
     biogeochemical_model,
     biogeochemical_model_at_alldepths,
 )
-from src.spyice.models.radiative_model import (
+from spyice.models.radiative_model import (
     calculate_radiative_terms,
     get_salinity_source_term,
 )
-from src.spyice.models.stefan_problem import StefanProblem
-from src.spyice.parameters.results_params import ResultsParams
-from src.spyice.parameters.user_input import UserInput
-from src.spyice.preprocess.initial_boundary_conditions import temperature_gradient
-from src.spyice.statevariables import (
+from spyice.models.stefan_problem import StefanProblem
+from spyice.parameters.results_params import ResultsParams
+from spyice.parameters.user_input import UserInput
+from spyice.preprocess.initial_boundary_conditions import temperature_gradient
+from spyice.statevariables import (
     compute_error_for_convergence,
     overwrite_statevariables,
     reset_error_for_while_loop,
     set_statevariables,
 )
-from src.spyice.update_physical_values import update_state_variables
-from src.spyice.utils.helpers import export_residuals, t_total
-from src.spyice.utils.spyice_exceptions import ConvergenceError, InvalidPhaseError
+from spyice.update_physical_values import update_state_variables
+from spyice.utils.helpers import export_residuals, t_total
+from spyice.utils.spyice_exceptions import ConvergenceError, InvalidPhaseError
 
-plt.style.use("src.spyice.utils.custom")
+plt.style.use("spyice.utils.custom")
 # plt.rcParams.update(
 #     {
 #         "text.usetex": True,
@@ -1116,7 +1116,7 @@ class SeaIceModel:
                 salinity_equation=self.preprocess_data.is_salinity_equation,
                 algae_equation=self.preprocess_data.is_algae_equation,
                 radiation_equation=self.preprocess_data.is_radiation_equation,
-                algae_model_depth_type="single",
+                algae_model_depth_type=self.preprocess_data.algae_model_BAL_type,
             )
 
             nutrient_cn_km1 = nutrient_cn_k

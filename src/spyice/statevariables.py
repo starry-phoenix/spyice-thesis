@@ -1,6 +1,6 @@
 import numpy as np
 
-from src.spyice.update_physical_values import calculate_melting_temperature_from_salinity
+from spyice.update_physical_values import calculate_melting_temperature_from_salinity
 
 # Function to set state variables
 def set_statevariables(

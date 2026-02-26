@@ -45,7 +45,7 @@ class RealConstants:
 
     ...
 
-    param_const: bool = True
+    param_const: bool = False
 
     phi_ini: int = 1  # FREEZING
     phi_ini_Stefan: int = 1  # FREEZING

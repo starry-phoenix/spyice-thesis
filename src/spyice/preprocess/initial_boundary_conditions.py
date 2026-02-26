@@ -4,7 +4,7 @@ import re
 
 import numpy as np
 
-from src.spyice.parameters.user_input import UserInput
+from spyice.parameters.user_input import UserInput
 
 ui = UserInput()
 (

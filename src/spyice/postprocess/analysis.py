@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 import numpy as np
 from pathlib import Path
-from src.spyice.utils.error_norms import ErrorNorms
+from spyice.utils.error_norms import ErrorNorms
 
 
 @dataclass
@@ -210,8 +210,10 @@ class Analysis:
         temperature_mushy = np.array(temperature_mushy, dtype=object)
         phi_mushy = np.array(phi_mushy, dtype=object)
         salinity_mushy = np.array(salinity_mushy, dtype=object)
-        np.save(output_dir + "/residuals.npy", residuals)
-        np.save(output_dir + "/temperature_mushy.npy", temperature_mushy)
-        np.save(output_dir + "/phi_mushy.npy", phi_mushy)
-        np.save(output_dir + "/salinity_mushy.npy", salinity_mushy)
+        output_dir = Path(output_dir)  # ensure it's a Path
+
+        np.save(output_dir / "residuals.npy", residuals)
+        np.save(output_dir / "temperature_mushy.npy", temperature_mushy)
+        np.save(output_dir / "phi_mushy.npy", phi_mushy)
+        np.save(output_dir / "salinity_mushy.npy", salinity_mushy)
         print("Residuals exported successfully.")

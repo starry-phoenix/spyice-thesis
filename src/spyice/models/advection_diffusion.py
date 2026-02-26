@@ -4,9 +4,9 @@ import warnings
 import numpy as np
 from scipy.sparse import linalg
 
-from src.spyice.parameters.user_input import UserInput as ui
-from src.spyice.coefficients import update_coefficients
-from src.spyice.rhs import apply_boundary_condition, correct_for_brine_movement
+from spyice.parameters.user_input import UserInput as ui
+from spyice.coefficients import update_coefficients
+from spyice.rhs import apply_boundary_condition, correct_for_brine_movement
 
 top_temp = ui.temperature_top_type
 
