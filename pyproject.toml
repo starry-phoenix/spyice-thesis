@@ -92,7 +92,6 @@ packages = ["src/spyice"]
 [tool.hatch.envs.docs.scripts]
   clean    = "make clean --directory=docs"
   html     = "make html --directory=docs"
-  latexpdf = "make latexpdf --directory=docs"
   serve    = "python -m http.server --directory=docs/build/html/"
   build    = "make clean --directory=docs && make html --directory=docs"
   apidoc   = "cd docs && sphinx-apidoc -H SpyIce -E -d 2 --tocfile _index --separate --implicit-namespaces  -o source/api/ ../src/spyice/"
