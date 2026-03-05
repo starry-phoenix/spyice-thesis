@@ -42,11 +42,13 @@
     <script src="../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'report/implementation';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Quickstart" href="../quick_start/_index.html" />
+    <link rel="next" title="Implementation basics" href="implementation.basics.html" />
     <link rel="prev" title="Problem Statement" href="problem_statement.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -146,6 +148,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
       
@@ -239,6 +248,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
           
@@ -269,7 +285,11 @@
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="problem_statement.html">Problem Statement</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Implementation</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Implementation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="implementation.basics.html">Implementation with basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="implementation.main_config.html">Implementation with hydra</a></li>
+</ul>
+</details></li>
 </ul>
 </div>
 </nav></div>
@@ -327,35 +347,18 @@
                   
   <section id="implementation">
 <h1>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h1>
-<p>Hydra configuration tool is used to feed multiple input combinations to the Sea ice model and generate a structured output directory based on the given input combination. For example: all combinations of user defined input values for salinity,
-maximum iterations and time step size are sequentially run using hydra which improves the traceability of simulation along with
-logging files in their respective output directory. The inputs are initialised and processed by the Prepossessing class. Here the
-respective initial and boundary conditions are applied to the user-defined discrete finite difference mesh. The simulation model
-is executed for the given number of maximum iterations which allows to model for a time period of (time step size) * (max iterations). At a given time <span class="math notranslate nohighlight">\($t$\)</span>, the numerical model is solved until it attains a convergence for field parameters temperature, salinity and volumetric liquid fraction whose pseudo code is given below in <span class="xref std std-ref">code_pseudo</span>:</p>
-<div class="literal-block-wrapper docutils container" id="id1">
-<div class="code-block-caption"><span class="caption-text">Python example</span><a class="headerlink" href="#id1" title="Link to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run_model</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Runs the model using the provided configuration and output directory.&quot;&quot;&quot;</span>
-    <span class="c1"># apply boundary and initial conditions during the pre-processing stage and get the pre-processed dataclass</span>
-    <span class="n">preprocess_data</span><span class="p">,</span> <span class="n">userinput_data</span> <span class="o">=</span> <span class="n">PreProcess</span><span class="o">.</span><span class="n">get_variables</span><span class="p">(</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">out_dir_final</span>
-    <span class="p">)</span>
-    <span class="c1"># run the sea ice model and get the results dataclass</span>
-    <span class="n">results_data</span> <span class="o">=</span> <span class="n">SeaIceModelClass</span><span class="o">.</span><span class="n">get_results</span><span class="p">(</span><span class="n">preprocess_data</span><span class="p">,</span> <span class="n">userinput_data</span><span class="p">)</span>
-    <span class="c1"># error analysis of results and get the analysis dataclass</span>
-    <span class="n">analysis_data</span> <span class="o">=</span> <span class="n">Analysis</span><span class="o">.</span><span class="n">get_error_results</span><span class="p">(</span>
-        <span class="n">t_k_diff</span><span class="o">=</span><span class="n">results_data</span><span class="o">.</span><span class="n">t_k_diff</span><span class="p">,</span> <span class="n">t_stefan_diff</span><span class="o">=</span><span class="n">results_data</span><span class="o">.</span><span class="n">t_stefan_diff</span>
-    <span class="p">)</span>
-    <span class="c1"># plot the sea ice model using the user input, results, and analysis dataclasses</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">plot_model</span><span class="p">(</span><span class="n">userinput_data</span><span class="p">,</span> <span class="n">results_data</span><span class="p">,</span> <span class="n">analysis_data</span><span class="p">)</span>
-</pre></div>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="implementation.basics.html">Implementation with basics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="implementation.main_config.html">Implementation with hydra</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="implementation.main_config.html#hydra-configuration-for-jupter-notebook">Hydra configuration for jupter notebook</a></li>
+</ul>
+</li>
+</ul>
 </div>
-</div>
-<p>Once the field values are obtained, an error analysis is performed using
-Analytical class to verify discrepancies between numerical and analytical results. The analytical results are verified with the
-one-phase Stefan problem which keeps one of the two phases constant (liquid phase in this project) while modelling. The
-temperature field can be visualised using the Visualisemodel class where the temperature fields can be compared at different
-spatial nodes points and their nodal time evolution in comparison to the analytical results.</p>
+</section>
 </section>
 
 
@@ -378,11 +381,11 @@ spatial nodes points and their nodal time evolution in comparison to the analyti
       </div>
     </a>
     <a class="right-next"
-       href="../quick_start/_index.html"
+       href="implementation.basics.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Quickstart</p>
+        <p class="prev-next-title">Implementation basics</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -396,6 +399,18 @@ spatial nodes points and their nodal time evolution in comparison to the analyti
                 <dialog id="pst-secondary-sidebar-modal"></dialog>
                 <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
+</ul>
+  </nav></div>
 
   <div class="sidebar-secondary-item">
 

@@ -1,0 +1,835 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" data-theme="auto">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>src.spyice.models.radiative_model &#8212; SpyIce  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "auto";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "auto";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=b6ad3417" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/spyice.models.radiative_model';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="spyice.parameters package" href="spyice.parameters.html" />
+    <link rel="prev" title="src.spyice.models.algae_model" href="spyice.models.algae_model.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.0.0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="auto">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">SpyIce  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../report/_index.html">
+    About
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quick_start/_index.html">
+    How-to
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="_index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../report/_index.html">
+    About
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quick_start/_index.html">
+    How-to
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="_index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="spyice.html">spyice package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="spyice.models.html">spyice.models package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.advection_diffusion.html">src.spyice.models.advection_diffusion</a></li>
+
+
+
+
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.sea_ice_model.html">src.spyice.models.sea_ice_model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.stefan_problem.html">src.spyice.models.stefan_problem</a></li>
+
+
+
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.algae_model.html">src.spyice.models.algae_model</a></li>
+
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">src.spyice.models.radiative_model</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.parameters.html">spyice.parameters package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.constants.html">src.spyice.parameters.constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.debug_constants.html">src.spyice.parameters.debug_constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.real_constants.html">src.spyice.parameters.real_constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.results_params.html">src.spyice.parameters.results_params</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.user_input.html">src.spyice.parameters.user_input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.algae_constants.html">spyice.parameters.algae_constants</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.postprocess.html">spyice.postprocess package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="spyice.postprocess.analysis.html">src.spyice.postprocess.analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.postprocess.visualise_model.html">src.spyice.postprocess.visualise_model</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.preprocess.html">spyice.preprocess package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.geometry_settings.html">src.spyice.preprocess.geometry_settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.initial_boundary_conditions.html">src.spyice.preprocess.initial_boundary_conditions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.modify_initial_boundary.html">src.spyice.preprocess.modify_initial_boundary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.pre_process.html">src.spyice.preprocess.pre_process</a></li>
+
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.store.html">src.spyice.preprocess.store</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.utils.html">spyice.utils package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.config_sort.html">src.spyice.utils.config_sort</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.error_norms.html">src.spyice.utils.error_norms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.helpers.html">src.spyice.utils.helpers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.spyice_exceptions.html">src.spyice.utils.spyice_exceptions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.spyice_logger.html">src.spyice.utils.spyice_logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.initial_userinput.html">spyice.utils.initial_userinput</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.create_directory.html">spyice.utils.create_directory</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.coefficients.html">src.spyice.coefficients</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.main_process.html">src.spyice.main_process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.rhs.html">src.spyice.rhs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.statevariables.html">src.spyice.statevariables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html">src.spyice.update_physical_values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.misc_subroutines.html">spyice.misc_subroutines</a></li>
+
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="_index.html" class="nav-link">SpyIce</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="spyice.html" class="nav-link">spyice package</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="spyice.models.html" class="nav-link">spyice.models package</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">src.spyice.models.radiative_model</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="src-spyice-models-radiative-model">
+<h1>src.spyice.models.radiative_model<a class="headerlink" href="#src-spyice-models-radiative-model" title="Link to this heading">#</a></h1>
+<p>Module: <code class="docutils literal notranslate"><span class="pre">spyice.models.brine_flux_radiation</span></code></p>
+<p>This module contains functions for modeling <strong>radiative fluxes, brine fluxes, and salinity transport</strong> in sea ice. It is designed for process-based simulations of ice-ocean interactions, focusing on:</p>
+<ul class="simple">
+<li><p>Radiative source terms from algae, ice, and organic matter.</p></li>
+<li><p>Calculation of Photosynthetically Active Radiation (PAR) in ice.</p></li>
+<li><p>Brine flux driven by Rayleigh number instabilities.</p></li>
+<li><p>Salinity source terms from brine advection.</p></li>
+<li><p>Permeability and local Rayleigh number calculations.</p></li>
+</ul>
+</section>
+<section id="functions">
+<h1>Functions<a class="headerlink" href="#functions" title="Link to this heading">#</a></h1>
+<section id="radiative-source-term">
+<h2>radiative_source_term<a class="headerlink" href="#radiative-source-term" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="radiative_source_term">
+<span class="sig-name descname"><span class="pre">radiative_source_term</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">radiative_algae</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radiative_ice</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radiative_organicmatter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#radiative_source_term" title="Link to this definition">#</a></dt>
+<dd><p>Compute the total radiative source term for the ice-algae system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>radiative_algae</strong> (<em>float</em>) – Radiative contribution from algae.</p></li>
+<li><p><strong>radiative_ice</strong> (<em>float</em>) – Radiative contribution from ice.</p></li>
+<li><p><strong>radiative_organicmatter</strong> (<em>float</em>) – Radiative contribution from organic matter.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Total radiative source term.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="radiative-ice">
+<h2>radiative_ice<a class="headerlink" href="#radiative-ice" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="radiative_ice">
+<span class="sig-name descname"><span class="pre">radiative_ice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depth</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#radiative_ice" title="Link to this definition">#</a></dt>
+<dd><p>Compute radiative attenuation through ice.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>depth</strong> (<em>float</em><em> or </em><em>np.ndarray</em>) – Depth in ice (m).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Radiative flux contribution from ice.</p>
+</dd>
+</dl>
+<p>Formula:</p>
+<div class="math notranslate nohighlight">
+\[I_0 = i_0 (1 - \alpha) F_{sw}, \quad
+I(z) = I_0 \exp(-\kappa z), \quad
+R_\text{ice} = I(z) \kappa\]</div>
+</dd></dl>
+
+</section>
+<section id="radiative-organicmatter">
+<h2>radiative_organicmatter<a class="headerlink" href="#radiative-organicmatter" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="radiative_organicmatter">
+<span class="sig-name descname"><span class="pre">radiative_organicmatter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depth</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#radiative_organicmatter" title="Link to this definition">#</a></dt>
+<dd><p>Compute radiative flux attenuation due to organic matter in ice.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>depth</strong> (<em>float</em><em> or </em><em>np.ndarray</em>) – Depth in ice (m).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Radiative flux contribution from organic matter.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="calculate-radiative-terms">
+<h2>calculate_radiative_terms<a class="headerlink" href="#calculate-radiative-terms" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="calculate_radiative_terms">
+<span class="sig-name descname"><span class="pre">calculate_radiative_terms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thickness_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radiative_algae</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algae_model_depth_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'single'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#calculate_radiative_terms" title="Link to this definition">#</a></dt>
+<dd><p>Combine radiative contributions from algae, ice, and organic matter for the given depth.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>depth</strong> (<em>np.ndarray</em>) – Depth array in ice.</p></li>
+<li><p><strong>thickness_index</strong> (<em>int</em>) – Index corresponding to interface layer.</p></li>
+<li><p><strong>radiative_algae</strong> (<em>float</em>) – Radiative flux from algae.</p></li>
+<li><p><strong>algae_model_depth_type</strong> (<em>str</em>) – ‘single’ or ‘all’ for biologically active layer modeling.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Total radiative source term.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="calculate-local-rayleigh-number">
+<h2>calculate_local_rayleigh_number<a class="headerlink" href="#calculate-local-rayleigh-number" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="calculate_local_rayleigh_number">
+<span class="sig-name descname"><span class="pre">calculate_local_rayleigh_number</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">thickness_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thickness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">salinity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid_size</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#calculate_local_rayleigh_number" title="Link to this definition">#</a></dt>
+<dd><p>Calculate the <strong>local Rayleigh number</strong> for brine convection in sea ice.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>thickness_index</strong> (<em>int</em>) – Index at the ice-ocean interface.</p></li>
+<li><p><strong>thickness</strong> (<em>np.ndarray</em>) – Ice thickness array.</p></li>
+<li><p><strong>salinity</strong> (<em>np.ndarray</em>) – Salinity profile in sea ice.</p></li>
+<li><p><strong>phi</strong> (<em>np.ndarray</em>) – Porosity profile.</p></li>
+<li><p><strong>grid_size</strong> (<em>float</em>) – Grid spacing (dz).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array of local Rayleigh numbers.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="calculate-salinity-flux">
+<h2>calculate_salinity_flux<a class="headerlink" href="#calculate-salinity-flux" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="calculate_salinity_flux">
+<span class="sig-name descname"><span class="pre">calculate_salinity_flux</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ra_c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thickness_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thickness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">salinity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#calculate_salinity_flux" title="Link to this definition">#</a></dt>
+<dd><p>Compute brine-driven salinity flux based on Rayleigh number exceeding critical value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dz</strong> (<em>float</em>) – Grid spacing in ice.</p></li>
+<li><p><strong>dt</strong> (<em>float</em>) – Time step.</p></li>
+<li><p><strong>Ra_c</strong> (<em>float</em>) – Critical Rayleigh number.</p></li>
+<li><p><strong>thickness_index</strong> (<em>int</em>) – Interface index.</p></li>
+<li><p><strong>thickness</strong> (<em>np.ndarray</em>) – Ice thickness array.</p></li>
+<li><p><strong>salinity</strong> (<em>np.ndarray</em>) – Salinity profile.</p></li>
+<li><p><strong>phi</strong> (<em>np.ndarray</em>) – Porosity profile.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Salinity flux array.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="calculate-permeability">
+<h2>calculate_permeability<a class="headerlink" href="#calculate-permeability" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="calculate_permeability">
+<span class="sig-name descname"><span class="pre">calculate_permeability</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phi_i</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#calculate_permeability" title="Link to this definition">#</a></dt>
+<dd><p>Compute brine permeability as a function of porosity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>phi_i</strong> (<em>np.ndarray</em>) – Porosity array.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Permeability array.</p>
+</dd>
+</dl>
+<p>Formula:</p>
+<div class="math notranslate nohighlight">
+\[\Pi = 10^{-17} (1000 \phi)^{3.1}\]</div>
+</dd></dl>
+
+</section>
+<section id="calculate-brine-flux">
+<h2>calculate_brine_flux<a class="headerlink" href="#calculate-brine-flux" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="calculate_brine_flux">
+<span class="sig-name descname"><span class="pre">calculate_brine_flux</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">thickness_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thickness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interface_depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">salinity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ra_c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#calculate_brine_flux" title="Link to this definition">#</a></dt>
+<dd><p>Calculate brine flux in the ice column.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>thickness_index</strong> (<em>int</em>) – Interface layer index.</p></li>
+<li><p><strong>thickness</strong> (<em>np.ndarray</em>) – Ice thickness array.</p></li>
+<li><p><strong>interface_depth</strong> (<em>float</em>) – Depth at ice-ocean interface.</p></li>
+<li><p><strong>salinity</strong> (<em>np.ndarray</em>) – Salinity profile.</p></li>
+<li><p><strong>phi</strong> (<em>np.ndarray</em>) – Porosity profile.</p></li>
+<li><p><strong>dt</strong> (<em>float</em>) – Time step.</p></li>
+<li><p><strong>dz</strong> (<em>float</em>) – Grid spacing.</p></li>
+<li><p><strong>Ra_c</strong> (<em>float</em>) – Critical Rayleigh number.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Brine flux array.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="calculate-in-out-brine-flux">
+<h2>calculate_in_out_brine_flux<a class="headerlink" href="#calculate-in-out-brine-flux" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="calculate_in_out_brine_flux">
+<span class="sig-name descname"><span class="pre">calculate_in_out_brine_flux</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">thickness_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flux</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#calculate_in_out_brine_flux" title="Link to this definition">#</a></dt>
+<dd><p>Compute <strong>incoming and outgoing brine fluxes</strong> for each layer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>thickness_index</strong> (<em>int</em>) – Interface layer index.</p></li>
+<li><p><strong>flux</strong> (<em>np.ndarray</em>) – Brine flux array.</p></li>
+<li><p><strong>phi</strong> (<em>np.ndarray</em>) – Porosity profile.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Tuple (flux_in, flux_out)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="calculate-salinity-source-term-from-brineflux">
+<h2>calculate_salinity_source_term_from_brineflux<a class="headerlink" href="#calculate-salinity-source-term-from-brineflux" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="calculate_salinity_source_term_from_brineflux">
+<span class="sig-name descname"><span class="pre">calculate_salinity_source_term_from_brineflux</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">salinity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flux_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flux_out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">flux_channel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#calculate_salinity_source_term_from_brineflux" title="Link to this definition">#</a></dt>
+<dd><p>Compute the <strong>salinity source term</strong> from brine fluxes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>salinity</strong> (<em>np.ndarray</em>) – Salinity profile.</p></li>
+<li><p><strong>flux_in</strong> (<em>np.ndarray</em>) – Incoming brine flux.</p></li>
+<li><p><strong>flux_out</strong> (<em>np.ndarray</em>) – Outgoing brine flux.</p></li>
+<li><p><strong>flux_channel</strong> (<em>np.ndarray</em>) – Total brine flux channel.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Salinity source term array.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="get-salinity-source-term">
+<h2>get_salinity_source_term<a class="headerlink" href="#get-salinity-source-term" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="get_salinity_source_term">
+<span class="sig-name descname"><span class="pre">get_salinity_source_term</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">thickness_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thickness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">salinity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dz</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#get_salinity_source_term" title="Link to this definition">#</a></dt>
+<dd><p>High-level function to calculate <strong>salinity source term</strong> from brine flux for a given ice column.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>thickness_index</strong> (<em>int</em>) – Index at ice-ocean interface.</p></li>
+<li><p><strong>thickness</strong> (<em>np.ndarray</em>) – Ice thickness array.</p></li>
+<li><p><strong>salinity</strong> (<em>np.ndarray</em>) – Salinity profile.</p></li>
+<li><p><strong>phi</strong> (<em>np.ndarray</em>) – Porosity profile.</p></li>
+<li><p><strong>dt</strong> (<em>float</em>) – Time step.</p></li>
+<li><p><strong>dz</strong> (<em>float</em>) – Grid spacing.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Salinity source term array.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="spyice.models.algae_model.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">src.spyice.models.algae_model</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="spyice.parameters.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">spyice.parameters package</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">src.spyice.models.radiative_model</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#radiative-source-term">radiative_source_term</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#radiative_source_term"><code class="docutils literal notranslate"><span class="pre">radiative_source_term()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#radiative-ice">radiative_ice</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#radiative_ice"><code class="docutils literal notranslate"><span class="pre">radiative_ice()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#radiative-organicmatter">radiative_organicmatter</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#radiative_organicmatter"><code class="docutils literal notranslate"><span class="pre">radiative_organicmatter()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-radiative-terms">calculate_radiative_terms</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate_radiative_terms"><code class="docutils literal notranslate"><span class="pre">calculate_radiative_terms()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-local-rayleigh-number">calculate_local_rayleigh_number</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate_local_rayleigh_number"><code class="docutils literal notranslate"><span class="pre">calculate_local_rayleigh_number()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-salinity-flux">calculate_salinity_flux</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate_salinity_flux"><code class="docutils literal notranslate"><span class="pre">calculate_salinity_flux()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-permeability">calculate_permeability</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate_permeability"><code class="docutils literal notranslate"><span class="pre">calculate_permeability()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-brine-flux">calculate_brine_flux</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate_brine_flux"><code class="docutils literal notranslate"><span class="pre">calculate_brine_flux()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-in-out-brine-flux">calculate_in_out_brine_flux</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate_in_out_brine_flux"><code class="docutils literal notranslate"><span class="pre">calculate_in_out_brine_flux()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-salinity-source-term-from-brineflux">calculate_salinity_source_term_from_brineflux</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate_salinity_source_term_from_brineflux"><code class="docutils literal notranslate"><span class="pre">calculate_salinity_source_term_from_brineflux()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-salinity-source-term">get_salinity_source_term</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get_salinity_source_term"><code class="docutils literal notranslate"><span class="pre">get_salinity_source_term()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/api/spyice.models.radiative_model.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Sneha Iyer.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

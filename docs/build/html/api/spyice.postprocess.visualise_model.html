@@ -42,6 +42,7 @@
     <script src="../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/spyice.postprocess.visualise_model';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -145,6 +146,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
       
@@ -238,6 +246,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
           
@@ -269,8 +284,21 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="spyice.html">spyice package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 has-children"><a class="reference internal" href="spyice.models.html">spyice.models package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="spyice.models.advection_diffusion.html">src.spyice.models.advection_diffusion</a></li>
+
+
+
+
+
 <li class="toctree-l3"><a class="reference internal" href="spyice.models.sea_ice_model.html">src.spyice.models.sea_ice_model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.models.stefan_problem.html">src.spyice.models.stefan_problem</a></li>
+
+
+
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.algae_model.html">src.spyice.models.algae_model</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.radiative_model.html">src.spyice.models.radiative_model</a></li>
+
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="spyice.parameters.html">spyice.parameters package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -279,6 +307,7 @@
 <li class="toctree-l3"><a class="reference internal" href="spyice.parameters.real_constants.html">src.spyice.parameters.real_constants</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.parameters.results_params.html">src.spyice.parameters.results_params</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.parameters.user_input.html">src.spyice.parameters.user_input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.algae_constants.html">spyice.parameters.algae_constants</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="spyice.postprocess.html">spyice.postprocess package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
@@ -291,6 +320,8 @@
 <li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.initial_boundary_conditions.html">src.spyice.preprocess.initial_boundary_conditions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.modify_initial_boundary.html">src.spyice.preprocess.modify_initial_boundary</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.pre_process.html">src.spyice.preprocess.pre_process</a></li>
+
+
 <li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.store.html">src.spyice.preprocess.store</a></li>
 </ul>
 </details></li>
@@ -300,6 +331,10 @@
 <li class="toctree-l3"><a class="reference internal" href="spyice.utils.helpers.html">src.spyice.utils.helpers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.utils.spyice_exceptions.html">src.spyice.utils.spyice_exceptions module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.utils.spyice_logger.html">src.spyice.utils.spyice_logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.initial_userinput.html">spyice.utils.initial_userinput</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.create_directory.html">spyice.utils.create_directory</a></li>
+
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="spyice.coefficients.html">src.spyice.coefficients</a></li>
@@ -307,6 +342,8 @@
 <li class="toctree-l2"><a class="reference internal" href="spyice.rhs.html">src.spyice.rhs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="spyice.statevariables.html">src.spyice.statevariables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html">src.spyice.update_physical_values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.misc_subroutines.html">spyice.misc_subroutines</a></li>
+
 </ul>
 </details></li>
 </ul>
@@ -382,7 +419,7 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>user_input_dataclass</strong> (<a class="reference internal" href="spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput" title="src.spyice.parameters.user_input.UserInput"><em>UserInput</em></a>) – An instance of the UserInput class containing user input data.</p></li>
 <li><p><strong>results_dataclass</strong> (<a class="reference internal" href="spyice.parameters.results_params.html#src.spyice.parameters.results_params.ResultsParams" title="src.spyice.parameters.results_params.ResultsParams"><em>ResultsParams</em></a>) – An instance of the ResultsParams class containing results data.</p></li>
-<li><p><strong>error_analysis_dataclass</strong> (<a class="reference internal" href="spyice.postprocess.analysis.html#src.spyice.postprocess.analysis.Analysis" title="src.spyice.postprocess.analysis.Analysis"><em>Analysis</em></a>) – An instance of the Analysis class containing error analysis data.</p></li>
+<li><p><strong>error_analysis_dataclass</strong> (<a class="reference internal" href="spyice.postprocess.html#src.spyice.postprocess.Analysis" title="src.spyice.postprocess.Analysis"><em>Analysis</em></a>) – An instance of the Analysis class containing error analysis data.</p></li>
 </ul>
 </dd>
 </dl>
@@ -394,7 +431,7 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>user_input_dataclass</strong> (<a class="reference internal" href="spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput" title="src.spyice.parameters.user_input.UserInput"><em>UserInput</em></a>) – An instance of the UserInput class containing user input data.</p></li>
 <li><p><strong>results_dataclass</strong> (<a class="reference internal" href="spyice.parameters.results_params.html#src.spyice.parameters.results_params.ResultsParams" title="src.spyice.parameters.results_params.ResultsParams"><em>ResultsParams</em></a>) – An instance of the ResultsParams class containing results data.</p></li>
-<li><p><strong>error_analysis_dataclass</strong> (<a class="reference internal" href="spyice.postprocess.analysis.html#src.spyice.postprocess.analysis.Analysis" title="src.spyice.postprocess.analysis.Analysis"><em>Analysis</em></a>) – An instance of the Analysis class containing error analysis data.</p></li>
+<li><p><strong>error_analysis_dataclass</strong> (<a class="reference internal" href="spyice.postprocess.html#src.spyice.postprocess.Analysis" title="src.spyice.postprocess.Analysis"><em>Analysis</em></a>) – An instance of the Analysis class containing error analysis data.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -402,6 +439,11 @@
 </dd>
 </dl>
 </dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.spyice.postprocess.visualise_model.VisualiseModel.create_2d_array">
+<span class="sig-name descname"><span class="pre">create_2d_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/postprocess/visualise_model.html#VisualiseModel.create_2d_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.postprocess.visualise_model.VisualiseModel.create_2d_array" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="src.spyice.postprocess.visualise_model.VisualiseModel.phi_slope">
@@ -444,6 +486,71 @@
 <dt class="sig sig-object py" id="src.spyice.postprocess.visualise_model.VisualiseModel.plot_all_phi_mush">
 <span class="sig-name descname"><span class="pre">plot_all_phi_mush</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phi_mush</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/postprocess/visualise_model.html#VisualiseModel.plot_all_phi_mush"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_all_phi_mush" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.spyice.postprocess.visualise_model.VisualiseModel.plot_brinevelocity_profile">
+<span class="sig-name descname"><span class="pre">plot_brinevelocity_profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/postprocess/visualise_model.html#VisualiseModel.plot_brinevelocity_profile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_brinevelocity_profile" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>savefig</strong> (<em>bool</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.spyice.postprocess.visualise_model.VisualiseModel.plot_carbon_concentration">
+<span class="sig-name descname"><span class="pre">plot_carbon_concentration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/postprocess/visualise_model.html#VisualiseModel.plot_carbon_concentration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_carbon_concentration" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>savefig</strong> (<em>bool</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.spyice.postprocess.visualise_model.VisualiseModel.plot_carbon_concentration_multiplelayers">
+<span class="sig-name descname"><span class="pre">plot_carbon_concentration_multiplelayers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/postprocess/visualise_model.html#VisualiseModel.plot_carbon_concentration_multiplelayers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_carbon_concentration_multiplelayers" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>savefig</strong> (<em>bool</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.spyice.postprocess.visualise_model.VisualiseModel.plot_carbon_concentration_profile">
+<span class="sig-name descname"><span class="pre">plot_carbon_concentration_profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/postprocess/visualise_model.html#VisualiseModel.plot_carbon_concentration_profile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_carbon_concentration_profile" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>savefig</strong> (<em>bool</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.spyice.postprocess.visualise_model.VisualiseModel.plot_carbon_heatmap_as_gif">
+<span class="sig-name descname"><span class="pre">plot_carbon_heatmap_as_gif</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/postprocess/visualise_model.html#VisualiseModel.plot_carbon_heatmap_as_gif"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_carbon_heatmap_as_gif" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.spyice.postprocess.visualise_model.VisualiseModel.plot_chla_bulk_concentration">
+<span class="sig-name descname"><span class="pre">plot_chla_bulk_concentration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/postprocess/visualise_model.html#VisualiseModel.plot_chla_bulk_concentration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_chla_bulk_concentration" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>savefig</strong> (<em>bool</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.spyice.postprocess.visualise_model.VisualiseModel.plot_chla_bulk_concentration_multiplelayers">
+<span class="sig-name descname"><span class="pre">plot_chla_bulk_concentration_multiplelayers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/postprocess/visualise_model.html#VisualiseModel.plot_chla_bulk_concentration_multiplelayers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_chla_bulk_concentration_multiplelayers" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>savefig</strong> (<em>bool</em>)</p>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="src.spyice.postprocess.visualise_model.VisualiseModel.plot_depth_over_time">
@@ -497,10 +604,135 @@
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="src.spyice.postprocess.visualise_model.VisualiseModel.plot_liquid_fraction_profile">
+<span class="sig-name descname"><span class="pre">plot_liquid_fraction_profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/postprocess/visualise_model.html#VisualiseModel.plot_liquid_fraction_profile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_liquid_fraction_profile" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>savefig</strong> (<em>bool</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.spyice.postprocess.visualise_model.VisualiseModel.plot_liquid_salinity_profile">
+<span class="sig-name descname"><span class="pre">plot_liquid_salinity_profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/postprocess/visualise_model.html#VisualiseModel.plot_liquid_salinity_profile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_liquid_salinity_profile" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>savefig</strong> (<em>bool</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="src.spyice.postprocess.visualise_model.VisualiseModel.plot_liquidfraction_heatmap">
 <span class="sig-name descname"><span class="pre">plot_liquidfraction_heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/postprocess/visualise_model.html#VisualiseModel.plot_liquidfraction_heatmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_liquidfraction_heatmap" title="Link to this definition">#</a></dt>
-<dd><p>Plots the temperature heatmap.</p>
+<dd><p>Plots the liquid fraction heatmap.</p>
 <dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>savefig</strong> (<em>bool</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.spyice.postprocess.visualise_model.VisualiseModel.plot_nutrient_cn_profile">
+<span class="sig-name descname"><span class="pre">plot_nutrient_cn_profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/postprocess/visualise_model.html#VisualiseModel.plot_nutrient_cn_profile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_nutrient_cn_profile" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>savefig</strong> (<em>bool</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.spyice.postprocess.visualise_model.VisualiseModel.plot_nutrient_concentration">
+<span class="sig-name descname"><span class="pre">plot_nutrient_concentration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/postprocess/visualise_model.html#VisualiseModel.plot_nutrient_concentration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_nutrient_concentration" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>savefig</strong> (<em>bool</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.spyice.postprocess.visualise_model.VisualiseModel.plot_nutrient_concentration_heatmap_as_gif">
+<span class="sig-name descname"><span class="pre">plot_nutrient_concentration_heatmap_as_gif</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/postprocess/visualise_model.html#VisualiseModel.plot_nutrient_concentration_heatmap_as_gif"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_nutrient_concentration_heatmap_as_gif" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.spyice.postprocess.visualise_model.VisualiseModel.plot_nutrient_concentration_multiplelayers">
+<span class="sig-name descname"><span class="pre">plot_nutrient_concentration_multiplelayers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/postprocess/visualise_model.html#VisualiseModel.plot_nutrient_concentration_multiplelayers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_nutrient_concentration_multiplelayers" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>savefig</strong> (<em>bool</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.spyice.postprocess.visualise_model.VisualiseModel.plot_photosynthetic_rate">
+<span class="sig-name descname"><span class="pre">plot_photosynthetic_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/postprocess/visualise_model.html#VisualiseModel.plot_photosynthetic_rate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_photosynthetic_rate" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>savefig</strong> (<em>bool</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.spyice.postprocess.visualise_model.VisualiseModel.plot_photosynthetic_rate_multiplelayers">
+<span class="sig-name descname"><span class="pre">plot_photosynthetic_rate_multiplelayers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/postprocess/visualise_model.html#VisualiseModel.plot_photosynthetic_rate_multiplelayers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_photosynthetic_rate_multiplelayers" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>savefig</strong> (<em>bool</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.spyice.postprocess.visualise_model.VisualiseModel.plot_radiation_algae">
+<span class="sig-name descname"><span class="pre">plot_radiation_algae</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/postprocess/visualise_model.html#VisualiseModel.plot_radiation_algae"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_radiation_algae" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>savefig</strong> (<em>bool</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.spyice.postprocess.visualise_model.VisualiseModel.plot_radiation_algae_dt_by_rho_c">
+<span class="sig-name descname"><span class="pre">plot_radiation_algae_dt_by_rho_c</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/postprocess/visualise_model.html#VisualiseModel.plot_radiation_algae_dt_by_rho_c"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_radiation_algae_dt_by_rho_c" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>savefig</strong> (<em>bool</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.spyice.postprocess.visualise_model.VisualiseModel.plot_radiation_algae_multiplelayers">
+<span class="sig-name descname"><span class="pre">plot_radiation_algae_multiplelayers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/postprocess/visualise_model.html#VisualiseModel.plot_radiation_algae_multiplelayers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_radiation_algae_multiplelayers" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>savefig</strong> (<em>bool</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.spyice.postprocess.visualise_model.VisualiseModel.plot_radiation_all">
+<span class="sig-name descname"><span class="pre">plot_radiation_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/postprocess/visualise_model.html#VisualiseModel.plot_radiation_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_radiation_all" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>savefig</strong> (<em>bool</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.spyice.postprocess.visualise_model.VisualiseModel.plot_radiation_profile">
+<span class="sig-name descname"><span class="pre">plot_radiation_profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/postprocess/visualise_model.html#VisualiseModel.plot_radiation_profile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_radiation_profile" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>savefig</strong> (<em>bool</em>)</p>
 </dd>
@@ -515,8 +747,33 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="src.spyice.postprocess.visualise_model.VisualiseModel.plot_salinity_heatmap">
 <span class="sig-name descname"><span class="pre">plot_salinity_heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/postprocess/visualise_model.html#VisualiseModel.plot_salinity_heatmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_salinity_heatmap" title="Link to this definition">#</a></dt>
-<dd><p>Plots the temperature heatmap.</p>
+<dd><p>Plots the Salinity heatmap.</p>
 <dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>savefig</strong> (<em>bool</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.spyice.postprocess.visualise_model.VisualiseModel.plot_salinity_heatmap_as_gif">
+<span class="sig-name descname"><span class="pre">plot_salinity_heatmap_as_gif</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/postprocess/visualise_model.html#VisualiseModel.plot_salinity_heatmap_as_gif"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_salinity_heatmap_as_gif" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.spyice.postprocess.visualise_model.VisualiseModel.plot_salinity_profile">
+<span class="sig-name descname"><span class="pre">plot_salinity_profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/postprocess/visualise_model.html#VisualiseModel.plot_salinity_profile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_salinity_profile" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>savefig</strong> (<em>bool</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.spyice.postprocess.visualise_model.VisualiseModel.plot_salinity_sourceterm_profile">
+<span class="sig-name descname"><span class="pre">plot_salinity_sourceterm_profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/postprocess/visualise_model.html#VisualiseModel.plot_salinity_sourceterm_profile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_salinity_sourceterm_profile" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>savefig</strong> (<em>bool</em>)</p>
 </dd>
@@ -539,8 +796,23 @@
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="src.spyice.postprocess.visualise_model.VisualiseModel.plot_temperature_3D">
+<span class="sig-name descname"><span class="pre">plot_temperature_3D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/postprocess/visualise_model.html#VisualiseModel.plot_temperature_3D"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_temperature_3D" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>savefig</strong> (<em>bool</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.spyice.postprocess.visualise_model.VisualiseModel.plot_temperature_3d_contours">
+<span class="sig-name descname"><span class="pre">plot_temperature_3d_contours</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/postprocess/visualise_model.html#VisualiseModel.plot_temperature_3d_contours"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_temperature_3d_contours" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="src.spyice.postprocess.visualise_model.VisualiseModel.plot_temperature_heatmap">
-<span class="sig-name descname"><span class="pre">plot_temperature_heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/postprocess/visualise_model.html#VisualiseModel.plot_temperature_heatmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_temperature_heatmap" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">plot_temperature_heatmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">export_csv</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/postprocess/visualise_model.html#VisualiseModel.plot_temperature_heatmap"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_temperature_heatmap" title="Link to this definition">#</a></dt>
 <dd><p>Plots the temperature heatmap.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -553,6 +825,31 @@
 <dt class="sig sig-object py" id="src.spyice.postprocess.visualise_model.VisualiseModel.plot_temperature_heatmap_as_gif">
 <span class="sig-name descname"><span class="pre">plot_temperature_heatmap_as_gif</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/postprocess/visualise_model.html#VisualiseModel.plot_temperature_heatmap_as_gif"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_temperature_heatmap_as_gif" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.spyice.postprocess.visualise_model.VisualiseModel.plot_temperature_liquid_solid_evolution">
+<span class="sig-name descname"><span class="pre">plot_temperature_liquid_solid_evolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">z_depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/postprocess/visualise_model.html#VisualiseModel.plot_temperature_liquid_solid_evolution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_temperature_liquid_solid_evolution" title="Link to this definition">#</a></dt>
+<dd><p>Plots the temperature evolution at a given depth.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>z_depth</strong> (<em>float</em>) – The depth at which to plot the temperature evolution.</p></li>
+<li><p><strong>savefig</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to save the figure. Defaults to True.</p></li>
+<li><p><strong>Buffo_matlab</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to include Buffo-matlab data in the plot. Defaults to False.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.spyice.postprocess.visualise_model.VisualiseModel.plot_temperature_profile">
+<span class="sig-name descname"><span class="pre">plot_temperature_profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">savefig</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/postprocess/visualise_model.html#VisualiseModel.plot_temperature_profile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_temperature_profile" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>savefig</strong> (<em>bool</em>)</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -607,22 +904,50 @@
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel"><code class="docutils literal notranslate"><span class="pre">VisualiseModel</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.__init__"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.__init__()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.create_2d_array"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.create_2d_array()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.phi_slope"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.phi_slope()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_H_iter"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_H_iter()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_H_iter_all"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_H_iter_all()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_H_iter_heatmap"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_H_iter_heatmap()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_H_iter_heatmap_mushy"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_H_iter_heatmap_mushy()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_all_phi_mush"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_all_phi_mush()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_brinevelocity_profile"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_brinevelocity_profile()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_carbon_concentration"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_carbon_concentration()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_carbon_concentration_multiplelayers"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_carbon_concentration_multiplelayers()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_carbon_concentration_profile"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_carbon_concentration_profile()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_carbon_heatmap_as_gif"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_carbon_heatmap_as_gif()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_chla_bulk_concentration"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_chla_bulk_concentration()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_chla_bulk_concentration_multiplelayers"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_chla_bulk_concentration_multiplelayers()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_depth_over_time"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_depth_over_time()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_depth_over_time_heatmap"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_depth_over_time_heatmap()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_error_temp"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_error_temp()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_error_temp_diff"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_error_temp_diff()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_liquid_fraction_profile"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_liquid_fraction_profile()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_liquid_salinity_profile"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_liquid_salinity_profile()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_liquidfraction_heatmap"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_liquidfraction_heatmap()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_nutrient_cn_profile"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_nutrient_cn_profile()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_nutrient_concentration"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_nutrient_concentration()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_nutrient_concentration_heatmap_as_gif"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_nutrient_concentration_heatmap_as_gif()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_nutrient_concentration_multiplelayers"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_nutrient_concentration_multiplelayers()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_photosynthetic_rate"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_photosynthetic_rate()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_photosynthetic_rate_multiplelayers"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_photosynthetic_rate_multiplelayers()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_radiation_algae"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_radiation_algae()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_radiation_algae_dt_by_rho_c"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_radiation_algae_dt_by_rho_c()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_radiation_algae_multiplelayers"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_radiation_algae_multiplelayers()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_radiation_all"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_radiation_all()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_radiation_profile"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_radiation_profile()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_response_pt1_pt2"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_response_pt1_pt2()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_salinity_heatmap"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_salinity_heatmap()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_salinity_heatmap_as_gif"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_salinity_heatmap_as_gif()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_salinity_profile"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_salinity_profile()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_salinity_sourceterm_profile"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_salinity_sourceterm_profile()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_temperature"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_temperature()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_temperature_3D"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_temperature_3D()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_temperature_3d_contours"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_temperature_3d_contours()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_temperature_heatmap"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_temperature_heatmap()</span></code></a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_temperature_heatmap_as_gif"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_temperature_heatmap_as_gif()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_temperature_liquid_solid_evolution"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_temperature_liquid_solid_evolution()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.postprocess.visualise_model.VisualiseModel.plot_temperature_profile"><code class="docutils literal notranslate"><span class="pre">VisualiseModel.plot_temperature_profile()</span></code></a></li>
 </ul>
 </li>
 </ul>

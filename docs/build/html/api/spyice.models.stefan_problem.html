@@ -42,10 +42,13 @@
     <script src="../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/spyice.models.stefan_problem';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="spyice.parameters package" href="spyice.parameters.html" />
+    <link rel="next" title="src.spyice.models.algae_model" href="spyice.models.algae_model.html" />
     <link rel="prev" title="src.spyice.models.sea_ice_model" href="spyice.models.sea_ice_model.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -145,6 +148,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
       
@@ -238,6 +248,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
           
@@ -269,8 +286,21 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="spyice.html">spyice package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="spyice.models.html">spyice.models package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="spyice.models.advection_diffusion.html">src.spyice.models.advection_diffusion</a></li>
+
+
+
+
+
 <li class="toctree-l3"><a class="reference internal" href="spyice.models.sea_ice_model.html">src.spyice.models.sea_ice_model</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">src.spyice.models.stefan_problem</a></li>
+
+
+
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.algae_model.html">src.spyice.models.algae_model</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.radiative_model.html">src.spyice.models.radiative_model</a></li>
+
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="spyice.parameters.html">spyice.parameters package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -279,6 +309,7 @@
 <li class="toctree-l3"><a class="reference internal" href="spyice.parameters.real_constants.html">src.spyice.parameters.real_constants</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.parameters.results_params.html">src.spyice.parameters.results_params</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.parameters.user_input.html">src.spyice.parameters.user_input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.algae_constants.html">spyice.parameters.algae_constants</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="spyice.postprocess.html">spyice.postprocess package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -291,6 +322,8 @@
 <li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.initial_boundary_conditions.html">src.spyice.preprocess.initial_boundary_conditions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.modify_initial_boundary.html">src.spyice.preprocess.modify_initial_boundary</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.pre_process.html">src.spyice.preprocess.pre_process</a></li>
+
+
 <li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.store.html">src.spyice.preprocess.store</a></li>
 </ul>
 </details></li>
@@ -300,6 +333,10 @@
 <li class="toctree-l3"><a class="reference internal" href="spyice.utils.helpers.html">src.spyice.utils.helpers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.utils.spyice_exceptions.html">src.spyice.utils.spyice_exceptions module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.utils.spyice_logger.html">src.spyice.utils.spyice_logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.initial_userinput.html">spyice.utils.initial_userinput</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.create_directory.html">spyice.utils.create_directory</a></li>
+
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="spyice.coefficients.html">src.spyice.coefficients</a></li>
@@ -307,6 +344,8 @@
 <li class="toctree-l2"><a class="reference internal" href="spyice.rhs.html">src.spyice.rhs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="spyice.statevariables.html">src.spyice.statevariables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html">src.spyice.update_physical_values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.misc_subroutines.html">spyice.misc_subroutines</a></li>
+
 </ul>
 </details></li>
 </ul>
@@ -370,104 +409,195 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="module-src.spyice.models.stefan_problem">
-<span id="src-spyice-models-stefan-problem"></span><h1>src.spyice.models.stefan_problem<a class="headerlink" href="#module-src.spyice.models.stefan_problem" title="Link to this heading">#</a></h1>
+  <section id="src-spyice-models-stefan-problem">
+<h1>src.spyice.models.stefan_problem<a class="headerlink" href="#src-spyice-models-stefan-problem" title="Link to this heading">#</a></h1>
+<p>This module provides analytical and semi-analytical solutions for the
+Stefan phase-change problem in one-dimensional sea ice systems.</p>
+<p>Both:</p>
+<ul class="simple">
+<li><p>One-phase Stefan formulation</p></li>
+<li><p>Two-phase (solid–liquid) formulation</p></li>
+</ul>
+<p>are implemented.</p>
+<p>The solutions are primarily used for:</p>
+<ul class="simple">
+<li><p>Model validation</p></li>
+<li><p>Benchmarking numerical solvers</p></li>
+<li><p>Comparing analytical and numerical ice growth</p></li>
+</ul>
+<section id="mathematical-background">
+<h2>Mathematical Background<a class="headerlink" href="#mathematical-background" title="Link to this heading">#</a></h2>
+<p>The classical one-phase Stefan problem describes phase boundary motion
+governed by heat diffusion:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial T}{\partial t}
+= \alpha \frac{\partial^2 T}{\partial z^2}\]</div>
+<p>with a moving boundary determined by the Stefan condition:</p>
+<div class="math notranslate nohighlight">
+\[\rho L \frac{ds}{dt}
+= -k \frac{\partial T}{\partial z}\]</div>
+<p>The analytical solution involves the similarity variable:</p>
+<div class="math notranslate nohighlight">
+\[s(t) = 2 \lambda \sqrt{\alpha t}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\lambda\)</span> is obtained from a transcendental equation.</p>
+</section>
+</section>
+<section id="class-stefanproblem">
+<h1>Class: StefanProblem<a class="headerlink" href="#class-stefanproblem" title="Link to this heading">#</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="src.spyice.models.stefan_problem.StefanProblem">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.spyice.models.stefan_problem.</span></span><span class="sig-name descname"><span class="pre">StefanProblem</span></span><a class="reference internal" href="../_modules/src/spyice/models/stefan_problem.html#StefanProblem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.stefan_problem.StefanProblem" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>A class to solve the Stefan problem.</p>
+<dt class="sig sig-object py" id="StefanProblem">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">StefanProblem</span></span><a class="headerlink" href="#StefanProblem" title="Link to this definition">#</a></dt>
+<dd><p>A utility class providing static methods to compute
+one-phase and two-phase Stefan solutions.</p>
+</dd></dl>
+
+</section>
+<section id="static-methods">
+<h1>Static Methods<a class="headerlink" href="#static-methods" title="Link to this heading">#</a></h1>
+<section id="stefan-problem">
+<h2>stefan_problem<a class="headerlink" href="#stefan-problem" title="Link to this heading">#</a></h2>
 <dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.models.stefan_problem.StefanProblem.calculate_temperature_profile">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">calculate_temperature_profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depth_stefan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ui</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/models/stefan_problem.html#StefanProblem.calculate_temperature_profile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.stefan_problem.StefanProblem.calculate_temperature_profile" title="Link to this definition">#</a></dt>
-<dd><p>Calculates the temperature profile for the Stefan problem.</p>
+<dt class="sig sig-object py" id="stefan_problem">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">stefan_problem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ui</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stefan_problem" title="Link to this definition">#</a></dt>
+<dd><p>Compute the one-phase Stefan solution depth.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>depth_stefan</strong> (<em>float</em>) – The depth of the Stefan problem.</p></li>
-<li><p><strong>t</strong> (<em>float</em>) – The time.</p></li>
-<li><p><strong>dz</strong> (<em>float</em>) – The step size in the z-direction.</p></li>
-<li><p><strong>nz</strong> (<em>int</em>) – The number of grid points in the z-direction.</p></li>
-<li><p><strong>ui</strong> (<a class="reference internal" href="spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput" title="src.spyice.parameters.user_input.UserInput"><em>UserInput</em></a>) – An instance of the UserInput class containing the required constants and parameters.</p></li>
+<li><p><strong>t</strong> (<em>float</em>) – Time.</p></li>
+<li><p><strong>ui</strong> (<a class="reference internal" href="spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput" title="src.spyice.parameters.user_input.UserInput"><em>UserInput</em></a>) – User input configuration.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>An array containing the temperature profile for the Stefan problem.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>numpy.ndarray</p>
+<dd class="field-even"><p>Ice thickness depth.</p>
 </dd>
 </dl>
+<p>The solution uses a Newton method to determine
+the similarity parameter <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
 </dd></dl>
 
+</section>
+<section id="calculate-temperature-profile">
+<h2>calculate_temperature_profile<a class="headerlink" href="#calculate-temperature-profile" title="Link to this heading">#</a></h2>
 <dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.models.stefan_problem.StefanProblem.calculate_temperature_twophase_profiles">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">calculate_temperature_twophase_profiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depth_stefan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ui</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/models/stefan_problem.html#StefanProblem.calculate_temperature_twophase_profiles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.stefan_problem.StefanProblem.calculate_temperature_twophase_profiles" title="Link to this definition">#</a></dt>
-<dd><p>Calculate the temperature and salinity profiles for the Stefan problem in a two-phase system.</p>
+<dt class="sig sig-object py" id="calculate_temperature_profile">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">calculate_temperature_profile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depth_stefan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ui</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#calculate_temperature_profile" title="Link to this definition">#</a></dt>
+<dd><p>Compute the temperature profile for the one-phase solution.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>depth_stefan</strong> (<em>float</em>) – The depth of the Stefan problem.</p></li>
-<li><p><strong>t</strong> (<em>float</em>) – The time.</p></li>
-<li><p><strong>dz</strong> (<em>float</em>) – The grid spacing.</p></li>
-<li><p><strong>nz</strong> (<em>int</em>) – The number of grid points.</p></li>
-<li><p><strong>ui</strong> (<a class="reference internal" href="spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput" title="src.spyice.parameters.user_input.UserInput"><em>UserInput</em></a>) – An instance of the UserInput class containing the input parameters.</p></li>
+<li><p><strong>depth_stefan</strong> (<em>float</em>) – Ice thickness.</p></li>
+<li><p><strong>t</strong> (<em>float</em>) – Time.</p></li>
+<li><p><strong>dz</strong> (<em>float</em>) – Grid spacing.</p></li>
+<li><p><strong>nz</strong> (<em>int</em>) – Number of grid cells.</p></li>
+<li><p><strong>ui</strong> (<a class="reference internal" href="spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput" title="src.spyice.parameters.user_input.UserInput"><em>UserInput</em></a>) – User input configuration.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A tuple containing the temperature and salinity profiles as numpy arrays.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>tuple</p>
+<dd class="field-even"><p>Temperature array.</p>
 </dd>
 </dl>
+<p>The profile is based on the error function solution:</p>
+<div class="math notranslate nohighlight">
+\[T(z,t)
+=
+T_b
+- (T_b - T_m)
+\frac{\operatorname{erf}(z / 2\sqrt{\alpha t})}
+     {\operatorname{erf}(s / 2\sqrt{\alpha t})}\]</div>
 </dd></dl>
 
+</section>
+<section id="calculate-temperature-twophase-profiles">
+<h2>calculate_temperature_twophase_profiles<a class="headerlink" href="#calculate-temperature-twophase-profiles" title="Link to this heading">#</a></h2>
 <dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.models.stefan_problem.StefanProblem.stefan_problem">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">stefan_problem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ui</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/models/stefan_problem.html#StefanProblem.stefan_problem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.stefan_problem.StefanProblem.stefan_problem" title="Link to this definition">#</a></dt>
-<dd><p>Calculates the Stefan problem solution for a given time and user input.</p>
+<dt class="sig sig-object py" id="calculate_temperature_twophase_profiles">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">calculate_temperature_twophase_profiles</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">depth_stefan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ui</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#calculate_temperature_twophase_profiles" title="Link to this definition">#</a></dt>
+<dd><p>Compute temperature and salinity profiles
+for the two-phase Stefan problem.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>t</strong> (<em>float</em>) – The time value.</p></li>
-<li><p><strong>ui</strong> (<a class="reference internal" href="spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput" title="src.spyice.parameters.user_input.UserInput"><em>UserInput</em></a>) – An instance of the UserInput class containing the necessary input parameters.</p></li>
+<li><p><strong>depth_stefan</strong> (<em>float</em>) – Interface position.</p></li>
+<li><p><strong>t</strong> (<em>float</em>) – Time.</p></li>
+<li><p><strong>dz</strong> (<em>float</em>) – Grid spacing.</p></li>
+<li><p><strong>nz</strong> (<em>int</em>) – Number of grid cells.</p></li>
+<li><p><strong>ui</strong> (<a class="reference internal" href="spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput" title="src.spyice.parameters.user_input.UserInput"><em>UserInput</em></a>) – User input configuration.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The calculated Stefan problem solution.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>None</strong> – </p>
+<dd class="field-even"><p><p>Tuple of:</p>
+<ul class="simple">
+<li><p>Temperature array</p></li>
+<li><p>Salinity array</p></li>
+</ul>
+</p>
 </dd>
 </dl>
+<p>Uses complementary error functions for the liquid region.</p>
 </dd></dl>
 
+</section>
+<section id="stefan-problem-twophase">
+<h2>stefan_problem_twophase<a class="headerlink" href="#stefan-problem-twophase" title="Link to this heading">#</a></h2>
 <dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.models.stefan_problem.StefanProblem.stefan_problem_twophase">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">stefan_problem_twophase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ui</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/models/stefan_problem.html#StefanProblem.stefan_problem_twophase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.stefan_problem.StefanProblem.stefan_problem_twophase" title="Link to this definition">#</a></dt>
-<dd><p>Solves the Stefan problem for a two-phase system.</p>
+<dt class="sig sig-object py" id="stefan_problem_twophase">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">stefan_problem_twophase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ui</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#stefan_problem_twophase" title="Link to this definition">#</a></dt>
+<dd><p>Compute the moving interface for a two-phase
+solid–liquid system.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>t</strong> (<em>float</em>) – Time parameter.</p></li>
-<li><p><strong>ui</strong> (<a class="reference internal" href="spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput" title="src.spyice.parameters.user_input.UserInput"><em>UserInput</em></a>) – User input object containing boundary conditions and constants.</p></li>
+<li><p><strong>t</strong> (<em>float</em>) – Time.</p></li>
+<li><p><strong>ui</strong> (<a class="reference internal" href="spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput" title="src.spyice.parameters.user_input.UserInput"><em>UserInput</em></a>) – User configuration.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The result of the Stefan problem calculation.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
+<dd class="field-even"><p>Interface depth.</p>
 </dd>
 </dl>
+<p>The solution requires solving a nonlinear root
+problem via Newton iteration.</p>
 </dd></dl>
 
+</section>
+<section id="plot-stefan-temp-twophase">
+<h2>_plot_stefan_temp_twophase<a class="headerlink" href="#plot-stefan-temp-twophase" title="Link to this heading">#</a></h2>
+<dl class="py method">
+<dt class="sig sig-object py" id="plot_stefan_temp_twophase">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">_plot_stefan_temp_twophase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">z_depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#plot_stefan_temp_twophase" title="Link to this definition">#</a></dt>
+<dd><p>Utility method for plotting temperature evolution
+at a specified depth.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>z_depth</strong> (<em>float</em>) – Relative depth location.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Temperature and salinity history arrays.</p>
+</dd>
+</dl>
+<p>Intended for validation and debugging.</p>
 </dd></dl>
 
+</section>
+</section>
+<section id="dependencies">
+<h1>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">numpy</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scipy.optimize</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scipy.special.erfc</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spyice.parameters.user_input</span></code></p></li>
+</ul>
+</section>
+<section id="notes">
+<h1>Notes<a class="headerlink" href="#notes" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Newton iteration tolerance is set to moderate precision.</p></li>
+<li><p>Analytical solutions assume constant thermophysical properties.</p></li>
+<li><p>Two-phase formulation accounts for salinity depression of melting temperature.</p></li>
+<li><p>Intended primarily for verification against the numerical solver.</p></li>
+</ul>
 </section>
 
 
@@ -490,11 +620,11 @@
       </div>
     </a>
     <a class="right-next"
-       href="spyice.parameters.html"
+       href="spyice.models.algae_model.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">spyice.parameters package</p>
+        <p class="prev-next-title">src.spyice.models.algae_model</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -517,14 +647,41 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.stefan_problem.StefanProblem"><code class="docutils literal notranslate"><span class="pre">StefanProblem</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.stefan_problem.StefanProblem.calculate_temperature_profile"><code class="docutils literal notranslate"><span class="pre">StefanProblem.calculate_temperature_profile()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.stefan_problem.StefanProblem.calculate_temperature_twophase_profiles"><code class="docutils literal notranslate"><span class="pre">StefanProblem.calculate_temperature_twophase_profiles()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.stefan_problem.StefanProblem.stefan_problem"><code class="docutils literal notranslate"><span class="pre">StefanProblem.stefan_problem()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.stefan_problem.StefanProblem.stefan_problem_twophase"><code class="docutils literal notranslate"><span class="pre">StefanProblem.stefan_problem_twophase()</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">src.spyice.models.stefan_problem</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-background">Mathematical Background</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#class-stefanproblem">Class: StefanProblem</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#StefanProblem"><code class="docutils literal notranslate"><span class="pre">StefanProblem</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#static-methods">Static Methods</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stefan-problem">stefan_problem</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stefan_problem"><code class="docutils literal notranslate"><span class="pre">stefan_problem()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-temperature-profile">calculate_temperature_profile</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate_temperature_profile"><code class="docutils literal notranslate"><span class="pre">calculate_temperature_profile()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-temperature-twophase-profiles">calculate_temperature_twophase_profiles</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate_temperature_twophase_profiles"><code class="docutils literal notranslate"><span class="pre">calculate_temperature_twophase_profiles()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stefan-problem-twophase">stefan_problem_twophase</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stefan_problem_twophase"><code class="docutils literal notranslate"><span class="pre">stefan_problem_twophase()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-stefan-temp-twophase">_plot_stefan_temp_twophase</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot_stefan_temp_twophase"><code class="docutils literal notranslate"><span class="pre">_plot_stefan_temp_twophase()</span></code></a></li>
 </ul>
 </li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dependencies">Dependencies</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
+</ul>
+
   </nav></div>
 
   <div class="sidebar-secondary-item">

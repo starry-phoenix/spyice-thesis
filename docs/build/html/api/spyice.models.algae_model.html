@@ -1,0 +1,928 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" data-theme="auto">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>src.spyice.models.algae_model &#8212; SpyIce  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "auto";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "auto";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=b6ad3417" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/spyice.models.algae_model';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="src.spyice.models.radiative_model" href="spyice.models.radiative_model.html" />
+    <link rel="prev" title="src.spyice.models.stefan_problem" href="spyice.models.stefan_problem.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.0.0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="auto">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">SpyIce  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../report/_index.html">
+    About
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quick_start/_index.html">
+    How-to
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="_index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../report/_index.html">
+    About
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quick_start/_index.html">
+    How-to
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="_index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="spyice.html">spyice package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="spyice.models.html">spyice.models package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.advection_diffusion.html">src.spyice.models.advection_diffusion</a></li>
+
+
+
+
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.sea_ice_model.html">src.spyice.models.sea_ice_model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.stefan_problem.html">src.spyice.models.stefan_problem</a></li>
+
+
+
+
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">src.spyice.models.algae_model</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.radiative_model.html">src.spyice.models.radiative_model</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.parameters.html">spyice.parameters package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.constants.html">src.spyice.parameters.constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.debug_constants.html">src.spyice.parameters.debug_constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.real_constants.html">src.spyice.parameters.real_constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.results_params.html">src.spyice.parameters.results_params</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.user_input.html">src.spyice.parameters.user_input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.algae_constants.html">spyice.parameters.algae_constants</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.postprocess.html">spyice.postprocess package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="spyice.postprocess.analysis.html">src.spyice.postprocess.analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.postprocess.visualise_model.html">src.spyice.postprocess.visualise_model</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.preprocess.html">spyice.preprocess package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.geometry_settings.html">src.spyice.preprocess.geometry_settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.initial_boundary_conditions.html">src.spyice.preprocess.initial_boundary_conditions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.modify_initial_boundary.html">src.spyice.preprocess.modify_initial_boundary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.pre_process.html">src.spyice.preprocess.pre_process</a></li>
+
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.store.html">src.spyice.preprocess.store</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.utils.html">spyice.utils package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.config_sort.html">src.spyice.utils.config_sort</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.error_norms.html">src.spyice.utils.error_norms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.helpers.html">src.spyice.utils.helpers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.spyice_exceptions.html">src.spyice.utils.spyice_exceptions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.spyice_logger.html">src.spyice.utils.spyice_logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.initial_userinput.html">spyice.utils.initial_userinput</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.create_directory.html">spyice.utils.create_directory</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.coefficients.html">src.spyice.coefficients</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.main_process.html">src.spyice.main_process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.rhs.html">src.spyice.rhs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.statevariables.html">src.spyice.statevariables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html">src.spyice.update_physical_values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.misc_subroutines.html">spyice.misc_subroutines</a></li>
+
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="_index.html" class="nav-link">SpyIce</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="spyice.html" class="nav-link">spyice package</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="spyice.models.html" class="nav-link">spyice.models package</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">src.spyice.models.algae_model</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="src-spyice-models-algae-model">
+<h1>src.spyice.models.algae_model<a class="headerlink" href="#src-spyice-models-algae-model" title="Link to this heading">#</a></h1>
+<p>This module contains functions for modeling <strong>sea-ice algae biogeochemistry</strong>, including:</p>
+<ul class="simple">
+<li><p>Salinity, temperature, and nutrient-dependent growth functions.</p></li>
+<li><p>Photosynthetically active radiation (PAR) modeling through ice.</p></li>
+<li><p>Chlorophyll-to-carbon ratio calculations.</p></li>
+<li><p>Carbon and nutrient uptake dynamics.</p></li>
+<li><p>Radiation absorption by ice algae.</p></li>
+<li><p>Bulk tracer and chlorophyll calculations.</p></li>
+<li><p>ODE-based updates for biologically active layers (BAL).</p></li>
+</ul>
+<p>The module is designed for process-based modeling in ice-ocean systems and supports depth-resolved calculations.</p>
+</section>
+<section id="functions">
+<h1>Functions<a class="headerlink" href="#functions" title="Link to this heading">#</a></h1>
+<section id="fs-salinity">
+<h2>fs_salinity<a class="headerlink" href="#fs-salinity" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="fs_salinity">
+<span class="sig-name descname"><span class="pre">fs_salinity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s_br_array</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fs_salinity" title="Link to this definition">#</a></dt>
+<dd><p>Compute the salinity limitation function <span class="math notranslate nohighlight">\(f_s\)</span> for algae growth.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>s_br_array</strong> (<em>numpy.ndarray</em>) – Salinity in g kg^-1.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Salinity function <span class="math notranslate nohighlight">\(f_s\)</span>.</p>
+</dd>
+</dl>
+<p>Formula:</p>
+<div class="math notranslate nohighlight">
+\[f_s = \exp\Big(-(2.16 - a - b)^2\Big),
+\quad
+a = 8.3 \cdot 10^{-5} s^{2.11},
+\quad
+b = 0.55 \log s\]</div>
+</dd></dl>
+
+</section>
+<section id="ft-temperature">
+<h2>ft_temperature<a class="headerlink" href="#ft-temperature" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ft_temperature">
+<span class="sig-name descname"><span class="pre">ft_temperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t_c_array</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ft_temperature" title="Link to this definition">#</a></dt>
+<dd><p>Compute the temperature limitation function <span class="math notranslate nohighlight">\(f_t\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>t_c_array</strong> (<em>numpy.ndarray</em>) – Temperature in Celsius.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Temperature function <span class="math notranslate nohighlight">\(f_t\)</span>.</p>
+</dd>
+</dl>
+<p>Formula:</p>
+<div class="math notranslate nohighlight">
+\[f_t = \exp(r_g (T - 273.15)), \quad r_g = 0.0633\]</div>
+</dd></dl>
+
+</section>
+<section id="ln-nutrient">
+<h2>ln_nutrient<a class="headerlink" href="#ln-nutrient" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ln_nutrient">
+<span class="sig-name descname"><span class="pre">ln_nutrient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">c_n_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ln_nutrient" title="Link to this definition">#</a></dt>
+<dd><p>Compute nutrient limitation function <span class="math notranslate nohighlight">\(l_n\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>c_n_array</strong> (<em>numpy.ndarray</em>) – Nutrient concentration in mmol m^-3.</p></li>
+<li><p><strong>k</strong> (<em>float</em>) – Half-saturation constant (mmol m^-3).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Nutrient limitation function <span class="math notranslate nohighlight">\(l_n\)</span>.</p>
+</dd>
+</dl>
+<p>Formula:</p>
+<div class="math notranslate nohighlight">
+\[l_n = \frac{c_n}{k + c_n}\]</div>
+</dd></dl>
+
+</section>
+<section id="photosynthetic-active-radiation">
+<h2>photosynthetic_active_radiation<a class="headerlink" href="#photosynthetic-active-radiation" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="photosynthetic_active_radiation">
+<span class="sig-name descname"><span class="pre">photosynthetic_active_radiation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kappa</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i_0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.17</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">albedo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.58</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">F_s_w</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#photosynthetic_active_radiation" title="Link to this definition">#</a></dt>
+<dd><p>Calculate Photosynthetically Active Radiation (PAR) at depth.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>z</strong> (<em>float</em><em> or </em><em>np.ndarray</em>) – Depth in ice (m).</p></li>
+<li><p><strong>kappa</strong> (<em>float</em>) – Attenuation coefficient (m^-1).</p></li>
+<li><p><strong>i_0</strong> (<em>float</em>) – Incident solar radiation factor.</p></li>
+<li><p><strong>albedo</strong> (<em>float</em>) – Ice/snow albedo.</p></li>
+<li><p><strong>F_s_w</strong> (<em>float</em>) – Incoming solar irradiance (W m^-2).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>PAR in W m^-2.</p>
+</dd>
+</dl>
+<p>Formula:</p>
+<div class="math notranslate nohighlight">
+\[I(z) = I_0 \exp(-\kappa z), \quad
+PAR = 4.91 \cdot I(z)\]</div>
+</dd></dl>
+
+</section>
+<section id="cholorophyl-to-c-ratio-par">
+<h2>cholorophyl_to_C_ratio_par<a class="headerlink" href="#cholorophyl-to-c-ratio-par" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="cholorophyl_to_C_ratio_par">
+<span class="sig-name descname"><span class="pre">cholorophyl_to_C_ratio_par</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PAR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ln</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">E</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_chl_c_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_chl_c_min</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cholorophyl_to_C_ratio_par" title="Link to this definition">#</a></dt>
+<dd><p>Chlorophyll-to-carbon ratio as a function of PAR and nutrients.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>PAR</strong> (<em>np.ndarray</em>) – Photosynthetically active radiation.</p></li>
+<li><p><strong>ln</strong> (<em>np.ndarray</em>) – Nutrient limitation function.</p></li>
+<li><p><strong>E</strong> (<em>float</em>) – Half-saturation energy.</p></li>
+<li><p><strong>r_chl_c_max</strong> (<em>float</em>) – Maximum chlorophyll-to-carbon ratio.</p></li>
+<li><p><strong>r_chl_c_min</strong> (<em>float</em>) – Minimum chlorophyll-to-carbon ratio.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Chlorophyll-to-carbon ratio.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="photosynthesis-rate-maximum-light">
+<h2>Photosynthesis_rate_maximum_light<a class="headerlink" href="#photosynthesis-rate-maximum-light" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="Photosynthesis_rate_maximum_light">
+<span class="sig-name descname"><span class="pre">Photosynthesis_rate_maximum_light</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mu_m</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ft</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ln</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_chl_c_par</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Photosynthesis_rate_maximum_light" title="Link to this definition">#</a></dt>
+<dd><p>Compute maximum potential photosynthesis rate <span class="math notranslate nohighlight">\(P_m\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mu_m</strong> (<em>float</em>) – Maximum photosynthesis rate (s^-1).</p></li>
+<li><p><strong>fs</strong> (<em>np.ndarray</em>) – Salinity function.</p></li>
+<li><p><strong>ft</strong> (<em>np.ndarray</em>) – Temperature function.</p></li>
+<li><p><strong>ln</strong> (<em>np.ndarray</em>) – Nutrient function.</p></li>
+<li><p><strong>r_chl_c_par</strong> (<em>np.ndarray</em>) – Chlorophyll-to-carbon ratio.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Maximum photosynthesis rate.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="ek-light">
+<h2>Ek_light<a class="headerlink" href="#ek-light" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="Ek_light">
+<span class="sig-name descname"><span class="pre">Ek_light</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Photosynthesis_rate</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Ek_light" title="Link to this definition">#</a></dt>
+<dd><p>Light limitation parameter <span class="math notranslate nohighlight">\(E_k\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Photosynthesis_rate</strong> (<em>np.ndarray</em>) – Maximum photosynthesis rate.</p></li>
+<li><p><strong>alpha</strong> (<em>float</em>) – Photosynthetic efficiency.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Light limitation parameter <span class="math notranslate nohighlight">\(E_k = P_m / \alpha\)</span></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="ek-light-tanh">
+<h2>Ek_light_tanh<a class="headerlink" href="#ek-light-tanh" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="Ek_light_tanh">
+<span class="sig-name descname"><span class="pre">Ek_light_tanh</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PAR_arr</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Ek_arr</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Ek_light_tanh" title="Link to this definition">#</a></dt>
+<dd><p>Tanh-based light limitation factor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>PAR_arr</strong> (<em>np.ndarray</em>) – Photosynthetically active radiation.</p></li>
+<li><p><strong>Ek_arr</strong> (<em>np.ndarray</em>) – Light limitation parameter.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Light limitation as tanh(PAR / Ek)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="photosynthetic-rate">
+<h2>photosynthetic_rate<a class="headerlink" href="#photosynthetic-rate" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="photosynthetic_rate">
+<span class="sig-name descname"><span class="pre">photosynthetic_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_mu</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ft</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ln</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lpar</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#photosynthetic_rate" title="Link to this definition">#</a></dt>
+<dd><p>Compute actual photosynthetic rate considering light, temperature, salinity, and nutrient limitation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>max_mu</strong> (<em>float</em>) – Maximum photosynthesis rate.</p></li>
+<li><p><strong>fs</strong> (<em>np.ndarray</em>) – Salinity function.</p></li>
+<li><p><strong>ft</strong> (<em>np.ndarray</em>) – Temperature function.</p></li>
+<li><p><strong>ln</strong> (<em>np.ndarray</em>) – Nutrient function.</p></li>
+<li><p><strong>lpar</strong> (<em>np.ndarray</em>) – Light limitation factor.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Photosynthetic rate.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="fs-ft-fs-ft-ln">
+<h2>fs_ft / fs_ft_ln<a class="headerlink" href="#fs-ft-fs-ft-ln" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="fs_ft">
+<span class="sig-name descname"><span class="pre">fs_ft</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f_s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_t</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fs_ft" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="fs_ft_ln">
+<span class="sig-name descname"><span class="pre">fs_ft_ln</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f_s</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l_n</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#fs_ft_ln" title="Link to this definition">#</a></dt>
+<dd><p>Combine limitation functions multiplicatively:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f_s \cdot f_t\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(f_s \cdot f_t \cdot l_n\)</span></p></li>
+</ul>
+</dd></dl>
+
+</section>
+<section id="model-algae-processes">
+<h2>model_algae_processes<a class="headerlink" href="#model-algae-processes" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="model_algae_processes">
+<span class="sig-name descname"><span class="pre">model_algae_processes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s_br_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_c_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_n_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">z_array</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">...</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model_algae_processes" title="Link to this definition">#</a></dt>
+<dd><p>High-level function to compute depth-resolved algae growth:</p>
+<ul class="simple">
+<li><p>Salinity, temperature, nutrient limitation</p></li>
+<li><p>PAR calculation</p></li>
+<li><p>Chlorophyll-to-carbon ratio</p></li>
+<li><p>Maximum photosynthesis</p></li>
+<li><p>Light limitation</p></li>
+<li><p>Actual photosynthetic rate</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple (mu, PAR, nutrient_function)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="ode-update-carbon-nutrient-uptake">
+<h2>ode_update_carbon_nutrient_uptake<a class="headerlink" href="#ode-update-carbon-nutrient-uptake" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="ode_update_carbon_nutrient_uptake">
+<span class="sig-name descname"><span class="pre">ode_update_carbon_nutrient_uptake</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">salinity_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nutrient_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cc_old</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cn_old</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_n_c</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.12</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ode_update_carbon_nutrient_uptake" title="Link to this definition">#</a></dt>
+<dd><p>Update carbon and nutrient concentrations for algae over a timestep <cite>dt</cite>.</p>
+</dd></dl>
+
+</section>
+<section id="chla-algae">
+<h2>chla_algae<a class="headerlink" href="#chla-algae" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="chla_algae">
+<span class="sig-name descname"><span class="pre">chla_algae</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">PAR</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nutrient_function</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c_bulk_tracer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#chla_algae" title="Link to this definition">#</a></dt>
+<dd><p>Compute chlorophyll-a bulk concentration from carbon tracer.</p>
+</dd></dl>
+
+</section>
+<section id="radiation-algae">
+<h2>radiation_algae<a class="headerlink" href="#radiation-algae" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="radiation_algae">
+<span class="sig-name descname"><span class="pre">radiation_algae</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chla_bulk_z</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">I_array</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#radiation_algae" title="Link to this definition">#</a></dt>
+<dd><p>Compute absorbed radiation by algae in ice.</p>
+</dd></dl>
+
+</section>
+<section id="get-bulk-tracer-concentration">
+<h2>get_bulk_tracer_concentration<a class="headerlink" href="#get-bulk-tracer-concentration" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="get_bulk_tracer_concentration">
+<span class="sig-name descname"><span class="pre">get_bulk_tracer_concentration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">liquid_fraction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">brine_concentration</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#get_bulk_tracer_concentration" title="Link to this definition">#</a></dt>
+<dd><p>Compute bulk tracer concentration considering liquid fraction.</p>
+</dd></dl>
+
+</section>
+<section id="biogeochemical-model-biogeochemical-model-at-alldepths">
+<h2>biogeochemical_model / biogeochemical_model_at_alldepths<a class="headerlink" href="#biogeochemical-model-biogeochemical-model-at-alldepths" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="biogeochemical_model">
+<span class="sig-name descname"><span class="pre">biogeochemical_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">salinity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">liquid_fraction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nutrient_concentration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">carbon_concentration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thickness_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thickness</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biogeochemical_model" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="biogeochemical_model_at_alldepths">
+<span class="sig-name descname"><span class="pre">biogeochemical_model_at_alldepths</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">salinity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">liquid_fraction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nutrient_concentration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">carbon_concentration</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thickness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thickness_index</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#biogeochemical_model_at_alldepths" title="Link to this definition">#</a></dt>
+<dd><p>Full depth-resolved or interface-level biogeochemical updates for algae:</p>
+<ul class="simple">
+<li><p>Photosynthesis</p></li>
+<li><p>Carbon and nutrient uptake</p></li>
+<li><p>Bulk tracer and chlorophyll</p></li>
+<li><p>Radiation absorption</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><p>Updated field arrays:</p>
+<ul class="simple">
+<li><p>Carbon concentration</p></li>
+<li><p>Nutrient concentration</p></li>
+<li><p>Photosynthetic rate</p></li>
+<li><p>Radiation</p></li>
+<li><p>Chlorophyll-a bulk</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="spyice.models.stefan_problem.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">src.spyice.models.stefan_problem</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="spyice.models.radiative_model.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">src.spyice.models.radiative_model</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">src.spyice.models.algae_model</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fs-salinity">fs_salinity</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fs_salinity"><code class="docutils literal notranslate"><span class="pre">fs_salinity()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ft-temperature">ft_temperature</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ft_temperature"><code class="docutils literal notranslate"><span class="pre">ft_temperature()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ln-nutrient">ln_nutrient</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ln_nutrient"><code class="docutils literal notranslate"><span class="pre">ln_nutrient()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#photosynthetic-active-radiation">photosynthetic_active_radiation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#photosynthetic_active_radiation"><code class="docutils literal notranslate"><span class="pre">photosynthetic_active_radiation()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cholorophyl-to-c-ratio-par">cholorophyl_to_C_ratio_par</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cholorophyl_to_C_ratio_par"><code class="docutils literal notranslate"><span class="pre">cholorophyl_to_C_ratio_par()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#photosynthesis-rate-maximum-light">Photosynthesis_rate_maximum_light</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Photosynthesis_rate_maximum_light"><code class="docutils literal notranslate"><span class="pre">Photosynthesis_rate_maximum_light()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ek-light">Ek_light</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Ek_light"><code class="docutils literal notranslate"><span class="pre">Ek_light()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ek-light-tanh">Ek_light_tanh</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Ek_light_tanh"><code class="docutils literal notranslate"><span class="pre">Ek_light_tanh()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#photosynthetic-rate">photosynthetic_rate</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#photosynthetic_rate"><code class="docutils literal notranslate"><span class="pre">photosynthetic_rate()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fs-ft-fs-ft-ln">fs_ft / fs_ft_ln</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fs_ft"><code class="docutils literal notranslate"><span class="pre">fs_ft()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fs_ft_ln"><code class="docutils literal notranslate"><span class="pre">fs_ft_ln()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-algae-processes">model_algae_processes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model_algae_processes"><code class="docutils literal notranslate"><span class="pre">model_algae_processes()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ode-update-carbon-nutrient-uptake">ode_update_carbon_nutrient_uptake</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ode_update_carbon_nutrient_uptake"><code class="docutils literal notranslate"><span class="pre">ode_update_carbon_nutrient_uptake()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chla-algae">chla_algae</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chla_algae"><code class="docutils literal notranslate"><span class="pre">chla_algae()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#radiation-algae">radiation_algae</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#radiation_algae"><code class="docutils literal notranslate"><span class="pre">radiation_algae()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-bulk-tracer-concentration">get_bulk_tracer_concentration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get_bulk_tracer_concentration"><code class="docutils literal notranslate"><span class="pre">get_bulk_tracer_concentration()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#biogeochemical-model-biogeochemical-model-at-alldepths">biogeochemical_model / biogeochemical_model_at_alldepths</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#biogeochemical_model"><code class="docutils literal notranslate"><span class="pre">biogeochemical_model()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#biogeochemical_model_at_alldepths"><code class="docutils literal notranslate"><span class="pre">biogeochemical_model_at_alldepths()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/api/spyice.models.algae_model.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Sneha Iyer.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

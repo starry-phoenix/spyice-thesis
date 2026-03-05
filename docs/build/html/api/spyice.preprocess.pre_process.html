@@ -42,6 +42,7 @@
     <script src="../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/spyice.preprocess.pre_process';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -145,6 +146,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
       
@@ -238,6 +246,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
           
@@ -269,8 +284,21 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="spyice.html">spyice package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 has-children"><a class="reference internal" href="spyice.models.html">spyice.models package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="spyice.models.advection_diffusion.html">src.spyice.models.advection_diffusion</a></li>
+
+
+
+
+
 <li class="toctree-l3"><a class="reference internal" href="spyice.models.sea_ice_model.html">src.spyice.models.sea_ice_model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.models.stefan_problem.html">src.spyice.models.stefan_problem</a></li>
+
+
+
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.algae_model.html">src.spyice.models.algae_model</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.radiative_model.html">src.spyice.models.radiative_model</a></li>
+
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="spyice.parameters.html">spyice.parameters package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -279,6 +307,7 @@
 <li class="toctree-l3"><a class="reference internal" href="spyice.parameters.real_constants.html">src.spyice.parameters.real_constants</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.parameters.results_params.html">src.spyice.parameters.results_params</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.parameters.user_input.html">src.spyice.parameters.user_input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.algae_constants.html">spyice.parameters.algae_constants</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="spyice.postprocess.html">spyice.postprocess package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -291,6 +320,8 @@
 <li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.initial_boundary_conditions.html">src.spyice.preprocess.initial_boundary_conditions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.modify_initial_boundary.html">src.spyice.preprocess.modify_initial_boundary</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">src.spyice.preprocess.pre_process</a></li>
+
+
 <li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.store.html">src.spyice.preprocess.store</a></li>
 </ul>
 </details></li>
@@ -300,6 +331,10 @@
 <li class="toctree-l3"><a class="reference internal" href="spyice.utils.helpers.html">src.spyice.utils.helpers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.utils.spyice_exceptions.html">src.spyice.utils.spyice_exceptions module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.utils.spyice_logger.html">src.spyice.utils.spyice_logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.initial_userinput.html">spyice.utils.initial_userinput</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.create_directory.html">spyice.utils.create_directory</a></li>
+
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="spyice.coefficients.html">src.spyice.coefficients</a></li>
@@ -307,6 +342,8 @@
 <li class="toctree-l2"><a class="reference internal" href="spyice.rhs.html">src.spyice.rhs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="spyice.statevariables.html">src.spyice.statevariables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html">src.spyice.update_physical_values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.misc_subroutines.html">spyice.misc_subroutines</a></li>
+
 </ul>
 </details></li>
 </ul>
@@ -370,182 +407,162 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="module-src.spyice.preprocess.pre_process">
-<span id="src-spyice-preprocess-pre-process"></span><h1>src.spyice.preprocess.pre_process<a class="headerlink" href="#module-src.spyice.preprocess.pre_process" title="Link to this heading">#</a></h1>
+  <section id="src-spyice-preprocess-pre-process">
+<h1>src.spyice.preprocess.pre_process<a class="headerlink" href="#src-spyice-preprocess-pre-process" title="Link to this heading">#</a></h1>
+<p>This module handles <strong>preprocessing of input data</strong> for the sea ice model. It sets up:</p>
+<ul class="simple">
+<li><p>User configuration and input data.</p></li>
+<li><p>Geometry and grid settings.</p></li>
+<li><p>Initial and boundary conditions.</p></li>
+<li><p>Enthalpy calculations (solid and bulk).</p></li>
+<li><p>Ice thickness initialization.</p></li>
+</ul>
+</section>
+<section id="classes">
+<h1>Classes<a class="headerlink" href="#classes" title="Link to this heading">#</a></h1>
+<section id="preprocessdata">
+<h2>PreprocessData<a class="headerlink" href="#preprocessdata" title="Link to this heading">#</a></h2>
 <dl class="py class">
-<dt class="sig sig-object py" id="src.spyice.preprocess.pre_process.PreProcess">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.spyice.preprocess.pre_process.</span></span><span class="sig-name descname"><span class="pre">PreProcess</span></span><a class="reference internal" href="../_modules/src/spyice/preprocess/pre_process.html#PreProcess"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.preprocess.pre_process.PreProcess" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput" title="src.spyice.parameters.user_input.UserInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">UserInput</span></code></a>, <a class="reference internal" href="spyice.preprocess.geometry_settings.html#src.spyice.preprocess.geometry_settings.GeometrySettings" title="src.spyice.preprocess.geometry_settings.GeometrySettings"><code class="xref py py-class docutils literal notranslate"><span class="pre">GeometrySettings</span></code></a>, <a class="reference internal" href="spyice.parameters.results_params.html#src.spyice.parameters.results_params.ResultsParams" title="src.spyice.parameters.results_params.ResultsParams"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResultsParams</span></code></a></p>
-<p>Class for preprocessing data before modeling.</p>
-<p>Initialize the PreProcess class.
-:param config_data: The configuration data object.
-:type config_data: ConfigData
-:param output_dir: The output directory.
-:type output_dir: str</p>
-<dl class="field-list simple">
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>None</strong> – </p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.preprocess.pre_process.PreProcess.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">constants_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/preprocess/pre_process.html#PreProcess.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.preprocess.pre_process.PreProcess.__init__" title="Link to this definition">#</a></dt>
-<dd><p>Initialize the PreProcess class.
-:param config_data: The configuration data object.
-:type config_data: ConfigData
-:param output_dir: The output directory.
-:type output_dir: str</p>
-<dl class="field-list simple">
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>None</strong> – </p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.preprocess.pre_process.PreProcess.get_userinput">
-<span class="sig-name descname"><span class="pre">get_userinput</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/preprocess/pre_process.html#PreProcess.get_userinput"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.preprocess.pre_process.PreProcess.get_userinput" title="Link to this definition">#</a></dt>
-<dd><p>Returns a UserInput object with the following attributes:</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>self</strong> (<a class="reference internal" href="#src.spyice.preprocess.pre_process.PreProcess" title="src.spyice.preprocess.pre_process.PreProcess"><em>PreProcess</em></a>) – The PreProcess instance.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>A UserInput object with the following attributes:</dt><dd><ul class="simple">
-<li><p>constants: The constants attribute.</p></li>
-<li><p>grid_timestep_dt: The grid_timestep_dt attribute.</p></li>
-<li><p>initial_salinity: The initial_salinity attribute.</p></li>
-<li><p>dir_output_name: The dir_output_name attribute.</p></li>
-<li><p>max_iterations: The max_iterations attribute.</p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput" title="src.spyice.parameters.user_input.UserInput">UserInput</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.preprocess.pre_process.PreProcess.get_variables">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_variables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir_final</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/preprocess/pre_process.html#PreProcess.get_variables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.preprocess.pre_process.PreProcess.get_variables" title="Link to this definition">#</a></dt>
-<dd><p>Retrieves variables and user input data after preprocessing.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>cls</strong> – The class object.</p></li>
-<li><p><strong>config</strong> – The configuration object.</p></li>
-<li><p><strong>out_dir_final</strong> (<em>str</em>) – The output directory.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>A tuple containing the filtered variables and user input data.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>tuple[<a class="reference internal" href="#src.spyice.preprocess.pre_process.PreprocessData" title="src.spyice.preprocess.pre_process.PreprocessData"><em>PreprocessData</em></a>, <a class="reference internal" href="spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput" title="src.spyice.parameters.user_input.UserInput"><em>UserInput</em></a>]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.preprocess.pre_process.PreProcess.preprocess">
-<span class="sig-name descname"><span class="pre">preprocess</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/preprocess/pre_process.html#PreProcess.preprocess"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.preprocess.pre_process.PreProcess.preprocess" title="Link to this definition">#</a></dt>
-<dd><p>Preprocesses the data before running the simulation.
-This method sets up the initial conditions and boundary conditions for the simulation.
-It calculates the solid enthalpy and updates the enthalpy based on temperature, salinity, and liquid fraction.
-Finally, it initializes the ice thickness and prints a message indicating that the initial and boundary conditions have been applied.</p>
-<blockquote>
-<div><dl class="simple">
-<dt>Args:</dt><dd><p>None</p>
-</dd>
-</dl>
-</div></blockquote>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.preprocess.pre_process.PreProcess.set_dataclass">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_dataclass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_to_be_converted</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataclass</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/preprocess/pre_process.html#PreProcess.set_dataclass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.preprocess.pre_process.PreProcess.set_dataclass" title="Link to this definition">#</a></dt>
-<dd><p>Sets the attributes of a dataclass object using a dictionary.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>data_to_be_converted</strong> (<em>dict</em>) – A dictionary containing the attribute names and values to be set.</p></li>
-<li><p><strong>dataclass</strong> (<em>dataclass</em>) – The dataclass object to be modified.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The modified dataclass object with the attributes set.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dataclass</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.preprocess.pre_process.PreProcess.set_preprocess">
-<span class="sig-name descname"><span class="pre">set_preprocess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/preprocess/pre_process.html#PreProcess.set_preprocess"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.preprocess.pre_process.PreProcess.set_preprocess" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="src.spyice.preprocess.pre_process.PreprocessData">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.spyice.preprocess.pre_process.</span></span><span class="sig-name descname"><span class="pre">PreprocessData</span></span><a class="reference internal" href="../_modules/src/spyice/preprocess/pre_process.html#PreprocessData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.preprocess.pre_process.PreprocessData" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Class representing the preprocessing of data.</p>
+<dt class="sig sig-object py" id="PreprocessData">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">PreprocessData</span></span><a class="headerlink" href="#PreprocessData" title="Link to this definition">#</a></dt>
+<dd><p>Data class representing preprocessing status.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>is_preprocessing</strong> (<em>bool</em>) – Flag indicating if preprocessing is enabled.</p>
+<dd class="field-odd"><p><strong>is_preprocessing</strong> (<em>bool</em>) – Flag indicating whether preprocessing is enabled. Defaults to True.</p>
 </dd>
 </dl>
+</dd></dl>
+
+</section>
+<section id="preprocess">
+<h2>PreProcess<a class="headerlink" href="#preprocess" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="PreProcess">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">PreProcess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">UserInput</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">GeometrySettings</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ResultsParams</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PreProcess" title="Link to this definition">#</a></dt>
+<dd><p>Main class for preprocessing input data before simulation.</p>
+<p><strong>Initialization</strong>:</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.preprocess.pre_process.PreprocessData.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">is_preprocessing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.spyice.preprocess.pre_process.PreprocessData.__init__" title="Link to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<dt class="sig sig-object py" id="PreProcess.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">constants_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#PreProcess.__init__" title="Link to this definition">#</a></dt>
+<dd><p>Initialize preprocessing with constants, geometry, and results parameters.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>is_preprocessing</strong> (<em>bool</em>)</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>constants_type</strong> (<em>str</em>) – Type of constants (“real” or other).</p></li>
+<li><p><strong>config_data</strong> (<a class="reference internal" href="spyice.utils.config_sort.html#src.spyice.utils.config_sort.ConfigData" title="src.spyice.utils.config_sort.ConfigData"><em>ConfigData</em></a>) – Configuration data object.</p></li>
+<li><p><strong>output_dir</strong> (<em>str</em>) – Output directory.</p></li>
+</ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.spyice.preprocess.pre_process.PreprocessData.is_preprocessing">
-<span class="sig-name descname"><span class="pre">is_preprocessing</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></em><a class="headerlink" href="#src.spyice.preprocess.pre_process.PreprocessData.is_preprocessing" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
 </dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="src.spyice.preprocess.pre_process.set_up_iter">
-<span class="sig-prename descclassname"><span class="pre">src.spyice.preprocess.pre_process.</span></span><span class="sig-name descname"><span class="pre">set_up_iter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iter_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid_timestep_dt</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/preprocess/pre_process.html#set_up_iter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.preprocess.pre_process.set_up_iter" title="Link to this definition">#</a></dt>
-<dd><p>Sets up the iteration parameters for the simulation.
-:param iter_max: The maximum number of iterations.
-:type iter_max: int
-:param grid_timestep_dt: The time step for the grid.
-:type grid_timestep_dt: float</p>
+</section>
+<section id="methods">
+<h2>Methods<a class="headerlink" href="#methods" title="Link to this heading">#</a></h2>
+<section id="id1">
+<h3>preprocess<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<dl class="py method">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">preprocess</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#id0" title="Link to this definition">#</a></dt>
+<dd><p>Perform preprocessing steps:</p>
+<ul class="simple">
+<li><p>Sets up iteration time tracking.</p></li>
+<li><p>Initializes temperature, salinity, liquid fraction, and velocity arrays.</p></li>
+<li><p>Computes solid and total enthalpy.</p></li>
+<li><p>Initializes ice thickness.</p></li>
+</ul>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Always returns 0.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>int</p>
+<dd class="field-odd"><p>None</p>
 </dd>
 </dl>
 </dd></dl>
 
+</section>
+<section id="get-variables">
+<h3>get_variables<a class="headerlink" href="#get-variables" title="Link to this heading">#</a></h3>
+<dl class="py method">
+<dt class="sig sig-object py" id="get_variables">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_variables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cls</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_dir_final</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#PreprocessData" title="PreprocessData"><span class="pre">PreprocessData</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput" title="src.spyice.parameters.user_input.UserInput"><span class="pre">UserInput</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#get_variables" title="Link to this definition">#</a></dt>
+<dd><p>Retrieve variables and user input data after preprocessing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cls</strong> – Class object.</p></li>
+<li><p><strong>config</strong> – Configuration object.</p></li>
+<li><p><strong>out_dir_final</strong> – Output directory.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Tuple containing the dataclass with filtered variables and a UserInput object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="get-userinput">
+<h3>get_userinput<a class="headerlink" href="#get-userinput" title="Link to this heading">#</a></h3>
+<dl class="py method">
+<dt class="sig sig-object py" id="get_userinput">
+<span class="sig-name descname"><span class="pre">get_userinput</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput" title="src.spyice.parameters.user_input.UserInput"><span class="pre">UserInput</span></a></span></span><a class="headerlink" href="#get_userinput" title="Link to this definition">#</a></dt>
+<dd><p>Returns a <cite>UserInput</cite> object containing core input attributes such as constants, grid timestep, initial salinity, output directory, and maximum iterations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>UserInput object</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="set-dataclass">
+<h3>set_dataclass<a class="headerlink" href="#set-dataclass" title="Link to this heading">#</a></h3>
+<dl class="py method">
+<dt class="sig sig-object py" id="set_dataclass">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_dataclass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_to_be_converted</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataclass</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dataclass</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dataclass</span></span></span><a class="headerlink" href="#set_dataclass" title="Link to this definition">#</a></dt>
+<dd><p>Sets attributes of a dataclass object using a dictionary of values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_to_be_converted</strong> (<em>dict</em>) – Dictionary of attributes to set.</p></li>
+<li><p><strong>dataclass</strong> (<em>dataclass</em>) – Dataclass object to update.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Updated dataclass object</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+</section>
+<section id="functions">
+<h1>Functions<a class="headerlink" href="#functions" title="Link to this heading">#</a></h1>
+<section id="set-up-iter">
+<h2>set_up_iter<a class="headerlink" href="#set-up-iter" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="set_up_iter">
+<span class="sig-name descname"><span class="pre">set_up_iter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iter_max</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid_timestep_dt</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#set_up_iter" title="Link to this definition">#</a></dt>
+<dd><p>Compute and print iteration setup for the simulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>iter_max</strong> (<em>int</em>) – Maximum number of iterations.</p></li>
+<li><p><strong>grid_timestep_dt</strong> (<em>float</em>) – Time step for the grid.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>0 (placeholder return value)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
 </section>
 
 
@@ -595,22 +612,49 @@ Finally, it initializes the ice thickness and prints a message indicating that t
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.preprocess.pre_process.PreProcess"><code class="docutils literal notranslate"><span class="pre">PreProcess</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.preprocess.pre_process.PreProcess.__init__"><code class="docutils literal notranslate"><span class="pre">PreProcess.__init__()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.preprocess.pre_process.PreProcess.get_userinput"><code class="docutils literal notranslate"><span class="pre">PreProcess.get_userinput()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.preprocess.pre_process.PreProcess.get_variables"><code class="docutils literal notranslate"><span class="pre">PreProcess.get_variables()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.preprocess.pre_process.PreProcess.preprocess"><code class="docutils literal notranslate"><span class="pre">PreProcess.preprocess()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.preprocess.pre_process.PreProcess.set_dataclass"><code class="docutils literal notranslate"><span class="pre">PreProcess.set_dataclass()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.preprocess.pre_process.PreProcess.set_preprocess"><code class="docutils literal notranslate"><span class="pre">PreProcess.set_preprocess()</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">src.spyice.preprocess.pre_process</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#classes">Classes</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessdata">PreprocessData</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#PreprocessData"><code class="docutils literal notranslate"><span class="pre">PreprocessData</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.preprocess.pre_process.PreprocessData"><code class="docutils literal notranslate"><span class="pre">PreprocessData</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.preprocess.pre_process.PreprocessData.__init__"><code class="docutils literal notranslate"><span class="pre">PreprocessData.__init__()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.preprocess.pre_process.PreprocessData.is_preprocessing"><code class="docutils literal notranslate"><span class="pre">PreprocessData.is_preprocessing</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocess">PreProcess</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#PreProcess"><code class="docutils literal notranslate"><span class="pre">PreProcess</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#PreProcess.__init__"><code class="docutils literal notranslate"><span class="pre">PreProcess.__init__()</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.preprocess.pre_process.set_up_iter"><code class="docutils literal notranslate"><span class="pre">set_up_iter()</span></code></a></li>
 </ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">preprocess</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id0"><code class="docutils literal notranslate"><span class="pre">preprocess()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-variables">get_variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#get_variables"><code class="docutils literal notranslate"><span class="pre">get_variables()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#get-userinput">get_userinput</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#get_userinput"><code class="docutils literal notranslate"><span class="pre">get_userinput()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#set-dataclass">set_dataclass</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#set_dataclass"><code class="docutils literal notranslate"><span class="pre">set_dataclass()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-up-iter">set_up_iter</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#set_up_iter"><code class="docutils literal notranslate"><span class="pre">set_up_iter()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
   </nav></div>
 
   <div class="sidebar-secondary-item">

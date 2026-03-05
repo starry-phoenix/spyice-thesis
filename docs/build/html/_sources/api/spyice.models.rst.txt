@@ -10,6 +10,8 @@ Submodules
    spyice.models.advection_diffusion
    spyice.models.sea_ice_model
    spyice.models.stefan_problem
+   spyice.models.algae_model
+   spyice.models.radiative_model
 
 Module contents
 ---------------

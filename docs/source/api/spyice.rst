@@ -24,6 +24,7 @@ Submodules
    spyice.rhs
    spyice.statevariables
    spyice.update_physical_values
+   spyice.misc_subroutines
 
 Module contents
 ---------------

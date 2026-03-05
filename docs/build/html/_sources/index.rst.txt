@@ -11,11 +11,10 @@ The SPyIce package is a software tool that enables 1D finite difference simulati
   About <report/_index>
   How-to <quick_start/_index>
   API <api/_index>
+  User Guide <user_guide/_index>
 
 Indices and tables
 ==================
 
 * :ref:`genindex`
 * :ref:`modindex`
-
-

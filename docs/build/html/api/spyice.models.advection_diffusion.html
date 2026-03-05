@@ -42,6 +42,9 @@
     <script src="../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/spyice.models.advection_diffusion';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -145,6 +148,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
       
@@ -238,6 +248,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
           
@@ -269,8 +286,21 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="spyice.html">spyice package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="spyice.models.html">spyice.models package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">src.spyice.models.advection_diffusion</a></li>
+
+
+
+
+
 <li class="toctree-l3"><a class="reference internal" href="spyice.models.sea_ice_model.html">src.spyice.models.sea_ice_model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.models.stefan_problem.html">src.spyice.models.stefan_problem</a></li>
+
+
+
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.algae_model.html">src.spyice.models.algae_model</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.radiative_model.html">src.spyice.models.radiative_model</a></li>
+
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="spyice.parameters.html">spyice.parameters package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -279,6 +309,7 @@
 <li class="toctree-l3"><a class="reference internal" href="spyice.parameters.real_constants.html">src.spyice.parameters.real_constants</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.parameters.results_params.html">src.spyice.parameters.results_params</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.parameters.user_input.html">src.spyice.parameters.user_input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.algae_constants.html">spyice.parameters.algae_constants</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="spyice.postprocess.html">spyice.postprocess package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -291,6 +322,8 @@
 <li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.initial_boundary_conditions.html">src.spyice.preprocess.initial_boundary_conditions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.modify_initial_boundary.html">src.spyice.preprocess.modify_initial_boundary</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.pre_process.html">src.spyice.preprocess.pre_process</a></li>
+
+
 <li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.store.html">src.spyice.preprocess.store</a></li>
 </ul>
 </details></li>
@@ -300,6 +333,10 @@
 <li class="toctree-l3"><a class="reference internal" href="spyice.utils.helpers.html">src.spyice.utils.helpers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.utils.spyice_exceptions.html">src.spyice.utils.spyice_exceptions module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.utils.spyice_logger.html">src.spyice.utils.spyice_logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.initial_userinput.html">spyice.utils.initial_userinput</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.create_directory.html">spyice.utils.create_directory</a></li>
+
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="spyice.coefficients.html">src.spyice.coefficients</a></li>
@@ -307,6 +344,8 @@
 <li class="toctree-l2"><a class="reference internal" href="spyice.rhs.html">src.spyice.rhs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="spyice.statevariables.html">src.spyice.statevariables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html">src.spyice.update_physical_values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.misc_subroutines.html">spyice.misc_subroutines</a></li>
+
 </ul>
 </details></li>
 </ul>
@@ -370,258 +409,264 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="module-src.spyice.models.advection_diffusion">
-<span id="src-spyice-models-advection-diffusion"></span><h1>src.spyice.models.advection_diffusion<a class="headerlink" href="#module-src.spyice.models.advection_diffusion" title="Link to this heading">#</a></h1>
+  <section id="src-spyice-models-advection-diffusion">
+<h1>src.spyice.models.advection_diffusion<a class="headerlink" href="#src-spyice-models-advection-diffusion" title="Link to this heading">#</a></h1>
+<p>This module implements a 1D implicit finite-difference solver for the
+advection–diffusion equation:</p>
+<div class="math notranslate nohighlight">
+\[a \frac{\partial U}{\partial t}
++ b \frac{\partial U}{\partial z}
++ \frac{\partial}{\partial z}
+  \left(c \frac{\partial U}{\partial z}\right)
++ d \frac{\partial W}{\partial t}
+= 0\]</div>
+<p>The model supports both <strong>temperature</strong> and <strong>salinity</strong> evolution and
+includes optional boundary-condition treatments (Stefan, Buffo, Voller).</p>
+<p>—</p>
+</section>
+<section id="class-advectiondiffusion">
+<h1>Class: AdvectionDiffusion<a class="headerlink" href="#class-advectiondiffusion" title="Link to this heading">#</a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="src.spyice.models.advection_diffusion.AdvectionDiffusion">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.spyice.models.advection_diffusion.</span></span><span class="sig-name descname"><span class="pre">AdvectionDiffusion</span></span><a class="reference internal" href="../_modules/src/spyice/models/advection_diffusion.html#AdvectionDiffusion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.advection_diffusion.AdvectionDiffusion" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Class representing an advection-diffusion model.</p>
+<dt class="sig sig-object py" id="AdvectionDiffusion">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AdvectionDiffusion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">argument</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">W</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">W_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thickness_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_passed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_IC</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Stefan</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Buffo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Voller</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bc_neumann</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#AdvectionDiffusion" title="Link to this definition">#</a></dt>
+<dd><p>Class representing a 1D advection–diffusion model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>argument</strong> (<em>str</em>) – The argument for the advection-diffusion equation. Must be either “temperature” or “salinity”.</p></li>
-<li><p><strong>X</strong> (<em>float</em>) – The value of X ( Field values T or S).</p></li>
-<li><p><strong>source</strong> (<em>float</em>) – The source value.</p></li>
-<li><p><strong>X_initial</strong> (<em>float</em>) – The initial value of X (Field values T or S).</p></li>
-<li><p><strong>W</strong> (<em>float</em>) – Liquid fraction current value.</p></li>
-<li><p><strong>W_initial</strong> (<em>float</em>) – The initial value of Liquid fraction.</p></li>
-<li><p><strong>w</strong> (<em>float</em>) – The value of w convective upwind velocity.</p></li>
-<li><p><strong>dt</strong> (<em>float</em>) – The time step size.</p></li>
-<li><p><strong>dz</strong> (<em>float</em>) – The spatial step size.</p></li>
-<li><p><strong>nz</strong> (<em>int</em>) – The number of spatial steps.</p></li>
-<li><p><strong>t_passed</strong> (<em>float</em>) – The time passed.</p></li>
-<li><p><strong>S_IC</strong> (<em>float</em>) – The initial condition for S.</p></li>
-<li><p><strong>Stefan</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to use Stefan condition. Defaults to False.</p></li>
-<li><p><strong>Buffo</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to use Buffo condition. Defaults to False.</p></li>
-<li><p><strong>bc_neumann</strong> (<em>float</em><em>, </em><em>optional</em>) – The Neumann boundary condition. Defaults to None.</p></li>
+<li><p><strong>argument</strong> (<em>str</em>) – Either <code class="docutils literal notranslate"><span class="pre">&quot;temperature&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;salinity&quot;</span></code>.</p></li>
+<li><p><strong>X</strong> (<em>ndarray</em>) – Current field values.</p></li>
+<li><p><strong>source</strong> (<em>float</em>) – Source term.</p></li>
+<li><p><strong>X_initial</strong> (<em>ndarray</em>) – Field values from previous timestep.</p></li>
+<li><p><strong>W</strong> (<em>ndarray</em>) – Current liquid fraction.</p></li>
+<li><p><strong>W_initial</strong> (<em>ndarray</em>) – Previous liquid fraction.</p></li>
+<li><p><strong>thickness_index</strong> (<em>int</em>) – Index of ice thickness boundary.</p></li>
+<li><p><strong>w</strong> (<em>ndarray</em>) – Convective brine velocity.</p></li>
+<li><p><strong>dt</strong> (<em>float</em>) – Time step.</p></li>
+<li><p><strong>dz</strong> (<em>float</em>) – Spatial step.</p></li>
+<li><p><strong>nz</strong> (<em>int</em>) – Number of spatial grid cells.</p></li>
+<li><p><strong>t_passed</strong> (<em>float</em>) – Simulation time.</p></li>
+<li><p><strong>S_IC</strong> (<em>float</em>) – Initial salinity condition.</p></li>
+<li><p><strong>Stefan</strong> (<em>bool</em>) – Enable Stefan boundary formulation.</p></li>
+<li><p><strong>Buffo</strong> (<em>bool</em>) – Enable Buffo boundary formulation.</p></li>
+<li><p><strong>Voller</strong> (<em>bool</em>) – Enable Voller enthalpy formulation.</p></li>
+<li><p><strong>bc_neumann</strong> (<em>float</em>) – Optional Neumann boundary gradient.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><ul class="simple">
-<li><p><strong>AssertionError</strong> – If the argument is not “temperature” or “salinity”.</p></li>
-<li><p><strong>AssertionError</strong> – If both Stefan and Buffo conditions are set to True.</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.models.advection_diffusion.AdvectionDiffusion.Buffosolver">
-<span class="sig-name descname"><span class="pre">Buffosolver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/models/advection_diffusion.html#AdvectionDiffusion.Buffosolver"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.advection_diffusion.AdvectionDiffusion.Buffosolver" title="Link to this definition">#</a></dt>
-<dd><p>Solves a tridiagonal linear system using the Thomas algorithm.
-:param a: Lower diagonal of the tridiagonal matrix.
-:type a: np.ndarray
-:param b: Upper diagonal of the tridiagonal matrix.
-:type b: np.ndarray
-:param c: Main diagonal of the tridiagonal matrix.
-:type c: np.ndarray
-:param f: Right-hand side vector.
-:type f: np.ndarray</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Solution vector of the linear system.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>np.ndarray</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.models.advection_diffusion.AdvectionDiffusion.TDMAsolver">
-<span class="sig-name descname"><span class="pre">TDMAsolver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/models/advection_diffusion.html#AdvectionDiffusion.TDMAsolver"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.advection_diffusion.AdvectionDiffusion.TDMAsolver" title="Link to this definition">#</a></dt>
-<dd><p>Solves a tridiagonal matrix system using the TDMA (Thomas algorithm).
-:param a: Coefficients of the sub-diagonal elements.
-:type a: array-like
-:param b: Coefficients of the diagonal elements.
-:type b: array-like
-:param c: Coefficients of the super-diagonal elements.
-:type c: array-like
-:param d: Right-hand side vector.
-:type d: array-like</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Solution vector.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>array-like</p>
-</dd>
-</dl>
-<p class="rubric">References</p>
-<ul class="simple">
-<li><p>Tridiagonal matrix algorithm: <a class="reference external" href="http://en.wikipedia.org/wiki/Tridiagonal_matrix_algorithm">http://en.wikipedia.org/wiki/Tridiagonal_matrix_algorithm</a></p></li>
-<li><p>TDMA (Thomas algorithm): <a class="reference external" href="http://www.cfd-online.com/Wiki/">http://www.cfd-online.com/Wiki/</a><a href="#id1"><span class="problematic" id="id2">Tridiagonal_matrix_algorithm_</span></a>-_TDMA_(Thomas_algorithm)</p></li>
-</ul>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.models.advection_diffusion.AdvectionDiffusion.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">argument</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">W</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">W_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_passed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_IC</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Stefan</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Buffo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Voller</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bc_neumann</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/models/advection_diffusion.html#AdvectionDiffusion.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.advection_diffusion.AdvectionDiffusion.__init__" title="Link to this definition">#</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>argument</strong> (<em>str</em>) – The argument for the advection-diffusion equation. Must be either “temperature” or “salinity”.</p></li>
-<li><p><strong>X</strong> (<em>float</em>) – The value of X ( Field values T or S).</p></li>
-<li><p><strong>source</strong> (<em>float</em>) – The source value.</p></li>
-<li><p><strong>X_initial</strong> (<em>float</em>) – The initial value of X (Field values T or S).</p></li>
-<li><p><strong>W</strong> (<em>float</em>) – Liquid fraction current value.</p></li>
-<li><p><strong>W_initial</strong> (<em>float</em>) – The initial value of Liquid fraction.</p></li>
-<li><p><strong>w</strong> (<em>float</em>) – The value of w convective upwind velocity.</p></li>
-<li><p><strong>dt</strong> (<em>float</em>) – The time step size.</p></li>
-<li><p><strong>dz</strong> (<em>float</em>) – The spatial step size.</p></li>
-<li><p><strong>nz</strong> (<em>int</em>) – The number of spatial steps.</p></li>
-<li><p><strong>t_passed</strong> (<em>float</em>) – The time passed.</p></li>
-<li><p><strong>S_IC</strong> (<em>float</em>) – The initial condition for S.</p></li>
-<li><p><strong>Stefan</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to use Stefan condition. Defaults to False.</p></li>
-<li><p><strong>Buffo</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to use Buffo condition. Defaults to False.</p></li>
-<li><p><strong>bc_neumann</strong> (<em>float</em><em>, </em><em>optional</em>) – The Neumann boundary condition. Defaults to None.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><ul class="simple">
-<li><p><strong>AssertionError</strong> – If the argument is not “temperature” or “salinity”.</p></li>
-<li><p><strong>AssertionError</strong> – If both Stefan and Buffo conditions are set to True.</p></li>
+<li><p><strong>AssertionError</strong> – If invalid argument is provided.</p></li>
+<li><p><strong>AssertionError</strong> – If both Stefan and Buffo are enabled.</p></li>
 </ul>
 </dd>
 </dl>
 </dd></dl>
 
+<p>—</p>
+</section>
+<section id="methods">
+<h1>Methods<a class="headerlink" href="#methods" title="Link to this heading">#</a></h1>
+<section id="tdmasolver">
+<h2>TDMAsolver<a class="headerlink" href="#tdmasolver" title="Link to this heading">#</a></h2>
 <dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.models.advection_diffusion.AdvectionDiffusion.assemble_tridiagonal">
-<span class="sig-name descname"><span class="pre">assemble_tridiagonal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/models/advection_diffusion.html#AdvectionDiffusion.assemble_tridiagonal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.advection_diffusion.AdvectionDiffusion.assemble_tridiagonal" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.models.advection_diffusion.AdvectionDiffusion.factor_1">
-<span class="sig-name descname"><span class="pre">factor_1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">argument</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nz</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/models/advection_diffusion.html#AdvectionDiffusion.factor_1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.advection_diffusion.AdvectionDiffusion.factor_1" title="Link to this definition">#</a></dt>
-<dd><p>Factor 1 and avoid zero divison error</p>
+<dt class="sig sig-object py" id="TDMAsolver">
+<span class="sig-name descname"><span class="pre">TDMAsolver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#TDMAsolver" title="Link to this definition">#</a></dt>
+<dd><p>Solve a tridiagonal system using the Thomas algorithm.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>argument</strong> (<em>str</em>) – The argument value.</p></li>
-<li><p><strong>a</strong> (<em>numpy.ndarray</em>) – The array containing values for ‘a’.</p></li>
-<li><p><strong>c</strong> (<em>numpy.ndarray</em>) – The array containing values for ‘c’.</p></li>
-<li><p><strong>dt</strong> (<em>float</em>) – The value of ‘dt’.</p></li>
-<li><p><strong>dz</strong> (<em>float</em>) – The value of ‘dz’.</p></li>
-<li><p><strong>nz</strong> (<em>int</em>) – The value of ‘nz’.</p></li>
+<li><p><strong>a</strong> (<em>array</em>) – Sub-diagonal.</p></li>
+<li><p><strong>b</strong> (<em>array</em>) – Main diagonal.</p></li>
+<li><p><strong>c</strong> (<em>array</em>) – Super-diagonal.</p></li>
+<li><p><strong>d</strong> (<em>array</em>) – RHS vector.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>The calculated factor(s) based on the given argument.</dt><dd><p>If the argument is not “salinity”, returns a numpy.ndarray.
-If the argument is “salinity”, returns a list containing two numpy.ndarrays.</p>
+<dd class="field-even"><p>Solution vector.</p>
 </dd>
 </dl>
+</dd></dl>
+
+</section>
+<section id="buffosolver">
+<h2>Buffosolver<a class="headerlink" href="#buffosolver" title="Link to this heading">#</a></h2>
+<dl class="py method">
+<dt class="sig sig-object py" id="Buffosolver">
+<span class="sig-name descname"><span class="pre">Buffosolver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Buffosolver" title="Link to this definition">#</a></dt>
+<dd><p>Modified tridiagonal solver enforcing diagonal dominance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>ndarray</em>) – Lower diagonal.</p></li>
+<li><p><strong>b</strong> (<em>ndarray</em>) – Upper diagonal.</p></li>
+<li><p><strong>c</strong> (<em>ndarray</em>) – Main diagonal.</p></li>
+<li><p><strong>f</strong> (<em>ndarray</em>) – RHS vector.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Solution vector.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>AssertionError</strong> – If matrix is not diagonally dominant.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="set-up-tridiagonal">
+<h2>set_up_tridiagonal<a class="headerlink" href="#set-up-tridiagonal" title="Link to this heading">#</a></h2>
+<dl class="py method">
+<dt class="sig sig-object py" id="set_up_tridiagonal">
+<span class="sig-name descname"><span class="pre">set_up_tridiagonal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#set_up_tridiagonal" title="Link to this definition">#</a></dt>
+<dd><p>Construct diagonal vectors for the implicit scheme matrix.
+Handles separate logic for temperature and salinity,
+including upwinding and boundary adjustments.</p>
+</dd></dl>
+
+</section>
+<section id="assemble-tridiagonal">
+<h2>assemble_tridiagonal<a class="headerlink" href="#assemble-tridiagonal" title="Link to this heading">#</a></h2>
+<dl class="py method">
+<dt class="sig sig-object py" id="assemble_tridiagonal">
+<span class="sig-name descname"><span class="pre">assemble_tridiagonal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#assemble_tridiagonal" title="Link to this definition">#</a></dt>
+<dd><p>Assemble full matrix from diagonal vectors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Assembled system matrix.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="modify-tridiagonal-voller-scheme">
+<h2>modify_tridiagonal_voller_scheme<a class="headerlink" href="#modify-tridiagonal-voller-scheme" title="Link to this heading">#</a></h2>
+<dl class="py method">
+<dt class="sig sig-object py" id="modify_tridiagonal_voller_scheme">
+<span class="sig-name descname"><span class="pre">modify_tridiagonal_voller_scheme</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modify_tridiagonal_voller_scheme" title="Link to this definition">#</a></dt>
+<dd><p>Modify diagonal dominance for mushy-layer cells when
+using the Voller enthalpy scheme.</p>
+</dd></dl>
+
+</section>
+<section id="voller-x-array-set-zero-to-melt">
+<h2>voller_X_array_set_zero_to_melt<a class="headerlink" href="#voller-x-array-set-zero-to-melt" title="Link to this heading">#</a></h2>
+<dl class="py method">
+<dt class="sig sig-object py" id="voller_X_array_set_zero_to_melt">
+<span class="sig-name descname"><span class="pre">voller_X_array_set_zero_to_melt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_boundary</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voller_X_array_set_zero_to_melt" title="Link to this definition">#</a></dt>
+<dd><p>Force solution values above melting threshold to boundary value.</p>
+</dd></dl>
+
+</section>
+<section id="set-source-term">
+<h2>set_source_term<a class="headerlink" href="#set-source-term" title="Link to this heading">#</a></h2>
+<dl class="py method">
+<dt class="sig sig-object py" id="set_source_term">
+<span class="sig-name descname"><span class="pre">set_source_term</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#set_source_term" title="Link to this definition">#</a></dt>
+<dd><p>Compute discretized source term depending on field type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Source contribution.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="unknowns-matrix">
+<h2>unknowns_matrix<a class="headerlink" href="#unknowns-matrix" title="Link to this heading">#</a></h2>
+<dl class="py method">
+<dt class="sig sig-object py" id="unknowns_matrix">
+<span class="sig-name descname"><span class="pre">unknowns_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temperature_melt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">non_constant_physical_properties</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#unknowns_matrix" title="Link to this definition">#</a></dt>
+<dd><p>Solve the implicit linear system for the updated field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>temperature_melt</strong> (<em>float</em>) – Melting temperature.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>X_new</strong> (ndarray) — Updated solution</p></li>
+<li><p><strong>X_wind</strong> (ndarray) — Wind-corrected solution</p></li>
+<li><p><strong>A_before_correction</strong> (ndarray) — System matrix</p></li>
+</ul>
 </p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>numpy.ndarray or list</p>
-</dd>
 </dl>
 </dd></dl>
 
+</section>
+<section id="factor-1">
+<h2>factor_1<a class="headerlink" href="#factor-1" title="Link to this heading">#</a></h2>
 <dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.models.advection_diffusion.AdvectionDiffusion.factor_2">
-<span class="sig-name descname"><span class="pre">factor_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nz</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/models/advection_diffusion.html#AdvectionDiffusion.factor_2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.advection_diffusion.AdvectionDiffusion.factor_2" title="Link to this definition">#</a></dt>
-<dd><p>Calculates the factor2 array for advection-diffusion model.
-:param a: Array containing values for ‘a’.
-:type a: numpy.ndarray
-:param b: Array containing values for ‘b’.
-:type b: numpy.ndarray
-:param dt: Time step.
-:type dt: float
-:param dz: Spatial step.
-:type dz: float
-:param nz: Number of elements in the array.
-:type nz: int</p>
+<dt class="sig sig-object py" id="factor_1">
+<span class="sig-name descname"><span class="pre">factor_1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">argument</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nz</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#factor_1" title="Link to this definition">#</a></dt>
+<dd><p>Compute diffusion discretization factor.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Array containing the calculated factor2 values.</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>numpy.ndarray</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.models.advection_diffusion.AdvectionDiffusion.factor_3">
-<span class="sig-name descname"><span class="pre">factor_3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nz</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/models/advection_diffusion.html#AdvectionDiffusion.factor_3"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.advection_diffusion.AdvectionDiffusion.factor_3" title="Link to this definition">#</a></dt>
-<dd><p>Factor 3 and avoid zero division error.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>a</strong> (<em>numpy.ndarray</em>) – Array containing values.</p></li>
-<li><p><strong>d</strong> (<em>numpy.ndarray</em>) – Array containing values.</p></li>
-<li><p><strong>nz</strong> (<em>int</em>) – Number of elements.</p></li>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>ndarray for temperature</p></li>
+<li><p>tuple of ndarrays for salinity (central, plus, minus)</p></li>
 </ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Array containing factor 3 values.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>numpy.ndarray</p>
+</p>
 </dd>
 </dl>
 </dd></dl>
 
+</section>
+<section id="factor-2">
+<h2>factor_2<a class="headerlink" href="#factor-2" title="Link to this heading">#</a></h2>
 <dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.models.advection_diffusion.AdvectionDiffusion.modify_tridiagonal_voller_scheme">
-<span class="sig-name descname"><span class="pre">modify_tridiagonal_voller_scheme</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/models/advection_diffusion.html#AdvectionDiffusion.modify_tridiagonal_voller_scheme"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.advection_diffusion.AdvectionDiffusion.modify_tridiagonal_voller_scheme" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.models.advection_diffusion.AdvectionDiffusion.set_up_tridiagonal">
-<span class="sig-name descname"><span class="pre">set_up_tridiagonal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/models/advection_diffusion.html#AdvectionDiffusion.set_up_tridiagonal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.advection_diffusion.AdvectionDiffusion.set_up_tridiagonal" title="Link to this definition">#</a></dt>
-<dd><p>Set up the tridiagonal matrix for Salinity and Temperature.
-This method sets up the tridiagonal matrix for Salinity and Temperature calculations. It initializes the main diagonal (main_A), upper diagonal (upper_A), and lower diagonal (lower_A) of the matrix based on the given arguments.
-:param self: The object instance.</p>
+<dt class="sig sig-object py" id="factor_2">
+<span class="sig-name descname"><span class="pre">factor_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nz</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#factor_2" title="Link to this definition">#</a></dt>
+<dd><p>Compute advection discretization factor.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
+<dd class="field-odd"><p>ndarray</p>
 </dd>
 </dl>
 </dd></dl>
 
+</section>
+<section id="factor-3">
+<h2>factor_3<a class="headerlink" href="#factor-3" title="Link to this heading">#</a></h2>
 <dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.models.advection_diffusion.AdvectionDiffusion.unknowns_matrix">
-<span class="sig-name descname"><span class="pre">unknowns_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temperature_melt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">non_constant_physical_properties</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/models/advection_diffusion.html#AdvectionDiffusion.unknowns_matrix"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.advection_diffusion.AdvectionDiffusion.unknowns_matrix" title="Link to this definition">#</a></dt>
-<dd><p>Calculates the unknowns matrix for the advection-diffusion model.
-:returns:</p>
-<blockquote>
-<div><dl class="simple">
-<dt>A tuple containing the following elements:</dt><dd><ul class="simple">
-<li><p>X_new (ndarray): The solution vector for the unknowns.</p></li>
-<li><p>X_wind (ndarray): The solution vector corrected for brine movement.</p></li>
-<li><p>dt (float): The time step used in the calculation.</p></li>
+<dt class="sig sig-object py" id="factor_3">
+<span class="sig-name descname"><span class="pre">factor_3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nz</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#factor_3" title="Link to this definition">#</a></dt>
+<dd><p>Compute phase-coupling factor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>—</p>
+</section>
+</section>
+<section id="numerical-characteristics">
+<h1>Numerical Characteristics<a class="headerlink" href="#numerical-characteristics" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Implicit time discretization</p></li>
+<li><p>Finite difference spatial scheme</p></li>
+<li><p>Tridiagonal linear system</p></li>
+<li><p>Upwind advection (salinity)</p></li>
+<li><p>Optional enthalpy formulation (Voller)</p></li>
+<li><p>Stefan and Buffo boundary options</p></li>
 </ul>
-</dd>
-</dl>
-</div></blockquote>
-<dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>tuple</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.models.advection_diffusion.AdvectionDiffusion.voller_X_array_set_zero_to_melt">
-<span class="sig-name descname"><span class="pre">voller_X_array_set_zero_to_melt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_boundary</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/models/advection_diffusion.html#AdvectionDiffusion.voller_X_array_set_zero_to_melt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.advection_diffusion.AdvectionDiffusion.voller_X_array_set_zero_to_melt" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py data">
-<dt class="sig sig-object py" id="src.spyice.models.advection_diffusion.top_temp">
-<span class="sig-prename descclassname"><span class="pre">src.spyice.models.advection_diffusion.</span></span><span class="sig-name descname"><span class="pre">top_temp</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Stefan'</span></em><a class="headerlink" href="#src.spyice.models.advection_diffusion.top_temp" title="Link to this definition">#</a></dt>
-<dd><p>a * (dU/dt) +  b * (dU/dz) + d/dz(c * dU/dz) + d * (dW/dt) = 0</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Solves for X in Advection- Diffusion- Equation of the form</p>
-</dd>
-</dl>
-</dd></dl>
-
+<p>—</p>
+</section>
+<section id="dependencies">
+<h1>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">spyice.parameters.user_input</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spyice.coefficients.update_coefficients</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spyice.rhs.apply_boundary_condition</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spyice.rhs.correct_for_brine_movement</span></code></p></li>
+</ul>
+<p>—</p>
+</section>
+<section id="notes">
+<h1>Notes<a class="headerlink" href="#notes" title="Link to this heading">#</a></h1>
+<p>Only one of <code class="docutils literal notranslate"><span class="pre">Stefan</span></code> or <code class="docutils literal notranslate"><span class="pre">Buffo</span></code> may be active at a time.</p>
+<p>Diagonal dominance is required for the Buffo solver.</p>
+<p>Zero-division protection is implemented in factor calculations.</p>
 </section>
 
 
@@ -671,22 +716,63 @@ This method sets up the tridiagonal matrix for Salinity and Temperature calculat
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.advection_diffusion.AdvectionDiffusion"><code class="docutils literal notranslate"><span class="pre">AdvectionDiffusion</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.advection_diffusion.AdvectionDiffusion.Buffosolver"><code class="docutils literal notranslate"><span class="pre">AdvectionDiffusion.Buffosolver()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.advection_diffusion.AdvectionDiffusion.TDMAsolver"><code class="docutils literal notranslate"><span class="pre">AdvectionDiffusion.TDMAsolver()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.advection_diffusion.AdvectionDiffusion.__init__"><code class="docutils literal notranslate"><span class="pre">AdvectionDiffusion.__init__()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.advection_diffusion.AdvectionDiffusion.assemble_tridiagonal"><code class="docutils literal notranslate"><span class="pre">AdvectionDiffusion.assemble_tridiagonal()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.advection_diffusion.AdvectionDiffusion.factor_1"><code class="docutils literal notranslate"><span class="pre">AdvectionDiffusion.factor_1()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.advection_diffusion.AdvectionDiffusion.factor_2"><code class="docutils literal notranslate"><span class="pre">AdvectionDiffusion.factor_2()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.advection_diffusion.AdvectionDiffusion.factor_3"><code class="docutils literal notranslate"><span class="pre">AdvectionDiffusion.factor_3()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.advection_diffusion.AdvectionDiffusion.modify_tridiagonal_voller_scheme"><code class="docutils literal notranslate"><span class="pre">AdvectionDiffusion.modify_tridiagonal_voller_scheme()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.advection_diffusion.AdvectionDiffusion.set_up_tridiagonal"><code class="docutils literal notranslate"><span class="pre">AdvectionDiffusion.set_up_tridiagonal()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.advection_diffusion.AdvectionDiffusion.unknowns_matrix"><code class="docutils literal notranslate"><span class="pre">AdvectionDiffusion.unknowns_matrix()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.advection_diffusion.AdvectionDiffusion.voller_X_array_set_zero_to_melt"><code class="docutils literal notranslate"><span class="pre">AdvectionDiffusion.voller_X_array_set_zero_to_melt()</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">src.spyice.models.advection_diffusion</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#class-advectiondiffusion">Class: AdvectionDiffusion</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#AdvectionDiffusion"><code class="docutils literal notranslate"><span class="pre">AdvectionDiffusion</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.advection_diffusion.top_temp"><code class="docutils literal notranslate"><span class="pre">top_temp</span></code></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">Methods</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tdmasolver">TDMAsolver</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#TDMAsolver"><code class="docutils literal notranslate"><span class="pre">TDMAsolver()</span></code></a></li>
 </ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#buffosolver">Buffosolver</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Buffosolver"><code class="docutils literal notranslate"><span class="pre">Buffosolver()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-up-tridiagonal">set_up_tridiagonal</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#set_up_tridiagonal"><code class="docutils literal notranslate"><span class="pre">set_up_tridiagonal()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assemble-tridiagonal">assemble_tridiagonal</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assemble_tridiagonal"><code class="docutils literal notranslate"><span class="pre">assemble_tridiagonal()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modify-tridiagonal-voller-scheme">modify_tridiagonal_voller_scheme</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modify_tridiagonal_voller_scheme"><code class="docutils literal notranslate"><span class="pre">modify_tridiagonal_voller_scheme()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#voller-x-array-set-zero-to-melt">voller_X_array_set_zero_to_melt</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#voller_X_array_set_zero_to_melt"><code class="docutils literal notranslate"><span class="pre">voller_X_array_set_zero_to_melt()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-source-term">set_source_term</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#set_source_term"><code class="docutils literal notranslate"><span class="pre">set_source_term()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unknowns-matrix">unknowns_matrix</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unknowns_matrix"><code class="docutils literal notranslate"><span class="pre">unknowns_matrix()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#factor-1">factor_1</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#factor_1"><code class="docutils literal notranslate"><span class="pre">factor_1()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#factor-2">factor_2</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#factor_2"><code class="docutils literal notranslate"><span class="pre">factor_2()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#factor-3">factor_3</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#factor_3"><code class="docutils literal notranslate"><span class="pre">factor_3()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-characteristics">Numerical Characteristics</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dependencies">Dependencies</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
+</ul>
+
   </nav></div>
 
   <div class="sidebar-secondary-item">

@@ -41,6 +41,7 @@
     <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/src/spyice/parameters/real_constants';</script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -142,6 +143,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
       
@@ -230,6 +238,13 @@
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../../../../api/_index.html">
     API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../user_guide/_index.html">
+    User Guide
   </a>
 </li>
 
@@ -366,9 +381,14 @@
     <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.56</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">**</span> <span class="p">(</span>
         <span class="o">-</span><span class="mi">3</span>
     <span class="p">)</span>  <span class="c1"># Linear coeff for Rayleigh number driven advection</span>
+    <span class="c1"># latent heat and diffusivity for sea ice</span>
     <span class="n">L</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">334774</span>  <span class="c1"># Latent heat of fusion ice&lt;-&gt;water (J/Kg)</span>
     <span class="n">D_s</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="mi">9</span><span class="p">)</span>  <span class="c1"># Diffusivity for Salt</span>
+    <span class="c1"># latent heat and diffusivity according to worster 1986</span>
+    <span class="c1"># L: int = 80  # Latent heat of fusion ice&lt;-&gt;water (J/Kg)</span>
+    <span class="c1"># D_s: float = 1e-03  </span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">param_const</span><span class="p">:</span>
+        <span class="c1"># Griewank and Notz (2013)</span>
         <span class="n">k_i</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span>  <span class="c1"># Thermal conductivity (ice) [W/m/K]</span>
         <span class="n">k_br</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.6</span>  <span class="c1"># Thermal conductivity (brine) [W/m/K]</span>
         <span class="n">k_w</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">k_br</span>  <span class="c1"># 2.0</span>
@@ -378,6 +398,17 @@
         <span class="n">rho_br</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span>  <span class="mi">1028</span>  <span class="c1"># Density of Ocean (used in volume averaging - 1D grav. drainage uses delta S) 34ppt NaCl-1027</span>
         <span class="n">rho_i</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">917</span>  <span class="c1"># Density of Ice (Kg/m^3)                                     #  12.3ppt MgSO4-1012, 100pppt-1103, 282ppt-1323</span>
         <span class="n">rho_w</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">rho_br</span>  <span class="c1"># 1000</span>
+        <span class="c1"># worster and wettlaufer (1986)</span>
+        <span class="c1"># k_i: float = 5.3e-03  # Thermal conductivity (ice) [W/m/K]</span>
+        <span class="c1"># k_br: float = 1.3e-03 # Thermal conductivity (brine) [W/m/K]</span>
+        <span class="c1"># k_w: float = k_br  # 2.0</span>
+        <span class="c1"># c_i: int = 0.48  # Specific heat of ice</span>
+        <span class="c1"># c_br: int = 1.0  # Specific heat of seawater (J/kg/K)</span>
+        <span class="c1"># c_w: int = c_br  # specific heat of water</span>
+        <span class="c1"># rho_br: int =  1.0  # Density of Ocean (used in volume averaging - 1D grav. drainage uses delta S) 34ppt NaCl-1027</span>
+        <span class="c1"># rho_i: int = 0.92  # Density of Ice (Kg/m^3)                                     #  12.3ppt MgSO4-1012, 100pppt-1103, 282ppt-1323</span>
+        <span class="c1"># rho_w: int = rho_br  # 1000</span>
+
     <span class="k">else</span><span class="p">:</span> 
         <span class="n">k_i</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span>  <span class="c1"># Thermal conductivity (ice) [W/m/K]</span>
         <span class="n">k_br</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">k_i</span>  <span class="c1"># Thermal conductivity (brine) [W/m/K]</span>
@@ -388,6 +419,16 @@
         <span class="n">rho_i</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">917</span>  <span class="c1"># Density of Ice (Kg/m^3)                                     #  12.3ppt MgSO4-1012, 100pppt-1103, 282ppt-1323</span>
         <span class="n">rho_br</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span>  <span class="n">rho_i</span>  <span class="c1"># Density of Ocean (used in volume averaging - 1D grav. drainage uses delta S) 34ppt NaCl-1027</span>
         <span class="n">rho_w</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">rho_i</span>  <span class="c1"># 1000</span>
+        <span class="c1"># worster and wettlaufer (1986)</span>
+        <span class="c1"># k_i: float = 1.3e-03  # Thermal conductivity (ice) [W/m/K]</span>
+        <span class="c1"># k_br: float = 1.3e-03 # Thermal conductivity (brine) [W/m/K]</span>
+        <span class="c1"># k_w: float = k_br  # 2.0</span>
+        <span class="c1"># c_i: int = 1.0  # Specific heat of ice</span>
+        <span class="c1"># c_br: int = 1.0  # Specific heat of seawater (J/kg/K)</span>
+        <span class="c1"># c_w: int = c_br  # specific heat of water</span>
+        <span class="c1"># rho_br: int =  1.0  # Density of Ocean (used in volume averaging - 1D grav. drainage uses delta S) 34ppt NaCl-1027</span>
+        <span class="c1"># rho_i: int = 1.0  # Density of Ice (Kg/m^3)                                     #  12.3ppt MgSO4-1012, 100pppt-1103, 282ppt-1323</span>
+        <span class="c1"># rho_w: int = rho_br  # 1000</span>
     <span class="n">m</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># Cementation exponent for Archies equation</span>
     <span class="n">g</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">9.8</span>  <span class="c1"># Earth Gravity</span>
     <span class="n">phi_c</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.06823</span>  <span class="c1"># Critical Porosity</span>

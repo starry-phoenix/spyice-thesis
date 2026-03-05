@@ -41,6 +41,7 @@
     <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/src/spyice/models/sea_ice_model';</script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -142,6 +143,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
       
@@ -233,6 +241,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
           
@@ -313,26 +328,29 @@
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">src.spyice.models.stefan_problem</span> <span class="kn">import</span> <span class="n">StefanProblem</span>
-<span class="kn">from</span> <span class="nn">src.spyice.parameters.results_params</span> <span class="kn">import</span> <span class="n">ResultsParams</span>
-<span class="kn">from</span> <span class="nn">src.spyice.parameters.user_input</span> <span class="kn">import</span> <span class="n">UserInput</span>
-<span class="kn">from</span> <span class="nn">src.spyice.preprocess.initial_boundary_conditions</span> <span class="kn">import</span> <span class="n">temperature_gradient</span>
-<span class="kn">from</span> <span class="nn">src.spyice.statevariables</span> <span class="kn">import</span> <span class="p">(</span>
+<span class="kn">from</span> <span class="nn">spyice.models.algae_model</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">biogeochemical_model</span><span class="p">,</span>
+    <span class="n">biogeochemical_model_at_alldepths</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">spyice.models.radiative_model</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">calculate_radiative_terms</span><span class="p">,</span>
+    <span class="n">get_salinity_source_term</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">spyice.models.stefan_problem</span> <span class="kn">import</span> <span class="n">StefanProblem</span>
+<span class="kn">from</span> <span class="nn">spyice.parameters.results_params</span> <span class="kn">import</span> <span class="n">ResultsParams</span>
+<span class="kn">from</span> <span class="nn">spyice.parameters.user_input</span> <span class="kn">import</span> <span class="n">UserInput</span>
+<span class="kn">from</span> <span class="nn">spyice.preprocess.initial_boundary_conditions</span> <span class="kn">import</span> <span class="n">temperature_gradient</span>
+<span class="kn">from</span> <span class="nn">spyice.statevariables</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">compute_error_for_convergence</span><span class="p">,</span>
     <span class="n">overwrite_statevariables</span><span class="p">,</span>
     <span class="n">reset_error_for_while_loop</span><span class="p">,</span>
     <span class="n">set_statevariables</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">src.spyice.update_physical_values</span> <span class="kn">import</span> <span class="n">update_state_variables</span>
-<span class="kn">from</span> <span class="nn">src.spyice.utils.helpers</span> <span class="kn">import</span> <span class="n">t_total</span><span class="p">,</span> <span class="n">export_residuals</span>
-<span class="kn">from</span> <span class="nn">src.spyice.utils.spyice_exceptions</span> <span class="kn">import</span> <span class="n">ConvergenceError</span><span class="p">,</span> <span class="n">InvalidPhaseError</span>
+<span class="kn">from</span> <span class="nn">spyice.update_physical_values</span> <span class="kn">import</span> <span class="n">update_state_variables</span>
+<span class="kn">from</span> <span class="nn">spyice.utils.helpers</span> <span class="kn">import</span> <span class="n">export_residuals</span><span class="p">,</span> <span class="n">t_total</span>
+<span class="kn">from</span> <span class="nn">spyice.utils.spyice_exceptions</span> <span class="kn">import</span> <span class="n">ConvergenceError</span><span class="p">,</span> <span class="n">InvalidPhaseError</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;src.spyice.utils.custom&quot;</span><span class="p">)</span>
-<span class="c1"># plt.rcParams.update(</span>
-<span class="c1">#     {</span>
-<span class="c1">#         &quot;text.usetex&quot;: True,</span>
-<span class="c1">#     }</span>
-<span class="c1"># )</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;spyice.utils.custom&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;text.latex.preamble&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
     <span class="p">[</span>
         <span class="sa">r</span><span class="s2">&quot;\usepackage</span><span class="si">{dashbox}</span><span class="s2">&quot;</span><span class="p">,</span>
@@ -341,8 +359,6 @@
 <span class="p">)</span>
 
 
-<div class="viewcode-block" id="locate_ice_ocean_interface">
-<a class="viewcode-back" href="../../../../api/spyice.models.sea_ice_model.html#src.spyice.models.sea_ice_model.locate_ice_ocean_interface">[docs]</a>
 <span class="k">def</span> <span class="nf">locate_ice_ocean_interface</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">dz</span><span class="p">,</span> <span class="n">nz</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Locate ice ocean interface, based on liquid fraction equivalent ice thickness</span>
 
@@ -374,17 +390,16 @@
             <span class="n">ice_depth_index</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">break</span>
-    <span class="k">return</span> <span class="n">ice_depth</span><span class="p">,</span> <span class="n">ice_depth_index</span></div>
-
+    <span class="k">return</span> <span class="n">ice_depth</span><span class="p">,</span> <span class="n">ice_depth_index</span>
 
 
 <div class="viewcode-block" id="SeaIceModel">
-<a class="viewcode-back" href="../../../../api/spyice.models.sea_ice_model.html#src.spyice.models.sea_ice_model.SeaIceModel">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.models.html#src.spyice.models.SeaIceModel">[docs]</a>
 <span class="k">class</span> <span class="nc">SeaIceModel</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;SeaIceModelClass represents a class that models the behavior of sea ice.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="SeaIceModel.__init__">
-<a class="viewcode-back" href="../../../../api/spyice.models.sea_ice_model.html#src.spyice.models.sea_ice_model.SeaIceModel.__init__">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.models.html#src.spyice.models.SeaIceModel.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dataclass</span><span class="p">:</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">user_dataclass</span><span class="p">:</span> <span class="n">UserInput</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Args:</span>
@@ -412,7 +427,7 @@
 
 
 <div class="viewcode-block" id="SeaIceModel.bc_neumann">
-<a class="viewcode-back" href="../../../../api/spyice.models.sea_ice_model.html#src.spyice.models.sea_ice_model.SeaIceModel.bc_neumann">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.models.html#src.spyice.models.SeaIceModel.bc_neumann">[docs]</a>
     <span class="k">def</span> <span class="nf">bc_neumann</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phi_k</span><span class="p">,</span> <span class="n">nz</span><span class="p">,</span> <span class="n">bc_condition</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply Neumann boundary condition to the sea ice model.</span>
 
@@ -433,7 +448,7 @@
 
 
 <div class="viewcode-block" id="SeaIceModel.set_boundary_condition_type">
-<a class="viewcode-back" href="../../../../api/spyice.models.sea_ice_model.html#src.spyice.models.sea_ice_model.SeaIceModel.set_boundary_condition_type">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.models.html#src.spyice.models.SeaIceModel.set_boundary_condition_type">[docs]</a>
     <span class="k">def</span> <span class="nf">set_boundary_condition_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">critical_depth</span><span class="p">,</span> <span class="n">bc_type</span><span class="o">=</span><span class="s2">&quot;Neumann&quot;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the boundary condition type for the model. This method sets the boundary condition type for the model. It calculates the temperature gradient based on the given critical depth and boundary condition type. If the boundary condition type is &quot;Neumann&quot;, the temperature gradient is calculated using the formula:</span>
 <span class="sd">        temp_grad = dz * (temperature_melt - boundary_top_temperature) / critical_depth</span>
@@ -472,7 +487,7 @@
 
 
 <div class="viewcode-block" id="SeaIceModel.t_running">
-<a class="viewcode-back" href="../../../../api/spyice.models.sea_ice_model.html#src.spyice.models.sea_ice_model.SeaIceModel.t_running">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.models.html#src.spyice.models.SeaIceModel.t_running">[docs]</a>
     <span class="k">def</span> <span class="nf">t_running</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax1</span><span class="p">,</span> <span class="n">t_stefan</span><span class="p">,</span> <span class="n">t_k</span><span class="p">,</span> <span class="n">t_k_buffo</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Plot the temperature profile against depth.</span>
 
@@ -489,20 +504,23 @@
         <span class="n">depth_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">Z</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">nz</span><span class="p">)</span>
         <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_k</span><span class="p">,</span> <span class="n">depth_arr</span><span class="p">,</span> <span class="s2">&quot;r--&quot;</span><span class="p">)</span>
         <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_stefan</span><span class="p">,</span> <span class="n">depth_arr</span><span class="p">,</span> <span class="s2">&quot;k&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">t_k_buffo</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">is_buffo</span><span class="p">:</span>
             <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_k_buffo</span><span class="p">,</span> <span class="n">depth_arr</span><span class="p">,</span> <span class="s2">&quot;b-.&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
         <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Depth [m]&quot;</span><span class="p">)</span>
         <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Temperature [K]&quot;</span><span class="p">)</span>
         <span class="c1"># ax1.set_yscale(&quot;log&quot;)</span>
         <span class="c1"># fig.tight_layout()</span>
         <span class="k">if</span> <span class="n">count</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s2">&quot;Numerical&quot;</span><span class="p">,</span> <span class="s2">&quot;Analytical&quot;</span><span class="p">,</span> <span class="s2">&quot;Buffo&quot;</span><span class="p">])</span></div>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">is_buffo</span><span class="p">:</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s2">&quot;Numerical&quot;</span><span class="p">,</span> <span class="s2">&quot;Analytical&quot;</span><span class="p">,</span> <span class="s2">&quot;Buffo&quot;</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s2">&quot;Numerical&quot;</span><span class="p">,</span> <span class="s2">&quot;Analytical&quot;</span><span class="p">])</span></div>
 
         <span class="c1"># display(fig)</span>
         <span class="c1"># clear_output(wait=True)</span>
 
 <div class="viewcode-block" id="SeaIceModel.track_mush_for_parameter">
-<a class="viewcode-back" href="../../../../api/spyice.models.sea_ice_model.html#src.spyice.models.sea_ice_model.SeaIceModel.track_mush_for_parameter">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.models.html#src.spyice.models.SeaIceModel.track_mush_for_parameter">[docs]</a>
     <span class="k">def</span> <span class="nf">track_mush_for_parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phi_k_</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">param_iterlist</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Track the mush for a given parameter.</span>
 
@@ -520,24 +538,40 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">mush_cond</span> <span class="o">=</span> <span class="n">phi_k_</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">mush_upperbound</span>
             <span class="n">mush_indx</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">param_iterlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-            <span class="p">[</span>
-                <span class="n">param</span><span class="p">[</span><span class="n">phi_k_</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">mush_lowerbound</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
-                <span class="n">param</span><span class="p">[</span><span class="n">phi_k_</span> <span class="o">==</span> <span class="n">phi_k_</span><span class="p">][</span><span class="n">mush_indx</span><span class="p">],</span>
-                <span class="n">param</span><span class="p">[</span><span class="n">phi_k_</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">mush_upperbound</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
-            <span class="p">]</span>
-        <span class="p">)</span> <span class="k">if</span> <span class="n">param</span><span class="p">[</span><span class="n">phi_k_</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">mush_lowerbound</span><span class="p">]</span><span class="o">.</span><span class="n">size</span> <span class="k">else</span> <span class="n">param_iterlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-            <span class="p">[</span>
-                <span class="n">param</span><span class="p">[</span><span class="n">mush_cond</span><span class="p">][</span><span class="n">mush_indx</span><span class="p">],</span>
-                <span class="n">param</span><span class="p">[</span><span class="n">phi_k_</span> <span class="o">==</span> <span class="n">phi_k_</span><span class="p">][</span><span class="n">mush_indx</span><span class="p">],</span>
-                <span class="n">param</span><span class="p">[</span><span class="n">phi_k_</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">mush_upperbound</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
-            <span class="p">]</span>
-        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="n">param</span><span class="p">[</span><span class="n">phi_k_</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">mush_lowerbound</span><span class="p">]</span><span class="o">.</span><span class="n">size</span>
+            <span class="o">&amp;</span> <span class="n">param</span><span class="p">[</span><span class="n">phi_k_</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">mush_upperbound</span><span class="p">]</span><span class="o">.</span><span class="n">size</span>
+        <span class="p">):</span>
+            <span class="n">param_iterlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="n">param</span><span class="p">[</span><span class="n">phi_k_</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">mush_lowerbound</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+                    <span class="n">param</span><span class="p">[</span><span class="n">phi_k_</span> <span class="o">==</span> <span class="n">phi_k_</span><span class="p">][</span><span class="n">mush_indx</span><span class="p">],</span>
+                    <span class="n">param</span><span class="p">[</span><span class="n">phi_k_</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">mush_upperbound</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="n">param</span><span class="p">[</span><span class="n">phi_k_</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">mush_upperbound</span><span class="p">]</span><span class="o">.</span><span class="n">size</span><span class="p">:</span>
+            <span class="n">param_iterlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="n">param</span><span class="p">[</span><span class="n">phi_k_</span> <span class="o">==</span> <span class="n">phi_k_</span><span class="p">][</span><span class="n">mush_indx</span><span class="p">],</span>
+                    <span class="n">param</span><span class="p">[</span><span class="n">phi_k_</span> <span class="o">==</span> <span class="n">phi_k_</span><span class="p">][</span><span class="n">mush_indx</span><span class="p">],</span>
+                    <span class="n">param</span><span class="p">[</span><span class="n">phi_k_</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">mush_upperbound</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">param_iterlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="n">param</span><span class="p">[</span><span class="n">phi_k_</span> <span class="o">==</span> <span class="n">phi_k_</span><span class="p">][</span><span class="n">mush_indx</span><span class="p">],</span>
+                    <span class="n">param</span><span class="p">[</span><span class="n">phi_k_</span> <span class="o">==</span> <span class="n">phi_k_</span><span class="p">][</span><span class="n">mush_indx</span><span class="p">],</span>
+                    <span class="n">param</span><span class="p">[</span><span class="n">phi_k_</span> <span class="o">==</span> <span class="n">phi_k_</span><span class="p">][</span><span class="n">mush_indx</span><span class="p">],</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
+
         <span class="k">return</span> <span class="n">param_iterlist</span><span class="p">,</span> <span class="n">mush_indx</span></div>
 
 
 <div class="viewcode-block" id="SeaIceModel.phi_all_mush_list">
-<a class="viewcode-back" href="../../../../api/spyice.models.sea_ice_model.html#src.spyice.models.sea_ice_model.SeaIceModel.phi_all_mush_list">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.models.html#src.spyice.models.SeaIceModel.phi_all_mush_list">[docs]</a>
     <span class="k">def</span> <span class="nf">phi_all_mush_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phi_k_</span><span class="p">,</span> <span class="n">phi_all_mush_list</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculates the number of elements in phi_k_ that fall within the mush_lowerbound and mush_upperbound range.</span>
 
@@ -554,18 +588,27 @@
 
 
 <div class="viewcode-block" id="SeaIceModel.convergence_loop_iteration">
-<a class="viewcode-back" href="../../../../api/spyice.models.sea_ice_model.html#src.spyice.models.sea_ice_model.SeaIceModel.convergence_loop_iteration">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.models.html#src.spyice.models.SeaIceModel.convergence_loop_iteration">[docs]</a>
     <span class="k">def</span> <span class="nf">convergence_loop_iteration</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">t</span><span class="p">,</span>
         <span class="n">t_km1</span><span class="p">,</span>
         <span class="n">s_km1</span><span class="p">,</span>
+        <span class="n">brine_velocity_km1</span><span class="p">,</span>
+        <span class="n">nutrient_cn_km1</span><span class="p">,</span>
         <span class="n">phi_km1</span><span class="p">,</span>
+        <span class="n">thickness_index</span><span class="p">,</span>
+        <span class="n">source_term_temperature</span><span class="p">,</span>
+        <span class="n">source_term_salinity</span><span class="p">,</span>
+        <span class="n">x_wind_temperature</span><span class="p">,</span>
+        <span class="n">x_wind_salinity</span><span class="p">,</span>
         <span class="n">buffo</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
         <span class="n">stefan</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
         <span class="n">voller</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
         <span class="n">temp_grad</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">salinity_equation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">diffusiononly_equation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">algae_equation</span><span class="o">=</span><span class="kc">False</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Performs a single iteration of the convergence loop by first resetting the parameters to their previous time step values and then running the convergence loop until convergence is reached.</span>
 <span class="sd">        Args:</span>
@@ -596,11 +639,15 @@
 <span class="sd">                - t_km1 (float): Temperature at the previous time step.</span>
 <span class="sd">                - s_km1 (float): Salinity at the previous time step.</span>
 <span class="sd">                - phi_km1 (float): Porosity at the previous time step.</span>
+<span class="sd">                - temperature_liquidus (float): Liquidus temperature.</span>
+<span class="sd">                - temperature_solidus (float): Solidus temperature.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="p">(</span>
             <span class="n">t_km1</span><span class="p">,</span>
             <span class="n">s_km1</span><span class="p">,</span>
+            <span class="n">brine_velocity_km1</span><span class="p">,</span>
+            <span class="n">nutrient_cn_km1</span><span class="p">,</span>
             <span class="n">phi_km1</span><span class="p">,</span>
             <span class="n">temp_grad</span><span class="p">,</span>
             <span class="n">t_err</span><span class="p">,</span>
@@ -609,12 +656,25 @@
             <span class="n">t_initial</span><span class="p">,</span>
             <span class="n">s_initial</span><span class="p">,</span>
             <span class="n">phi_initial</span><span class="p">,</span>
-            <span class="n">source_term_array</span><span class="p">,</span>
+            <span class="n">source_term_temperature</span><span class="p">,</span>
+            <span class="n">source_term_salinity</span><span class="p">,</span>
             <span class="n">counter</span><span class="p">,</span>
-        <span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reset_iteration_parameters</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">t_km1</span><span class="p">,</span> <span class="n">s_km1</span><span class="p">,</span> <span class="n">phi_km1</span><span class="p">)</span>
+        <span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reset_iteration_parameters</span><span class="p">(</span>
+            <span class="n">t</span><span class="p">,</span>
+            <span class="n">t_km1</span><span class="p">,</span>
+            <span class="n">s_km1</span><span class="p">,</span>
+            <span class="n">brine_velocity_km1</span><span class="p">,</span>
+            <span class="n">nutrient_cn_km1</span><span class="p">,</span>
+            <span class="n">phi_km1</span><span class="p">,</span>
+            <span class="n">source_term_temperature</span><span class="p">,</span>
+            <span class="n">source_term_salinity</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="c1"># TODO: truncate field variables until boundary (thickness_index)</span>
         <span class="p">(</span>
             <span class="n">t_km1</span><span class="p">,</span>
             <span class="n">s_km1</span><span class="p">,</span>
+            <span class="n">brine_velocity_k</span><span class="p">,</span>
+            <span class="n">nutrient_cn_km1</span><span class="p">,</span>
             <span class="n">phi_km1</span><span class="p">,</span>
             <span class="n">t_prev</span><span class="p">,</span>
             <span class="n">s_prev</span><span class="p">,</span>
@@ -624,28 +684,44 @@
             <span class="n">phi_k</span><span class="p">,</span>
             <span class="n">t_k</span><span class="p">,</span>
             <span class="n">s_k</span><span class="p">,</span>
+            <span class="n">nutrient_cn_k</span><span class="p">,</span>
             <span class="n">thickness</span><span class="p">,</span>
             <span class="n">thickness_index</span><span class="p">,</span>
+            <span class="n">temperature_liquidus</span><span class="p">,</span>
+            <span class="n">temperature_solidus</span><span class="p">,</span>
+            <span class="n">x_wind_temperature</span><span class="p">,</span>
+            <span class="n">x_wind_salinity</span><span class="p">,</span>
         <span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_while_convergence_iteration</span><span class="p">(</span>
             <span class="n">t</span><span class="p">,</span>
             <span class="n">t_km1</span><span class="p">,</span>
             <span class="n">s_km1</span><span class="p">,</span>
+            <span class="n">brine_velocity_km1</span><span class="p">,</span>
+            <span class="n">nutrient_cn_km1</span><span class="p">,</span>
             <span class="n">phi_km1</span><span class="p">,</span>
+            <span class="n">thickness_index</span><span class="p">,</span>
             <span class="n">buffo</span><span class="p">,</span>
             <span class="n">stefan</span><span class="p">,</span>
             <span class="n">voller</span><span class="p">,</span>
             <span class="n">t_err</span><span class="p">,</span>
             <span class="n">s_err</span><span class="p">,</span>
             <span class="n">phi_err</span><span class="p">,</span>
-            <span class="n">source_term_array</span><span class="p">,</span>
+            <span class="n">source_term_temperature</span><span class="p">,</span>
+            <span class="n">source_term_salinity</span><span class="p">,</span>
+            <span class="n">x_wind_temperature</span><span class="p">,</span>
+            <span class="n">x_wind_salinity</span><span class="p">,</span>
             <span class="n">counter</span><span class="p">,</span>
             <span class="n">salinity_equation</span><span class="p">,</span>
+            <span class="n">diffusiononly_equation</span><span class="p">,</span>
+            <span class="n">algae_equation</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="p">(</span>
             <span class="n">t_k</span><span class="p">,</span>
             <span class="n">t_prev</span><span class="p">,</span>
             <span class="n">s_k</span><span class="p">,</span>
             <span class="n">s_prev</span><span class="p">,</span>
+            <span class="n">brine_velocity_k</span><span class="p">,</span>
+            <span class="n">nutrient_cn_k</span><span class="p">,</span>
+            <span class="n">nutrient_cn_km1</span><span class="p">,</span>
             <span class="n">phi_k</span><span class="p">,</span>
             <span class="n">phi_prev</span><span class="p">,</span>
             <span class="n">h_k</span><span class="p">,</span>
@@ -655,26 +731,38 @@
             <span class="n">t_km1</span><span class="p">,</span>
             <span class="n">s_km1</span><span class="p">,</span>
             <span class="n">phi_km1</span><span class="p">,</span>
+            <span class="n">temperature_liquidus</span><span class="p">,</span>
+            <span class="n">temperature_solidus</span><span class="p">,</span>
+            <span class="n">x_wind_temperature</span><span class="p">,</span>
+            <span class="n">x_wind_salinity</span><span class="p">,</span>
         <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="SeaIceModel.run_while_convergence_iteration">
-<a class="viewcode-back" href="../../../../api/spyice.models.sea_ice_model.html#src.spyice.models.sea_ice_model.SeaIceModel.run_while_convergence_iteration">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.models.html#src.spyice.models.SeaIceModel.run_while_convergence_iteration">[docs]</a>
     <span class="k">def</span> <span class="nf">run_while_convergence_iteration</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">t</span><span class="p">,</span>
         <span class="n">t_initial</span><span class="p">,</span>
         <span class="n">s_initial</span><span class="p">,</span>
+        <span class="n">brine_velocity_initial</span><span class="p">,</span>
+        <span class="n">nutrient_cn_initial</span><span class="p">,</span>
         <span class="n">phi_initial</span><span class="p">,</span>
+        <span class="n">thickness_index</span><span class="p">,</span>
         <span class="n">buffo</span><span class="p">,</span>
         <span class="n">stefan</span><span class="p">,</span>
         <span class="n">voller</span><span class="p">,</span>
         <span class="n">t_err</span><span class="p">,</span>
         <span class="n">s_err</span><span class="p">,</span>
         <span class="n">phi_err</span><span class="p">,</span>
-        <span class="n">source_term</span><span class="p">,</span>
+        <span class="n">source_term_temperature</span><span class="p">,</span>
+        <span class="n">source_term_salinity</span><span class="p">,</span>
+        <span class="n">x_wind_temperature</span><span class="p">,</span>
+        <span class="n">x_wind_salinity</span><span class="p">,</span>
         <span class="n">counter</span><span class="p">,</span>
         <span class="n">_is_salinity_equation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">_is_diffusiononly_equation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">_is_algae_equation</span><span class="o">=</span><span class="kc">False</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Runs the convergence loop until convergence is reached.</span>
 
@@ -720,37 +808,77 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># Set previous state variables temperature, salinity, liquid fraction respectively</span>
-        <span class="n">t_prev</span><span class="p">,</span> <span class="n">s_prev</span><span class="p">,</span> <span class="n">phi_prev</span><span class="p">,</span> <span class="n">t_k_A_LHS_matrix</span><span class="p">,</span> <span class="n">temp_factor3</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">overwrite_statevariables</span><span class="p">(</span><span class="n">t_initial</span><span class="p">,</span> <span class="n">s_initial</span><span class="p">,</span> <span class="n">phi_initial</span><span class="p">)</span>
+        <span class="p">(</span>
+            <span class="n">t_prev</span><span class="p">,</span>
+            <span class="n">s_prev</span><span class="p">,</span>
+            <span class="n">brine_velocity_prev</span><span class="p">,</span>
+            <span class="n">nutrient_cn_prev</span><span class="p">,</span>
+            <span class="n">phi_prev</span><span class="p">,</span>
+            <span class="n">t_k_melt</span><span class="p">,</span>
+            <span class="n">t_k_A_LHS_matrix</span><span class="p">,</span>
+            <span class="n">temp_factor3</span><span class="p">,</span>
+            <span class="n">x_wind_temperature_prev</span><span class="p">,</span>
+            <span class="n">x_wind_salinity_prev</span><span class="p">,</span>
+        <span class="p">)</span> <span class="o">=</span> <span class="n">overwrite_statevariables</span><span class="p">(</span>
+            <span class="n">t_initial</span><span class="p">,</span>
+            <span class="n">s_initial</span><span class="p">,</span>
+            <span class="n">brine_velocity_initial</span><span class="p">,</span>
+            <span class="n">nutrient_cn_initial</span><span class="p">,</span>
+            <span class="n">phi_initial</span><span class="p">,</span>
+            <span class="n">x_wind_temperature</span><span class="p">,</span>
+            <span class="n">x_wind_salinity</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">residual_voller</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="c1"># Run the while loop until convergence is reached</span>
         <span class="c1"># FIXME: tolerance check and change for new enthalpy update for inhomognoeus physical values</span>
-        <span class="c1"># TODO: Document Voller method on overleaf </span>
+        <span class="c1"># TODO: Document Voller method on overleaf</span>
         <span class="k">while</span> <span class="p">(</span>
-            <span class="p">((</span><span class="n">residual_voller</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">temperature_tolerance</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">stefan</span><span class="p">))</span> <span class="ow">or</span>
-            <span class="p">((</span><span class="n">t_err</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">temperature_tolerance</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">buffo</span><span class="p">))</span>
-            <span class="ow">or</span> <span class="p">((</span><span class="n">phi_err</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">liquid_fraction_tolerance</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">buffo</span><span class="p">))</span>
+            <span class="p">((</span><span class="n">residual_voller</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">temperature_tolerance</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">stefan</span><span class="p">))</span>
+            <span class="ow">or</span> <span class="p">(</span><span class="n">t_err</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">temperature_tolerance</span><span class="p">)</span>
+            <span class="ow">or</span> <span class="p">(</span><span class="n">phi_err</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">liquid_fraction_tolerance</span><span class="p">)</span>
             <span class="ow">or</span> <span class="p">(</span><span class="n">s_err</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">salinity_tolerance</span><span class="p">)</span>
         <span class="p">):</span>
             <span class="c1"># Update state variables Enthalpy, Enthalpy Solid, Liquid Fraction, Temperature, Salinity respectively</span>
-            <span class="n">h_k</span><span class="p">,</span> <span class="n">h_solid</span><span class="p">,</span> <span class="n">phi_k</span><span class="p">,</span> <span class="n">t_k</span><span class="p">,</span> <span class="n">s_k</span><span class="p">,</span> <span class="n">t_k_A_LHS_matrix</span><span class="p">,</span> <span class="n">temp_factor3</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="n">update_state_variables</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="p">,</span>
-                    <span class="n">t_prev</span><span class="p">,</span>
-                    <span class="n">s_prev</span><span class="p">,</span>
-                    <span class="n">phi_prev</span><span class="p">,</span>
-                    <span class="n">buffo</span><span class="p">,</span>
-                    <span class="n">stefan</span><span class="p">,</span>
-                    <span class="n">voller</span><span class="p">,</span>
-                    <span class="n">t_initial</span><span class="p">,</span>
-                    <span class="n">s_initial</span><span class="p">,</span>
-                    <span class="n">phi_initial</span><span class="p">,</span>
-                    <span class="n">t_k_A_LHS_matrix</span><span class="p">,</span>
-                    <span class="n">temp_factor3</span><span class="p">,</span>
-                    <span class="n">source_term</span><span class="p">,</span>
-                    <span class="n">_is_salinity_equation</span><span class="o">=</span><span class="n">_is_salinity_equation</span><span class="p">,</span>
-                <span class="p">)</span>
+            <span class="p">(</span>
+                <span class="n">h_k</span><span class="p">,</span>
+                <span class="n">h_solid</span><span class="p">,</span>
+                <span class="n">phi_k</span><span class="p">,</span>
+                <span class="n">t_k</span><span class="p">,</span>
+                <span class="n">s_k</span><span class="p">,</span>
+                <span class="n">brine_velocity</span><span class="p">,</span>
+                <span class="n">nutrient_cn</span><span class="p">,</span>
+                <span class="n">t_k_A_LHS_matrix</span><span class="p">,</span>
+                <span class="n">temp_factor3</span><span class="p">,</span>
+                <span class="n">t_k_melt</span><span class="p">,</span>
+                <span class="n">temperature_liquidus</span><span class="p">,</span>
+                <span class="n">temperature_solidus</span><span class="p">,</span>
+                <span class="n">x_wind_temperature</span><span class="p">,</span>
+                <span class="n">x_wind_salinity</span><span class="p">,</span>
+            <span class="p">)</span> <span class="o">=</span> <span class="n">update_state_variables</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="p">,</span>
+                <span class="n">t_prev</span><span class="p">,</span>
+                <span class="n">s_prev</span><span class="p">,</span>
+                <span class="n">brine_velocity_prev</span><span class="p">,</span>
+                <span class="n">nutrient_cn_prev</span><span class="p">,</span>
+                <span class="n">phi_prev</span><span class="p">,</span>
+                <span class="n">thickness_index</span><span class="p">,</span>
+                <span class="n">buffo</span><span class="p">,</span>
+                <span class="n">stefan</span><span class="p">,</span>
+                <span class="n">voller</span><span class="p">,</span>
+                <span class="n">t_initial</span><span class="p">,</span>
+                <span class="n">s_initial</span><span class="p">,</span>
+                <span class="n">nutrient_cn_initial</span><span class="p">,</span>
+                <span class="n">phi_initial</span><span class="p">,</span>
+                <span class="n">t_k_melt</span><span class="p">,</span>
+                <span class="n">t_k_A_LHS_matrix</span><span class="p">,</span>
+                <span class="n">temp_factor3</span><span class="p">,</span>
+                <span class="n">source_term_salinity</span><span class="p">,</span>
+                <span class="n">source_term_temperature</span><span class="p">,</span>
+                <span class="n">x_wind_temperature_prev</span><span class="p">,</span>
+                <span class="n">x_wind_salinity_prev</span><span class="p">,</span>
+                <span class="n">_is_salinity_equation</span><span class="o">=</span><span class="n">_is_salinity_equation</span><span class="p">,</span>
+                <span class="n">_is_algae_equation</span><span class="o">=</span><span class="n">_is_algae_equation</span><span class="p">,</span>
+                <span class="n">_is_diffusiononly_equation</span><span class="o">=</span><span class="n">_is_diffusiononly_equation</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="c1"># Locate ice-ocean interface based on liquid fraction</span>
             <span class="n">thickness</span><span class="p">,</span> <span class="n">thickness_index</span> <span class="o">=</span> <span class="n">locate_ice_ocean_interface</span><span class="p">(</span>
@@ -778,10 +906,28 @@
                 <span class="n">temp_factor3</span><span class="o">=</span><span class="n">temp_factor3</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="c1"># Update state variables temperature, salinity, liquid fraction respectively</span>
-            <span class="n">t_prev</span><span class="p">,</span> <span class="n">s_prev</span><span class="p">,</span> <span class="n">phi_prev</span><span class="p">,</span> <span class="n">t_k_A_LHS_matrix</span><span class="p">,</span> <span class="n">temp_factor3</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="n">overwrite_statevariables</span><span class="p">(</span>
-                    <span class="n">t_k</span><span class="p">,</span> <span class="n">s_k</span><span class="p">,</span> <span class="n">phi_k</span><span class="p">,</span> <span class="n">t_k_A_LHS_matrix</span><span class="p">,</span> <span class="n">temp_factor3</span>
-                <span class="p">)</span>
+            <span class="p">(</span>
+                <span class="n">t_prev</span><span class="p">,</span>
+                <span class="n">s_prev</span><span class="p">,</span>
+                <span class="n">brine_velocity_prev</span><span class="p">,</span>
+                <span class="n">nutrient_cn_prev</span><span class="p">,</span>
+                <span class="n">phi_prev</span><span class="p">,</span>
+                <span class="n">t_k_melt</span><span class="p">,</span>
+                <span class="n">t_k_A_LHS_matrix</span><span class="p">,</span>
+                <span class="n">temp_factor3</span><span class="p">,</span>
+                <span class="n">x_wind_temperature_prev</span><span class="p">,</span>
+                <span class="n">x_wind_salinity_prev</span><span class="p">,</span>
+            <span class="p">)</span> <span class="o">=</span> <span class="n">overwrite_statevariables</span><span class="p">(</span>
+                <span class="n">t_k</span><span class="p">,</span>
+                <span class="n">s_k</span><span class="p">,</span>
+                <span class="n">brine_velocity</span><span class="p">,</span>
+                <span class="n">nutrient_cn</span><span class="p">,</span>
+                <span class="n">phi_k</span><span class="p">,</span>
+                <span class="n">t_k_melt</span><span class="p">,</span>
+                <span class="n">x_wind_temperature</span><span class="p">,</span>
+                <span class="n">x_wind_salinity</span><span class="p">,</span>
+                <span class="n">t_k_A_LHS_matrix</span><span class="p">,</span>
+                <span class="n">temp_factor3</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="c1"># Track mushy layer using liquid fraction for temperature and phi values</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">record_mushy_layer_data</span><span class="p">(</span>
@@ -805,6 +951,8 @@
         <span class="k">return</span> <span class="p">(</span>
             <span class="n">t_prev</span><span class="p">,</span>
             <span class="n">s_prev</span><span class="p">,</span>
+            <span class="n">brine_velocity_prev</span><span class="p">,</span>
+            <span class="n">nutrient_cn_prev</span><span class="p">,</span>
             <span class="n">phi_prev</span><span class="p">,</span>
             <span class="n">t_initial</span><span class="p">,</span>
             <span class="n">s_initial</span><span class="p">,</span>
@@ -814,13 +962,18 @@
             <span class="n">phi_k</span><span class="p">,</span>
             <span class="n">t_k</span><span class="p">,</span>
             <span class="n">s_k</span><span class="p">,</span>
+            <span class="n">nutrient_cn</span><span class="p">,</span>
             <span class="n">thickness</span><span class="p">,</span>
             <span class="n">thickness_index</span><span class="p">,</span>
+            <span class="n">temperature_liquidus</span><span class="p">,</span>
+            <span class="n">temperature_solidus</span><span class="p">,</span>
+            <span class="n">x_wind_temperature_prev</span><span class="p">,</span>
+            <span class="n">x_wind_salinity_prev</span><span class="p">,</span>
         <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="SeaIceModel.check_convergence">
-<a class="viewcode-back" href="../../../../api/spyice.models.sea_ice_model.html#src.spyice.models.sea_ice_model.SeaIceModel.check_convergence">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.models.html#src.spyice.models.SeaIceModel.check_convergence">[docs]</a>
     <span class="k">def</span> <span class="nf">check_convergence</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">t</span><span class="p">,</span>
@@ -866,7 +1019,7 @@
 
 
 <div class="viewcode-block" id="SeaIceModel.record_mushy_layer_data">
-<a class="viewcode-back" href="../../../../api/spyice.models.sea_ice_model.html#src.spyice.models.sea_ice_model.SeaIceModel.record_mushy_layer_data">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.models.html#src.spyice.models.SeaIceModel.record_mushy_layer_data">[docs]</a>
     <span class="k">def</span> <span class="nf">record_mushy_layer_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">t_km1</span><span class="p">,</span> <span class="n">stefan</span><span class="p">,</span> <span class="n">phi_k</span><span class="p">,</span> <span class="n">residual_voller</span><span class="p">,</span> <span class="n">s_prev</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Records the mushy layer data for temperature and phi values at time iterations t at specific time steps corresponding to initial stages, middle and final stages of the process.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">stefan</span><span class="p">:</span>
@@ -891,8 +1044,18 @@
 
 
 <div class="viewcode-block" id="SeaIceModel.reset_iteration_parameters">
-<a class="viewcode-back" href="../../../../api/spyice.models.sea_ice_model.html#src.spyice.models.sea_ice_model.SeaIceModel.reset_iteration_parameters">[docs]</a>
-    <span class="k">def</span> <span class="nf">reset_iteration_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">tkm1</span><span class="p">,</span> <span class="n">s_km1</span><span class="p">,</span> <span class="n">phi_km1</span><span class="p">):</span>
+<a class="viewcode-back" href="../../../../api/spyice.models.html#src.spyice.models.SeaIceModel.reset_iteration_parameters">[docs]</a>
+    <span class="k">def</span> <span class="nf">reset_iteration_parameters</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">t</span><span class="p">,</span>
+        <span class="n">tkm1</span><span class="p">,</span>
+        <span class="n">s_km1</span><span class="p">,</span>
+        <span class="n">brine_velocity_km1</span><span class="p">,</span>
+        <span class="n">nutrient_cn_km1</span><span class="p">,</span>
+        <span class="n">phi_km1</span><span class="p">,</span>
+        <span class="n">source_term_temperature</span><span class="p">,</span>
+        <span class="n">source_term_salinity</span><span class="p">,</span>
+    <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset the iteration parameters for the sea ice model.</span>
 
 <span class="sd">        Args:</span>
@@ -923,13 +1086,17 @@
         <span class="n">t_initial</span><span class="p">,</span> <span class="n">t_km1</span><span class="p">,</span> <span class="n">s_initial</span><span class="p">,</span> <span class="n">s_km1</span><span class="p">,</span> <span class="n">phi_initial</span><span class="p">,</span> <span class="n">phi_km1</span> <span class="o">=</span> <span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">initialize_state_variables</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">tkm1</span><span class="p">,</span> <span class="n">s_km1</span><span class="p">,</span> <span class="n">phi_km1</span><span class="p">)</span>
         <span class="p">)</span>
+        <span class="n">nutrient_cn_initial</span> <span class="o">=</span> <span class="n">nutrient_cn_km1</span>
         <span class="n">temp_grad</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">temp_grad</span>
-        <span class="n">source_term_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">nz</span><span class="p">)</span>
+        <span class="n">source_term_temperature</span> <span class="o">=</span> <span class="n">source_term_temperature</span>
+        <span class="n">source_term_salinity</span> <span class="o">=</span> <span class="n">source_term_salinity</span>
         <span class="n">counter</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">record_iteration_data</span><span class="p">()</span>
         <span class="k">return</span> <span class="p">(</span>
             <span class="n">t_km1</span><span class="p">,</span>
             <span class="n">s_km1</span><span class="p">,</span>
+            <span class="n">brine_velocity_km1</span><span class="p">,</span>
+            <span class="n">nutrient_cn_initial</span><span class="p">,</span>
             <span class="n">phi_km1</span><span class="p">,</span>
             <span class="n">temp_grad</span><span class="p">,</span>
             <span class="n">t_err</span><span class="p">,</span>
@@ -938,13 +1105,14 @@
             <span class="n">t_initial</span><span class="p">,</span>
             <span class="n">s_initial</span><span class="p">,</span>
             <span class="n">phi_initial</span><span class="p">,</span>
-            <span class="n">source_term_array</span><span class="p">,</span>
+            <span class="n">source_term_temperature</span><span class="p">,</span>
+            <span class="n">source_term_salinity</span><span class="p">,</span>
             <span class="n">counter</span><span class="p">,</span>
         <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="SeaIceModel.check_and_reset_any_iteration_data">
-<a class="viewcode-back" href="../../../../api/spyice.models.sea_ice_model.html#src.spyice.models.sea_ice_model.SeaIceModel.check_and_reset_any_iteration_data">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.models.html#src.spyice.models.SeaIceModel.check_and_reset_any_iteration_data">[docs]</a>
     <span class="k">def</span> <span class="nf">check_and_reset_any_iteration_data</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">parameter_list</span><span class="p">,</span> <span class="n">parameter_all_list</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -965,7 +1133,7 @@
 
 
 <div class="viewcode-block" id="SeaIceModel.record_iteration_data">
-<a class="viewcode-back" href="../../../../api/spyice.models.sea_ice_model.html#src.spyice.models.sea_ice_model.SeaIceModel.record_iteration_data">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.models.html#src.spyice.models.SeaIceModel.record_iteration_data">[docs]</a>
     <span class="k">def</span> <span class="nf">record_iteration_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Records the iteration data for temperature and phi values.</span>
 <span class="sd">        This method appends the temperature and phi values from the current iteration to the respective arrays.</span>
@@ -1028,7 +1196,7 @@
         <span class="c1">#     self.check_and_reset_any_iteration_data(parameter_list, parameter_all_list)</span>
 
 <div class="viewcode-block" id="SeaIceModel.initialize_state_variables">
-<a class="viewcode-back" href="../../../../api/spyice.models.sea_ice_model.html#src.spyice.models.sea_ice_model.SeaIceModel.initialize_state_variables">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.models.html#src.spyice.models.SeaIceModel.initialize_state_variables">[docs]</a>
     <span class="k">def</span> <span class="nf">initialize_state_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">t_km1</span><span class="p">,</span> <span class="n">s_km1</span><span class="p">,</span> <span class="n">phi_km1</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Initializes the state variables for the sea ice model.</span>
 
@@ -1075,7 +1243,7 @@
 
 
 <div class="viewcode-block" id="SeaIceModel.choose_phase_type_iteration">
-<a class="viewcode-back" href="../../../../api/spyice.models.sea_ice_model.html#src.spyice.models.sea_ice_model.SeaIceModel.choose_phase_type_iteration">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.models.html#src.spyice.models.SeaIceModel.choose_phase_type_iteration">[docs]</a>
     <span class="k">def</span> <span class="nf">choose_phase_type_iteration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Choose the phase type iteration based on the one-phase and two-phase generalised Stefan Probem.</span>
 
@@ -1125,7 +1293,7 @@
 
 
 <div class="viewcode-block" id="SeaIceModel.run_sea_ice_model">
-<a class="viewcode-back" href="../../../../api/spyice.models.sea_ice_model.html#src.spyice.models.sea_ice_model.SeaIceModel.run_sea_ice_model">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.models.html#src.spyice.models.SeaIceModel.run_sea_ice_model">[docs]</a>
     <span class="k">def</span> <span class="nf">run_sea_ice_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Runs the sea ice model.</span>
 
@@ -1141,13 +1309,56 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">fig1</span><span class="p">,</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="n">t_km1</span><span class="p">,</span> <span class="n">s_km1</span><span class="p">,</span> <span class="n">phi_km1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([])</span>
-        <span class="n">t_km1_buffo</span><span class="p">,</span> <span class="n">s_km1_buffo</span><span class="p">,</span> <span class="n">phi_km1_buffo</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([]),</span>
-            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([]),</span>
-            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([]),</span>
+        <span class="c1"># set nutrient concentration initial values</span>
+        <span class="c1"># TODO: reorganize the init to another script</span>
+        <span class="n">nutrient_cn_km1</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">nutrient_concentration_multiplelayers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">nutrient_cn_dsi_water</span>
         <span class="p">)</span>
+        <span class="n">nutrient_cn_km1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">nutrient_cn_dsi_ice</span>
+        <span class="n">nutrient_cn_km1_buffo</span> <span class="o">=</span> <span class="n">nutrient_cn_km1</span>
+        <span class="n">carbon_cc</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">carbon_concentration_multiplelayers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">carbon_cc_water_initial</span>
+        <span class="p">)</span>
+        <span class="n">carbon_cc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">carbon_cc_ice_initial</span>
+        <span class="c1"># thickness</span>
+        <span class="n">thickness_index</span><span class="p">,</span> <span class="n">thickness_index_buffo</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+        <span class="c1"># carbon_concentration, nutrient_concentration, photosynthetic_rate_mu, radiation_algae = biogeochemical_model(self.preprocess_data.boundary_top_temperature, self.preprocess_data.boundary_salinity, 1.0, self.results.nutrient_concentration[0], self.results.carbon_concentration[0], self.preprocess_data.grid_timestep_dt, 0, 0)</span>
+        <span class="n">radiative_source_term</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">salinity_source_term</span> <span class="o">=</span> <span class="mf">0.0</span>
         <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># set temperature salinity and liquid fraction values</span>
+        <span class="p">(</span>
+            <span class="n">t_km1</span><span class="p">,</span>
+            <span class="n">s_km1</span><span class="p">,</span>
+            <span class="n">phi_km1</span><span class="p">,</span>
+            <span class="n">x_wind_temperature</span><span class="p">,</span>
+            <span class="n">x_wind_salinity</span><span class="p">,</span>
+            <span class="n">brine_velocity_km1</span><span class="p">,</span>
+        <span class="p">)</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([]),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([]),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([]),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([]),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([]),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">upwind_velocity</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="p">(</span>
+            <span class="n">t_km1_buffo</span><span class="p">,</span>
+            <span class="n">s_km1_buffo</span><span class="p">,</span>
+            <span class="n">phi_km1_buffo</span><span class="p">,</span>
+            <span class="n">x_wind_temperature_buffo</span><span class="p">,</span>
+            <span class="n">x_wind_salinity_buffo</span><span class="p">,</span>
+            <span class="n">brine_velocity_km1_buffo</span><span class="p">,</span>
+        <span class="p">)</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([]),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([]),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([]),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([]),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([]),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">upwind_velocity</span><span class="p">,</span>
+        <span class="p">)</span>
         <span class="c1"># with alive_bar(self.preprocess_data.max_iterations, force_tty=True) as bar:</span>
         <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">max_iterations</span><span class="p">):</span>
             <span class="c1"># time.sleep(0.005)</span>
@@ -1157,6 +1368,9 @@
                     <span class="n">t_prev_buffo</span><span class="p">,</span>
                     <span class="n">s_k_buffo</span><span class="p">,</span>
                     <span class="n">s_prev_buffo</span><span class="p">,</span>
+                    <span class="n">brine_velocity_km1_buffo</span><span class="p">,</span>
+                    <span class="n">nutrient_cn_km1_buffo</span><span class="p">,</span>
+                    <span class="n">nutrient_cn_prev_buffo</span><span class="p">,</span>
                     <span class="n">phi_k_buffo</span><span class="p">,</span>
                     <span class="n">phi_prev_buffo</span><span class="p">,</span>
                     <span class="n">h_k_buffo</span><span class="p">,</span>
@@ -1166,14 +1380,28 @@
                     <span class="n">t_km1_buffo</span><span class="p">,</span>
                     <span class="n">s_km1_buffo</span><span class="p">,</span>
                     <span class="n">phi_km1_buffo</span><span class="p">,</span>
+                    <span class="n">temperature_liquidus_buffo</span><span class="p">,</span>
+                    <span class="n">temperature_solidus_buffo</span><span class="p">,</span>
+                    <span class="n">x_wind_temperature_buffo</span><span class="p">,</span>
+                    <span class="n">x_wind_salinity_buffo</span><span class="p">,</span>
                 <span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convergence_loop_iteration</span><span class="p">(</span>
                     <span class="n">t</span><span class="p">,</span>
                     <span class="n">t_km1_buffo</span><span class="p">,</span>
                     <span class="n">s_km1_buffo</span><span class="p">,</span>
+                    <span class="n">brine_velocity_km1_buffo</span><span class="p">,</span>
+                    <span class="n">nutrient_cn_km1_buffo</span><span class="p">,</span>
                     <span class="n">phi_km1_buffo</span><span class="p">,</span>
+                    <span class="n">thickness_index_buffo</span><span class="p">,</span>
+                    <span class="n">radiative_source_term</span><span class="p">,</span>
+                    <span class="n">salinity_source_term</span><span class="p">,</span>
+                    <span class="n">x_wind_temperature_buffo</span><span class="p">,</span>
+                    <span class="n">x_wind_salinity_buffo</span><span class="p">,</span>
+                    <span class="n">stefan</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                     <span class="n">buffo</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                     <span class="n">temp_grad</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">temp_grad</span><span class="p">,</span>
                     <span class="n">salinity_equation</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">is_salinity_equation</span><span class="p">,</span>
+                    <span class="n">diffusiononly_equation</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">is_diffusiononly_equation</span><span class="p">,</span>
+                    <span class="n">algae_equation</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">is_algae_equation</span><span class="p">,</span>
                 <span class="p">)</span>
             <span class="k">elif</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">is_buffo</span><span class="p">:</span>
                 <span class="p">(</span><span class="n">t_k_buffo</span><span class="p">,</span> <span class="n">s_k_buffo</span><span class="p">,</span> <span class="n">phi_k_buffo</span><span class="p">,</span> <span class="n">thickness_buffo</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span>
@@ -1187,6 +1415,9 @@
                 <span class="n">t_prev</span><span class="p">,</span>
                 <span class="n">s_k</span><span class="p">,</span>
                 <span class="n">s_prev</span><span class="p">,</span>
+                <span class="n">brine_velocity_km1</span><span class="p">,</span>
+                <span class="n">nutrient_cn_k</span><span class="p">,</span>
+                <span class="n">nutrient_cn_km1</span><span class="p">,</span>
                 <span class="n">phi_k</span><span class="p">,</span>
                 <span class="n">phi_prev</span><span class="p">,</span>
                 <span class="n">h_k</span><span class="p">,</span>
@@ -1196,16 +1427,29 @@
                 <span class="n">t_km1</span><span class="p">,</span>
                 <span class="n">s_km1</span><span class="p">,</span>
                 <span class="n">phi_km1</span><span class="p">,</span>
+                <span class="n">temperature_liquidus</span><span class="p">,</span>
+                <span class="n">temperature_solidus</span><span class="p">,</span>
+                <span class="n">x_wind_temperature</span><span class="p">,</span>
+                <span class="n">x_wind_salinity</span><span class="p">,</span>
             <span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">convergence_loop_iteration</span><span class="p">(</span>
                 <span class="n">t</span><span class="p">,</span>
                 <span class="n">t_km1</span><span class="p">,</span>
                 <span class="n">s_km1</span><span class="p">,</span>
+                <span class="n">brine_velocity_km1</span><span class="p">,</span>
+                <span class="n">nutrient_cn_km1</span><span class="p">,</span>
                 <span class="n">phi_km1</span><span class="p">,</span>
+                <span class="n">thickness_index</span><span class="p">,</span>
+                <span class="n">radiative_source_term</span><span class="p">,</span>
+                <span class="n">salinity_source_term</span><span class="p">,</span>
+                <span class="n">x_wind_temperature</span><span class="p">,</span>
+                <span class="n">x_wind_salinity</span><span class="p">,</span>
                 <span class="n">stefan</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                 <span class="n">buffo</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                 <span class="n">voller</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">is_voller</span><span class="p">,</span>
                 <span class="n">temp_grad</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">temp_grad</span><span class="p">,</span>
                 <span class="n">salinity_equation</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">is_salinity_equation</span><span class="p">,</span>
+                <span class="n">diffusiononly_equation</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">is_diffusiononly_equation</span><span class="p">,</span>
+                <span class="n">algae_equation</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">is_algae_equation</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">time_passed</span> <span class="o">=</span> <span class="n">t_total</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">time_passed</span><span class="p">,</span>
@@ -1219,6 +1463,34 @@
             <span class="n">t_stefan</span><span class="p">,</span> <span class="n">error_depth_t</span><span class="p">,</span> <span class="n">thickness_stefan</span> <span class="o">=</span> <span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">choose_phase_type_iteration</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
             <span class="p">)</span>
+
+            <span class="c1"># TODO: Add radiation and algae</span>
+            <span class="c1"># TODO: create a parameter script for algae model</span>
+            <span class="p">(</span>
+                <span class="n">radiative_source_term</span><span class="p">,</span>
+                <span class="n">salinity_source_term</span><span class="p">,</span>
+                <span class="n">carbon_cc</span><span class="p">,</span>
+                <span class="n">nutrient_cn_k</span><span class="p">,</span>
+                <span class="n">photosynthetic_rate_mu</span><span class="p">,</span>
+                <span class="n">radiation_algae</span><span class="p">,</span>
+                <span class="n">chla_bulk</span><span class="p">,</span>
+            <span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_source_terms</span><span class="p">(</span>
+                <span class="n">carbon_cc</span><span class="p">,</span>
+                <span class="n">thickness_index</span><span class="p">,</span>
+                <span class="n">t</span><span class="p">,</span>
+                <span class="n">t_k</span><span class="p">,</span>
+                <span class="n">s_k</span><span class="p">,</span>
+                <span class="n">nutrient_cn_k</span><span class="p">,</span>
+                <span class="n">phi_k</span><span class="p">,</span>
+                <span class="n">thickness</span><span class="p">,</span>
+                <span class="n">salinity_equation</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">is_salinity_equation</span><span class="p">,</span>
+                <span class="n">algae_equation</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">is_algae_equation</span><span class="p">,</span>
+                <span class="n">radiation_equation</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">is_radiation_equation</span><span class="p">,</span>
+                <span class="n">algae_model_depth_type</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">algae_model_BAL_type</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="n">nutrient_cn_km1</span> <span class="o">=</span> <span class="n">nutrient_cn_k</span>
+            
             <span class="bp">self</span><span class="o">.</span><span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">store_results</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">,</span>
                 <span class="n">t_k</span><span class="p">,</span>
@@ -1239,6 +1511,9 @@
                 <span class="n">t_stefan</span><span class="p">,</span>
                 <span class="n">s_k</span><span class="p">,</span>
                 <span class="n">s_k_buffo</span><span class="p">,</span>
+                <span class="n">brine_velocity_km1</span><span class="p">,</span>
+                <span class="n">nutrient_cn_k</span><span class="p">,</span>
+                <span class="n">carbon_cc</span><span class="p">,</span>
                 <span class="n">phi_k</span><span class="p">,</span>
                 <span class="n">phi_k_buffo</span><span class="p">,</span>
                 <span class="n">h_k</span><span class="p">,</span>
@@ -1247,11 +1522,20 @@
                 <span class="n">thickness_buffo</span><span class="p">,</span>
                 <span class="n">thickness_stefan</span><span class="p">,</span>
                 <span class="n">t_k_buffo</span><span class="p">,</span>
+                <span class="n">temperature_liquidus</span><span class="p">,</span>
+                <span class="n">temperature_solidus</span><span class="p">,</span>
+                <span class="n">carbon_cc</span><span class="p">[</span><span class="n">thickness_index</span><span class="p">],</span>
+                <span class="n">nutrient_cn_k</span><span class="p">[</span><span class="n">thickness_index</span><span class="p">],</span>
+                <span class="n">photosynthetic_rate_mu</span><span class="p">,</span>
+                <span class="n">radiation_algae</span><span class="p">,</span>
+                <span class="n">chla_bulk</span><span class="p">,</span>
+                <span class="n">radiative_source_term</span><span class="p">,</span>
+                <span class="n">salinity_source_term</span><span class="p">,</span>
                 <span class="n">buffo</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">is_buffo</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="c1"># bar()</span>
 
-            <span class="k">if</span> <span class="n">t</span> <span class="o">%</span> <span class="mi">500</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">t</span> <span class="o">%</span> <span class="mi">1000</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">t_running</span><span class="p">(</span>
                     <span class="n">fig1</span><span class="p">,</span> <span class="n">ax1</span><span class="p">,</span> <span class="n">t_stefan</span><span class="p">,</span> <span class="n">t_k</span><span class="o">=</span><span class="n">t_k</span><span class="p">,</span> <span class="n">t_k_buffo</span><span class="o">=</span><span class="n">t_k_buffo</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="n">count</span>
@@ -1263,8 +1547,104 @@
         <span class="p">)</span></div>
 
 
+<div class="viewcode-block" id="SeaIceModel.calculate_source_terms">
+<a class="viewcode-back" href="../../../../api/spyice.models.html#src.spyice.models.SeaIceModel.calculate_source_terms">[docs]</a>
+    <span class="k">def</span> <span class="nf">calculate_source_terms</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">carbon_cc</span><span class="p">,</span>
+        <span class="n">thickness_index</span><span class="p">,</span>
+        <span class="n">t</span><span class="p">,</span>
+        <span class="n">t_k</span><span class="p">,</span>
+        <span class="n">s_k</span><span class="p">,</span>
+        <span class="n">nutrient_cn_k</span><span class="p">,</span>
+        <span class="n">phi_k</span><span class="p">,</span>
+        <span class="n">thickness</span><span class="p">,</span>
+        <span class="n">salinity_equation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">algae_equation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">radiation_equation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="c1"># Initialize source terms</span>
+        <span class="n">salinity_source_term</span><span class="p">,</span> <span class="n">radiative_source_term</span><span class="p">,</span> <span class="n">radiation_algae</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">carbon_cc</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">carbon_cc</span><span class="p">))</span>
+        <span class="n">carbon_concentration</span><span class="p">,</span> <span class="n">nutrient_concentration</span><span class="p">,</span> <span class="n">chla_bulk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">carbon_cc</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nutrient_cn_k</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nutrient_cn_k</span><span class="p">))</span>
+        <span class="n">photosynthetic_rate_mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nutrient_cn_k</span><span class="p">))</span>
+
+        <span class="n">Z</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">nz</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">grid_resolution_dz</span>
+        <span class="n">depth</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">grid_resolution_dz</span><span class="p">,</span>
+            <span class="n">Z</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">grid_resolution_dz</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">nz</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;algae_model_depth_type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;single&quot;</span> <span class="ow">and</span> <span class="n">algae_equation</span><span class="p">:</span>
+            <span class="p">(</span>
+                <span class="n">carbon_concentration</span><span class="p">,</span>
+                <span class="n">nutrient_concentration</span><span class="p">,</span>
+                <span class="n">photosynthetic_rate_mu</span><span class="p">,</span>
+                <span class="n">radiation_algae</span><span class="p">,</span>
+                <span class="n">chla_bulk</span><span class="p">,</span>
+            <span class="p">)</span> <span class="o">=</span> <span class="n">biogeochemical_model</span><span class="p">(</span>
+                <span class="n">t_k</span><span class="p">,</span>
+                <span class="n">s_k</span><span class="p">,</span>
+                <span class="n">phi_k</span><span class="p">,</span>
+                <span class="n">nutrient_cn_k</span><span class="p">,</span>
+                <span class="n">carbon_cc</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">grid_timestep_dt</span><span class="p">,</span>
+                <span class="n">thickness_index</span><span class="p">,</span>
+                <span class="n">thickness</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;algae_model_depth_type&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;all&quot;</span> <span class="ow">and</span> <span class="n">algae_equation</span><span class="p">:</span>
+            <span class="p">(</span>
+                <span class="n">carbon_concentration</span><span class="p">,</span>
+                <span class="n">nutrient_concentration</span><span class="p">,</span>
+                <span class="n">photosynthetic_rate_mu</span><span class="p">,</span>
+                <span class="n">radiation_algae</span><span class="p">,</span>
+                <span class="n">chla_bulk</span><span class="p">,</span>
+            <span class="p">)</span> <span class="o">=</span> <span class="n">biogeochemical_model_at_alldepths</span><span class="p">(</span>
+                <span class="n">t_k</span><span class="p">,</span>
+                <span class="n">s_k</span><span class="p">,</span>
+                <span class="n">phi_k</span><span class="p">,</span>
+                <span class="n">nutrient_cn_k</span><span class="p">,</span>
+                <span class="n">carbon_cc</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">grid_timestep_dt</span><span class="p">,</span>
+                <span class="n">depth</span><span class="p">,</span>
+                <span class="n">thickness_index</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">algae_equation</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid algae model depth type.&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">thickness_list</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">thickness</span>
+        <span class="c1"># salinity source term using gravity drainage</span>
+        <span class="k">if</span> <span class="n">salinity_equation</span><span class="p">:</span>
+            <span class="n">salinity_source_term</span> <span class="o">=</span> <span class="n">get_salinity_source_term</span><span class="p">(</span>
+                <span class="nb">int</span><span class="p">(</span><span class="n">thickness_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">thickness_list</span><span class="p">,</span>
+                <span class="n">s_k</span><span class="p">,</span>
+                <span class="n">phi_k</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">grid_timestep_dt</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">grid_resolution_dz</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">radiation_equation</span><span class="p">:</span>
+        <span class="c1"># get radiative terms all</span>
+            <span class="n">radiative_source_term</span> <span class="o">=</span> <span class="n">calculate_radiative_terms</span><span class="p">(</span>
+                <span class="n">depth</span><span class="p">,</span> <span class="n">thickness_index</span><span class="p">,</span> <span class="n">radiation_algae</span><span class="p">,</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;algae_model_depth_type&quot;</span><span class="p">)</span>
+            <span class="p">)</span>
+        
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">radiative_source_term</span><span class="p">,</span>
+            <span class="n">salinity_source_term</span><span class="p">,</span>
+            <span class="n">carbon_concentration</span><span class="p">,</span>
+            <span class="n">nutrient_concentration</span><span class="p">,</span>
+            <span class="n">photosynthetic_rate_mu</span><span class="p">,</span>
+            <span class="n">radiation_algae</span><span class="p">,</span>
+            <span class="n">chla_bulk</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+
 <div class="viewcode-block" id="SeaIceModel.add_new_parameter_results">
-<a class="viewcode-back" href="../../../../api/spyice.models.sea_ice_model.html#src.spyice.models.sea_ice_model.SeaIceModel.add_new_parameter_results">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.models.html#src.spyice.models.SeaIceModel.add_new_parameter_results">[docs]</a>
     <span class="k">def</span> <span class="nf">add_new_parameter_results</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">t_k_iter_all</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">t_k_iter_all</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">phi_k_iter_all</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">phi_k_iter_all</span>
@@ -1280,7 +1660,7 @@
 
 
 <div class="viewcode-block" id="SeaIceModel.get_results">
-<a class="viewcode-back" href="../../../../api/spyice.models.sea_ice_model.html#src.spyice.models.sea_ice_model.SeaIceModel.get_results">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.models.html#src.spyice.models.SeaIceModel.get_results">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">get_results</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span> <span class="n">dataclass</span><span class="p">:</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">user_dataclass</span><span class="p">:</span> <span class="n">UserInput</span>
@@ -1305,7 +1685,7 @@
 
 
 <div class="viewcode-block" id="SeaIceModel.set_dataclass">
-<a class="viewcode-back" href="../../../../api/spyice.models.sea_ice_model.html#src.spyice.models.sea_ice_model.SeaIceModel.set_dataclass">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.models.html#src.spyice.models.SeaIceModel.set_dataclass">[docs]</a>
     <span class="k">def</span> <span class="nf">set_dataclass</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_dataclass</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the dataclass attributes of the object.</span>
 

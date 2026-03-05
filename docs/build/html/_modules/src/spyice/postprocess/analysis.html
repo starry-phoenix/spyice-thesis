@@ -41,6 +41,7 @@
     <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/src/spyice/postprocess/analysis';</script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -142,6 +143,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
       
@@ -233,6 +241,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
           
@@ -309,12 +324,12 @@
 <span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
-<span class="kn">from</span> <span class="nn">src.spyice.utils.error_norms</span> <span class="kn">import</span> <span class="n">ErrorNorms</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">spyice.utils.error_norms</span> <span class="kn">import</span> <span class="n">ErrorNorms</span>
 
 
 <div class="viewcode-block" id="AnalysisData">
-<a class="viewcode-back" href="../../../../api/spyice.postprocess.analysis.html#src.spyice.postprocess.analysis.AnalysisData">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.postprocess.analysis.html#src.spyice.postprocess.AnalysisData">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">AnalysisData</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents the analysis data.</span>
@@ -328,12 +343,12 @@
 
 
 <div class="viewcode-block" id="Analysis">
-<a class="viewcode-back" href="../../../../api/spyice.postprocess.analysis.html#src.spyice.postprocess.analysis.Analysis">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.postprocess.analysis.html#src.spyice.postprocess.Analysis">[docs]</a>
 <span class="k">class</span> <span class="nc">Analysis</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents an analysis object that performs error analysis on temperature differences.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="Analysis.__init__">
-<a class="viewcode-back" href="../../../../api/spyice.postprocess.analysis.html#src.spyice.postprocess.analysis.Analysis.__init__">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.postprocess.analysis.html#src.spyice.postprocess.Analysis.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t_k_diff</span><span class="p">,</span> <span class="n">t_stefan_diff</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Args:</span>
@@ -346,7 +361,7 @@
 
 
 <div class="viewcode-block" id="Analysis.set_analysis">
-<a class="viewcode-back" href="../../../../api/spyice.postprocess.analysis.html#src.spyice.postprocess.analysis.Analysis.set_analysis">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.postprocess.analysis.html#src.spyice.postprocess.Analysis.set_analysis">[docs]</a>
     <span class="k">def</span> <span class="nf">set_analysis</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets up the analysis for the current object.</span>
 
@@ -367,7 +382,7 @@
 
 
 <div class="viewcode-block" id="Analysis.error_analytical_numerical">
-<a class="viewcode-back" href="../../../../api/spyice.postprocess.analysis.html#src.spyice.postprocess.analysis.Analysis.error_analytical_numerical">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.postprocess.analysis.html#src.spyice.postprocess.Analysis.error_analytical_numerical">[docs]</a>
     <span class="k">def</span> <span class="nf">error_analytical_numerical</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculates the errors of Numerical and Analytical using error norms one, two and infinity.</span>
 
@@ -420,7 +435,7 @@
 
 
 <div class="viewcode-block" id="Analysis.calculate_errors">
-<a class="viewcode-back" href="../../../../api/spyice.postprocess.analysis.html#src.spyice.postprocess.analysis.Analysis.calculate_errors">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.postprocess.analysis.html#src.spyice.postprocess.Analysis.calculate_errors">[docs]</a>
     <span class="k">def</span> <span class="nf">calculate_errors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field_array</span><span class="p">,</span> <span class="n">error_norms_object</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculates the errors of a given field array using the provided error norms object.</span>
 
@@ -438,7 +453,7 @@
 
 
 <div class="viewcode-block" id="Analysis.store_field_errors">
-<a class="viewcode-back" href="../../../../api/spyice.postprocess.analysis.html#src.spyice.postprocess.analysis.Analysis.store_field_errors">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.postprocess.analysis.html#src.spyice.postprocess.Analysis.store_field_errors">[docs]</a>
     <span class="k">def</span> <span class="nf">store_field_errors</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">T_k_Stefan_diff_L1norm</span><span class="p">,</span>
@@ -476,17 +491,17 @@
 
 
 <div class="viewcode-block" id="Analysis.get_error_results">
-<a class="viewcode-back" href="../../../../api/spyice.postprocess.analysis.html#src.spyice.postprocess.analysis.Analysis.get_error_results">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.postprocess.analysis.html#src.spyice.postprocess.Analysis.get_error_results">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">get_error_results</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span>
-        <span class="n">t_k_diff</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
-        <span class="n">t_stefan_diff</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
-        <span class="n">residual</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
-        <span class="n">temperature_mushy</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
-        <span class="n">phi_mushy</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
-        <span class="n">salinity_mushy</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">,</span>
-        <span class="n">output_dir</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">t_k_diff</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">t_stefan_diff</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">residual</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">temperature_mushy</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">phi_mushy</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">salinity_mushy</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">output_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AnalysisData</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Runs error analysis on the given temperature differences.</span>
 
@@ -504,13 +519,13 @@
         <span class="n">error_analysis_object</span><span class="o">.</span><span class="n">error_analytical_numerical</span><span class="p">()</span>
         <span class="n">error_analysis_object</span><span class="o">.</span><span class="n">export_residuals</span><span class="p">(</span>
             <span class="n">residual</span><span class="p">,</span> <span class="n">temperature_mushy</span><span class="p">,</span> <span class="n">phi_mushy</span><span class="p">,</span> <span class="n">salinity_mushy</span><span class="p">,</span> <span class="n">output_dir</span>
-        <span class="p">)</span>
+        <span class="p">)</span> 
         <span class="n">all_vars</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">vars</span><span class="p">(</span><span class="n">error_analysis_object</span><span class="p">))</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">set_dataclass</span><span class="p">(</span><span class="n">all_vars</span><span class="p">,</span> <span class="n">AnalysisData</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Analysis.set_dataclass">
-<a class="viewcode-back" href="../../../../api/spyice.postprocess.analysis.html#src.spyice.postprocess.analysis.Analysis.set_dataclass">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.postprocess.analysis.html#src.spyice.postprocess.Analysis.set_dataclass">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">set_dataclass</span><span class="p">(</span><span class="n">data_to_be_converted</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">dataclass</span><span class="p">:</span> <span class="n">dataclass</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the values of a dataclass object using a dictionary.</span>
@@ -529,7 +544,7 @@
 
 
 <div class="viewcode-block" id="Analysis.export_residuals">
-<a class="viewcode-back" href="../../../../api/spyice.postprocess.analysis.html#src.spyice.postprocess.analysis.Analysis.export_residuals">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.postprocess.analysis.html#src.spyice.postprocess.Analysis.export_residuals">[docs]</a>
     <span class="k">def</span> <span class="nf">export_residuals</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">residuals</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">temperature_mushy</span><span class="p">,</span> <span class="n">phi_mushy</span><span class="p">,</span> <span class="n">salinity_mushy</span><span class="p">,</span> <span class="n">output_dir</span>
     <span class="p">):</span>
@@ -546,10 +561,12 @@
         <span class="n">temperature_mushy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">temperature_mushy</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
         <span class="n">phi_mushy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">phi_mushy</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
         <span class="n">salinity_mushy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">salinity_mushy</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">)</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span> <span class="s2">&quot;/residuals.npy&quot;</span><span class="p">,</span> <span class="n">residuals</span><span class="p">)</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span> <span class="s2">&quot;/temperature_mushy.npy&quot;</span><span class="p">,</span> <span class="n">temperature_mushy</span><span class="p">)</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span> <span class="s2">&quot;/phi_mushy.npy&quot;</span><span class="p">,</span> <span class="n">phi_mushy</span><span class="p">)</span>
-        <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">+</span> <span class="s2">&quot;/salinity_mushy.npy&quot;</span><span class="p">,</span> <span class="n">salinity_mushy</span><span class="p">)</span>
+        <span class="n">output_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span>  <span class="c1"># ensure it&#39;s a Path</span>
+
+        <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">/</span> <span class="s2">&quot;residuals.npy&quot;</span><span class="p">,</span> <span class="n">residuals</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">/</span> <span class="s2">&quot;temperature_mushy.npy&quot;</span><span class="p">,</span> <span class="n">temperature_mushy</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">/</span> <span class="s2">&quot;phi_mushy.npy&quot;</span><span class="p">,</span> <span class="n">phi_mushy</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">/</span> <span class="s2">&quot;salinity_mushy.npy&quot;</span><span class="p">,</span> <span class="n">salinity_mushy</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Residuals exported successfully.&quot;</span><span class="p">)</span></div>
 </div>
 
