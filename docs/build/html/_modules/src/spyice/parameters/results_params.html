@@ -41,6 +41,7 @@
     <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/src/spyice/parameters/results_params';</script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -142,6 +143,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
       
@@ -230,6 +238,13 @@
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../../../../api/_index.html">
     API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../user_guide/_index.html">
+    User Guide
   </a>
 </li>
 
@@ -406,14 +421,41 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">all_h_solid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">iter_max</span><span class="p">,</span> <span class="n">nz</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">all_w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">iter_max</span><span class="p">,</span> <span class="n">nz</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">all_thick</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">iter_max</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">all_t_passed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">iter_max</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">all_t_passed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">iter_max</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">temperature_solid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">iter_max</span><span class="p">,</span> <span class="n">nz</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">temperature_liquid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">iter_max</span><span class="p">,</span> <span class="n">nz</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">brine_velocity_list</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">iter_max</span><span class="p">,</span> <span class="n">nz</span><span class="p">])</span>
+        <span class="c1"># biogeochemical process single layer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">carbon_concentration</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">iter_max</span><span class="p">)</span><span class="o">*</span><span class="mf">0.01</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nutrient_concentration</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">iter_max</span><span class="p">)</span><span class="o">*</span><span class="mf">19.90</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">photosynthetic_rate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">iter_max</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radiation_algae</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">iter_max</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">chla_bulk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">iter_max</span><span class="p">)</span>
+        <span class="c1"># biogeochemical process multiple layer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nutrient_concentration_multiplelayers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="n">iter_max</span><span class="p">,</span> <span class="n">nz</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">carbon_concentration_multiplelayers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">([</span><span class="n">iter_max</span><span class="p">,</span> <span class="n">nz</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radiation_multiplelayers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">iter_max</span><span class="p">,</span> <span class="n">nz</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radiation_algae_multiplelayers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">iter_max</span><span class="p">,</span> <span class="n">nz</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">photosynthetic_rate_multiplelayers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">iter_max</span><span class="p">,</span> <span class="n">nz</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">chla_bulk_multiplelayers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">iter_max</span><span class="p">,</span> <span class="n">nz</span><span class="p">])</span>
+        <span class="c1"># salinity souce term</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">salinity_source_term</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">iter_max</span><span class="p">,</span> <span class="n">nz</span><span class="p">])</span></div>
 
 
 <div class="viewcode-block" id="ResultsParams.store_results">
 <a class="viewcode-back" href="../../../../api/spyice.parameters.results_params.html#src.spyice.parameters.results_params.ResultsParams.store_results">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">store_results</span><span class="p">(</span>
-        <span class="n">results_dataclass</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="n">s_sw</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">h_solid</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">thickness</span><span class="p">,</span> <span class="n">t_passed</span><span class="p">,</span> <span class="n">t</span>
+        <span class="n">results_dataclass</span><span class="p">,</span>
+        <span class="n">temp</span><span class="p">,</span>
+        <span class="n">s_sw</span><span class="p">,</span>
+        <span class="n">phi</span><span class="p">,</span>
+        <span class="n">h</span><span class="p">,</span>
+        <span class="n">h_solid</span><span class="p">,</span>
+        <span class="n">w</span><span class="p">,</span>
+        <span class="n">thickness</span><span class="p">,</span>
+        <span class="n">t_passed</span><span class="p">,</span>
+        <span class="n">t</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Stores the results of the simulation in the given results_dataclass.</span>
 
@@ -463,6 +505,9 @@
         <span class="n">t_stefan</span><span class="p">,</span>
         <span class="n">s_k</span><span class="p">,</span>
         <span class="n">s_k_buffo</span><span class="p">,</span>
+        <span class="n">brine_velocity_k</span><span class="p">,</span>
+        <span class="n">nutrient_cn_multiple_layers</span><span class="p">,</span>
+        <span class="n">carbon_cc_multiple_layers</span><span class="p">,</span>
         <span class="n">phi_k</span><span class="p">,</span>
         <span class="n">phi_k_buffo</span><span class="p">,</span>
         <span class="n">h_k</span><span class="p">,</span>
@@ -471,6 +516,15 @@
         <span class="n">thickness_buffo</span><span class="p">,</span>
         <span class="n">thickness_stefan</span><span class="p">,</span>
         <span class="n">t_k_buffo</span><span class="p">,</span>
+        <span class="n">temperature_liquid</span><span class="p">,</span>
+        <span class="n">temperature_solid</span><span class="p">,</span>
+        <span class="n">carbon_concentration</span><span class="p">,</span>
+        <span class="n">nutrient_concentration</span><span class="p">,</span>
+        <span class="n">photosynthetic_rate</span><span class="p">,</span>
+        <span class="n">radiation_algae</span><span class="p">,</span>
+        <span class="n">chla_bulk</span><span class="p">,</span>
+        <span class="n">radiation_all</span><span class="p">,</span>
+        <span class="n">salinity_source_term</span><span class="p">,</span>
         <span class="n">buffo</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Stores the results for a given iteration &#39;t&#39; in the &#39;results_dataclass&#39;.</span>
@@ -512,14 +566,27 @@
             <span class="n">t_stefan</span><span class="p">,</span>
             <span class="n">s_k</span><span class="p">,</span>
             <span class="n">s_k_buffo</span><span class="p">,</span>
+            <span class="n">brine_velocity_k</span><span class="p">,</span>
+            <span class="n">nutrient_cn_multiple_layers</span><span class="p">,</span>
+            <span class="n">carbon_cc_multiple_layers</span><span class="p">,</span>
             <span class="n">phi_k</span><span class="p">,</span>
             <span class="n">h_k</span><span class="p">,</span>
             <span class="n">h_solid</span><span class="p">,</span>
             <span class="n">thickness</span><span class="p">,</span>
             <span class="n">thickness_buffo</span><span class="p">,</span>
             <span class="n">thickness_stefan</span><span class="p">,</span>
+            <span class="n">thickness_index</span><span class="p">,</span>
             <span class="n">t_k_buffo</span><span class="p">,</span>
             <span class="n">phi_k_buffo</span><span class="p">,</span>
+            <span class="n">temperature_liquid</span><span class="p">,</span>
+            <span class="n">temperature_solid</span><span class="p">,</span>
+            <span class="n">carbon_concentration</span><span class="p">,</span>
+            <span class="n">nutrient_concentration</span><span class="p">,</span>
+            <span class="n">photosynthetic_rate</span><span class="p">,</span>
+            <span class="n">radiation_algae</span><span class="p">,</span> 
+            <span class="n">chla_bulk</span><span class="p">,</span>
+            <span class="n">radiation_all</span><span class="p">,</span>    
+            <span class="n">salinity_source_term</span><span class="p">,</span>       
             <span class="n">buffo</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="k">if</span> <span class="n">thickness_index</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -553,14 +620,27 @@
         <span class="n">t_stefan</span><span class="p">,</span>
         <span class="n">s_k</span><span class="p">,</span>
         <span class="n">s_k_buffo</span><span class="p">,</span>
+        <span class="n">brine_velocity_k</span><span class="p">,</span>
+        <span class="n">nutrient_cn_multiplelayers</span><span class="p">,</span>
+        <span class="n">carbon_cc_multiplelayers</span><span class="p">,</span>
         <span class="n">phi_k</span><span class="p">,</span>
         <span class="n">h_k</span><span class="p">,</span>
         <span class="n">h_solid</span><span class="p">,</span>
         <span class="n">thickness</span><span class="p">,</span>
         <span class="n">thickness_buffo</span><span class="p">,</span>
         <span class="n">thickness_stefan</span><span class="p">,</span>
+        <span class="n">thickness_index</span><span class="p">,</span>
         <span class="n">t_k_buffo</span><span class="p">,</span>
         <span class="n">phi_k_buffo</span><span class="p">,</span>
+        <span class="n">temperature_liquid</span><span class="p">,</span>
+        <span class="n">temperature_solid</span><span class="p">,</span>
+        <span class="n">carbon_concentration</span><span class="p">,</span>
+        <span class="n">nutrient_concentration</span><span class="p">,</span>
+        <span class="n">photosynthetic_rate</span><span class="p">,</span>
+        <span class="n">radiation_algae</span><span class="p">,</span>
+        <span class="n">chla_bulk</span><span class="p">,</span>
+        <span class="n">radiation_all</span><span class="p">,</span>
+        <span class="n">salinity_source_term</span><span class="p">,</span>
         <span class="n">buffo</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Appends the given parameters to the respective lists.</span>
@@ -589,11 +669,33 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">phi_buffo_list</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">phi_k_buffo</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">thickness_list</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">thickness</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">depth_stefan_all</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">thickness_stefan</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">thickness_index_total</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">thickness_index</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">phi_k_list</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">phi_k</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">s_k_list</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">s_k</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">s_buffo_list</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">s_k_buffo</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">brine_velocity_list</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">brine_velocity_k</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">salinity_source_term</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">salinity_source_term</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nutrient_concentration_multiplelayers</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">nutrient_cn_multiplelayers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">carbon_concentration_multiplelayers</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">carbon_cc_multiplelayers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radiation_multiplelayers</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">radiation_all</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">h_k_list</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">h_k</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">h_solid_list</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">h_solid</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">h_solid_list</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">h_solid</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">temperature_liquid</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">temperature_liquid</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">temperature_solid</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">temperature_solid</span>
+        <span class="c1"># algae model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">carbon_concentration</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">carbon_concentration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nutrient_concentration</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">nutrient_concentration</span>
+
+        <span class="c1"># TODO: correct self.radiation_algae[t] and self.chla_bulk[t] for single float value of radiation_algae </span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radiation_algae</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">radiation_algae</span><span class="p">[</span><span class="n">thickness_index</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">chla_bulk</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">chla_bulk</span><span class="p">[</span><span class="n">thickness_index</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">photosynthetic_rate</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">photosynthetic_rate</span><span class="p">[</span><span class="n">thickness_index</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">photosynthetic_rate_multiplelayers</span><span class="p">[</span><span class="n">t</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">photosynthetic_rate</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radiation_algae_multiplelayers</span><span class="p">[</span><span class="n">t</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">radiation_algae</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">chla_bulk_multiplelayers</span><span class="p">[</span><span class="n">t</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">chla_bulk</span></div>
+
+
 
 </pre></div>
 

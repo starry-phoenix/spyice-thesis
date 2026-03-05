@@ -36,6 +36,8 @@
     "Programming Language :: Python :: Implementation :: PyPy",
   ]
 
+[tool.hatch.build.targets.wheel]
+packages = ["src/spyice"]
 
 [tool.hatch.version]
   path = "src/spyice/__about__.py"

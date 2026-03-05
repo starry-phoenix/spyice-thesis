@@ -41,6 +41,7 @@
     <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/src/spyice/main_process';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -142,6 +143,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
       
@@ -233,6 +241,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
           
@@ -313,14 +328,12 @@
 
 <span class="kn">from</span> <span class="nn">omegaconf</span> <span class="kn">import</span> <span class="n">DictConfig</span>
 
-<span class="kn">from</span> <span class="nn">src.spyice.models.sea_ice_model</span> <span class="kn">import</span> <span class="n">SeaIceModel</span>
-<span class="kn">from</span> <span class="nn">src.spyice.postprocess.analysis</span> <span class="kn">import</span> <span class="n">Analysis</span>
-<span class="kn">from</span> <span class="nn">src.spyice.postprocess.visualise_model</span> <span class="kn">import</span> <span class="n">VisualiseModel</span>
-<span class="kn">from</span> <span class="nn">src.spyice.preprocess.pre_process</span> <span class="kn">import</span> <span class="n">PreProcess</span>
+<span class="kn">from</span> <span class="nn">spyice.models</span> <span class="kn">import</span> <span class="n">SeaIceModel</span>
+<span class="kn">from</span> <span class="nn">spyice.postprocess</span> <span class="kn">import</span> <span class="n">Analysis</span>
+<span class="kn">from</span> <span class="nn">spyice.postprocess</span> <span class="kn">import</span> <span class="n">VisualiseModel</span>
+<span class="kn">from</span> <span class="nn">spyice.preprocess</span> <span class="kn">import</span> <span class="n">PreProcess</span>
 
 
-<span class="c1"># TODO: Type hinting for all functions</span>
-<span class="c1"># TODO: Return type hinting for all functions</span>
 <div class="viewcode-block" id="MainProcess">
 <a class="viewcode-back" href="../../../api/spyice.main_process.html#src.spyice.main_process.MainProcess">[docs]</a>
 <span class="k">class</span> <span class="nc">MainProcess</span><span class="p">:</span>
@@ -330,10 +343,10 @@
 <a class="viewcode-back" href="../../../api/spyice.main_process.html#src.spyice.main_process.MainProcess.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">config</span><span class="p">,</span>
+        <span class="n">config</span> <span class="p">:</span> <span class="n">DictConfig</span><span class="p">,</span>
         <span class="n">hyd_output_dir</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s2">&quot;outputs&quot;</span><span class="p">)),</span>
         <span class="n">project_path</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span>
-    <span class="p">):</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Args:</span>
 <span class="sd">            config: The configuration object.</span>
@@ -345,7 +358,7 @@
         <span class="c1">#     self.config_raw, config_type=&quot;default&quot;</span>
         <span class="c1"># )</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">project_path</span><span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">project_path</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">out_dir_final</span> <span class="o">=</span> <span class="n">hyd_output_dir</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out_dir_final</span> <span class="p">:</span> <span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">hyd_output_dir</span></div>
 
 
 <div class="viewcode-block" id="MainProcess.run_model">
@@ -403,15 +416,54 @@
         <span class="p">)</span>
         <span class="c1"># model_visualization_object.plot_error_temp(100, norm=&quot;inf&quot;, savefig=False)</span>
         <span class="c1"># model_visualization_object.plot_depth_over_time(savefig=True)</span>
-        <span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_depth_over_time_heatmap</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="c1"># model_visualization_object.plot_temperature(</span>
-        <span class="c1">#     z_depth=0.1, savefig=True, Buffo_matlab=False</span>
+
+        <span class="c1"># uncomment from here for physical model</span>
+        <span class="c1"># model_visualization_object.plot_depth_over_time_heatmap(savefig=True)</span>
+        <span class="c1"># # model_visualization_object.plot_temperature(</span>
+        <span class="c1"># #     z_depth=0.1, savefig=True, Buffo_matlab=False</span>
+        <span class="c1"># # )</span>
+        <span class="c1"># model_visualization_object.plot_H_iter_all(savefig=True)</span>
+        <span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_temperature_heatmap</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">export_csv</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="c1"># model_visualization_object.plot_salinity_heatmap(savefig=True)</span>
+        <span class="c1"># model_visualization_object.plot_liquidfraction_heatmap(savefig=True)</span>
+        <span class="c1"># model_visualization_object.plot_temperature_liquid_solid_evolution(</span>
+        <span class="c1">#     z_depth=0.1, savefig=True</span>
         <span class="c1"># )</span>
-        <span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_H_iter_all</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_temperature_heatmap</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_salinity_heatmap</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_liquidfraction_heatmap</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># # algae model</span>
+        <span class="c1"># model_visualization_object.plot_carbon_concentration(savefig=True)</span>
+        <span class="c1"># model_visualization_object.plot_nutrient_concentration(savefig=True)</span>
+        <span class="c1"># model_visualization_object.plot_photosynthetic_rate(savefig=True)</span>
+        <span class="c1"># model_visualization_object.plot_radiation_algae(savefig=True)</span>
+        <span class="c1"># model_visualization_object.plot_radiation_algae_dt_by_rho_c(savefig=True)</span>
+        <span class="c1"># model_visualization_object.plot_chla_bulk_concentration(savefig=True)</span>
+        <span class="c1"># model_visualization_object.plot_radiation_all(savefig=True)</span>
+        <span class="c1"># # # plot algae model multiple layers</span>
+        <span class="c1"># model_visualization_object.plot_nutrient_concentration_multiplelayers(savefig=True)</span>
+        <span class="c1"># model_visualization_object.plot_carbon_concentration_multiplelayers(savefig=True)</span>
+        <span class="c1"># model_visualization_object.plot_photosynthetic_rate_multiplelayers(savefig=True)</span>
+        <span class="c1"># model_visualization_object.plot_radiation_algae_multiplelayers(savefig=True)</span>
+        <span class="c1"># model_visualization_object.plot_chla_bulk_concentration_multiplelayers(savefig=True)</span>
+        <span class="c1"># # # plot vertical profiles of algae model</span>
+
+        <span class="c1"># model_visualization_object.plot_nutrient_cn_profile(savefig=True)</span>
+        <span class="c1"># model_visualization_object.plot_carbon_concentration_profile(savefig=True)</span>
+        <span class="c1"># model_visualization_object.plot_radiation_profile(savefig=True)</span>
+        <span class="c1"># model_visualization_object.plot_salinity_sourceterm_profile(savefig=True)</span>
+        <span class="c1"># model_visualization_object.plot_liquid_salinity_profile(savefig=True)</span>
+        <span class="c1"># model_visualization_object.plot_brinevelocity_profile(savefig=True)</span>
+
+        <span class="c1"># model_visualization_object.plot_salinity_profile(savefig=True)</span>
+        <span class="c1"># model_visualization_object.plot_liquid_fraction_profile(savefig=True)</span>
+        <span class="c1"># model_visualization_object.plot_temperature_profile(savefig=True)</span>
+
         <span class="c1"># model_visualization_object.plot_temperature_heatmap_as_gif()</span>
+        <span class="c1"># model_visualization_object.plot_salinity_heatmap_as_gif()</span>
+        <span class="c1">#model_visualization_object.plot_carbon_heatmap_as_gif()</span>
+        <span class="c1">#model_visualization_object.plot_nutrient_concentration_heatmap_as_gif()</span>
+        <span class="c1"># 3d plots</span>
+        <span class="c1"># model_visualization_object.plot_temperature_3D(savefig=True)</span>
+        <span class="c1"># model_visualization_object.plot_temperature_3d_contours(savefig=True)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Postprocessing done.&quot;</span><span class="p">)</span></div>
 </div>
 

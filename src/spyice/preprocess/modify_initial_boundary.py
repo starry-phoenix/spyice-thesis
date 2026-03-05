@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from src.spyice.parameters.user_input import UserInput
-from src.spyice.preprocess.initial_boundary_conditions import temperature_gradient
+from spyice.parameters.user_input import UserInput
+from spyice.preprocess.initial_boundary_conditions import temperature_gradient
 
 ui = UserInput()
 (

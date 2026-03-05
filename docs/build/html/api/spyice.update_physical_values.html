@@ -42,9 +42,11 @@
     <script src="../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/spyice.update_physical_values';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="spyice.misc_subroutines" href="spyice.misc_subroutines.html" />
     <link rel="prev" title="src.spyice.statevariables" href="spyice.statevariables.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -144,6 +146,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
       
@@ -237,6 +246,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
           
@@ -268,8 +284,21 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="spyice.html">spyice package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 has-children"><a class="reference internal" href="spyice.models.html">spyice.models package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="spyice.models.advection_diffusion.html">src.spyice.models.advection_diffusion</a></li>
+
+
+
+
+
 <li class="toctree-l3"><a class="reference internal" href="spyice.models.sea_ice_model.html">src.spyice.models.sea_ice_model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.models.stefan_problem.html">src.spyice.models.stefan_problem</a></li>
+
+
+
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.algae_model.html">src.spyice.models.algae_model</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.radiative_model.html">src.spyice.models.radiative_model</a></li>
+
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="spyice.parameters.html">spyice.parameters package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -278,6 +307,7 @@
 <li class="toctree-l3"><a class="reference internal" href="spyice.parameters.real_constants.html">src.spyice.parameters.real_constants</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.parameters.results_params.html">src.spyice.parameters.results_params</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.parameters.user_input.html">src.spyice.parameters.user_input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.algae_constants.html">spyice.parameters.algae_constants</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="spyice.postprocess.html">spyice.postprocess package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -290,6 +320,8 @@
 <li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.initial_boundary_conditions.html">src.spyice.preprocess.initial_boundary_conditions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.modify_initial_boundary.html">src.spyice.preprocess.modify_initial_boundary</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.pre_process.html">src.spyice.preprocess.pre_process</a></li>
+
+
 <li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.store.html">src.spyice.preprocess.store</a></li>
 </ul>
 </details></li>
@@ -299,6 +331,10 @@
 <li class="toctree-l3"><a class="reference internal" href="spyice.utils.helpers.html">src.spyice.utils.helpers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.utils.spyice_exceptions.html">src.spyice.utils.spyice_exceptions module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.utils.spyice_logger.html">src.spyice.utils.spyice_logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.initial_userinput.html">spyice.utils.initial_userinput</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.create_directory.html">spyice.utils.create_directory</a></li>
+
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="spyice.coefficients.html">src.spyice.coefficients</a></li>
@@ -306,6 +342,8 @@
 <li class="toctree-l2"><a class="reference internal" href="spyice.rhs.html">src.spyice.rhs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="spyice.statevariables.html">src.spyice.statevariables</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">src.spyice.update_physical_values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.misc_subroutines.html">spyice.misc_subroutines</a></li>
+
 </ul>
 </details></li>
 </ul>
@@ -433,13 +471,57 @@
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="src.spyice.update_physical_values.calculate_brine_velocity_darcyscheme">
+<span class="sig-prename descclassname"><span class="pre">src.spyice.update_physical_values.</span></span><span class="sig-name descname"><span class="pre">calculate_brine_velocity_darcyscheme</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_br</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thickness_index_prev</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/update_physical_values.html#calculate_brine_velocity_darcyscheme"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.update_physical_values.calculate_brine_velocity_darcyscheme" title="Link to this definition">#</a></dt>
+<dd><p>compute brine velocity (no gravity)</p>
+<dl class="simple">
+<dt>Arguments——————————————————————</dt><dd><p>phi_initial initial liquid fraction, computed in previous time step [-]
+phi
+lastly updated liquid fraction in convergence scheme of
+the present time step [-]
+dz
+dt
+nz
+spatial discretization [m]
+time discretization [s]
+number of computational nodes</p>
+</dd>
+<dt>Results—————</dt><dd><p>wkm1
+brine velocity updated [ms-1]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="src.spyice.update_physical_values.calculate_brine_velocity_upwindscheme">
+<span class="sig-prename descclassname"><span class="pre">src.spyice.update_physical_values.</span></span><span class="sig-name descname"><span class="pre">calculate_brine_velocity_upwindscheme</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_i</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rho_br</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thickness_index_prev</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/update_physical_values.html#calculate_brine_velocity_upwindscheme"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.update_physical_values.calculate_brine_velocity_upwindscheme" title="Link to this definition">#</a></dt>
+<dd><p>compute brine velocity (no gravity) according to upwind scheme</p>
+<dl class="simple">
+<dt>Arguments——————————————————————</dt><dd><p>phi_initial initial liquid fraction, computed in previous time step [-]
+phi
+lastly updated liquid fraction in convergence scheme of
+the present time step [-]
+dz
+dt
+nz
+spatial discretization [m]
+time discretization [s]
+number of computational nodes</p>
+</dd>
+<dt>Results—————</dt><dd><p>wkm1
+brine velocity updated [ms-1]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="src.spyice.update_physical_values.calculate_liquidus_temperature">
-<span class="sig-prename descclassname"><span class="pre">src.spyice.update_physical_values.</span></span><span class="sig-name descname"><span class="pre">calculate_liquidus_temperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_salinity</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/update_physical_values.html#calculate_liquidus_temperature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.update_physical_values.calculate_liquidus_temperature" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">src.spyice.update_physical_values.</span></span><span class="sig-name descname"><span class="pre">calculate_liquidus_temperature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_salinity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_liquid_relation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Normal'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/update_physical_values.html#calculate_liquidus_temperature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.update_physical_values.calculate_liquidus_temperature" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="src.spyice.update_physical_values.calculate_melting_temperature_from_salinity">
-<span class="sig-prename descclassname"><span class="pre">src.spyice.update_physical_values.</span></span><span class="sig-name descname"><span class="pre">calculate_melting_temperature_from_salinity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_salinity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_temperature_melt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">271.189559549752</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_liquid_relation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Frezchem'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/update_physical_values.html#calculate_melting_temperature_from_salinity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.update_physical_values.calculate_melting_temperature_from_salinity" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">src.spyice.update_physical_values.</span></span><span class="sig-name descname"><span class="pre">calculate_melting_temperature_from_salinity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_salinity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_temperature_melt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">270.8999285714286</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_liquid_relation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Normal'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/update_physical_values.html#calculate_melting_temperature_from_salinity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.update_physical_values.calculate_melting_temperature_from_salinity" title="Link to this definition">#</a></dt>
 <dd><p>Calculates the melting temperature of seawater based on salinity.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -499,6 +581,30 @@
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="src.spyice.update_physical_values.update_algae_transport">
+<span class="sig-prename descclassname"><span class="pre">src.spyice.update_physical_values.</span></span><span class="sig-name descname"><span class="pre">update_algae_transport</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preprocess_data_object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nutrient_cn_prev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">brine_velocity_prev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thickness_index_prev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nutrient_cn_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_melt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_term</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buffo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stefan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">voller</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_nonconstant_physical_properties</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/update_physical_values.html#update_algae_transport"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.update_physical_values.update_algae_transport" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>preprocess_data_object</strong> (<a class="reference internal" href="spyice.preprocess.pre_process.html#PreprocessData" title="PreprocessData"><em>PreprocessData</em></a>)</p></li>
+<li><p><strong>nutrient_cn_prev</strong> (<em>np.ndarray</em>)</p></li>
+<li><p><strong>phi_k</strong> (<em>np.ndarray</em>)</p></li>
+<li><p><strong>brine_velocity_prev</strong> (<em>np.ndarray</em>)</p></li>
+<li><p><strong>thickness_index_prev</strong> (<em>float</em>)</p></li>
+<li><p><strong>nutrient_cn_initial</strong> (<em>np.ndarray</em>)</p></li>
+<li><p><strong>phi_initial</strong> (<em>np.ndarray</em>)</p></li>
+<li><p><strong>t_melt</strong> (<em>np.ndarray</em>)</p></li>
+<li><p><strong>source_term</strong> (<em>np.ndarray</em>)</p></li>
+<li><p><strong>buffo</strong> (<em>bool</em>)</p></li>
+<li><p><strong>stefan</strong> (<em>bool</em>)</p></li>
+<li><p><strong>voller</strong> (<em>bool</em>)</p></li>
+<li><p><strong>_nonconstant_physical_properties</strong> (<em>bool</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="src.spyice.update_physical_values.update_enthalpy">
 <span class="sig-prename descclassname"><span class="pre">src.spyice.update_physical_values.</span></span><span class="sig-name descname"><span class="pre">update_enthalpy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_salinity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_liquid_fraction</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_nz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'likebuffo'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/update_physical_values.html#update_enthalpy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.update_physical_values.update_enthalpy" title="Link to this definition">#</a></dt>
 <dd><p>Updates the enthalpy based on the given parameters.</p>
@@ -526,7 +632,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="src.spyice.update_physical_values.update_enthalpy_solid_state">
-<span class="sig-prename descclassname"><span class="pre">src.spyice.update_physical_values.</span></span><span class="sig-name descname"><span class="pre">update_enthalpy_solid_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_salinity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_nz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_liq_rel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Normal'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_temperature_melt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">271.189559549752</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/update_physical_values.html#update_enthalpy_solid_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.update_physical_values.update_enthalpy_solid_state" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">src.spyice.update_physical_values.</span></span><span class="sig-name descname"><span class="pre">update_enthalpy_solid_state</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_salinity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_nz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_liq_rel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Normal'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_temperature_melt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">270.8999285714286</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/update_physical_values.html#update_enthalpy_solid_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.update_physical_values.update_enthalpy_solid_state" title="Link to this definition">#</a></dt>
 <dd><p>Updates the enthalpy in the solid state based on the given parameters.
 :param _salinity: The salinity value.
 :type _salinity: float
@@ -577,7 +683,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="src.spyice.update_physical_values.update_liquid_fraction_mixture_with_enthalpy_equation">
-<span class="sig-prename descclassname"><span class="pre">src.spyice.update_physical_values.</span></span><span class="sig-name descname"><span class="pre">update_liquid_fraction_mixture_with_enthalpy_equation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_salinity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_liquid_fraction_previous</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">under_relaxation_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_is_stefan</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/update_physical_values.html#update_liquid_fraction_mixture_with_enthalpy_equation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.update_physical_values.update_liquid_fraction_mixture_with_enthalpy_equation" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">src.spyice.update_physical_values.</span></span><span class="sig-name descname"><span class="pre">update_liquid_fraction_mixture_with_enthalpy_equation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_salinity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_liquid_fraction_previous</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_enthalpy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_enthalpy_solid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">under_relaxation_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_is_stefan</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/update_physical_values.html#update_liquid_fraction_mixture_with_enthalpy_equation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.update_physical_values.update_liquid_fraction_mixture_with_enthalpy_equation" title="Link to this definition">#</a></dt>
 <dd><p>Update the liquid fraction mixture using under-relaxation.
 :param _temperature: The current temperature.
 :type _temperature: float
@@ -625,7 +731,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="src.spyice.update_physical_values.update_liquid_fraction_voller_continuous_thermal_properties">
-<span class="sig-prename descclassname"><span class="pre">src.spyice.update_physical_values.</span></span><span class="sig-name descname"><span class="pre">update_liquid_fraction_voller_continuous_thermal_properties</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_salinity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_phi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_enthalpy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_enthalpy_solid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a_p_temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp_factor_3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_is_stefan</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'likebuffo'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/update_physical_values.html#update_liquid_fraction_voller_continuous_thermal_properties"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.update_physical_values.update_liquid_fraction_voller_continuous_thermal_properties" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">src.spyice.update_physical_values.</span></span><span class="sig-name descname"><span class="pre">update_liquid_fraction_voller_continuous_thermal_properties</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_salinity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_phi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_enthalpy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_enthalpy_solid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">under_relaxation_factor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp_factor_3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_is_stefan</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'likebuffo'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/update_physical_values.html#update_liquid_fraction_voller_continuous_thermal_properties"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.update_physical_values.update_liquid_fraction_voller_continuous_thermal_properties" title="Link to this definition">#</a></dt>
 <dd><p>Updates the liquid fraction based on temperature, salinity, enthalpy, and other parameters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -688,21 +794,23 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="src.spyice.update_physical_values.update_state_variables">
-<span class="sig-prename descclassname"><span class="pre">src.spyice.update_physical_values.</span></span><span class="sig-name descname"><span class="pre">update_state_variables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preprocess_data_object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_prev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_prev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_prev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buffo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stefan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">voller</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_k_A_LHS_matrix_prev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp_factor_3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_term</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_is_salinity_equation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/update_physical_values.html#update_state_variables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.update_physical_values.update_state_variables" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">src.spyice.update_physical_values.</span></span><span class="sig-name descname"><span class="pre">update_state_variables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preprocess_data_object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_prev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_prev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">brine_velocity_prev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nutrient_cn_prev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_prev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thickness_index_prev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buffo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stefan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">voller</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nutrient_cn_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_k_melt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_k_A_LHS_matrix_prev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp_factor_3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_term_temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_term_salinity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_wind_temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_wind_salinity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_is_salinity_equation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_is_algae_equation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_is_diffusiononly_equation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/update_physical_values.html#update_state_variables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.update_physical_values.update_state_variables" title="Link to this definition">#</a></dt>
 <dd><p>Update the state variables Temperature, Salinity, Liquid Fraction, Enthalpy and Enthalpy of solid based on the given parameters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>preprocess_data_object</strong> (<a class="reference internal" href="spyice.preprocess.pre_process.html#src.spyice.preprocess.pre_process.PreprocessData" title="src.spyice.preprocess.pre_process.PreprocessData"><em>PreprocessData</em></a>) – The preprocess data object.</p></li>
+<li><p><strong>preprocess_data_object</strong> (<a class="reference internal" href="spyice.preprocess.pre_process.html#PreprocessData" title="PreprocessData"><em>PreprocessData</em></a>) – The preprocess data object.</p></li>
 <li><p><strong>t_km1</strong> (<em>numpy.ndarray</em>) – The previous temperature values.</p></li>
 <li><p><strong>s_km1</strong> (<em>numpy.ndarray</em>) – The previous salinity values.</p></li>
+<li><p><strong>nutrient_cn</strong> (<em>numpy.ndarray</em>) – The previous nutrient concentration values</p></li>
 <li><p><strong>phi_km1</strong> (<em>numpy.ndarray</em>) – The previous liquid fraction values.</p></li>
 <li><p><strong>buffo</strong> (<em>bool</em>) – The buffo flag.</p></li>
 <li><p><strong>stefan</strong> (<em>bool</em>) – The stefan flag.</p></li>
 <li><p><strong>t_initial</strong> (<em>numpy.ndarray</em>) – The initial temperature values.</p></li>
 <li><p><strong>s_initial</strong> (<em>numpy.ndarray</em>) – The initial salinity values.</p></li>
+<li><p><strong>nutrient_cn_initial</strong> (<em>numpy.ndarray</em>) – The initial nutrient concentration values</p></li>
 <li><p><strong>phi_initial</strong> (<em>numpy.ndarray</em>) – The initial liquid fraction values.</p></li>
-<li><p><strong>source_term</strong> (<em>numpy.ndarray</em>) – The source term values.</p></li>
+<li><p><strong>source_term</strong> (<em>numpy.ndarray</em>) – The source term values like radiation ocean flux, algae, etc.</p></li>
 </ul>
 </dd>
 </dl>
@@ -713,6 +821,7 @@
 <li><p>update_enthalpy_solid_state: Update the enthalpy of the solid state with previous salinity using the liquidus relation.</p></li>
 <li><p>update_liquid_fraction: Update the liquid fraction of the system with previous temperature, salinity, enthalpy, solid enthalpy.</p></li>
 <li><p>update_temperature_and_salinity: Update the temperature and salinity of the system with updated liquid fraction and previous temperature, salinity, initial temperature, initial salinity, initial liquid fraction, source term, buffo, stefan.</p></li>
+<li><p>update_algae_transport: Update the nutrient concentration of the system</p></li>
 </ul>
 </dd>
 </dl>
@@ -727,6 +836,7 @@
 <li><p>phi_k (numpy.ndarray): The updated liquid fraction values.</p></li>
 <li><p>t_k (numpy.ndarray): The updated temperature values.</p></li>
 <li><p>s_k (numpy.ndarray): The updated salinity values.</p></li>
+<li><p>nutrient_cn (numpy.ndarray): The updated nutrient values</p></li>
 </ul>
 </dd>
 </dl>
@@ -736,19 +846,19 @@
 <dd class="field-even"><p>tuple</p>
 </dd>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>preprocess_data_object</strong> (<a class="reference internal" href="spyice.preprocess.pre_process.html#src.spyice.preprocess.pre_process.PreprocessData" title="src.spyice.preprocess.pre_process.PreprocessData"><em>PreprocessData</em></a>)</p>
+<dd class="field-odd"><p><strong>preprocess_data_object</strong> (<a class="reference internal" href="spyice.preprocess.pre_process.html#PreprocessData" title="PreprocessData"><em>PreprocessData</em></a>)</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="src.spyice.update_physical_values.update_temperature_and_salinity">
-<span class="sig-prename descclassname"><span class="pre">src.spyice.update_physical_values.</span></span><span class="sig-name descname"><span class="pre">update_temperature_and_salinity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preprocess_data_object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_prev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_prev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_term</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buffo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stefan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">voller</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_is_salinity_equation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_nonconstant_physical_properties</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_k_A_LHS_matrix_prev</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/update_physical_values.html#update_temperature_and_salinity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.update_physical_values.update_temperature_and_salinity" title="Link to this definition">#</a></dt>
+<span class="sig-prename descclassname"><span class="pre">src.spyice.update_physical_values.</span></span><span class="sig-name descname"><span class="pre">update_temperature_and_salinity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">preprocess_data_object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_prev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_prev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">brine_velocity_prev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thickness_index_prev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_melt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_term_temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_term_salinity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_wind_temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_wind_salinity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buffo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stefan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">voller</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_is_salinity_equation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_nonconstant_physical_properties</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_k_A_LHS_matrix_prev</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/update_physical_values.html#update_temperature_and_salinity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.update_physical_values.update_temperature_and_salinity" title="Link to this definition">#</a></dt>
 <dd><p>Update the temperature and salinity based on the given parameters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>preprocess_data_object</strong> (<a class="reference internal" href="spyice.preprocess.pre_process.html#src.spyice.preprocess.pre_process.PreprocessData" title="src.spyice.preprocess.pre_process.PreprocessData"><em>PreprocessData</em></a>) – The preprocess data object.</p></li>
+<li><p><strong>preprocess_data_object</strong> (<a class="reference internal" href="spyice.preprocess.pre_process.html#PreprocessData" title="PreprocessData"><em>PreprocessData</em></a>) – The preprocess data object.</p></li>
 <li><p><strong>t_prev</strong> (<em>numpy.ndarray</em>) – The previous temperature values.</p></li>
 <li><p><strong>s_prev</strong> (<em>numpy.ndarray</em>) – The previous salinity values.</p></li>
 <li><p><strong>phi_k</strong> (<em>numpy.ndarray</em>) – The liquid fraction values.</p></li>
@@ -759,6 +869,13 @@
 <li><p><strong>buffo</strong> (<em>bool</em>) – The buffo flag.</p></li>
 <li><p><strong>stefan</strong> (<em>bool</em>) – The stefan flag.</p></li>
 <li><p><strong>_is_salinity_equation</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to consider the salinity equation. Defaults to False.</p></li>
+<li><p><strong>brine_velocity_prev</strong> (<em>np.ndarray</em>)</p></li>
+<li><p><strong>thickness_index_prev</strong> (<em>float</em>)</p></li>
+<li><p><strong>t_melt</strong> (<em>np.ndarray</em>)</p></li>
+<li><p><strong>source_term_temperature</strong> (<em>np.ndarray</em>)</p></li>
+<li><p><strong>source_term_salinity</strong> (<em>np.ndarray</em>)</p></li>
+<li><p><strong>x_wind_temperature</strong> (<em>np.ndarray</em>)</p></li>
+<li><p><strong>x_wind_salinity</strong> (<em>np.ndarray</em>)</p></li>
 <li><p><strong>voller</strong> (<em>bool</em>)</p></li>
 <li><p><strong>_nonconstant_physical_properties</strong> (<em>bool</em>)</p></li>
 <li><p><strong>t_k_A_LHS_matrix_prev</strong> (<em>np.ndarray</em>)</p></li>
@@ -795,6 +912,15 @@ a_p: The main diagonal of the matrix A for the Voller scheme liquid fraction upd
         <p class="prev-next-title">src.spyice.statevariables</p>
       </div>
     </a>
+    <a class="right-next"
+       href="spyice.misc_subroutines.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">spyice.misc_subroutines</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -817,10 +943,13 @@ a_p: The main diagonal of the matrix A for the Voller scheme liquid fraction upd
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.update_physical_values.H_function"><code class="docutils literal notranslate"><span class="pre">H_function()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.update_physical_values.H_function_derivate"><code class="docutils literal notranslate"><span class="pre">H_function_derivate()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.update_physical_values.H_newton_iteration"><code class="docutils literal notranslate"><span class="pre">H_newton_iteration()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.update_physical_values.calculate_brine_velocity_darcyscheme"><code class="docutils literal notranslate"><span class="pre">calculate_brine_velocity_darcyscheme()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.update_physical_values.calculate_brine_velocity_upwindscheme"><code class="docutils literal notranslate"><span class="pre">calculate_brine_velocity_upwindscheme()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.update_physical_values.calculate_liquidus_temperature"><code class="docutils literal notranslate"><span class="pre">calculate_liquidus_temperature()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.update_physical_values.calculate_melting_temperature_from_salinity"><code class="docutils literal notranslate"><span class="pre">calculate_melting_temperature_from_salinity()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.update_physical_values.phi_control_for_infinite_values"><code class="docutils literal notranslate"><span class="pre">phi_control_for_infinite_values()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.update_physical_values.phi_func"><code class="docutils literal notranslate"><span class="pre">phi_func()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.update_physical_values.update_algae_transport"><code class="docutils literal notranslate"><span class="pre">update_algae_transport()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.update_physical_values.update_enthalpy"><code class="docutils literal notranslate"><span class="pre">update_enthalpy()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.update_physical_values.update_enthalpy_solid_state"><code class="docutils literal notranslate"><span class="pre">update_enthalpy_solid_state()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.update_physical_values.update_liquid_fraction_buffo"><code class="docutils literal notranslate"><span class="pre">update_liquid_fraction_buffo()</span></code></a></li>

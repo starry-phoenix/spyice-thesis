@@ -12,6 +12,8 @@ Submodules
    spyice.utils.helpers
    spyice.utils.spyice_exceptions
    spyice.utils.spyice_logger
+   spyice.utils.initial_userinput
+   spyice.utils.create_directory
 
 Module contents
 ---------------

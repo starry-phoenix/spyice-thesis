@@ -56,9 +56,14 @@ class RealConstants:
     alpha: float = 1.56 * 10 ** (
         -3
     )  # Linear coeff for Rayleigh number driven advection
+    # latent heat and diffusivity for sea ice
     L: int = 334774  # Latent heat of fusion ice<->water (J/Kg)
-    D_s: float = 2 * 10 ** (-9) # 2 * 10 ** (-9)  # Diffusivity for Salt
+    D_s: float = 2 * 10 ** (-9)  # Diffusivity for Salt
+    # latent heat and diffusivity according to worster 1986
+    # L: int = 80  # Latent heat of fusion ice<->water (J/Kg)
+    # D_s: float = 1e-03  
     if not param_const:
+        # Griewank and Notz (2013)
         k_i: float = 2.0  # Thermal conductivity (ice) [W/m/K]
         k_br: float = 0.6  # Thermal conductivity (brine) [W/m/K]
         k_w: float = k_br  # 2.0
@@ -68,6 +73,17 @@ class RealConstants:
         rho_br: int =  1028  # Density of Ocean (used in volume averaging - 1D grav. drainage uses delta S) 34ppt NaCl-1027
         rho_i: int = 917  # Density of Ice (Kg/m^3)                                     #  12.3ppt MgSO4-1012, 100pppt-1103, 282ppt-1323
         rho_w: int = rho_br  # 1000
+        # worster and wettlaufer (1986)
+        # k_i: float = 5.3e-03  # Thermal conductivity (ice) [W/m/K]
+        # k_br: float = 1.3e-03 # Thermal conductivity (brine) [W/m/K]
+        # k_w: float = k_br  # 2.0
+        # c_i: int = 0.48  # Specific heat of ice
+        # c_br: int = 1.0  # Specific heat of seawater (J/kg/K)
+        # c_w: int = c_br  # specific heat of water
+        # rho_br: int =  1.0  # Density of Ocean (used in volume averaging - 1D grav. drainage uses delta S) 34ppt NaCl-1027
+        # rho_i: int = 0.92  # Density of Ice (Kg/m^3)                                     #  12.3ppt MgSO4-1012, 100pppt-1103, 282ppt-1323
+        # rho_w: int = rho_br  # 1000
+
     else: 
         k_i: float = 2.0  # Thermal conductivity (ice) [W/m/K]
         k_br: float = k_i  # Thermal conductivity (brine) [W/m/K]
@@ -78,6 +94,16 @@ class RealConstants:
         rho_i: int = 917  # Density of Ice (Kg/m^3)                                     #  12.3ppt MgSO4-1012, 100pppt-1103, 282ppt-1323
         rho_br: int =  rho_i  # Density of Ocean (used in volume averaging - 1D grav. drainage uses delta S) 34ppt NaCl-1027
         rho_w: int = rho_i  # 1000
+        # worster and wettlaufer (1986)
+        # k_i: float = 1.3e-03  # Thermal conductivity (ice) [W/m/K]
+        # k_br: float = 1.3e-03 # Thermal conductivity (brine) [W/m/K]
+        # k_w: float = k_br  # 2.0
+        # c_i: int = 1.0  # Specific heat of ice
+        # c_br: int = 1.0  # Specific heat of seawater (J/kg/K)
+        # c_w: int = c_br  # specific heat of water
+        # rho_br: int =  1.0  # Density of Ocean (used in volume averaging - 1D grav. drainage uses delta S) 34ppt NaCl-1027
+        # rho_i: int = 1.0  # Density of Ice (Kg/m^3)                                     #  12.3ppt MgSO4-1012, 100pppt-1103, 282ppt-1323
+        # rho_w: int = rho_br  # 1000
     m: int = 2  # Cementation exponent for Archies equation
     g: float = 9.8  # Earth Gravity
     phi_c: float = 0.06823  # Critical Porosity

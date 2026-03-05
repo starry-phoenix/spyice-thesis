@@ -42,6 +42,9 @@
     <script src="../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/spyice';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -145,6 +148,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
       
@@ -238,6 +248,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
           
@@ -269,8 +286,21 @@
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">spyice package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="spyice.models.html">spyice.models package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="spyice.models.advection_diffusion.html">src.spyice.models.advection_diffusion</a></li>
+
+
+
+
+
 <li class="toctree-l3"><a class="reference internal" href="spyice.models.sea_ice_model.html">src.spyice.models.sea_ice_model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.models.stefan_problem.html">src.spyice.models.stefan_problem</a></li>
+
+
+
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.algae_model.html">src.spyice.models.algae_model</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.radiative_model.html">src.spyice.models.radiative_model</a></li>
+
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="spyice.parameters.html">spyice.parameters package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -279,6 +309,7 @@
 <li class="toctree-l3"><a class="reference internal" href="spyice.parameters.real_constants.html">src.spyice.parameters.real_constants</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.parameters.results_params.html">src.spyice.parameters.results_params</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.parameters.user_input.html">src.spyice.parameters.user_input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.algae_constants.html">spyice.parameters.algae_constants</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="spyice.postprocess.html">spyice.postprocess package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -291,6 +322,8 @@
 <li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.initial_boundary_conditions.html">src.spyice.preprocess.initial_boundary_conditions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.modify_initial_boundary.html">src.spyice.preprocess.modify_initial_boundary</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.pre_process.html">src.spyice.preprocess.pre_process</a></li>
+
+
 <li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.store.html">src.spyice.preprocess.store</a></li>
 </ul>
 </details></li>
@@ -300,6 +333,10 @@
 <li class="toctree-l3"><a class="reference internal" href="spyice.utils.helpers.html">src.spyice.utils.helpers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.utils.spyice_exceptions.html">src.spyice.utils.spyice_exceptions module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.utils.spyice_logger.html">src.spyice.utils.spyice_logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.initial_userinput.html">spyice.utils.initial_userinput</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.create_directory.html">spyice.utils.create_directory</a></li>
+
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="spyice.coefficients.html">src.spyice.coefficients</a></li>
@@ -307,6 +344,8 @@
 <li class="toctree-l2"><a class="reference internal" href="spyice.rhs.html">src.spyice.rhs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="spyice.statevariables.html">src.spyice.statevariables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html">src.spyice.update_physical_values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.misc_subroutines.html">spyice.misc_subroutines</a></li>
+
 </ul>
 </details></li>
 </ul>
@@ -428,10 +467,13 @@
 <li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html#src.spyice.update_physical_values.H_function"><code class="docutils literal notranslate"><span class="pre">H_function()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html#src.spyice.update_physical_values.H_function_derivate"><code class="docutils literal notranslate"><span class="pre">H_function_derivate()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html#src.spyice.update_physical_values.H_newton_iteration"><code class="docutils literal notranslate"><span class="pre">H_newton_iteration()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html#src.spyice.update_physical_values.calculate_brine_velocity_darcyscheme"><code class="docutils literal notranslate"><span class="pre">calculate_brine_velocity_darcyscheme()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html#src.spyice.update_physical_values.calculate_brine_velocity_upwindscheme"><code class="docutils literal notranslate"><span class="pre">calculate_brine_velocity_upwindscheme()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html#src.spyice.update_physical_values.calculate_liquidus_temperature"><code class="docutils literal notranslate"><span class="pre">calculate_liquidus_temperature()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html#src.spyice.update_physical_values.calculate_melting_temperature_from_salinity"><code class="docutils literal notranslate"><span class="pre">calculate_melting_temperature_from_salinity()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html#src.spyice.update_physical_values.phi_control_for_infinite_values"><code class="docutils literal notranslate"><span class="pre">phi_control_for_infinite_values()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html#src.spyice.update_physical_values.phi_func"><code class="docutils literal notranslate"><span class="pre">phi_func()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html#src.spyice.update_physical_values.update_algae_transport"><code class="docutils literal notranslate"><span class="pre">update_algae_transport()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html#src.spyice.update_physical_values.update_enthalpy"><code class="docutils literal notranslate"><span class="pre">update_enthalpy()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html#src.spyice.update_physical_values.update_enthalpy_solid_state"><code class="docutils literal notranslate"><span class="pre">update_enthalpy_solid_state()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html#src.spyice.update_physical_values.update_liquid_fraction_buffo"><code class="docutils literal notranslate"><span class="pre">update_liquid_fraction_buffo()</span></code></a></li>
@@ -441,6 +483,11 @@
 <li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html#src.spyice.update_physical_values.update_liquid_fraction_voller_under_relaxation"><code class="docutils literal notranslate"><span class="pre">update_liquid_fraction_voller_under_relaxation()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html#src.spyice.update_physical_values.update_state_variables"><code class="docutils literal notranslate"><span class="pre">update_state_variables()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html#src.spyice.update_physical_values.update_temperature_and_salinity"><code class="docutils literal notranslate"><span class="pre">update_temperature_and_salinity()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="spyice.misc_subroutines.html">spyice.misc_subroutines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spyice.misc_subroutines.html#functions">Functions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="spyice.misc_subroutines.html#calculate-melting-temperature-from-salinity">calculate_melting_temperature_from_salinity</a></li>
 </ul>
 </li>
 </ul>

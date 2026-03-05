@@ -34,7 +34,7 @@ extensions = [
     # "jupyter_sphinx",
     # "myst_parser",
     # "sphinx_favicon",
-    # "nbsphinx",
+    "nbsphinx",
     # "sphinx.ext.todo",
     # "sphinx.ext.coverage",
     # "sphinx_automodapi.automodapi",

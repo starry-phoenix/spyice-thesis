@@ -41,6 +41,7 @@
     <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/src/spyice/coefficients';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -142,6 +143,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
       
@@ -233,6 +241,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
           
@@ -308,7 +323,7 @@
   <h1>Source code for src.spyice.coefficients</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">src.spyice.parameters.user_input</span> <span class="kn">import</span> <span class="n">UserInput</span>
+<span class="kn">from</span> <span class="nn">spyice.parameters.user_input</span> <span class="kn">import</span> <span class="n">UserInput</span>
 
 <span class="n">ui</span> <span class="o">=</span> <span class="n">UserInput</span><span class="p">()</span>
 <span class="p">(</span>
@@ -340,7 +355,6 @@
     <span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">c_w</span><span class="p">,</span>
     <span class="n">ui</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">k_w</span><span class="p">,</span>
 <span class="p">)</span>
-
 
 <div class="viewcode-block" id="update_coefficients">
 <a class="viewcode-back" href="../../../api/spyice.coefficients.html#src.spyice.coefficients.update_coefficients">[docs]</a>
@@ -425,6 +439,7 @@
     <span class="c1"># phi = np.where(phi &lt; 0.5, 0, np.where(phi &gt; 0.5, 1, phi))</span>
     <span class="n">eff</span> <span class="o">=</span> <span class="n">phi</span> <span class="o">*</span> <span class="n">brine_coefficient</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">phi</span><span class="p">)</span> <span class="o">*</span> <span class="n">ice_coefficient</span>
     <span class="k">return</span> <span class="n">eff</span>
+
 </pre></div>
 
                 </article>

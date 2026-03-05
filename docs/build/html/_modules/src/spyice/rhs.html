@@ -41,6 +41,7 @@
     <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/src/spyice/rhs';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -142,6 +143,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
       
@@ -233,6 +241,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
           
@@ -310,8 +325,8 @@
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">src.spyice.parameters.user_input</span> <span class="kn">import</span> <span class="n">UserInput</span>
-<span class="kn">from</span> <span class="nn">src.spyice.preprocess.initial_boundary_conditions</span> <span class="kn">import</span> <span class="n">boundary_condition</span>
+<span class="kn">from</span> <span class="nn">spyice.parameters.user_input</span> <span class="kn">import</span> <span class="n">UserInput</span>
+<span class="kn">from</span> <span class="nn">spyice.preprocess.initial_boundary_conditions</span> <span class="kn">import</span> <span class="n">boundary_condition</span>
 
 <span class="n">ui</span> <span class="o">=</span> <span class="n">UserInput</span><span class="p">()</span>
 <span class="n">temperature_melt</span><span class="p">,</span> <span class="n">temperature_top</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">temperature_melt</span><span class="p">,</span> <span class="n">ui</span><span class="o">.</span><span class="n">boundary_top_temperature</span>
@@ -323,7 +338,9 @@
     <span class="n">argument</span><span class="p">,</span>
     <span class="n">x_initial</span><span class="p">,</span>
     <span class="n">source</span><span class="p">,</span>
+    <span class="n">thickness_index</span><span class="p">,</span>
     <span class="n">factor1</span><span class="p">,</span>
+    <span class="n">factor2</span><span class="p">,</span>
     <span class="n">factor3</span><span class="p">,</span>
     <span class="n">a</span><span class="p">,</span>
     <span class="n">delta_upwind</span><span class="p">,</span>
@@ -359,16 +376,21 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">rhs_matrix</span> <span class="o">=</span> <span class="n">x_initial</span> <span class="o">-</span> <span class="n">factor3</span> <span class="o">*</span> <span class="n">delta_upwind</span>
 
+    <span class="c1"># TODO: modified the boundary condition to the moving boundary condition</span>
     <span class="k">if</span> <span class="n">argument</span> <span class="o">==</span> <span class="s2">&quot;salinity&quot;</span><span class="p">:</span>
         <span class="n">salinity_bc_top</span><span class="p">,</span> <span class="n">salinity_bc_bottom</span> <span class="o">=</span> <span class="n">boundary_condition</span><span class="p">(</span>
-            <span class="n">argument</span><span class="p">,</span> <span class="n">t_passed</span><span class="p">,</span> <span class="n">salinity_initial</span>
-        <span class="p">)</span>
-        <span class="n">rhs_matrix</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">factor1</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">x_initial</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># Dirichlet</span>
+                    <span class="n">argument</span><span class="p">,</span> <span class="n">t_passed</span><span class="p">,</span> <span class="n">salinity_initial</span><span class="p">)</span>
+        <span class="n">bottom_index</span> <span class="o">=</span> <span class="n">thickness_index</span>
+        <span class="k">if</span> <span class="n">w</span><span class="p">[</span><span class="n">bottom_index</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">rhs_matrix</span><span class="p">[</span><span class="n">bottom_index</span><span class="p">:]</span> <span class="o">+=</span> <span class="n">factor1</span><span class="p">[</span><span class="n">bottom_index</span><span class="p">:]</span> <span class="o">*</span> <span class="n">salinity_bc_bottom</span> <span class="o">+</span> <span class="n">factor2</span><span class="p">[</span><span class="n">bottom_index</span><span class="p">:]</span><span class="o">*</span><span class="n">salinity_bc_bottom</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">rhs_matrix</span><span class="p">[</span><span class="n">bottom_index</span><span class="p">:]</span> <span class="o">+=</span> <span class="n">factor1</span><span class="p">[</span><span class="n">bottom_index</span><span class="p">:]</span> <span class="o">*</span> <span class="n">salinity_bc_bottom</span>  <span class="c1">#+ factor2[bottom_index:]*salinity_bc_bottom # Dirichlet</span>
 
     <span class="k">elif</span> <span class="n">argument</span> <span class="o">==</span> <span class="s2">&quot;temperature&quot;</span><span class="p">:</span>
         <span class="n">temperature_bc_top</span><span class="p">,</span> <span class="n">temperature_bc_bottom</span> <span class="o">=</span> <span class="n">boundary_condition</span><span class="p">(</span>
             <span class="n">argument</span><span class="p">,</span> <span class="n">t_passed</span><span class="p">,</span> <span class="n">salinity_initial</span><span class="p">,</span> <span class="n">top_temp</span><span class="o">=</span><span class="n">_temperature_top</span>
         <span class="p">)</span>
+        <span class="n">rhs_matrix</span> <span class="o">=</span> <span class="n">rhs_matrix</span> <span class="o">+</span> <span class="n">source</span>
 
         <span class="k">if</span> <span class="n">is_stefan</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">bc_neumann</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -398,7 +420,6 @@
 
 
 
-<span class="c1"># not relevant for our topic</span>
 <div class="viewcode-block" id="correct_for_brine_movement">
 <a class="viewcode-back" href="../../../api/spyice.rhs.html#src.spyice.rhs.correct_for_brine_movement">[docs]</a>
 <span class="k">def</span> <span class="nf">correct_for_brine_movement</span><span class="p">(</span>
@@ -419,6 +440,7 @@
 <span class="sd">    Raises:</span>
 <span class="sd">        None</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># TODO: where tp use x_upwind </span>
 
     <span class="n">x_upwind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nz</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">nz</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>

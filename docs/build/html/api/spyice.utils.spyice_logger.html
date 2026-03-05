@@ -42,10 +42,11 @@
     <script src="../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/spyice.utils.spyice_logger';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="src.spyice.coefficients" href="spyice.coefficients.html" />
+    <link rel="next" title="spyice.utils.initial_userinput" href="spyice.utils.initial_userinput.html" />
     <link rel="prev" title="src.spyice.utils.spyice_exceptions module" href="spyice.utils.spyice_exceptions.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -145,6 +146,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
       
@@ -238,6 +246,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
           
@@ -269,8 +284,21 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="spyice.html">spyice package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 has-children"><a class="reference internal" href="spyice.models.html">spyice.models package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="spyice.models.advection_diffusion.html">src.spyice.models.advection_diffusion</a></li>
+
+
+
+
+
 <li class="toctree-l3"><a class="reference internal" href="spyice.models.sea_ice_model.html">src.spyice.models.sea_ice_model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.models.stefan_problem.html">src.spyice.models.stefan_problem</a></li>
+
+
+
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.algae_model.html">src.spyice.models.algae_model</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.radiative_model.html">src.spyice.models.radiative_model</a></li>
+
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="spyice.parameters.html">spyice.parameters package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -279,6 +307,7 @@
 <li class="toctree-l3"><a class="reference internal" href="spyice.parameters.real_constants.html">src.spyice.parameters.real_constants</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.parameters.results_params.html">src.spyice.parameters.results_params</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.parameters.user_input.html">src.spyice.parameters.user_input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.algae_constants.html">spyice.parameters.algae_constants</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="spyice.postprocess.html">spyice.postprocess package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -291,6 +320,8 @@
 <li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.initial_boundary_conditions.html">src.spyice.preprocess.initial_boundary_conditions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.modify_initial_boundary.html">src.spyice.preprocess.modify_initial_boundary</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.pre_process.html">src.spyice.preprocess.pre_process</a></li>
+
+
 <li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.store.html">src.spyice.preprocess.store</a></li>
 </ul>
 </details></li>
@@ -300,6 +331,10 @@
 <li class="toctree-l3"><a class="reference internal" href="spyice.utils.helpers.html">src.spyice.utils.helpers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.utils.spyice_exceptions.html">src.spyice.utils.spyice_exceptions module</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">src.spyice.utils.spyice_logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.initial_userinput.html">spyice.utils.initial_userinput</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.create_directory.html">spyice.utils.create_directory</a></li>
+
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="spyice.coefficients.html">src.spyice.coefficients</a></li>
@@ -307,6 +342,8 @@
 <li class="toctree-l2"><a class="reference internal" href="spyice.rhs.html">src.spyice.rhs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="spyice.statevariables.html">src.spyice.statevariables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html">src.spyice.update_physical_values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.misc_subroutines.html">spyice.misc_subroutines</a></li>
+
 </ul>
 </details></li>
 </ul>
@@ -445,11 +482,11 @@
       </div>
     </a>
     <a class="right-next"
-       href="spyice.coefficients.html"
+       href="spyice.utils.initial_userinput.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">src.spyice.coefficients</p>
+        <p class="prev-next-title">spyice.utils.initial_userinput</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

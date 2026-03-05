@@ -41,6 +41,7 @@
     <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/src/spyice/update_physical_values';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -142,6 +143,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
       
@@ -233,6 +241,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
           
@@ -312,8 +327,8 @@
 <span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">bisect</span><span class="p">,</span> <span class="n">newton</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
 
-<span class="kn">from</span> <span class="nn">src.spyice.parameters.user_input</span> <span class="kn">import</span> <span class="n">UserInput</span>
-<span class="kn">from</span> <span class="nn">src.spyice.models.advection_diffusion</span> <span class="kn">import</span> <span class="n">AdvectionDiffusion</span>
+<span class="kn">from</span> <span class="nn">spyice.parameters.user_input</span> <span class="kn">import</span> <span class="n">UserInput</span>
+<span class="kn">from</span> <span class="nn">spyice.models.advection_diffusion</span> <span class="kn">import</span> <span class="n">AdvectionDiffusion</span>
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
     <span class="kn">from</span> <span class="nn">preprocess.pre_process</span> <span class="kn">import</span> <span class="n">PreprocessData</span>
@@ -329,7 +344,7 @@
 <div class="viewcode-block" id="calculate_melting_temperature_from_salinity">
 <a class="viewcode-back" href="../../../api/spyice.update_physical_values.html#src.spyice.update_physical_values.calculate_melting_temperature_from_salinity">[docs]</a>
 <span class="k">def</span> <span class="nf">calculate_melting_temperature_from_salinity</span><span class="p">(</span>
-    <span class="n">_salinity</span><span class="p">,</span> <span class="n">_temperature_melt</span><span class="o">=</span><span class="n">_temperature_melt</span><span class="p">,</span> <span class="n">_liquid_relation</span><span class="o">=</span><span class="s2">&quot;Frezchem&quot;</span>
+    <span class="n">_salinity</span><span class="p">,</span> <span class="n">_temperature_melt</span><span class="o">=</span><span class="n">_temperature_melt</span><span class="p">,</span> <span class="n">_liquid_relation</span><span class="o">=</span><span class="s2">&quot;Normal&quot;</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates the melting temperature of seawater based on salinity.</span>
 
@@ -346,7 +361,12 @@
     <span class="k">if</span> <span class="n">_liquid_relation</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Normal&quot;</span><span class="p">,</span> <span class="s2">&quot;Frezchem&quot;</span><span class="p">]:</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Liquid relation not available&quot;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">_liquid_relation</span> <span class="o">==</span> <span class="s2">&quot;Normal&quot;</span><span class="p">:</span>
-        <span class="n">_melting_temperature_seawater</span> <span class="o">=</span> <span class="n">_temperature_melt</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">_salinity</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="n">T_m</span> <span class="o">=</span> <span class="n">_temperature_melt</span> <span class="c1"># melt temperature as solidus temperature</span>
+        <span class="n">T_s</span> <span class="o">=</span> <span class="mf">252.05</span> <span class="c1"># eutectic temperature for Sbr = 233ppt</span>
+        <span class="n">S_br</span> <span class="o">=</span> <span class="mf">233.0</span>  <span class="c1"># brine salinity in ppt</span>
+        <span class="n">_melting_temperature_seawater</span> <span class="o">=</span> <span class="n">_temperature_melt</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">_salinity</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">T_s</span> <span class="o">-</span> <span class="n">T_m</span><span class="p">)</span><span class="o">*</span><span class="n">_salinity</span><span class="o">/</span><span class="n">S_br</span>
+        <span class="c1"># _melting_temperature_seawater = 273.15 - 1.853 * _salinity / 28.0</span>
+
     <span class="k">elif</span> <span class="n">_liquid_relation</span> <span class="o">==</span> <span class="s2">&quot;Frezchem&quot;</span><span class="p">:</span>
         <span class="c1"># _melting_temperature_seawater = _temperature_melt + (</span>
         <span class="c1">#     -(9.1969758 * (1e-05) * _salinity**2) - 0.03942059 * _salinity</span>
@@ -355,7 +375,6 @@
             <span class="o">-</span><span class="p">(</span><span class="mf">9.1969758</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1e-05</span><span class="p">)</span> <span class="o">*</span> <span class="n">_salinity</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.03942059</span> <span class="o">*</span> <span class="n">_salinity</span>
         <span class="p">)</span>
     <span class="k">return</span> <span class="n">_melting_temperature_seawater</span></div>
-
 
 
 <div class="viewcode-block" id="update_liquid_fraction_buffo">
@@ -427,6 +446,8 @@
             <span class="p">(</span><span class="n">_phi</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">_phi</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span>
         <span class="p">),</span> <span class="s2">&quot;liquid fraction has non-physical value&quot;</span>
 
+    <span class="n">_phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">_phi</span><span class="o">&gt;</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">_phi</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">_phi</span><span class="p">))</span>
+    <span class="n">_phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">_phi</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">_phi</span> <span class="o">*</span> <span class="n">phi_control_for_infinite_values</span><span class="p">(</span><span class="n">_phi</span><span class="p">)</span></div>
 
 
@@ -577,6 +598,7 @@
         <span class="n">_specific_heat_ice</span> <span class="o">*</span> <span class="n">calculate_melting_temperature_from_salinity</span><span class="p">(</span><span class="n">_salinity</span><span class="p">)</span>
     <span class="p">)</span>
 
+    <span class="c1"># TODO: original phi condition</span>
     <span class="k">if</span> <span class="n">_is_stefan</span><span class="p">:</span>
         <span class="n">_phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
             <span class="n">_enthalpy</span> <span class="o">&lt;=</span> <span class="n">_enthalpy_solid</span><span class="p">,</span>
@@ -588,8 +610,20 @@
                 <span class="o">+</span> <span class="n">under_relaxation_factor</span> <span class="o">*</span> <span class="n">_temperature_difference</span> <span class="o">*</span> <span class="n">_specific_heat_effective_by_L</span><span class="p">,</span>
             <span class="p">),</span>
         <span class="p">)</span>
+    <span class="c1"># TODO: modified with temperatures of previous step</span>
+    <span class="c1"># if _is_stefan:</span>
+    <span class="c1">#     _phi = np.where(</span>
+    <span class="c1">#         _temperature &lt;= _temperature_liquidus,</span>
+    <span class="c1">#         0,</span>
+    <span class="c1">#         np.where(</span>
+    <span class="c1">#             _enthalpy &gt; (_enthalpy_solid + _latent_heat_water),</span>
+    <span class="c1">#             1,</span>
+    <span class="c1">#             _phi_km1</span>
+    <span class="c1">#             + under_relaxation_factor * _temperature_difference * _specific_heat_effective_by_L,</span>
+    <span class="c1">#         ),</span>
+    <span class="c1">#     )</span>
     
-    <span class="k">return</span> <span class="n">_phi</span> <span class="o">*</span> <span class="n">phi_control_for_infinite_values</span><span class="p">(</span><span class="n">_phi</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">_phi</span> <span class="o">*</span> <span class="n">phi_control_for_infinite_values</span><span class="p">(</span><span class="n">_phi</span><span class="p">),</span> <span class="n">_temperature_liquidus</span><span class="p">,</span> <span class="n">_temperature_solidus</span></div>
 
 
 <div class="viewcode-block" id="update_liquid_fraction_mixture_with_enthalpy_equation">
@@ -598,6 +632,8 @@
     <span class="n">_temperature</span><span class="p">,</span>
     <span class="n">_salinity</span><span class="p">,</span>
     <span class="n">_liquid_fraction_previous</span><span class="p">,</span>
+    <span class="n">_enthalpy</span><span class="p">,</span>
+    <span class="n">_enthalpy_solid</span><span class="p">,</span>
     <span class="n">under_relaxation_factor</span><span class="p">,</span>
     <span class="n">_is_stefan</span><span class="o">=</span><span class="kc">False</span><span class="p">,)</span> <span class="p">:</span>
 
@@ -613,17 +649,21 @@
 <span class="sd">        float: The updated liquid fraction mixture.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">_temperature_liquidus</span> <span class="p">,</span> <span class="n">_temperature_solidus</span> <span class="o">=</span> <span class="n">calculate_liquidus_temperature</span><span class="p">(</span><span class="n">_salinity</span><span class="p">)</span>
+    <span class="n">_temperature_liquidus</span> <span class="p">,</span> <span class="n">_temperature_solidus</span> <span class="o">=</span> <span class="n">calculate_liquidus_temperature</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">_salinity</span><span class="p">))</span><span class="o">*</span><span class="mf">34.0</span><span class="p">)</span>
     <span class="n">_phi_km1</span> <span class="o">=</span> <span class="n">_liquid_fraction_previous</span>
     <span class="n">_alpha</span> <span class="o">=</span> <span class="n">_rho_brine</span><span class="o">*</span><span class="n">_specific_heat_brine</span><span class="o">/</span><span class="p">(</span><span class="n">_rho_ice</span><span class="o">*</span><span class="n">_specific_heat_ice</span><span class="p">)</span>
-    <span class="n">_coef</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">_alpha</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">_alpha</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">_coef</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">_coef</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">_alpha</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    
     <span class="n">_temperature_difference</span> <span class="o">=</span> <span class="n">_temperature_liquidus</span> <span class="o">-</span> <span class="n">_temperature_solidus</span>
-    <span class="n">_temperature_numerator</span> <span class="o">=</span> <span class="n">_temperature</span> <span class="o">-</span> <span class="n">_temperature_difference</span>
+    <span class="n">_temperature_numerator</span> <span class="o">=</span> <span class="n">_temperature_difference</span>
     <span class="n">_temperature_denominator</span> <span class="o">=</span> <span class="n">_temperature</span> <span class="o">-</span> <span class="n">_coef</span> <span class="o">*</span> <span class="n">_temperature_difference</span>
-    <span class="n">_enthalpy</span> <span class="o">=</span> <span class="n">_specific_heat_ice</span> <span class="o">*</span> <span class="n">_temperature</span> <span class="o">+</span> <span class="n">_latent_heat_water</span> <span class="o">*</span> <span class="n">_phi_km1</span>
-    <span class="n">_enthalpy_solid</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">_specific_heat_ice</span> <span class="o">*</span> <span class="n">calculate_melting_temperature_from_salinity</span><span class="p">(</span><span class="n">_salinity</span><span class="p">)</span>
-    <span class="p">)</span>
+    <span class="c1"># _enthalpy = _specific_heat_ice * _temperature + _latent_heat_water * _phi_km1</span>
+    <span class="c1"># _enthalpy_solid = (</span>
+    <span class="c1">#     _specific_heat_ice * calculate_melting_temperature_from_salinity(_salinity)</span>
+    <span class="c1"># )</span>
 
     <span class="k">if</span> <span class="n">_is_stefan</span><span class="p">:</span>
         <span class="n">_phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
@@ -632,8 +672,7 @@
             <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
                 <span class="n">_enthalpy</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">_enthalpy_solid</span> <span class="o">+</span> <span class="n">_latent_heat_water</span><span class="p">),</span>
                 <span class="mi">1</span><span class="p">,</span>
-                <span class="n">_phi_km1</span>
-                <span class="o">+</span> <span class="n">_phi_km1</span> <span class="o">*</span> <span class="n">_temperature_numerator</span> <span class="o">/</span> <span class="n">_temperature_denominator</span><span class="p">,</span>
+                <span class="n">_phi_km1</span> <span class="o">-</span> <span class="n">_phi_km1</span> <span class="o">*</span> <span class="n">_temperature_numerator</span> <span class="o">/</span> <span class="n">_temperature_denominator</span><span class="p">,</span>
             <span class="p">),</span>
         <span class="p">)</span>
     
@@ -642,10 +681,16 @@
 
 <div class="viewcode-block" id="calculate_liquidus_temperature">
 <a class="viewcode-back" href="../../../api/spyice.update_physical_values.html#src.spyice.update_physical_values.calculate_liquidus_temperature">[docs]</a>
-<span class="k">def</span> <span class="nf">calculate_liquidus_temperature</span><span class="p">(</span><span class="n">_salinity</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">calculate_liquidus_temperature</span><span class="p">(</span><span class="n">_salinity</span><span class="p">,</span> <span class="n">_liquid_relation</span><span class="o">=</span><span class="s2">&quot;Normal&quot;</span><span class="p">):</span>
     <span class="n">S_br</span> <span class="o">=</span> <span class="mf">233.0</span>  <span class="c1"># brine salinity in ppt</span>
-    <span class="n">T_m</span> <span class="o">=</span> <span class="mf">273.15</span> <span class="c1"># melt temperature as solidus temperature</span>
-    <span class="n">T_s</span> <span class="o">=</span> <span class="mf">252.05</span> <span class="c1"># eutectic temperature for Sbr = 233ppt </span>
+    
+    <span class="k">if</span> <span class="n">_liquid_relation</span> <span class="o">==</span> <span class="s2">&quot;Normal&quot;</span><span class="p">:</span>
+        <span class="n">T_m</span> <span class="o">=</span> <span class="n">_temperature_melt</span> <span class="c1"># melt temperature as solidus temperature</span>
+        <span class="n">T_s</span> <span class="o">=</span> <span class="mf">252.05</span> <span class="c1"># eutectic temperature for Sbr = 233ppt</span>
+    <span class="k">elif</span> <span class="n">_liquid_relation</span> <span class="o">==</span> <span class="s2">&quot;Frezchem&quot;</span><span class="p">:</span>
+        <span class="n">T_m</span> <span class="o">=</span> <span class="n">_temperature_melt</span>
+        <span class="n">T_s</span> <span class="o">=</span> <span class="mf">252.05</span> <span class="c1"># eutectic temperature for Sbr = 233ppt</span>
+
     <span class="n">T_l</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">S</span><span class="p">:</span> <span class="p">(</span><span class="n">T_m</span> <span class="o">+</span> <span class="p">(</span><span class="n">T_s</span> <span class="o">-</span> <span class="n">T_m</span><span class="p">)</span><span class="o">/</span><span class="n">S_br</span><span class="o">*</span><span class="n">S</span><span class="p">)</span>  <span class="c1"># liquidus temperature at salinity S  # noqa: E731</span>
     <span class="n">T_l_S</span> <span class="o">=</span> <span class="n">T_l</span><span class="p">(</span><span class="n">_salinity</span><span class="p">)</span>  <span class="c1"># liquidus temperature at salinity S</span>
 
@@ -661,7 +706,7 @@
     <span class="n">_phi</span><span class="p">,</span>
     <span class="n">_enthalpy</span><span class="p">,</span>
     <span class="n">_enthalpy_solid</span><span class="p">,</span>
-    <span class="n">a_p_temperature</span><span class="p">,</span>
+    <span class="n">under_relaxation_factor</span><span class="p">,</span>
     <span class="n">temp_factor_3</span><span class="p">,</span>
     <span class="n">_is_stefan</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">_method</span><span class="o">=</span><span class="s2">&quot;likebuffo&quot;</span><span class="p">,</span>
@@ -695,7 +740,7 @@
             <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
                 <span class="n">_enthalpy</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">_enthalpy_solid</span> <span class="o">+</span> <span class="n">_latent_heat_water</span><span class="p">),</span>
                 <span class="mi">1</span><span class="p">,</span>
-                <span class="n">_phi</span> <span class="o">+</span> <span class="n">a_p_temperature</span> <span class="o">*</span> <span class="n">_temperature_difference</span> <span class="o">/</span> <span class="p">(</span><span class="n">temp_factor_3</span><span class="p">),</span>
+                <span class="n">_phi</span> <span class="o">+</span> <span class="n">under_relaxation_factor</span> <span class="o">*</span> <span class="n">_temperature_difference</span> <span class="o">/</span> <span class="p">(</span><span class="n">temp_factor_3</span><span class="p">),</span>
             <span class="p">),</span>
         <span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
@@ -705,7 +750,7 @@
             <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
                 <span class="n">_enthalpy</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">_enthalpy_solid</span> <span class="o">+</span> <span class="n">_latent_heat_water</span><span class="p">),</span>
                 <span class="mi">1</span><span class="p">,</span>
-                <span class="n">_phi</span> <span class="o">+</span> <span class="n">a_p_temperature</span> <span class="o">*</span> <span class="n">_temperature_difference</span> <span class="o">/</span> <span class="p">(</span><span class="n">temp_factor_3</span><span class="p">),</span>
+                <span class="n">_phi</span> <span class="o">+</span> <span class="n">under_relaxation_factor</span> <span class="o">*</span> <span class="n">_temperature_difference</span> <span class="o">/</span> <span class="p">(</span><span class="n">temp_factor_3</span><span class="p">),</span>
             <span class="p">),</span>
         <span class="p">)</span>
         <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span>
@@ -767,6 +812,71 @@
     <span class="k">return</span> <span class="n">_enthalpy</span></div>
 
 
+<div class="viewcode-block" id="calculate_brine_velocity_upwindscheme">
+<a class="viewcode-back" href="../../../api/spyice.update_physical_values.html#src.spyice.update_physical_values.calculate_brine_velocity_upwindscheme">[docs]</a>
+<span class="k">def</span> <span class="nf">calculate_brine_velocity_upwindscheme</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">phi_initial</span><span class="p">,</span> <span class="n">dz</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">nz</span><span class="p">,</span> <span class="n">rho_i</span><span class="p">,</span> <span class="n">rho_br</span><span class="p">,</span> <span class="n">thickness_index_prev</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        compute brine velocity (no gravity) according to upwind scheme</span>
+
+<span class="sd">        Arguments------------------------------------------------------------------</span>
+<span class="sd">            phi_initial initial liquid fraction, computed in previous time step [-]</span>
+<span class="sd">            phi</span>
+<span class="sd">            lastly updated liquid fraction in convergence scheme of</span>
+<span class="sd">            the present time step [-]</span>
+<span class="sd">            dz</span>
+<span class="sd">            dt</span>
+<span class="sd">            nz</span>
+<span class="sd">            spatial discretization [m]</span>
+<span class="sd">            time discretization [s]</span>
+<span class="sd">            number of computational nodes</span>
+<span class="sd">        Results---------------</span>
+<span class="sd">            wkm1</span>
+<span class="sd">            brine velocity updated [ms-1]</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">w_km1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nz</span><span class="p">)</span>
+        <span class="c1"># initial velocity zero constant in space</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="p">(</span><span class="n">rho_i</span><span class="o">/</span><span class="n">rho_br</span><span class="p">)</span><span class="o">-</span> <span class="mi">1</span>
+        <span class="n">nu</span> <span class="o">=</span> <span class="n">e</span><span class="o">*</span><span class="n">dz</span><span class="o">/</span><span class="n">dt</span>
+        
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">nz</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">w_km1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">w_km1</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">nu</span><span class="o">*</span><span class="p">(</span><span class="n">phi</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">phi_initial</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">w_km1</span></div>
+
+
+<div class="viewcode-block" id="calculate_brine_velocity_darcyscheme">
+<a class="viewcode-back" href="../../../api/spyice.update_physical_values.html#src.spyice.update_physical_values.calculate_brine_velocity_darcyscheme">[docs]</a>
+<span class="k">def</span> <span class="nf">calculate_brine_velocity_darcyscheme</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">phi_initial</span><span class="p">,</span> <span class="n">dz</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">nz</span><span class="p">,</span> <span class="n">rho_i</span><span class="p">,</span> <span class="n">rho_br</span><span class="p">,</span> <span class="n">thickness_index_prev</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        compute brine velocity (no gravity)</span>
+
+<span class="sd">        Arguments------------------------------------------------------------------</span>
+<span class="sd">            phi_initial initial liquid fraction, computed in previous time step [-]</span>
+<span class="sd">            phi</span>
+<span class="sd">            lastly updated liquid fraction in convergence scheme of</span>
+<span class="sd">            the present time step [-]</span>
+<span class="sd">            dz</span>
+<span class="sd">            dt</span>
+<span class="sd">            nz</span>
+<span class="sd">            spatial discretization [m]</span>
+<span class="sd">            time discretization [s]</span>
+<span class="sd">            number of computational nodes</span>
+<span class="sd">        Results---------------</span>
+<span class="sd">            wkm1</span>
+<span class="sd">            brine velocity updated [ms-1]</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">dt_phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nz</span><span class="p">)</span>
+        <span class="n">w_km1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nz</span><span class="p">)</span>
+        <span class="c1"># initial velocity zero constant in space</span>
+        <span class="n">dt_phi</span><span class="o">=</span> <span class="p">(</span><span class="n">phi</span> <span class="o">-</span> <span class="n">phi_initial</span><span class="p">)</span><span class="o">/</span><span class="n">dt</span>
+        <span class="c1"># time derivative of phi</span>
+        <span class="n">dt_phi_dz</span> <span class="o">=</span> <span class="n">dt_phi</span><span class="p">[:]</span> <span class="o">*</span> <span class="n">dz</span>
+        <span class="n">dt_phi_integrated</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">dt_phi_dz</span><span class="p">)</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="p">(</span><span class="n">rho_i</span><span class="o">/</span><span class="n">rho_br</span><span class="p">)</span><span class="o">-</span> <span class="mi">1</span>
+        <span class="n">w_km1</span> <span class="o">=</span> <span class="n">e</span> <span class="o">*</span> <span class="n">dt_phi_integrated</span>  <span class="c1"># * 0.25 #*phi_zero</span>
+
+        <span class="k">return</span> <span class="n">w_km1</span></div>
+
 
 <div class="viewcode-block" id="update_temperature_and_salinity">
 <a class="viewcode-back" href="../../../api/spyice.update_physical_values.html#src.spyice.update_physical_values.update_temperature_and_salinity">[docs]</a>
@@ -775,14 +885,20 @@
     <span class="n">t_prev</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
     <span class="n">s_prev</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
     <span class="n">phi_k</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">brine_velocity_prev</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">thickness_index_prev</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">t_initial</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
     <span class="n">s_initial</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
     <span class="n">phi_initial</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
-    <span class="n">source_term</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">t_melt</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">source_term_temperature</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">source_term_salinity</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">x_wind_temperature</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">x_wind_salinity</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
     <span class="n">buffo</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
     <span class="n">stefan</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
     <span class="n">voller</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
-    <span class="n">_is_salinity_equation</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">_is_salinity_equation</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
     <span class="n">_nonconstant_physical_properties</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">t_k_A_LHS_matrix_prev</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
@@ -810,11 +926,12 @@
     <span class="n">advection_diffusion_temp</span> <span class="o">=</span> <span class="n">AdvectionDiffusion</span><span class="p">(</span>
         <span class="s2">&quot;temperature&quot;</span><span class="p">,</span>
         <span class="n">t_prev</span><span class="p">,</span>
-        <span class="n">source_term</span><span class="p">,</span>
+        <span class="n">source_term_temperature</span><span class="p">,</span>
         <span class="n">t_initial</span><span class="p">,</span>
         <span class="n">phi_k</span><span class="p">,</span>
         <span class="n">phi_initial</span><span class="p">,</span>
-        <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">upwind_velocity</span><span class="p">,</span>
+        <span class="n">thickness_index_prev</span><span class="p">,</span>
+        <span class="n">brine_velocity_prev</span><span class="p">,</span>
         <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">grid_timestep_dt</span><span class="p">,</span>
         <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">grid_resolution_dz</span><span class="p">,</span>
         <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">nz</span><span class="p">,</span>
@@ -826,18 +943,19 @@
         <span class="n">bc_neumann</span><span class="o">=</span><span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">temp_grad</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">t_k</span><span class="p">,</span> <span class="n">x_wind_t</span><span class="p">,</span> <span class="n">A_before_correction</span> <span class="o">=</span> <span class="n">advection_diffusion_temp</span><span class="o">.</span><span class="n">unknowns_matrix</span><span class="p">(</span>
-        <span class="n">_temperature_melt</span><span class="p">,</span> <span class="n">_nonconstant_physical_properties</span>
+        <span class="n">t_melt</span><span class="p">,</span> <span class="n">_nonconstant_physical_properties</span>
     <span class="p">)</span>
-    <span class="c1"># TODO: Add algae growth model here to salinity</span>
+    
     <span class="k">if</span> <span class="n">_is_salinity_equation</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">advection_diffusion_salinity</span> <span class="o">=</span> <span class="n">AdvectionDiffusion</span><span class="p">(</span>
             <span class="s2">&quot;salinity&quot;</span><span class="p">,</span>
             <span class="n">s_prev</span><span class="p">,</span>
-            <span class="n">source_term</span><span class="p">,</span>
+            <span class="n">source_term_salinity</span><span class="p">,</span>
             <span class="n">s_initial</span><span class="p">,</span>
             <span class="n">phi_k</span><span class="p">,</span>
             <span class="n">phi_initial</span><span class="p">,</span>
-            <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">upwind_velocity</span><span class="p">,</span>
+            <span class="n">thickness_index_prev</span><span class="p">,</span>
+            <span class="n">brine_velocity_prev</span><span class="p">,</span>
             <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">grid_timestep_dt</span><span class="p">,</span>
             <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">grid_resolution_dz</span><span class="p">,</span>
             <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">nz</span><span class="p">,</span>
@@ -850,12 +968,58 @@
         <span class="p">)</span>
         <span class="n">s_k</span><span class="p">,</span> <span class="n">x_wind_s</span><span class="p">,</span> <span class="n">S_before_correction</span> <span class="o">=</span> <span class="p">(</span>
             <span class="n">advection_diffusion_salinity</span><span class="o">.</span><span class="n">unknowns_matrix</span><span class="p">(</span>
-                <span class="n">_temperature_melt</span><span class="p">,</span> <span class="n">_nonconstant_physical_properties</span>
+                <span class="n">t_melt</span><span class="p">,</span> <span class="n">_nonconstant_physical_properties</span>
             <span class="p">)</span>
         <span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">s_k</span> <span class="o">=</span> <span class="n">s_prev</span>
-    <span class="k">return</span> <span class="n">t_k</span><span class="p">,</span> <span class="n">s_k</span><span class="p">,</span> <span class="n">A_before_correction</span><span class="p">,</span> <span class="n">advection_diffusion_temp</span><span class="o">.</span><span class="n">factor3</span></div>
+        <span class="n">x_wind_s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t_k</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">t_k</span><span class="p">,</span> <span class="n">s_k</span><span class="p">,</span> <span class="n">A_before_correction</span><span class="p">,</span> <span class="n">advection_diffusion_temp</span><span class="o">.</span><span class="n">factor3</span><span class="p">,</span> <span class="n">x_wind_t</span><span class="p">,</span> <span class="n">x_wind_s</span></div>
+
+
+<div class="viewcode-block" id="update_algae_transport">
+<a class="viewcode-back" href="../../../api/spyice.update_physical_values.html#src.spyice.update_physical_values.update_algae_transport">[docs]</a>
+<span class="k">def</span> <span class="nf">update_algae_transport</span><span class="p">(</span>    
+    <span class="n">preprocess_data_object</span><span class="p">:</span> <span class="n">PreprocessData</span><span class="p">,</span>
+    <span class="n">nutrient_cn_prev</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">phi_k</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">brine_velocity_prev</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">thickness_index_prev</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">nutrient_cn_initial</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">phi_initial</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">t_melt</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">source_term</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">buffo</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">stefan</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">voller</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="n">_nonconstant_physical_properties</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,):</span>
+
+    <span class="n">advection_diffusion_algae</span> <span class="o">=</span> <span class="n">AdvectionDiffusion</span><span class="p">(</span>
+        <span class="s2">&quot;salinity&quot;</span><span class="p">,</span>
+        <span class="n">nutrient_cn_prev</span><span class="p">,</span>
+        <span class="n">source_term</span><span class="p">,</span>
+        <span class="n">nutrient_cn_initial</span><span class="p">,</span>
+        <span class="n">phi_k</span><span class="p">,</span>
+        <span class="n">phi_initial</span><span class="p">,</span>
+        <span class="n">thickness_index_prev</span><span class="p">,</span>
+        <span class="n">brine_velocity_prev</span><span class="p">,</span>
+        <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">grid_timestep_dt</span><span class="p">,</span>
+        <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">grid_resolution_dz</span><span class="p">,</span>
+        <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">nz</span><span class="p">,</span>
+        <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">time_passed</span><span class="p">,</span>
+        <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">initial_salinity</span><span class="p">,</span>
+        <span class="n">Stefan</span><span class="o">=</span><span class="n">stefan</span><span class="p">,</span>
+        <span class="n">Buffo</span><span class="o">=</span><span class="n">buffo</span><span class="p">,</span>
+        <span class="n">Voller</span><span class="o">=</span><span class="n">voller</span><span class="p">,</span>
+        <span class="n">bc_neumann</span><span class="o">=</span><span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">temp_grad</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">nutrient_cn</span><span class="p">,</span> <span class="n">x_wind_cn</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">advection_diffusion_algae</span><span class="o">.</span><span class="n">unknowns_matrix</span><span class="p">(</span>
+            <span class="n">t_melt</span><span class="p">,</span> <span class="n">_nonconstant_physical_properties</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">nutrient_cn</span></div>
 
 
 
@@ -865,17 +1029,27 @@
     <span class="n">preprocess_data_object</span><span class="p">:</span> <span class="n">PreprocessData</span><span class="p">,</span>
     <span class="n">t_prev</span><span class="p">,</span>
     <span class="n">s_prev</span><span class="p">,</span>
+    <span class="n">brine_velocity_prev</span><span class="p">,</span>
+    <span class="n">nutrient_cn_prev</span><span class="p">,</span>
     <span class="n">phi_prev</span><span class="p">,</span>
+    <span class="n">thickness_index_prev</span><span class="p">,</span>
     <span class="n">buffo</span><span class="p">,</span>
     <span class="n">stefan</span><span class="p">,</span>
     <span class="n">voller</span><span class="p">,</span>
     <span class="n">t_initial</span><span class="p">,</span>
     <span class="n">s_initial</span><span class="p">,</span>
+    <span class="n">nutrient_cn_initial</span><span class="p">,</span>
     <span class="n">phi_initial</span><span class="p">,</span>
+    <span class="n">t_k_melt</span><span class="p">,</span>
     <span class="n">t_k_A_LHS_matrix_prev</span><span class="p">,</span>
     <span class="n">temp_factor_3</span><span class="p">,</span>
-    <span class="n">source_term</span><span class="p">,</span>
-    <span class="n">_is_salinity_equation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">source_term_temperature</span><span class="p">,</span>
+    <span class="n">source_term_salinity</span><span class="p">,</span>
+    <span class="n">x_wind_temperature</span><span class="p">,</span>
+    <span class="n">x_wind_salinity</span><span class="p">,</span>
+    <span class="n">_is_salinity_equation</span><span class="p">,</span>
+    <span class="n">_is_algae_equation</span><span class="p">,</span>
+    <span class="n">_is_diffusiononly_equation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Update the state variables Temperature, Salinity, Liquid Fraction, Enthalpy and Enthalpy of solid based on the given parameters.</span>
@@ -884,13 +1058,15 @@
 <span class="sd">        preprocess_data_object (PreprocessData): The preprocess data object.</span>
 <span class="sd">        t_km1 (numpy.ndarray): The previous temperature values.</span>
 <span class="sd">        s_km1 (numpy.ndarray): The previous salinity values.</span>
+<span class="sd">        nutrient_cn (numpy.ndarray): The previous nutrient concentration values</span>
 <span class="sd">        phi_km1 (numpy.ndarray): The previous liquid fraction values.</span>
 <span class="sd">        buffo (bool): The buffo flag.</span>
 <span class="sd">        stefan (bool): The stefan flag.</span>
 <span class="sd">        t_initial (numpy.ndarray): The initial temperature values.</span>
 <span class="sd">        s_initial (numpy.ndarray): The initial salinity values.</span>
+<span class="sd">        nutrient_cn_initial (numpy.ndarray): The initial nutrient concentration values</span>
 <span class="sd">        phi_initial (numpy.ndarray): The initial liquid fraction values.</span>
-<span class="sd">        source_term (numpy.ndarray): The source term values.</span>
+<span class="sd">        source_term (numpy.ndarray): The source term values like radiation ocean flux, algae, etc.</span>
 
 <span class="sd">    Methods called:</span>
 <span class="sd">        Updates the state variables based on the given parameters.</span>
@@ -898,6 +1074,7 @@
 <span class="sd">            - update_enthalpy_solid_state: Update the enthalpy of the solid state with previous salinity using the liquidus relation.</span>
 <span class="sd">            - update_liquid_fraction: Update the liquid fraction of the system with previous temperature, salinity, enthalpy, solid enthalpy.</span>
 <span class="sd">            - update_temperature_and_salinity: Update the temperature and salinity of the system with updated liquid fraction and previous temperature, salinity, initial temperature, initial salinity, initial liquid fraction, source term, buffo, stefan.</span>
+<span class="sd">            - update_algae_transport: Update the nutrient concentration of the system </span>
 <span class="sd">    Returns:</span>
 <span class="sd">        tuple: A tuple containing the following updated values:</span>
 <span class="sd">            - h_k (numpy.ndarray): The updated enthalpy values.</span>
@@ -905,6 +1082,7 @@
 <span class="sd">            - phi_k (numpy.ndarray): The updated liquid fraction values.</span>
 <span class="sd">            - t_k (numpy.ndarray): The updated temperature values.</span>
 <span class="sd">            - s_k (numpy.ndarray): The updated salinity values.</span>
+<span class="sd">            - nutrient_cn (numpy.ndarray): The updated nutrient values </span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">h_k</span> <span class="o">=</span> <span class="n">update_enthalpy</span><span class="p">(</span><span class="n">t_prev</span><span class="p">,</span> <span class="n">s_prev</span><span class="p">,</span> <span class="n">phi_prev</span><span class="p">,</span> <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">nz</span><span class="p">)</span>
@@ -914,15 +1092,21 @@
         <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">liquidus_relation_type</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="k">if</span> <span class="n">voller</span><span class="p">:</span>
-        <span class="n">t_k</span><span class="p">,</span> <span class="n">s_k</span><span class="p">,</span> <span class="n">t_k_A_LHS_matrix</span><span class="p">,</span> <span class="n">temp_factor_3</span> <span class="o">=</span> <span class="n">update_temperature_and_salinity</span><span class="p">(</span>
+        <span class="n">t_k</span><span class="p">,</span> <span class="n">s_k</span><span class="p">,</span> <span class="n">t_k_A_LHS_matrix</span><span class="p">,</span> <span class="n">temp_factor_3</span><span class="p">,</span> <span class="n">x_wind_temperature</span><span class="p">,</span> <span class="n">x_wind_salinity</span> <span class="o">=</span> <span class="n">update_temperature_and_salinity</span><span class="p">(</span>
             <span class="n">preprocess_data_object</span><span class="p">,</span>
             <span class="n">t_prev</span><span class="p">,</span>
             <span class="n">s_prev</span><span class="p">,</span>
             <span class="n">phi_prev</span><span class="p">,</span>
+            <span class="n">brine_velocity_prev</span><span class="p">,</span>
+            <span class="n">thickness_index_prev</span><span class="p">,</span>
             <span class="n">t_initial</span><span class="p">,</span>
             <span class="n">s_initial</span><span class="p">,</span>
             <span class="n">phi_initial</span><span class="p">,</span>
-            <span class="n">source_term</span><span class="p">,</span>
+            <span class="n">t_k_melt</span><span class="p">,</span>
+            <span class="n">source_term_temperature</span><span class="p">,</span>
+            <span class="n">source_term_salinity</span><span class="p">,</span>
+            <span class="n">x_wind_temperature</span><span class="p">,</span>
+            <span class="n">x_wind_salinity</span><span class="p">,</span>
             <span class="n">buffo</span><span class="p">,</span>
             <span class="n">stefan</span><span class="p">,</span>
             <span class="n">voller</span><span class="p">,</span>
@@ -937,46 +1121,94 @@
             <span class="n">temp_factor_3</span><span class="p">,</span>
             <span class="n">_is_stefan</span><span class="o">=</span><span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">is_stefan</span><span class="p">,</span>
         <span class="p">)</span>
+        <span class="n">t_k_melt</span> <span class="o">=</span> <span class="n">calculate_melting_temperature_from_salinity</span><span class="p">(</span><span class="n">s_k</span><span class="p">)</span>
+        <span class="n">temperature_solidus</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">temperature_liquidus</span> <span class="o">=</span> <span class="mf">0.0</span>
     <span class="k">elif</span> <span class="n">stefan</span><span class="p">:</span>
-        <span class="n">t_k</span><span class="p">,</span> <span class="n">s_k</span><span class="p">,</span> <span class="n">t_k_A_LHS_matrix</span><span class="p">,</span> <span class="n">temp_factor_3</span> <span class="o">=</span> <span class="n">update_temperature_and_salinity</span><span class="p">(</span>
-            <span class="n">preprocess_data_object</span><span class="p">,</span>
+
+        <span class="c1"># phi update for a mixture using enthalpy equation</span>
+        <span class="c1"># FIXME: This method is not working as expected. Requires debugging</span>
+        <span class="c1"># phi_k = update_liquid_fraction_mixture_with_enthalpy_equation(</span>
+        <span class="c1">#     t_prev,</span>
+        <span class="c1">#     s_prev,</span>
+        <span class="c1">#     phi_initial,</span>
+        <span class="c1">#     h_k,</span>
+        <span class="c1">#     h_solid,</span>
+        <span class="c1">#     1.0,</span>
+        <span class="c1">#     _is_stefan=preprocess_data_object.is_stefan,</span>
+        <span class="c1"># )</span>
+
+        <span class="c1"># phi update for a mixture using Faden method from paper &quot;An optimum Enthalpy Approach for Melting and Solidification with Volume Change&quot;</span>
+        <span class="n">phi_k</span><span class="p">,</span> <span class="n">temperature_liquidus</span><span class="p">,</span> <span class="n">temperature_solidus</span> <span class="o">=</span> <span class="n">update_liquid_fraction_mixture_with_under_relaxation</span><span class="p">(</span>
             <span class="n">t_prev</span><span class="p">,</span>
             <span class="n">s_prev</span><span class="p">,</span>
             <span class="n">phi_prev</span><span class="p">,</span>
-            <span class="n">t_initial</span><span class="p">,</span>
-            <span class="n">s_initial</span><span class="p">,</span>
-            <span class="n">phi_initial</span><span class="p">,</span>
-            <span class="n">source_term</span><span class="p">,</span>
-            <span class="n">buffo</span><span class="p">,</span>
-            <span class="n">stefan</span><span class="p">,</span>
-            <span class="n">voller</span><span class="p">,</span>
-            <span class="n">_is_salinity_equation</span><span class="p">,</span>
-            <span class="n">t_k_A_LHS_matrix_prev</span><span class="o">=</span><span class="n">t_k_A_LHS_matrix_prev</span><span class="p">,</span>
-        <span class="p">)</span>
+            <span class="mf">1.0</span><span class="p">,</span>
+            <span class="n">_is_stefan</span><span class="o">=</span><span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">is_stefan</span><span class="p">,)</span>  <span class="c1"># returns an array of [phi, T_l, T_s]</span>
+
+        <span class="c1"># # phi update for a mixture using Voller method with under-relaxation</span>
         <span class="c1"># phi_k = update_liquid_fraction_voller_under_relaxation(</span>
-        <span class="c1">#     t_k,</span>
-        <span class="c1">#     s_k,</span>
+        <span class="c1">#     t_prev,</span>
+        <span class="c1">#     s_prev,</span>
         <span class="c1">#     t_initial,</span>
         <span class="c1">#     phi_prev,</span>
         <span class="c1">#     t_prev,</span>
         <span class="c1">#     s_prev,</span>
         <span class="c1">#     preprocess_data_object.nz,</span>
         <span class="c1">#     temp_factor_3,</span>
-        <span class="c1">#     t_k_A_LHS_matrix,</span>
+        <span class="c1">#     t_k_A_LHS_matrix_prev,</span>
         <span class="c1">#     t_k_A_LHS_matrix_prev,</span>
         <span class="c1">#     1.4,</span>
         <span class="c1">#     _is_stefan=preprocess_data_object.is_stefan,</span>
         <span class="c1">#     _pt2_system=False,</span>
         <span class="c1">#     _nonconstant_physical_properties=False,</span>
         <span class="c1"># )</span>
-
-        <span class="n">phi_k</span> <span class="o">=</span> <span class="n">update_liquid_fraction_mixture_with_enthalpy_equation</span><span class="p">(</span>
-            <span class="n">t_k</span><span class="p">,</span>
-            <span class="n">s_k</span><span class="p">,</span>
-            <span class="n">phi_prev</span><span class="p">,</span>
-            <span class="mf">1.0</span><span class="p">,</span>
-            <span class="n">_is_stefan</span><span class="o">=</span><span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">is_stefan</span><span class="p">,</span>
+        
+        <span class="n">t_k</span><span class="p">,</span> <span class="n">s_k</span><span class="p">,</span> <span class="n">t_k_A_LHS_matrix</span><span class="p">,</span> <span class="n">temp_factor_3</span><span class="p">,</span> <span class="n">x_wind_temperature</span><span class="p">,</span> <span class="n">x_wind_salinity</span> <span class="o">=</span> <span class="n">update_temperature_and_salinity</span><span class="p">(</span>
+            <span class="n">preprocess_data_object</span><span class="p">,</span>
+            <span class="n">t_prev</span><span class="p">,</span>
+            <span class="n">s_prev</span><span class="p">,</span>
+            <span class="n">phi_k</span><span class="p">,</span>
+            <span class="n">brine_velocity_prev</span><span class="p">,</span>
+            <span class="n">thickness_index_prev</span><span class="p">,</span>
+            <span class="n">t_initial</span><span class="p">,</span>
+            <span class="n">s_initial</span><span class="p">,</span>
+            <span class="n">phi_initial</span><span class="p">,</span>
+            <span class="n">t_k_melt</span><span class="p">,</span>
+            <span class="n">source_term_temperature</span><span class="p">,</span>
+            <span class="n">source_term_salinity</span><span class="p">,</span>
+            <span class="n">x_wind_temperature</span><span class="p">,</span>
+            <span class="n">x_wind_salinity</span><span class="p">,</span>
+            <span class="n">buffo</span><span class="p">,</span>
+            <span class="n">stefan</span><span class="p">,</span>
+            <span class="n">voller</span><span class="p">,</span>
+            <span class="n">_is_salinity_equation</span><span class="p">,</span>
+            <span class="n">t_k_A_LHS_matrix_prev</span><span class="o">=</span><span class="n">t_k_A_LHS_matrix_prev</span><span class="p">,</span>
         <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">_is_algae_equation</span><span class="p">:</span>
+            <span class="n">nutrient_cn</span> <span class="o">=</span> <span class="n">update_algae_transport</span><span class="p">(</span>
+                <span class="n">preprocess_data_object</span><span class="p">,</span>
+                <span class="n">nutrient_cn_prev</span><span class="p">,</span>
+                <span class="n">phi_k</span><span class="p">,</span>
+                <span class="n">brine_velocity_prev</span><span class="p">,</span>
+                <span class="n">thickness_index_prev</span><span class="p">,</span>
+                <span class="n">nutrient_cn_initial</span><span class="p">,</span>
+                <span class="n">phi_initial</span><span class="p">,</span>
+                <span class="n">t_k_melt</span><span class="p">,</span>
+                <span class="n">source_term_salinity</span><span class="p">,</span>
+                <span class="n">buffo</span><span class="p">,</span>
+                <span class="n">stefan</span><span class="p">,</span>
+                <span class="n">voller</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">nutrient_cn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nutrient_cn_prev</span><span class="p">))</span>
+
+
+        <span class="c1"># switch algae transport off</span>
+        <span class="c1"># nutrient_cn = 0.0*nutrient_cn</span>
+
+        <span class="n">t_k_melt</span> <span class="o">=</span> <span class="n">calculate_melting_temperature_from_salinity</span><span class="p">(</span><span class="n">s_k</span><span class="p">)</span>
 
     <span class="k">elif</span> <span class="n">buffo</span><span class="p">:</span>
         <span class="n">phi_k</span> <span class="o">=</span> <span class="n">update_liquid_fraction_buffo</span><span class="p">(</span>
@@ -989,26 +1221,43 @@
             <span class="n">_is_stefan</span><span class="o">=</span><span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">is_stefan</span><span class="p">,</span>
             <span class="n">_method</span><span class="o">=</span><span class="s2">&quot;likebuffo&quot;</span><span class="p">,</span>
         <span class="p">)</span>
-        <span class="n">t_k</span><span class="p">,</span> <span class="n">s_k</span><span class="p">,</span> <span class="n">t_k_A_LHS_matrix</span><span class="p">,</span> <span class="n">temp_factor_3</span> <span class="o">=</span> <span class="n">update_temperature_and_salinity</span><span class="p">(</span>
+        <span class="n">t_k</span><span class="p">,</span> <span class="n">s_k</span><span class="p">,</span> <span class="n">t_k_A_LHS_matrix</span><span class="p">,</span> <span class="n">temp_factor_3</span><span class="p">,</span> <span class="n">x_wind_temperature</span><span class="p">,</span> <span class="n">x_wind_salinity</span> <span class="o">=</span> <span class="n">update_temperature_and_salinity</span><span class="p">(</span>
             <span class="n">preprocess_data_object</span><span class="p">,</span>
             <span class="n">t_prev</span><span class="p">,</span>
             <span class="n">s_prev</span><span class="p">,</span>
             <span class="n">phi_k</span><span class="p">,</span>
+            <span class="n">brine_velocity_prev</span><span class="p">,</span>
+            <span class="n">thickness_index_prev</span><span class="p">,</span>
             <span class="n">t_initial</span><span class="p">,</span>
             <span class="n">s_initial</span><span class="p">,</span>
             <span class="n">phi_initial</span><span class="p">,</span>
-            <span class="n">source_term</span><span class="p">,</span>
+            <span class="n">t_k_melt</span><span class="p">,</span>
+            <span class="n">source_term_temperature</span><span class="p">,</span>
+            <span class="n">source_term_salinity</span><span class="p">,</span>
+            <span class="n">x_wind_temperature</span><span class="p">,</span>
+            <span class="n">x_wind_salinity</span><span class="p">,</span>
             <span class="n">buffo</span><span class="p">,</span>
             <span class="n">stefan</span><span class="p">,</span>
             <span class="n">voller</span><span class="p">,</span>
-            <span class="n">_is_salinity_equation</span><span class="p">,</span>
+            <span class="n">_is_salinity_equation</span><span class="o">=</span><span class="n">_is_salinity_equation</span><span class="p">,</span>
         <span class="p">)</span>
+        <span class="n">t_k_melt</span> <span class="o">=</span> <span class="n">calculate_melting_temperature_from_salinity</span><span class="p">(</span><span class="n">s_k</span><span class="p">)</span>
+        <span class="n">temperature_liquidus</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">temperature_solidus</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">nutrient_cn</span> <span class="o">=</span> <span class="mf">0.0</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="ne">AssertionError</span><span class="p">(</span><span class="s2">&quot;No method selected for liquid fraction update&quot;</span><span class="p">)</span>
 
     <span class="c1"># Voller scheme: lower, main, upper diagonal of the matrix A of Ax = b</span>
 
-    <span class="k">return</span> <span class="n">h_k</span><span class="p">,</span> <span class="n">h_solid</span><span class="p">,</span> <span class="n">phi_k</span><span class="p">,</span> <span class="n">t_k</span><span class="p">,</span> <span class="n">s_k</span><span class="p">,</span> <span class="n">t_k_A_LHS_matrix</span><span class="p">,</span> <span class="n">temp_factor_3</span></div>
+    <span class="c1"># calculate brine velocity</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">_is_diffusiononly_equation</span><span class="p">:</span>
+        <span class="n">brine_velocity</span> <span class="o">=</span> <span class="n">calculate_brine_velocity_upwindscheme</span><span class="p">(</span><span class="n">phi_k</span><span class="p">,</span> <span class="n">phi_initial</span><span class="p">,</span> <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">grid_resolution_dz</span><span class="p">,</span> <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">grid_timestep_dt</span><span class="p">,</span> <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">nz</span><span class="p">,</span> <span class="n">_rho_ice</span><span class="p">,</span> <span class="n">_rho_brine</span><span class="p">,</span> <span class="n">thickness_index_prev</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">brine_velocity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">nz</span><span class="p">)</span>
+    <span class="c1"># TODO: investigate values of T_k, s_k, brine_velocity, nutrient_cn, t_k_A_LHS_matrix, temp_factor_3, t_k_melt, temperature_liquidus, temperature_solidus, x_wind_temperature, x_wind_salinity</span>
+    <span class="c1"># TODO: if T_k, s_k change then the initial values need to change </span>
+    <span class="k">return</span> <span class="n">h_k</span><span class="p">,</span> <span class="n">h_solid</span><span class="p">,</span> <span class="n">phi_k</span><span class="p">,</span> <span class="n">t_k</span><span class="p">,</span> <span class="n">s_k</span><span class="p">,</span> <span class="n">brine_velocity</span><span class="p">,</span> <span class="n">nutrient_cn</span><span class="p">,</span> <span class="n">t_k_A_LHS_matrix</span><span class="p">,</span> <span class="n">temp_factor_3</span><span class="p">,</span> <span class="n">t_k_melt</span><span class="p">,</span> <span class="n">temperature_liquidus</span><span class="p">,</span> <span class="n">temperature_solidus</span><span class="p">,</span> <span class="n">x_wind_temperature</span><span class="p">,</span> <span class="n">x_wind_salinity</span></div>
 
 
 

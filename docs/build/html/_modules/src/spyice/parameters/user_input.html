@@ -41,6 +41,7 @@
     <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/src/spyice/parameters/user_input';</script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -142,6 +143,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
       
@@ -233,6 +241,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
           
@@ -309,14 +324,22 @@
 <span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
 
 <span class="kn">from</span> <span class="nn">omegaconf</span> <span class="kn">import</span> <span class="n">DictConfig</span>
-<span class="kn">from</span> <span class="nn">src.spyice.parameters.constants</span> <span class="kn">import</span> <span class="n">Constants</span>
-<span class="kn">from</span> <span class="nn">src.spyice.parameters.real_constants</span> <span class="kn">import</span> <span class="n">RealConstants</span>
-<span class="kn">from</span> <span class="nn">src.spyice.parameters.debug_constants</span> <span class="kn">import</span> <span class="n">DebugConstants</span>
-<span class="kn">from</span> <span class="nn">src.spyice.utils.config_sort</span> <span class="kn">import</span> <span class="n">read_omegaconfig</span>
-<span class="kn">from</span> <span class="nn">src.spyice.utils.create_directory</span> <span class="kn">import</span> <span class="n">create_output_directory</span>
+<span class="kn">from</span> <span class="nn">.constants</span> <span class="kn">import</span> <span class="n">Constants</span>
+<span class="kn">from</span> <span class="nn">.real_constants</span> <span class="kn">import</span> <span class="n">RealConstants</span>
+<span class="kn">from</span> <span class="nn">.debug_constants</span> <span class="kn">import</span> <span class="n">DebugConstants</span>
+<span class="kn">from</span> <span class="nn">.algae_constants</span> <span class="kn">import</span> <span class="n">nutrient_cn_dsi_ice</span><span class="p">,</span> <span class="n">nutrient_cn_dsi_water</span><span class="p">,</span> <span class="n">carbon_cc_ice_initial</span><span class="p">,</span> <span class="n">carbon_cc_water_initial</span>
+<span class="kn">from</span> <span class="nn">spyice.utils.config_sort</span> <span class="kn">import</span> <span class="n">read_omegaconfig</span>
+<span class="kn">from</span> <span class="nn">spyice.utils.create_directory</span> <span class="kn">import</span> <span class="n">create_output_directory</span>
+<span class="kn">from</span> <span class="nn">spyice.utils.initial_userinput</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">calculate_initial_melt_temperature</span><span class="p">,)</span>
 
+<span class="c1"># TODO: Add docstrings to the functions and classes</span>
+<span class="c1"># TODO: DEBUG this script for new enum classes.</span>
+<span class="c1"># TODO: const parameters and varied parameters difference show</span>
+<span class="c1"># TODO: liquidus relationship status is always &quot;normal&quot; in script update physical values in function calculate_melting_temperature_from_salinity</span>
 
 <span class="k">def</span> <span class="nf">_dt_stability_validator</span><span class="p">(</span><span class="n">dz</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Validates the time-step (dt) based on the Fourier stability criteria.</span>
@@ -330,7 +353,7 @@
 <span class="sd">        None</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">fourier_criteria</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">50</span> <span class="o">*</span> <span class="p">(</span><span class="n">dz</span> <span class="o">/</span> <span class="mf">0.01</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">fourier_criteria</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">121</span> <span class="o">*</span> <span class="p">(</span><span class="n">dz</span> <span class="o">/</span> <span class="mf">0.01</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">dt</span> <span class="o">&gt;</span> <span class="n">fourier_criteria</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="s2">&quot;Time-step not following Fourier stability criteria, choose dt &lt; &quot;</span>
@@ -339,7 +362,7 @@
 
 
 <div class="viewcode-block" id="fourier_number_timestep">
-<a class="viewcode-back" href="../../../../api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.fourier_number_timestep">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.parameters.user_input.html#src.spyice.parameters.fourier_number_timestep">[docs]</a>
 <span class="k">def</span> <span class="nf">fourier_number_timestep</span><span class="p">(</span><span class="n">constants</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates the Fourier number for the given timestep.</span>
 
@@ -352,9 +375,136 @@
     <span class="k">return</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">constants</span><span class="o">.</span><span class="n">rho_br</span> <span class="o">*</span> <span class="n">constants</span><span class="o">.</span><span class="n">c_br</span> <span class="o">*</span> <span class="n">constants</span><span class="o">.</span><span class="n">dz</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">constants</span><span class="o">.</span><span class="n">k_br</span></div>
 
 
+<div class="viewcode-block" id="LiquidusRelation">
+<a class="viewcode-back" href="../../../../api/spyice.parameters.user_input.html#src.spyice.parameters.LiquidusRelation">[docs]</a>
+<span class="k">class</span> <span class="nc">LiquidusRelation</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents the liquidus relation type.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        NORMAL (str): Normal liquidus relation.</span>
+<span class="sd">        FREZCHEM (str): Frezchem liquidus relation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">NORMAL</span> <span class="o">=</span> <span class="s2">&quot;Normal&quot;</span>
+    <span class="n">FREZCHEM</span> <span class="o">=</span> <span class="s2">&quot;Frezchem&quot;</span></div>
+
+
+<div class="viewcode-block" id="BoundaryConditionType">
+<a class="viewcode-back" href="../../../../api/spyice.parameters.user_input.html#src.spyice.parameters.BoundaryConditionType">[docs]</a>
+<span class="k">class</span> <span class="nc">BoundaryConditionType</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents the type of boundary condition.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        NEUMANN (str): Neumann boundary condition.</span>
+<span class="sd">        DIRICHLET (str): Dirichlet boundary condition.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">NEUMANN</span> <span class="o">=</span> <span class="s2">&quot;Neumann&quot;</span>
+    <span class="n">DIRICHLET</span> <span class="o">=</span> <span class="s2">&quot;Dirichlet&quot;</span></div>
+
+
+<div class="viewcode-block" id="InitialSalinity">
+<a class="viewcode-back" href="../../../../api/spyice.parameters.user_input.html#src.spyice.parameters.InitialSalinity">[docs]</a>
+<span class="k">class</span> <span class="nc">InitialSalinity</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents the type of initial salinity. User can add more salinity option SX where X is a number.</span>
+<span class="sd">    The salinity is in parts per thousand (ppt).</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        S34 (str): Initial salinity of 34 ppt.</span>
+<span class="sd">        S0 (str): Initial salinity of 0 ppt.</span>
+<span class="sd">        S1 (str): Initial salinity of 1 ppt.</span>
+<span class="sd">        S2 (str): Initial salinity of 2 ppt.</span>
+<span class="sd">        S3 (str): Initial salinity of 3 ppt.</span>
+<span class="sd">        S_LINEAR (str): Linear initial salinity.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">S34</span> <span class="o">=</span> <span class="s2">&quot;S34&quot;</span>
+    <span class="n">S0</span> <span class="o">=</span> <span class="s2">&quot;S0&quot;</span>
+    <span class="n">S1</span> <span class="o">=</span> <span class="s2">&quot;S1&quot;</span>
+    <span class="n">S2</span> <span class="o">=</span> <span class="s2">&quot;S2&quot;</span>
+    <span class="n">S3</span> <span class="o">=</span> <span class="s2">&quot;S3&quot;</span>
+    <span class="n">S_LINEAR</span> <span class="o">=</span> <span class="s2">&quot;S_linear&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="InitialTemperature">
+<a class="viewcode-back" href="../../../../api/spyice.parameters.user_input.html#src.spyice.parameters.InitialTemperature">[docs]</a>
+<span class="k">class</span> <span class="nc">InitialTemperature</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents the type of initial temperature.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        T_Stefan (str): Initial temperature based on Stefan condition.</span>
+<span class="sd">        T271p25 (str): Initial temperature of 271.25 K.</span>
+<span class="sd">        T250 (str): Initial temperature of 250 K.</span>
+<span class="sd">        T_MELT (str): Initial temperature at which the material melts.</span>
+<span class="sd">        T_S (str): Initial temperature based on salinity.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">T_STEFAN</span> <span class="o">=</span> <span class="s2">&quot;T_Stefan&quot;</span>
+    <span class="n">T271p25</span> <span class="o">=</span> <span class="s2">&quot;T271.25&quot;</span>
+    <span class="n">T250</span> <span class="o">=</span> <span class="s2">&quot;T250&quot;</span>
+    <span class="n">T_MELT</span> <span class="o">=</span> <span class="s2">&quot;Tm_w&quot;</span>
+    <span class="n">T_S</span> <span class="o">=</span> <span class="s2">&quot;T(S)&quot;</span></div>
+
+
+<div class="viewcode-block" id="InitialMeltTemperature">
+<a class="viewcode-back" href="../../../../api/spyice.parameters.user_input.html#src.spyice.parameters.InitialMeltTemperature">[docs]</a>
+<span class="k">class</span> <span class="nc">InitialMeltTemperature</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents the type of initial melt temperature.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        T_MELT (str): Initial melt temperature.</span>
+<span class="sd">        T_S (str): Initial temperature based on salinity.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ONEPHASE</span> <span class="o">=</span> <span class="s2">&quot;onephase&quot;</span>
+    <span class="n">FREZCHEM</span> <span class="o">=</span> <span class="s2">&quot;Frezchem&quot;</span>
+    <span class="n">TWOPHASE</span> <span class="o">=</span> <span class="s2">&quot;twophase&quot;</span></div>
+
+
+<div class="viewcode-block" id="InitialLiquidFraction">
+<a class="viewcode-back" href="../../../../api/spyice.parameters.user_input.html#src.spyice.parameters.InitialLiquidFraction">[docs]</a>
+<span class="k">class</span> <span class="nc">InitialLiquidFraction</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents the type of initial liquid fraction.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        P0 (str): Initial liquid fraction of 0.</span>
+<span class="sd">        P1 (str): Initial liquid fraction of 1.</span>
+<span class="sd">        P_Stefan (str): Initial liquid fraction based on Stefan condition.</span>
+<span class="sd">        PX (str): Initial liquid fraction based on a custom profile.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">P0</span> <span class="o">=</span> <span class="s2">&quot;P0&quot;</span>
+    <span class="n">P1</span> <span class="o">=</span> <span class="s2">&quot;P1&quot;</span>
+    <span class="n">P_Stefan</span> <span class="o">=</span> <span class="s2">&quot;P_Stefan&quot;</span>
+    <span class="n">PX</span> <span class="o">=</span> <span class="s2">&quot;PX&quot;</span>  <span class="c1"># where X is a number</span></div>
+
+
+<div class="viewcode-block" id="FileNameSuffix">
+<a class="viewcode-back" href="../../../../api/spyice.parameters.user_input.html#src.spyice.parameters.FileNameSuffix">[docs]</a>
+<span class="k">class</span> <span class="nc">FileNameSuffix</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents the suffix for the output file name.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        NON_CONST_DENS_MUSHFIX (str): Non-constant density mush-fix.</span>
+<span class="sd">        NON_CONST_DENS (str): Non-constant density.</span>
+<span class="sd">        CONST_DENS (str): Constant density.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">NON_CONST_DENS_MUSHFIX</span> <span class="o">=</span> <span class="s2">&quot;nonconst_dens-mushfix&quot;</span>
+    <span class="n">NON_CONST_DENS</span> <span class="o">=</span> <span class="s2">&quot;nonconst_dens&quot;</span>
+    <span class="n">CONST_DENS</span> <span class="o">=</span> <span class="s2">&quot;const_dens&quot;</span></div>
+
+
+<div class="viewcode-block" id="TopTemperatureType">
+<a class="viewcode-back" href="../../../../api/spyice.parameters.user_input.html#src.spyice.parameters.TopTemperatureType">[docs]</a>
+<span class="k">class</span> <span class="nc">TopTemperatureType</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents the type of top temperature condition.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        STEFAN (str): Stefan condition.</span>
+<span class="sd">        DIRICHLET (str): Dirichlet condition.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">STEFAN</span> <span class="o">=</span> <span class="s2">&quot;Stefan&quot;</span>
+    <span class="n">DIRICHLET</span> <span class="o">=</span> <span class="s2">&quot;Dirichlet&quot;</span></div>
+
 
 <div class="viewcode-block" id="UserInput">
-<a class="viewcode-back" href="../../../../api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.parameters.user_input.html#src.spyice.parameters.UserInput">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">UserInput</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents the user input parameters for the model.</span>
@@ -400,58 +550,77 @@
     <span class="c1"># self.is_salinity_equation = self.read_omegaconfig(&quot;salinity&quot;)</span>
     <span class="o">...</span>
 
+    <span class="c1"># --- Constants and Config ---</span>
     <span class="n">constants</span><span class="p">:</span> <span class="n">RealConstants</span> <span class="o">|</span> <span class="n">DebugConstants</span> <span class="o">=</span> <span class="n">Constants</span><span class="o">.</span><span class="n">REAL</span><span class="o">.</span><span class="n">value</span>
     <span class="n">config_data</span><span class="p">:</span> <span class="n">DictConfig</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">dict</span><span class="p">)</span>
-    <span class="n">max_iterations</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">500</span>
+
+    <span class="c1"># --- Model Switches ---</span>
     <span class="n">is_stefan</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="n">is_buffo</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">is_buffo</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="n">is_voller</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">is_salinity_equation</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="n">liquidus_relation_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Normal&quot;</span>  <span class="c1"># Normal or Frezchem</span>
+    
+    <span class="n">is_salinity_equation</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">is_diffusiononly_equation</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">is_algae_equation</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">is_radiation_equation</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">algae_model_BAL_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;all&quot;</span>   <span class="c1"># or &quot;all&quot; or &quot;single&quot;</span>
+
+    <span class="c1"># --- Iteration and Limits ---</span>
+    <span class="n">max_iterations</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">25000</span>
+    <span class="n">counter_limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100000</span>
+
+    <span class="c1"># --- Grid and Time Step ---</span>
     <span class="n">grid_resolution_dz</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.01</span>
-    <span class="n">boundary_condition_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Dirichlet&quot;</span>  <span class="c1"># Neumann or Dirichlet</span>
+    <span class="n">grid_timestep_dt</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">100</span>  <span class="c1"># in seconds</span>
+
+    <span class="c1"># --- Boundary and Geometry ---</span>
+    <span class="n">boundary_condition_type</span><span class="p">:</span> <span class="n">BoundaryConditionType</span> <span class="o">=</span> <span class="n">BoundaryConditionType</span><span class="o">.</span><span class="n">DIRICHLET</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">geometry_type</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">boundary_salinity</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">34.0</span>
+    <span class="n">boundary_top_temperature</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">265.0</span>
+    <span class="n">temperature_top_type</span><span class="p">:</span> <span class="n">TopTemperatureType</span> <span class="o">=</span> <span class="n">TopTemperatureType</span><span class="o">.</span><span class="n">STEFAN</span><span class="o">.</span><span class="n">value</span>
+
+    <span class="c1"># --- Tolerances ---</span>
     <span class="n">temperature_tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.01</span>
     <span class="n">salinity_tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.01</span>
-    <span class="n">liquid_fraction_tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.001</span>
-    <span class="n">initial_temperature</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;T(S)&quot;</span>  <span class="c1"># &quot;T_Stefan&quot; or  &quot;T271.25&quot; or &quot;T250&quot; or &quot;Tm_w&quot;</span>
-    <span class="n">initial_salinity</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="s2">&quot;S34&quot;</span>  <span class="c1"># &quot;S_linear&quot; or &quot;S34&quot; or &quot;S0&quot; or &quot;SX&quot; where X is a number</span>
-    <span class="p">)</span>
-    <span class="n">initial_liquid_fraction</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="s2">&quot;P1&quot;</span>  <span class="c1"># &quot;P_Stefan&quot; or &quot;P0&quot; or &quot;P1&quot; or &quot;PX&quot; where X is a number</span>
-    <span class="p">)</span>
-    <span class="n">output_suffix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;nonconst_dens-mushfix&quot;</span>
-    <span class="n">temperature_top_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Stefan&quot;</span>  <span class="c1"># &quot;Stefan&quot; or &quot;Dirichlet&quot;</span>
+    <span class="n">liquid_fraction_tolerance</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.01</span>
+
+    <span class="c1"># --- Initial Conditions ---</span>
+    <span class="n">initial_temperature</span><span class="p">:</span> <span class="n">InitialTemperature</span> <span class="o">=</span> <span class="n">InitialTemperature</span><span class="o">.</span><span class="n">T_S</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">initial_salinity</span><span class="p">:</span> <span class="n">InitialSalinity</span> <span class="o">=</span> <span class="n">InitialSalinity</span><span class="o">.</span><span class="n">S34</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">initial_liquid_fraction</span><span class="p">:</span> <span class="n">InitialLiquidFraction</span> <span class="o">=</span> <span class="n">InitialLiquidFraction</span><span class="o">.</span><span class="n">P1</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">critical_liquid_fraction</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span>
+    <span class="n">temperature_melt</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="c1"># --- Phase and Liquidus ---</span>
     <span class="n">phase_type</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="n">grid_timestep_dt</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">liquidus_relation_type</span><span class="p">:</span> <span class="n">LiquidusRelation</span> <span class="o">=</span> <span class="n">LiquidusRelation</span><span class="o">.</span><span class="n">NORMAL</span><span class="o">.</span><span class="n">value</span>
+
+    <span class="c1"># --- Output and Directory ---</span>
+    <span class="n">output_suffix</span><span class="p">:</span> <span class="n">FileNameSuffix</span> <span class="o">=</span> <span class="n">FileNameSuffix</span><span class="o">.</span><span class="n">NON_CONST_DENS_MUSHFIX</span><span class="o">.</span><span class="n">value</span>
     <span class="n">dir_output_name_hydra</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="p">(</span>
         <span class="s2">&quot;Temperature_</span><span class="si">{S_IC}</span><span class="s2">_</span><span class="si">{bc_condition}</span><span class="s2">_</span><span class="si">{dz}</span><span class="s2">_</span><span class="si">{dt}</span><span class="s2">_</span><span class="si">{iter_max}</span><span class="s2">_</span><span class="si">{cap_dens}</span><span class="s2">&quot;</span>
     <span class="p">)</span>
     <span class="n">dir_output_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="p">(</span>
         <span class="s2">&quot;Temperature_</span><span class="si">{S_IC}</span><span class="s2">_</span><span class="si">{bc_condition}</span><span class="s2">_</span><span class="si">{dz}</span><span class="s2">_</span><span class="si">{dt}</span><span class="s2">_</span><span class="si">{iter_max}</span><span class="s2">_</span><span class="si">{cap_dens}</span><span class="s2">&quot;</span>
     <span class="p">)</span>
-    <span class="n">critical_liquid_fraction</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span>
 
-    <span class="n">boundary_salinity</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">temperature_melt</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">boundary_top_temperature</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">geometry_type</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">counter_limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100000</span>
+    <span class="c1"># --- Algae Model Parameters ---</span>
+    <span class="n">nutrient_cn_dsi_water</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">nutrient_cn_dsi_water</span>
+    <span class="n">nutrient_cn_dsi_ice</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">nutrient_cn_dsi_ice</span>
+    <span class="n">carbon_cc_ice_initial</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">carbon_cc_ice_initial</span>
+    <span class="n">carbon_cc_water_initial</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">carbon_cc_water_initial</span>
 
 <div class="viewcode-block" id="UserInput.__post_init__">
-<a class="viewcode-back" href="../../../../api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.__post_init__">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.parameters.user_input.html#src.spyice.parameters.UserInput.__post_init__">[docs]</a>
     <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">_dt_stability_validator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid_resolution_dz</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid_timestep_dt</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">constants</span><span class="p">,</span> <span class="n">RealConstants</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">boundary_salinity</span> <span class="o">=</span> <span class="mf">34.0</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">boundary_top_temperature</span> <span class="o">=</span> <span class="mf">265.0</span>
-            <span class="c1"># self.temperature_melt = 273.15 - 1.853 * self.boundary_salinity / 28.0</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">temperature_melt</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="o">-</span><span class="p">(</span><span class="mf">9.1969758</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1e-05</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary_salinity</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-                <span class="o">-</span> <span class="mf">0.03942059</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary_salinity</span>
-                <span class="o">+</span> <span class="mf">272.63617665</span>
-            <span class="p">)</span>
+            <span class="c1"># melt temperature affects the liquid relation: Frezchem or Normal in src/update_physical_values.py script</span>
+            <span class="n">method</span> <span class="o">=</span> <span class="n">InitialMeltTemperature</span><span class="o">.</span><span class="n">ONEPHASE</span><span class="o">.</span><span class="n">value</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">temperature_melt</span> <span class="o">=</span> <span class="n">calculate_initial_melt_temperature</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">boundary_salinity</span><span class="p">,</span> <span class="n">method</span><span class="p">)</span>
+
             <span class="bp">self</span><span class="o">.</span><span class="n">geometry_type</span> <span class="o">=</span> <span class="mi">2</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config_data</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">grid_timestep_dt</span> <span class="o">=</span> <span class="n">read_omegaconfig</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config_data</span><span class="p">,</span> <span class="s2">&quot;dt&quot;</span><span class="p">)</span>
@@ -468,12 +637,8 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">output_suffix</span><span class="p">,</span>
                 <span class="p">)</span>
 
-                <span class="c1"># self.is_salinity_equation = read_omegaconfig(</span>
-                <span class="c1">#     self.config_data, &quot;salinity&quot;</span>
-                <span class="c1"># )</span>
-
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">constants</span><span class="p">,</span> <span class="n">DebugConstants</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">boundary_salinity</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">boundary_salinity</span> <span class="o">=</span> <span class="mf">1.0</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">boundary_top_temperature</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">temperature_melt</span> <span class="o">=</span> <span class="mf">0.0</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">geometry_type</span> <span class="o">=</span> <span class="mi">1</span></div>

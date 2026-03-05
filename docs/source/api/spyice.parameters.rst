@@ -12,6 +12,7 @@ Submodules
    spyice.parameters.real_constants
    spyice.parameters.results_params
    spyice.parameters.user_input
+   spyice.parameters.algae_constants
 
 Module contents
 ---------------

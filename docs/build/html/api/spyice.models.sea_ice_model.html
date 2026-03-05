@@ -42,6 +42,7 @@
     <script src="../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'api/spyice.models.sea_ice_model';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -145,6 +146,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
       
@@ -238,6 +246,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
           
@@ -269,8 +284,21 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="spyice.html">spyice package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="spyice.models.html">spyice.models package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="spyice.models.advection_diffusion.html">src.spyice.models.advection_diffusion</a></li>
+
+
+
+
+
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">src.spyice.models.sea_ice_model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.models.stefan_problem.html">src.spyice.models.stefan_problem</a></li>
+
+
+
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.algae_model.html">src.spyice.models.algae_model</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.radiative_model.html">src.spyice.models.radiative_model</a></li>
+
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="spyice.parameters.html">spyice.parameters package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -279,6 +307,7 @@
 <li class="toctree-l3"><a class="reference internal" href="spyice.parameters.real_constants.html">src.spyice.parameters.real_constants</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.parameters.results_params.html">src.spyice.parameters.results_params</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.parameters.user_input.html">src.spyice.parameters.user_input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.algae_constants.html">spyice.parameters.algae_constants</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="spyice.postprocess.html">spyice.postprocess package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -291,6 +320,8 @@
 <li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.initial_boundary_conditions.html">src.spyice.preprocess.initial_boundary_conditions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.modify_initial_boundary.html">src.spyice.preprocess.modify_initial_boundary</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.pre_process.html">src.spyice.preprocess.pre_process</a></li>
+
+
 <li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.store.html">src.spyice.preprocess.store</a></li>
 </ul>
 </details></li>
@@ -300,6 +331,10 @@
 <li class="toctree-l3"><a class="reference internal" href="spyice.utils.helpers.html">src.spyice.utils.helpers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.utils.spyice_exceptions.html">src.spyice.utils.spyice_exceptions module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spyice.utils.spyice_logger.html">src.spyice.utils.spyice_logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.initial_userinput.html">spyice.utils.initial_userinput</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.create_directory.html">spyice.utils.create_directory</a></li>
+
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="spyice.coefficients.html">src.spyice.coefficients</a></li>
@@ -307,6 +342,8 @@
 <li class="toctree-l2"><a class="reference internal" href="spyice.rhs.html">src.spyice.rhs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="spyice.statevariables.html">src.spyice.statevariables</a></li>
 <li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html">src.spyice.update_physical_values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.misc_subroutines.html">spyice.misc_subroutines</a></li>
+
 </ul>
 </details></li>
 </ul>
@@ -370,28 +407,83 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="module-src.spyice.models.sea_ice_model">
-<span id="src-spyice-models-sea-ice-model"></span><h1>src.spyice.models.sea_ice_model<a class="headerlink" href="#module-src.spyice.models.sea_ice_model" title="Link to this heading">#</a></h1>
+  <section id="src-spyice-models-sea-ice-model">
+<h1>src.spyice.models.sea_ice_model<a class="headerlink" href="#src-spyice-models-sea-ice-model" title="Link to this heading">#</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">SeaIceModel</span></code> module implements the full numerical framework
+for simulating thermodynamic and biogeochemical evolution of sea ice.</p>
+<p>It includes:</p>
+<ul class="simple">
+<li><p>Ice–ocean interface tracking</p></li>
+<li><p>Convergence iteration loops</p></li>
+<li><p>Phase change handling (Stefan problem)</p></li>
+<li><p>Radiation and salinity source terms</p></li>
+<li><p>Algae and biogeochemical coupling</p></li>
+<li><p>Residual tracking and mushy layer diagnostics</p></li>
+<li><p>Results storage and export</p></li>
+</ul>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">#</a></h2>
+<section id="locate-ice-ocean-interface">
+<h3>locate_ice_ocean_interface<a class="headerlink" href="#locate-ice-ocean-interface" title="Link to this heading">#</a></h3>
+<dl class="py function">
+<dt class="sig sig-object py" id="spyice.models.sea_ice_model.locate_ice_ocean_interface">
+<span class="sig-prename descclassname"><span class="pre">spyice.models.sea_ice_model.</span></span><span class="sig-name descname"><span class="pre">locate_ice_ocean_interface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nz</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/spyice/models/sea_ice_model.html#locate_ice_ocean_interface"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spyice.models.sea_ice_model.locate_ice_ocean_interface" title="Link to this definition">#</a></dt>
+<dd><p>Locate ice ocean interface, based on liquid fraction equivalent ice thickness</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>phi</strong> (<em>array-like</em>) – Liquid fraction [-]</p></li>
+<li><p><strong>dz</strong> (<em>float</em>) – Spatial discretization [m]</p></li>
+<li><p><strong>nz</strong> (<em>int</em>) – Number of computational nodes</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments
+Stefan (bool): Validation with Stefan problem (default: True)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A tuple containing:</dt><dd><ul class="simple">
+<li><p>if_depth (float): Location of the ice-water interface/sea ice total thickness [m]</p></li>
+<li><p>if_depth_index (int): Index of the ‘transition cell’ from ice to ocean (freezing) or water to ice (melting)</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">#</a></h2>
+<section id="seaicemodel">
+<h3>SeaIceModel<a class="headerlink" href="#seaicemodel" title="Link to this heading">#</a></h3>
 <dl class="py class">
-<dt class="sig sig-object py" id="src.spyice.models.sea_ice_model.SeaIceModel">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.spyice.models.sea_ice_model.</span></span><span class="sig-name descname"><span class="pre">SeaIceModel</span></span><a class="reference internal" href="../_modules/src/spyice/models/sea_ice_model.html#SeaIceModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.sea_ice_model.SeaIceModel" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="spyice.models.sea_ice_model.SeaIceModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">spyice.models.sea_ice_model.</span></span><span class="sig-name descname"><span class="pre">SeaIceModel</span></span><a class="reference internal" href="../_modules/spyice/models/sea_ice_model.html#SeaIceModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spyice.models.sea_ice_model.SeaIceModel" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>SeaIceModelClass represents a class that models the behavior of sea ice.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dataclass</strong> (<a class="reference internal" href="spyice.preprocess.pre_process.html#src.spyice.preprocess.pre_process.PreprocessData" title="src.spyice.preprocess.pre_process.PreprocessData"><em>PreprocessData</em></a>) – The preprocessed data for the model.</p></li>
+<li><p><strong>dataclass</strong> (<a class="reference internal" href="spyice.preprocess.pre_process.html#PreprocessData" title="PreprocessData"><em>PreprocessData</em></a>) – The preprocessed data for the model.</p></li>
 <li><p><strong>user_dataclass</strong> (<a class="reference internal" href="spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput" title="src.spyice.parameters.user_input.UserInput"><em>UserInput</em></a>) – The user input data for the model.</p></li>
 </ul>
 </dd>
 </dl>
 <dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.models.sea_ice_model.SeaIceModel.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataclass</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_dataclass</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/models/sea_ice_model.html#SeaIceModel.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.sea_ice_model.SeaIceModel.__init__" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="spyice.models.sea_ice_model.SeaIceModel.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataclass</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_dataclass</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/spyice/models/sea_ice_model.html#SeaIceModel.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spyice.models.sea_ice_model.SeaIceModel.__init__" title="Link to this definition">#</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dataclass</strong> (<a class="reference internal" href="spyice.preprocess.pre_process.html#src.spyice.preprocess.pre_process.PreprocessData" title="src.spyice.preprocess.pre_process.PreprocessData"><em>PreprocessData</em></a>) – The preprocessed data for the model.</p></li>
+<li><p><strong>dataclass</strong> (<a class="reference internal" href="spyice.preprocess.pre_process.html#PreprocessData" title="PreprocessData"><em>PreprocessData</em></a>) – The preprocessed data for the model.</p></li>
 <li><p><strong>user_dataclass</strong> (<a class="reference internal" href="spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput" title="src.spyice.parameters.user_input.UserInput"><em>UserInput</em></a>) – The user input data for the model.</p></li>
 </ul>
 </dd>
@@ -399,18 +491,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.models.sea_ice_model.SeaIceModel.add_new_parameter_results">
-<span class="sig-name descname"><span class="pre">add_new_parameter_results</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/models/sea_ice_model.html#SeaIceModel.add_new_parameter_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.sea_ice_model.SeaIceModel.add_new_parameter_results" title="Link to this definition">#</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.models.sea_ice_model.SeaIceModel.bc_neumann">
-<span class="sig-name descname"><span class="pre">bc_neumann</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phi_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bc_condition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/models/sea_ice_model.html#SeaIceModel.bc_neumann"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.sea_ice_model.SeaIceModel.bc_neumann" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="spyice.models.sea_ice_model.SeaIceModel.bc_neumann">
+<span class="sig-name descname"><span class="pre">bc_neumann</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phi_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bc_condition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/spyice/models/sea_ice_model.html#SeaIceModel.bc_neumann"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spyice.models.sea_ice_model.SeaIceModel.bc_neumann" title="Link to this definition">#</a></dt>
 <dd><p>Apply Neumann boundary condition to the sea ice model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -427,63 +509,83 @@
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.models.sea_ice_model.SeaIceModel.check_and_reset_any_iteration_data">
-<span class="sig-name descname"><span class="pre">check_and_reset_any_iteration_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameter_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameter_all_list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/models/sea_ice_model.html#SeaIceModel.check_and_reset_any_iteration_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.sea_ice_model.SeaIceModel.check_and_reset_any_iteration_data" title="Link to this definition">#</a></dt>
-<dd><p>Check the iteration data for temperature and phi values.
-This method appends the temperature and phi values from the current iteration to the respective arrays.
-The arrays are used to store the iteration data for further analysis.</p>
+<dt class="sig sig-object py" id="spyice.models.sea_ice_model.SeaIceModel.set_boundary_condition_type">
+<span class="sig-name descname"><span class="pre">set_boundary_condition_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">critical_depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bc_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Neumann'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/spyice/models/sea_ice_model.html#SeaIceModel.set_boundary_condition_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spyice.models.sea_ice_model.SeaIceModel.set_boundary_condition_type" title="Link to this definition">#</a></dt>
+<dd><p>Sets the boundary condition type for the model. This method sets the boundary condition type for the model. It calculates the temperature gradient based on the given critical depth and boundary condition type. If the boundary condition type is “Neumann”, the temperature gradient is calculated using the formula:
+temp_grad = dz * (temperature_melt - boundary_top_temperature) / critical_depth
+If the boundary condition type is not “Neumann”, the temperature gradient is set to None.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>parameter_list</strong> (<em>list</em>) – The list of parameter values.</p></li>
-<li><p><strong>parameter_all_list</strong> (<em>list</em>) – The list of all parameter values.</p></li>
+<li><p><strong>critical_depth</strong> (<em>float</em>) – The critical depth value.</p></li>
+<li><p><strong>bc_type</strong> (<em>str</em><em>, </em><em>optional</em>) – The type of boundary condition. Defaults to “Neumann”.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>model.set_boundary_condition_type(10.0, “Neumann”)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spyice.models.sea_ice_model.SeaIceModel.t_running">
+<span class="sig-name descname"><span class="pre">t_running</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fig</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_stefan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_k_buffo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/spyice/models/sea_ice_model.html#SeaIceModel.t_running"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spyice.models.sea_ice_model.SeaIceModel.t_running" title="Link to this definition">#</a></dt>
+<dd><p>Plot the temperature profile against depth.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fig</strong> (<em>matplotlib.figure.Figure</em>) – The figure object to plot on.</p></li>
+<li><p><strong>ax1</strong> (<em>matplotlib.axes.Axes</em>) – The axes object to plot on.</p></li>
+<li><p><strong>t_stefan</strong> (<em>numpy.ndarray</em>) – The temperature profile obtained analytically.</p></li>
+<li><p><strong>t_k</strong> (<em>numpy.ndarray</em>) – The temperature profile obtained numerically.</p></li>
+<li><p><strong>t_k_buffo</strong> (<em>numpy.ndarray</em><em>, </em><em>optional</em>) – The temperature profile obtained using Buffo method. Defaults to None.</p></li>
+<li><p><strong>count</strong> (<em>int</em><em>, </em><em>optional</em>) – The count value. Defaults to 0.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
-</dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.models.sea_ice_model.SeaIceModel.check_convergence">
-<span class="sig-name descname"><span class="pre">check_convergence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">counter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_prev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_prev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_prev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">voller</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/models/sea_ice_model.html#SeaIceModel.check_convergence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.sea_ice_model.SeaIceModel.check_convergence" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.models.sea_ice_model.SeaIceModel.choose_phase_type_iteration">
-<span class="sig-name descname"><span class="pre">choose_phase_type_iteration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/models/sea_ice_model.html#SeaIceModel.choose_phase_type_iteration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.sea_ice_model.SeaIceModel.choose_phase_type_iteration" title="Link to this definition">#</a></dt>
-<dd><p>Choose the phase type iteration based on the one-phase and two-phase generalised Stefan Probem.</p>
+<dt class="sig sig-object py" id="spyice.models.sea_ice_model.SeaIceModel.track_mush_for_parameter">
+<span class="sig-name descname"><span class="pre">track_mush_for_parameter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phi_k_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param_iterlist</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/spyice/models/sea_ice_model.html#SeaIceModel.track_mush_for_parameter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spyice.models.sea_ice_model.SeaIceModel.track_mush_for_parameter" title="Link to this definition">#</a></dt>
+<dd><p>Track the mush for a given parameter.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>t</strong> (<em>int</em>) – The time index.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>A tuple containing the following values:</dt><dd><ul class="simple">
-<li><p>t_stefan (float): The Stefan temperature.</p></li>
-<li><p>error_depth_t (float): The error in depth.</p></li>
-<li><p>depth_stefan_t (float): The depth at time t.</p></li>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>phi_k</strong> – numpy array representing the values of phi_k</p></li>
+<li><p><strong>param</strong> – numpy array representing the parameter values</p></li>
+<li><p><strong>param_iterlist</strong> – list to store the tracked mush values for the parameter</p></li>
+<li><p><strong>parameter</strong> (<em>Updated list with the tracked mush values for the</em>)</p></li>
 </ul>
 </dd>
 </dl>
-</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spyice.models.sea_ice_model.SeaIceModel.phi_all_mush_list">
+<span class="sig-name descname"><span class="pre">phi_all_mush_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phi_k_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_all_mush_list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/spyice/models/sea_ice_model.html#SeaIceModel.phi_all_mush_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spyice.models.sea_ice_model.SeaIceModel.phi_all_mush_list" title="Link to this definition">#</a></dt>
+<dd><p>Calculates the number of elements in <a href="#id1"><span class="problematic" id="id2">phi_k_</span></a> that fall within the mush_lowerbound and mush_upperbound range.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>phi_k</strong> (<em>numpy.ndarray</em>) – The input array containing the values to be checked.</p></li>
+<li><p><strong>phi_all_mush_list</strong> (<em>list</em>) – The list to which the count of elements within the range will be appended.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The updated phi_all_mush_list with the count of elements within the range appended.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>tuple</p>
-</dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="spyice.utils.spyice_exceptions.html#src.spyice.utils.spyice_exceptions.InvalidPhaseError" title="src.spyice.utils.spyice_exceptions.InvalidPhaseError"><strong>InvalidPhaseError</strong></a> – If the phase type is invalid (not 1 or 2).</p>
+<dd class="field-odd"><p>list</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.models.sea_ice_model.SeaIceModel.convergence_loop_iteration">
-<span class="sig-name descname"><span class="pre">convergence_loop_iteration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_km1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_km1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_km1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buffo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stefan</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">voller</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp_grad</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">salinity_equation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/models/sea_ice_model.html#SeaIceModel.convergence_loop_iteration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.sea_ice_model.SeaIceModel.convergence_loop_iteration" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="spyice.models.sea_ice_model.SeaIceModel.convergence_loop_iteration">
+<span class="sig-name descname"><span class="pre">convergence_loop_iteration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_km1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_km1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">brine_velocity_km1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nutrient_cn_km1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_km1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thickness_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_term_temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_term_salinity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_wind_temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_wind_salinity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buffo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stefan</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">voller</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp_grad</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">salinity_equation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diffusiononly_equation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algae_equation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/spyice/models/sea_ice_model.html#SeaIceModel.convergence_loop_iteration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spyice.models.sea_ice_model.SeaIceModel.convergence_loop_iteration" title="Link to this definition">#</a></dt>
 <dd><p>Performs a single iteration of the convergence loop by first resetting the parameters to their previous time step values and then running the convergence loop until convergence is reached.
 :param t: Current temperature.
 :type t: float
@@ -523,6 +625,8 @@ The arrays are used to store the iteration data for further analysis.</p>
 <li><p>t_km1 (float): Temperature at the previous time step.</p></li>
 <li><p>s_km1 (float): Salinity at the previous time step.</p></li>
 <li><p>phi_km1 (float): Porosity at the previous time step.</p></li>
+<li><p>temperature_liquidus (float): Liquidus temperature.</p></li>
+<li><p>temperature_solidus (float): Solidus temperature.</p></li>
 </ul>
 </dd>
 </dl>
@@ -535,160 +639,8 @@ The arrays are used to store the iteration data for further analysis.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.models.sea_ice_model.SeaIceModel.get_results">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataclass</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_dataclass</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/models/sea_ice_model.html#SeaIceModel.get_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.sea_ice_model.SeaIceModel.get_results" title="Link to this definition">#</a></dt>
-<dd><p>Runs the sea ice model and returns the results.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>cls</strong> (<em>class</em>) – The class object.</p></li>
-<li><p><strong>dataclass</strong> (<a class="reference internal" href="spyice.preprocess.pre_process.html#src.spyice.preprocess.pre_process.PreprocessData" title="src.spyice.preprocess.pre_process.PreprocessData"><em>PreprocessData</em></a>) – The dataclass containing preprocessed data.</p></li>
-<li><p><strong>user_dataclass</strong> (<a class="reference internal" href="spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput" title="src.spyice.parameters.user_input.UserInput"><em>UserInput</em></a>) – The dataclass containing user input.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The results dataclass object generated by running the sea ice model.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Results</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.models.sea_ice_model.SeaIceModel.initialize_state_variables">
-<span class="sig-name descname"><span class="pre">initialize_state_variables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_km1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_km1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_km1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/models/sea_ice_model.html#SeaIceModel.initialize_state_variables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.sea_ice_model.SeaIceModel.initialize_state_variables" title="Link to this definition">#</a></dt>
-<dd><p>Initializes the state variables for the sea ice model.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>t</strong> (<em>int</em>) – The current time step.</p></li>
-<li><p><strong>t_km1</strong> (<em>float</em>) – The temperature at the previous time step.</p></li>
-<li><p><strong>s_km1</strong> (<em>float</em>) – The salinity at the previous time step.</p></li>
-<li><p><strong>phi_km1</strong> (<em>float</em>) – The liquid fraction at the previous time step.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>A tuple containing the initialized state variables:</dt><dd><ul class="simple">
-<li><p>t_initial (float): The initial temperature.</p></li>
-<li><p>t_km1 (float): The temperature at the previous time step.</p></li>
-<li><p>s_km1 (float): The salinity at the previous time step.</p></li>
-<li><p>phi_initial (float): The initial liquid fraction.</p></li>
-<li><p>phi_km1 (float): The liquid fraction at the previous time step.</p></li>
-<li><p>temp_grad (float): The temperature gradient.</p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>tuple</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.models.sea_ice_model.SeaIceModel.phi_all_mush_list">
-<span class="sig-name descname"><span class="pre">phi_all_mush_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phi_k_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_all_mush_list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/models/sea_ice_model.html#SeaIceModel.phi_all_mush_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.sea_ice_model.SeaIceModel.phi_all_mush_list" title="Link to this definition">#</a></dt>
-<dd><p>Calculates the number of elements in <a href="#id1"><span class="problematic" id="id2">phi_k_</span></a> that fall within the mush_lowerbound and mush_upperbound range.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>phi_k</strong> (<em>numpy.ndarray</em>) – The input array containing the values to be checked.</p></li>
-<li><p><strong>phi_all_mush_list</strong> (<em>list</em>) – The list to which the count of elements within the range will be appended.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The updated phi_all_mush_list with the count of elements within the range appended.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.models.sea_ice_model.SeaIceModel.record_iteration_data">
-<span class="sig-name descname"><span class="pre">record_iteration_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/models/sea_ice_model.html#SeaIceModel.record_iteration_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.sea_ice_model.SeaIceModel.record_iteration_data" title="Link to this definition">#</a></dt>
-<dd><p>Records the iteration data for temperature and phi values.
-This method appends the temperature and phi values from the current iteration to the respective arrays.
-The arrays are used to store the iteration data for further analysis.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>None</strong></p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.models.sea_ice_model.SeaIceModel.record_mushy_layer_data">
-<span class="sig-name descname"><span class="pre">record_mushy_layer_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_km1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stefan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residual_voller</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_prev</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/models/sea_ice_model.html#SeaIceModel.record_mushy_layer_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.sea_ice_model.SeaIceModel.record_mushy_layer_data" title="Link to this definition">#</a></dt>
-<dd><p>Records the mushy layer data for temperature and phi values at time iterations t at specific time steps corresponding to initial stages, middle and final stages of the process.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.models.sea_ice_model.SeaIceModel.reset_iteration_parameters">
-<span class="sig-name descname"><span class="pre">reset_iteration_parameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tkm1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_km1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_km1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/models/sea_ice_model.html#SeaIceModel.reset_iteration_parameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.sea_ice_model.SeaIceModel.reset_iteration_parameters" title="Link to this definition">#</a></dt>
-<dd><p>Reset the iteration parameters for the sea ice model.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>t</strong> (<em>float</em>) – Current temperature.</p></li>
-<li><p><strong>tkm1</strong> (<em>float</em>) – Temperature at the previous time step.</p></li>
-<li><p><strong>s_km1</strong> (<em>float</em>) – Salinity at the previous time step.</p></li>
-<li><p><strong>phi_km1</strong> (<em>float</em>) – Liquid fraction at the previous time step.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>A tuple containing the following iteration parameters:</dt><dd><ul class="simple">
-<li><p>t_km1 (float): Temperature at the previous time step.</p></li>
-<li><p>s_km1 (float): Salinity at the previous time step.</p></li>
-<li><p>phi_km1 (float): Liquid fraction at the previous time step.</p></li>
-<li><p>temp_grad (float): Temperature gradient.</p></li>
-<li><p>t_err (float): Temperature error.</p></li>
-<li><p>s_err (float): Salinity error.</p></li>
-<li><p>phi_err (float): Liquid fraction error.</p></li>
-<li><p>t_initial (float): Initial temperature.</p></li>
-<li><p>s_initial (float): Initial salinity.</p></li>
-<li><p>phi_initial (float): Initial liquid fraction.</p></li>
-<li><p>source_term_array (ndarray): Array of source-term values.</p></li>
-<li><p>counter (int): Iteration counter.</p></li>
-</ul>
-</dd>
-</dl>
-</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>tuple</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.models.sea_ice_model.SeaIceModel.run_sea_ice_model">
-<span class="sig-name descname"><span class="pre">run_sea_ice_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/models/sea_ice_model.html#SeaIceModel.run_sea_ice_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.sea_ice_model.SeaIceModel.run_sea_ice_model" title="Link to this definition">#</a></dt>
-<dd><p>Runs the sea ice model.</p>
-<p>This function iterates over a specified number of time steps and performs calculations
-to simulate the behavior of sea ice. It updates the results and saves a temperature profile
-plot at the end.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>None</strong></p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.models.sea_ice_model.SeaIceModel.run_while_convergence_iteration">
-<span class="sig-name descname"><span class="pre">run_while_convergence_iteration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buffo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stefan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">voller</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_err</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_err</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_err</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_term</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">counter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_is_salinity_equation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/models/sea_ice_model.html#SeaIceModel.run_while_convergence_iteration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.sea_ice_model.SeaIceModel.run_while_convergence_iteration" title="Link to this definition">#</a></dt>
+<dt class="sig sig-object py" id="spyice.models.sea_ice_model.SeaIceModel.run_while_convergence_iteration">
+<span class="sig-name descname"><span class="pre">run_while_convergence_iteration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">brine_velocity_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nutrient_cn_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thickness_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buffo</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stefan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">voller</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_err</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_err</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_err</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_term_temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_term_salinity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_wind_temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_wind_salinity</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">counter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_is_salinity_equation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_is_diffusiononly_equation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_is_algae_equation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/spyice/models/sea_ice_model.html#SeaIceModel.run_while_convergence_iteration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spyice.models.sea_ice_model.SeaIceModel.run_while_convergence_iteration" title="Link to this definition">#</a></dt>
 <dd><p>Runs the convergence loop until convergence is reached.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -750,95 +702,44 @@ plot at the end.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.models.sea_ice_model.SeaIceModel.set_boundary_condition_type">
-<span class="sig-name descname"><span class="pre">set_boundary_condition_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">critical_depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bc_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Neumann'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/models/sea_ice_model.html#SeaIceModel.set_boundary_condition_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.sea_ice_model.SeaIceModel.set_boundary_condition_type" title="Link to this definition">#</a></dt>
-<dd><p>Sets the boundary condition type for the model. This method sets the boundary condition type for the model. It calculates the temperature gradient based on the given critical depth and boundary condition type. If the boundary condition type is “Neumann”, the temperature gradient is calculated using the formula:
-temp_grad = dz * (temperature_melt - boundary_top_temperature) / critical_depth
-If the boundary condition type is not “Neumann”, the temperature gradient is set to None.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>critical_depth</strong> (<em>float</em>) – The critical depth value.</p></li>
-<li><p><strong>bc_type</strong> (<em>str</em><em>, </em><em>optional</em>) – The type of boundary condition. Defaults to “Neumann”.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Example</p>
-<p>model.set_boundary_condition_type(10.0, “Neumann”)</p>
+<dt class="sig sig-object py" id="spyice.models.sea_ice_model.SeaIceModel.check_convergence">
+<span class="sig-name descname"><span class="pre">check_convergence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">counter</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_prev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_prev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_prev</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">voller</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/spyice/models/sea_ice_model.html#SeaIceModel.check_convergence"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spyice.models.sea_ice_model.SeaIceModel.check_convergence" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spyice.models.sea_ice_model.SeaIceModel.record_mushy_layer_data">
+<span class="sig-name descname"><span class="pre">record_mushy_layer_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_km1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stefan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">residual_voller</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_prev</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/spyice/models/sea_ice_model.html#SeaIceModel.record_mushy_layer_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spyice.models.sea_ice_model.SeaIceModel.record_mushy_layer_data" title="Link to this definition">#</a></dt>
+<dd><p>Records the mushy layer data for temperature and phi values at time iterations t at specific time steps corresponding to initial stages, middle and final stages of the process.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.models.sea_ice_model.SeaIceModel.set_dataclass">
-<span class="sig-name descname"><span class="pre">set_dataclass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_dataclass</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/models/sea_ice_model.html#SeaIceModel.set_dataclass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.sea_ice_model.SeaIceModel.set_dataclass" title="Link to this definition">#</a></dt>
-<dd><p>Sets the dataclass attributes of the object.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>_dataclass</strong> – An instance of the dataclass.</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.models.sea_ice_model.SeaIceModel.t_running">
-<span class="sig-name descname"><span class="pre">t_running</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fig</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_stefan</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_k_buffo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/models/sea_ice_model.html#SeaIceModel.t_running"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.sea_ice_model.SeaIceModel.t_running" title="Link to this definition">#</a></dt>
-<dd><p>Plot the temperature profile against depth.</p>
+<dt class="sig sig-object py" id="spyice.models.sea_ice_model.SeaIceModel.reset_iteration_parameters">
+<span class="sig-name descname"><span class="pre">reset_iteration_parameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tkm1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_km1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">brine_velocity_km1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nutrient_cn_km1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_km1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_term_temperature</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_term_salinity</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/spyice/models/sea_ice_model.html#SeaIceModel.reset_iteration_parameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spyice.models.sea_ice_model.SeaIceModel.reset_iteration_parameters" title="Link to this definition">#</a></dt>
+<dd><p>Reset the iteration parameters for the sea ice model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>fig</strong> (<em>matplotlib.figure.Figure</em>) – The figure object to plot on.</p></li>
-<li><p><strong>ax1</strong> (<em>matplotlib.axes.Axes</em>) – The axes object to plot on.</p></li>
-<li><p><strong>t_stefan</strong> (<em>numpy.ndarray</em>) – The temperature profile obtained analytically.</p></li>
-<li><p><strong>t_k</strong> (<em>numpy.ndarray</em>) – The temperature profile obtained numerically.</p></li>
-<li><p><strong>t_k_buffo</strong> (<em>numpy.ndarray</em><em>, </em><em>optional</em>) – The temperature profile obtained using Buffo method. Defaults to None.</p></li>
-<li><p><strong>count</strong> (<em>int</em><em>, </em><em>optional</em>) – The count value. Defaults to 0.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.models.sea_ice_model.SeaIceModel.track_mush_for_parameter">
-<span class="sig-name descname"><span class="pre">track_mush_for_parameter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phi_k_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param_iterlist</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/models/sea_ice_model.html#SeaIceModel.track_mush_for_parameter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.sea_ice_model.SeaIceModel.track_mush_for_parameter" title="Link to this definition">#</a></dt>
-<dd><p>Track the mush for a given parameter.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>phi_k</strong> – numpy array representing the values of phi_k</p></li>
-<li><p><strong>param</strong> – numpy array representing the parameter values</p></li>
-<li><p><strong>param_iterlist</strong> – list to store the tracked mush values for the parameter</p></li>
-<li><p><strong>parameter</strong> (<em>Updated list with the tracked mush values for the</em>)</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="src.spyice.models.sea_ice_model.locate_ice_ocean_interface">
-<span class="sig-prename descclassname"><span class="pre">src.spyice.models.sea_ice_model.</span></span><span class="sig-name descname"><span class="pre">locate_ice_ocean_interface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nz</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/models/sea_ice_model.html#locate_ice_ocean_interface"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.models.sea_ice_model.locate_ice_ocean_interface" title="Link to this definition">#</a></dt>
-<dd><p>Locate ice ocean interface, based on liquid fraction equivalent ice thickness</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>phi</strong> (<em>array-like</em>) – Liquid fraction [-]</p></li>
-<li><p><strong>dz</strong> (<em>float</em>) – Spatial discretization [m]</p></li>
-<li><p><strong>nz</strong> (<em>int</em>) – Number of computational nodes</p></li>
-<li><p><strong>**kwargs</strong> – Additional keyword arguments
-Stefan (bool): Validation with Stefan problem (default: True)</p></li>
+<li><p><strong>t</strong> (<em>float</em>) – Current temperature.</p></li>
+<li><p><strong>tkm1</strong> (<em>float</em>) – Temperature at the previous time step.</p></li>
+<li><p><strong>s_km1</strong> (<em>float</em>) – Salinity at the previous time step.</p></li>
+<li><p><strong>phi_km1</strong> (<em>float</em>) – Liquid fraction at the previous time step.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><dl class="simple">
-<dt>A tuple containing:</dt><dd><ul class="simple">
-<li><p>if_depth (float): Location of the ice-water interface/sea ice total thickness [m]</p></li>
-<li><p>if_depth_index (int): Index of the ‘transition cell’ from ice to ocean (freezing) or water to ice (melting)</p></li>
+<dt>A tuple containing the following iteration parameters:</dt><dd><ul class="simple">
+<li><p>t_km1 (float): Temperature at the previous time step.</p></li>
+<li><p>s_km1 (float): Salinity at the previous time step.</p></li>
+<li><p>phi_km1 (float): Liquid fraction at the previous time step.</p></li>
+<li><p>temp_grad (float): Temperature gradient.</p></li>
+<li><p>t_err (float): Temperature error.</p></li>
+<li><p>s_err (float): Salinity error.</p></li>
+<li><p>phi_err (float): Liquid fraction error.</p></li>
+<li><p>t_initial (float): Initial temperature.</p></li>
+<li><p>s_initial (float): Initial salinity.</p></li>
+<li><p>phi_initial (float): Initial liquid fraction.</p></li>
+<li><p>source_term_array (ndarray): Array of source-term values.</p></li>
+<li><p>counter (int): Iteration counter.</p></li>
 </ul>
 </dd>
 </dl>
@@ -850,6 +751,217 @@ Stefan (bool): Validation with Stefan problem (default: True)</p></li>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="spyice.models.sea_ice_model.SeaIceModel.check_and_reset_any_iteration_data">
+<span class="sig-name descname"><span class="pre">check_and_reset_any_iteration_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameter_list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parameter_all_list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/spyice/models/sea_ice_model.html#SeaIceModel.check_and_reset_any_iteration_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spyice.models.sea_ice_model.SeaIceModel.check_and_reset_any_iteration_data" title="Link to this definition">#</a></dt>
+<dd><p>Check the iteration data for temperature and phi values.
+This method appends the temperature and phi values from the current iteration to the respective arrays.
+The arrays are used to store the iteration data for further analysis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parameter_list</strong> (<em>list</em>) – The list of parameter values.</p></li>
+<li><p><strong>parameter_all_list</strong> (<em>list</em>) – The list of all parameter values.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spyice.models.sea_ice_model.SeaIceModel.record_iteration_data">
+<span class="sig-name descname"><span class="pre">record_iteration_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/spyice/models/sea_ice_model.html#SeaIceModel.record_iteration_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spyice.models.sea_ice_model.SeaIceModel.record_iteration_data" title="Link to this definition">#</a></dt>
+<dd><p>Records the iteration data for temperature and phi values.
+This method appends the temperature and phi values from the current iteration to the respective arrays.
+The arrays are used to store the iteration data for further analysis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None</strong></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spyice.models.sea_ice_model.SeaIceModel.initialize_state_variables">
+<span class="sig-name descname"><span class="pre">initialize_state_variables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_km1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_km1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_km1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/spyice/models/sea_ice_model.html#SeaIceModel.initialize_state_variables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spyice.models.sea_ice_model.SeaIceModel.initialize_state_variables" title="Link to this definition">#</a></dt>
+<dd><p>Initializes the state variables for the sea ice model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> (<em>int</em>) – The current time step.</p></li>
+<li><p><strong>t_km1</strong> (<em>float</em>) – The temperature at the previous time step.</p></li>
+<li><p><strong>s_km1</strong> (<em>float</em>) – The salinity at the previous time step.</p></li>
+<li><p><strong>phi_km1</strong> (<em>float</em>) – The liquid fraction at the previous time step.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A tuple containing the initialized state variables:</dt><dd><ul class="simple">
+<li><p>t_initial (float): The initial temperature.</p></li>
+<li><p>t_km1 (float): The temperature at the previous time step.</p></li>
+<li><p>s_km1 (float): The salinity at the previous time step.</p></li>
+<li><p>phi_initial (float): The initial liquid fraction.</p></li>
+<li><p>phi_km1 (float): The liquid fraction at the previous time step.</p></li>
+<li><p>temp_grad (float): The temperature gradient.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spyice.models.sea_ice_model.SeaIceModel.choose_phase_type_iteration">
+<span class="sig-name descname"><span class="pre">choose_phase_type_iteration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/spyice/models/sea_ice_model.html#SeaIceModel.choose_phase_type_iteration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spyice.models.sea_ice_model.SeaIceModel.choose_phase_type_iteration" title="Link to this definition">#</a></dt>
+<dd><p>Choose the phase type iteration based on the one-phase and two-phase generalised Stefan Probem.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>t</strong> (<em>int</em>) – The time index.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A tuple containing the following values:</dt><dd><ul class="simple">
+<li><p>t_stefan (float): The Stefan temperature.</p></li>
+<li><p>error_depth_t (float): The error in depth.</p></li>
+<li><p>depth_stefan_t (float): The depth at time t.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="spyice.utils.spyice_exceptions.html#src.spyice.utils.spyice_exceptions.InvalidPhaseError" title="src.spyice.utils.spyice_exceptions.InvalidPhaseError"><strong>InvalidPhaseError</strong></a> – If the phase type is invalid (not 1 or 2).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spyice.models.sea_ice_model.SeaIceModel.run_sea_ice_model">
+<span class="sig-name descname"><span class="pre">run_sea_ice_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/spyice/models/sea_ice_model.html#SeaIceModel.run_sea_ice_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spyice.models.sea_ice_model.SeaIceModel.run_sea_ice_model" title="Link to this definition">#</a></dt>
+<dd><p>Runs the sea ice model.</p>
+<p>This function iterates over a specified number of time steps and performs calculations
+to simulate the behavior of sea ice. It updates the results and saves a temperature profile
+plot at the end.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None</strong></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spyice.models.sea_ice_model.SeaIceModel.calculate_source_terms">
+<span class="sig-name descname"><span class="pre">calculate_source_terms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">carbon_cc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thickness_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nutrient_cn_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi_k</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thickness</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">salinity_equation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algae_equation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">radiation_equation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/spyice/models/sea_ice_model.html#SeaIceModel.calculate_source_terms"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spyice.models.sea_ice_model.SeaIceModel.calculate_source_terms" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spyice.models.sea_ice_model.SeaIceModel.add_new_parameter_results">
+<span class="sig-name descname"><span class="pre">add_new_parameter_results</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/spyice/models/sea_ice_model.html#SeaIceModel.add_new_parameter_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spyice.models.sea_ice_model.SeaIceModel.add_new_parameter_results" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spyice.models.sea_ice_model.SeaIceModel.get_results">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataclass</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_dataclass</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/spyice/models/sea_ice_model.html#SeaIceModel.get_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spyice.models.sea_ice_model.SeaIceModel.get_results" title="Link to this definition">#</a></dt>
+<dd><p>Runs the sea ice model and returns the results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cls</strong> (<em>class</em>) – The class object.</p></li>
+<li><p><strong>dataclass</strong> (<a class="reference internal" href="spyice.preprocess.pre_process.html#PreprocessData" title="PreprocessData"><em>PreprocessData</em></a>) – The dataclass containing preprocessed data.</p></li>
+<li><p><strong>user_dataclass</strong> (<a class="reference internal" href="spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput" title="src.spyice.parameters.user_input.UserInput"><em>UserInput</em></a>) – The dataclass containing user input.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The results dataclass object generated by running the sea ice model.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Results</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="spyice.models.sea_ice_model.SeaIceModel.set_dataclass">
+<span class="sig-name descname"><span class="pre">set_dataclass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_dataclass</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/spyice/models/sea_ice_model.html#SeaIceModel.set_dataclass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#spyice.models.sea_ice_model.SeaIceModel.set_dataclass" title="Link to this definition">#</a></dt>
+<dd><p>Sets the dataclass attributes of the object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>_dataclass</strong> – An instance of the dataclass.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+<section id="main-methods">
+<h2>Main Methods<a class="headerlink" href="#main-methods" title="Link to this heading">#</a></h2>
+<p>The most important high-level methods are:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">run_sea_ice_model()</span></code></dt><dd><p>Executes the full time-stepping simulation.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">convergence_loop_iteration()</span></code></dt><dd><p>Performs a full nonlinear convergence iteration for a given timestep.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">run_while_convergence_iteration()</span></code></dt><dd><p>Core iterative solver loop until tolerance is met.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">calculate_source_terms()</span></code></dt><dd><p>Computes radiation, salinity, and algae-related source terms.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">choose_phase_type_iteration()</span></code></dt><dd><p>Selects between one-phase and two-phase Stefan problem.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">get_results()</span></code></dt><dd><p>Class method to run the model and return a <code class="docutils literal notranslate"><span class="pre">ResultsParams</span></code> object.</p>
+</dd>
+</dl>
+</section>
+<section id="dependencies">
+<h2>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading">#</a></h2>
+<p>This module relies on:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">spyice.models.algae_model</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spyice.models.radiative_model</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spyice.models.stefan_problem</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spyice.statevariables</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spyice.update_physical_values</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spyice.utils.helpers</span></code></p></li>
+</ul>
+</section>
+<section id="notes">
+<h2>Notes<a class="headerlink" href="#notes" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Convergence is controlled by user-defined tolerances.</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">ConvergenceError</span></code> is raised if iteration exceeds the counter limit.</p></li>
+<li><p>An <code class="docutils literal notranslate"><span class="pre">InvalidPhaseError</span></code> is raised if an unsupported Stefan phase type is selected.</p></li>
+<li><p>Mushy layer diagnostics are recorded during Stefan validation runs.</p></li>
+<li><p>Results are stored incrementally at each timestep.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">SeaIceModel.get_results(...)</span></code> is the recommended entry point for external use.</p>
+</section>
 </section>
 
 
@@ -899,29 +1011,46 @@ Stefan (bool): Validation with Stefan problem (default: True)</p></li>
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.sea_ice_model.SeaIceModel"><code class="docutils literal notranslate"><span class="pre">SeaIceModel</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.sea_ice_model.SeaIceModel.__init__"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.__init__()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.sea_ice_model.SeaIceModel.add_new_parameter_results"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.add_new_parameter_results()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.sea_ice_model.SeaIceModel.bc_neumann"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.bc_neumann()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.sea_ice_model.SeaIceModel.check_and_reset_any_iteration_data"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.check_and_reset_any_iteration_data()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.sea_ice_model.SeaIceModel.check_convergence"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.check_convergence()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.sea_ice_model.SeaIceModel.choose_phase_type_iteration"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.choose_phase_type_iteration()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.sea_ice_model.SeaIceModel.convergence_loop_iteration"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.convergence_loop_iteration()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.sea_ice_model.SeaIceModel.get_results"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.get_results()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.sea_ice_model.SeaIceModel.initialize_state_variables"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.initialize_state_variables()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.sea_ice_model.SeaIceModel.phi_all_mush_list"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.phi_all_mush_list()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.sea_ice_model.SeaIceModel.record_iteration_data"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.record_iteration_data()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.sea_ice_model.SeaIceModel.record_mushy_layer_data"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.record_mushy_layer_data()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.sea_ice_model.SeaIceModel.reset_iteration_parameters"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.reset_iteration_parameters()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.sea_ice_model.SeaIceModel.run_sea_ice_model"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.run_sea_ice_model()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.sea_ice_model.SeaIceModel.run_while_convergence_iteration"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.run_while_convergence_iteration()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.sea_ice_model.SeaIceModel.set_boundary_condition_type"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.set_boundary_condition_type()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.sea_ice_model.SeaIceModel.set_dataclass"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.set_dataclass()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.sea_ice_model.SeaIceModel.t_running"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.t_running()</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.sea_ice_model.SeaIceModel.track_mush_for_parameter"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.track_mush_for_parameter()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#functions">Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#locate-ice-ocean-interface">locate_ice_ocean_interface</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#spyice.models.sea_ice_model.locate_ice_ocean_interface"><code class="docutils literal notranslate"><span class="pre">locate_ice_ocean_interface()</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.models.sea_ice_model.locate_ice_ocean_interface"><code class="docutils literal notranslate"><span class="pre">locate_ice_ocean_interface()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classes">Classes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seaicemodel">SeaIceModel</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#spyice.models.sea_ice_model.SeaIceModel"><code class="docutils literal notranslate"><span class="pre">SeaIceModel</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#spyice.models.sea_ice_model.SeaIceModel.__init__"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.__init__()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#spyice.models.sea_ice_model.SeaIceModel.bc_neumann"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.bc_neumann()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#spyice.models.sea_ice_model.SeaIceModel.set_boundary_condition_type"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.set_boundary_condition_type()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#spyice.models.sea_ice_model.SeaIceModel.t_running"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.t_running()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#spyice.models.sea_ice_model.SeaIceModel.track_mush_for_parameter"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.track_mush_for_parameter()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#spyice.models.sea_ice_model.SeaIceModel.phi_all_mush_list"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.phi_all_mush_list()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#spyice.models.sea_ice_model.SeaIceModel.convergence_loop_iteration"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.convergence_loop_iteration()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#spyice.models.sea_ice_model.SeaIceModel.run_while_convergence_iteration"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.run_while_convergence_iteration()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#spyice.models.sea_ice_model.SeaIceModel.check_convergence"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.check_convergence()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#spyice.models.sea_ice_model.SeaIceModel.record_mushy_layer_data"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.record_mushy_layer_data()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#spyice.models.sea_ice_model.SeaIceModel.reset_iteration_parameters"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.reset_iteration_parameters()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#spyice.models.sea_ice_model.SeaIceModel.check_and_reset_any_iteration_data"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.check_and_reset_any_iteration_data()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#spyice.models.sea_ice_model.SeaIceModel.record_iteration_data"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.record_iteration_data()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#spyice.models.sea_ice_model.SeaIceModel.initialize_state_variables"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.initialize_state_variables()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#spyice.models.sea_ice_model.SeaIceModel.choose_phase_type_iteration"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.choose_phase_type_iteration()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#spyice.models.sea_ice_model.SeaIceModel.run_sea_ice_model"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.run_sea_ice_model()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#spyice.models.sea_ice_model.SeaIceModel.calculate_source_terms"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.calculate_source_terms()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#spyice.models.sea_ice_model.SeaIceModel.add_new_parameter_results"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.add_new_parameter_results()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#spyice.models.sea_ice_model.SeaIceModel.get_results"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.get_results()</span></code></a></li>
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#spyice.models.sea_ice_model.SeaIceModel.set_dataclass"><code class="docutils literal notranslate"><span class="pre">SeaIceModel.set_dataclass()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#main-methods">Main Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependencies">Dependencies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
 </ul>
   </nav></div>
 

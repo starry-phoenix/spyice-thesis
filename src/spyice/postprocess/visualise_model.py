@@ -3,16 +3,18 @@ import matplotlib.colors as colors
 import numpy as np
 import pandas as pd
 import matplotlib.animation as animation
+from mpl_toolkits.mplot3d import Axes3D  # Add this import at the top of your file
 from functools import partial
 from pathlib import Path
+from mpl_toolkits.axes_grid1 import make_axes_locatable
 
-from src.spyice.parameters.results_params import ResultsParams
-from src.spyice.parameters.user_input import UserInput
-from src.spyice.postprocess.analysis import Analysis
+from spyice.parameters.results_params import ResultsParams
+from spyice.parameters.user_input import UserInput
+from spyice.postprocess import Analysis
 
 np.seterr(divide="ignore", invalid="ignore")
 # .style.use("spyice.utils.custom")
-plt.style.use("src.spyice.utils.custom")
+plt.style.use("spyice.utils.custom")
 # plt.rcParams.update(
 #     {
 #         "text.usetex": True,
@@ -103,7 +105,7 @@ class VisualiseModel:
             alpha=0.7,
             linestyle="dashed",
         )
-        ax2.set_ylabel("Depth in m", color=color)
+        ax2.set_ylabel("Depth m", color=color)
         ax2.tick_params(axis="y", labelcolor=color)
         ax1.autoscale()
         ax2.autoscale()
@@ -261,7 +263,6 @@ class VisualiseModel:
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
         ax.legend()
-        ax.set_title(r"Numerical Depth Vs Analytical Depth")
         ax.set_yscale("log")
 
         if savefig:
@@ -290,7 +291,7 @@ class VisualiseModel:
         depth = self.results_object.depth_stefan_all[len(x_axis_iter) - 1]
         index = int(depth / self.ui_object.grid_resolution_dz)
         heatmap_data = self.results_object.phi_k_list[:, :index]
-        fig, ax = plt.subplots()
+        fig, ax = plt.subplots(figsize=(10, 6))
         cax = ax.imshow(
             heatmap_data.T,
             cmap="Blues",
@@ -305,7 +306,7 @@ class VisualiseModel:
         )
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
-        fig.colorbar(cax, ax=ax, label="Thickness [m]")
+        fig.colorbar(cax, ax=ax, label="Thickness [$m$]")
         # mush_list_y2 = [depth_mush[self.phi_slope(i)[-1]] for i in x_axis_iter]
         ax1 = ax.twinx()
         ax1.plot(
@@ -332,7 +333,6 @@ class VisualiseModel:
             0.0,
         )
         ax1.set_yticks([])
-        ax1.set_title(r"Numerical Depth Vs Analytical Depth")
         # ax1.set_yscale("log")
 
         if savefig:
@@ -415,7 +415,6 @@ class VisualiseModel:
         ax1.set_ylabel(r"Temperature [K]")
         ax1.set_yscale("log")
         # ax1.legend()
-        ax1.set_title(rf"Temperature evolution at {z_depth}m")
         color = "gray"
         ax3 = ax1.twinx()
         ax3.plot(
@@ -449,7 +448,7 @@ class VisualiseModel:
             + ".csv"
         )
 
-    def plot_temperature_heatmap(self, savefig: bool = True):
+    def plot_temperature_heatmap(self, savefig: bool = True, export_csv=False):
         """Plots the temperature heatmap."""
 
         print("Plotting Temperature heatmap...")
@@ -467,15 +466,33 @@ class VisualiseModel:
                 0,
             ],
         )
+        # Add contour lines
+        X = np.linspace(0, len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600, heatmap_data.shape[0])
+        Y = np.linspace(0, 1.0, heatmap_data.shape[1])
+        X, Y = np.meshgrid(X, Y)
+        contour = ax.contour(
+            X,
+            Y,
+            heatmap_data.T,
+            colors='k',
+            linewidths=0.5,
+        )
+        ax.clabel(contour, fmt="%.1f", inline=True, fontsize=5, use_clabeltext=True)
+
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
-        ax.set_title(r"Freezing Overtime")
         fig.colorbar(cax, ax=ax, label="Temperature [K]")
 
         if savefig:
             fig.savefig(
                 self.ui_object.dir_output_name + "/Temperature_heatmap.pdf",
                 backend="pgf",
+            )
+        if export_csv:
+            df_heatmap = pd.DataFrame(heatmap_data)
+            df_heatmap.to_csv(
+                self.ui_object.dir_output_name + "/Temperature.csv",
+                index=False,
             )
         plt.close(fig)
 
@@ -497,9 +514,22 @@ class VisualiseModel:
                 0,
             ],
         )
+
+                # Add contour lines
+        X = np.linspace(0, len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600, heatmap_data.shape[0])
+        Y = np.linspace(0, 1.0, heatmap_data.shape[1])
+        X, Y = np.meshgrid(X, Y)
+        contour = ax.contour(
+            X,
+            Y,
+            heatmap_data.T,
+            colors='k',
+            linewidths=0.5,
+        )
+        ax.clabel(contour, fmt="%.1f", inline=True, fontsize=5, use_clabeltext=True)
+
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
-        ax.set_title(r"Freezing Overtime")
         fig.colorbar(cax, ax=ax, label="Salinity in ppt")
 
         if savefig:
@@ -527,9 +557,21 @@ class VisualiseModel:
                 0,
             ],
         )
+        # Add contour lines
+        X = np.linspace(0, len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600, heatmap_data.shape[0])
+        Y = np.linspace(0, 1.0, heatmap_data.shape[1])
+        X, Y = np.meshgrid(X, Y)
+        contour = ax.contour(
+            X,
+            Y,
+            heatmap_data.T,
+            colors='k',
+            linewidths=0.5,
+        )
+        ax.clabel(contour, fmt="%.1f", inline=True, fontsize=5, use_clabeltext=True)
+
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
-        ax.set_title(r"Freezing Overtime")
         fig.colorbar(cax, ax=ax, label=r"Liquid Fraction")
 
         if savefig:
@@ -560,7 +602,7 @@ class VisualiseModel:
             ],
         )
         ax.set_xlabel(r"$t$ [hours]")
-        ax.set_ylabel(r"Depth [m]")
+        ax.set_ylabel(r"Depth [$m$]")
 
         def animation_function(i):
             hmap.set_data(data[10 * i + 1].T)
@@ -590,6 +632,165 @@ class VisualiseModel:
         # ani.save("test_new_html.html", writer="html")
         plt.close(fig)
 
+    def plot_salinity_heatmap_as_gif(self):
+        fps = 4
+        nseconds = 10
+        depth = self.results_object.depth_stefan_all[self.ui_object.max_iterations - 1]
+        index = int(depth / self.ui_object.grid_resolution_dz) + 1
+        fig, (ax) = plt.subplots()
+        data = self.results_object.s_k_list[:, :index]
+        frames_plot = int(self.ui_object.max_iterations / 1)
+        data = data.reshape(frames_plot, 1, index)
+        hmap = ax.imshow(
+            data[1].T,
+            cmap="Blues",
+            aspect="auto",
+            extent=[
+                0,
+                5 * 1 * self.ui_object.grid_timestep_dt / 3600,
+                depth,
+                0,
+            ],
+        )
+        ax.set_xlabel(r"$t$ [hours]")
+        ax.set_ylabel(r"Depth [$m$]")
+
+        def animation_function(i):
+            hmap.set_data(data[1000 * i + 1].T)
+            hmap.set_extent(
+                [
+                    0,
+                    (1000 * i + 1) * self.ui_object.grid_timestep_dt / 3600,
+                    depth,
+                    0,
+                ]
+            )
+
+            return [hmap]
+
+        fig.colorbar(hmap, ax=ax, label="Salinity [ppt]")
+
+        ani = animation.FuncAnimation(
+            fig,
+            animation_function,
+            repeat=True,
+            frames=(fps * nseconds),
+            interval=10 / fps,
+        )
+
+        # To save the animation using Pillow as a gif
+        ani.save(self.ui_object.dir_output_name + "/salinity_new.gif", writer="imagemagick")
+        # ani.save("test_new_html.html", writer="html")
+        plt.close(fig)
+
+    def plot_carbon_heatmap_as_gif(self):
+        fps = 4
+        nseconds = 10
+        depth = 1.0  #self.results_object.depth_stefan_all[self.ui_object.max_iterations - 1]
+        index = int(depth / self.ui_object.grid_resolution_dz) + 1
+        fig, (ax) = plt.subplots()
+        data = self.results_object.carbon_concentration_multiplelayers[:, :index]
+        frames_plot = int(self.ui_object.max_iterations / 1)
+        data = data.reshape(frames_plot, 1, index)
+        vmax = np.nanmax(data)
+        hmap = ax.imshow(
+            data[1].T,
+            cmap="Greens",
+            aspect="auto",
+            extent=[
+                0,
+                5 * 1 * self.ui_object.grid_timestep_dt / 3600,
+                depth,
+                0,
+            ],
+            vmin=0,
+            vmax=vmax,
+        )
+        ax.set_xlabel(r"$t$ [hours]")
+        ax.set_ylabel(r"Depth [$m$]")
+
+        def animation_function(i):
+            hmap.set_data(data[1000 * i + 1].T)
+            hmap.set_extent(
+                [
+                    0,
+                    (1000 * i + 1) * self.ui_object.grid_timestep_dt / 3600,
+                    depth,
+                    0,
+                ]
+            )
+
+            return [hmap]
+
+        fig.colorbar(hmap, ax=ax, label=r"$C_C$ $[mmol/m^3]$")
+
+        ani = animation.FuncAnimation(
+            fig,
+            animation_function,
+            repeat=True,
+            frames=(fps * nseconds),
+            interval=10 / fps,
+        )
+
+        # To save the animation using Pillow as a gif
+        ani.save(self.ui_object.dir_output_name + "/carbon_concentration_gif.gif", writer="imagemagick")
+        # ani.save("test_new_html.html", writer="html")
+        plt.close(fig)
+
+    def plot_nutrient_concentration_heatmap_as_gif(self):
+        fps = 4
+        nseconds = 10
+        depth = 1.0  #self.results_object.depth_stefan_all[self.ui_object.max_iterations - 1]
+        index = int(depth / self.ui_object.grid_resolution_dz) + 1
+        fig, (ax) = plt.subplots()
+        data = self.results_object.nutrient_concentration_multiplelayers[:, :index]
+        frames_plot = int(self.ui_object.max_iterations / 1)
+        data = data.reshape(frames_plot, 1, index)
+        vmax = np.nanmax(data)
+        hmap = ax.imshow(
+            data[1].T,
+            cmap="Greens",
+            aspect="auto",
+            extent=[
+                0,
+                5 * 1 * self.ui_object.grid_timestep_dt / 3600,
+                depth,
+                0,
+            ],
+            vmin=0,
+            vmax=vmax,
+        )
+        ax.set_xlabel(r"$t$ [hours]")
+        ax.set_ylabel(r"Depth [$m$]")
+
+        def animation_function(i):
+            hmap.set_data(data[1000 * i + 1].T)
+            hmap.set_extent(
+                [
+                    0,
+                    (1000 * i + 1) * self.ui_object.grid_timestep_dt / 3600,
+                    depth,
+                    0,
+                ]
+            )
+
+            return [hmap]
+
+        fig.colorbar(hmap, ax=ax, label=r"$C_N$ $[mmol/m^3]$")
+
+        ani = animation.FuncAnimation(
+            fig,
+            animation_function,
+            repeat=True,
+            frames=(fps * nseconds),
+            interval=10 / fps,
+        )
+
+        # To save the animation using Pillow as a gif
+        ani.save(self.ui_object.dir_output_name + "/nutrient_concentration_gif.gif", writer="imagemagick")
+        # ani.save("test_new_html.html", writer="html")
+        plt.close(fig)
+
     def plot_H_iter(
         self, h, t, s=None, param_name="Temperature", unit="K", savefig=False
     ):
@@ -612,7 +813,6 @@ class VisualiseModel:
             plt.scatter(iters_arr, t_melt, color="black", alpha=0.6)
         plt.xlabel(r"iteration before convergence")
         plt.ylabel(rf"{param_name} [{unit}]")
-        plt.title(rf"{param_name} at t={t}H")
         plt.legend()
 
         if savefig:
@@ -629,6 +829,46 @@ class VisualiseModel:
             )
         plt.close()
 
+    def plot_H_iter(
+        self, h, t, s=None, param_name="Temperature", unit="K", savefig=False
+    ):
+        iters = h.shape[0]
+        iters_arr = np.linspace(0, iters - 1, iters)
+        if s is not None:
+            s_melt = s[:, 1]
+            t_melt = (
+                -(9.1969758 * (1e-05) * s_melt**2) - 0.03942059 * s_melt + 272.63617665
+            )
+        plt.grid()
+        plt.plot(h[:, 0], label=r"cell Solid", color="turquoise")
+        plt.scatter(iters_arr, h[:, 0], color="turquoise")
+        plt.plot(h[:, 1], "--", label=r"cell Mushy", color="red", alpha=0.6)
+        plt.scatter(iters_arr, h[:, 1], color="red", alpha=0.6)
+        plt.plot(h[:, 2], ":", label=r"cell Liquid", color="teal")
+        plt.scatter(iters_arr, h[:, 2], color="teal")
+        if s is not None:
+            plt.plot(t_melt, label=r"Temperature Melt", color="black", alpha=0.6)
+            plt.scatter(iters_arr, t_melt, color="black", alpha=0.6)
+        plt.xlabel(r"iteration before convergence")
+        plt.ylabel(rf"{param_name} [{unit}]")
+        plt.legend()
+
+        if savefig:
+            plt.savefig(
+                self.ui_object.dir_output_name
+                + "/"
+                + param_name
+                + "_iter"
+                + self.ui_object.output_suffix
+                + "_"
+                + str(t)
+                + "m.pdf",
+                backend="pgf",
+            )
+        plt.close()
+
+
+
     def plot_H_iter_heatmap_mushy(
         self, h, p, temp_all, t, param_name="Temperature", unit="K", savefig=False
     ):
@@ -644,8 +884,7 @@ class VisualiseModel:
             extent=[0, iters - 1, h[:, 2][-1], h[:, 0][-1]],
         )
         ax1.set_xlabel(r"iteration before convergence")
-        ax1.set_ylabel(r"Depth [m]")
-        ax1.set_title(rf"{param_name} at t={t}H")
+        ax1.set_ylabel(r"Depth [$m$]")
 
         fig1.colorbar(heatmap, ax=ax1, label=rf"{param_name} [{unit}]")
         ax2 = ax1.twinx()
@@ -707,7 +946,6 @@ class VisualiseModel:
         )
         ax1.set_xlabel(r"iteration before convergence")
         ax1.set_ylabel(r"Depth")
-        ax1.set_title(rf"{param_name} at t={t}H")
         ax1.set_yticks(
             [
                 0.0,
@@ -756,7 +994,6 @@ class VisualiseModel:
         plt.scatter(iters_arr, phi_mush)
         plt.xlabel(r"iteration before convergence")
         plt.ylabel(r"No. of mushy cells")
-        plt.title(rf"Mushy Cells at t={t}H")
 
         if savefig:
             plt.savefig(
@@ -844,7 +1081,6 @@ class VisualiseModel:
         plt.scatter(iter_arr, tempmushPT2_arr, color="red", alpha=0.6)
         plt.xlabel(r"No. of Iterations")
         plt.ylabel(r"Temperature [K]")
-        plt.title(r"Interface temperature at t=0.5H before convergence")
         plt.legend()
 
         if savefig:
@@ -895,7 +1131,6 @@ class VisualiseModel:
         ax1.set_ylabel(r"Temperature [K]")
         ax1.set_yscale("log")
         # ax1.legend()
-        ax1.set_title(rf"Liqduius-Solidus Temperature evolution at {z_depth}m")
         color = "gray"
         ax1.legend()
         # fig1.tight_layout()
@@ -908,6 +1143,659 @@ class VisualiseModel:
                 backend="pgf",
             )
         plt.close(fig1)
+    
+    # TODO: place create_2d_array in utils script
+    def create_2d_array(self, data):
+        data_2d = np.zeros([self.ui_object.max_iterations, 101])
+
+        for t in range(len(data)):
+            index = int(self.results_object.thickness_index_total[t])
+            data_2d[t, index] = data[t]
+
+        return data_2d
+
+    def plot_carbon_concentration(self, savefig: bool = True):
+        carbon_concentration = self.create_2d_array(self.results_object.carbon_concentration)
+        depth = self.results_object.thickness_list[-1]
+        depth_index = int(self.results_object.thickness_index_total[-1]) + 1
+
+        print("Plotting carbon concentration heatmap...")
+        x_axis_iter = np.arange(0, self.ui_object.max_iterations - 1, 1)
+        heatmap_data = carbon_concentration[1:, :(depth_index)]
+        fig, ax = plt.subplots()
+        cax = ax.imshow(
+            heatmap_data.T,
+            cmap="Greens",
+            aspect="auto",
+            extent=[
+                0,
+                len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600,
+                depth,
+                0,
+            ],
+        )
+        ax.set_xlabel(r"$t$ [hours]")
+        ax.set_ylabel(r"Depth [$m$]")
+        fig.colorbar(cax, ax=ax, label=r"$C_C$ $[mmol/m^3]$")
+
+        if savefig:
+            fig.savefig(
+                self.ui_object.dir_output_name + "/carbon_concentration.pdf",
+                backend="pgf",
+            )
+        plt.close(fig)
+
+    def plot_carbon_concentration_multiplelayers(self, savefig: bool = True):
+        carbon_concentration = self.results_object.carbon_concentration_multiplelayers
+        depth = self.results_object.thickness_list[-1]
+        depth_index = int(self.results_object.thickness_index_total[-1]) + 1
+
+        print("Plotting carbon concentration multiple layers...")
+        x_axis_iter = np.arange(0, self.ui_object.max_iterations - 1, 1)
+        heatmap_data = carbon_concentration[1:, :(depth_index)]
+        fig, ax = plt.subplots()
+        cax = ax.imshow(
+            heatmap_data.T,
+            cmap="Greens",
+            aspect="auto",
+            extent=[
+                0,
+                len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600,
+                depth,
+                0,
+            ],
+        )
+        ax.set_xlabel(r"$t$ [hours]")
+        ax.set_ylabel(r"Depth [$m$]")
+        fig.colorbar(cax, ax=ax, label=r"$C_C$ $[mmol/m^3]$")
+
+        if savefig:
+            fig.savefig(
+                self.ui_object.dir_output_name + "/carbon_concentration_multiplelayers.pdf",
+                backend="pgf",
+            )
+        plt.close(fig)
+
+    def plot_chla_bulk_concentration(self, savefig: bool = True):
+        chla_bulk_concentration = self.create_2d_array(self.results_object.chla_bulk)
+        depth = self.results_object.thickness_list[-1]
+        depth_index = int(self.results_object.thickness_index_total[-1]) + 1
+
+        print("Plotting carbon concentration heatmap...")
+        x_axis_iter = np.arange(0, self.ui_object.max_iterations - 1, 1)
+        heatmap_data = chla_bulk_concentration[1:, :(depth_index)]
+        fig, ax = plt.subplots()
+        cax = ax.imshow(
+            heatmap_data.T,
+            cmap="Greens",
+            aspect="auto",
+            extent=[
+                0,
+                len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600,
+                depth,
+                0,
+            ],
+        )
+        ax.set_xlabel(r"$t$ [hours]")
+        ax.set_ylabel(r"Depth [$m$]")
+        fig.colorbar(cax, ax=ax, label=r"Chl-a bulk $[mg/m^3]$")
+
+        if savefig:
+            fig.savefig(
+                self.ui_object.dir_output_name + "/chla_bulk_concentration.pdf",
+                backend="pgf",
+            )
+        plt.close(fig)
+
+    def plot_chla_bulk_concentration_multiplelayers(self, savefig: bool = True):
+        chla_bulk_concentration = self.results_object.chla_bulk_multiplelayers
+        depth = self.results_object.thickness_list[-1]
+        depth_index = int(self.results_object.thickness_index_total[-1]) + 1
+
+        print("Plotting chla concentration multiple layers...")
+        x_axis_iter = np.arange(0, self.ui_object.max_iterations - 1, 1)
+        heatmap_data = chla_bulk_concentration[1:, :(depth_index)]
+        fig, ax = plt.subplots()
+        cax = ax.imshow(
+            heatmap_data.T,
+            cmap="Greens",
+            aspect="auto",
+            extent=[
+                0,
+                len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600,
+                depth,
+                0,
+            ],
+        )
+        ax.set_xlabel(r"$t$ [hours]")
+        ax.set_ylabel(r"Depth [$m$]")
+        fig.colorbar(cax, ax=ax, label=r"Chl-a bulk $[mg/m^3]$")
+
+        if savefig:
+            fig.savefig(
+                self.ui_object.dir_output_name + "/chla_bulk_concentration_multiplelayers.pdf",
+                backend="pgf",
+            )
+        plt.close(fig)
+
+    def plot_nutrient_concentration(self, savefig: bool = True):
+        nutrient_concentration = self.create_2d_array(self.results_object.nutrient_concentration)
+        depth = self.results_object.thickness_list[-1]
+        depth_index = int(self.results_object.thickness_index_total[-1]) + 1
+
+        print("Plotting nutrient concentration heatmap...")
+        x_axis_iter = np.arange(0, self.ui_object.max_iterations - 1, 1)
+        heatmap_data = nutrient_concentration[1:, :depth_index]
+        fig, ax = plt.subplots()
+        cax = ax.imshow(
+            heatmap_data.T,
+            cmap="Greens",
+            aspect="auto",
+            extent=[
+                0,
+                len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600,
+                depth,
+                0,
+            ],
+        )
+        ax.set_xlabel(r"$t$ [hours]")
+        ax.set_ylabel(r"Depth [$m$]")
+        fig.colorbar(cax, ax=ax, label=r" $C_N$ $[mmol/m^3]$")
+
+        if savefig:
+            fig.savefig(
+                self.ui_object.dir_output_name + "/nutrient_concentration.pdf",
+                backend="pgf",
+            )
+        plt.close(fig)
+
+    def plot_nutrient_concentration_multiplelayers(self, savefig: bool = True):
+        nutrient_concentration = self.results_object.nutrient_concentration_multiplelayers
+
+        print("Plotting nutrient concentration of all layers: heatmap...")
+        x_axis_iter = np.arange(0, self.ui_object.max_iterations - 1, 1)
+        heatmap_data = nutrient_concentration[1:]
+        fig, ax = plt.subplots()
+        cax = ax.imshow(
+            heatmap_data.T,
+            cmap="Greens",
+            aspect="auto",
+            extent=[
+                0,
+                len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600,
+                1.0,
+                0,
+            ],
+        )
+        ax.set_xlabel(r"$t$ [hours]")
+        ax.set_ylabel(r"Depth [$m$]")
+        fig.colorbar(cax, ax=ax, label=r"$C_N$ $[mmol/m^3]$")
+
+        if savefig:
+            fig.savefig(
+                self.ui_object.dir_output_name + "/nutrient_concentration_alllayers.pdf",
+                backend="pgf",
+            )
+        plt.close(fig)
+
+
+    def plot_photosynthetic_rate(self, savefig: bool = True):
+        photosynthetic_rate_T_S_PAR = self.create_2d_array(self.results_object.photosynthetic_rate)
+        depth = self.results_object.thickness_list[-1]
+        depth_index = int(self.results_object.thickness_index_total[-1]) + 1
+
+        print("Plotting photosynthetic rate heatmap...")
+        x_axis_iter = np.arange(0, self.ui_object.max_iterations - 1, 1)
+        heatmap_data = photosynthetic_rate_T_S_PAR[1:, :depth_index]
+        fig, ax = plt.subplots()
+        cax = ax.imshow(
+            heatmap_data.T,
+            cmap="Reds",
+            aspect="auto",
+            extent=[
+                0,
+                len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600,
+                depth,
+                0,
+            ],
+        )
+        ax.set_xlabel(r"$t$ [hours]")
+        ax.set_ylabel(r"Depth [$m$]")
+        fig.colorbar(cax, ax=ax, label=r"$\mu$ $[mmol/m^3/s]$")
+
+        if savefig:
+            fig.savefig(
+                self.ui_object.dir_output_name + "/photosynthetic_rate.pdf",
+                backend="pgf",
+            )
+        plt.close(fig)
+    
+    def plot_photosynthetic_rate_multiplelayers(self, savefig: bool = True):
+        photosynthetic_rate_T_S_PAR = self.results_object.photosynthetic_rate_multiplelayers
+        depth = self.results_object.thickness_list[-1]
+        depth_index = int(self.results_object.thickness_index_total[-1]) + 1
+
+        print("Plotting photosynthetic rate multiple layers...")
+        x_axis_iter = np.arange(0, self.ui_object.max_iterations - 1, 1)
+        heatmap_data = photosynthetic_rate_T_S_PAR[1:, :depth_index]
+        fig, ax = plt.subplots()
+        cax = ax.imshow(
+            heatmap_data.T,
+            cmap="Reds",
+            aspect="auto",
+            extent=[
+                0,
+                len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600,
+                depth,
+                0,
+            ],
+        )
+        ax.set_xlabel(r"$t$ [hours]")
+        ax.set_ylabel(r"Depth [$m$]")
+        fig.colorbar(cax, ax=ax, label=r"$\mu$ $[mmol/m^3/s]$")
+
+        if savefig:
+            fig.savefig(
+                self.ui_object.dir_output_name + "/photosynthetic_rate_multiplelayers.pdf",
+                backend="pgf",
+            )
+        plt.close(fig)
+
+    def plot_radiation_algae(self, savefig: bool = True):
+        radiation_algae = self.create_2d_array(self.results_object.radiation_algae)
+
+        depth = self.results_object.thickness_list[-1]
+        depth_index = int(self.results_object.thickness_index_total[-1]) + 1
+
+        print("Plotting algae radiation heatmap...")
+        x_axis_iter = np.arange(0, self.ui_object.max_iterations - 1, 1)
+        heatmap_data = radiation_algae[1:, :depth_index]
+        fig, ax = plt.subplots()
+        cax = ax.imshow(
+            heatmap_data.T,
+            cmap="Reds",
+            aspect="auto",
+            extent=[
+                0,
+                len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600,
+                depth,
+                0,
+            ],
+        )
+        ax.set_xlabel(r"$t$ [hours]")
+        ax.set_ylabel(r"Depth [$m$]")
+        fig.colorbar(cax, ax=ax, label=r"$R^a$ $[W/m^2]$")
+
+        if savefig:
+            fig.savefig(
+                self.ui_object.dir_output_name + "/algae_radiation.pdf",
+                backend="pgf",
+            )
+        plt.close(fig)
+    
+    def plot_radiation_algae_multiplelayers(self, savefig: bool = True):
+        radiation_algae = self.results_object.radiation_algae_multiplelayers
+
+        depth = self.results_object.thickness_list[-1]
+        depth_index = int(self.results_object.thickness_index_total[-1]) + 1
+
+        print("Plotting algae radiation multiple layers...")
+        x_axis_iter = np.arange(0, self.ui_object.max_iterations - 1, 1)
+        heatmap_data = radiation_algae[1:, :depth_index]
+        fig, ax = plt.subplots()
+        cax = ax.imshow(
+            heatmap_data.T,
+            cmap="Reds",
+            aspect="auto",
+            extent=[
+                0,
+                len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600,
+                depth,
+                0,
+            ],
+        )
+        ax.set_xlabel(r"$t$ [hours]")
+        ax.set_ylabel(r"Depth [$m$]")
+        fig.colorbar(cax, ax=ax, label=r"$R^a$ $[W/m^2]$")
+
+        if savefig:
+            fig.savefig(
+                self.ui_object.dir_output_name + "/algae_radiation_multiplelayers.pdf",
+                backend="pgf",
+            )
+        plt.close(fig)
+
+    def plot_radiation_algae_dt_by_rho_c(self, savefig: bool = True):
+        depth = self.results_object.thickness_list[-1]
+        depth_index = int(self.results_object.thickness_index_total[-1]) + 1
+
+        phi = self.results_object.phi_k_list[:, depth_index]
+        rho_c_eff = self.ui_object.constants.rho_br*phi + self.ui_object.constants.rho_i*(1-phi)
+        radiation_algae_by_rho_c_eff = self.results_object.radiation_algae / rho_c_eff
+        radiation_algae_by_rho_c_eff_2d = self.create_2d_array(radiation_algae_by_rho_c_eff)
+
+        print("Plotting algae radiation heatmap...")
+        x_axis_iter = np.arange(0, self.ui_object.max_iterations - 1, 1)
+        heatmap_data = radiation_algae_by_rho_c_eff_2d[1:, :depth_index]
+        fig, ax = plt.subplots()
+        cax = ax.imshow(
+            heatmap_data.T,
+            cmap="Reds",
+            aspect="auto",
+            extent=[
+                0,
+                len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600,
+                depth,
+                0,
+            ],
+        )
+        ax.set_xlabel(r"$t$ [hours]")
+        ax.set_ylabel(r"Depth [$m$]")
+        fig.colorbar(cax, ax=ax, label=r"$R^a/\rho c$ $[K s^{-1}]$")
+
+        if savefig:
+            fig.savefig(
+                self.ui_object.dir_output_name + "/algae_radiation_heating.pdf",
+                backend="pgf",
+            )
+        plt.close(fig)
+
+    def plot_radiation_all(self, savefig: bool = True):
+        radiation_algae = self.results_object.radiation_multiplelayers
+
+        print("Plotting radiation ice and algae heatmap...")
+        x_axis_iter = np.arange(0, self.ui_object.max_iterations - 1, 1)
+        heatmap_data = radiation_algae[1:]
+        fig, ax = plt.subplots()
+        cax = ax.imshow(
+            heatmap_data.T,
+            cmap="Reds",
+            aspect="auto",
+            extent=[
+                0,
+                len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600,
+                1.0,
+                0,
+            ],
+        )
+        ax.set_xlabel(r"$t$ [hours]")
+        ax.set_ylabel(r"Depth [$m$]")
+        fig.colorbar(cax, ax=ax, label=r"$R^i + R^a$ $[W/m^2]$")
+
+        if savefig:
+            fig.savefig(
+                self.ui_object.dir_output_name + "/radiation_algae_heatmap_multiplelayers.pdf",
+                backend="pgf",
+            )
+        plt.close(fig)
+
+    def plot_nutrient_cn_profile(self, savefig: bool = True):
+        time = len(self.results_object.nutrient_concentration_multiplelayers)
+        depth_ = np.append(np.arange(0, 1, self.ui_object.grid_resolution_dz), 1.0)
+
+        plt.figure(figsize=(6, 5))
+        
+        plt.grid()
+        plt.plot(self.results_object.nutrient_concentration_multiplelayers[5, :], depth_, ':',label=r't=5s', color='black', linewidth=1)
+        plt.plot(self.results_object.nutrient_concentration_multiplelayers[int(time/2), :], depth_, label=rf't={int(time/2)}s', color='black', linewidth=1)
+        plt.plot(self.results_object.nutrient_concentration_multiplelayers[int(time -5), :], depth_, '--',label=rf't={time-5}s', color='black', linewidth=1)
+        plt.gca().invert_yaxis()
+        plt.xlabel(r'$C_N$ [mmol m^{-3}]')
+        plt.ylabel(r'Depth [$m$]')
+        plt.legend()
+        if savefig:
+            plt.savefig(
+                self.ui_object.dir_output_name + "/nutrient_concentration_vertical_profile.pdf",
+                backend="pgf",
+            )
+        plt.close()            
+
+    def plot_salinity_profile(self, savefig: bool = True):
+        time = len(self.results_object.s_k_list)
+        depth_ = np.append(np.arange(0, 1, self.ui_object.grid_resolution_dz), 1.0)
+        
+        plt.figure(figsize=(6,5))
+        plt.grid()
+        plt.plot(self.results_object.s_k_list[5, :], depth_, ':',label=r't=5s', color='black', linewidth=1)
+        plt.plot(self.results_object.s_k_list[int(time/2), :], depth_, label=rf't={int(time/2)}s', color='black', linewidth=1)
+        plt.plot(self.results_object.s_k_list[int(time -5), :], depth_, '--',label=rf't={time-5}s', color='black', linewidth=1)
+        plt.gca().invert_yaxis()
+        plt.xlabel(r'Salinity concentration [ppt]')
+        plt.ylabel(r'Depth [$m$]')
+        plt.legend(loc='lower left')
+        if savefig:
+            plt.savefig(
+                self.ui_object.dir_output_name + "/salinity_concentration_vertical_profile.pdf",
+                backend="pgf",
+            )
+        plt.close()   
+
+    def plot_liquid_fraction_profile(self, savefig: bool = True):
+        time = len(self.results_object.phi_k_list)
+        depth_ = np.append(np.arange(0, 1, self.ui_object.grid_resolution_dz), 1.0)
+        
+        plt.figure(figsize=(6, 5))
+        plt.grid()
+        plt.plot(self.results_object.phi_k_list[5, :], depth_, ':',label=r't=5s', color='black', linewidth=1)
+        plt.plot(self.results_object.phi_k_list[int(time/2), :], depth_, label=rf't={int(time/2)}s', color='black', linewidth=1)
+        plt.plot(self.results_object.phi_k_list[int(time -5), :], depth_, '--',label=rf't={time-5}s', color='black', linewidth=1)
+        plt.gca().invert_yaxis()
+        plt.xlabel(r'Liquid fraction')
+        plt.ylabel(r'Depth [$m$]')
+        plt.legend()
+        if savefig:
+            plt.savefig(
+                self.ui_object.dir_output_name + "/liquidfraction_concentration_vertical_profile.pdf",
+                backend="pgf",
+            )
+        plt.close()        
+
+    def plot_temperature_profile(self, savefig: bool = True):
+        time = len(self.results_object.t_k_list)
+        depth_ = np.append(np.arange(0, 1, self.ui_object.grid_resolution_dz), 1.0)
+        
+        plt.figure(figsize=(6, 5))
+        plt.grid()
+        plt.plot(self.results_object.t_k_list[5, :], depth_, ':',label=r't=5s', color='black', linewidth=1)
+        plt.plot(self.results_object.t_k_list[int(time/2), :], depth_, label=rf't={int(time/2)}s', color='black', linewidth=1)
+        plt.plot(self.results_object.t_k_list[int(time -5), :], depth_, '--',label=rf't={time-5}s', color='black', linewidth=1)
+        plt.gca().invert_yaxis()
+        plt.xlabel(r'Temperature [K]')
+        plt.ylabel(r'Depth [$m$]')
+        plt.legend()
+        if savefig:
+            plt.savefig(
+                self.ui_object.dir_output_name + "/temperature_3_vertical_profile.pdf",
+                backend="pgf",
+            )
+        plt.close()     
+
+    def plot_carbon_concentration_profile(self, savefig: bool = True):
+
+        time = len(self.results_object.carbon_concentration_multiplelayers)
+        depth_ = np.append(np.arange(0, 1, self.ui_object.grid_resolution_dz), 1.0)
+        
+        plt.figure(figsize=(6, 5))
+        plt.grid()
+        plt.plot(self.results_object.carbon_concentration_multiplelayers[5, :], depth_, ':',label=r't=5s', color='black', linewidth=1)
+        plt.plot(self.results_object.carbon_concentration_multiplelayers[int(time/2), :], depth_, label=rf't={int(time/2)}s', color='black', linewidth=1)
+        plt.plot(self.results_object.carbon_concentration_multiplelayers[int(time -5), :], depth_, '--',label=rf't={time-5}s', color='black', linewidth=1)
+        plt.gca().invert_yaxis()
+        plt.xlabel(r'$C_C$ [mmol m^{-3}]')
+        plt.ylabel(r'Depth [$m$]')
+        plt.legend()
+        if savefig:
+            plt.savefig(
+                self.ui_object.dir_output_name + "/carbon_concentration_vertical_profile.pdf",
+                backend="pgf",
+            )
+        plt.close()              
+
+    
+    def plot_salinity_sourceterm_profile(self, savefig: bool = True):
+
+        time = len(self.results_object.salinity_source_term)
+        depth_ = np.append(np.arange(0, 1, self.ui_object.grid_resolution_dz), 1.0)
+        
+        plt.figure(figsize=(6, 5))
+        plt.grid()
+        plt.plot(self.results_object.salinity_source_term[5, :], depth_, ':',label=r't=5s', color='black', linewidth=1)
+        plt.plot(self.results_object.salinity_source_term[int(time/2), :], depth_, label=rf't={int(time/2)}s', color='black', linewidth=1)
+        plt.plot(self.results_object.salinity_source_term[int(time -5), :], depth_, '--',label=rf't={time-5}s', color='black', linewidth=1)
+        plt.gca().invert_yaxis()
+        plt.xlabel(r'Salinity source term [kg]')
+        plt.ylabel(r'Depth [$m$]')
+        plt.legend()
+        if savefig:
+            plt.savefig(
+                self.ui_object.dir_output_name + "/salinitysourceterm_vertical_profile.pdf",
+                backend="pgf",
+            )
+        plt.close()      
+
+    def plot_radiation_profile(self, savefig: bool = True):
+
+        time = len(self.results_object.radiation_multiplelayers)
+        depth_ = np.append(np.arange(0, 1, self.ui_object.grid_resolution_dz), 1.0)
+        
+        plt.figure(figsize=(6, 5))
+        plt.grid()
+        plt.plot(self.results_object.radiation_multiplelayers[5, :], depth_, ':',label=r't=5s', color='black', linewidth=1)
+        plt.plot(self.results_object.radiation_multiplelayers[int(time/2), :], depth_, label=rf't={int(time/2)}s', color='black', linewidth=1)
+        plt.plot(self.results_object.radiation_multiplelayers[int(time -5), :], depth_, '--',label=rf't={time-5}s', color='black', linewidth=1)
+        plt.gca().invert_yaxis()
+        plt.xlabel(r'$R^i + R^a$ [W/m^2]')
+        plt.ylabel(r'Depth [$m$]')
+        plt.legend()
+        if savefig:
+            plt.savefig(
+                self.ui_object.dir_output_name + "/radiation_vertical_profile.pdf",
+                backend="pgf",
+            )
+        plt.close()    
+    
+    def plot_liquid_salinity_profile(self, savefig: bool = True):
+        time = len(self.results_object.s_k_list)
+        depth_ = np.append(np.arange(0, 1, self.ui_object.grid_resolution_dz), 1.0)
+        liquid_salinity = self.results_object.s_k_list/self.results_object.phi_k_list
+
+        plt.figure()
+        plt.grid()
+        plt.plot(liquid_salinity[5, :], depth_, ':',label=r't=5s', color='black', linewidth=1)
+        plt.plot(liquid_salinity[int(time/2), :], depth_, label=rf't={int(time/2)}s', color='black', linewidth=1)
+        plt.plot(liquid_salinity[int(time -5), :], depth_, '--',label=rf't={time-5}s', color='black', linewidth=1)
+        plt.gca().invert_yaxis()
+        plt.xlabel(r'Salinity concentration [ppt]')
+        plt.ylabel(r'Depth [$m$]')
+        plt.legend()
+        if savefig:
+            plt.savefig(
+                self.ui_object.dir_output_name + "/liquidsalinity_concentration_vertical_profile.pdf",
+                backend="pgf",
+            )
+        plt.close()   
+    
+    def plot_brinevelocity_profile(self, savefig: bool = True):
+
+        time = len(self.results_object.brine_velocity_list)
+        depth_ = np.append(np.arange(0, 1, self.ui_object.grid_resolution_dz), 1.0)
+        
+        plt.figure(figsize=(6, 5))
+        plt.grid()
+        plt.plot(self.results_object.brine_velocity_list[5, :], depth_, ':',label=r't=5s', color='black', linewidth=1)
+        plt.plot(self.results_object.brine_velocity_list[int(time/2), :], depth_, label=rf't={int(time/2)}s', color='black', linewidth=1)
+        plt.plot(self.results_object.brine_velocity_list[int(time -5), :], depth_, '--',label=rf't={time-5}s', color='black', linewidth=1)
+        plt.gca().invert_yaxis()
+        plt.xlabel(r'Brine velocity [m/s]')
+        plt.ylabel(r'Depth [$m$]')
+        plt.legend()
+        if savefig:
+            plt.savefig(
+                self.ui_object.dir_output_name + "/brinevelocity_vertical_profile.pdf",
+                backend="pgf",
+            )
+        plt.close()     
+
+    def plot_temperature_3D(self, savefig:bool = True):
+        time = len(self.results_object.t_k_list[1:])
+        depth_ = np.append(np.arange(0, 1, self.ui_object.grid_resolution_dz), 1.0)
+        t_k_arr = np.array(self.results_object.t_k_list[1:])
+
+        # Take every 100th time step
+        t_k_arr = t_k_arr[::500, :]
+        dt = self.ui_object.grid_timestep_dt  # time step in seconds
+        time_indices = np.arange(0, time, 100)
+        time_hours = time_indices * dt / 3600  # convert to hours
+        D, T = np.meshgrid(depth_, time_hours)
+
+        fig = plt.figure(figsize=(12, 10))
+        ax = fig.add_subplot(111, projection='3d')
+        surf = ax.plot_surface(
+            D, T, t_k_arr, cmap='Blues', edgecolor='black', alpha=0.9
+        )
+        ax.set_ylabel(r'$t$ [hours]', labelpad=20)
+        ax.set_xlabel('Depth $[$m$]$',  labelpad=20)
+        ax.set_zlabel('Temperature [K]', labelpad=10)
+
+        # Place colorbar on top
+        fig.colorbar(
+            surf,
+            ax=ax,
+            orientation='vertical',
+            pad=0.05,  # increase for more space between plot and colorbar
+            aspect=10,
+            shrink=0.5,
+            label='Temperature [K]',
+            location='right'
+        )
+
+        ax.set_xlim(ax.get_xlim()[::-1])
+        ax.set_ylim(ax.get_ylim()[::-1])
+
+        if savefig:
+            plt.savefig(
+                self.ui_object.dir_output_name + "/temperature_3d_surface_profile.pdf",
+                backend="pgf",
+            )
+        plt.close(fig)
+
+    def plot_temperature_3d_contours(self, savefig=True):
+        time = len(self.results_object.t_k_list[1:])
+        depth_ = np.append(np.arange(0, 1, self.ui_object.grid_resolution_dz), 1.0)
+        t_k_arr = np.array(self.results_object.t_k_list[1:])
+
+        # Take every 100th time step
+        t_k_arr = t_k_arr[::100, :]
+        time_indices = np.arange(0, time, 100)
+        T, D = np.meshgrid(time_indices, depth_)
+
+        fig = plt.figure(figsize=(8, 6))
+        ax = fig.add_subplot(111, projection='3d')
+
+        # Choose contour levels (e.g., 10 evenly spaced between min and max)
+        levels = np.linspace(np.nanmin(t_k_arr), np.nanmax(t_k_arr), 10)
+
+        # Plot 3D contours
+        contours = ax.contour3D(
+            T, D, t_k_arr, levels=levels, cmap='viridis', linewidths=2
+        )
+
+        ax.set_ylabel('Depth [$m$]')
+        ax.set_xlabel('Time step')
+        ax.set_zlabel('Temperature [K]')
+
+        fig.colorbar(contours, ax=ax, shrink=0.5, aspect=10, label='Temperature [K]')
+
+        ax.set_xlim(ax.get_xlim()[::-1])
+        ax.set_ylim(ax.get_ylim()[::-1])
+
+        if savefig:
+            plt.savefig(
+                self.ui_object.dir_output_name + "/temperature_3d_contour_profile.pdf",
+                backend="pgf",
+            )
+        plt.close(fig)
+
 
     # def residual_plot(self):
     #     res_0p01_1000iter_voller1 = np.load("outputs/2024-09-26/123923_real_47.0_1000_0.01/residuals.npy", allow_pickle=True)
@@ -927,10 +1815,9 @@ class VisualiseModel:
     #     ax1.plot(x_axis_iter*self.ui_object.grid_timestep_dt/3600, phi_k, 'r--',label='Numerical Temperature')
     #     if self.is_buffo is True:
     #         ax1.plot(x_axis_iter*self.ui_object.grid_timestep_dt/3600, phi_buffo, 'b--',alpha=0.5,label='Buffo')
-    #     ax1.set_xlabel("depth in nodes")
+    #     ax1.set_xlabel("Depth nodes")
     #     ax1.set_ylabel("Phi")
     #     #ax1.legend()
-    #     ax1.set_title(f"Temperature evolution at {timestep}H")
     #     color = 'gray'
     #     ax1.legend()
     #     fig1.tight_layout()
@@ -951,7 +1838,6 @@ class VisualiseModel:
     #     ax1.set_xlabel("t in hours")
     #     ax1.set_ylabel("Salinity in ppt")
     #     #ax1.legend()
-    #     ax1.set_title(f"Salinity evolution at {z_depth}m")
     #     color = 'gray'
     #     ax1.legend()
     #     fig1.tight_layout()
@@ -976,7 +1862,6 @@ class VisualiseModel:
     #     ax1.fill_betweenx(H, T_k[mush][0], T_k[mush][-1], color='gray', alpha=0.2, label='Mushy Layer')
     #     ax1.set_xlabel("Temperature in K")
     #     ax1.set_ylabel(r"Liquid Fraction $\phi$")
-    #     ax1.set_title(f"Liquid Fraction Vs Temperature at {timestep}h")
     #     color = 'gray'
     #     ax3 = ax1.twinx()
     #     ax3.axvline(

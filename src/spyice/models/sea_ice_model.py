@@ -5,21 +5,29 @@ from dataclasses import asdict, dataclass
 import matplotlib.pyplot as plt
 import numpy as np
 
-from src.spyice.models.stefan_problem import StefanProblem
-from src.spyice.parameters.results_params import ResultsParams
-from src.spyice.parameters.user_input import UserInput
-from src.spyice.preprocess.initial_boundary_conditions import temperature_gradient
-from src.spyice.statevariables import (
+from spyice.models.algae_model import (
+    biogeochemical_model,
+    biogeochemical_model_at_alldepths,
+)
+from spyice.models.radiative_model import (
+    calculate_radiative_terms,
+    get_salinity_source_term,
+)
+from spyice.models.stefan_problem import StefanProblem
+from spyice.parameters.results_params import ResultsParams
+from spyice.parameters.user_input import UserInput
+from spyice.preprocess.initial_boundary_conditions import temperature_gradient
+from spyice.statevariables import (
     compute_error_for_convergence,
     overwrite_statevariables,
     reset_error_for_while_loop,
     set_statevariables,
 )
-from src.spyice.update_physical_values import update_state_variables
-from src.spyice.utils.helpers import t_total, export_residuals
-from src.spyice.utils.spyice_exceptions import ConvergenceError, InvalidPhaseError
+from spyice.update_physical_values import update_state_variables
+from spyice.utils.helpers import export_residuals, t_total
+from spyice.utils.spyice_exceptions import ConvergenceError, InvalidPhaseError
 
-plt.style.use("src.spyice.utils.custom")
+plt.style.use("spyice.utils.custom")
 # plt.rcParams.update(
 #     {
 #         "text.usetex": True,
@@ -194,14 +202,17 @@ class SeaIceModel:
             mush_cond = phi_k_ > self.mush_upperbound
             mush_indx = 0
 
-        if param[phi_k_ < self.mush_lowerbound].size & param[phi_k_ > self.mush_upperbound].size:
+        if (
+            param[phi_k_ < self.mush_lowerbound].size
+            & param[phi_k_ > self.mush_upperbound].size
+        ):
             param_iterlist.append(
-            [
-                param[phi_k_ < self.mush_lowerbound][0],
-                param[phi_k_ == phi_k_][mush_indx],
-                param[phi_k_ > self.mush_upperbound][-1],
-            ]
-        )
+                [
+                    param[phi_k_ < self.mush_lowerbound][0],
+                    param[phi_k_ == phi_k_][mush_indx],
+                    param[phi_k_ > self.mush_upperbound][-1],
+                ]
+            )
         elif param[phi_k_ > self.mush_upperbound].size:
             param_iterlist.append(
                 [
@@ -218,7 +229,7 @@ class SeaIceModel:
                     param[phi_k_ == phi_k_][mush_indx],
                 ]
             )
-    
+
         return param_iterlist, mush_indx
 
     def phi_all_mush_list(self, phi_k_, phi_all_mush_list):
@@ -240,12 +251,21 @@ class SeaIceModel:
         t,
         t_km1,
         s_km1,
+        brine_velocity_km1,
+        nutrient_cn_km1,
         phi_km1,
+        thickness_index,
+        source_term_temperature,
+        source_term_salinity,
+        x_wind_temperature,
+        x_wind_salinity,
         buffo=False,
         stefan=False,
         voller=False,
         temp_grad=None,
         salinity_equation=False,
+        diffusiononly_equation=False,
+        algae_equation=False
     ):
         """Performs a single iteration of the convergence loop by first resetting the parameters to their previous time step values and then running the convergence loop until convergence is reached.
         Args:
@@ -283,6 +303,8 @@ class SeaIceModel:
         (
             t_km1,
             s_km1,
+            brine_velocity_km1,
+            nutrient_cn_km1,
             phi_km1,
             temp_grad,
             t_err,
@@ -291,12 +313,25 @@ class SeaIceModel:
             t_initial,
             s_initial,
             phi_initial,
-            source_term_array,
+            source_term_temperature,
+            source_term_salinity,
             counter,
-        ) = self.reset_iteration_parameters(t, t_km1, s_km1, phi_km1)
+        ) = self.reset_iteration_parameters(
+            t,
+            t_km1,
+            s_km1,
+            brine_velocity_km1,
+            nutrient_cn_km1,
+            phi_km1,
+            source_term_temperature,
+            source_term_salinity,
+        )
+        # TODO: truncate field variables until boundary (thickness_index)
         (
             t_km1,
             s_km1,
+            brine_velocity_k,
+            nutrient_cn_km1,
             phi_km1,
             t_prev,
             s_prev,
@@ -306,30 +341,44 @@ class SeaIceModel:
             phi_k,
             t_k,
             s_k,
+            nutrient_cn_k,
             thickness,
             thickness_index,
             temperature_liquidus,
             temperature_solidus,
+            x_wind_temperature,
+            x_wind_salinity,
         ) = self.run_while_convergence_iteration(
             t,
             t_km1,
             s_km1,
+            brine_velocity_km1,
+            nutrient_cn_km1,
             phi_km1,
+            thickness_index,
             buffo,
             stefan,
             voller,
             t_err,
             s_err,
             phi_err,
-            source_term_array,
+            source_term_temperature,
+            source_term_salinity,
+            x_wind_temperature,
+            x_wind_salinity,
             counter,
             salinity_equation,
+            diffusiononly_equation,
+            algae_equation,
         )
         return (
             t_k,
             t_prev,
             s_k,
             s_prev,
+            brine_velocity_k,
+            nutrient_cn_k,
+            nutrient_cn_km1,
             phi_k,
             phi_prev,
             h_k,
@@ -341,6 +390,8 @@ class SeaIceModel:
             phi_km1,
             temperature_liquidus,
             temperature_solidus,
+            x_wind_temperature,
+            x_wind_salinity,
         )
 
     def run_while_convergence_iteration(
@@ -348,16 +399,24 @@ class SeaIceModel:
         t,
         t_initial,
         s_initial,
+        brine_velocity_initial,
+        nutrient_cn_initial,
         phi_initial,
+        thickness_index,
         buffo,
         stefan,
         voller,
         t_err,
         s_err,
         phi_err,
-        source_term,
+        source_term_temperature,
+        source_term_salinity,
+        x_wind_temperature,
+        x_wind_salinity,
         counter,
         _is_salinity_equation=False,
+        _is_diffusiononly_equation=False,
+        _is_algae_equation=False
     ):
         """Runs the convergence loop until convergence is reached.
 
@@ -403,38 +462,77 @@ class SeaIceModel:
         """
 
         # Set previous state variables temperature, salinity, liquid fraction respectively
-        t_prev, s_prev, phi_prev, t_k_melt, t_k_A_LHS_matrix, temp_factor3 = (
-            overwrite_statevariables(t_initial, s_initial, phi_initial)
+        (
+            t_prev,
+            s_prev,
+            brine_velocity_prev,
+            nutrient_cn_prev,
+            phi_prev,
+            t_k_melt,
+            t_k_A_LHS_matrix,
+            temp_factor3,
+            x_wind_temperature_prev,
+            x_wind_salinity_prev,
+        ) = overwrite_statevariables(
+            t_initial,
+            s_initial,
+            brine_velocity_initial,
+            nutrient_cn_initial,
+            phi_initial,
+            x_wind_temperature,
+            x_wind_salinity,
         )
         residual_voller = 1
         # Run the while loop until convergence is reached
         # FIXME: tolerance check and change for new enthalpy update for inhomognoeus physical values
-        # TODO: Document Voller method on overleaf 
+        # TODO: Document Voller method on overleaf
         while (
-            ((residual_voller > self.preprocess_data.temperature_tolerance) & (stefan)) or
-            ((t_err > self.preprocess_data.temperature_tolerance))
-            or ((phi_err > self.preprocess_data.liquid_fraction_tolerance) )
-            or ((s_err > self.preprocess_data.salinity_tolerance))
+            ((residual_voller > self.preprocess_data.temperature_tolerance) & (stefan))
+            or (t_err > self.preprocess_data.temperature_tolerance)
+            or (phi_err > self.preprocess_data.liquid_fraction_tolerance)
+            or (s_err > self.preprocess_data.salinity_tolerance)
         ):
             # Update state variables Enthalpy, Enthalpy Solid, Liquid Fraction, Temperature, Salinity respectively
-            h_k, h_solid, phi_k, t_k, s_k, t_k_A_LHS_matrix, temp_factor3, t_k_melt, temperature_liquidus, temperature_solidus = (
-                update_state_variables(
-                    self.preprocess_data,
-                    t_prev,
-                    s_prev,
-                    phi_prev,
-                    buffo,
-                    stefan,
-                    voller,
-                    t_initial,
-                    s_initial,
-                    phi_initial,
-                    t_k_melt,
-                    t_k_A_LHS_matrix,
-                    temp_factor3,
-                    source_term,
-                    _is_salinity_equation=_is_salinity_equation,
-                )
+            (
+                h_k,
+                h_solid,
+                phi_k,
+                t_k,
+                s_k,
+                brine_velocity,
+                nutrient_cn,
+                t_k_A_LHS_matrix,
+                temp_factor3,
+                t_k_melt,
+                temperature_liquidus,
+                temperature_solidus,
+                x_wind_temperature,
+                x_wind_salinity,
+            ) = update_state_variables(
+                self.preprocess_data,
+                t_prev,
+                s_prev,
+                brine_velocity_prev,
+                nutrient_cn_prev,
+                phi_prev,
+                thickness_index,
+                buffo,
+                stefan,
+                voller,
+                t_initial,
+                s_initial,
+                nutrient_cn_initial,
+                phi_initial,
+                t_k_melt,
+                t_k_A_LHS_matrix,
+                temp_factor3,
+                source_term_salinity,
+                source_term_temperature,
+                x_wind_temperature_prev,
+                x_wind_salinity_prev,
+                _is_salinity_equation=_is_salinity_equation,
+                _is_algae_equation=_is_algae_equation,
+                _is_diffusiononly_equation=_is_diffusiononly_equation,
             )
             # Locate ice-ocean interface based on liquid fraction
             thickness, thickness_index = locate_ice_ocean_interface(
@@ -462,10 +560,28 @@ class SeaIceModel:
                 temp_factor3=temp_factor3,
             )
             # Update state variables temperature, salinity, liquid fraction respectively
-            t_prev, s_prev, phi_prev, t_k_melt, t_k_A_LHS_matrix, temp_factor3 = (
-                overwrite_statevariables(
-                    t_k, s_k, phi_k, t_k_melt, t_k_A_LHS_matrix, temp_factor3
-                )
+            (
+                t_prev,
+                s_prev,
+                brine_velocity_prev,
+                nutrient_cn_prev,
+                phi_prev,
+                t_k_melt,
+                t_k_A_LHS_matrix,
+                temp_factor3,
+                x_wind_temperature_prev,
+                x_wind_salinity_prev,
+            ) = overwrite_statevariables(
+                t_k,
+                s_k,
+                brine_velocity,
+                nutrient_cn,
+                phi_k,
+                t_k_melt,
+                x_wind_temperature,
+                x_wind_salinity,
+                t_k_A_LHS_matrix,
+                temp_factor3,
             )
             # Track mushy layer using liquid fraction for temperature and phi values
             self.record_mushy_layer_data(
@@ -489,6 +605,8 @@ class SeaIceModel:
         return (
             t_prev,
             s_prev,
+            brine_velocity_prev,
+            nutrient_cn_prev,
             phi_prev,
             t_initial,
             s_initial,
@@ -498,10 +616,13 @@ class SeaIceModel:
             phi_k,
             t_k,
             s_k,
+            nutrient_cn,
             thickness,
             thickness_index,
             temperature_liquidus,
             temperature_solidus,
+            x_wind_temperature_prev,
+            x_wind_salinity_prev,
         )
 
     def check_convergence(
@@ -569,7 +690,17 @@ class SeaIceModel:
                 [s_prev[0], s_prev[t_mush_indx], s_prev[-1]]
             )
 
-    def reset_iteration_parameters(self, t, tkm1, s_km1, phi_km1):
+    def reset_iteration_parameters(
+        self,
+        t,
+        tkm1,
+        s_km1,
+        brine_velocity_km1,
+        nutrient_cn_km1,
+        phi_km1,
+        source_term_temperature,
+        source_term_salinity,
+    ):
         """Reset the iteration parameters for the sea ice model.
 
         Args:
@@ -600,13 +731,17 @@ class SeaIceModel:
         t_initial, t_km1, s_initial, s_km1, phi_initial, phi_km1 = (
             self.initialize_state_variables(t, tkm1, s_km1, phi_km1)
         )
+        nutrient_cn_initial = nutrient_cn_km1
         temp_grad = self.preprocess_data.temp_grad
-        source_term_array = np.zeros(self.preprocess_data.nz)
+        source_term_temperature = source_term_temperature
+        source_term_salinity = source_term_salinity
         counter = 1
         self.record_iteration_data()
         return (
             t_km1,
             s_km1,
+            brine_velocity_km1,
+            nutrient_cn_initial,
             phi_km1,
             temp_grad,
             t_err,
@@ -615,7 +750,8 @@ class SeaIceModel:
             t_initial,
             s_initial,
             phi_initial,
-            source_term_array,
+            source_term_temperature,
+            source_term_salinity,
             counter,
         )
 
@@ -803,13 +939,56 @@ class SeaIceModel:
         """
 
         fig1, ax1 = plt.subplots(1, 1)
-        t_km1, s_km1, phi_km1 = np.array([]), np.array([]), np.array([])
-        t_km1_buffo, s_km1_buffo, phi_km1_buffo = (
-            np.array([]),
-            np.array([]),
-            np.array([]),
+        # set nutrient concentration initial values
+        # TODO: reorganize the init to another script
+        nutrient_cn_km1 = (
+            self.results.nutrient_concentration_multiplelayers[0]
+            * self.preprocess_data.nutrient_cn_dsi_water
         )
+        nutrient_cn_km1[0] = self.preprocess_data.nutrient_cn_dsi_ice
+        nutrient_cn_km1_buffo = nutrient_cn_km1
+        carbon_cc = (
+            self.results.carbon_concentration_multiplelayers[0]
+            * self.preprocess_data.carbon_cc_water_initial
+        )
+        carbon_cc[0] = self.preprocess_data.carbon_cc_ice_initial
+        # thickness
+        thickness_index, thickness_index_buffo = 0, 0
+        # carbon_concentration, nutrient_concentration, photosynthetic_rate_mu, radiation_algae = biogeochemical_model(self.preprocess_data.boundary_top_temperature, self.preprocess_data.boundary_salinity, 1.0, self.results.nutrient_concentration[0], self.results.carbon_concentration[0], self.preprocess_data.grid_timestep_dt, 0, 0)
+        radiative_source_term = 0.0
+        salinity_source_term = 0.0
         count = 0
+        # set temperature salinity and liquid fraction values
+        (
+            t_km1,
+            s_km1,
+            phi_km1,
+            x_wind_temperature,
+            x_wind_salinity,
+            brine_velocity_km1,
+        ) = (
+            np.array([]),
+            np.array([]),
+            np.array([]),
+            np.array([]),
+            np.array([]),
+            self.preprocess_data.upwind_velocity,
+        )
+        (
+            t_km1_buffo,
+            s_km1_buffo,
+            phi_km1_buffo,
+            x_wind_temperature_buffo,
+            x_wind_salinity_buffo,
+            brine_velocity_km1_buffo,
+        ) = (
+            np.array([]),
+            np.array([]),
+            np.array([]),
+            np.array([]),
+            np.array([]),
+            self.preprocess_data.upwind_velocity,
+        )
         # with alive_bar(self.preprocess_data.max_iterations, force_tty=True) as bar:
         for t in range(1, self.preprocess_data.max_iterations):
             # time.sleep(0.005)
@@ -819,6 +998,9 @@ class SeaIceModel:
                     t_prev_buffo,
                     s_k_buffo,
                     s_prev_buffo,
+                    brine_velocity_km1_buffo,
+                    nutrient_cn_km1_buffo,
+                    nutrient_cn_prev_buffo,
                     phi_k_buffo,
                     phi_prev_buffo,
                     h_k_buffo,
@@ -830,14 +1012,26 @@ class SeaIceModel:
                     phi_km1_buffo,
                     temperature_liquidus_buffo,
                     temperature_solidus_buffo,
+                    x_wind_temperature_buffo,
+                    x_wind_salinity_buffo,
                 ) = self.convergence_loop_iteration(
                     t,
                     t_km1_buffo,
                     s_km1_buffo,
+                    brine_velocity_km1_buffo,
+                    nutrient_cn_km1_buffo,
                     phi_km1_buffo,
+                    thickness_index_buffo,
+                    radiative_source_term,
+                    salinity_source_term,
+                    x_wind_temperature_buffo,
+                    x_wind_salinity_buffo,
+                    stefan=False,
                     buffo=True,
                     temp_grad=self.preprocess_data.temp_grad,
                     salinity_equation=self.preprocess_data.is_salinity_equation,
+                    diffusiononly_equation=self.preprocess_data.is_diffusiononly_equation,
+                    algae_equation=self.preprocess_data.is_algae_equation,
                 )
             elif not self.preprocess_data.is_buffo:
                 (t_k_buffo, s_k_buffo, phi_k_buffo, thickness_buffo) = (
@@ -851,6 +1045,9 @@ class SeaIceModel:
                 t_prev,
                 s_k,
                 s_prev,
+                brine_velocity_km1,
+                nutrient_cn_k,
+                nutrient_cn_km1,
                 phi_k,
                 phi_prev,
                 h_k,
@@ -862,16 +1059,27 @@ class SeaIceModel:
                 phi_km1,
                 temperature_liquidus,
                 temperature_solidus,
+                x_wind_temperature,
+                x_wind_salinity,
             ) = self.convergence_loop_iteration(
                 t,
                 t_km1,
                 s_km1,
+                brine_velocity_km1,
+                nutrient_cn_km1,
                 phi_km1,
+                thickness_index,
+                radiative_source_term,
+                salinity_source_term,
+                x_wind_temperature,
+                x_wind_salinity,
                 stefan=True,
                 buffo=False,
                 voller=self.preprocess_data.is_voller,
                 temp_grad=self.preprocess_data.temp_grad,
                 salinity_equation=self.preprocess_data.is_salinity_equation,
+                diffusiononly_equation=self.preprocess_data.is_diffusiononly_equation,
+                algae_equation=self.preprocess_data.is_algae_equation,
             )
             self.preprocess_data.time_passed = t_total(
                 self.preprocess_data.time_passed,
@@ -885,6 +1093,34 @@ class SeaIceModel:
             t_stefan, error_depth_t, thickness_stefan = (
                 self.choose_phase_type_iteration(t)
             )
+
+            # TODO: Add radiation and algae
+            # TODO: create a parameter script for algae model
+            (
+                radiative_source_term,
+                salinity_source_term,
+                carbon_cc,
+                nutrient_cn_k,
+                photosynthetic_rate_mu,
+                radiation_algae,
+                chla_bulk,
+            ) = self.calculate_source_terms(
+                carbon_cc,
+                thickness_index,
+                t,
+                t_k,
+                s_k,
+                nutrient_cn_k,
+                phi_k,
+                thickness,
+                salinity_equation=self.preprocess_data.is_salinity_equation,
+                algae_equation=self.preprocess_data.is_algae_equation,
+                radiation_equation=self.preprocess_data.is_radiation_equation,
+                algae_model_depth_type=self.preprocess_data.algae_model_BAL_type,
+            )
+
+            nutrient_cn_km1 = nutrient_cn_k
+            
             self.results = self.results.store_results(
                 self.results,
                 t_k,
@@ -905,6 +1141,9 @@ class SeaIceModel:
                 t_stefan,
                 s_k,
                 s_k_buffo,
+                brine_velocity_km1,
+                nutrient_cn_k,
+                carbon_cc,
                 phi_k,
                 phi_k_buffo,
                 h_k,
@@ -915,6 +1154,13 @@ class SeaIceModel:
                 t_k_buffo,
                 temperature_liquidus,
                 temperature_solidus,
+                carbon_cc[thickness_index],
+                nutrient_cn_k[thickness_index],
+                photosynthetic_rate_mu,
+                radiation_algae,
+                chla_bulk,
+                radiative_source_term,
+                salinity_source_term,
                 buffo=self.preprocess_data.is_buffo,
             )
             # bar()
@@ -928,6 +1174,99 @@ class SeaIceModel:
         fig1.savefig(
             f"{self.preprocess_data.dir_output_name}/TemperatureProfile.pdf",
             backend="pgf",
+        )
+
+    def calculate_source_terms(
+        self,
+        carbon_cc,
+        thickness_index,
+        t,
+        t_k,
+        s_k,
+        nutrient_cn_k,
+        phi_k,
+        thickness,
+        salinity_equation=False,
+        algae_equation=False,
+        radiation_equation=False,
+        **kwargs,
+    ):
+        # Initialize source terms
+        salinity_source_term, radiative_source_term, radiation_algae = 0.0, np.zeros(len(carbon_cc)), np.zeros(len(carbon_cc))
+        carbon_concentration, nutrient_concentration, chla_bulk = np.zeros(len(carbon_cc)), np.zeros(len(nutrient_cn_k)), np.zeros(len(nutrient_cn_k))
+        photosynthetic_rate_mu = np.zeros(len(nutrient_cn_k))
+
+        Z = (self.preprocess_data.nz - 1) * self.preprocess_data.grid_resolution_dz
+        depth = np.linspace(
+            self.preprocess_data.grid_resolution_dz,
+            Z + self.preprocess_data.grid_resolution_dz,
+            self.preprocess_data.nz,
+        )
+
+        if kwargs.get("algae_model_depth_type") == "single" and algae_equation:
+            (
+                carbon_concentration,
+                nutrient_concentration,
+                photosynthetic_rate_mu,
+                radiation_algae,
+                chla_bulk,
+            ) = biogeochemical_model(
+                t_k,
+                s_k,
+                phi_k,
+                nutrient_cn_k,
+                carbon_cc,
+                self.preprocess_data.grid_timestep_dt,
+                thickness_index,
+                thickness,
+            )
+        elif kwargs.get("algae_model_depth_type") == "all" and algae_equation:
+            (
+                carbon_concentration,
+                nutrient_concentration,
+                photosynthetic_rate_mu,
+                radiation_algae,
+                chla_bulk,
+            ) = biogeochemical_model_at_alldepths(
+                t_k,
+                s_k,
+                phi_k,
+                nutrient_cn_k,
+                carbon_cc,
+                self.preprocess_data.grid_timestep_dt,
+                depth,
+                thickness_index
+            )
+        else:
+            if algae_equation:
+                raise ValueError("Invalid algae model depth type.")
+
+        self.results.thickness_list[t] = thickness
+        # salinity source term using gravity drainage
+        if salinity_equation:
+            salinity_source_term = get_salinity_source_term(
+                int(thickness_index + 1),
+                self.results.thickness_list,
+                s_k,
+                phi_k,
+            self.preprocess_data.grid_timestep_dt,
+            self.preprocess_data.grid_resolution_dz,
+        )
+
+        if radiation_equation:
+        # get radiative terms all
+            radiative_source_term = calculate_radiative_terms(
+                depth, thickness_index, radiation_algae, kwargs.get("algae_model_depth_type")
+            )
+        
+        return (
+            radiative_source_term,
+            salinity_source_term,
+            carbon_concentration,
+            nutrient_concentration,
+            photosynthetic_rate_mu,
+            radiation_algae,
+            chla_bulk,
         )
 
     def add_new_parameter_results(self) -> None:

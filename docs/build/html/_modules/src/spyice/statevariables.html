@@ -41,6 +41,7 @@
     <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/src/spyice/statevariables';</script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -142,6 +143,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
       
@@ -233,6 +241,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
           
@@ -308,6 +323,7 @@
   <h1>Source code for src.spyice.statevariables</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
+<span class="kn">from</span> <span class="nn">spyice.update_physical_values</span> <span class="kn">import</span> <span class="n">calculate_melting_temperature_from_salinity</span>
 
 <span class="c1"># Function to set state variables</span>
 <div class="viewcode-block" id="set_statevariables">
@@ -316,7 +332,6 @@
     <span class="n">temperature_calculated</span><span class="p">,</span> <span class="n">salinity_calculated</span><span class="p">,</span> <span class="n">liquid_fraction_calculated</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the state variables for temperature, salinity, and liquid fraction.</span>
-
 <span class="sd">    Args:</span>
 <span class="sd">        temperature_calculated (float): The calculated temperature.</span>
 <span class="sd">        salinity_calculated (float): The calculated salinity.</span>
@@ -329,7 +344,6 @@
 <span class="sd">            - salinity_previous (float): The previous salinity.</span>
 <span class="sd">            - phi_initial (float): The initial liquid fraction.</span>
 <span class="sd">            - phi_prev (float): The previous liquid fraction.</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">temperature_previous</span><span class="p">,</span> <span class="n">temperature_initial</span> <span class="o">=</span> <span class="p">(</span>
@@ -362,7 +376,12 @@
 <span class="k">def</span> <span class="nf">overwrite_statevariables</span><span class="p">(</span>
     <span class="n">temperature_calculated</span><span class="p">,</span>
     <span class="n">salinity_calculated</span><span class="p">,</span>
+    <span class="n">brine_velocity_calculated</span><span class="p">,</span>
+    <span class="n">nutrient_calculated</span><span class="p">,</span>
     <span class="n">liquid_fraction_calculated</span><span class="p">,</span>
+    <span class="n">x_wind_temperature</span><span class="p">,</span>
+    <span class="n">x_wind_salinity</span><span class="p">,</span>
+    <span class="n">temperature_melt</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">t_k_lhs_A_matrix</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">temp_factor3</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
@@ -385,6 +404,13 @@
     <span class="n">liquid_fraction_new</span> <span class="o">=</span> <span class="p">(</span>
         <span class="n">liquid_fraction_calculated</span>  <span class="c1"># Set current phi as previous phi for next iteration</span>
     <span class="p">)</span>
+    <span class="n">nutrient_cn_new</span> <span class="o">=</span> <span class="n">nutrient_calculated</span>
+
+    <span class="k">if</span> <span class="n">temperature_melt</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">temperature_melt</span> <span class="o">=</span>  <span class="n">calculate_melting_temperature_from_salinity</span><span class="p">(</span><span class="n">salinity_new</span><span class="p">)</span> <span class="c1"># Store the calculated T_melt for later use</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">temperature_melt</span> <span class="o">=</span> <span class="n">temperature_melt</span>
+        
     <span class="k">if</span> <span class="n">t_k_lhs_A_matrix</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">t_k_lhs_A_matrix</span> <span class="o">=</span> <span class="n">t_k_lhs_A_matrix</span>
         <span class="n">temp_factor3</span> <span class="o">=</span> <span class="n">temp_factor3</span>
@@ -394,9 +420,14 @@
     <span class="k">return</span> <span class="p">(</span>
         <span class="n">temperature_new</span><span class="p">,</span>
         <span class="n">salinity_new</span><span class="p">,</span>
+        <span class="n">brine_velocity_calculated</span><span class="p">,</span>
+        <span class="n">nutrient_cn_new</span><span class="p">,</span>
         <span class="n">liquid_fraction_new</span><span class="p">,</span>
+        <span class="n">temperature_melt</span><span class="p">,</span>
         <span class="n">t_k_lhs_A_matrix</span><span class="p">,</span>
         <span class="n">temp_factor3</span><span class="p">,</span>
+        <span class="n">x_wind_temperature</span><span class="p">,</span>
+        <span class="n">x_wind_salinity</span><span class="p">,</span>
     <span class="p">)</span></div>
 
 
@@ -523,7 +554,6 @@
 
     <span class="n">residual_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">residual</span><span class="p">))</span>
 
-    <span class="n">residual_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">residual</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">residual_sum</span></div>
 
 

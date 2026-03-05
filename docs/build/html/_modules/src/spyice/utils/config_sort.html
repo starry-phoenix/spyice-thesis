@@ -41,6 +41,7 @@
     <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/src/spyice/utils/config_sort';</script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
@@ -142,6 +143,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
       
@@ -233,6 +241,13 @@
   </a>
 </li>
 
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
   </ul>
 </nav></div>
           
@@ -312,7 +327,7 @@
 
 
 <div class="viewcode-block" id="ConfigData">
-<a class="viewcode-back" href="../../../../api/spyice.utils.config_sort.html#src.spyice.utils.config_sort.ConfigData">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.utils.config_sort.html#src.spyice.utils.ConfigData">[docs]</a>
 <span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">ConfigData</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Class representing configuration data.</span>
@@ -326,7 +341,7 @@
 
 
 <div class="viewcode-block" id="read_omegaconfig">
-<a class="viewcode-back" href="../../../../api/spyice.utils.config_sort.html#src.spyice.utils.config_sort.read_omegaconfig">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.utils.config_sort.html#src.spyice.utils.read_omegaconfig">[docs]</a>
 <span class="k">def</span> <span class="nf">read_omegaconfig</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="n">parameter</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Reads the parameter from the OmegaConf configuration.</span>
 
@@ -343,10 +358,10 @@
 
 
 <div class="viewcode-block" id="ConfigSort">
-<a class="viewcode-back" href="../../../../api/spyice.utils.config_sort.html#src.spyice.utils.config_sort.ConfigSort">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.utils.config_sort.html#src.spyice.utils.ConfigSort">[docs]</a>
 <span class="k">class</span> <span class="nc">ConfigSort</span><span class="p">:</span>
 <div class="viewcode-block" id="ConfigSort.__init__">
-<a class="viewcode-back" href="../../../../api/spyice.utils.config_sort.html#src.spyice.utils.config_sort.ConfigSort.__init__">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.utils.config_sort.html#src.spyice.utils.ConfigSort.__init__">[docs]</a>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">DictConfig</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;A class that provides methods for retrieving configuration parameters.</span>
 
@@ -363,7 +378,7 @@
 
 
 <div class="viewcode-block" id="ConfigSort.get_config_params">
-<a class="viewcode-back" href="../../../../api/spyice.utils.config_sort.html#src.spyice.utils.config_sort.ConfigSort.get_config_params">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.utils.config_sort.html#src.spyice.utils.ConfigSort.get_config_params">[docs]</a>
     <span class="k">def</span> <span class="nf">get_config_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">DictConfig</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the configuration parameters from the given `config` dictionary.</span>
 
@@ -383,7 +398,7 @@
         <span class="c1"># self.is_salinity_equation = self.read_omegaconfig(&quot;salinity&quot;)</span>
 
 <div class="viewcode-block" id="ConfigSort.get_ownconfig_params">
-<a class="viewcode-back" href="../../../../api/spyice.utils.config_sort.html#src.spyice.utils.config_sort.ConfigSort.get_ownconfig_params">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.utils.config_sort.html#src.spyice.utils.ConfigSort.get_ownconfig_params">[docs]</a>
     <span class="k">def</span> <span class="nf">get_ownconfig_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieves the parameters from the given configuration dictionary.</span>
 
@@ -400,7 +415,7 @@
 
 
 <div class="viewcode-block" id="ConfigSort.getconfig_dataclass">
-<a class="viewcode-back" href="../../../../api/spyice.utils.config_sort.html#src.spyice.utils.config_sort.ConfigSort.getconfig_dataclass">[docs]</a>
+<a class="viewcode-back" href="../../../../api/spyice.utils.config_sort.html#src.spyice.utils.ConfigSort.getconfig_dataclass">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">getconfig_dataclass</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">config_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span>

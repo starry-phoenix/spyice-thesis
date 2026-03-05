@@ -5,23 +5,21 @@ from pathlib import Path
 
 from omegaconf import DictConfig
 
-from src.spyice.models.sea_ice_model import SeaIceModel
-from src.spyice.postprocess.analysis import Analysis
-from src.spyice.postprocess.visualise_model import VisualiseModel
-from src.spyice.preprocess.pre_process import PreProcess
+from spyice.models import SeaIceModel
+from spyice.postprocess import Analysis
+from spyice.postprocess import VisualiseModel
+from spyice.preprocess import PreProcess
 
 
-# TODO: Type hinting for all functions
-# TODO: Return type hinting for all functions
 class MainProcess:
     """Main class to run the model."""
 
     def __init__(
         self,
-        config,
+        config : DictConfig,
         hyd_output_dir: Path | str = Path(os.path.join(os.getcwd(), "outputs")),
         project_path=os.getcwd(),
-    ):
+    ) -> None:
         """
         Args:
             config: The configuration object.
@@ -33,7 +31,7 @@ class MainProcess:
         #     self.config_raw, config_type="default"
         # )
         self.project_path: Path | str = project_path
-        self.out_dir_final = hyd_output_dir
+        self.out_dir_final : Path | str = hyd_output_dir
 
     def run_model(self) -> None:
         """Runs the model using the provided configuration and output directory.
@@ -85,16 +83,52 @@ class MainProcess:
         )
         # model_visualization_object.plot_error_temp(100, norm="inf", savefig=False)
         # model_visualization_object.plot_depth_over_time(savefig=True)
-        model_visualization_object.plot_depth_over_time_heatmap(savefig=True)
-        # model_visualization_object.plot_temperature(
-        #     z_depth=0.1, savefig=True, Buffo_matlab=False
-        # )
-        model_visualization_object.plot_H_iter_all(savefig=True)
-        model_visualization_object.plot_temperature_heatmap(savefig=True)
+
+        # uncomment from here for physical model
+        # model_visualization_object.plot_depth_over_time_heatmap(savefig=True)
+        # # model_visualization_object.plot_temperature(
+        # #     z_depth=0.1, savefig=True, Buffo_matlab=False
+        # # )
+        # model_visualization_object.plot_H_iter_all(savefig=True)
+        model_visualization_object.plot_temperature_heatmap(savefig=True, export_csv=True)
         model_visualization_object.plot_salinity_heatmap(savefig=True)
         model_visualization_object.plot_liquidfraction_heatmap(savefig=True)
         model_visualization_object.plot_temperature_liquid_solid_evolution(
             z_depth=0.1, savefig=True
         )
+
+        # # algae model
+        model_visualization_object.plot_carbon_concentration(savefig=True)
+        model_visualization_object.plot_nutrient_concentration(savefig=True)
+        model_visualization_object.plot_photosynthetic_rate(savefig=True)
+        model_visualization_object.plot_radiation_algae(savefig=True)
+        model_visualization_object.plot_radiation_algae_dt_by_rho_c(savefig=True)
+        model_visualization_object.plot_chla_bulk_concentration(savefig=True)
+        model_visualization_object.plot_radiation_all(savefig=True)
+        # # plot algae model multiple layers
+        model_visualization_object.plot_nutrient_concentration_multiplelayers(savefig=True)
+        model_visualization_object.plot_carbon_concentration_multiplelayers(savefig=True)
+        model_visualization_object.plot_photosynthetic_rate_multiplelayers(savefig=True)
+        model_visualization_object.plot_radiation_algae_multiplelayers(savefig=True)
+        model_visualization_object.plot_chla_bulk_concentration_multiplelayers(savefig=True)
+        # # plot vertical profiles of algae model
+
+        model_visualization_object.plot_nutrient_cn_profile(savefig=True)
+        model_visualization_object.plot_carbon_concentration_profile(savefig=True)
+        model_visualization_object.plot_radiation_profile(savefig=True)
+        model_visualization_object.plot_salinity_sourceterm_profile(savefig=True)
+        model_visualization_object.plot_liquid_salinity_profile(savefig=True)
+        model_visualization_object.plot_brinevelocity_profile(savefig=True)
+
+        model_visualization_object.plot_salinity_profile(savefig=True)
+        model_visualization_object.plot_liquid_fraction_profile(savefig=True)
+        model_visualization_object.plot_temperature_profile(savefig=True)
+
         # model_visualization_object.plot_temperature_heatmap_as_gif()
+        # model_visualization_object.plot_salinity_heatmap_as_gif()
+        #model_visualization_object.plot_carbon_heatmap_as_gif()
+        #model_visualization_object.plot_nutrient_concentration_heatmap_as_gif()
+        # 3d plots
+        # model_visualization_object.plot_temperature_3D(savefig=True)
+        # model_visualization_object.plot_temperature_3d_contours(savefig=True)
         print("Postprocessing done.")
