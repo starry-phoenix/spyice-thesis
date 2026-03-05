@@ -583,8 +583,11 @@ def biogeochemical_model_at_alldepths(
         nutrient_concentration_at_interface,
     )
     # calculate bulk concentration in ice
+    # bulk_tracer_concentration = get_bulk_tracer_concentration(
+    #     algae_liquid_fraction, nutrient_concentration_at_interface
+    # )
     bulk_tracer_concentration = get_bulk_tracer_concentration(
-        algae_liquid_fraction, nutrient_concentration_at_interface
+        algae_liquid_fraction, carbon_concentration_at_interface
     )
     # calculate chla concentration
     # TODO: is chla bulk dependent on bulk tracer or carbon??

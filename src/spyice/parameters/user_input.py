@@ -209,17 +209,17 @@ class UserInput:
     
     is_salinity_equation: bool = True
     is_diffusiononly_equation: bool = False
-    is_algae_equation: bool = True
-    is_radiation_equation: bool = True
+    is_algae_equation: bool = False
+    is_radiation_equation: bool = False
     algae_model_BAL_type: str = "all"   # or "all" or "single"
 
     # --- Iteration and Limits ---
-    max_iterations: int = 25000
+    max_iterations: int = 1500
     counter_limit: int = 100000
 
     # --- Grid and Time Step ---
     grid_resolution_dz: float = 0.01
-    grid_timestep_dt: float = 100  # in seconds
+    grid_timestep_dt: float = 47  # in seconds
 
     # --- Boundary and Geometry ---
     boundary_condition_type: BoundaryConditionType = BoundaryConditionType.DIRICHLET.value
@@ -263,8 +263,8 @@ class UserInput:
         _dt_stability_validator(self.grid_resolution_dz, self.grid_timestep_dt)
 
         if isinstance(self.constants, RealConstants):
-            self.boundary_salinity = 34.0
-            self.boundary_top_temperature = 265.0
+            self.boundary_salinity = 34
+            self.boundary_top_temperature = 265
 
             # melt temperature affects the liquid relation: Frezchem or Normal in src/update_physical_values.py script
             method = InitialMeltTemperature.ONEPHASE.value
