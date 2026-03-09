@@ -1540,7 +1540,7 @@ class VisualiseModel:
         plt.plot(self.results_object.nutrient_concentration_multiplelayers[int(time/2), :], depth_, label=rf't={int(time/2)}s', color='black', linewidth=1)
         plt.plot(self.results_object.nutrient_concentration_multiplelayers[int(time -5), :], depth_, '--',label=rf't={time-5}s', color='black', linewidth=1)
         plt.gca().invert_yaxis()
-        plt.xlabel(r'$C_N$ [mmol m^{-3}]')
+        plt.xlabel(r'$C_N$ $[mmol/m^3]$')
         plt.ylabel(r'Depth [$m$]')
         plt.legend()
         if savefig:
@@ -1621,7 +1621,7 @@ class VisualiseModel:
         plt.plot(self.results_object.carbon_concentration_multiplelayers[int(time/2), :], depth_, label=rf't={int(time/2)}s', color='black', linewidth=1)
         plt.plot(self.results_object.carbon_concentration_multiplelayers[int(time -5), :], depth_, '--',label=rf't={time-5}s', color='black', linewidth=1)
         plt.gca().invert_yaxis()
-        plt.xlabel(r'$C_C$ [mmol m^{-3}]')
+        plt.xlabel(r'$C_C$ $[mmol/m^3]$')
         plt.ylabel(r'Depth [$m$]')
         plt.legend()
         if savefig:
