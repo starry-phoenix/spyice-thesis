@@ -65,5 +65,8 @@ An alternative to the above is by directly opening existing html documentation i
 
     ```
     cd docs
+    ```
+
+    ```
     make clean html
     ```

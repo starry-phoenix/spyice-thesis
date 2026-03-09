@@ -23,9 +23,12 @@
   },
   {
    "cell_type": "code",
-   "execution_count": 12,
-   "metadata": {},
-   "outputs": [],
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2026-03-09T13:43:47.963303300Z",
+     "start_time": "2026-03-09T13:43:46.675432700Z"
+    }
+   },
    "source": [
     "import os\n",
     "from pathlib import Path\n",
@@ -39,7 +42,9 @@
     "from spyice.utils import ConfigSort\n",
     "from spyice.models import SeaIceModel\n",
     "from spyice.preprocess import PreProcess"
-   ]
+   ],
+   "outputs": [],
+   "execution_count": 1
   },
   {
    "cell_type": "markdown",
@@ -50,9 +55,12 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
-   "metadata": {},
-   "outputs": [],
+   "metadata": {
+    "ExecuteTime": {
+     "end_time": "2026-03-09T13:44:11.699164500Z",
+     "start_time": "2026-03-09T13:44:11.658403900Z"
+    }
+   },
    "source": [
     "# creates a OmegaConf object from a dictionary for fast testing only for parameters: constants, dt, S_IC, iter_max, dz\n",
     "constants_dict = {\n",
@@ -70,7 +78,9 @@
     "output_base_dir = Path(base_dir, \"output\")\n",
     "wo_hydra_dir = Path(output_base_dir, \"without_hydra\")\n",
     "out_dir_final = create_output_directory(wo_hydra_dir, config.initial_salinity.S_IC, \"2\", \"0.01\", \"47\", \"1500\", \"example\")"
-   ]
+   ],
+   "outputs": [],
+   "execution_count": 2
   },
   {
    "cell_type": "markdown",

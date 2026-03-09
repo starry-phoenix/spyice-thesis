@@ -6,4 +6,4 @@ Quickstart
 
    
    Installation Guide <installation>
-   Example <example/main_original>
+   Example <example/_index>

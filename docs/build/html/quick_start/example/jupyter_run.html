@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Quick start guide to model building and running with SPyice &#8212; SpyIce  documentation</title>
+    <title>Model building and running with SPyice for heat-salt transport system &#8212; SpyIce  documentation</title>
   
   
   
@@ -49,6 +49,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'quick_start/example/jupyter_run';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Guide to model building and running with SPyice for biogeochemical model" href="jupyter_run_algae.html" />
+    <link rel="prev" title="Sea-Ice Model Package (SPyIce)" href="main_original.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="1.0.0" />
@@ -155,8 +157,8 @@
 </li>
 
 
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="main_original.html">
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="_index.html">
     Examples
   </a>
 </li>
@@ -218,10 +220,8 @@
       
       
       
-        
-      
       <dialog id="pst-primary-sidebar-modal"></dialog>
-      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -264,8 +264,8 @@
 </li>
 
 
-<li class="nav-item ">
-  <a class="nav-link nav-internal" href="main_original.html">
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="_index.html">
     Examples
   </a>
 </li>
@@ -291,6 +291,20 @@
       </div>
     
   </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="main_original.html">Quick start example</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Heat-Salt Transport in Sea ice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jupyter_run_algae.html">Biogeochemical system response to transport mechanics</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
@@ -322,7 +336,10 @@
         <i class="fa-solid fa-home"></i>
       </a>
     </li>
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Quick start guide to model building and running with SPyice</span></li>
+    
+    <li class="breadcrumb-item"><a href="_index.html" class="nav-link">Examples</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Model building and running with SPyice for heat-salt transport system</span></li>
   </ul>
 </nav>
 </div>
@@ -339,9 +356,9 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="Quick-start-guide-to-model-building-and-running-with-SPyice">
-<h1>Quick start guide to model building and running with SPyice<a class="headerlink" href="#Quick-start-guide-to-model-building-and-running-with-SPyice" title="Link to this heading">#</a></h1>
-<p>Demonstrates a simple example for a freezing sea ice model for a simple heat diffusion setup with default settings of initial conditions of 265K at the top boundary and Salinity of 34ppt choosing constant fixed Dirichlet boundary conditions. For the one phase distinct interface system where sea water is at melt temperature of 271.25K.</p>
+  <section id="Model-building-and-running-with-SPyice-for-heat-salt-transport-system">
+<h1>Model building and running with SPyice for heat-salt transport system<a class="headerlink" href="#Model-building-and-running-with-SPyice-for-heat-salt-transport-system" title="Link to this heading">#</a></h1>
+<p>Demonstrates a simple example for a freezing sea ice model heat-salt transport setup with default settings of initial conditions of 265K at the top boundary and Salinity of 34ppt choosing constant fixed Dirichlet boundary conditions. For the one phase distinct interface system where sea water is at melt temperature of 271.25K.</p>
 <section id="Import-Packages">
 <h2>Import Packages<a class="headerlink" href="#Import-Packages" title="Link to this heading">#</a></h2>
 <div class="nbinput nblast docutils container">
@@ -351,6 +368,7 @@
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 
 <span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="kn">from</span> <span class="nn">omegaconf</span> <span class="kn">import</span> <span class="n">OmegaConf</span>
@@ -371,6 +389,7 @@
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># creates a OmegaConf object from a dictionary for fast testing only for parameters: constants, dt, S_IC, iter_max, dz</span>
+<span class="c1"># make sure to change userinput_data data class values if any parameters in constants_dict is changed!</span>
 <span class="n">constants_dict</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;constants&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;constants&quot;</span><span class="p">:</span> <span class="s2">&quot;real&quot;</span><span class="p">},</span>
     <span class="s2">&quot;dt&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;dt&quot;</span><span class="p">:</span> <span class="mi">47</span><span class="p">},</span>
@@ -384,6 +403,9 @@
 <span class="c1"># choose your output directory</span>
 <span class="n">base_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span>
 <span class="n">output_base_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">base_dir</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">)</span>
+<span class="c1"># Current date-time string</span>
+<span class="n">timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">_%H%M%S&quot;</span><span class="p">)</span>
+<span class="n">output_base_dir</span> <span class="o">=</span> <span class="n">create_output_directory</span><span class="p">(</span><span class="n">output_base_dir</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">)</span>
 <span class="n">wo_hydra_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_base_dir</span><span class="p">,</span> <span class="s2">&quot;without_hydra&quot;</span><span class="p">)</span>
 <span class="n">out_dir_final</span> <span class="o">=</span> <span class="n">create_output_directory</span><span class="p">(</span><span class="n">wo_hydra_dir</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">initial_salinity</span><span class="o">.</span><span class="n">S_IC</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;0.01&quot;</span><span class="p">,</span> <span class="s2">&quot;47&quot;</span><span class="p">,</span> <span class="s2">&quot;1500&quot;</span><span class="p">,</span> <span class="s2">&quot;example&quot;</span><span class="p">)</span>
 </pre></div>
@@ -424,6 +446,15 @@ Preprocessing done.
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># choose the diffusion only equation for heat diffusion without the influence of salinity and physical properties</span>
 <span class="n">userinput_data</span><span class="o">.</span><span class="n">is_diffusiononly_equation</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">userinput_data</span><span class="o">.</span><span class="n">is_salinity_equation</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preprocess_data</span> <span class="o">=</span> <span class="n">PreProcess</span><span class="o">.</span><span class="n">update_preprocess_dataclass</span><span class="p">(</span><span class="n">preprocess_data</span><span class="p">,</span> <span class="n">userinput_data</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -464,7 +495,7 @@ Residuals exported successfully.
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/quick_start_example_jupyter_run_11_1.png" src="../../_images/quick_start_example_jupyter_run_11_1.png" />
+<img alt="../../_images/quick_start_example_jupyter_run_12_1.png" src="../../_images/quick_start_example_jupyter_run_12_1.png" />
 </div>
 </div>
 </section>
@@ -572,6 +603,24 @@ Plotting Temperature heatmap...
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="main_original.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Sea-Ice Model Package (SPyIce)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="jupyter_run_algae.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Guide to model building and running with SPyice for biogeochemical model</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
