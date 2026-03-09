@@ -152,7 +152,7 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../../../quick_start/example/main_original.html">
+  <a class="nav-link nav-internal" href="../../../../quick_start/example/_index.html">
     Examples
   </a>
 </li>
@@ -257,7 +257,7 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../../../quick_start/example/main_original.html">
+  <a class="nav-link nav-internal" href="../../../../quick_start/example/_index.html">
     Examples
   </a>
 </li>
@@ -337,7 +337,7 @@
   <h1>Source code for src.spyice.preprocess.pre_process</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
-<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">asdict</span><span class="p">,</span> <span class="n">dataclass</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">spyice.utils.config_sort</span> <span class="kn">import</span> <span class="n">read_omegaconfig</span>
 
@@ -499,6 +499,38 @@
             <span class="n">dir_output_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">dir_output_name</span><span class="p">,</span>
             <span class="n">max_iterations</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">max_iterations</span><span class="p">,</span>
         <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PreProcess.update_preprocess_dataclass">
+<a class="viewcode-back" href="../../../../api/spyice.preprocess.html#src.spyice.preprocess.PreProcess.update_preprocess_dataclass">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">update_preprocess_dataclass</span><span class="p">(</span><span class="n">preprocess_dataclass</span><span class="p">,</span> <span class="n">userinput_dataclass</span><span class="p">:</span> <span class="n">UserInput</span><span class="p">):</span>
+        <span class="c1">#updates preprocess dataclass with userinput</span>
+
+        <span class="k">return</span> <span class="n">PreProcess</span><span class="o">.</span><span class="n">set_dataclass_with_dataclass</span><span class="p">(</span><span class="n">preprocess_dataclass</span><span class="p">,</span> <span class="n">userinput_dataclass</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="PreProcess.set_dataclass_with_dataclass">
+<a class="viewcode-back" href="../../../../api/spyice.preprocess.html#src.spyice.preprocess.PreProcess.set_dataclass_with_dataclass">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">set_dataclass_with_dataclass</span><span class="p">(</span><span class="n">_preprocess_dataclass</span><span class="p">,</span> <span class="n">_dataclass</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the dataclass attributes of the object.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            _dataclass: An instance of the dataclass.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">data_class_obj</span> <span class="o">=</span> <span class="n">_dataclass</span>
+
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">asdict</span><span class="p">(</span><span class="n">data_class_obj</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;constants&quot;</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">setattr</span><span class="p">(</span><span class="n">_preprocess_dataclass</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_preprocess_dataclass</span></div>
 
 
 <div class="viewcode-block" id="PreProcess.set_dataclass">

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 from pathlib import Path
 from spyice.utils.config_sort import read_omegaconfig
 
@@ -146,6 +146,32 @@ class PreProcess(UserInput, GeometrySettings, ResultsParams):
             dir_output_name=self.dir_output_name,
             max_iterations=self.max_iterations,
         )
+
+    @staticmethod
+    def update_preprocess_dataclass(preprocess_dataclass, userinput_dataclass: UserInput):
+        #updates preprocess dataclass with userinput
+
+        return PreProcess.set_dataclass_with_dataclass(preprocess_dataclass, userinput_dataclass)
+
+    @staticmethod
+    def set_dataclass_with_dataclass(_preprocess_dataclass, _dataclass):
+        """Sets the dataclass attributes of the object.
+
+        Args:
+            _dataclass: An instance of the dataclass.
+        Returns:
+            None
+        """
+
+        data_class_obj = _dataclass
+
+        for key, value in asdict(data_class_obj).items():
+            if key == "constants":
+                pass
+            else:
+                setattr(_preprocess_dataclass, key, value)
+
+        return _preprocess_dataclass
 
     @staticmethod
     def set_dataclass(data_to_be_converted: dict, dataclass: dataclass) -> dataclass:
