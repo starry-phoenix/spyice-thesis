@@ -5,7 +5,7 @@ Subpackages
 -----------
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 2
 
    spyice.models
    spyice.parameters
@@ -71,3 +71,9 @@ Module contents
    :members:
    :undoc-members:
    :show-inheritance:
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`

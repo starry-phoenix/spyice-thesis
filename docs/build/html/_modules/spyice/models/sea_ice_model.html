@@ -131,8 +131,8 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../../quick_start/_index.html">
-    How-to
+  <a class="nav-link nav-internal" href="../../../quick_start/installation.html">
+    Installation
   </a>
 </li>
 
@@ -147,6 +147,13 @@
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../../../user_guide/_index.html">
     User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../quick_start/example/main_original.html">
+    Examples
   </a>
 </li>
 
@@ -229,8 +236,8 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../../quick_start/_index.html">
-    How-to
+  <a class="nav-link nav-internal" href="../../../quick_start/installation.html">
+    Installation
   </a>
 </li>
 
@@ -245,6 +252,13 @@
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../../../user_guide/_index.html">
     User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../quick_start/example/main_original.html">
+    Examples
   </a>
 </li>
 
@@ -351,6 +365,11 @@
 <span class="kn">from</span> <span class="nn">spyice.utils.spyice_exceptions</span> <span class="kn">import</span> <span class="n">ConvergenceError</span><span class="p">,</span> <span class="n">InvalidPhaseError</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;spyice.utils.custom&quot;</span><span class="p">)</span>
+<span class="c1"># plt.rcParams.update(</span>
+<span class="c1">#     {</span>
+<span class="c1">#         &quot;text.usetex&quot;: True,</span>
+<span class="c1">#     }</span>
+<span class="c1"># )</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;text.latex.preamble&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
     <span class="p">[</span>
         <span class="sa">r</span><span class="s2">&quot;\usepackage</span><span class="si">{dashbox}</span><span class="s2">&quot;</span><span class="p">,</span>
@@ -507,17 +526,14 @@
         <span class="n">depth_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">Z</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">nz</span><span class="p">)</span>
         <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_k</span><span class="p">,</span> <span class="n">depth_arr</span><span class="p">,</span> <span class="s2">&quot;r--&quot;</span><span class="p">)</span>
         <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_stefan</span><span class="p">,</span> <span class="n">depth_arr</span><span class="p">,</span> <span class="s2">&quot;k&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">is_buffo</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">t_k_buffo</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_k_buffo</span><span class="p">,</span> <span class="n">depth_arr</span><span class="p">,</span> <span class="s2">&quot;b-.&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
         <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Depth [m]&quot;</span><span class="p">)</span>
         <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Temperature [K]&quot;</span><span class="p">)</span>
         <span class="c1"># ax1.set_yscale(&quot;log&quot;)</span>
         <span class="c1"># fig.tight_layout()</span>
         <span class="k">if</span> <span class="n">count</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">is_buffo</span><span class="p">:</span>
-                <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s2">&quot;Numerical&quot;</span><span class="p">,</span> <span class="s2">&quot;Analytical&quot;</span><span class="p">,</span> <span class="s2">&quot;Buffo&quot;</span><span class="p">])</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s2">&quot;Numerical&quot;</span><span class="p">,</span> <span class="s2">&quot;Analytical&quot;</span><span class="p">])</span></div>
+            <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s2">&quot;Numerical&quot;</span><span class="p">,</span> <span class="s2">&quot;Analytical&quot;</span><span class="p">,</span> <span class="s2">&quot;Buffo&quot;</span><span class="p">])</span></div>
 
         <span class="c1"># display(fig)</span>
         <span class="c1"># clear_output(wait=True)</span>

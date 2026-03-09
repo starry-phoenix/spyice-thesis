@@ -134,8 +134,8 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../quick_start/_index.html">
-    How-to
+  <a class="nav-link nav-internal" href="../quick_start/installation.html">
+    Installation
   </a>
 </li>
 
@@ -150,6 +150,13 @@
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../user_guide/_index.html">
     User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quick_start/example/main_original.html">
+    Examples
   </a>
 </li>
 
@@ -234,8 +241,8 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../quick_start/_index.html">
-    How-to
+  <a class="nav-link nav-internal" href="../quick_start/installation.html">
+    Installation
   </a>
 </li>
 
@@ -250,6 +257,13 @@
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../user_guide/_index.html">
     User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quick_start/example/main_original.html">
+    Examples
   </a>
 </li>
 
@@ -528,16 +542,17 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="src.spyice.statevariables.set_statevariables">
 <span class="sig-prename descclassname"><span class="pre">src.spyice.statevariables.</span></span><span class="sig-name descname"><span class="pre">set_statevariables</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temperature_calculated</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">salinity_calculated</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">liquid_fraction_calculated</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/statevariables.html#set_statevariables"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.statevariables.set_statevariables" title="Link to this definition">#</a></dt>
-<dd><p>Set the state variables for temperature, salinity, and liquid fraction.
-:param temperature_calculated: The calculated temperature.
-:type temperature_calculated: float
-:param salinity_calculated: The calculated salinity.
-:type salinity_calculated: float
-:param liquid_fraction_calculated: The calculated liquid fraction.
-:type liquid_fraction_calculated: float</p>
+<dd><p>Set the state variables for temperature, salinity, and liquid fraction.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><dl class="simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>temperature_calculated</strong> (<em>float</em>) – The calculated temperature.</p></li>
+<li><p><strong>salinity_calculated</strong> (<em>float</em>) – The calculated salinity.</p></li>
+<li><p><strong>liquid_fraction_calculated</strong> (<em>float</em>) – The calculated liquid fraction.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
 <dt>A tuple containing the following state variables:</dt><dd><ul class="simple">
 <li><p>temperature_initial (float): The initial temperature.</p></li>
 <li><p>temperature_previous (float): The previous temperature.</p></li>
@@ -550,8 +565,8 @@
 </dl>
 </p>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>tuple</p>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
 </dd>
 </dl>
 </dd></dl>

@@ -134,8 +134,8 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../quick_start/_index.html">
-    How-to
+  <a class="nav-link nav-internal" href="../quick_start/installation.html">
+    Installation
   </a>
 </li>
 
@@ -150,6 +150,13 @@
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../user_guide/_index.html">
     User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quick_start/example/main_original.html">
+    Examples
   </a>
 </li>
 
@@ -234,8 +241,8 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../quick_start/_index.html">
-    How-to
+  <a class="nav-link nav-internal" href="../quick_start/installation.html">
+    Installation
   </a>
 </li>
 
@@ -250,6 +257,13 @@
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../user_guide/_index.html">
     User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quick_start/example/main_original.html">
+    Examples
   </a>
 </li>
 
@@ -448,258 +462,6 @@
 </section>
 <section id="module-src.spyice.parameters">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-src.spyice.parameters" title="Link to this heading">#</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="src.spyice.parameters.BoundaryConditionType">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.spyice.parameters.</span></span><span class="sig-name descname"><span class="pre">BoundaryConditionType</span></span><a class="reference internal" href="../_modules/src/spyice/parameters/user_input.html#BoundaryConditionType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.parameters.BoundaryConditionType" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
-<p>Represents the type of boundary condition.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>NEUMANN</strong> (<em>str</em>) – Neumann boundary condition.</p></li>
-<li><p><strong>DIRICHLET</strong> (<em>str</em>) – Dirichlet boundary condition.</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.parameters.BoundaryConditionType.__new__">
-<span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.spyice.parameters.BoundaryConditionType.__new__" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.spyice.parameters.BoundaryConditionType.DIRICHLET">
-<span class="sig-name descname"><span class="pre">DIRICHLET</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Dirichlet'</span></em><a class="headerlink" href="#src.spyice.parameters.BoundaryConditionType.DIRICHLET" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.spyice.parameters.BoundaryConditionType.NEUMANN">
-<span class="sig-name descname"><span class="pre">NEUMANN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Neumann'</span></em><a class="headerlink" href="#src.spyice.parameters.BoundaryConditionType.NEUMANN" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="src.spyice.parameters.Constants">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.spyice.parameters.</span></span><span class="sig-name descname"><span class="pre">Constants</span></span><a class="reference internal" href="../_modules/src/spyice/parameters/constants.html#Constants"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.parameters.Constants" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
-<p>Enumeration class for constants.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.spyice.parameters.Constants.DEBUG">
-<span class="sig-name descname"><span class="pre">DEBUG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">DebugConstants(phi_ini=1,</span> <span class="pre">phi_ini_Stefan=1,</span> <span class="pre">beta=1,</span> <span class="pre">kappa=1,</span> <span class="pre">mu=1,</span> <span class="pre">Ra_c=0,</span> <span class="pre">alpha=1,</span> <span class="pre">k_i=1,</span> <span class="pre">k_br=1,</span> <span class="pre">k_w=1,</span> <span class="pre">D_s=0.0001,</span> <span class="pre">c_br=1,</span> <span class="pre">c_i=1,</span> <span class="pre">c_w=1,</span> <span class="pre">L=1,</span> <span class="pre">rho_i=1,</span> <span class="pre">rho_br=1,</span> <span class="pre">rho_w=1,</span> <span class="pre">m=1,</span> <span class="pre">g=0,</span> <span class="pre">phi_c=1,</span> <span class="pre">P_s=1,</span> <span class="pre">a_phi=1,</span> <span class="pre">b_phi=1)</span></em><a class="headerlink" href="#src.spyice.parameters.Constants.DEBUG" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.spyice.parameters.Constants.REAL">
-<span class="sig-name descname"><span class="pre">REAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">RealConstants(param_const=False,</span> <span class="pre">phi_ini=1,</span> <span class="pre">phi_ini_Stefan=1,</span> <span class="pre">beta=0.0005836,</span> <span class="pre">kappa=1.37e-07,</span> <span class="pre">mu=0.00188,</span> <span class="pre">Ra_c=1.01,</span> <span class="pre">alpha=0.0015600000000000002,</span> <span class="pre">L=334774,</span> <span class="pre">D_s=2e-09,</span> <span class="pre">k_i=2.0,</span> <span class="pre">k_br=0.6,</span> <span class="pre">k_w=0.6,</span> <span class="pre">c_i=2000,</span> <span class="pre">c_br=3985,</span> <span class="pre">c_w=3985,</span> <span class="pre">rho_br=1028,</span> <span class="pre">rho_i=917,</span> <span class="pre">rho_w=1028,</span> <span class="pre">m=2,</span> <span class="pre">g=9.8,</span> <span class="pre">phi_c=0.06823,</span> <span class="pre">P_s=0.01,</span> <span class="pre">a_phi=5.9e-06,</span> <span class="pre">b_phi=169491.5254237288)</span></em><a class="headerlink" href="#src.spyice.parameters.Constants.REAL" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="src.spyice.parameters.InitialLiquidFraction">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.spyice.parameters.</span></span><span class="sig-name descname"><span class="pre">InitialLiquidFraction</span></span><a class="reference internal" href="../_modules/src/spyice/parameters/user_input.html#InitialLiquidFraction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.parameters.InitialLiquidFraction" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
-<p>Represents the type of initial liquid fraction.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>P0</strong> (<em>str</em>) – Initial liquid fraction of 0.</p></li>
-<li><p><strong>P1</strong> (<em>str</em>) – Initial liquid fraction of 1.</p></li>
-<li><p><strong>P_Stefan</strong> (<em>str</em>) – Initial liquid fraction based on Stefan condition.</p></li>
-<li><p><strong>PX</strong> (<em>str</em>) – Initial liquid fraction based on a custom profile.</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.parameters.InitialLiquidFraction.__new__">
-<span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.spyice.parameters.InitialLiquidFraction.__new__" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.spyice.parameters.InitialLiquidFraction.P0">
-<span class="sig-name descname"><span class="pre">P0</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'P0'</span></em><a class="headerlink" href="#src.spyice.parameters.InitialLiquidFraction.P0" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.spyice.parameters.InitialLiquidFraction.P1">
-<span class="sig-name descname"><span class="pre">P1</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'P1'</span></em><a class="headerlink" href="#src.spyice.parameters.InitialLiquidFraction.P1" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.spyice.parameters.InitialLiquidFraction.PX">
-<span class="sig-name descname"><span class="pre">PX</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'PX'</span></em><a class="headerlink" href="#src.spyice.parameters.InitialLiquidFraction.PX" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.spyice.parameters.InitialLiquidFraction.P_Stefan">
-<span class="sig-name descname"><span class="pre">P_Stefan</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'P_Stefan'</span></em><a class="headerlink" href="#src.spyice.parameters.InitialLiquidFraction.P_Stefan" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="src.spyice.parameters.InitialSalinity">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.spyice.parameters.</span></span><span class="sig-name descname"><span class="pre">InitialSalinity</span></span><a class="reference internal" href="../_modules/src/spyice/parameters/user_input.html#InitialSalinity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.parameters.InitialSalinity" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
-<p>Represents the type of initial salinity. User can add more salinity option SX where X is a number.
-The salinity is in parts per thousand (ppt).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>S34</strong> (<em>str</em>) – Initial salinity of 34 ppt.</p></li>
-<li><p><strong>S0</strong> (<em>str</em>) – Initial salinity of 0 ppt.</p></li>
-<li><p><strong>S1</strong> (<em>str</em>) – Initial salinity of 1 ppt.</p></li>
-<li><p><strong>S2</strong> (<em>str</em>) – Initial salinity of 2 ppt.</p></li>
-<li><p><strong>S3</strong> (<em>str</em>) – Initial salinity of 3 ppt.</p></li>
-<li><p><strong>S_LINEAR</strong> (<em>str</em>) – Linear initial salinity.</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.parameters.InitialSalinity.__new__">
-<span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.spyice.parameters.InitialSalinity.__new__" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.spyice.parameters.InitialSalinity.S0">
-<span class="sig-name descname"><span class="pre">S0</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'S0'</span></em><a class="headerlink" href="#src.spyice.parameters.InitialSalinity.S0" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.spyice.parameters.InitialSalinity.S1">
-<span class="sig-name descname"><span class="pre">S1</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'S1'</span></em><a class="headerlink" href="#src.spyice.parameters.InitialSalinity.S1" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.spyice.parameters.InitialSalinity.S2">
-<span class="sig-name descname"><span class="pre">S2</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'S2'</span></em><a class="headerlink" href="#src.spyice.parameters.InitialSalinity.S2" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.spyice.parameters.InitialSalinity.S3">
-<span class="sig-name descname"><span class="pre">S3</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'S3'</span></em><a class="headerlink" href="#src.spyice.parameters.InitialSalinity.S3" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.spyice.parameters.InitialSalinity.S34">
-<span class="sig-name descname"><span class="pre">S34</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'S34'</span></em><a class="headerlink" href="#src.spyice.parameters.InitialSalinity.S34" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.spyice.parameters.InitialSalinity.S_LINEAR">
-<span class="sig-name descname"><span class="pre">S_LINEAR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'S_linear'</span></em><a class="headerlink" href="#src.spyice.parameters.InitialSalinity.S_LINEAR" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="src.spyice.parameters.InitialTemperature">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.spyice.parameters.</span></span><span class="sig-name descname"><span class="pre">InitialTemperature</span></span><a class="reference internal" href="../_modules/src/spyice/parameters/user_input.html#InitialTemperature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.parameters.InitialTemperature" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
-<p>Represents the type of initial temperature.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>T_Stefan</strong> (<em>str</em>) – Initial temperature based on Stefan condition.</p></li>
-<li><p><strong>T271p25</strong> (<em>str</em>) – Initial temperature of 271.25 K.</p></li>
-<li><p><strong>T250</strong> (<em>str</em>) – Initial temperature of 250 K.</p></li>
-<li><p><strong>T_MELT</strong> (<em>str</em>) – Initial temperature at which the material melts.</p></li>
-<li><p><strong>T_S</strong> (<em>str</em>) – Initial temperature based on salinity.</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.parameters.InitialTemperature.__new__">
-<span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.spyice.parameters.InitialTemperature.__new__" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.spyice.parameters.InitialTemperature.T250">
-<span class="sig-name descname"><span class="pre">T250</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'T250'</span></em><a class="headerlink" href="#src.spyice.parameters.InitialTemperature.T250" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.spyice.parameters.InitialTemperature.T271p25">
-<span class="sig-name descname"><span class="pre">T271p25</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'T271.25'</span></em><a class="headerlink" href="#src.spyice.parameters.InitialTemperature.T271p25" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.spyice.parameters.InitialTemperature.T_MELT">
-<span class="sig-name descname"><span class="pre">T_MELT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Tm_w'</span></em><a class="headerlink" href="#src.spyice.parameters.InitialTemperature.T_MELT" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.spyice.parameters.InitialTemperature.T_S">
-<span class="sig-name descname"><span class="pre">T_S</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'T(S)'</span></em><a class="headerlink" href="#src.spyice.parameters.InitialTemperature.T_S" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.spyice.parameters.InitialTemperature.T_STEFAN">
-<span class="sig-name descname"><span class="pre">T_STEFAN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'T_Stefan'</span></em><a class="headerlink" href="#src.spyice.parameters.InitialTemperature.T_STEFAN" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="src.spyice.parameters.LiquidusRelation">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.spyice.parameters.</span></span><span class="sig-name descname"><span class="pre">LiquidusRelation</span></span><a class="reference internal" href="../_modules/src/spyice/parameters/user_input.html#LiquidusRelation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.parameters.LiquidusRelation" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
-<p>Represents the liquidus relation type.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>NORMAL</strong> (<em>str</em>) – Normal liquidus relation.</p></li>
-<li><p><strong>FREZCHEM</strong> (<em>str</em>) – Frezchem liquidus relation.</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.parameters.LiquidusRelation.__new__">
-<span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.spyice.parameters.LiquidusRelation.__new__" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.spyice.parameters.LiquidusRelation.FREZCHEM">
-<span class="sig-name descname"><span class="pre">FREZCHEM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Frezchem'</span></em><a class="headerlink" href="#src.spyice.parameters.LiquidusRelation.FREZCHEM" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.spyice.parameters.LiquidusRelation.NORMAL">
-<span class="sig-name descname"><span class="pre">NORMAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Normal'</span></em><a class="headerlink" href="#src.spyice.parameters.LiquidusRelation.NORMAL" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="src.spyice.parameters.TopTemperatureType">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.spyice.parameters.</span></span><span class="sig-name descname"><span class="pre">TopTemperatureType</span></span><a class="reference internal" href="../_modules/src/spyice/parameters/user_input.html#TopTemperatureType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.parameters.TopTemperatureType" title="Link to this definition">#</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
-<p>Represents the type of top temperature condition.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>STEFAN</strong> (<em>str</em>) – Stefan condition.</p></li>
-<li><p><strong>DIRICHLET</strong> (<em>str</em>) – Dirichlet condition.</p></li>
-</ul>
-</dd>
-</dl>
-<dl class="py method">
-<dt class="sig sig-object py" id="src.spyice.parameters.TopTemperatureType.__new__">
-<span class="sig-name descname"><span class="pre">__new__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.spyice.parameters.TopTemperatureType.__new__" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.spyice.parameters.TopTemperatureType.DIRICHLET">
-<span class="sig-name descname"><span class="pre">DIRICHLET</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Dirichlet'</span></em><a class="headerlink" href="#src.spyice.parameters.TopTemperatureType.DIRICHLET" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.spyice.parameters.TopTemperatureType.STEFAN">
-<span class="sig-name descname"><span class="pre">STEFAN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Stefan'</span></em><a class="headerlink" href="#src.spyice.parameters.TopTemperatureType.STEFAN" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
 </section>
 </section>
 
@@ -751,59 +513,7 @@ The salinity is in parts per thousand (ppt).</p>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-src.spyice.parameters">Module contents</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.parameters.BoundaryConditionType"><code class="docutils literal notranslate"><span class="pre">BoundaryConditionType</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.parameters.BoundaryConditionType.__new__"><code class="docutils literal notranslate"><span class="pre">BoundaryConditionType.__new__()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.parameters.BoundaryConditionType.DIRICHLET"><code class="docutils literal notranslate"><span class="pre">BoundaryConditionType.DIRICHLET</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.parameters.BoundaryConditionType.NEUMANN"><code class="docutils literal notranslate"><span class="pre">BoundaryConditionType.NEUMANN</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.parameters.Constants"><code class="docutils literal notranslate"><span class="pre">Constants</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.parameters.Constants.DEBUG"><code class="docutils literal notranslate"><span class="pre">Constants.DEBUG</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.parameters.Constants.REAL"><code class="docutils literal notranslate"><span class="pre">Constants.REAL</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.parameters.InitialLiquidFraction"><code class="docutils literal notranslate"><span class="pre">InitialLiquidFraction</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.parameters.InitialLiquidFraction.__new__"><code class="docutils literal notranslate"><span class="pre">InitialLiquidFraction.__new__()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.parameters.InitialLiquidFraction.P0"><code class="docutils literal notranslate"><span class="pre">InitialLiquidFraction.P0</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.parameters.InitialLiquidFraction.P1"><code class="docutils literal notranslate"><span class="pre">InitialLiquidFraction.P1</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.parameters.InitialLiquidFraction.PX"><code class="docutils literal notranslate"><span class="pre">InitialLiquidFraction.PX</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.parameters.InitialLiquidFraction.P_Stefan"><code class="docutils literal notranslate"><span class="pre">InitialLiquidFraction.P_Stefan</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.parameters.InitialSalinity"><code class="docutils literal notranslate"><span class="pre">InitialSalinity</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.parameters.InitialSalinity.__new__"><code class="docutils literal notranslate"><span class="pre">InitialSalinity.__new__()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.parameters.InitialSalinity.S0"><code class="docutils literal notranslate"><span class="pre">InitialSalinity.S0</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.parameters.InitialSalinity.S1"><code class="docutils literal notranslate"><span class="pre">InitialSalinity.S1</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.parameters.InitialSalinity.S2"><code class="docutils literal notranslate"><span class="pre">InitialSalinity.S2</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.parameters.InitialSalinity.S3"><code class="docutils literal notranslate"><span class="pre">InitialSalinity.S3</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.parameters.InitialSalinity.S34"><code class="docutils literal notranslate"><span class="pre">InitialSalinity.S34</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.parameters.InitialSalinity.S_LINEAR"><code class="docutils literal notranslate"><span class="pre">InitialSalinity.S_LINEAR</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.parameters.InitialTemperature"><code class="docutils literal notranslate"><span class="pre">InitialTemperature</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.parameters.InitialTemperature.__new__"><code class="docutils literal notranslate"><span class="pre">InitialTemperature.__new__()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.parameters.InitialTemperature.T250"><code class="docutils literal notranslate"><span class="pre">InitialTemperature.T250</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.parameters.InitialTemperature.T271p25"><code class="docutils literal notranslate"><span class="pre">InitialTemperature.T271p25</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.parameters.InitialTemperature.T_MELT"><code class="docutils literal notranslate"><span class="pre">InitialTemperature.T_MELT</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.parameters.InitialTemperature.T_S"><code class="docutils literal notranslate"><span class="pre">InitialTemperature.T_S</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.parameters.InitialTemperature.T_STEFAN"><code class="docutils literal notranslate"><span class="pre">InitialTemperature.T_STEFAN</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.parameters.LiquidusRelation"><code class="docutils literal notranslate"><span class="pre">LiquidusRelation</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.parameters.LiquidusRelation.__new__"><code class="docutils literal notranslate"><span class="pre">LiquidusRelation.__new__()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.parameters.LiquidusRelation.FREZCHEM"><code class="docutils literal notranslate"><span class="pre">LiquidusRelation.FREZCHEM</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.parameters.LiquidusRelation.NORMAL"><code class="docutils literal notranslate"><span class="pre">LiquidusRelation.NORMAL</span></code></a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.parameters.TopTemperatureType"><code class="docutils literal notranslate"><span class="pre">TopTemperatureType</span></code></a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.parameters.TopTemperatureType.__new__"><code class="docutils literal notranslate"><span class="pre">TopTemperatureType.__new__()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.parameters.TopTemperatureType.DIRICHLET"><code class="docutils literal notranslate"><span class="pre">TopTemperatureType.DIRICHLET</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.parameters.TopTemperatureType.STEFAN"><code class="docutils literal notranslate"><span class="pre">TopTemperatureType.STEFAN</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-src.spyice.parameters">Module contents</a></li>
 </ul>
   </nav></div>
 

@@ -131,8 +131,8 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../../../quick_start/_index.html">
-    How-to
+  <a class="nav-link nav-internal" href="../../../../quick_start/installation.html">
+    Installation
   </a>
 </li>
 
@@ -147,6 +147,13 @@
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../../../../user_guide/_index.html">
     User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../quick_start/example/main_original.html">
+    Examples
   </a>
 </li>
 
@@ -229,8 +236,8 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../../../quick_start/_index.html">
-    How-to
+  <a class="nav-link nav-internal" href="../../../../quick_start/installation.html">
+    Installation
   </a>
 </li>
 
@@ -245,6 +252,13 @@
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../../../../user_guide/_index.html">
     User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../quick_start/example/main_original.html">
+    Examples
   </a>
 </li>
 
@@ -336,9 +350,14 @@
 <span class="kn">from</span> <span class="nn">spyice.postprocess</span> <span class="kn">import</span> <span class="n">Analysis</span>
 
 <span class="n">np</span><span class="o">.</span><span class="n">seterr</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">invalid</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
-
+<span class="c1"># .style.use(&quot;spyice.utils.custom&quot;)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;spyice.utils.custom&quot;</span><span class="p">)</span>
-
+<span class="c1"># plt.rcParams.update(</span>
+<span class="c1">#     {</span>
+<span class="c1">#         &quot;text.usetex&quot;: True,</span>
+<span class="c1">#     }</span>
+<span class="c1"># )</span>
+<span class="c1"># plt.rcParams[&quot;pgf.texsystem&quot;] = &quot;pdflatex&quot;</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;text.latex.preamble&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
     <span class="p">[</span>
         <span class="sa">r</span><span class="s2">&quot;\usepackage</span><span class="si">{dashbox}</span><span class="s2">&quot;</span><span class="p">,</span>
@@ -843,9 +862,9 @@
 <div class="viewcode-block" id="VisualiseModel.plot_salinity_heatmap">
 <a class="viewcode-back" href="../../../../api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.VisualiseModel.plot_salinity_heatmap">[docs]</a>
     <span class="k">def</span> <span class="nf">plot_salinity_heatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">savefig</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Plots the Salinity heatmap.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Plots the temperature heatmap.&quot;&quot;&quot;</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Plotting Salinity heatmap...&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Plotting Temperature heatmap...&quot;</span><span class="p">)</span>
         <span class="n">x_axis_iter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">max_iterations</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
         <span class="n">heatmap_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">s_k_list</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
         <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
@@ -889,9 +908,9 @@
 <div class="viewcode-block" id="VisualiseModel.plot_liquidfraction_heatmap">
 <a class="viewcode-back" href="../../../../api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.VisualiseModel.plot_liquidfraction_heatmap">[docs]</a>
     <span class="k">def</span> <span class="nf">plot_liquidfraction_heatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">savefig</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Plots the liquid fraction heatmap.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Plots the temperature heatmap.&quot;&quot;&quot;</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Plotting Liquid Fraction heatmap...&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Plotting Temperature heatmap...&quot;</span><span class="p">)</span>
         <span class="n">x_axis_iter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">max_iterations</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
         <span class="n">heatmap_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">phi_k_list</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
         <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>

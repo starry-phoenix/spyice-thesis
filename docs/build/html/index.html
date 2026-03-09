@@ -135,8 +135,8 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="quick_start/_index.html">
-    How-to
+  <a class="nav-link nav-internal" href="quick_start/installation.html">
+    Installation
   </a>
 </li>
 
@@ -151,6 +151,13 @@
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="user_guide/_index.html">
     User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="quick_start/example/main_original.html">
+    Examples
   </a>
 </li>
 
@@ -237,8 +244,8 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="quick_start/_index.html">
-    How-to
+  <a class="nav-link nav-internal" href="quick_start/installation.html">
+    Installation
   </a>
 </li>
 
@@ -253,6 +260,13 @@
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="user_guide/_index.html">
     User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="quick_start/example/main_original.html">
+    Examples
   </a>
 </li>
 
@@ -303,47 +317,56 @@
                   
   <section id="sea-ice-model-package-spyice">
 <h1>Sea-Ice Model Package (SPyIce)<a class="headerlink" href="#sea-ice-model-package-spyice" title="Link to this heading">#</a></h1>
-<p>The SPyIce package is a software tool that enables 1D finite difference simulation for vertical transport equations. It specifically focuses on thermal diffusion with the influence of salinity and physical properties. The package utilizes the Thomas tridiagonal solver as the solver algorithm. With SPyIce, users can model and analyze the behavior of temperature, salinity, and other relevant variables in a vertical system. It provides a comprehensive framework for studying the thermal diffusion process and its interaction with salinity in various scenarios. Hydra is used to automate the simulation runs of the Sea-Ice Model. It is used to manage and run sea ice simulations, making it easier for users to explore different scenarios and optimize their models.</p>
+<p>The SPyIce package is a software tool that enables 1D finite difference simulation for vertical transport equations. It specifically focuses on thermal diffusion with the influence of salinity and physical properties. The package utilizes the Thomas tridiagonal solver as the solver algorithm. With SPyIce, users can model and analyze the behavior of temperature, salinity, and other relevant variables in a vertical system. It provides a comprehensive framework for studying the thermal diffusion process and its interaction with salinity in various scenarios. Hydra is used to automate the simulation runs of the Sea-Ice Model. It is used to manage and run sea ice simulations, making it easier for users to explore different scenarios and optimize their models.
+You can also model microalgae bloom on sea ice and how nutrient transport, sunlight and radiation affects its growth with this package.</p>
+<div class="pst-scrollable-table-container"><table class="table table-center">
+<colgroup>
+<col style="width: 33.3%" />
+<col style="width: 33.3%" />
+<col style="width: 33.3%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="_images/seaicemodel.png"><img alt="_images/seaicemodel.png" src="_images/seaicemodel.png" style="width: 270px; height: 200px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Sketch of sea ice model with biogeochemical processes.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</td>
+<td><figure class="align-center" id="id2">
+<a class="reference internal image-reference" href="_images/seaicemodel_algae_layers.png"><img alt="_images/seaicemodel_algae_layers.png" src="_images/seaicemodel_algae_layers.png" style="width: 200px; height: 200px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Sketch of sea ice model with multiple microalgae layers near the ocean interface.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</td>
+<td><figure class="align-center" id="id3">
+<a class="reference internal image-reference" href="_images/sunlight_brinedrainage_seaice.png"><img alt="_images/sunlight_brinedrainage_seaice.png" src="_images/sunlight_brinedrainage_seaice.png" style="width: 200px; height: 200px;" />
+</a>
+<figcaption>
+<p><span class="caption-text">Model with gravity drainage and sunlight penetration through sea ice.</span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="contents">
+<h1>Contents<a class="headerlink" href="#contents" title="Link to this heading">#</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="report/_index.html">About</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="report/introduction.html">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="report/problem_statement.html">Problem Statement</a></li>
-<li class="toctree-l2"><a class="reference internal" href="report/implementation.html">Implementation</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="quick_start/_index.html">How-to</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="quick_start/installation.html">Installation Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="quick_start/example/main_original.html">Example</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="api/_index.html">API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="api/spyice.html">spyice package</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="user_guide/cmd_run.html">To run on command line</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="user_guide/cmd_run.html#running-spyice">Running SpyIce</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_guide/cmd_run.html#hydra-command-line-overrides">Hydra Command-Line Overrides</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_guide/cmd_run.html#hydra-multirun">Hydra Multirun</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_guide/cmd_run.html#output-directory-structure">Output Directory Structure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_guide/cmd_run.html#adding-new-parameters-for-automation">Adding New Parameters for Automation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_guide/cmd_run.html#main-script-modifications">Main Script Modifications</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="user_guide/jupyter_run.html">To run on jupyter notebook</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="user_guide/jupyter_run.html#Import-Packages">Import Packages</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user_guide/jupyter_run.html#Define-Inputs-and-Project-Output-paths">Define Inputs and Project Output paths</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="report/_index.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/_index.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide/cmd_run.html">To run on command line</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide/jupyter_run.html">To run on jupyter notebook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start/example/main_original.html">Examples</a></li>
 </ul>
 </div>
-<section id="indices-and-tables">
-<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
-<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
-</ul>
-</section>
 </section>
 
 
@@ -384,8 +407,10 @@
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#indices-and-tables">Indices and tables</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Sea-Ice Model Package (SPyIce)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#contents">Contents</a></li>
 </ul>
+
   </nav></div>
 
   <div class="sidebar-secondary-item">

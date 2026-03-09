@@ -273,7 +273,7 @@ class UserInput:
             self.geometry_type = 2
             if self.config_data:
                 self.grid_timestep_dt = read_omegaconfig(self.config_data, "dt")
-                self.initial_salinity = read_omegaconfig(self.config_data, "S_IC")
+                # self.initial_salinity = read_omegaconfig(self.config_data, "S_IC")
                 self.max_iterations = read_omegaconfig(self.config_data, "iter_max")
                 self.grid_resolution_dz = read_omegaconfig(self.config_data, "dz")
                 self.dir_output_name = create_output_directory(

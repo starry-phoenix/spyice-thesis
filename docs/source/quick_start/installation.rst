@@ -47,3 +47,26 @@ Enter the project directory and run the following command in the terminal to vie
     ```
 
 This will start a local server at `http://localhost:8000/` where you can view the documentation by opening the link in your browser.
+
+An alternative to the above is by directly opening existing html documentation in the directory:
+
+.. code-block:: text
+
+   docs/
+   └── build/
+       └── html/
+           ├── index.html
+           └─ ..
+
+
+.. note::
+
+   For developers only, you can make html documentation with sphynx with the following commands:
+
+    ```
+    cd docs
+    ```
+
+    ```
+    make clean html
+    ```

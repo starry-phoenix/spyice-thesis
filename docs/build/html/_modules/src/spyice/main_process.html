@@ -131,8 +131,8 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../../quick_start/_index.html">
-    How-to
+  <a class="nav-link nav-internal" href="../../../quick_start/installation.html">
+    Installation
   </a>
 </li>
 
@@ -147,6 +147,13 @@
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../../../user_guide/_index.html">
     User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../quick_start/example/main_original.html">
+    Examples
   </a>
 </li>
 
@@ -229,8 +236,8 @@
 
 
 <li class="nav-item ">
-  <a class="nav-link nav-internal" href="../../../quick_start/_index.html">
-    How-to
+  <a class="nav-link nav-internal" href="../../../quick_start/installation.html">
+    Installation
   </a>
 </li>
 
@@ -245,6 +252,13 @@
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../../../user_guide/_index.html">
     User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../quick_start/example/main_original.html">
+    Examples
   </a>
 </li>
 
@@ -424,38 +438,44 @@
         <span class="c1"># # )</span>
         <span class="c1"># model_visualization_object.plot_H_iter_all(savefig=True)</span>
         <span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_temperature_heatmap</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">export_csv</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="c1"># model_visualization_object.plot_salinity_heatmap(savefig=True)</span>
-        <span class="c1"># model_visualization_object.plot_liquidfraction_heatmap(savefig=True)</span>
-        <span class="c1"># model_visualization_object.plot_temperature_liquid_solid_evolution(</span>
-        <span class="c1">#     z_depth=0.1, savefig=True</span>
-        <span class="c1"># )</span>
+        <span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_liquidfraction_heatmap</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_liquid_fraction_profile</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_temperature_profile</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
+        <span class="k">if</span> <span class="n">userinput_data</span><span class="o">.</span><span class="n">is_salinity_equation</span><span class="p">:</span>
+            <span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_salinity_heatmap</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_temperature_liquid_solid_evolution</span><span class="p">(</span>
+                <span class="n">z_depth</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">savefig</span><span class="o">=</span><span class="kc">True</span>
+            <span class="p">)</span>
+            <span class="c1"># # plot vertical profiles of algae model</span>
+            <span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_salinity_sourceterm_profile</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_liquid_salinity_profile</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_brinevelocity_profile</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_salinity_profile</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+        <span class="k">if</span> <span class="n">userinput_data</span><span class="o">.</span><span class="n">is_algae_equation</span><span class="p">:</span>
         <span class="c1"># # algae model</span>
-        <span class="c1"># model_visualization_object.plot_carbon_concentration(savefig=True)</span>
-        <span class="c1"># model_visualization_object.plot_nutrient_concentration(savefig=True)</span>
-        <span class="c1"># model_visualization_object.plot_photosynthetic_rate(savefig=True)</span>
-        <span class="c1"># model_visualization_object.plot_radiation_algae(savefig=True)</span>
-        <span class="c1"># model_visualization_object.plot_radiation_algae_dt_by_rho_c(savefig=True)</span>
-        <span class="c1"># model_visualization_object.plot_chla_bulk_concentration(savefig=True)</span>
-        <span class="c1"># model_visualization_object.plot_radiation_all(savefig=True)</span>
-        <span class="c1"># # # plot algae model multiple layers</span>
-        <span class="c1"># model_visualization_object.plot_nutrient_concentration_multiplelayers(savefig=True)</span>
-        <span class="c1"># model_visualization_object.plot_carbon_concentration_multiplelayers(savefig=True)</span>
-        <span class="c1"># model_visualization_object.plot_photosynthetic_rate_multiplelayers(savefig=True)</span>
-        <span class="c1"># model_visualization_object.plot_radiation_algae_multiplelayers(savefig=True)</span>
-        <span class="c1"># model_visualization_object.plot_chla_bulk_concentration_multiplelayers(savefig=True)</span>
-        <span class="c1"># # # plot vertical profiles of algae model</span>
+            <span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_carbon_concentration</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_nutrient_concentration</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_photosynthetic_rate</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_chla_bulk_concentration</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-        <span class="c1"># model_visualization_object.plot_nutrient_cn_profile(savefig=True)</span>
-        <span class="c1"># model_visualization_object.plot_carbon_concentration_profile(savefig=True)</span>
-        <span class="c1"># model_visualization_object.plot_radiation_profile(savefig=True)</span>
-        <span class="c1"># model_visualization_object.plot_salinity_sourceterm_profile(savefig=True)</span>
-        <span class="c1"># model_visualization_object.plot_liquid_salinity_profile(savefig=True)</span>
-        <span class="c1"># model_visualization_object.plot_brinevelocity_profile(savefig=True)</span>
+            <span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_nutrient_cn_profile</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_carbon_concentration_profile</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-        <span class="c1"># model_visualization_object.plot_salinity_profile(savefig=True)</span>
-        <span class="c1"># model_visualization_object.plot_liquid_fraction_profile(savefig=True)</span>
-        <span class="c1"># model_visualization_object.plot_temperature_profile(savefig=True)</span>
+            <span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_radiation_algae</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_radiation_algae_dt_by_rho_c</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_radiation_all</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_radiation_profile</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">userinput_data</span><span class="o">.</span><span class="n">algae_model_BAL_type</span> <span class="o">==</span> <span class="s2">&quot;all&quot;</span><span class="p">:</span>
+                <span class="c1"># # plot algae model multiple layers</span>
+                <span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_nutrient_concentration_multiplelayers</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_carbon_concentration_multiplelayers</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_photosynthetic_rate_multiplelayers</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_radiation_algae_multiplelayers</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_chla_bulk_concentration_multiplelayers</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
         <span class="c1"># model_visualization_object.plot_temperature_heatmap_as_gif()</span>
         <span class="c1"># model_visualization_object.plot_salinity_heatmap_as_gif()</span>

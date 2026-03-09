@@ -46,8 +46,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'quick_start/installation';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Sea-Ice Model Package (SPyIce)" href="example/main_original.html" />
-    <link rel="prev" title="Quickstart" href="_index.html" />
+    <link rel="next" title="SpyIce" href="../api/_index.html" />
+    <link rel="prev" title="Implementation with Hydra hierarchical configuration" href="../report/implementation.main_config.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="1.0.0" />
@@ -134,8 +134,8 @@
 
 
 <li class="nav-item current active">
-  <a class="nav-link nav-internal" href="_index.html">
-    How-to
+  <a class="nav-link nav-internal" href="#">
+    Installation
   </a>
 </li>
 
@@ -150,6 +150,13 @@
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../user_guide/_index.html">
     User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="example/main_original.html">
+    Examples
   </a>
 </li>
 
@@ -234,8 +241,8 @@
 
 
 <li class="nav-item current active">
-  <a class="nav-link nav-internal" href="_index.html">
-    How-to
+  <a class="nav-link nav-internal" href="#">
+    Installation
   </a>
 </li>
 
@@ -250,6 +257,13 @@
 <li class="nav-item ">
   <a class="nav-link nav-internal" href="../user_guide/_index.html">
     User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="example/main_original.html">
+    Examples
   </a>
 </li>
 
@@ -280,11 +294,7 @@
 <nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Installation Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="example/main_original.html">Example</a></li>
-</ul>
-</div>
+  <div class="bd-toc-item navbar-nav"></div>
 </nav></div>
     </div>
   
@@ -318,9 +328,6 @@
         <i class="fa-solid fa-home"></i>
       </a>
     </li>
-    
-    <li class="breadcrumb-item"><a href="_index.html" class="nav-link">Quickstart</a></li>
-    
     <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Installation Guide</span></li>
   </ul>
 </nav>
@@ -386,6 +393,24 @@
 <span class="pre">`</span></code></p>
 </div></blockquote>
 <p>This will start a local server at <cite>http://localhost:8000/</cite> where you can view the documentation by opening the link in your browser.</p>
+<p>An alternative to the above is by directly opening existing html documentation in the directory:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>docs/
+└── build/
+    └── html/
+        ├── index.html
+        └─ ..
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For developers only, you can make html documentation with sphynx with the following commands:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">cd</span> <span class="pre">docs</span>
+<span class="pre">make</span> <span class="pre">clean</span> <span class="pre">html</span>
+<span class="pre">`</span></code></p>
+</div></blockquote>
+</div>
 </section>
 </section>
 
@@ -400,20 +425,20 @@
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="_index.html"
+       href="../report/implementation.main_config.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Quickstart</p>
+        <p class="prev-next-title">Implementation with Hydra hierarchical configuration</p>
       </div>
     </a>
     <a class="right-next"
-       href="example/main_original.html"
+       href="../api/_index.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Sea-Ice Model Package (SPyIce)</p>
+        <p class="prev-next-title">SpyIce</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
