@@ -1,0 +1,38 @@
+# add salinity_equation_option in defaults and hydra.sweeper.params and dir
+
+defaults:
+  - constants: real
+  - dt: dt47
+  - iter_max: iter_max1000
+  - dz: dz0p01
+  - override hydra/help: config_param_help
+  - _self_
+
+hydra:
+  run:
+    dir: outputs/${now:%Y-%m-%d}/${now:%H%M%S}_${constants.constants}_${dt.dt}_${iter_max.iter_max}_${dz.dz}
+  sweep:
+    dir: outputs/${now:%Y-%m-%d}
+    subdir: ${now:%H%M%S}_${constants.constants}_${dt.dt}_${iter_max.iter_max}_${dz.dz}
+    # /${hydra.job.num}
+  sweeper:
+    params:
+      constants: real
+      dt: glob(*)
+      iter_max: iter_max1000
+  job_logging:
+    root:
+      handlers: [console, file]
+      level: INFO
+    formatters:
+      simple:
+        format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    handlers:
+      console:
+        class: logging.StreamHandler
+        formatter: simple
+        stream: ext://sys.stdout
+        level: DEBUG
+      file:
+        mode: w
+        # filename: ${hydra.runtime.output_dir}/${hydra.job.name}.log
