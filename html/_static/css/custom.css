@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&family=Noto+Sans+Mono:wght@100..900&family=Noto+Sans+Symbols:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Noto+Serif+Display:ital,wght@0,100..900;1,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&family=Quicksand:wght@300..700&display=swap');
+
+html {
+	/* --pst-font-family-base: 'Noto Sans', var(--pst-font-family-base-system); */
+	--pst-font-family-base: 'Noto Sans', var(--pst-font-family-base-system);
+	/* --pst-font-family-heading: 'Noto Serif', var(--pst-font-family-base-system); */
+	/* --pst-font-family-heading: 'Noto Sans Display', var(--pst-font-family-base-system); */
+	--pst-font-family-monospace: "Fira Mono", "Noto Sans Mono", var(--pst-font-family-monospace-system);
+}
+
+pre {
+	background-color: var(--pst-color-surface)
+		/*#f7f7f7*/
+	;
+	border: var(--pst-color-surface);
+	/* border-radius: .25rem; */
+	color: var(--pst-color-text-base);
+	line-height: 1.2em;
+	margin: 1.5em 0;
+	padding: 1rem;
+}

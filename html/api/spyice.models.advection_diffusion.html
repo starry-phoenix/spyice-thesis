@@ -1,0 +1,857 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" data-theme="auto">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>src.spyice.models.advection_diffusion &#8212; SpyIce  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "auto";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "auto";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=b6ad3417" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/spyice.models.advection_diffusion';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="src.spyice.models.sea_ice_model" href="spyice.models.sea_ice_model.html" />
+    <link rel="prev" title="spyice.models package" href="spyice.models.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.0.0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="auto">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">SpyIce  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../report/_index.html">
+    About
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quick_start/installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="_index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quick_start/example/main_original.html">
+    Examples
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../report/_index.html">
+    About
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quick_start/installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="_index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quick_start/example/main_original.html">
+    Examples
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="spyice.html">spyice package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="spyice.models.html">spyice.models package</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">src.spyice.models.advection_diffusion</a></li>
+
+
+
+
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.sea_ice_model.html">src.spyice.models.sea_ice_model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.stefan_problem.html">src.spyice.models.stefan_problem</a></li>
+
+
+
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.algae_model.html">src.spyice.models.algae_model</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.models.radiative_model.html">src.spyice.models.radiative_model</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.parameters.html">spyice.parameters package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.constants.html">src.spyice.parameters.constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.debug_constants.html">src.spyice.parameters.debug_constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.real_constants.html">src.spyice.parameters.real_constants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.results_params.html">src.spyice.parameters.results_params</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.user_input.html">src.spyice.parameters.user_input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.parameters.algae_constants.html">spyice.parameters.algae_constants</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.postprocess.html">spyice.postprocess package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="spyice.postprocess.analysis.html">src.spyice.postprocess.analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.postprocess.visualise_model.html">src.spyice.postprocess.visualise_model</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.preprocess.html">spyice.preprocess package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.geometry_settings.html">src.spyice.preprocess.geometry_settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.initial_boundary_conditions.html">src.spyice.preprocess.initial_boundary_conditions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.modify_initial_boundary.html">src.spyice.preprocess.modify_initial_boundary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.pre_process.html">src.spyice.preprocess.pre_process</a></li>
+
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.preprocess.store.html">src.spyice.preprocess.store</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="spyice.utils.html">spyice.utils package</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.config_sort.html">src.spyice.utils.config_sort</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.error_norms.html">src.spyice.utils.error_norms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.helpers.html">src.spyice.utils.helpers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.spyice_exceptions.html">src.spyice.utils.spyice_exceptions module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.spyice_logger.html">src.spyice.utils.spyice_logger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.initial_userinput.html">spyice.utils.initial_userinput</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="spyice.utils.create_directory.html">spyice.utils.create_directory</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.coefficients.html">src.spyice.coefficients</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.main_process.html">src.spyice.main_process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.rhs.html">src.spyice.rhs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.statevariables.html">src.spyice.statevariables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.update_physical_values.html">src.spyice.update_physical_values</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spyice.misc_subroutines.html">spyice.misc_subroutines</a></li>
+
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="_index.html" class="nav-link">SpyIce</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="spyice.html" class="nav-link">spyice package</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="spyice.models.html" class="nav-link">spyice.models package</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">src.spyice.models.advection_diffusion</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="src-spyice-models-advection-diffusion">
+<h1>src.spyice.models.advection_diffusion<a class="headerlink" href="#src-spyice-models-advection-diffusion" title="Link to this heading">#</a></h1>
+<p>This module implements a 1D implicit finite-difference solver for the
+advection–diffusion equation:</p>
+<div class="math notranslate nohighlight">
+\[a \frac{\partial U}{\partial t}
++ b \frac{\partial U}{\partial z}
++ \frac{\partial}{\partial z}
+  \left(c \frac{\partial U}{\partial z}\right)
++ d \frac{\partial W}{\partial t}
+= 0\]</div>
+<p>The model supports both <strong>temperature</strong> and <strong>salinity</strong> evolution and
+includes optional boundary-condition treatments (Stefan, Buffo, Voller).</p>
+<p>—</p>
+</section>
+<section id="class-advectiondiffusion">
+<h1>Class: AdvectionDiffusion<a class="headerlink" href="#class-advectiondiffusion" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="AdvectionDiffusion">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">AdvectionDiffusion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">argument</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">W</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">W_initial</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">thickness_index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t_passed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">S_IC</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Stefan</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Buffo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Voller</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bc_neumann</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#AdvectionDiffusion" title="Link to this definition">#</a></dt>
+<dd><p>Class representing a 1D advection–diffusion model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>argument</strong> (<em>str</em>) – Either <code class="docutils literal notranslate"><span class="pre">&quot;temperature&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;salinity&quot;</span></code>.</p></li>
+<li><p><strong>X</strong> (<em>ndarray</em>) – Current field values.</p></li>
+<li><p><strong>source</strong> (<em>float</em>) – Source term.</p></li>
+<li><p><strong>X_initial</strong> (<em>ndarray</em>) – Field values from previous timestep.</p></li>
+<li><p><strong>W</strong> (<em>ndarray</em>) – Current liquid fraction.</p></li>
+<li><p><strong>W_initial</strong> (<em>ndarray</em>) – Previous liquid fraction.</p></li>
+<li><p><strong>thickness_index</strong> (<em>int</em>) – Index of ice thickness boundary.</p></li>
+<li><p><strong>w</strong> (<em>ndarray</em>) – Convective brine velocity.</p></li>
+<li><p><strong>dt</strong> (<em>float</em>) – Time step.</p></li>
+<li><p><strong>dz</strong> (<em>float</em>) – Spatial step.</p></li>
+<li><p><strong>nz</strong> (<em>int</em>) – Number of spatial grid cells.</p></li>
+<li><p><strong>t_passed</strong> (<em>float</em>) – Simulation time.</p></li>
+<li><p><strong>S_IC</strong> (<em>float</em>) – Initial salinity condition.</p></li>
+<li><p><strong>Stefan</strong> (<em>bool</em>) – Enable Stefan boundary formulation.</p></li>
+<li><p><strong>Buffo</strong> (<em>bool</em>) – Enable Buffo boundary formulation.</p></li>
+<li><p><strong>Voller</strong> (<em>bool</em>) – Enable Voller enthalpy formulation.</p></li>
+<li><p><strong>bc_neumann</strong> (<em>float</em>) – Optional Neumann boundary gradient.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>AssertionError</strong> – If invalid argument is provided.</p></li>
+<li><p><strong>AssertionError</strong> – If both Stefan and Buffo are enabled.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<p>—</p>
+</section>
+<section id="methods">
+<h1>Methods<a class="headerlink" href="#methods" title="Link to this heading">#</a></h1>
+<section id="tdmasolver">
+<h2>TDMAsolver<a class="headerlink" href="#tdmasolver" title="Link to this heading">#</a></h2>
+<dl class="py method">
+<dt class="sig sig-object py" id="TDMAsolver">
+<span class="sig-name descname"><span class="pre">TDMAsolver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#TDMAsolver" title="Link to this definition">#</a></dt>
+<dd><p>Solve a tridiagonal system using the Thomas algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>array</em>) – Sub-diagonal.</p></li>
+<li><p><strong>b</strong> (<em>array</em>) – Main diagonal.</p></li>
+<li><p><strong>c</strong> (<em>array</em>) – Super-diagonal.</p></li>
+<li><p><strong>d</strong> (<em>array</em>) – RHS vector.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Solution vector.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="buffosolver">
+<h2>Buffosolver<a class="headerlink" href="#buffosolver" title="Link to this heading">#</a></h2>
+<dl class="py method">
+<dt class="sig sig-object py" id="Buffosolver">
+<span class="sig-name descname"><span class="pre">Buffosolver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#Buffosolver" title="Link to this definition">#</a></dt>
+<dd><p>Modified tridiagonal solver enforcing diagonal dominance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>ndarray</em>) – Lower diagonal.</p></li>
+<li><p><strong>b</strong> (<em>ndarray</em>) – Upper diagonal.</p></li>
+<li><p><strong>c</strong> (<em>ndarray</em>) – Main diagonal.</p></li>
+<li><p><strong>f</strong> (<em>ndarray</em>) – RHS vector.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Solution vector.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>AssertionError</strong> – If matrix is not diagonally dominant.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="set-up-tridiagonal">
+<h2>set_up_tridiagonal<a class="headerlink" href="#set-up-tridiagonal" title="Link to this heading">#</a></h2>
+<dl class="py method">
+<dt class="sig sig-object py" id="set_up_tridiagonal">
+<span class="sig-name descname"><span class="pre">set_up_tridiagonal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#set_up_tridiagonal" title="Link to this definition">#</a></dt>
+<dd><p>Construct diagonal vectors for the implicit scheme matrix.
+Handles separate logic for temperature and salinity,
+including upwinding and boundary adjustments.</p>
+</dd></dl>
+
+</section>
+<section id="assemble-tridiagonal">
+<h2>assemble_tridiagonal<a class="headerlink" href="#assemble-tridiagonal" title="Link to this heading">#</a></h2>
+<dl class="py method">
+<dt class="sig sig-object py" id="assemble_tridiagonal">
+<span class="sig-name descname"><span class="pre">assemble_tridiagonal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#assemble_tridiagonal" title="Link to this definition">#</a></dt>
+<dd><p>Assemble full matrix from diagonal vectors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Assembled system matrix.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="modify-tridiagonal-voller-scheme">
+<h2>modify_tridiagonal_voller_scheme<a class="headerlink" href="#modify-tridiagonal-voller-scheme" title="Link to this heading">#</a></h2>
+<dl class="py method">
+<dt class="sig sig-object py" id="modify_tridiagonal_voller_scheme">
+<span class="sig-name descname"><span class="pre">modify_tridiagonal_voller_scheme</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modify_tridiagonal_voller_scheme" title="Link to this definition">#</a></dt>
+<dd><p>Modify diagonal dominance for mushy-layer cells when
+using the Voller enthalpy scheme.</p>
+</dd></dl>
+
+</section>
+<section id="voller-x-array-set-zero-to-melt">
+<h2>voller_X_array_set_zero_to_melt<a class="headerlink" href="#voller-x-array-set-zero-to-melt" title="Link to this heading">#</a></h2>
+<dl class="py method">
+<dt class="sig sig-object py" id="voller_X_array_set_zero_to_melt">
+<span class="sig-name descname"><span class="pre">voller_X_array_set_zero_to_melt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_boundary</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#voller_X_array_set_zero_to_melt" title="Link to this definition">#</a></dt>
+<dd><p>Force solution values above melting threshold to boundary value.</p>
+</dd></dl>
+
+</section>
+<section id="set-source-term">
+<h2>set_source_term<a class="headerlink" href="#set-source-term" title="Link to this heading">#</a></h2>
+<dl class="py method">
+<dt class="sig sig-object py" id="set_source_term">
+<span class="sig-name descname"><span class="pre">set_source_term</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#set_source_term" title="Link to this definition">#</a></dt>
+<dd><p>Compute discretized source term depending on field type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Source contribution.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="unknowns-matrix">
+<h2>unknowns_matrix<a class="headerlink" href="#unknowns-matrix" title="Link to this heading">#</a></h2>
+<dl class="py method">
+<dt class="sig sig-object py" id="unknowns_matrix">
+<span class="sig-name descname"><span class="pre">unknowns_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">temperature_melt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">non_constant_physical_properties</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#unknowns_matrix" title="Link to this definition">#</a></dt>
+<dd><p>Solve the implicit linear system for the updated field.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>temperature_melt</strong> (<em>float</em>) – Melting temperature.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>X_new</strong> (ndarray) — Updated solution</p></li>
+<li><p><strong>X_wind</strong> (ndarray) — Wind-corrected solution</p></li>
+<li><p><strong>A_before_correction</strong> (ndarray) — System matrix</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="factor-1">
+<h2>factor_1<a class="headerlink" href="#factor-1" title="Link to this heading">#</a></h2>
+<dl class="py method">
+<dt class="sig sig-object py" id="factor_1">
+<span class="sig-name descname"><span class="pre">factor_1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">argument</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nz</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#factor_1" title="Link to this definition">#</a></dt>
+<dd><p>Compute diffusion discretization factor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>ndarray for temperature</p></li>
+<li><p>tuple of ndarrays for salinity (central, plus, minus)</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="factor-2">
+<h2>factor_2<a class="headerlink" href="#factor-2" title="Link to this heading">#</a></h2>
+<dl class="py method">
+<dt class="sig sig-object py" id="factor_2">
+<span class="sig-name descname"><span class="pre">factor_2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nz</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#factor_2" title="Link to this definition">#</a></dt>
+<dd><p>Compute advection discretization factor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="factor-3">
+<h2>factor_3<a class="headerlink" href="#factor-3" title="Link to this heading">#</a></h2>
+<dl class="py method">
+<dt class="sig sig-object py" id="factor_3">
+<span class="sig-name descname"><span class="pre">factor_3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nz</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#factor_3" title="Link to this definition">#</a></dt>
+<dd><p>Compute phase-coupling factor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p>—</p>
+</section>
+</section>
+<section id="numerical-characteristics">
+<h1>Numerical Characteristics<a class="headerlink" href="#numerical-characteristics" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Implicit time discretization</p></li>
+<li><p>Finite difference spatial scheme</p></li>
+<li><p>Tridiagonal linear system</p></li>
+<li><p>Upwind advection (salinity)</p></li>
+<li><p>Optional enthalpy formulation (Voller)</p></li>
+<li><p>Stefan and Buffo boundary options</p></li>
+</ul>
+<p>—</p>
+</section>
+<section id="dependencies">
+<h1>Dependencies<a class="headerlink" href="#dependencies" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">spyice.parameters.user_input</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spyice.coefficients.update_coefficients</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spyice.rhs.apply_boundary_condition</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">spyice.rhs.correct_for_brine_movement</span></code></p></li>
+</ul>
+<p>—</p>
+</section>
+<section id="notes">
+<h1>Notes<a class="headerlink" href="#notes" title="Link to this heading">#</a></h1>
+<p>Only one of <code class="docutils literal notranslate"><span class="pre">Stefan</span></code> or <code class="docutils literal notranslate"><span class="pre">Buffo</span></code> may be active at a time.</p>
+<p>Diagonal dominance is required for the Buffo solver.</p>
+<p>Zero-division protection is implemented in factor calculations.</p>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="spyice.models.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">spyice.models package</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="spyice.models.sea_ice_model.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">src.spyice.models.sea_ice_model</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">src.spyice.models.advection_diffusion</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#class-advectiondiffusion">Class: AdvectionDiffusion</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#AdvectionDiffusion"><code class="docutils literal notranslate"><span class="pre">AdvectionDiffusion</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#methods">Methods</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tdmasolver">TDMAsolver</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#TDMAsolver"><code class="docutils literal notranslate"><span class="pre">TDMAsolver()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#buffosolver">Buffosolver</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Buffosolver"><code class="docutils literal notranslate"><span class="pre">Buffosolver()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-up-tridiagonal">set_up_tridiagonal</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#set_up_tridiagonal"><code class="docutils literal notranslate"><span class="pre">set_up_tridiagonal()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assemble-tridiagonal">assemble_tridiagonal</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assemble_tridiagonal"><code class="docutils literal notranslate"><span class="pre">assemble_tridiagonal()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modify-tridiagonal-voller-scheme">modify_tridiagonal_voller_scheme</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modify_tridiagonal_voller_scheme"><code class="docutils literal notranslate"><span class="pre">modify_tridiagonal_voller_scheme()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#voller-x-array-set-zero-to-melt">voller_X_array_set_zero_to_melt</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#voller_X_array_set_zero_to_melt"><code class="docutils literal notranslate"><span class="pre">voller_X_array_set_zero_to_melt()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-source-term">set_source_term</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#set_source_term"><code class="docutils literal notranslate"><span class="pre">set_source_term()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unknowns-matrix">unknowns_matrix</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unknowns_matrix"><code class="docutils literal notranslate"><span class="pre">unknowns_matrix()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#factor-1">factor_1</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#factor_1"><code class="docutils literal notranslate"><span class="pre">factor_1()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#factor-2">factor_2</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#factor_2"><code class="docutils literal notranslate"><span class="pre">factor_2()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#factor-3">factor_3</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#factor_3"><code class="docutils literal notranslate"><span class="pre">factor_3()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-characteristics">Numerical Characteristics</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#dependencies">Dependencies</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#notes">Notes</a></li>
+</ul>
+
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/api/spyice.models.advection_diffusion.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Sneha Iyer.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

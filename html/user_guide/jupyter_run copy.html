@@ -1,0 +1,628 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" data-theme="auto">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Quick start guide to model building and running with SPyice &#8212; SpyIce  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "auto";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "auto";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=b6ad3417" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'user_guide/jupyter_run copy';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.0.0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="auto">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">SpyIce  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../report/_index.html">
+    About
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quick_start/installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/_index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="_index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quick_start/example/main_original.html">
+    Examples
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../report/_index.html">
+    About
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quick_start/installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../api/_index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="_index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../quick_start/example/main_original.html">
+    Examples
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Quick start guide to model building and running with SPyice</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="Quick-start-guide-to-model-building-and-running-with-SPyice">
+<h1>Quick start guide to model building and running with SPyice<a class="headerlink" href="#Quick-start-guide-to-model-building-and-running-with-SPyice" title="Link to this heading">#</a></h1>
+<p>Demonstrates a simple example for a freezing sea ice model for a simple heat diffusion setup with a user defined boundary temperature value at the top boundary and Salinity of 34ppt choosing constant fixed Dirichlet boundary conditions. For the one phase distinct interface system where sea water is at melt temperature of 271.25K.</p>
+<section id="Import-Packages">
+<h2>Import Packages<a class="headerlink" href="#Import-Packages" title="Link to this heading">#</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">from</span> <span class="nn">omegaconf</span> <span class="kn">import</span> <span class="n">OmegaConf</span>
+
+<span class="kn">from</span> <span class="nn">spyice.utils</span> <span class="kn">import</span> <span class="n">create_output_directory</span>
+<span class="kn">from</span> <span class="nn">spyice.postprocess</span> <span class="kn">import</span> <span class="n">Analysis</span><span class="p">,</span> <span class="n">VisualiseModel</span>
+<span class="kn">from</span> <span class="nn">spyice.utils</span> <span class="kn">import</span> <span class="n">ConfigSort</span>
+<span class="kn">from</span> <span class="nn">spyice.preprocess</span> <span class="kn">import</span> <span class="n">PreProcess</span>
+<span class="kn">from</span> <span class="nn">spyice.models</span> <span class="kn">import</span> <span class="n">SeaIceModel</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-intense-fg ansi-bold">ImportError</span>                               Traceback (most recent call last)
+Cell <span class="ansi-green-intense-fg ansi-bold">In[1], line 11</span>
+<span class="ansi-green-fg">      9</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">spyice</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">postprocess</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> Analysis, VisualiseModel
+<span class="ansi-green-fg">     10</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">spyice</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">utils</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> ConfigSort
+<span class="ansi-green-intense-fg ansi-bold">---&gt; 11</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">spyice</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">preprocess</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> PreProcess
+<span class="ansi-green-fg">     12</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">spyice</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">models</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> SeaIceModel
+
+File <span class="ansi-green-intense-fg ansi-bold">~\Documents\MBDHiWi\MBDHiwi\spyicedir\spyicedir\src\spyice\preprocess\__init__.py:1</span>
+<span class="ansi-green-intense-fg ansi-bold">----&gt; 1</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">pre_process</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> PreProcess
+<span class="ansi-green-fg">      2</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">geometry_settings</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> GeometrySettings
+<span class="ansi-green-fg">      4</span> __all__ <span style="color: rgb(98,98,98)">=</span> [<span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">PreProcess</span><span style="color: rgb(175,0,0)">&#34;</span>,
+<span class="ansi-green-fg">      5</span>            <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">GeometrySettings</span><span style="color: rgb(175,0,0)">&#34;</span>]
+
+File <span class="ansi-green-intense-fg ansi-bold">~\Documents\MBDHiWi\MBDHiwi\spyicedir\spyicedir\src\spyice\preprocess\pre_process.py:12</span>
+<span class="ansi-green-fg">     10</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">spyice</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">parameters</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> ResultsParams
+<span class="ansi-green-fg">     11</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">spyice</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">parameters</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> UserInput
+<span class="ansi-green-intense-fg ansi-bold">---&gt; 12</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">spyice</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">preprocess</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> GeometrySettings
+<span class="ansi-green-fg">     13</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">spyice</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">preprocess</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">initial_boundary_conditions</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> set_initial_conditions
+<span class="ansi-green-fg">     16</span> <span style="color: rgb(175,0,255)">@dataclass</span>
+<span class="ansi-green-fg">     17</span> <span class="ansi-bold" style="color: rgb(0,135,0)">class</span> <span class="ansi-bold" style="color: rgb(0,0,255)">PreprocessData</span>:
+
+<span class="ansi-red-intense-fg ansi-bold">ImportError</span>: cannot import name &#39;GeometrySettings&#39; from partially initialized module &#39;spyice.preprocess&#39; (most likely due to a circular import) (C:\Users\sneha\Documents\MBDHiWi\MBDHiwi\spyicedir\spyicedir\src\spyice\preprocess\__init__.py)
+</pre></div></div>
+</div>
+</section>
+<section id="Define-Inputs-and-Project-Output-paths">
+<h2>Define Inputs and Project Output paths<a class="headerlink" href="#Define-Inputs-and-Project-Output-paths" title="Link to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># creates a OmegaConf object from a dictionary for fast testing only for parameters: constants, dt, S_IC, iter_max, dz</span>
+<span class="n">constants_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;constants&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;constants&quot;</span><span class="p">:</span> <span class="s2">&quot;real&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;dt&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;dt&quot;</span><span class="p">:</span> <span class="mi">47</span><span class="p">},</span>
+    <span class="s2">&quot;S_IC&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;S_IC&quot;</span><span class="p">:</span> <span class="s2">&quot;S34&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;iter_max&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;iter_max&quot;</span><span class="p">:</span> <span class="mi">1500</span><span class="p">},</span>
+    <span class="s2">&quot;dz&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;dz&quot;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">},</span>
+<span class="p">}</span>
+<span class="n">config_raw</span> <span class="o">=</span> <span class="n">OmegaConf</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">constants_dict</span><span class="p">)</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">ConfigSort</span><span class="o">.</span><span class="n">getconfig_dataclass</span><span class="p">(</span><span class="n">config_raw</span><span class="p">,</span> <span class="n">config_type</span><span class="o">=</span><span class="s2">&quot;jupyter&quot;</span><span class="p">)</span>
+
+<span class="c1"># choose your output directory</span>
+<span class="n">base_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span>
+<span class="n">output_base_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">base_dir</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">)</span>
+<span class="n">wo_hydra_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_base_dir</span><span class="p">,</span> <span class="s2">&quot;without_hydra&quot;</span><span class="p">)</span>
+<span class="n">out_dir_final</span> <span class="o">=</span> <span class="n">create_output_directory</span><span class="p">(</span><span class="n">wo_hydra_dir</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">initial_salinity</span><span class="o">.</span><span class="n">S_IC</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;0.01&quot;</span><span class="p">,</span> <span class="s2">&quot;47&quot;</span><span class="p">,</span> <span class="s2">&quot;1500&quot;</span><span class="p">,</span> <span class="s2">&quot;example&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<section id="Preprocessing">
+<h3>Preprocessing<a class="headerlink" href="#Preprocessing" title="Link to this heading">#</a></h3>
+</section>
+<section id="Model-settings">
+<h3>Model settings<a class="headerlink" href="#Model-settings" title="Link to this heading">#</a></h3>
+<p>for more info on all the model parameters have a look at the documentation: <a class="reference external" href="http://%5B::1%5D:8000/api/spyice.parameters.user_input.html">userinput</a></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># choose the diffusion only equation for heat diffusion without the influence of salinity and physical properties</span>
+<span class="n">userinput_data</span> <span class="o">=</span> <span class="n">PreProcess</span><span class="o">.</span><span class="n">get_parameterclass</span><span class="p">(</span><span class="n">config_raw</span><span class="p">,</span> <span class="n">out_dir_final</span><span class="p">)</span>
+<span class="n">userinput_data</span><span class="o">.</span><span class="n">is_diffusiononly_equation</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">userinput_data</span><span class="o">.</span><span class="n">boundary_top_temperature</span> <span class="o">=</span> <span class="mf">250.0</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preprocess_data</span> <span class="o">=</span> <span class="n">PreProcess</span><span class="o">.</span><span class="n">get_preprocesseddata</span><span class="p">(</span><span class="n">userinput_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Run-model">
+<h3>Run model<a class="headerlink" href="#Run-model" title="Link to this heading">#</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># run the model</span>
+<span class="n">results_data</span> <span class="o">=</span> <span class="n">SeaIceModel</span><span class="o">.</span><span class="n">get_results</span><span class="p">(</span><span class="n">preprocess_data</span><span class="p">)</span>
+<span class="n">analysis_data</span> <span class="o">=</span> <span class="n">Analysis</span><span class="o">.</span><span class="n">get_error_results</span><span class="p">(</span>
+            <span class="n">t_k_diff</span><span class="o">=</span><span class="n">results_data</span><span class="o">.</span><span class="n">t_k_diff</span><span class="p">,</span>
+            <span class="n">t_stefan_diff</span><span class="o">=</span><span class="n">results_data</span><span class="o">.</span><span class="n">t_stefan_diff</span><span class="p">,</span>
+            <span class="n">residual</span><span class="o">=</span><span class="n">results_data</span><span class="o">.</span><span class="n">residual_voller_all</span><span class="p">,</span>
+            <span class="n">temperature_mushy</span><span class="o">=</span><span class="n">results_data</span><span class="o">.</span><span class="n">t_k_iter_all</span><span class="p">,</span>
+            <span class="n">phi_mushy</span><span class="o">=</span><span class="n">results_data</span><span class="o">.</span><span class="n">all_phi_iter_all</span><span class="p">,</span>
+            <span class="n">salinity_mushy</span><span class="o">=</span><span class="n">results_data</span><span class="o">.</span><span class="n">s_k_iter_all</span><span class="p">,</span>
+            <span class="n">output_dir</span><span class="o">=</span><span class="n">out_dir_final</span><span class="p">,</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Visualization-of-Model:">
+<h3>Visualization of Model:<a class="headerlink" href="#Visualization-of-Model:" title="Link to this heading">#</a></h3>
+<p>for more info on other visualization options look at: <a class="reference external" href="http://%5B::1%5D:8000/api/spyice.postprocess.visualise_model.html">visualize model</a></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_visualization_object</span> <span class="o">=</span> <span class="n">VisualiseModel</span><span class="p">(</span>
+    <span class="n">user_input_dataclass</span><span class="o">=</span><span class="n">userinput_data</span><span class="p">,</span>
+    <span class="n">results_dataclass</span><span class="o">=</span><span class="n">results_data</span><span class="p">,</span>
+    <span class="n">error_analysis_dataclass</span><span class="o">=</span><span class="n">analysis_data</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plots the Temperature Difference between Analytical and Numerical Solutions</span>
+<span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_error_temp</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s2">&quot;inf&quot;</span><span class="p">,</span> <span class="n">savefig</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plots the interface tracking over time for Analytical and Numerical Solutions</span>
+<span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_depth_over_time</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_temperature_heatmap</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">export_csv</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_salinity_heatmap</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Import-Packages">Import Packages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Define-Inputs-and-Project-Output-paths">Define Inputs and Project Output paths</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Preprocessing">Preprocessing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Model-settings">Model settings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Run-model">Run model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Visualization-of-Model:">Visualization of Model:</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/user_guide/jupyter_run copy.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Sneha Iyer.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

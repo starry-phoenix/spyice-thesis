@@ -1,0 +1,2234 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" data-theme="auto">
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Index &#8212; SpyIce  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "auto";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "auto";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=b6ad3417" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'genindex';</script>
+    <link rel="index" title="Index" href="#" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="1.0.0" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="auto">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">SpyIce  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="report/_index.html">
+    About
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="quick_start/installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api/_index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="quick_start/example/main_original.html">
+    Examples
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="report/_index.html">
+    About
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="quick_start/installation.html">
+    Installation
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="api/_index.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="user_guide/_index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="quick_start/example/main_original.html">
+    Examples
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none"></div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+
+<h1 id="index">Index</h1>
+
+<div class="genindex-jumpbox">
+ <a href="#_"><strong>_</strong></a>
+ | <a href="#A"><strong>A</strong></a>
+ | <a href="#B"><strong>B</strong></a>
+ | <a href="#C"><strong>C</strong></a>
+ | <a href="#D"><strong>D</strong></a>
+ | <a href="#E"><strong>E</strong></a>
+ | <a href="#F"><strong>F</strong></a>
+ | <a href="#G"><strong>G</strong></a>
+ | <a href="#H"><strong>H</strong></a>
+ | <a href="#I"><strong>I</strong></a>
+ | <a href="#K"><strong>K</strong></a>
+ | <a href="#L"><strong>L</strong></a>
+ | <a href="#M"><strong>M</strong></a>
+ | <a href="#N"><strong>N</strong></a>
+ | <a href="#O"><strong>O</strong></a>
+ | <a href="#P"><strong>P</strong></a>
+ | <a href="#R"><strong>R</strong></a>
+ | <a href="#S"><strong>S</strong></a>
+ | <a href="#T"><strong>T</strong></a>
+ | <a href="#U"><strong>U</strong></a>
+ | <a href="#V"><strong>V</strong></a>
+ | <a href="#W"><strong>W</strong></a>
+ 
+</div>
+<h2 id="_">_</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.preprocess.pre_process.html#PreProcess.__init__">__init__() (PreProcess method)</a>
+
+      <ul>
+        <li><a href="api/spyice.models.sea_ice_model.html#spyice.models.sea_ice_model.SeaIceModel.__init__">(spyice.models.sea_ice_model.SeaIceModel method)</a>
+</li>
+        <li><a href="api/spyice.main_process.html#src.spyice.main_process.MainProcess.__init__">(src.spyice.main_process.MainProcess method)</a>
+</li>
+        <li><a href="api/spyice.models.html#src.spyice.models.SeaIceModel.__init__">(src.spyice.models.SeaIceModel method)</a>
+</li>
+        <li><a href="api/spyice.parameters.debug_constants.html#src.spyice.parameters.debug_constants.DebugConstants.__init__">(src.spyice.parameters.debug_constants.DebugConstants method)</a>
+</li>
+        <li><a href="api/spyice.parameters.real_constants.html#src.spyice.parameters.real_constants.RealConstants.__init__">(src.spyice.parameters.real_constants.RealConstants method)</a>
+</li>
+        <li><a href="api/spyice.parameters.results_params.html#src.spyice.parameters.results_params.ResultsParams.__init__">(src.spyice.parameters.results_params.ResultsParams method)</a>
+</li>
+        <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.__init__">(src.spyice.parameters.user_input.UserInput method)</a>
+</li>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.Analysis.__init__">(src.spyice.postprocess.Analysis method)</a>
+</li>
+        <li><a href="api/spyice.postprocess.analysis.html#src.spyice.postprocess.analysis.Analysis.__init__">(src.spyice.postprocess.analysis.Analysis method)</a>
+</li>
+        <li><a href="api/spyice.postprocess.analysis.html#src.spyice.postprocess.analysis.AnalysisData.__init__">(src.spyice.postprocess.analysis.AnalysisData method)</a>
+</li>
+        <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.__init__">(src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+</li>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.__init__">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+        <li><a href="api/spyice.preprocess.geometry_settings.html#src.spyice.preprocess.geometry_settings.GeometrySettings.__init__">(src.spyice.preprocess.geometry_settings.GeometrySettings method)</a>
+</li>
+        <li><a href="api/spyice.preprocess.modify_initial_boundary.html#src.spyice.preprocess.modify_initial_boundary.ModifyInitialBoundary.__init__">(src.spyice.preprocess.modify_initial_boundary.ModifyInitialBoundary method)</a>
+</li>
+        <li><a href="api/spyice.preprocess.html#src.spyice.preprocess.PreProcess.__init__">(src.spyice.preprocess.PreProcess method)</a>
+</li>
+        <li><a href="api/spyice.utils.config_sort.html#src.spyice.utils.config_sort.ConfigData.__init__">(src.spyice.utils.config_sort.ConfigData method)</a>
+</li>
+        <li><a href="api/spyice.utils.config_sort.html#src.spyice.utils.config_sort.ConfigSort.__init__">(src.spyice.utils.config_sort.ConfigSort method)</a>
+</li>
+        <li><a href="api/spyice.utils.html#src.spyice.utils.ConfigSort.__init__">(src.spyice.utils.ConfigSort method)</a>
+</li>
+        <li><a href="api/spyice.utils.error_norms.html#src.spyice.utils.error_norms.ErrorNorms.__init__">(src.spyice.utils.error_norms.ErrorNorms method)</a>
+</li>
+        <li><a href="api/spyice.utils.spyice_exceptions.html#src.spyice.utils.spyice_exceptions.ConvergenceError.__init__">(src.spyice.utils.spyice_exceptions.ConvergenceError method)</a>
+</li>
+        <li><a href="api/spyice.utils.spyice_logger.html#src.spyice.utils.spyice_logger.SpyiceLogger.__init__">(src.spyice.utils.spyice_logger.SpyiceLogger method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.BoundaryConditionType.__new__">__new__() (src.spyice.parameters.user_input.BoundaryConditionType method)</a>
+
+      <ul>
+        <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.FileNameSuffix.__new__">(src.spyice.parameters.user_input.FileNameSuffix method)</a>
+</li>
+        <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.InitialLiquidFraction.__new__">(src.spyice.parameters.user_input.InitialLiquidFraction method)</a>
+</li>
+        <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.InitialMeltTemperature.__new__">(src.spyice.parameters.user_input.InitialMeltTemperature method)</a>
+</li>
+        <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.InitialSalinity.__new__">(src.spyice.parameters.user_input.InitialSalinity method)</a>
+</li>
+        <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.InitialTemperature.__new__">(src.spyice.parameters.user_input.InitialTemperature method)</a>
+</li>
+        <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.LiquidusRelation.__new__">(src.spyice.parameters.user_input.LiquidusRelation method)</a>
+</li>
+        <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.TopTemperatureType.__new__">(src.spyice.parameters.user_input.TopTemperatureType method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.__post_init__">__post_init__() (src.spyice.parameters.user_input.UserInput method)</a>
+</li>
+      <li><a href="api/spyice.models.stefan_problem.html#plot_stefan_temp_twophase">_plot_stefan_temp_twophase()</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="A">A</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.parameters.debug_constants.html#src.spyice.parameters.debug_constants.DebugConstants.a_phi">a_phi (src.spyice.parameters.debug_constants.DebugConstants attribute)</a>
+
+      <ul>
+        <li><a href="api/spyice.parameters.real_constants.html#src.spyice.parameters.real_constants.RealConstants.a_phi">(src.spyice.parameters.real_constants.RealConstants attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.models.sea_ice_model.html#spyice.models.sea_ice_model.SeaIceModel.add_new_parameter_results">add_new_parameter_results() (spyice.models.sea_ice_model.SeaIceModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.models.html#src.spyice.models.SeaIceModel.add_new_parameter_results">(src.spyice.models.SeaIceModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.models.advection_diffusion.html#AdvectionDiffusion">AdvectionDiffusion (built-in class)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.algae_model_BAL_type">algae_model_BAL_type (src.spyice.parameters.user_input.UserInput attribute)</a>
+</li>
+      <li><a href="api/spyice.postprocess.analysis.html#src.spyice.postprocess.analysis.AnalysisData.all_variables">all_variables (src.spyice.postprocess.analysis.AnalysisData attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.parameters.debug_constants.html#src.spyice.parameters.debug_constants.DebugConstants.alpha">alpha (src.spyice.parameters.debug_constants.DebugConstants attribute)</a>
+
+      <ul>
+        <li><a href="api/spyice.parameters.real_constants.html#src.spyice.parameters.real_constants.RealConstants.alpha">(src.spyice.parameters.real_constants.RealConstants attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.Analysis">Analysis (class in src.spyice.postprocess)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.analysis.html#src.spyice.postprocess.analysis.Analysis">(class in src.spyice.postprocess.analysis)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.analysis.html#src.spyice.postprocess.analysis.AnalysisData">AnalysisData (class in src.spyice.postprocess.analysis)</a>
+</li>
+      <li><a href="api/spyice.rhs.html#src.spyice.rhs.apply_boundary_condition">apply_boundary_condition() (in module src.spyice.rhs)</a>
+</li>
+      <li><a href="api/spyice.models.advection_diffusion.html#assemble_tridiagonal">assemble_tridiagonal()</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="B">B</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.parameters.debug_constants.html#src.spyice.parameters.debug_constants.DebugConstants.b_phi">b_phi (src.spyice.parameters.debug_constants.DebugConstants attribute)</a>
+
+      <ul>
+        <li><a href="api/spyice.parameters.real_constants.html#src.spyice.parameters.real_constants.RealConstants.b_phi">(src.spyice.parameters.real_constants.RealConstants attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.models.sea_ice_model.html#spyice.models.sea_ice_model.SeaIceModel.bc_neumann">bc_neumann() (spyice.models.sea_ice_model.SeaIceModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.models.html#src.spyice.models.SeaIceModel.bc_neumann">(src.spyice.models.SeaIceModel method)</a>
+</li>
+        <li><a href="api/spyice.preprocess.modify_initial_boundary.html#src.spyice.preprocess.modify_initial_boundary.ModifyInitialBoundary.bc_neumann">(src.spyice.preprocess.modify_initial_boundary.ModifyInitialBoundary method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.parameters.debug_constants.html#src.spyice.parameters.debug_constants.DebugConstants.beta">beta (src.spyice.parameters.debug_constants.DebugConstants attribute)</a>
+
+      <ul>
+        <li><a href="api/spyice.parameters.real_constants.html#src.spyice.parameters.real_constants.RealConstants.beta">(src.spyice.parameters.real_constants.RealConstants attribute)</a>
+</li>
+      </ul></li>
+      <li>
+    biogeochemical_model()
+
+      <ul>
+        <li><a href="api/spyice.models.algae_model.html#biogeochemical_model">built-in function</a>
+</li>
+      </ul></li>
+      <li>
+    biogeochemical_model_at_alldepths()
+
+      <ul>
+        <li><a href="api/spyice.models.algae_model.html#biogeochemical_model_at_alldepths">built-in function</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.preprocess.initial_boundary_conditions.html#src.spyice.preprocess.initial_boundary_conditions.boundary_condition">boundary_condition() (in module src.spyice.preprocess.initial_boundary_conditions)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.boundary_condition_type">boundary_condition_type (src.spyice.parameters.user_input.UserInput attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.boundary_salinity">boundary_salinity (src.spyice.parameters.user_input.UserInput attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.boundary_top_temperature">boundary_top_temperature (src.spyice.parameters.user_input.UserInput attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.BoundaryConditionType">BoundaryConditionType (class in src.spyice.parameters.user_input)</a>
+</li>
+      <li><a href="api/spyice.models.advection_diffusion.html#Buffosolver">Buffosolver()</a>
+</li>
+      <li>
+    built-in function
+
+      <ul>
+        <li><a href="api/spyice.models.algae_model.html#biogeochemical_model">biogeochemical_model()</a>
+</li>
+        <li><a href="api/spyice.models.algae_model.html#biogeochemical_model_at_alldepths">biogeochemical_model_at_alldepths()</a>
+</li>
+        <li><a href="api/spyice.models.radiative_model.html#calculate_brine_flux">calculate_brine_flux()</a>
+</li>
+        <li><a href="api/spyice.models.radiative_model.html#calculate_in_out_brine_flux">calculate_in_out_brine_flux()</a>
+</li>
+        <li><a href="api/spyice.utils.initial_userinput.html#calculate_initial_melt_temperature">calculate_initial_melt_temperature()</a>
+</li>
+        <li><a href="api/spyice.utils.initial_userinput.html#calculate_initial_melt_temperature_onephase">calculate_initial_melt_temperature_onephase()</a>
+</li>
+        <li><a href="api/spyice.utils.initial_userinput.html#calculate_initial_melt_temperature_twophase">calculate_initial_melt_temperature_twophase()</a>
+</li>
+        <li><a href="api/spyice.utils.initial_userinput.html#calculate_initial_temperature_frezchem">calculate_initial_temperature_frezchem()</a>
+</li>
+        <li><a href="api/spyice.models.radiative_model.html#calculate_local_rayleigh_number">calculate_local_rayleigh_number()</a>
+</li>
+        <li><a href="api/spyice.misc_subroutines.html#calculate_melting_temperature_from_salinity">calculate_melting_temperature_from_salinity()</a>
+</li>
+        <li><a href="api/spyice.models.radiative_model.html#calculate_permeability">calculate_permeability()</a>
+</li>
+        <li><a href="api/spyice.models.radiative_model.html#calculate_radiative_terms">calculate_radiative_terms()</a>
+</li>
+        <li><a href="api/spyice.models.radiative_model.html#calculate_salinity_flux">calculate_salinity_flux()</a>
+</li>
+        <li><a href="api/spyice.models.radiative_model.html#calculate_salinity_source_term_from_brineflux">calculate_salinity_source_term_from_brineflux()</a>
+</li>
+        <li><a href="api/spyice.models.algae_model.html#chla_algae">chla_algae()</a>
+</li>
+        <li><a href="api/spyice.models.algae_model.html#cholorophyl_to_C_ratio_par">cholorophyl_to_C_ratio_par()</a>
+</li>
+        <li><a href="api/spyice.preprocess.store.html#create_directory">create_directory()</a>
+</li>
+        <li><a href="api/spyice.utils.create_directory.html#create_output_directory">create_output_directory()</a>
+</li>
+        <li><a href="api/spyice.models.algae_model.html#Ek_light">Ek_light()</a>
+</li>
+        <li><a href="api/spyice.models.algae_model.html#Ek_light_tanh">Ek_light_tanh()</a>
+</li>
+        <li><a href="api/spyice.models.algae_model.html#fs_ft">fs_ft()</a>
+</li>
+        <li><a href="api/spyice.models.algae_model.html#fs_ft_ln">fs_ft_ln()</a>
+</li>
+        <li><a href="api/spyice.models.algae_model.html#fs_salinity">fs_salinity()</a>
+</li>
+        <li><a href="api/spyice.models.algae_model.html#ft_temperature">ft_temperature()</a>
+</li>
+        <li><a href="api/spyice.models.algae_model.html#get_bulk_tracer_concentration">get_bulk_tracer_concentration()</a>
+</li>
+        <li><a href="api/spyice.models.radiative_model.html#get_salinity_source_term">get_salinity_source_term()</a>
+</li>
+        <li><a href="api/spyice.models.algae_model.html#ln_nutrient">ln_nutrient()</a>
+</li>
+        <li><a href="api/spyice.models.algae_model.html#model_algae_processes">model_algae_processes()</a>
+</li>
+        <li><a href="api/spyice.models.algae_model.html#ode_update_carbon_nutrient_uptake">ode_update_carbon_nutrient_uptake()</a>
+</li>
+        <li><a href="api/spyice.models.algae_model.html#Photosynthesis_rate_maximum_light">Photosynthesis_rate_maximum_light()</a>
+</li>
+        <li><a href="api/spyice.models.algae_model.html#photosynthetic_active_radiation">photosynthetic_active_radiation()</a>
+</li>
+        <li><a href="api/spyice.models.algae_model.html#photosynthetic_rate">photosynthetic_rate()</a>
+</li>
+        <li><a href="api/spyice.models.algae_model.html#radiation_algae">radiation_algae()</a>
+</li>
+        <li><a href="api/spyice.models.radiative_model.html#radiative_ice">radiative_ice()</a>
+</li>
+        <li><a href="api/spyice.models.radiative_model.html#radiative_organicmatter">radiative_organicmatter()</a>
+</li>
+        <li><a href="api/spyice.models.radiative_model.html#radiative_source_term">radiative_source_term()</a>
+</li>
+        <li><a href="api/spyice.preprocess.store.html#save_results">save_results()</a>
+</li>
+        <li><a href="api/spyice.preprocess.pre_process.html#set_up_iter">set_up_iter()</a>
+</li>
+        <li><a href="api/spyice.preprocess.store.html#set_up_matrices">set_up_matrices()</a>
+</li>
+        <li><a href="api/spyice.preprocess.store.html#store_results">store_results()</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="C">C</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.parameters.debug_constants.html#src.spyice.parameters.debug_constants.DebugConstants.c_br">c_br (src.spyice.parameters.debug_constants.DebugConstants attribute)</a>
+
+      <ul>
+        <li><a href="api/spyice.parameters.real_constants.html#src.spyice.parameters.real_constants.RealConstants.c_br">(src.spyice.parameters.real_constants.RealConstants attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.parameters.debug_constants.html#src.spyice.parameters.debug_constants.DebugConstants.c_i">c_i (src.spyice.parameters.debug_constants.DebugConstants attribute)</a>
+
+      <ul>
+        <li><a href="api/spyice.parameters.real_constants.html#src.spyice.parameters.real_constants.RealConstants.c_i">(src.spyice.parameters.real_constants.RealConstants attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.parameters.debug_constants.html#src.spyice.parameters.debug_constants.DebugConstants.c_w">c_w (src.spyice.parameters.debug_constants.DebugConstants attribute)</a>
+
+      <ul>
+        <li><a href="api/spyice.parameters.real_constants.html#src.spyice.parameters.real_constants.RealConstants.c_w">(src.spyice.parameters.real_constants.RealConstants attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.preprocess.initial_boundary_conditions.html#src.spyice.preprocess.initial_boundary_conditions.calculate_boundary_salinity">calculate_boundary_salinity() (in module src.spyice.preprocess.initial_boundary_conditions)</a>
+</li>
+      <li><a href="api/spyice.preprocess.initial_boundary_conditions.html#src.spyice.preprocess.initial_boundary_conditions.calculate_boundary_temperature">calculate_boundary_temperature() (in module src.spyice.preprocess.initial_boundary_conditions)</a>
+</li>
+      <li>
+    calculate_brine_flux()
+
+      <ul>
+        <li><a href="api/spyice.models.radiative_model.html#calculate_brine_flux">built-in function</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.update_physical_values.html#src.spyice.update_physical_values.calculate_brine_velocity_darcyscheme">calculate_brine_velocity_darcyscheme() (in module src.spyice.update_physical_values)</a>
+</li>
+      <li><a href="api/spyice.update_physical_values.html#src.spyice.update_physical_values.calculate_brine_velocity_upwindscheme">calculate_brine_velocity_upwindscheme() (in module src.spyice.update_physical_values)</a>
+</li>
+      <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.Analysis.calculate_errors">calculate_errors() (src.spyice.postprocess.Analysis method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.analysis.html#src.spyice.postprocess.analysis.Analysis.calculate_errors">(src.spyice.postprocess.analysis.Analysis method)</a>
+</li>
+      </ul></li>
+      <li>
+    calculate_in_out_brine_flux()
+
+      <ul>
+        <li><a href="api/spyice.models.radiative_model.html#calculate_in_out_brine_flux">built-in function</a>
+</li>
+      </ul></li>
+      <li>
+    calculate_initial_melt_temperature()
+
+      <ul>
+        <li><a href="api/spyice.utils.initial_userinput.html#calculate_initial_melt_temperature">built-in function</a>
+</li>
+      </ul></li>
+      <li>
+    calculate_initial_melt_temperature_onephase()
+
+      <ul>
+        <li><a href="api/spyice.utils.initial_userinput.html#calculate_initial_melt_temperature_onephase">built-in function</a>
+</li>
+      </ul></li>
+      <li>
+    calculate_initial_melt_temperature_twophase()
+
+      <ul>
+        <li><a href="api/spyice.utils.initial_userinput.html#calculate_initial_melt_temperature_twophase">built-in function</a>
+</li>
+      </ul></li>
+      <li>
+    calculate_initial_temperature_frezchem()
+
+      <ul>
+        <li><a href="api/spyice.utils.initial_userinput.html#calculate_initial_temperature_frezchem">built-in function</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.update_physical_values.html#src.spyice.update_physical_values.calculate_liquidus_temperature">calculate_liquidus_temperature() (in module src.spyice.update_physical_values)</a>
+</li>
+      <li>
+    calculate_local_rayleigh_number()
+
+      <ul>
+        <li><a href="api/spyice.models.radiative_model.html#calculate_local_rayleigh_number">built-in function</a>
+</li>
+      </ul></li>
+      <li>
+    calculate_melting_temperature_from_salinity()
+
+      <ul>
+        <li><a href="api/spyice.misc_subroutines.html#calculate_melting_temperature_from_salinity">built-in function</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.update_physical_values.html#src.spyice.update_physical_values.calculate_melting_temperature_from_salinity">calculate_melting_temperature_from_salinity() (in module src.spyice.update_physical_values)</a>
+</li>
+      <li>
+    calculate_permeability()
+
+      <ul>
+        <li><a href="api/spyice.models.radiative_model.html#calculate_permeability">built-in function</a>
+</li>
+      </ul></li>
+      <li>
+    calculate_radiative_terms()
+
+      <ul>
+        <li><a href="api/spyice.models.radiative_model.html#calculate_radiative_terms">built-in function</a>
+</li>
+      </ul></li>
+      <li>
+    calculate_salinity_flux()
+
+      <ul>
+        <li><a href="api/spyice.models.radiative_model.html#calculate_salinity_flux">built-in function</a>
+</li>
+      </ul></li>
+      <li>
+    calculate_salinity_source_term_from_brineflux()
+
+      <ul>
+        <li><a href="api/spyice.models.radiative_model.html#calculate_salinity_source_term_from_brineflux">built-in function</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.models.sea_ice_model.html#spyice.models.sea_ice_model.SeaIceModel.calculate_source_terms">calculate_source_terms() (spyice.models.sea_ice_model.SeaIceModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.models.html#src.spyice.models.SeaIceModel.calculate_source_terms">(src.spyice.models.SeaIceModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.models.stefan_problem.html#calculate_temperature_profile">calculate_temperature_profile()</a>
+</li>
+      <li><a href="api/spyice.models.stefan_problem.html#calculate_temperature_twophase_profiles">calculate_temperature_twophase_profiles()</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.carbon_cc_ice_initial">carbon_cc_ice_initial (src.spyice.parameters.user_input.UserInput attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.carbon_cc_water_initial">carbon_cc_water_initial (src.spyice.parameters.user_input.UserInput attribute)</a>
+</li>
+      <li><a href="api/spyice.models.sea_ice_model.html#spyice.models.sea_ice_model.SeaIceModel.check_and_reset_any_iteration_data">check_and_reset_any_iteration_data() (spyice.models.sea_ice_model.SeaIceModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.models.html#src.spyice.models.SeaIceModel.check_and_reset_any_iteration_data">(src.spyice.models.SeaIceModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.models.sea_ice_model.html#spyice.models.sea_ice_model.SeaIceModel.check_convergence">check_convergence() (spyice.models.sea_ice_model.SeaIceModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.models.html#src.spyice.models.SeaIceModel.check_convergence">(src.spyice.models.SeaIceModel method)</a>
+</li>
+      </ul></li>
+      <li>
+    chla_algae()
+
+      <ul>
+        <li><a href="api/spyice.models.algae_model.html#chla_algae">built-in function</a>
+</li>
+      </ul></li>
+      <li>
+    cholorophyl_to_C_ratio_par()
+
+      <ul>
+        <li><a href="api/spyice.models.algae_model.html#cholorophyl_to_C_ratio_par">built-in function</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.models.sea_ice_model.html#spyice.models.sea_ice_model.SeaIceModel.choose_phase_type_iteration">choose_phase_type_iteration() (spyice.models.sea_ice_model.SeaIceModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.models.html#src.spyice.models.SeaIceModel.choose_phase_type_iteration">(src.spyice.models.SeaIceModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.statevariables.html#src.spyice.statevariables.compute_error_for_convergence">compute_error_for_convergence() (in module src.spyice.statevariables)</a>
+</li>
+      <li><a href="api/spyice.preprocess.initial_boundary_conditions.html#src.spyice.preprocess.initial_boundary_conditions.compute_melting_temperature_from_salinity">compute_melting_temperature_from_salinity() (in module src.spyice.preprocess.initial_boundary_conditions)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.config_data">config_data (src.spyice.parameters.user_input.UserInput attribute)</a>
+</li>
+      <li><a href="api/spyice.utils.config_sort.html#src.spyice.utils.config_sort.ConfigData">ConfigData (class in src.spyice.utils.config_sort)</a>
+</li>
+      <li><a href="api/spyice.utils.html#src.spyice.utils.ConfigSort">ConfigSort (class in src.spyice.utils)</a>
+
+      <ul>
+        <li><a href="api/spyice.utils.config_sort.html#src.spyice.utils.config_sort.ConfigSort">(class in src.spyice.utils.config_sort)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.FileNameSuffix.CONST_DENS">CONST_DENS (src.spyice.parameters.user_input.FileNameSuffix attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.constants.html#src.spyice.parameters.constants.Constants">Constants (class in src.spyice.parameters.constants)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.constants">constants (src.spyice.parameters.user_input.UserInput attribute)</a>
+</li>
+      <li><a href="api/spyice.models.sea_ice_model.html#spyice.models.sea_ice_model.SeaIceModel.convergence_loop_iteration">convergence_loop_iteration() (spyice.models.sea_ice_model.SeaIceModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.models.html#src.spyice.models.SeaIceModel.convergence_loop_iteration">(src.spyice.models.SeaIceModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.utils.spyice_exceptions.html#src.spyice.utils.spyice_exceptions.ConvergenceError">ConvergenceError</a>
+</li>
+      <li><a href="api/spyice.rhs.html#src.spyice.rhs.correct_for_brine_movement">correct_for_brine_movement() (in module src.spyice.rhs)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.counter_limit">counter_limit (src.spyice.parameters.user_input.UserInput attribute)</a>
+</li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.create_2d_array">create_2d_array() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.create_2d_array">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li>
+    create_directory()
+
+      <ul>
+        <li><a href="api/spyice.preprocess.store.html#create_directory">built-in function</a>
+</li>
+      </ul></li>
+      <li>
+    create_output_directory()
+
+      <ul>
+        <li><a href="api/spyice.utils.create_directory.html#create_output_directory">built-in function</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.utils.html#src.spyice.utils.create_output_directory">create_output_directory() (in module src.spyice.utils)</a>
+</li>
+      <li><a href="api/spyice.parameters.real_constants.html#src.spyice.parameters.real_constants.RealConstants.critical_depth">critical_depth (src.spyice.parameters.real_constants.RealConstants attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.critical_liquid_fraction">critical_liquid_fraction (src.spyice.parameters.user_input.UserInput attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="D">D</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.parameters.debug_constants.html#src.spyice.parameters.debug_constants.DebugConstants.D_s">D_s (src.spyice.parameters.debug_constants.DebugConstants attribute)</a>
+
+      <ul>
+        <li><a href="api/spyice.parameters.real_constants.html#src.spyice.parameters.real_constants.RealConstants.D_s">(src.spyice.parameters.real_constants.RealConstants attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.parameters.constants.html#src.spyice.parameters.constants.Constants.DEBUG">DEBUG (src.spyice.parameters.constants.Constants attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.debug_constants.html#src.spyice.parameters.debug_constants.DebugConstants">DebugConstants (class in src.spyice.parameters.debug_constants)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.dir_output_name">dir_output_name (src.spyice.parameters.user_input.UserInput attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.dir_output_name_hydra">dir_output_name_hydra (src.spyice.parameters.user_input.UserInput attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.BoundaryConditionType.DIRICHLET">DIRICHLET (src.spyice.parameters.user_input.BoundaryConditionType attribute)</a>
+
+      <ul>
+        <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.TopTemperatureType.DIRICHLET">(src.spyice.parameters.user_input.TopTemperatureType attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="E">E</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    Ek_light()
+
+      <ul>
+        <li><a href="api/spyice.models.algae_model.html#Ek_light">built-in function</a>
+</li>
+      </ul></li>
+      <li>
+    Ek_light_tanh()
+
+      <ul>
+        <li><a href="api/spyice.models.algae_model.html#Ek_light_tanh">built-in function</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.Analysis.error_analytical_numerical">error_analytical_numerical() (src.spyice.postprocess.Analysis method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.analysis.html#src.spyice.postprocess.analysis.Analysis.error_analytical_numerical">(src.spyice.postprocess.analysis.Analysis method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.utils.error_norms.html#src.spyice.utils.error_norms.ErrorNorms">ErrorNorms (class in src.spyice.utils.error_norms)</a>
+</li>
+      <li><a href="api/spyice.utils.helpers.html#src.spyice.utils.helpers.export_residuals">export_residuals() (in module src.spyice.utils.helpers)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.Analysis.export_residuals">(src.spyice.postprocess.Analysis method)</a>
+</li>
+        <li><a href="api/spyice.postprocess.analysis.html#src.spyice.postprocess.analysis.Analysis.export_residuals">(src.spyice.postprocess.analysis.Analysis method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.models.advection_diffusion.html#factor_1">factor_1()</a>
+</li>
+      <li><a href="api/spyice.models.advection_diffusion.html#factor_2">factor_2()</a>
+</li>
+      <li><a href="api/spyice.models.advection_diffusion.html#factor_3">factor_3()</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.FileNameSuffix">FileNameSuffix (class in src.spyice.parameters.user_input)</a>
+</li>
+      <li><a href="api/spyice.utils.spyice_logger.html#src.spyice.utils.spyice_logger.SpyiceLogger.flush">flush() (src.spyice.utils.spyice_logger.SpyiceLogger method)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.fourier_number_timestep">fourier_number_timestep() (in module src.spyice.parameters.user_input)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.InitialMeltTemperature.FREZCHEM">FREZCHEM (src.spyice.parameters.user_input.InitialMeltTemperature attribute)</a>
+
+      <ul>
+        <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.LiquidusRelation.FREZCHEM">(src.spyice.parameters.user_input.LiquidusRelation attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    fs_ft()
+
+      <ul>
+        <li><a href="api/spyice.models.algae_model.html#fs_ft">built-in function</a>
+</li>
+      </ul></li>
+      <li>
+    fs_ft_ln()
+
+      <ul>
+        <li><a href="api/spyice.models.algae_model.html#fs_ft_ln">built-in function</a>
+</li>
+      </ul></li>
+      <li>
+    fs_salinity()
+
+      <ul>
+        <li><a href="api/spyice.models.algae_model.html#fs_salinity">built-in function</a>
+</li>
+      </ul></li>
+      <li>
+    ft_temperature()
+
+      <ul>
+        <li><a href="api/spyice.models.algae_model.html#ft_temperature">built-in function</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="G">G</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.parameters.debug_constants.html#src.spyice.parameters.debug_constants.DebugConstants.g">g (src.spyice.parameters.debug_constants.DebugConstants attribute)</a>
+
+      <ul>
+        <li><a href="api/spyice.parameters.real_constants.html#src.spyice.parameters.real_constants.RealConstants.g">(src.spyice.parameters.real_constants.RealConstants attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.geometry_type">geometry_type (src.spyice.parameters.user_input.UserInput attribute)</a>
+</li>
+      <li><a href="api/spyice.preprocess.geometry_settings.html#src.spyice.preprocess.geometry_settings.GeometrySettings">GeometrySettings (class in src.spyice.preprocess.geometry_settings)</a>
+</li>
+      <li>
+    get_bulk_tracer_concentration()
+
+      <ul>
+        <li><a href="api/spyice.models.algae_model.html#get_bulk_tracer_concentration">built-in function</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.utils.config_sort.html#src.spyice.utils.config_sort.ConfigSort.get_config_params">get_config_params() (src.spyice.utils.config_sort.ConfigSort method)</a>
+
+      <ul>
+        <li><a href="api/spyice.utils.html#src.spyice.utils.ConfigSort.get_config_params">(src.spyice.utils.ConfigSort method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.Analysis.get_error_results">get_error_results() (src.spyice.postprocess.Analysis class method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.analysis.html#src.spyice.postprocess.analysis.Analysis.get_error_results">(src.spyice.postprocess.analysis.Analysis class method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.utils.config_sort.html#id0">get_ownconfig_params() (src.spyice.utils.config_sort.ConfigSort method)</a>, <a href="api/spyice.utils.config_sort.html#id2">[1]</a>, <a href="api/spyice.utils.config_sort.html#src.spyice.utils.config_sort.ConfigSort.get_ownconfig_params">[2]</a>
+
+      <ul>
+        <li><a href="api/spyice.utils.html#id0">(src.spyice.utils.ConfigSort method)</a>, <a href="api/spyice.utils.html#id2">[1]</a>, <a href="api/spyice.utils.html#src.spyice.utils.ConfigSort.get_ownconfig_params">[2]</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.models.sea_ice_model.html#spyice.models.sea_ice_model.SeaIceModel.get_results">get_results() (spyice.models.sea_ice_model.SeaIceModel class method)</a>
+
+      <ul>
+        <li><a href="api/spyice.models.html#src.spyice.models.SeaIceModel.get_results">(src.spyice.models.SeaIceModel class method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    get_salinity_source_term()
+
+      <ul>
+        <li><a href="api/spyice.models.radiative_model.html#get_salinity_source_term">built-in function</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.preprocess.pre_process.html#get_userinput">get_userinput()</a>
+
+      <ul>
+        <li><a href="api/spyice.preprocess.html#src.spyice.preprocess.PreProcess.get_userinput">(src.spyice.preprocess.PreProcess method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.preprocess.pre_process.html#get_variables">get_variables()</a>
+
+      <ul>
+        <li><a href="api/spyice.preprocess.html#src.spyice.preprocess.PreProcess.get_variables">(src.spyice.preprocess.PreProcess class method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.utils.config_sort.html#id3">getconfig_dataclass() (src.spyice.utils.config_sort.ConfigSort class method)</a>
+
+      <ul>
+        <li><a href="api/spyice.utils.config_sort.html#id1">(src.spyice.utils.config_sort.ConfigSort method)</a>, <a href="api/spyice.utils.config_sort.html#src.spyice.utils.config_sort.ConfigSort.getconfig_dataclass">[1]</a>
+</li>
+        <li><a href="api/spyice.utils.html#id3">(src.spyice.utils.ConfigSort class method)</a>
+</li>
+        <li><a href="api/spyice.utils.html#id1">(src.spyice.utils.ConfigSort method)</a>, <a href="api/spyice.utils.html#src.spyice.utils.ConfigSort.getconfig_dataclass">[1]</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.grid_resolution_dz">grid_resolution_dz (src.spyice.parameters.user_input.UserInput attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.grid_timestep_dt">grid_timestep_dt (src.spyice.parameters.user_input.UserInput attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="H">H</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.update_physical_values.html#src.spyice.update_physical_values.H_function">H_function() (in module src.spyice.update_physical_values)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.update_physical_values.html#src.spyice.update_physical_values.H_function_derivate">H_function_derivate() (in module src.spyice.update_physical_values)</a>
+</li>
+      <li><a href="api/spyice.update_physical_values.html#src.spyice.update_physical_values.H_newton_iteration">H_newton_iteration() (in module src.spyice.update_physical_values)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.utils.error_norms.html#src.spyice.utils.error_norms.ErrorNorms.infinity_norm">infinity_norm() (src.spyice.utils.error_norms.ErrorNorms method)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.initial_liquid_fraction">initial_liquid_fraction (src.spyice.parameters.user_input.UserInput attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.initial_salinity">initial_salinity (src.spyice.parameters.user_input.UserInput attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.initial_temperature">initial_temperature (src.spyice.parameters.user_input.UserInput attribute)</a>
+</li>
+      <li><a href="api/spyice.models.sea_ice_model.html#spyice.models.sea_ice_model.SeaIceModel.initialize_state_variables">initialize_state_variables() (spyice.models.sea_ice_model.SeaIceModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.models.html#src.spyice.models.SeaIceModel.initialize_state_variables">(src.spyice.models.SeaIceModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.InitialLiquidFraction">InitialLiquidFraction (class in src.spyice.parameters.user_input)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.InitialMeltTemperature">InitialMeltTemperature (class in src.spyice.parameters.user_input)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.InitialSalinity">InitialSalinity (class in src.spyice.parameters.user_input)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.InitialTemperature">InitialTemperature (class in src.spyice.parameters.user_input)</a>
+</li>
+      <li><a href="api/spyice.utils.spyice_exceptions.html#src.spyice.utils.spyice_exceptions.InvalidPhaseError">InvalidPhaseError</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.is_algae_equation">is_algae_equation (src.spyice.parameters.user_input.UserInput attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.is_buffo">is_buffo (src.spyice.parameters.user_input.UserInput attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.is_diffusiononly_equation">is_diffusiononly_equation (src.spyice.parameters.user_input.UserInput attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.is_radiation_equation">is_radiation_equation (src.spyice.parameters.user_input.UserInput attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.is_salinity_equation">is_salinity_equation (src.spyice.parameters.user_input.UserInput attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.is_stefan">is_stefan (src.spyice.parameters.user_input.UserInput attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.is_voller">is_voller (src.spyice.parameters.user_input.UserInput attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="K">K</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.parameters.debug_constants.html#src.spyice.parameters.debug_constants.DebugConstants.k_br">k_br (src.spyice.parameters.debug_constants.DebugConstants attribute)</a>
+
+      <ul>
+        <li><a href="api/spyice.parameters.real_constants.html#src.spyice.parameters.real_constants.RealConstants.k_br">(src.spyice.parameters.real_constants.RealConstants attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.parameters.debug_constants.html#src.spyice.parameters.debug_constants.DebugConstants.k_i">k_i (src.spyice.parameters.debug_constants.DebugConstants attribute)</a>
+
+      <ul>
+        <li><a href="api/spyice.parameters.real_constants.html#src.spyice.parameters.real_constants.RealConstants.k_i">(src.spyice.parameters.real_constants.RealConstants attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.parameters.debug_constants.html#src.spyice.parameters.debug_constants.DebugConstants.k_w">k_w (src.spyice.parameters.debug_constants.DebugConstants attribute)</a>
+
+      <ul>
+        <li><a href="api/spyice.parameters.real_constants.html#src.spyice.parameters.real_constants.RealConstants.k_w">(src.spyice.parameters.real_constants.RealConstants attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.parameters.debug_constants.html#src.spyice.parameters.debug_constants.DebugConstants.kappa">kappa (src.spyice.parameters.debug_constants.DebugConstants attribute)</a>
+
+      <ul>
+        <li><a href="api/spyice.parameters.real_constants.html#src.spyice.parameters.real_constants.RealConstants.kappa">(src.spyice.parameters.real_constants.RealConstants attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.parameters.debug_constants.html#src.spyice.parameters.debug_constants.DebugConstants.L">L (src.spyice.parameters.debug_constants.DebugConstants attribute)</a>
+
+      <ul>
+        <li><a href="api/spyice.parameters.real_constants.html#src.spyice.parameters.real_constants.RealConstants.L">(src.spyice.parameters.real_constants.RealConstants attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.liquid_fraction_tolerance">liquid_fraction_tolerance (src.spyice.parameters.user_input.UserInput attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.liquidus_relation_type">liquidus_relation_type (src.spyice.parameters.user_input.UserInput attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.LiquidusRelation">LiquidusRelation (class in src.spyice.parameters.user_input)</a>
+</li>
+      <li>
+    ln_nutrient()
+
+      <ul>
+        <li><a href="api/spyice.models.algae_model.html#ln_nutrient">built-in function</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.models.sea_ice_model.html#spyice.models.sea_ice_model.locate_ice_ocean_interface">locate_ice_ocean_interface() (in module spyice.models.sea_ice_model)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="M">M</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.parameters.debug_constants.html#src.spyice.parameters.debug_constants.DebugConstants.m">m (src.spyice.parameters.debug_constants.DebugConstants attribute)</a>
+
+      <ul>
+        <li><a href="api/spyice.parameters.real_constants.html#src.spyice.parameters.real_constants.RealConstants.m">(src.spyice.parameters.real_constants.RealConstants attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.main_process.html#src.spyice.main_process.MainProcess">MainProcess (class in src.spyice.main_process)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.max_iterations">max_iterations (src.spyice.parameters.user_input.UserInput attribute)</a>
+</li>
+      <li>
+    model_algae_processes()
+
+      <ul>
+        <li><a href="api/spyice.models.algae_model.html#model_algae_processes">built-in function</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.models.advection_diffusion.html#modify_tridiagonal_voller_scheme">modify_tridiagonal_voller_scheme()</a>
+</li>
+      <li><a href="api/spyice.preprocess.modify_initial_boundary.html#src.spyice.preprocess.modify_initial_boundary.ModifyInitialBoundary">ModifyInitialBoundary (class in src.spyice.preprocess.modify_initial_boundary)</a>
+</li>
+      <li>
+    module
+
+      <ul>
+        <li><a href="api/spyice.html#module-src.spyice">src.spyice</a>
+</li>
+        <li><a href="api/spyice.coefficients.html#module-src.spyice.coefficients">src.spyice.coefficients</a>
+</li>
+        <li><a href="api/spyice.main_process.html#module-src.spyice.main_process">src.spyice.main_process</a>
+</li>
+        <li><a href="api/spyice.models.html#module-src.spyice.models">src.spyice.models</a>
+</li>
+        <li><a href="api/spyice.parameters.html#module-src.spyice.parameters">src.spyice.parameters</a>
+</li>
+        <li><a href="api/spyice.parameters.constants.html#module-src.spyice.parameters.constants">src.spyice.parameters.constants</a>
+</li>
+        <li><a href="api/spyice.parameters.debug_constants.html#module-src.spyice.parameters.debug_constants">src.spyice.parameters.debug_constants</a>
+</li>
+        <li><a href="api/spyice.parameters.real_constants.html#module-src.spyice.parameters.real_constants">src.spyice.parameters.real_constants</a>
+</li>
+        <li><a href="api/spyice.parameters.results_params.html#module-src.spyice.parameters.results_params">src.spyice.parameters.results_params</a>
+</li>
+        <li><a href="api/spyice.parameters.user_input.html#module-src.spyice.parameters.user_input">src.spyice.parameters.user_input</a>
+</li>
+        <li><a href="api/spyice.postprocess.html#module-src.spyice.postprocess">src.spyice.postprocess</a>
+</li>
+        <li><a href="api/spyice.postprocess.analysis.html#module-src.spyice.postprocess.analysis">src.spyice.postprocess.analysis</a>
+</li>
+        <li><a href="api/spyice.postprocess.visualise_model.html#module-src.spyice.postprocess.visualise_model">src.spyice.postprocess.visualise_model</a>
+</li>
+        <li><a href="api/spyice.preprocess.html#module-src.spyice.preprocess">src.spyice.preprocess</a>
+</li>
+        <li><a href="api/spyice.preprocess.geometry_settings.html#module-src.spyice.preprocess.geometry_settings">src.spyice.preprocess.geometry_settings</a>
+</li>
+        <li><a href="api/spyice.preprocess.initial_boundary_conditions.html#module-src.spyice.preprocess.initial_boundary_conditions">src.spyice.preprocess.initial_boundary_conditions</a>
+</li>
+        <li><a href="api/spyice.preprocess.modify_initial_boundary.html#module-src.spyice.preprocess.modify_initial_boundary">src.spyice.preprocess.modify_initial_boundary</a>
+</li>
+        <li><a href="api/spyice.rhs.html#module-src.spyice.rhs">src.spyice.rhs</a>
+</li>
+        <li><a href="api/spyice.statevariables.html#module-src.spyice.statevariables">src.spyice.statevariables</a>
+</li>
+        <li><a href="api/spyice.update_physical_values.html#module-src.spyice.update_physical_values">src.spyice.update_physical_values</a>
+</li>
+        <li><a href="api/spyice.utils.html#module-src.spyice.utils">src.spyice.utils</a>
+</li>
+        <li><a href="api/spyice.utils.config_sort.html#module-src.spyice.utils.config_sort">src.spyice.utils.config_sort</a>
+</li>
+        <li><a href="api/spyice.utils.error_norms.html#module-src.spyice.utils.error_norms">src.spyice.utils.error_norms</a>
+</li>
+        <li><a href="api/spyice.utils.helpers.html#module-src.spyice.utils.helpers">src.spyice.utils.helpers</a>
+</li>
+        <li><a href="api/spyice.utils.spyice_exceptions.html#module-src.spyice.utils.spyice_exceptions">src.spyice.utils.spyice_exceptions</a>
+</li>
+        <li><a href="api/spyice.utils.spyice_logger.html#module-src.spyice.utils.spyice_logger">src.spyice.utils.spyice_logger</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.parameters.debug_constants.html#src.spyice.parameters.debug_constants.DebugConstants.mu">mu (src.spyice.parameters.debug_constants.DebugConstants attribute)</a>
+
+      <ul>
+        <li><a href="api/spyice.parameters.real_constants.html#src.spyice.parameters.real_constants.RealConstants.mu">(src.spyice.parameters.real_constants.RealConstants attribute)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="N">N</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.BoundaryConditionType.NEUMANN">NEUMANN (src.spyice.parameters.user_input.BoundaryConditionType attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.FileNameSuffix.NON_CONST_DENS">NON_CONST_DENS (src.spyice.parameters.user_input.FileNameSuffix attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.FileNameSuffix.NON_CONST_DENS_MUSHFIX">NON_CONST_DENS_MUSHFIX (src.spyice.parameters.user_input.FileNameSuffix attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.LiquidusRelation.NORMAL">NORMAL (src.spyice.parameters.user_input.LiquidusRelation attribute)</a>
+</li>
+      <li><a href="api/spyice.utils.error_norms.html#src.spyice.utils.error_norms.ErrorNorms.numerical_analytical_diff">numerical_analytical_diff() (src.spyice.utils.error_norms.ErrorNorms method)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.nutrient_cn_dsi_ice">nutrient_cn_dsi_ice (src.spyice.parameters.user_input.UserInput attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.nutrient_cn_dsi_water">nutrient_cn_dsi_water (src.spyice.parameters.user_input.UserInput attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="O">O</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    ode_update_carbon_nutrient_uptake()
+
+      <ul>
+        <li><a href="api/spyice.models.algae_model.html#ode_update_carbon_nutrient_uptake">built-in function</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.utils.error_norms.html#src.spyice.utils.error_norms.ErrorNorms.one_norm">one_norm() (src.spyice.utils.error_norms.ErrorNorms method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.InitialMeltTemperature.ONEPHASE">ONEPHASE (src.spyice.parameters.user_input.InitialMeltTemperature attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.output_suffix">output_suffix (src.spyice.parameters.user_input.UserInput attribute)</a>
+</li>
+      <li><a href="api/spyice.statevariables.html#src.spyice.statevariables.overwrite_statevariables">overwrite_statevariables() (in module src.spyice.statevariables)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="P">P</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.InitialLiquidFraction.P0">P0 (src.spyice.parameters.user_input.InitialLiquidFraction attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.InitialLiquidFraction.P1">P1 (src.spyice.parameters.user_input.InitialLiquidFraction attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.debug_constants.html#src.spyice.parameters.debug_constants.DebugConstants.P_s">P_s (src.spyice.parameters.debug_constants.DebugConstants attribute)</a>
+
+      <ul>
+        <li><a href="api/spyice.parameters.real_constants.html#src.spyice.parameters.real_constants.RealConstants.P_s">(src.spyice.parameters.real_constants.RealConstants attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.InitialLiquidFraction.P_Stefan">P_Stefan (src.spyice.parameters.user_input.InitialLiquidFraction attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.real_constants.html#src.spyice.parameters.real_constants.RealConstants.param_const">param_const (src.spyice.parameters.real_constants.RealConstants attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.phase_type">phase_type (src.spyice.parameters.user_input.UserInput attribute)</a>
+</li>
+      <li><a href="api/spyice.models.sea_ice_model.html#spyice.models.sea_ice_model.SeaIceModel.phi_all_mush_list">phi_all_mush_list() (spyice.models.sea_ice_model.SeaIceModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.models.html#src.spyice.models.SeaIceModel.phi_all_mush_list">(src.spyice.models.SeaIceModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.parameters.debug_constants.html#src.spyice.parameters.debug_constants.DebugConstants.phi_c">phi_c (src.spyice.parameters.debug_constants.DebugConstants attribute)</a>
+
+      <ul>
+        <li><a href="api/spyice.parameters.real_constants.html#src.spyice.parameters.real_constants.RealConstants.phi_c">(src.spyice.parameters.real_constants.RealConstants attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.update_physical_values.html#src.spyice.update_physical_values.phi_control_for_infinite_values">phi_control_for_infinite_values() (in module src.spyice.update_physical_values)</a>
+</li>
+      <li><a href="api/spyice.update_physical_values.html#src.spyice.update_physical_values.phi_func">phi_func() (in module src.spyice.update_physical_values)</a>
+</li>
+      <li><a href="api/spyice.parameters.debug_constants.html#src.spyice.parameters.debug_constants.DebugConstants.phi_ini">phi_ini (src.spyice.parameters.debug_constants.DebugConstants attribute)</a>
+
+      <ul>
+        <li><a href="api/spyice.parameters.real_constants.html#src.spyice.parameters.real_constants.RealConstants.phi_ini">(src.spyice.parameters.real_constants.RealConstants attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.parameters.debug_constants.html#src.spyice.parameters.debug_constants.DebugConstants.phi_ini_Stefan">phi_ini_Stefan (src.spyice.parameters.debug_constants.DebugConstants attribute)</a>
+
+      <ul>
+        <li><a href="api/spyice.parameters.real_constants.html#src.spyice.parameters.real_constants.RealConstants.phi_ini_Stefan">(src.spyice.parameters.real_constants.RealConstants attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.phi_slope">phi_slope() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.phi_slope">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li>
+    Photosynthesis_rate_maximum_light()
+
+      <ul>
+        <li><a href="api/spyice.models.algae_model.html#Photosynthesis_rate_maximum_light">built-in function</a>
+</li>
+      </ul></li>
+      <li>
+    photosynthetic_active_radiation()
+
+      <ul>
+        <li><a href="api/spyice.models.algae_model.html#photosynthetic_active_radiation">built-in function</a>
+</li>
+      </ul></li>
+      <li>
+    photosynthetic_rate()
+
+      <ul>
+        <li><a href="api/spyice.models.algae_model.html#photosynthetic_rate">built-in function</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_all_phi_mush">plot_all_phi_mush() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_all_phi_mush">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_brinevelocity_profile">plot_brinevelocity_profile() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_brinevelocity_profile">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_carbon_concentration">plot_carbon_concentration() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_carbon_concentration">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_carbon_concentration_multiplelayers">plot_carbon_concentration_multiplelayers() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_carbon_concentration_multiplelayers">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_carbon_concentration_profile">plot_carbon_concentration_profile() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_carbon_concentration_profile">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_carbon_heatmap_as_gif">plot_carbon_heatmap_as_gif() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_carbon_heatmap_as_gif">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_chla_bulk_concentration">plot_chla_bulk_concentration() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_chla_bulk_concentration">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_chla_bulk_concentration_multiplelayers">plot_chla_bulk_concentration_multiplelayers() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_chla_bulk_concentration_multiplelayers">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_depth_over_time">plot_depth_over_time() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_depth_over_time">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_depth_over_time_heatmap">plot_depth_over_time_heatmap() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_depth_over_time_heatmap">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_error_temp">plot_error_temp() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_error_temp">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_error_temp_diff">plot_error_temp_diff() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_error_temp_diff">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_H_iter">plot_H_iter() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_H_iter">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_H_iter_all">plot_H_iter_all() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_H_iter_all">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_H_iter_heatmap">plot_H_iter_heatmap() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_H_iter_heatmap">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_H_iter_heatmap_mushy">plot_H_iter_heatmap_mushy() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_H_iter_heatmap_mushy">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_liquid_fraction_profile">plot_liquid_fraction_profile() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_liquid_fraction_profile">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_liquid_salinity_profile">plot_liquid_salinity_profile() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_liquid_salinity_profile">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_liquidfraction_heatmap">plot_liquidfraction_heatmap() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_liquidfraction_heatmap">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.main_process.html#src.spyice.main_process.MainProcess.plot_model">plot_model() (src.spyice.main_process.MainProcess method)</a>
+</li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_nutrient_cn_profile">plot_nutrient_cn_profile() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_nutrient_cn_profile">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_nutrient_concentration">plot_nutrient_concentration() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_nutrient_concentration">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_nutrient_concentration_heatmap_as_gif">plot_nutrient_concentration_heatmap_as_gif() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_nutrient_concentration_heatmap_as_gif">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_nutrient_concentration_multiplelayers">plot_nutrient_concentration_multiplelayers() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_nutrient_concentration_multiplelayers">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_photosynthetic_rate">plot_photosynthetic_rate() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_photosynthetic_rate">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_photosynthetic_rate_multiplelayers">plot_photosynthetic_rate_multiplelayers() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_photosynthetic_rate_multiplelayers">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_radiation_algae">plot_radiation_algae() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_radiation_algae">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_radiation_algae_dt_by_rho_c">plot_radiation_algae_dt_by_rho_c() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_radiation_algae_dt_by_rho_c">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_radiation_algae_multiplelayers">plot_radiation_algae_multiplelayers() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_radiation_algae_multiplelayers">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_radiation_all">plot_radiation_all() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_radiation_all">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_radiation_profile">plot_radiation_profile() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_radiation_profile">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_response_pt1_pt2">plot_response_pt1_pt2() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_response_pt1_pt2">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_salinity_heatmap">plot_salinity_heatmap() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_salinity_heatmap">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_salinity_heatmap_as_gif">plot_salinity_heatmap_as_gif() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_salinity_heatmap_as_gif">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_salinity_profile">plot_salinity_profile() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_salinity_profile">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_salinity_sourceterm_profile">plot_salinity_sourceterm_profile() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_salinity_sourceterm_profile">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_temperature">plot_temperature() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_temperature">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_temperature_3D">plot_temperature_3D() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_temperature_3D">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_temperature_3d_contours">plot_temperature_3d_contours() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_temperature_3d_contours">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_temperature_heatmap">plot_temperature_heatmap() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_temperature_heatmap">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_temperature_heatmap_as_gif">plot_temperature_heatmap_as_gif() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_temperature_heatmap_as_gif">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_temperature_liquid_solid_evolution">plot_temperature_liquid_solid_evolution() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_temperature_liquid_solid_evolution">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel.plot_temperature_profile">plot_temperature_profile() (src.spyice.postprocess.visualise_model.VisualiseModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel.plot_temperature_profile">(src.spyice.postprocess.VisualiseModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.preprocess.pre_process.html#PreProcess">PreProcess (built-in class)</a>
+
+      <ul>
+        <li><a href="api/spyice.preprocess.html#src.spyice.preprocess.PreProcess">(class in src.spyice.preprocess)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.preprocess.pre_process.html#id0">preprocess()</a>
+
+      <ul>
+        <li><a href="api/spyice.preprocess.html#src.spyice.preprocess.PreProcess.preprocess">(src.spyice.preprocess.PreProcess method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.preprocess.pre_process.html#PreprocessData">PreprocessData (built-in class)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.InitialLiquidFraction.PX">PX (src.spyice.parameters.user_input.InitialLiquidFraction attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="R">R</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.parameters.debug_constants.html#src.spyice.parameters.debug_constants.DebugConstants.Ra_c">Ra_c (src.spyice.parameters.debug_constants.DebugConstants attribute)</a>
+
+      <ul>
+        <li><a href="api/spyice.parameters.real_constants.html#src.spyice.parameters.real_constants.RealConstants.Ra_c">(src.spyice.parameters.real_constants.RealConstants attribute)</a>
+</li>
+      </ul></li>
+      <li>
+    radiation_algae()
+
+      <ul>
+        <li><a href="api/spyice.models.algae_model.html#radiation_algae">built-in function</a>
+</li>
+      </ul></li>
+      <li>
+    radiative_ice()
+
+      <ul>
+        <li><a href="api/spyice.models.radiative_model.html#radiative_ice">built-in function</a>
+</li>
+      </ul></li>
+      <li>
+    radiative_organicmatter()
+
+      <ul>
+        <li><a href="api/spyice.models.radiative_model.html#radiative_organicmatter">built-in function</a>
+</li>
+      </ul></li>
+      <li>
+    radiative_source_term()
+
+      <ul>
+        <li><a href="api/spyice.models.radiative_model.html#radiative_source_term">built-in function</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.preprocess.initial_boundary_conditions.html#src.spyice.preprocess.initial_boundary_conditions.raise_salinity_exception">raise_salinity_exception() (in module src.spyice.preprocess.initial_boundary_conditions)</a>
+</li>
+      <li><a href="api/spyice.utils.config_sort.html#src.spyice.utils.config_sort.read_omegaconfig">read_omegaconfig() (in module src.spyice.utils.config_sort)</a>
+</li>
+      <li><a href="api/spyice.parameters.constants.html#src.spyice.parameters.constants.Constants.REAL">REAL (src.spyice.parameters.constants.Constants attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.real_constants.html#src.spyice.parameters.real_constants.RealConstants">RealConstants (class in src.spyice.parameters.real_constants)</a>
+</li>
+      <li><a href="api/spyice.models.sea_ice_model.html#spyice.models.sea_ice_model.SeaIceModel.record_iteration_data">record_iteration_data() (spyice.models.sea_ice_model.SeaIceModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.models.html#src.spyice.models.SeaIceModel.record_iteration_data">(src.spyice.models.SeaIceModel method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.models.sea_ice_model.html#spyice.models.sea_ice_model.SeaIceModel.record_mushy_layer_data">record_mushy_layer_data() (spyice.models.sea_ice_model.SeaIceModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.models.html#src.spyice.models.SeaIceModel.record_mushy_layer_data">(src.spyice.models.SeaIceModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.statevariables.html#src.spyice.statevariables.reset_error_for_while_loop">reset_error_for_while_loop() (in module src.spyice.statevariables)</a>
+</li>
+      <li><a href="api/spyice.models.sea_ice_model.html#spyice.models.sea_ice_model.SeaIceModel.reset_iteration_parameters">reset_iteration_parameters() (spyice.models.sea_ice_model.SeaIceModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.models.html#src.spyice.models.SeaIceModel.reset_iteration_parameters">(src.spyice.models.SeaIceModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.parameters.results_params.html#src.spyice.parameters.results_params.ResultsParams">ResultsParams (class in src.spyice.parameters.results_params)</a>
+</li>
+      <li><a href="api/spyice.parameters.debug_constants.html#src.spyice.parameters.debug_constants.DebugConstants.rho_br">rho_br (src.spyice.parameters.debug_constants.DebugConstants attribute)</a>
+
+      <ul>
+        <li><a href="api/spyice.parameters.real_constants.html#src.spyice.parameters.real_constants.RealConstants.rho_br">(src.spyice.parameters.real_constants.RealConstants attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.parameters.debug_constants.html#src.spyice.parameters.debug_constants.DebugConstants.rho_i">rho_i (src.spyice.parameters.debug_constants.DebugConstants attribute)</a>
+
+      <ul>
+        <li><a href="api/spyice.parameters.real_constants.html#src.spyice.parameters.real_constants.RealConstants.rho_i">(src.spyice.parameters.real_constants.RealConstants attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.parameters.debug_constants.html#src.spyice.parameters.debug_constants.DebugConstants.rho_w">rho_w (src.spyice.parameters.debug_constants.DebugConstants attribute)</a>
+
+      <ul>
+        <li><a href="api/spyice.parameters.real_constants.html#src.spyice.parameters.real_constants.RealConstants.rho_w">(src.spyice.parameters.real_constants.RealConstants attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.main_process.html#src.spyice.main_process.MainProcess.run_model">run_model() (src.spyice.main_process.MainProcess method)</a>
+</li>
+      <li><a href="api/spyice.models.sea_ice_model.html#spyice.models.sea_ice_model.SeaIceModel.run_sea_ice_model">run_sea_ice_model() (spyice.models.sea_ice_model.SeaIceModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.models.html#src.spyice.models.SeaIceModel.run_sea_ice_model">(src.spyice.models.SeaIceModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.models.sea_ice_model.html#spyice.models.sea_ice_model.SeaIceModel.run_while_convergence_iteration">run_while_convergence_iteration() (spyice.models.sea_ice_model.SeaIceModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.models.html#src.spyice.models.SeaIceModel.run_while_convergence_iteration">(src.spyice.models.SeaIceModel method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="S">S</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.InitialSalinity.S0">S0 (src.spyice.parameters.user_input.InitialSalinity attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.InitialSalinity.S1">S1 (src.spyice.parameters.user_input.InitialSalinity attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.InitialSalinity.S2">S2 (src.spyice.parameters.user_input.InitialSalinity attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.InitialSalinity.S3">S3 (src.spyice.parameters.user_input.InitialSalinity attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.InitialSalinity.S34">S34 (src.spyice.parameters.user_input.InitialSalinity attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.InitialSalinity.S_LINEAR">S_LINEAR (src.spyice.parameters.user_input.InitialSalinity attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.salinity_tolerance">salinity_tolerance (src.spyice.parameters.user_input.UserInput attribute)</a>
+</li>
+      <li><a href="api/spyice.preprocess.initial_boundary_conditions.html#src.spyice.preprocess.initial_boundary_conditions.SalinityUnavailableError">SalinityUnavailableError</a>
+</li>
+      <li>
+    save_results()
+
+      <ul>
+        <li><a href="api/spyice.preprocess.store.html#save_results">built-in function</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.models.sea_ice_model.html#spyice.models.sea_ice_model.SeaIceModel">SeaIceModel (class in spyice.models.sea_ice_model)</a>
+
+      <ul>
+        <li><a href="api/spyice.models.html#src.spyice.models.SeaIceModel">(class in src.spyice.models)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.Analysis.set_analysis">set_analysis() (src.spyice.postprocess.Analysis method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.analysis.html#src.spyice.postprocess.analysis.Analysis.set_analysis">(src.spyice.postprocess.analysis.Analysis method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.models.sea_ice_model.html#spyice.models.sea_ice_model.SeaIceModel.set_boundary_condition_type">set_boundary_condition_type() (spyice.models.sea_ice_model.SeaIceModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.models.html#src.spyice.models.SeaIceModel.set_boundary_condition_type">(src.spyice.models.SeaIceModel method)</a>
+</li>
+        <li><a href="api/spyice.preprocess.modify_initial_boundary.html#src.spyice.preprocess.modify_initial_boundary.ModifyInitialBoundary.set_boundary_condition_type">(src.spyice.preprocess.modify_initial_boundary.ModifyInitialBoundary method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.preprocess.initial_boundary_conditions.html#src.spyice.preprocess.initial_boundary_conditions.set_boundary_temperature">set_boundary_temperature() (in module src.spyice.preprocess.initial_boundary_conditions)</a>
+</li>
+      <li><a href="api/spyice.preprocess.pre_process.html#set_dataclass">set_dataclass()</a>
+
+      <ul>
+        <li><a href="api/spyice.utils.helpers.html#src.spyice.utils.helpers.set_dataclass">(in module src.spyice.utils.helpers)</a>
+</li>
+        <li><a href="api/spyice.models.sea_ice_model.html#spyice.models.sea_ice_model.SeaIceModel.set_dataclass">(spyice.models.sea_ice_model.SeaIceModel method)</a>
+</li>
+        <li><a href="api/spyice.models.html#src.spyice.models.SeaIceModel.set_dataclass">(src.spyice.models.SeaIceModel method)</a>
+</li>
+        <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.Analysis.set_dataclass">(src.spyice.postprocess.Analysis static method)</a>
+</li>
+        <li><a href="api/spyice.postprocess.analysis.html#src.spyice.postprocess.analysis.Analysis.set_dataclass">(src.spyice.postprocess.analysis.Analysis static method)</a>
+</li>
+        <li><a href="api/spyice.preprocess.html#src.spyice.preprocess.PreProcess.set_dataclass">(src.spyice.preprocess.PreProcess static method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.preprocess.initial_boundary_conditions.html#src.spyice.preprocess.initial_boundary_conditions.set_inital_salinity">set_inital_salinity() (in module src.spyice.preprocess.initial_boundary_conditions)</a>
+</li>
+      <li><a href="api/spyice.preprocess.initial_boundary_conditions.html#src.spyice.preprocess.initial_boundary_conditions.set_inital_temperature">set_inital_temperature() (in module src.spyice.preprocess.initial_boundary_conditions)</a>
+</li>
+      <li><a href="api/spyice.preprocess.initial_boundary_conditions.html#src.spyice.preprocess.initial_boundary_conditions.set_initial_conditions">set_initial_conditions() (in module src.spyice.preprocess.initial_boundary_conditions)</a>
+</li>
+      <li><a href="api/spyice.preprocess.initial_boundary_conditions.html#src.spyice.preprocess.initial_boundary_conditions.set_initial_liquidfraction">set_initial_liquidfraction() (in module src.spyice.preprocess.initial_boundary_conditions)</a>
+</li>
+      <li><a href="api/spyice.statevariables.html#src.spyice.statevariables.set_initial_statevariables">set_initial_statevariables() (in module src.spyice.statevariables)</a>
+</li>
+      <li><a href="api/spyice.preprocess.html#src.spyice.preprocess.PreProcess.set_preprocess">set_preprocess() (src.spyice.preprocess.PreProcess method)</a>
+</li>
+      <li><a href="api/spyice.models.advection_diffusion.html#set_source_term">set_source_term()</a>
+</li>
+      <li><a href="api/spyice.statevariables.html#src.spyice.statevariables.set_statevariables">set_statevariables() (in module src.spyice.statevariables)</a>
+</li>
+      <li>
+    set_up_iter()
+
+      <ul>
+        <li><a href="api/spyice.preprocess.pre_process.html#set_up_iter">built-in function</a>
+</li>
+      </ul></li>
+      <li>
+    set_up_matrices()
+
+      <ul>
+        <li><a href="api/spyice.preprocess.store.html#set_up_matrices">built-in function</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.models.advection_diffusion.html#set_up_tridiagonal">set_up_tridiagonal()</a>
+</li>
+      <li><a href="api/spyice.utils.config_sort.html#src.spyice.utils.config_sort.ConfigData.setup">setup (src.spyice.utils.config_sort.ConfigData attribute)</a>
+</li>
+      <li><a href="api/spyice.utils.spyice_logger.html#src.spyice.utils.spyice_logger.SpyiceLogger">SpyiceLogger (class in src.spyice.utils.spyice_logger)</a>
+</li>
+      <li>
+    src.spyice
+
+      <ul>
+        <li><a href="api/spyice.html#module-src.spyice">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.spyice.coefficients
+
+      <ul>
+        <li><a href="api/spyice.coefficients.html#module-src.spyice.coefficients">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.spyice.main_process
+
+      <ul>
+        <li><a href="api/spyice.main_process.html#module-src.spyice.main_process">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.spyice.models
+
+      <ul>
+        <li><a href="api/spyice.models.html#module-src.spyice.models">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.spyice.parameters
+
+      <ul>
+        <li><a href="api/spyice.parameters.html#module-src.spyice.parameters">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.spyice.parameters.constants
+
+      <ul>
+        <li><a href="api/spyice.parameters.constants.html#module-src.spyice.parameters.constants">module</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    src.spyice.parameters.debug_constants
+
+      <ul>
+        <li><a href="api/spyice.parameters.debug_constants.html#module-src.spyice.parameters.debug_constants">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.spyice.parameters.real_constants
+
+      <ul>
+        <li><a href="api/spyice.parameters.real_constants.html#module-src.spyice.parameters.real_constants">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.spyice.parameters.results_params
+
+      <ul>
+        <li><a href="api/spyice.parameters.results_params.html#module-src.spyice.parameters.results_params">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.spyice.parameters.user_input
+
+      <ul>
+        <li><a href="api/spyice.parameters.user_input.html#module-src.spyice.parameters.user_input">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.spyice.postprocess
+
+      <ul>
+        <li><a href="api/spyice.postprocess.html#module-src.spyice.postprocess">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.spyice.postprocess.analysis
+
+      <ul>
+        <li><a href="api/spyice.postprocess.analysis.html#module-src.spyice.postprocess.analysis">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.spyice.postprocess.visualise_model
+
+      <ul>
+        <li><a href="api/spyice.postprocess.visualise_model.html#module-src.spyice.postprocess.visualise_model">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.spyice.preprocess
+
+      <ul>
+        <li><a href="api/spyice.preprocess.html#module-src.spyice.preprocess">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.spyice.preprocess.geometry_settings
+
+      <ul>
+        <li><a href="api/spyice.preprocess.geometry_settings.html#module-src.spyice.preprocess.geometry_settings">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.spyice.preprocess.initial_boundary_conditions
+
+      <ul>
+        <li><a href="api/spyice.preprocess.initial_boundary_conditions.html#module-src.spyice.preprocess.initial_boundary_conditions">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.spyice.preprocess.modify_initial_boundary
+
+      <ul>
+        <li><a href="api/spyice.preprocess.modify_initial_boundary.html#module-src.spyice.preprocess.modify_initial_boundary">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.spyice.rhs
+
+      <ul>
+        <li><a href="api/spyice.rhs.html#module-src.spyice.rhs">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.spyice.statevariables
+
+      <ul>
+        <li><a href="api/spyice.statevariables.html#module-src.spyice.statevariables">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.spyice.update_physical_values
+
+      <ul>
+        <li><a href="api/spyice.update_physical_values.html#module-src.spyice.update_physical_values">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.spyice.utils
+
+      <ul>
+        <li><a href="api/spyice.utils.html#module-src.spyice.utils">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.spyice.utils.config_sort
+
+      <ul>
+        <li><a href="api/spyice.utils.config_sort.html#module-src.spyice.utils.config_sort">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.spyice.utils.error_norms
+
+      <ul>
+        <li><a href="api/spyice.utils.error_norms.html#module-src.spyice.utils.error_norms">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.spyice.utils.helpers
+
+      <ul>
+        <li><a href="api/spyice.utils.helpers.html#module-src.spyice.utils.helpers">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.spyice.utils.spyice_exceptions
+
+      <ul>
+        <li><a href="api/spyice.utils.spyice_exceptions.html#module-src.spyice.utils.spyice_exceptions">module</a>
+</li>
+      </ul></li>
+      <li>
+    src.spyice.utils.spyice_logger
+
+      <ul>
+        <li><a href="api/spyice.utils.spyice_logger.html#module-src.spyice.utils.spyice_logger">module</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.TopTemperatureType.STEFAN">STEFAN (src.spyice.parameters.user_input.TopTemperatureType attribute)</a>
+</li>
+      <li><a href="api/spyice.models.stefan_problem.html#stefan_problem">stefan_problem()</a>
+</li>
+      <li><a href="api/spyice.models.stefan_problem.html#stefan_problem_twophase">stefan_problem_twophase()</a>
+</li>
+      <li><a href="api/spyice.models.stefan_problem.html#StefanProblem">StefanProblem (built-in class)</a>
+</li>
+      <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.Analysis.store_field_errors">store_field_errors() (src.spyice.postprocess.Analysis method)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.analysis.html#src.spyice.postprocess.analysis.Analysis.store_field_errors">(src.spyice.postprocess.analysis.Analysis method)</a>
+</li>
+      </ul></li>
+      <li>
+    store_results()
+
+      <ul>
+        <li><a href="api/spyice.preprocess.store.html#store_results">built-in function</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.parameters.results_params.html#src.spyice.parameters.results_params.ResultsParams.store_results">store_results() (src.spyice.parameters.results_params.ResultsParams static method)</a>
+</li>
+      <li><a href="api/spyice.parameters.results_params.html#src.spyice.parameters.results_params.ResultsParams.store_results_for_iter_t">store_results_for_iter_t() (src.spyice.parameters.results_params.ResultsParams static method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="T">T</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.InitialTemperature.T250">T250 (src.spyice.parameters.user_input.InitialTemperature attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.InitialTemperature.T271p25">T271p25 (src.spyice.parameters.user_input.InitialTemperature attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.InitialTemperature.T_MELT">T_MELT (src.spyice.parameters.user_input.InitialTemperature attribute)</a>
+</li>
+      <li><a href="api/spyice.models.sea_ice_model.html#spyice.models.sea_ice_model.SeaIceModel.t_running">t_running() (spyice.models.sea_ice_model.SeaIceModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.models.html#src.spyice.models.SeaIceModel.t_running">(src.spyice.models.SeaIceModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.InitialTemperature.T_S">T_S (src.spyice.parameters.user_input.InitialTemperature attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.InitialTemperature.T_STEFAN">T_STEFAN (src.spyice.parameters.user_input.InitialTemperature attribute)</a>
+</li>
+      <li><a href="api/spyice.utils.helpers.html#src.spyice.utils.helpers.t_total">t_total() (in module src.spyice.utils.helpers)</a>
+</li>
+      <li><a href="api/spyice.preprocess.initial_boundary_conditions.html#src.spyice.preprocess.initial_boundary_conditions.t_w3">t_w3() (in module src.spyice.preprocess.initial_boundary_conditions)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.models.advection_diffusion.html#TDMAsolver">TDMAsolver()</a>
+</li>
+      <li><a href="api/spyice.preprocess.initial_boundary_conditions.html#src.spyice.preprocess.initial_boundary_conditions.temperature_gradient">temperature_gradient() (in module src.spyice.preprocess.initial_boundary_conditions)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.temperature_melt">temperature_melt (src.spyice.parameters.user_input.UserInput attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.temperature_tolerance">temperature_tolerance (src.spyice.parameters.user_input.UserInput attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput.temperature_top_type">temperature_top_type (src.spyice.parameters.user_input.UserInput attribute)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.TopTemperatureType">TopTemperatureType (class in src.spyice.parameters.user_input)</a>
+</li>
+      <li><a href="api/spyice.models.sea_ice_model.html#spyice.models.sea_ice_model.SeaIceModel.track_mush_for_parameter">track_mush_for_parameter() (spyice.models.sea_ice_model.SeaIceModel method)</a>
+
+      <ul>
+        <li><a href="api/spyice.models.html#src.spyice.models.SeaIceModel.track_mush_for_parameter">(src.spyice.models.SeaIceModel method)</a>
+</li>
+      </ul></li>
+      <li><a href="api/spyice.utils.error_norms.html#src.spyice.utils.error_norms.ErrorNorms.two_norm">two_norm() (src.spyice.utils.error_norms.ErrorNorms method)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.InitialMeltTemperature.TWOPHASE">TWOPHASE (src.spyice.parameters.user_input.InitialMeltTemperature attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.models.advection_diffusion.html#unknowns_matrix">unknowns_matrix()</a>
+</li>
+      <li><a href="api/spyice.update_physical_values.html#src.spyice.update_physical_values.update_algae_transport">update_algae_transport() (in module src.spyice.update_physical_values)</a>
+</li>
+      <li><a href="api/spyice.coefficients.html#src.spyice.coefficients.update_coefficients">update_coefficients() (in module src.spyice.coefficients)</a>
+</li>
+      <li><a href="api/spyice.update_physical_values.html#src.spyice.update_physical_values.update_enthalpy">update_enthalpy() (in module src.spyice.update_physical_values)</a>
+</li>
+      <li><a href="api/spyice.update_physical_values.html#src.spyice.update_physical_values.update_enthalpy_solid_state">update_enthalpy_solid_state() (in module src.spyice.update_physical_values)</a>
+</li>
+      <li><a href="api/spyice.update_physical_values.html#src.spyice.update_physical_values.update_liquid_fraction_buffo">update_liquid_fraction_buffo() (in module src.spyice.update_physical_values)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.update_physical_values.html#src.spyice.update_physical_values.update_liquid_fraction_mixture_with_enthalpy_equation">update_liquid_fraction_mixture_with_enthalpy_equation() (in module src.spyice.update_physical_values)</a>
+</li>
+      <li><a href="api/spyice.update_physical_values.html#src.spyice.update_physical_values.update_liquid_fraction_mixture_with_under_relaxation">update_liquid_fraction_mixture_with_under_relaxation() (in module src.spyice.update_physical_values)</a>
+</li>
+      <li><a href="api/spyice.update_physical_values.html#src.spyice.update_physical_values.update_liquid_fraction_voller_continuous_thermal_properties">update_liquid_fraction_voller_continuous_thermal_properties() (in module src.spyice.update_physical_values)</a>
+</li>
+      <li><a href="api/spyice.update_physical_values.html#src.spyice.update_physical_values.update_liquid_fraction_voller_under_relaxation">update_liquid_fraction_voller_under_relaxation() (in module src.spyice.update_physical_values)</a>
+</li>
+      <li><a href="api/spyice.update_physical_values.html#src.spyice.update_physical_values.update_state_variables">update_state_variables() (in module src.spyice.update_physical_values)</a>
+</li>
+      <li><a href="api/spyice.update_physical_values.html#src.spyice.update_physical_values.update_temperature_and_salinity">update_temperature_and_salinity() (in module src.spyice.update_physical_values)</a>
+</li>
+      <li><a href="api/spyice.parameters.user_input.html#src.spyice.parameters.user_input.UserInput">UserInput (class in src.spyice.parameters.user_input)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="V">V</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.postprocess.html#src.spyice.postprocess.VisualiseModel">VisualiseModel (class in src.spyice.postprocess)</a>
+
+      <ul>
+        <li><a href="api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.visualise_model.VisualiseModel">(class in src.spyice.postprocess.visualise_model)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.statevariables.html#src.spyice.statevariables.voller_residual_scheme">voller_residual_scheme() (in module src.spyice.statevariables)</a>
+</li>
+      <li><a href="api/spyice.models.advection_diffusion.html#voller_X_array_set_zero_to_melt">voller_X_array_set_zero_to_melt()</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="W">W</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="api/spyice.utils.spyice_logger.html#src.spyice.utils.spyice_logger.SpyiceLogger.write">write() (src.spyice.utils.spyice_logger.SpyiceLogger method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, Sneha Iyer.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
