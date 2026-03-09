@@ -42,4 +42,4 @@ Contents
   Installation <quick_start/installation.rst>
   API <api/_index>
   User Guide <user_guide/_index>
-  Examples <quick_start/example/main_original>
+  Examples <quick_start/example/_index>

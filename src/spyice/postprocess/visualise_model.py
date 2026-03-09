@@ -448,7 +448,7 @@ class VisualiseModel:
             + ".csv"
         )
 
-    def plot_temperature_heatmap(self, savefig: bool = True, export_csv=False):
+    def plot_temperature_heatmap(self, savefig: bool = True, export_csv=False, show: bool = True):
         """Plots the temperature heatmap."""
 
         print("Plotting Temperature heatmap...")
@@ -494,9 +494,11 @@ class VisualiseModel:
                 self.ui_object.dir_output_name + "/Temperature.csv",
                 index=False,
             )
+        if show:
+            plt.show()
         plt.close(fig)
 
-    def plot_salinity_heatmap(self, savefig: bool = True):
+    def plot_salinity_heatmap(self, savefig: bool = True, show: bool = False):
         """Plots the temperature heatmap."""
 
         print("Plotting Temperature heatmap...")
@@ -537,6 +539,8 @@ class VisualiseModel:
                 self.ui_object.dir_output_name + "/Salinity_heatmap.pdf",
                 backend="pgf",
             )
+        if show:
+            plt.show()
         plt.close(fig)
 
     def plot_liquidfraction_heatmap(self, savefig: bool = True):
@@ -1185,7 +1189,7 @@ class VisualiseModel:
             )
         plt.close(fig)
 
-    def plot_carbon_concentration_multiplelayers(self, savefig: bool = True):
+    def plot_carbon_concentration_multiplelayers(self, savefig: bool = True, show: bool = False):
         carbon_concentration = self.results_object.carbon_concentration_multiplelayers
         depth = self.results_object.thickness_list[-1]
         depth_index = int(self.results_object.thickness_index_total[-1]) + 1
@@ -1214,6 +1218,8 @@ class VisualiseModel:
                 self.ui_object.dir_output_name + "/carbon_concentration_multiplelayers.pdf",
                 backend="pgf",
             )
+        if show:
+            plt.show()
         plt.close(fig)
 
     def plot_chla_bulk_concentration(self, savefig: bool = True):
@@ -1309,7 +1315,7 @@ class VisualiseModel:
             )
         plt.close(fig)
 
-    def plot_nutrient_concentration_multiplelayers(self, savefig: bool = True):
+    def plot_nutrient_concentration_multiplelayers(self, savefig: bool = True, show: bool = False):
         nutrient_concentration = self.results_object.nutrient_concentration_multiplelayers
 
         print("Plotting nutrient concentration of all layers: heatmap...")
@@ -1336,6 +1342,8 @@ class VisualiseModel:
                 self.ui_object.dir_output_name + "/nutrient_concentration_alllayers.pdf",
                 backend="pgf",
             )
+        if show:
+            plt.show()
         plt.close(fig)
 
 
@@ -1433,7 +1441,7 @@ class VisualiseModel:
             )
         plt.close(fig)
     
-    def plot_radiation_algae_multiplelayers(self, savefig: bool = True):
+    def plot_radiation_algae_multiplelayers(self, savefig: bool = True, show: bool = False):
         radiation_algae = self.results_object.radiation_algae_multiplelayers
 
         depth = self.results_object.thickness_list[-1]
@@ -1463,6 +1471,8 @@ class VisualiseModel:
                 self.ui_object.dir_output_name + "/algae_radiation_multiplelayers.pdf",
                 backend="pgf",
             )
+        if show:
+            plt.show()
         plt.close(fig)
 
     def plot_radiation_algae_dt_by_rho_c(self, savefig: bool = True):
@@ -1610,7 +1620,7 @@ class VisualiseModel:
             )
         plt.close()     
 
-    def plot_carbon_concentration_profile(self, savefig: bool = True):
+    def plot_carbon_concentration_profile(self, savefig: bool = True, show: bool = False):
 
         time = len(self.results_object.carbon_concentration_multiplelayers)
         depth_ = np.append(np.arange(0, 1, self.ui_object.grid_resolution_dz), 1.0)
@@ -1629,6 +1639,8 @@ class VisualiseModel:
                 self.ui_object.dir_output_name + "/carbon_concentration_vertical_profile.pdf",
                 backend="pgf",
             )
+        if show:
+            plt.show()
         plt.close()              
 
     
