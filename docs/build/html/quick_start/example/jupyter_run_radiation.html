@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Guide to model building and running with SPyice for biogeochemical model &#8212; SpyIce  documentation</title>
+    <title>Guide to model building and running with SPyice for heat-salt transport with radiation &#8212; SpyIce  documentation</title>
   
   
   
@@ -46,10 +46,11 @@
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'quick_start/example/jupyter_run_algae';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'quick_start/example/jupyter_run_radiation';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="prev" title="Guide to model building and running with SPyice for heat-salt transport with radiation" href="jupyter_run_radiation.html" />
+    <link rel="next" title="Guide to model building and running with SPyice for biogeochemical model" href="jupyter_run_algae.html" />
+    <link rel="prev" title="Model building and running with SPyice for heat-salt transport system" href="jupyter_run.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="1.0.0" />
@@ -299,8 +300,8 @@
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="main_original.html">Quick start example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="jupyter_run.html">Heat-Salt transport in sea ice</a></li>
-<li class="toctree-l1"><a class="reference internal" href="jupyter_run_radiation.html">Heat-Salt transport with radiation and gravity drainage</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Biogeochemical system response to transport mechanics</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Heat-Salt transport with radiation and gravity drainage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jupyter_run_algae.html">Biogeochemical system response to transport mechanics</a></li>
 </ul>
 </div>
 </nav></div>
@@ -339,7 +340,7 @@
     
     <li class="breadcrumb-item"><a href="_index.html" class="nav-link">Examples</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Guide to model building and running with SPyice for biogeochemical model</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Guide to model building and running with SPyice for heat-salt transport with radiation</span></li>
   </ul>
 </nav>
 </div>
@@ -356,10 +357,10 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="Guide-to-model-building-and-running-with-SPyice-for-biogeochemical-model">
-<h1>Guide to model building and running with SPyice for biogeochemical model<a class="headerlink" href="#Guide-to-model-building-and-running-with-SPyice-for-biogeochemical-model" title="Link to this heading">#</a></h1>
-<p>Demonstrates a simple example for a freezing sea ice model with heat-salinity-nutrient transport, gravity drainage, radiation and microalgae growth along with other default settings of initial conditions of 265K at the top boundary and Salinity of 34ppt choosing constant fixed Dirichlet boundary conditions. For the one phase distinct interface system where sea water is at melt temperature of 271.25K.</p>
-<p><img alt="290036c5a81a42c1a957681dd43a14f2" class="no-scaled-link" src="../../_images/seaicemodel.png" style="width: 500px;" /></p>
+  <section id="Guide-to-model-building-and-running-with-SPyice-for-heat-salt-transport-with-radiation">
+<h1>Guide to model building and running with SPyice for heat-salt transport with radiation<a class="headerlink" href="#Guide-to-model-building-and-running-with-SPyice-for-heat-salt-transport-with-radiation" title="Link to this heading">#</a></h1>
+<p>Demonstrates a simple example for a freezing sea ice model with <strong>gravity drainage and radiation</strong> along with other default settings of initial conditions of 265K at the top boundary and Salinity of 34ppt choosing constant fixed Dirichlet boundary conditions. For the one phase distinct interface system where sea water is at melt temperature of 271.25K.</p>
+<p><img alt="55cb1300e4ed42e0bdd8151164dc880f" class="no-scaled-link" src="../../_images/sunlight_brinedrainage_seaice.png" style="width: 300px;" /></p>
 <section id="Import-Packages">
 <h2>Import Packages<a class="headerlink" href="#Import-Packages" title="Link to this heading">#</a></h2>
 <div class="nbinput nblast docutils container">
@@ -394,8 +395,8 @@
     <span class="s2">&quot;constants&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;constants&quot;</span><span class="p">:</span> <span class="s2">&quot;real&quot;</span><span class="p">},</span>
     <span class="s2">&quot;dt&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;dt&quot;</span><span class="p">:</span> <span class="mi">47</span><span class="p">},</span>
     <span class="s2">&quot;S_IC&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;S_IC&quot;</span><span class="p">:</span> <span class="s2">&quot;S34&quot;</span><span class="p">},</span>
-    <span class="s2">&quot;iter_max&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;iter_max&quot;</span><span class="p">:</span> <span class="mi">10000</span><span class="p">},</span>
-    <span class="s2">&quot;dz&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;dz&quot;</span><span class="p">:</span> <span class="mf">0.05</span><span class="p">},</span>
+    <span class="s2">&quot;iter_max&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;iter_max&quot;</span><span class="p">:</span> <span class="mi">1500</span><span class="p">},</span>
+    <span class="s2">&quot;dz&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;dz&quot;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">},</span>
 <span class="p">}</span>
 <span class="n">config_raw</span> <span class="o">=</span> <span class="n">OmegaConf</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">constants_dict</span><span class="p">)</span>
 <span class="n">config</span> <span class="o">=</span> <span class="n">ConfigSort</span><span class="o">.</span><span class="n">getconfig_dataclass</span><span class="p">(</span><span class="n">config_raw</span><span class="p">,</span> <span class="n">config_type</span><span class="o">=</span><span class="s2">&quot;jupyter&quot;</span><span class="p">)</span>
@@ -407,7 +408,7 @@
 <span class="n">timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">_%H%M%S&quot;</span><span class="p">)</span>
 <span class="n">output_base_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_base_dir</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">)</span>
 <span class="n">wo_hydra_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_base_dir</span><span class="p">,</span> <span class="s2">&quot;without_hydra&quot;</span><span class="p">)</span>
-<span class="n">out_dir_final</span> <span class="o">=</span> <span class="n">create_output_directory</span><span class="p">(</span><span class="n">wo_hydra_dir</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">initial_salinity</span><span class="o">.</span><span class="n">S_IC</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;0.01&quot;</span><span class="p">,</span> <span class="s2">&quot;47&quot;</span><span class="p">,</span> <span class="s2">&quot;10000&quot;</span><span class="p">,</span> <span class="s2">&quot;example&quot;</span><span class="p">)</span>
+<span class="n">out_dir_final</span> <span class="o">=</span> <span class="n">create_output_directory</span><span class="p">(</span><span class="n">wo_hydra_dir</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">initial_salinity</span><span class="o">.</span><span class="n">S_IC</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;0.01&quot;</span><span class="p">,</span> <span class="s2">&quot;47&quot;</span><span class="p">,</span> <span class="s2">&quot;1500&quot;</span><span class="p">,</span> <span class="s2">&quot;example&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -440,17 +441,14 @@ Preprocessing done.
 <section id="Model-settings">
 <h3>Model settings<a class="headerlink" href="#Model-settings" title="Link to this heading">#</a></h3>
 <p>for more info on all the model parameters have a look at the documentation: <a class="reference external" href="https://starry-phoenix.github.io/spyice-thesis/build/html/api/spyice.parameters.user_input.html">userinput</a></p>
-<p><img alt="ab3a350b05e44cc4b25beddc4b981b62" class="no-scaled-link" src="../../_images/seaicemodel_algae_layers.png" style="width: 250px;" /></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># choose the diffusion only equation for heat diffusion without the influence of salinity and physical properties for algae layers</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># choose the diffusion only equation for heat diffusion without the influence of salinity and radiation due to sunlight</span>
 <span class="n">userinput_data</span><span class="o">.</span><span class="n">is_diffusiononly_equation</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="n">userinput_data</span><span class="o">.</span><span class="n">is_salinity_equation</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">userinput_data</span><span class="o">.</span><span class="n">is_algae_equation</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="n">userinput_data</span><span class="o">.</span><span class="n">is_radiation_equation</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">userinput_data</span><span class="o">.</span><span class="n">algae_model_BAL_type</span> <span class="o">=</span> <span class="s2">&quot;all&quot;</span>  <span class="c1"># choice between &quot;all&quot; or &quot;single&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -460,9 +458,9 @@ Preprocessing done.
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># change dz, dt and time iterations</span>
 <span class="c1"># simulation time = dt * (time iterations)</span>
-<span class="n">userinput_data</span><span class="o">.</span><span class="n">grid_resolution_dz</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="n">userinput_data</span><span class="o">.</span><span class="n">grid_resolution_dz</span> <span class="o">=</span> <span class="mf">0.01</span>
 <span class="n">userinput_data</span><span class="o">.</span><span class="n">grid_timestep_dt</span> <span class="o">=</span> <span class="mi">47</span>
-<span class="n">userinput_data</span><span class="o">.</span><span class="n">max_iterations</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">userinput_data</span><span class="o">.</span><span class="n">max_iterations</span> <span class="o">=</span> <span class="mi">1500</span>
 </pre></div>
 </div>
 </div>
@@ -521,7 +519,7 @@ Residuals exported successfully.
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/quick_start_example_jupyter_run_algae_13_1.png" src="../../_images/quick_start_example_jupyter_run_algae_13_1.png" />
+<img alt="../../_images/quick_start_example_jupyter_run_radiation_13_1.png" src="../../_images/quick_start_example_jupyter_run_radiation_13_1.png" />
 </div>
 </div>
 </section>
@@ -568,7 +566,7 @@ Plotting Temperature heatmap...
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/quick_start_example_jupyter_run_algae_16_1.png" src="../../_images/quick_start_example_jupyter_run_algae_16_1.png" />
+<img alt="../../_images/quick_start_example_jupyter_run_radiation_16_1.png" src="../../_images/quick_start_example_jupyter_run_radiation_16_1.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
@@ -591,14 +589,14 @@ Plotting Salinity heatmap...
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/quick_start_example_jupyter_run_algae_17_1.png" src="../../_images/quick_start_example_jupyter_run_algae_17_1.png" />
+<img alt="../../_images/quick_start_example_jupyter_run_radiation_17_1.png" src="../../_images/quick_start_example_jupyter_run_radiation_17_1.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_nutrient_concentration_multiplelayers</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_radiation_all</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -607,60 +605,61 @@ Plotting Salinity heatmap...
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Plotting nutrient concentration of all layers: heatmap...
+Plotting radiation ice and algae heatmap...
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/quick_start_example_jupyter_run_algae_18_1.png" src="../../_images/quick_start_example_jupyter_run_algae_18_1.png" />
+<img alt="../../_images/quick_start_example_jupyter_run_radiation_18_1.png" src="../../_images/quick_start_example_jupyter_run_radiation_18_1.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_radiation_algae_multiplelayers</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_radiation_profile</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-Plotting algae radiation multiple layers...
-</pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/quick_start_example_jupyter_run_algae_19_1.png" src="../../_images/quick_start_example_jupyter_run_algae_19_1.png" />
+<img alt="../../_images/quick_start_example_jupyter_run_radiation_19_0.png" src="../../_images/quick_start_example_jupyter_run_radiation_19_0.png" />
 </div>
 </div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_carbon_concentration_multiplelayers</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># brine velocity profile</span>
+<span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_brinevelocity_profile</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-Plotting carbon concentration multiple layers...
-</pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/quick_start_example_jupyter_run_algae_20_1.png" src="../../_images/quick_start_example_jupyter_run_algae_20_1.png" />
+<img alt="../../_images/quick_start_example_jupyter_run_radiation_20_0.png" src="../../_images/quick_start_example_jupyter_run_radiation_20_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plots contribution of gravity drainage as a salinity source/drain</span>
+<span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_salinity_sourceterm_profile</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/quick_start_example_jupyter_run_radiation_21_0.png" src="../../_images/quick_start_example_jupyter_run_radiation_21_0.png" />
 </div>
 </div>
 </section>
@@ -678,13 +677,22 @@ Plotting carbon concentration multiple layers...
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="jupyter_run_radiation.html"
+       href="jupyter_run.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Guide to model building and running with SPyice for heat-salt transport with radiation</p>
+        <p class="prev-next-title">Model building and running with SPyice for heat-salt transport system</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="jupyter_run_algae.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Guide to model building and running with SPyice for biogeochemical model</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -719,7 +727,7 @@ Plotting carbon concentration multiple layers...
   <div class="sidebar-secondary-item">
 
   <div class="tocsection sourcelink">
-    <a href="../../_sources/quick_start/example/jupyter_run_algae.ipynb.txt">
+    <a href="../../_sources/quick_start/example/jupyter_run_radiation.ipynb.txt">
       <i class="fa-solid fa-file-lines"></i> Show Source
     </a>
   </div>
