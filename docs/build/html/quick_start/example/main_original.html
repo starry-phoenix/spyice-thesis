@@ -299,7 +299,8 @@
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Quick start example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="jupyter_run.html">Heat-Salt Transport in Sea ice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jupyter_run.html">Heat-Salt transport in sea ice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="jupyter_run_radiation.html">Heat-Salt transport with radiation and gravity drainage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="jupyter_run_algae.html">Biogeochemical system response to transport mechanics</a></li>
 </ul>
 </div>
@@ -360,13 +361,13 @@
 <h1>Sea-Ice Model Package (SPyIce)<a class="headerlink" href="#Sea-Ice-Model-Package-(SPyIce)" title="Link to this heading">#</a></h1>
 <p>The SPyIce package is a software tool that enables 1D finite difference simulation for vertical transport equations. It specifically focuses on thermal diffusion with the influence of salinity and physical properties. The package utilizes the Thomas tridiagonal solver as the solver algorithm. With SPyIce, users can model and analyze the behavior of temperature, salinity, and other relevant variables in a vertical system. It provides a comprehensive framework for studying the thermal diffusion
 process and its interaction with salinity in various scenarios. Hydra is used to automate the simulation runs of the Sea-Ice Model. It is used to manage and run sea ice simulations, making it easier for users to explore different scenarios and optimize their models.</p>
-<p><img alt="285e0fae6d24407599f347ec8bdb115f" class="no-scaled-link" src="../../_images/seaice_withboundary.png" style="width: 250px;" /></p>
+<p><img alt="aa88ad0cb71c4b95be280ed4e1e41c1d" class="no-scaled-link" src="../../_images/seaice_withboundary.png" style="width: 250px;" /></p>
 <section id="Package-Demo-Example">
 <h2>Package Demo Example<a class="headerlink" href="#Package-Demo-Example" title="Link to this heading">#</a></h2>
 <section id="Import-Packages">
 <h3>Import Packages<a class="headerlink" href="#Import-Packages" title="Link to this heading">#</a></h3>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># creates a OmegaConf object from a dictionary</span>
@@ -388,7 +389,7 @@ process and its interaction with salinity in various scenarios. Hydra is used to
 <section id="Define-Inputs-and-Project-Output-paths">
 <h3>Define Inputs and Project Output paths<a class="headerlink" href="#Define-Inputs-and-Project-Output-paths" title="Link to this heading">#</a></h3>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># creates a OmegaConf object from a dictionary for fast testing only for parameters: constants, dt, S_IC, iter_max, dz</span>
@@ -413,8 +414,8 @@ process and its interaction with salinity in various scenarios. Hydra is used to
 </section>
 <section id="Preprocessing,-Running-and-Analysis-of-Sea-Ice-Model">
 <h3>Preprocessing, Running and Analysis of Sea-Ice Model<a class="headerlink" href="#Preprocessing,-Running-and-Analysis-of-Sea-Ice-Model" title="Link to this heading">#</a></h3>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># preprocess the data</span>
@@ -433,11 +434,37 @@ process and its interaction with salinity in various scenarios. Hydra is used to
 </pre></div>
 </div>
 </div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Preprocessing...
+User Configuration Data Setup Complete...
+Geometry Data Setup Complete...
+Results Data Setup Complete...
+Time step set to: 47s
+Applied Initial &amp; Boundary Conditions...
+Preprocessing done.
+Running model...
+Model run complete and Ready for Analysis.
+Running error analysis...
+Calculating errors...
+Residuals exported successfully.
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/quick_start_example_main_original_8_1.png" src="../../_images/quick_start_example_main_original_8_1.png" />
+</div>
+</div>
 </section>
 <section id="Visualization-of-Model-with-VisualiseModel">
 <h3>Visualization of Model with VisualiseModel<a class="headerlink" href="#Visualization-of-Model-with-VisualiseModel" title="Link to this heading">#</a></h3>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_visualization_object</span> <span class="o">=</span> <span class="n">VisualiseModel</span><span class="p">(</span>
@@ -448,8 +475,16 @@ process and its interaction with salinity in various scenarios. Hydra is used to
 </pre></div>
 </div>
 </div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Visualisation object created...
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plots the Temperature Difference between Analytical and Numerical Solutions</span>
@@ -457,8 +492,16 @@ process and its interaction with salinity in various scenarios. Hydra is used to
 <br/></pre></div>
 </div>
 </div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Plotting Temperature errors using inf norm...
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plots the interface tracking over time for Analytical and Numerical Solutions</span>
@@ -466,8 +509,16 @@ process and its interaction with salinity in various scenarios. Hydra is used to
 <br/></pre></div>
 </div>
 </div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Plotting Depth over time...
+</pre></div></div>
+</div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
@@ -485,7 +536,7 @@ process and its interaction with salinity in various scenarios. Hydra is used to
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># choose your output directory</span>
@@ -496,7 +547,7 @@ process and its interaction with salinity in various scenarios. Hydra is used to
 </div>
 <p>To run the Sea-Ice Model using Hydra and the <code class="docutils literal notranslate"><span class="pre">MainProcess</span></code> script, users simply need to initialize Hydra, load the configuration file, specify any desired overrides, and then create an instance of the <code class="docutils literal notranslate"><span class="pre">MainProcess</span></code> class. The <code class="docutils literal notranslate"><span class="pre">run_model()</span></code> method is then called to execute the simulation. This streamlined process makes it simple for users to run the model with different configurations and analyze the results.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">initialize</span><span class="p">(</span><span class="n">version_base</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">config_path</span><span class="o">=</span><span class="s2">&quot;conf&quot;</span><span class="p">):</span>
@@ -530,8 +581,8 @@ Residuals exported successfully.
 Postprocessing...
 Visualisation object created...
 Plotting Temperature heatmap...
-Plotting Temperature heatmap...
-Plotting Temperature heatmap...
+Plotting Liquid-Fraction heatmap...
+Plotting Salinity heatmap...
 Plotting Liqiudus-Solidus Temperature evolution at 0.1m...
 Postprocessing done.
 </pre></div></div>

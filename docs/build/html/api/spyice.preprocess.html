@@ -571,6 +571,26 @@ Finally, it initializes the ice thickness and prints a message indicating that t
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="src.spyice.preprocess.PreProcess.preprocess_jupyter">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">preprocess_jupyter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/preprocess/pre_process.html#PreProcess.preprocess_jupyter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.preprocess.PreProcess.preprocess_jupyter" title="Link to this definition">#</a></dt>
+<dd><p>Preprocesses the data before running the simulation.
+This method sets up the initial conditions and boundary conditions for the simulation.
+It calculates the solid enthalpy and updates the enthalpy based on temperature, salinity, and liquid fraction.
+Finally, it initializes the ice thickness and prints a message indicating that the initial and boundary conditions have been applied.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Args:</dt><dd><p>None</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>self</strong> (<em>PreprocessData</em>)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="src.spyice.preprocess.PreProcess.set_dataclass">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">set_dataclass</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_to_be_converted</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataclass</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/src/spyice/preprocess/pre_process.html#PreProcess.set_dataclass"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#src.spyice.preprocess.PreProcess.set_dataclass" title="Link to this definition">#</a></dt>
 <dd><p>Sets the attributes of a dataclass object using a dictionary.</p>
@@ -678,6 +698,7 @@ Finally, it initializes the ice thickness and prints a message indicating that t
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.preprocess.PreProcess.get_userinput"><code class="docutils literal notranslate"><span class="pre">PreProcess.get_userinput()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.preprocess.PreProcess.get_variables"><code class="docutils literal notranslate"><span class="pre">PreProcess.get_variables()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.preprocess.PreProcess.preprocess"><code class="docutils literal notranslate"><span class="pre">PreProcess.preprocess()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.preprocess.PreProcess.preprocess_jupyter"><code class="docutils literal notranslate"><span class="pre">PreProcess.preprocess_jupyter()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.preprocess.PreProcess.set_dataclass"><code class="docutils literal notranslate"><span class="pre">PreProcess.set_dataclass()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.preprocess.PreProcess.set_dataclass_with_dataclass"><code class="docutils literal notranslate"><span class="pre">PreProcess.set_dataclass_with_dataclass()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#src.spyice.preprocess.PreProcess.set_preprocess"><code class="docutils literal notranslate"><span class="pre">PreProcess.set_preprocess()</span></code></a></li>
