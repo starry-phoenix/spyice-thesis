@@ -1512,7 +1512,7 @@ class VisualiseModel:
             )
         plt.close(fig)
 
-    def plot_radiation_all(self, savefig: bool = True):
+    def plot_radiation_all(self, savefig: bool = True, show=False):
         radiation_algae = self.results_object.radiation_multiplelayers
 
         print("Plotting radiation ice and algae heatmap...")
@@ -1539,6 +1539,8 @@ class VisualiseModel:
                 self.ui_object.dir_output_name + "/radiation_algae_heatmap_multiplelayers.pdf",
                 backend="pgf",
             )
+        if show:
+            plt.show()
         plt.close(fig)
 
     def plot_nutrient_cn_profile(self, savefig: bool = True):
@@ -1646,12 +1648,12 @@ class VisualiseModel:
         plt.close()              
 
     
-    def plot_salinity_sourceterm_profile(self, savefig: bool = True):
+    def plot_salinity_sourceterm_profile(self, savefig: bool = True, show=False):
 
         time = len(self.results_object.salinity_source_term)
         depth_ = np.append(np.arange(0, 1, self.ui_object.grid_resolution_dz), 1.0)
         
-        plt.figure(figsize=(6, 5))
+        plt.figure(figsize=(4, 3))
         plt.grid()
         plt.plot(self.results_object.salinity_source_term[5, :], depth_, ':',label=r't=5s', color='black', linewidth=1)
         plt.plot(self.results_object.salinity_source_term[int(time/2), :], depth_, label=rf't={int(time/2)}s', color='black', linewidth=1)
@@ -1665,20 +1667,22 @@ class VisualiseModel:
                 self.ui_object.dir_output_name + "/salinitysourceterm_vertical_profile.pdf",
                 backend="pgf",
             )
+        if show:
+            plt.show()
         plt.close()      
 
-    def plot_radiation_profile(self, savefig: bool = True):
+    def plot_radiation_profile(self, savefig: bool = True, show=False):
 
         time = len(self.results_object.radiation_multiplelayers)
         depth_ = np.append(np.arange(0, 1, self.ui_object.grid_resolution_dz), 1.0)
         
-        plt.figure(figsize=(6, 5))
+        plt.figure(figsize=(4, 3))
         plt.grid()
         plt.plot(self.results_object.radiation_multiplelayers[5, :], depth_, ':',label=r't=5s', color='black', linewidth=1)
         plt.plot(self.results_object.radiation_multiplelayers[int(time/2), :], depth_, label=rf't={int(time/2)}s', color='black', linewidth=1)
         plt.plot(self.results_object.radiation_multiplelayers[int(time -5), :], depth_, '--',label=rf't={time-5}s', color='black', linewidth=1)
         plt.gca().invert_yaxis()
-        plt.xlabel(r'$R^i + R^a$ [W/m^2]')
+        plt.xlabel(r'$R^i$ + $R^a$ $[W/m^2]$')
         plt.ylabel(r'Depth [$m$]')
         plt.legend()
         if savefig:
@@ -1686,6 +1690,8 @@ class VisualiseModel:
                 self.ui_object.dir_output_name + "/radiation_vertical_profile.pdf",
                 backend="pgf",
             )
+        if show:
+            plt.show()
         plt.close()    
     
     def plot_liquid_salinity_profile(self, savefig: bool = True):
@@ -1709,12 +1715,12 @@ class VisualiseModel:
             )
         plt.close()   
     
-    def plot_brinevelocity_profile(self, savefig: bool = True):
+    def plot_brinevelocity_profile(self, savefig: bool = True, show=False):
 
         time = len(self.results_object.brine_velocity_list)
         depth_ = np.append(np.arange(0, 1, self.ui_object.grid_resolution_dz), 1.0)
         
-        plt.figure(figsize=(6, 5))
+        plt.figure(figsize=(4, 3))
         plt.grid()
         plt.plot(self.results_object.brine_velocity_list[5, :], depth_, ':',label=r't=5s', color='black', linewidth=1)
         plt.plot(self.results_object.brine_velocity_list[int(time/2), :], depth_, label=rf't={int(time/2)}s', color='black', linewidth=1)
@@ -1728,6 +1734,8 @@ class VisualiseModel:
                 self.ui_object.dir_output_name + "/brinevelocity_vertical_profile.pdf",
                 backend="pgf",
             )
+        if show:
+            plt.show()
         plt.close()     
 
     def plot_temperature_3D(self, savefig:bool = True):

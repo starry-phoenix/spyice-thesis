@@ -955,6 +955,7 @@
         <span class="n">Buffo</span><span class="o">=</span><span class="n">buffo</span><span class="p">,</span>
         <span class="n">Voller</span><span class="o">=</span><span class="n">voller</span><span class="p">,</span>
         <span class="n">bc_neumann</span><span class="o">=</span><span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">temp_grad</span><span class="p">,</span>
+        <span class="n">top_temperature</span><span class="o">=</span><span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">boundary_top_temperature</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">t_k</span><span class="p">,</span> <span class="n">x_wind_t</span><span class="p">,</span> <span class="n">A_before_correction</span> <span class="o">=</span> <span class="n">advection_diffusion_temp</span><span class="o">.</span><span class="n">unknowns_matrix</span><span class="p">(</span>
         <span class="n">t_melt</span><span class="p">,</span> <span class="n">_nonconstant_physical_properties</span>
@@ -979,6 +980,7 @@
             <span class="n">Buffo</span><span class="o">=</span><span class="n">buffo</span><span class="p">,</span>
             <span class="n">Voller</span><span class="o">=</span><span class="n">voller</span><span class="p">,</span>
             <span class="n">bc_neumann</span><span class="o">=</span><span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">temp_grad</span><span class="p">,</span>
+            <span class="n">top_temperature</span><span class="o">=</span><span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">boundary_top_temperature</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">s_k</span><span class="p">,</span> <span class="n">x_wind_s</span><span class="p">,</span> <span class="n">S_before_correction</span> <span class="o">=</span> <span class="p">(</span>
             <span class="n">advection_diffusion_salinity</span><span class="o">.</span><span class="n">unknowns_matrix</span><span class="p">(</span>
@@ -1026,6 +1028,7 @@
         <span class="n">Buffo</span><span class="o">=</span><span class="n">buffo</span><span class="p">,</span>
         <span class="n">Voller</span><span class="o">=</span><span class="n">voller</span><span class="p">,</span>
         <span class="n">bc_neumann</span><span class="o">=</span><span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">temp_grad</span><span class="p">,</span>
+        <span class="n">top_temperature</span><span class="o">=</span><span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">boundary_top_temperature</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">nutrient_cn</span><span class="p">,</span> <span class="n">x_wind_cn</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="p">(</span>
         <span class="n">advection_diffusion_algae</span><span class="o">.</span><span class="n">unknowns_matrix</span><span class="p">(</span>
@@ -1139,19 +1142,6 @@
         <span class="n">temperature_solidus</span> <span class="o">=</span> <span class="mf">0.0</span>
         <span class="n">temperature_liquidus</span> <span class="o">=</span> <span class="mf">0.0</span>
     <span class="k">elif</span> <span class="n">stefan</span><span class="p">:</span>
-
-        <span class="c1"># phi update for a mixture using enthalpy equation</span>
-        <span class="c1"># FIXME: This method is not working as expected. Requires debugging</span>
-        <span class="c1"># phi_k = update_liquid_fraction_mixture_with_enthalpy_equation(</span>
-        <span class="c1">#     t_prev,</span>
-        <span class="c1">#     s_prev,</span>
-        <span class="c1">#     phi_initial,</span>
-        <span class="c1">#     h_k,</span>
-        <span class="c1">#     h_solid,</span>
-        <span class="c1">#     1.0,</span>
-        <span class="c1">#     _is_stefan=preprocess_data_object.is_stefan,</span>
-        <span class="c1"># )</span>
-
         <span class="c1"># phi update for a mixture using Faden method from paper &quot;An optimum Enthalpy Approach for Melting and Solidification with Volume Change&quot;</span>
         <span class="n">phi_k</span><span class="p">,</span> <span class="n">temperature_liquidus</span><span class="p">,</span> <span class="n">temperature_solidus</span> <span class="o">=</span> <span class="n">update_liquid_fraction_mixture_with_under_relaxation</span><span class="p">(</span>
             <span class="n">t_prev</span><span class="p">,</span>
@@ -1159,24 +1149,6 @@
             <span class="n">phi_prev</span><span class="p">,</span>
             <span class="mf">1.0</span><span class="p">,</span>
             <span class="n">_is_stefan</span><span class="o">=</span><span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">is_stefan</span><span class="p">,)</span>  <span class="c1"># returns an array of [phi, T_l, T_s]</span>
-
-        <span class="c1"># # phi update for a mixture using Voller method with under-relaxation</span>
-        <span class="c1"># phi_k = update_liquid_fraction_voller_under_relaxation(</span>
-        <span class="c1">#     t_prev,</span>
-        <span class="c1">#     s_prev,</span>
-        <span class="c1">#     t_initial,</span>
-        <span class="c1">#     phi_prev,</span>
-        <span class="c1">#     t_prev,</span>
-        <span class="c1">#     s_prev,</span>
-        <span class="c1">#     preprocess_data_object.nz,</span>
-        <span class="c1">#     temp_factor_3,</span>
-        <span class="c1">#     t_k_A_LHS_matrix_prev,</span>
-        <span class="c1">#     t_k_A_LHS_matrix_prev,</span>
-        <span class="c1">#     1.4,</span>
-        <span class="c1">#     _is_stefan=preprocess_data_object.is_stefan,</span>
-        <span class="c1">#     _pt2_system=False,</span>
-        <span class="c1">#     _nonconstant_physical_properties=False,</span>
-        <span class="c1"># )</span>
         
         <span class="n">t_k</span><span class="p">,</span> <span class="n">s_k</span><span class="p">,</span> <span class="n">t_k_A_LHS_matrix</span><span class="p">,</span> <span class="n">temp_factor_3</span><span class="p">,</span> <span class="n">x_wind_temperature</span><span class="p">,</span> <span class="n">x_wind_salinity</span> <span class="o">=</span> <span class="n">update_temperature_and_salinity</span><span class="p">(</span>
             <span class="n">preprocess_data_object</span><span class="p">,</span>
@@ -1217,11 +1189,6 @@
             <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">nutrient_cn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">nutrient_cn_prev</span><span class="p">))</span>
-
-
-        <span class="c1"># switch algae transport off</span>
-        <span class="c1"># nutrient_cn = 0.0*nutrient_cn</span>
-
         <span class="n">t_k_melt</span> <span class="o">=</span> <span class="n">calculate_melting_temperature_from_salinity</span><span class="p">(</span><span class="n">s_k</span><span class="p">)</span>
 
     <span class="k">elif</span> <span class="n">buffo</span><span class="p">:</span>
@@ -1261,16 +1228,11 @@
         <span class="n">nutrient_cn</span> <span class="o">=</span> <span class="mf">0.0</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="ne">AssertionError</span><span class="p">(</span><span class="s2">&quot;No method selected for liquid fraction update&quot;</span><span class="p">)</span>
-
-    <span class="c1"># Voller scheme: lower, main, upper diagonal of the matrix A of Ax = b</span>
-
     <span class="c1"># calculate brine velocity</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">_is_diffusiononly_equation</span><span class="p">:</span>
         <span class="n">brine_velocity</span> <span class="o">=</span> <span class="n">calculate_brine_velocity_upwindscheme</span><span class="p">(</span><span class="n">phi_k</span><span class="p">,</span> <span class="n">phi_initial</span><span class="p">,</span> <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">grid_resolution_dz</span><span class="p">,</span> <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">grid_timestep_dt</span><span class="p">,</span> <span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">nz</span><span class="p">,</span> <span class="n">_rho_ice</span><span class="p">,</span> <span class="n">_rho_brine</span><span class="p">,</span> <span class="n">thickness_index_prev</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">brine_velocity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">preprocess_data_object</span><span class="o">.</span><span class="n">nz</span><span class="p">)</span>
-    <span class="c1"># TODO: investigate values of T_k, s_k, brine_velocity, nutrient_cn, t_k_A_LHS_matrix, temp_factor_3, t_k_melt, temperature_liquidus, temperature_solidus, x_wind_temperature, x_wind_salinity</span>
-    <span class="c1"># TODO: if T_k, s_k change then the initial values need to change </span>
     <span class="k">return</span> <span class="n">h_k</span><span class="p">,</span> <span class="n">h_solid</span><span class="p">,</span> <span class="n">phi_k</span><span class="p">,</span> <span class="n">t_k</span><span class="p">,</span> <span class="n">s_k</span><span class="p">,</span> <span class="n">brine_velocity</span><span class="p">,</span> <span class="n">nutrient_cn</span><span class="p">,</span> <span class="n">t_k_A_LHS_matrix</span><span class="p">,</span> <span class="n">temp_factor_3</span><span class="p">,</span> <span class="n">t_k_melt</span><span class="p">,</span> <span class="n">temperature_liquidus</span><span class="p">,</span> <span class="n">temperature_solidus</span><span class="p">,</span> <span class="n">x_wind_temperature</span><span class="p">,</span> <span class="n">x_wind_salinity</span></div>
 
 

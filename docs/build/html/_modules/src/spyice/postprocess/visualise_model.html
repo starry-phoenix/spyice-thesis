@@ -810,7 +810,7 @@
 
 <div class="viewcode-block" id="VisualiseModel.plot_temperature_heatmap">
 <a class="viewcode-back" href="../../../../api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.VisualiseModel.plot_temperature_heatmap">[docs]</a>
-    <span class="k">def</span> <span class="nf">plot_temperature_heatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">savefig</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">export_csv</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">plot_temperature_heatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">savefig</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">export_csv</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Plots the temperature heatmap.&quot;&quot;&quot;</span>
 
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Plotting Temperature heatmap...&quot;</span><span class="p">)</span>
@@ -864,9 +864,9 @@
 <div class="viewcode-block" id="VisualiseModel.plot_salinity_heatmap">
 <a class="viewcode-back" href="../../../../api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.VisualiseModel.plot_salinity_heatmap">[docs]</a>
     <span class="k">def</span> <span class="nf">plot_salinity_heatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">savefig</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">show</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Plots the temperature heatmap.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Plots the Salinity heatmap.&quot;&quot;&quot;</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Plotting Temperature heatmap...&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Plotting Salinity heatmap...&quot;</span><span class="p">)</span>
         <span class="n">x_axis_iter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">max_iterations</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
         <span class="n">heatmap_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">s_k_list</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
         <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
@@ -911,10 +911,10 @@
 
 <div class="viewcode-block" id="VisualiseModel.plot_liquidfraction_heatmap">
 <a class="viewcode-back" href="../../../../api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.VisualiseModel.plot_liquidfraction_heatmap">[docs]</a>
-    <span class="k">def</span> <span class="nf">plot_liquidfraction_heatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">savefig</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Plots the temperature heatmap.&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">plot_liquidfraction_heatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">savefig</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Plots the Liquidfraction heatmap.&quot;&quot;&quot;</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Plotting Temperature heatmap...&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Plotting Liquid-Fraction heatmap...&quot;</span><span class="p">)</span>
         <span class="n">x_axis_iter</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">max_iterations</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
         <span class="n">heatmap_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">phi_k_list</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
         <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
@@ -951,6 +951,8 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">dir_output_name</span> <span class="o">+</span> <span class="s2">&quot;/Liquidfraction.pdf&quot;</span><span class="p">,</span>
                 <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;pgf&quot;</span><span class="p">,</span>
             <span class="p">)</span>
+        <span class="k">if</span> <span class="n">show</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span></div>
 
 
@@ -1950,7 +1952,7 @@
 
 <div class="viewcode-block" id="VisualiseModel.plot_radiation_all">
 <a class="viewcode-back" href="../../../../api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.VisualiseModel.plot_radiation_all">[docs]</a>
-    <span class="k">def</span> <span class="nf">plot_radiation_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">savefig</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">plot_radiation_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">savefig</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="n">radiation_algae</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">radiation_multiplelayers</span>
 
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Plotting radiation ice and algae heatmap...&quot;</span><span class="p">)</span>
@@ -1977,6 +1979,8 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">dir_output_name</span> <span class="o">+</span> <span class="s2">&quot;/radiation_algae_heatmap_multiplelayers.pdf&quot;</span><span class="p">,</span>
                 <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;pgf&quot;</span><span class="p">,</span>
             <span class="p">)</span>
+        <span class="k">if</span> <span class="n">show</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span></div>
 
 
@@ -2102,12 +2106,12 @@
     
 <div class="viewcode-block" id="VisualiseModel.plot_salinity_sourceterm_profile">
 <a class="viewcode-back" href="../../../../api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.VisualiseModel.plot_salinity_sourceterm_profile">[docs]</a>
-    <span class="k">def</span> <span class="nf">plot_salinity_sourceterm_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">savefig</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">plot_salinity_sourceterm_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">savefig</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 
         <span class="n">time</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">salinity_source_term</span><span class="p">)</span>
         <span class="n">depth_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_resolution_dz</span><span class="p">),</span> <span class="mf">1.0</span><span class="p">)</span>
         
-        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">salinity_source_term</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="p">:],</span> <span class="n">depth_</span><span class="p">,</span> <span class="s1">&#39;:&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;t=5s&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">salinity_source_term</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="p">:],</span> <span class="n">depth_</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">rf</span><span class="s1">&#39;t=</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s1">s&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -2121,23 +2125,25 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">dir_output_name</span> <span class="o">+</span> <span class="s2">&quot;/salinitysourceterm_vertical_profile.pdf&quot;</span><span class="p">,</span>
                 <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;pgf&quot;</span><span class="p">,</span>
             <span class="p">)</span>
+        <span class="k">if</span> <span class="n">show</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>      </div>
 
 
 <div class="viewcode-block" id="VisualiseModel.plot_radiation_profile">
 <a class="viewcode-back" href="../../../../api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.VisualiseModel.plot_radiation_profile">[docs]</a>
-    <span class="k">def</span> <span class="nf">plot_radiation_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">savefig</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">plot_radiation_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">savefig</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 
         <span class="n">time</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">radiation_multiplelayers</span><span class="p">)</span>
         <span class="n">depth_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_resolution_dz</span><span class="p">),</span> <span class="mf">1.0</span><span class="p">)</span>
         
-        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">radiation_multiplelayers</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="p">:],</span> <span class="n">depth_</span><span class="p">,</span> <span class="s1">&#39;:&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;t=5s&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">radiation_multiplelayers</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="p">:],</span> <span class="n">depth_</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">rf</span><span class="s1">&#39;t=</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s1">s&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">radiation_multiplelayers</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span> <span class="o">-</span><span class="mi">5</span><span class="p">),</span> <span class="p">:],</span> <span class="n">depth_</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">rf</span><span class="s1">&#39;t=</span><span class="si">{</span><span class="n">time</span><span class="o">-</span><span class="mi">5</span><span class="si">}</span><span class="s1">s&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$R^i + R^a$ [W/m^2]&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$R^i$ + $R^a$ $[W/m^2]$&#39;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Depth [$m$]&#39;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">savefig</span><span class="p">:</span>
@@ -2145,6 +2151,8 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">dir_output_name</span> <span class="o">+</span> <span class="s2">&quot;/radiation_vertical_profile.pdf&quot;</span><span class="p">,</span>
                 <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;pgf&quot;</span><span class="p">,</span>
             <span class="p">)</span>
+        <span class="k">if</span> <span class="n">show</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>    </div>
 
     
@@ -2174,12 +2182,12 @@
     
 <div class="viewcode-block" id="VisualiseModel.plot_brinevelocity_profile">
 <a class="viewcode-back" href="../../../../api/spyice.postprocess.visualise_model.html#src.spyice.postprocess.VisualiseModel.plot_brinevelocity_profile">[docs]</a>
-    <span class="k">def</span> <span class="nf">plot_brinevelocity_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">savefig</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">plot_brinevelocity_profile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">savefig</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 
         <span class="n">time</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">brine_velocity_list</span><span class="p">)</span>
         <span class="n">depth_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">grid_resolution_dz</span><span class="p">),</span> <span class="mf">1.0</span><span class="p">)</span>
         
-        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">brine_velocity_list</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="p">:],</span> <span class="n">depth_</span><span class="p">,</span> <span class="s1">&#39;:&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;t=5s&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">results_object</span><span class="o">.</span><span class="n">brine_velocity_list</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="p">:],</span> <span class="n">depth_</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">rf</span><span class="s1">&#39;t=</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s1">s&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -2193,6 +2201,8 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">ui_object</span><span class="o">.</span><span class="n">dir_output_name</span> <span class="o">+</span> <span class="s2">&quot;/brinevelocity_vertical_profile.pdf&quot;</span><span class="p">,</span>
                 <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;pgf&quot;</span><span class="p">,</span>
             <span class="p">)</span>
+        <span class="k">if</span> <span class="n">show</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>     </div>
 
 
@@ -2282,92 +2292,6 @@
         <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span></div>
 </div>
 
-
-
-    <span class="c1"># def residual_plot(self):</span>
-    <span class="c1">#     res_0p01_1000iter_voller1 = np.load(&quot;outputs/2024-09-26/123923_real_47.0_1000_0.01/residuals.npy&quot;, allow_pickle=True)</span>
-
-    <span class="c1"># TODO: Add the following methods</span>
-    <span class="c1"># def plot_phi(self, timestep, savefig=True):</span>
-    <span class="c1">#     print(f&quot;Plotting Liquid Fraction evolution at {timestep}H...&quot;)</span>
-    <span class="c1">#     x_axis_iter = np.arange(0,self.nz,1)</span>
-    <span class="c1">#     #x_axis_iter = np.arange(0,22970,1)</span>
-    <span class="c1">#     index = timestep*3600/self.ui_object.grid_timestep_dt</span>
-    <span class="c1">#     phi_k = self.phi_k_list[int(index)]</span>
-    <span class="c1">#     if self.is_buffo is True:</span>
-    <span class="c1">#         phi_buffo = self.phi_buffo_list[int(index)]</span>
-
-    <span class="c1">#     fig1,(ax1) = plt.subplots(figsize=(10,6))</span>
-    <span class="c1">#     plt.grid()</span>
-    <span class="c1">#     ax1.plot(x_axis_iter*self.ui_object.grid_timestep_dt/3600, phi_k, &#39;r--&#39;,label=&#39;Numerical Temperature&#39;)</span>
-    <span class="c1">#     if self.is_buffo is True:</span>
-    <span class="c1">#         ax1.plot(x_axis_iter*self.ui_object.grid_timestep_dt/3600, phi_buffo, &#39;b--&#39;,alpha=0.5,label=&#39;Buffo&#39;)</span>
-    <span class="c1">#     ax1.set_xlabel(&quot;Depth nodes&quot;)</span>
-    <span class="c1">#     ax1.set_ylabel(&quot;Phi&quot;)</span>
-    <span class="c1">#     #ax1.legend()</span>
-    <span class="c1">#     color = &#39;gray&#39;</span>
-    <span class="c1">#     ax1.legend()</span>
-    <span class="c1">#     fig1.tight_layout()</span>
-    <span class="c1">#     if savefig:</span>
-    <span class="c1">#         fig1.savefig(self.dir_output_name + &quot;/Liquid Fraction evolution at&quot;+ str(timestep) +&quot;s.png&quot;)</span>
-
-    <span class="c1"># def plot_salinity(self, z_depth, savefig=True):</span>
-    <span class="c1">#     x_axis_iter = np.arange(0, iter_max-1,1)</span>
-    <span class="c1">#     index = z_depth*self.nz</span>
-    <span class="c1">#     S_k = self.S_k_list[:,int(index)]</span>
-    <span class="c1">#     if self.is_buffo is True:</span>
-    <span class="c1">#         S_buffo = self.S_buffo_list[:,int(index)]</span>
-    <span class="c1">#     fig1,(ax1) = plt.subplots(figsize=(10,6))</span>
-    <span class="c1">#     plt.grid()</span>
-    <span class="c1">#     ax1.plot(x_axis_iter*self.ui_object.grid_timestep_dt/3600, S_k[x_axis_iter], &#39;r--&#39;,label=&#39;Numerical Temperature&#39;)</span>
-    <span class="c1">#     if self.is_buffo is True:</span>
-    <span class="c1">#         ax1.plot(x_axis_iter*self.ui_object.grid_timestep_dt/3600, S_buffo[x_axis_iter], &#39;b--&#39;,alpha=0.5,label=&#39;Buffo&#39;)</span>
-    <span class="c1">#     ax1.set_xlabel(&quot;t in hours&quot;)</span>
-    <span class="c1">#     ax1.set_ylabel(&quot;Salinity in ppt&quot;)</span>
-    <span class="c1">#     #ax1.legend()</span>
-    <span class="c1">#     color = &#39;gray&#39;</span>
-    <span class="c1">#     ax1.legend()</span>
-    <span class="c1">#     fig1.tight_layout()</span>
-    <span class="c1">#     if savefig:</span>
-    <span class="c1">#         fig1.savefig(self.dir_output_name + &quot;/Salinity evolution at&quot;+ str(z_depth) +&quot;m.png&quot;)</span>
-
-    <span class="c1"># def plot_enthalpy(self, timestep, savefig=False):</span>
-    <span class="c1">#     print(f&quot;Plotting Liquid Fraction Vs Temperature at {timestep}H...&quot;)</span>
-    <span class="c1">#     x_axis_iter = np.arange(0, iter_max-1,1)</span>
-    <span class="c1">#     index = timestep*3600/self.ui_object.grid_timestep_dt</span>
-    <span class="c1">#     mush = self.phi_slope(int(index))</span>
-    <span class="c1">#     phi = self.phi_k_list[int(index)]</span>
-    <span class="c1">#     H_k = self.H_k_list[int(index)]</span>
-    <span class="c1">#     H_solid = self.H_solid_list[int(index)]</span>
-    <span class="c1">#     T_k = self.T_k_list[int(index)]</span>
-    <span class="c1">#     H = (H_k - H_solid)/334774</span>
-    <span class="c1">#     T_melt = Tm_w</span>
-    <span class="c1">#     T_interface = self.Temp_interface[int(index)]</span>
-    <span class="c1">#     fig1,(ax1) = plt.subplots(figsize=(10,6))</span>
-    <span class="c1">#     plt.grid()</span>
-    <span class="c1">#     ax1.plot(T_k,phi, &#39;r--&#39;,label=&#39;Phi&#39;)</span>
-    <span class="c1">#     ax1.fill_betweenx(H, T_k[mush][0], T_k[mush][-1], color=&#39;gray&#39;, alpha=0.2, label=&#39;Mushy Layer&#39;)</span>
-    <span class="c1">#     ax1.set_xlabel(&quot;Temperature in K&quot;)</span>
-    <span class="c1">#     ax1.set_ylabel(r&quot;Liquid Fraction $\phi$&quot;)</span>
-    <span class="c1">#     color = &#39;gray&#39;</span>
-    <span class="c1">#     ax3 = ax1.twinx()</span>
-    <span class="c1">#     ax3.axvline(</span>
-    <span class="c1">#         T_melt,</span>
-    <span class="c1">#         color=&#39;b&#39;,</span>
-    <span class="c1">#         linestyle=&#39;dashed&#39;,</span>
-    <span class="c1">#         label=f&#39;T_melt:{str(round(T_melt, 2))}&#39;,</span>
-    <span class="c1">#     )</span>
-    <span class="c1">#     ax3.axvline(</span>
-    <span class="c1">#         T_interface,</span>
-    <span class="c1">#         color=&#39;g&#39;,</span>
-    <span class="c1">#         linestyle=&#39;dashed&#39;,</span>
-    <span class="c1">#         label=f&#39;T_interface:{str(round(T_interface, 2))}&#39;,</span>
-    <span class="c1">#     )</span>
-    <span class="c1">#     fig1.tight_layout()</span>
-    <span class="c1">#     ax1.legend(loc=0)</span>
-    <span class="c1">#     ax3.legend(loc=1)</span>
-    <span class="c1">#     if savefig:</span>
-    <span class="c1">#         fig1.savefig(self.dir_output_name + &quot;/LiqVsTemp evolution at&quot;+ str(timestep) +&quot;h.png&quot;)</span>
 </pre></div>
 
                 </article>

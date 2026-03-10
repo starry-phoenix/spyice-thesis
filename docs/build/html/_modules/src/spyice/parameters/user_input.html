@@ -570,7 +570,7 @@
 
     <span class="c1"># --- Model Switches ---</span>
     <span class="n">is_stefan</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="n">is_buffo</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">is_buffo</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="n">is_voller</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
     
     <span class="n">is_salinity_equation</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
@@ -590,8 +590,8 @@
     <span class="c1"># --- Boundary and Geometry ---</span>
     <span class="n">boundary_condition_type</span><span class="p">:</span> <span class="n">BoundaryConditionType</span> <span class="o">=</span> <span class="n">BoundaryConditionType</span><span class="o">.</span><span class="n">DIRICHLET</span><span class="o">.</span><span class="n">value</span>
     <span class="n">geometry_type</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">boundary_salinity</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">boundary_top_temperature</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">boundary_salinity</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">34.0</span>
+    <span class="n">boundary_top_temperature</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">265.0</span>
     <span class="n">temperature_top_type</span><span class="p">:</span> <span class="n">TopTemperatureType</span> <span class="o">=</span> <span class="n">TopTemperatureType</span><span class="o">.</span><span class="n">STEFAN</span><span class="o">.</span><span class="n">value</span>
 
     <span class="c1"># --- Tolerances ---</span>
@@ -631,8 +631,6 @@
         <span class="n">_dt_stability_validator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid_resolution_dz</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid_timestep_dt</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">constants</span><span class="p">,</span> <span class="n">RealConstants</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">boundary_salinity</span> <span class="o">=</span> <span class="mi">34</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">boundary_top_temperature</span> <span class="o">=</span> <span class="mi">265</span>
 
             <span class="c1"># melt temperature affects the liquid relation: Frezchem or Normal in src/update_physical_values.py script</span>
             <span class="n">method</span> <span class="o">=</span> <span class="n">InitialMeltTemperature</span><span class="o">.</span><span class="n">ONEPHASE</span><span class="o">.</span><span class="n">value</span>
