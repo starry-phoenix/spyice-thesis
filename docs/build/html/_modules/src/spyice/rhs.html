@@ -343,7 +343,7 @@
 <span class="kn">from</span> <span class="nn">spyice.preprocess.initial_boundary_conditions</span> <span class="kn">import</span> <span class="n">boundary_condition</span>
 
 <span class="n">ui</span> <span class="o">=</span> <span class="n">UserInput</span><span class="p">()</span>
-<span class="n">temperature_melt</span><span class="p">,</span> <span class="n">temperature_top</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">temperature_melt</span><span class="p">,</span> <span class="n">ui</span><span class="o">.</span><span class="n">boundary_top_temperature</span>
+<span class="n">temperature_melt</span> <span class="o">=</span> <span class="n">ui</span><span class="o">.</span><span class="n">temperature_melt</span>
 
 
 <div class="viewcode-block" id="apply_boundary_condition">
@@ -362,11 +362,12 @@
     <span class="n">nz</span><span class="p">,</span>
     <span class="n">t_passed</span><span class="p">,</span>
     <span class="n">salinity_initial</span><span class="p">,</span>
-    <span class="n">_temperature_top</span><span class="p">,</span>
+    <span class="n">temperature_top</span><span class="p">,</span>
     <span class="n">is_stefan</span><span class="p">,</span>
     <span class="n">is_buffo</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">is_voller</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">bc_neumann</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">top_temp_type</span> <span class="o">=</span> <span class="s2">&quot;Stefan&quot;</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Creates the right hand side of the matrix equation considering source terms.</span>
 
@@ -382,15 +383,14 @@
 <span class="sd">        nz (int): Number of computational nodes.</span>
 <span class="sd">        t_passed (float): Time passed in seconds.</span>
 <span class="sd">        salinity_initial (float): Initial salinity value.</span>
-<span class="sd">        _temperature_top (float): Top temperature value.</span>
+<span class="sd">        temperature_top (float): Top temperature value.</span>
 <span class="sd">        is_stefan (bool): Indicates if Stefan condition is used.</span>
 <span class="sd">        is_buffo (bool, optional): Indicates if Buffo condition is used. Defaults to False.</span>
 <span class="sd">        bc_neumann (float, optional): Neumann boundary condition. Defaults to None.</span>
-<span class="sd">        float: The right hand side of the equation.</span>
+<span class="sd">        top_temp_type (str, optional): Stefan problem with Dirichlet conditions at top boundary</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">rhs_matrix</span> <span class="o">=</span> <span class="n">x_initial</span> <span class="o">-</span> <span class="n">factor3</span> <span class="o">*</span> <span class="n">delta_upwind</span>
 
-    <span class="c1"># TODO: modified the boundary condition to the moving boundary condition</span>
     <span class="k">if</span> <span class="n">argument</span> <span class="o">==</span> <span class="s2">&quot;salinity&quot;</span><span class="p">:</span>
         <span class="n">salinity_bc_top</span><span class="p">,</span> <span class="n">salinity_bc_bottom</span> <span class="o">=</span> <span class="n">boundary_condition</span><span class="p">(</span>
                     <span class="n">argument</span><span class="p">,</span> <span class="n">t_passed</span><span class="p">,</span> <span class="n">salinity_initial</span><span class="p">)</span>
@@ -398,11 +398,11 @@
         <span class="k">if</span> <span class="n">w</span><span class="p">[</span><span class="n">bottom_index</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">rhs_matrix</span><span class="p">[</span><span class="n">bottom_index</span><span class="p">:]</span> <span class="o">+=</span> <span class="n">factor1</span><span class="p">[</span><span class="n">bottom_index</span><span class="p">:]</span> <span class="o">*</span> <span class="n">salinity_bc_bottom</span> <span class="o">+</span> <span class="n">factor2</span><span class="p">[</span><span class="n">bottom_index</span><span class="p">:]</span><span class="o">*</span><span class="n">salinity_bc_bottom</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">rhs_matrix</span><span class="p">[</span><span class="n">bottom_index</span><span class="p">:]</span> <span class="o">+=</span> <span class="n">factor1</span><span class="p">[</span><span class="n">bottom_index</span><span class="p">:]</span> <span class="o">*</span> <span class="n">salinity_bc_bottom</span>  <span class="c1">#+ factor2[bottom_index:]*salinity_bc_bottom # Dirichlet</span>
+            <span class="n">rhs_matrix</span><span class="p">[</span><span class="n">bottom_index</span><span class="p">]</span> <span class="o">+=</span> <span class="n">factor1</span><span class="p">[</span><span class="n">bottom_index</span><span class="p">]</span> <span class="o">*</span> <span class="n">salinity_bc_bottom</span>  <span class="c1">#+ factor2[bottom_index:]*salinity_bc_bottom # Dirichlet</span>
 
     <span class="k">elif</span> <span class="n">argument</span> <span class="o">==</span> <span class="s2">&quot;temperature&quot;</span><span class="p">:</span>
         <span class="n">temperature_bc_top</span><span class="p">,</span> <span class="n">temperature_bc_bottom</span> <span class="o">=</span> <span class="n">boundary_condition</span><span class="p">(</span>
-            <span class="n">argument</span><span class="p">,</span> <span class="n">t_passed</span><span class="p">,</span> <span class="n">salinity_initial</span><span class="p">,</span> <span class="n">top_temp</span><span class="o">=</span><span class="n">_temperature_top</span>
+            <span class="n">argument</span><span class="p">,</span> <span class="n">t_passed</span><span class="p">,</span> <span class="n">salinity_initial</span><span class="p">,</span> <span class="n">top_temp</span><span class="o">=</span><span class="n">top_temp_type</span><span class="p">,</span> <span class="n">top_temp_value</span><span class="o">=</span><span class="n">temperature_top</span>
         <span class="p">)</span>
         <span class="n">rhs_matrix</span> <span class="o">=</span> <span class="n">rhs_matrix</span> <span class="o">+</span> <span class="n">source</span>
 
@@ -437,7 +437,7 @@
 <div class="viewcode-block" id="correct_for_brine_movement">
 <a class="viewcode-back" href="../../../api/spyice.rhs.html#src.spyice.rhs.correct_for_brine_movement">[docs]</a>
 <span class="k">def</span> <span class="nf">correct_for_brine_movement</span><span class="p">(</span>
-    <span class="n">argument</span><span class="p">,</span> <span class="n">x_initial</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">t_passed</span><span class="p">,</span> <span class="n">nz</span><span class="p">,</span> <span class="n">salinity_initial</span><span class="p">,</span> <span class="n">top_temp</span>
+    <span class="n">argument</span><span class="p">,</span> <span class="n">x_initial</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">t_passed</span><span class="p">,</span> <span class="n">nz</span><span class="p">,</span> <span class="n">salinity_initial</span><span class="p">,</span> <span class="n">top_temp</span><span class="p">,</span> <span class="n">top_temp_type</span><span class="o">=</span><span class="s2">&quot;Stefan&quot;</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Corrects for brine movement based on the given arguments.</span>
 
@@ -454,8 +454,6 @@
 <span class="sd">    Raises:</span>
 <span class="sd">        None</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># TODO: where tp use x_upwind </span>
-
     <span class="n">x_upwind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nz</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">nz</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">w</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
@@ -482,7 +480,7 @@
 
     <span class="k">elif</span> <span class="n">argument</span> <span class="o">==</span> <span class="s2">&quot;temperature&quot;</span><span class="p">:</span>
         <span class="n">temperature_bc_top</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">boundary_condition</span><span class="p">(</span>
-            <span class="n">argument</span><span class="p">,</span> <span class="n">t_passed</span><span class="p">,</span> <span class="n">salinity_initial</span><span class="p">,</span> <span class="n">top_temp</span><span class="o">=</span><span class="n">top_temp</span>
+            <span class="n">argument</span><span class="p">,</span> <span class="n">t_passed</span><span class="p">,</span> <span class="n">salinity_initial</span><span class="p">,</span> <span class="n">top_temp_value</span><span class="o">=</span><span class="n">top_temp</span><span class="p">,</span> <span class="n">top_temp</span><span class="o">=</span><span class="n">top_temp_type</span>
         <span class="p">)</span>
         <span class="n">x_upwind</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
             <span class="n">x_initial</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">temperature_bc_top</span>

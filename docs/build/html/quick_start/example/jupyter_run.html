@@ -358,11 +358,13 @@
                   
   <section id="Model-building-and-running-with-SPyice-for-heat-salt-transport-system">
 <h1>Model building and running with SPyice for heat-salt transport system<a class="headerlink" href="#Model-building-and-running-with-SPyice-for-heat-salt-transport-system" title="Link to this heading">#</a></h1>
-<p>Demonstrates a simple example for a freezing sea ice model heat-salt transport setup with default settings of initial conditions of 265K at the top boundary and Salinity of 34ppt choosing constant fixed Dirichlet boundary conditions. For the one phase distinct interface system where sea water is at melt temperature of 271.25K.</p>
+<section id="Example-1:-Demo-to-activate-salt-process-model-with-heat-model">
+<h2>Example 1: Demo to activate salt process model with heat model<a class="headerlink" href="#Example-1:-Demo-to-activate-salt-process-model-with-heat-model" title="Link to this heading">#</a></h2>
+<p>Demonstrates a simple example for a freezing sea ice model <strong>heat-salt transport setup</strong> with default settings of initial conditions of 265K at the top boundary and Salinity of 34ppt choosing constant fixed Dirichlet boundary conditions. For the one phase distinct interface system where sea water is at melt temperature of 271.25K.</p>
 <section id="Import-Packages">
-<h2>Import Packages<a class="headerlink" href="#Import-Packages" title="Link to this heading">#</a></h2>
+<h3>Import Packages<a class="headerlink" href="#Import-Packages" title="Link to this heading">#</a></h3>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
@@ -383,9 +385,9 @@
 </div>
 </section>
 <section id="Define-Inputs-and-Project-Output-paths">
-<h2>Define Inputs and Project Output paths<a class="headerlink" href="#Define-Inputs-and-Project-Output-paths" title="Link to this heading">#</a></h2>
+<h3>Define Inputs and Project Output paths<a class="headerlink" href="#Define-Inputs-and-Project-Output-paths" title="Link to this heading">#</a></h3>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># creates a OmegaConf object from a dictionary for fast testing only for parameters: constants, dt, S_IC, iter_max, dz</span>
@@ -405,12 +407,13 @@
 <span class="n">output_base_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">base_dir</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">)</span>
 <span class="c1"># Current date-time string</span>
 <span class="n">timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">_%H%M%S&quot;</span><span class="p">)</span>
-<span class="n">output_base_dir</span> <span class="o">=</span> <span class="n">create_output_directory</span><span class="p">(</span><span class="n">output_base_dir</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">)</span>
+<span class="n">output_base_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_base_dir</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">)</span>
 <span class="n">wo_hydra_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_base_dir</span><span class="p">,</span> <span class="s2">&quot;without_hydra&quot;</span><span class="p">)</span>
-<span class="n">out_dir_final</span> <span class="o">=</span> <span class="n">create_output_directory</span><span class="p">(</span><span class="n">wo_hydra_dir</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">initial_salinity</span><span class="o">.</span><span class="n">S_IC</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;0.01&quot;</span><span class="p">,</span> <span class="s2">&quot;47&quot;</span><span class="p">,</span> <span class="s2">&quot;1500&quot;</span><span class="p">,</span> <span class="s2">&quot;example&quot;</span><span class="p">)</span>
+<span class="n">out_dir_final</span> <span class="o">=</span> <span class="n">create_output_directory</span><span class="p">(</span><span class="n">wo_hydra_dir</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">initial_salinity</span><span class="o">.</span><span class="n">S_IC</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;0.01&quot;</span><span class="p">,</span> <span class="s2">&quot;47&quot;</span><span class="p">,</span> <span class="s2">&quot;1500&quot;</span><span class="p">,</span><span class="s2">&quot;example&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+</section>
 <section id="Preprocessing">
 <h3>Preprocessing<a class="headerlink" href="#Preprocessing" title="Link to this heading">#</a></h3>
 <div class="nbinput docutils container">
@@ -439,7 +442,7 @@ Preprocessing done.
 </section>
 <section id="Model-settings">
 <h3>Model settings<a class="headerlink" href="#Model-settings" title="Link to this heading">#</a></h3>
-<p>for more info on all the model parameters have a look at the documentation: <a class="reference external" href="http://%5B::1%5D:8000/api/spyice.parameters.user_input.html">userinput</a></p>
+<p>for more info on all the model parameters have a look at the documentation: <a class="reference external" href="https://starry-phoenix.github.io/spyice-thesis/build/html/api/spyice.parameters.user_input.html">userinput</a></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -450,19 +453,28 @@ Preprocessing done.
 </pre></div>
 </div>
 </div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preprocess_data</span> <span class="o">=</span> <span class="n">PreProcess</span><span class="o">.</span><span class="n">update_preprocess_dataclass</span><span class="p">(</span><span class="n">preprocess_data</span><span class="p">,</span> <span class="n">userinput_data</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Time step set to: 47s
+Updated Initial &amp; Boundary Conditions...
+</pre></div></div>
+</div>
 </section>
 <section id="Run-model">
 <h3>Run model<a class="headerlink" href="#Run-model" title="Link to this heading">#</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># run the model</span>
@@ -495,15 +507,15 @@ Residuals exported successfully.
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/quick_start_example_jupyter_run_12_1.png" src="../../_images/quick_start_example_jupyter_run_12_1.png" />
+<img alt="../../_images/quick_start_example_jupyter_run_13_1.png" src="../../_images/quick_start_example_jupyter_run_13_1.png" />
 </div>
 </div>
 </section>
 <section id="Visualization-of-Model:">
 <h3>Visualization of Model:<a class="headerlink" href="#Visualization-of-Model:" title="Link to this heading">#</a></h3>
-<p>for more info on other visualization options look at: <a class="reference external" href="http://%5B::1%5D:8000/api/spyice.postprocess.visualise_model.html">visualize model</a></p>
+<p>for more info on other visualization options look at: <a class="reference external" href="https://starry-phoenix.github.io/spyice-thesis/build/html/api/spyice.postprocess.visualise_model.html">visualize model</a></p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_visualization_object</span> <span class="o">=</span> <span class="n">VisualiseModel</span><span class="p">(</span>
@@ -523,61 +535,173 @@ Visualisation object created...
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plots the Temperature Difference between Analytical and Numerical Solutions</span>
-<span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_error_temp</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s2">&quot;inf&quot;</span><span class="p">,</span> <span class="n">savefig</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<br/></pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-Plotting Temperature errors using inf norm...
-</pre></div></div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plots the interface tracking over time for Analytical and Numerical Solutions</span>
-<span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_depth_over_time</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<br/></pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-Plotting Depth over time...
-</pre></div></div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_temperature_heatmap</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">export_csv</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_temperature_heatmap</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">export_csv</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
+<div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 Plotting Temperature heatmap...
 </pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/quick_start_example_jupyter_run_16_1.png" src="../../_images/quick_start_example_jupyter_run_16_1.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_salinity_heatmap</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Plotting Salinity heatmap...
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/quick_start_example_jupyter_run_17_1.png" src="../../_images/quick_start_example_jupyter_run_17_1.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="Example-2:-Demo-to-change-temperature-boundary-conditions-and-salt-initial-conditions-in-heat-solute-transport-simulation">
+<h2>Example 2: Demo to change temperature boundary conditions and salt initial conditions in heat-solute transport simulation<a class="headerlink" href="#Example-2:-Demo-to-change-temperature-boundary-conditions-and-salt-initial-conditions-in-heat-solute-transport-simulation" title="Link to this heading">#</a></h2>
+<p>Demonstrates a simple example for a freezing sea ice model heat-salt transport setup with different <strong>boundary settings 250K at the top boundary and Salinity of 100ppt</strong> choosing constant fixed Dirichlet boundary conditions. For the one phase distinct interface system where sea water is at melt temperature of 271.25K.</p>
+<section id="id1">
+<h3>Import Packages<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">from</span> <span class="nn">omegaconf</span> <span class="kn">import</span> <span class="n">OmegaConf</span>
+
+<span class="kn">from</span> <span class="nn">spyice.utils</span> <span class="kn">import</span> <span class="n">create_output_directory</span>
+<span class="kn">from</span> <span class="nn">spyice.postprocess</span> <span class="kn">import</span> <span class="n">Analysis</span><span class="p">,</span> <span class="n">VisualiseModel</span>
+<span class="kn">from</span> <span class="nn">spyice.utils</span> <span class="kn">import</span> <span class="n">ConfigSort</span>
+<span class="kn">from</span> <span class="nn">spyice.models</span> <span class="kn">import</span> <span class="n">SeaIceModel</span>
+<span class="kn">from</span> <span class="nn">spyice.preprocess</span> <span class="kn">import</span> <span class="n">PreProcess</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="id2">
+<h3>Define Inputs and Project Output paths<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># creates a OmegaConf object from a dictionary for fast testing only for parameters: constants, dt, S_IC, iter_max, dz</span>
+<span class="c1"># make sure to change userinput_data data class values if any parameters in constants_dict is changed!</span>
+<span class="n">constants_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;constants&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;constants&quot;</span><span class="p">:</span> <span class="s2">&quot;real&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;dt&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;dt&quot;</span><span class="p">:</span> <span class="mi">47</span><span class="p">},</span>
+    <span class="s2">&quot;S_IC&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;S_IC&quot;</span><span class="p">:</span> <span class="s2">&quot;S34&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;iter_max&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;iter_max&quot;</span><span class="p">:</span> <span class="mi">1500</span><span class="p">},</span>
+    <span class="s2">&quot;dz&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;dz&quot;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">},</span>
+<span class="p">}</span>
+<span class="n">config_raw</span> <span class="o">=</span> <span class="n">OmegaConf</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">constants_dict</span><span class="p">)</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">ConfigSort</span><span class="o">.</span><span class="n">getconfig_dataclass</span><span class="p">(</span><span class="n">config_raw</span><span class="p">,</span> <span class="n">config_type</span><span class="o">=</span><span class="s2">&quot;jupyter&quot;</span><span class="p">)</span>
+
+<span class="c1"># choose your output directory</span>
+<span class="n">base_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span>
+<span class="n">output_base_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">base_dir</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">)</span>
+<span class="c1"># Current date-time string</span>
+<span class="n">timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">_%H%M%S&quot;</span><span class="p">)</span>
+<span class="n">output_base_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_base_dir</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">)</span>
+<span class="n">wo_hydra_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_base_dir</span><span class="p">,</span> <span class="s2">&quot;without_hydra&quot;</span><span class="p">)</span>
+<span class="n">out_dir_final</span> <span class="o">=</span> <span class="n">create_output_directory</span><span class="p">(</span><span class="n">wo_hydra_dir</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">initial_salinity</span><span class="o">.</span><span class="n">S_IC</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;0.01&quot;</span><span class="p">,</span> <span class="s2">&quot;47&quot;</span><span class="p">,</span> <span class="s2">&quot;1500&quot;</span><span class="p">,</span><span class="s2">&quot;example&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="id3">
+<h3>Preprocessing<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># preprocess the data</span>
+<span class="n">preprocess_data</span><span class="p">,</span> <span class="n">userinput_data</span> <span class="o">=</span> <span class="n">PreProcess</span><span class="o">.</span><span class="n">get_variables</span><span class="p">(</span><span class="n">config_raw</span><span class="p">,</span> <span class="n">out_dir_final</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Preprocessing...
+User Configuration Data Setup Complete...
+Geometry Data Setup Complete...
+Results Data Setup Complete...
+Time step set to: 47s
+Applied Initial &amp; Boundary Conditions...
+Preprocessing done.
+</pre></div></div>
+</div>
+</section>
+<section id="id4">
+<h3>Model settings<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>for more info on all the model parameters have a look at the documentation: <a class="reference external" href="https://starry-phoenix.github.io/spyice-thesis/build/html/api/spyice.parameters.user_input.html">userinput</a></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Choose the diffusion only equation for heat diffusion without the influence of salinity and physical properties</span>
+<span class="n">userinput_data</span><span class="o">.</span><span class="n">is_diffusiononly_equation</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">userinput_data</span><span class="o">.</span><span class="n">is_salinity_equation</span> <span class="o">=</span> <span class="kc">True</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Top surface boundary temperature of sea ice in K</span>
+<span class="n">userinput_data</span><span class="o">.</span><span class="n">boundary_top_temperature</span> <span class="o">=</span> <span class="mf">250.0</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Salinity as SX with X being the initial value</span>
+<span class="c1"># Initial salinity of ocean can be changed as follows:</span>
+<span class="n">userinput_data</span><span class="o">.</span><span class="n">initial_salinity</span> <span class="o">=</span> <span class="s2">&quot;S100&quot;</span>
+</pre></div>
+</div>
 </div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_salinity_heatmap</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Update preprocess data class with new data</span>
+<span class="n">preprocess_data</span> <span class="o">=</span> <span class="n">PreProcess</span><span class="o">.</span><span class="n">update_preprocess_dataclass</span><span class="p">(</span><span class="n">preprocess_data</span><span class="p">,</span> <span class="n">userinput_data</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -586,8 +710,145 @@ Plotting Temperature heatmap...
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
+Time step set to: 47s
+Updated Initial &amp; Boundary Conditions...
+</pre></div></div>
+</div>
+</section>
+<section id="id5">
+<h3>Run model<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># run the model</span>
+<span class="n">results_data</span> <span class="o">=</span> <span class="n">SeaIceModel</span><span class="o">.</span><span class="n">get_results</span><span class="p">(</span><span class="n">preprocess_data</span><span class="p">,</span> <span class="n">userinput_data</span><span class="p">)</span>
+<span class="n">analysis_data</span> <span class="o">=</span> <span class="n">Analysis</span><span class="o">.</span><span class="n">get_error_results</span><span class="p">(</span>
+    <span class="n">t_k_diff</span><span class="o">=</span><span class="n">results_data</span><span class="o">.</span><span class="n">t_k_diff</span><span class="p">,</span>
+    <span class="n">t_stefan_diff</span><span class="o">=</span><span class="n">results_data</span><span class="o">.</span><span class="n">t_stefan_diff</span><span class="p">,</span>
+    <span class="n">residual</span><span class="o">=</span><span class="n">results_data</span><span class="o">.</span><span class="n">residual_voller_all</span><span class="p">,</span>
+    <span class="n">temperature_mushy</span><span class="o">=</span><span class="n">results_data</span><span class="o">.</span><span class="n">t_k_iter_all</span><span class="p">,</span>
+    <span class="n">phi_mushy</span><span class="o">=</span><span class="n">results_data</span><span class="o">.</span><span class="n">all_phi_iter_all</span><span class="p">,</span>
+    <span class="n">salinity_mushy</span><span class="o">=</span><span class="n">results_data</span><span class="o">.</span><span class="n">s_k_iter_all</span><span class="p">,</span>
+    <span class="n">output_dir</span><span class="o">=</span><span class="n">out_dir_final</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Running model...
+Model run complete and Ready for Analysis.
+Running error analysis...
+Calculating errors...
+Residuals exported successfully.
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/quick_start_example_jupyter_run_32_1.png" src="../../_images/quick_start_example_jupyter_run_32_1.png" />
+</div>
+</div>
+</section>
+<section id="id6">
+<h3>Visualization of Model:<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<p>for more info on other visualization options look at: <a class="reference external" href="https://starry-phoenix.github.io/spyice-thesis/build/html/api/spyice.postprocess.visualise_model.html">visualize model</a></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_visualization_object</span> <span class="o">=</span> <span class="n">VisualiseModel</span><span class="p">(</span>
+    <span class="n">user_input_dataclass</span><span class="o">=</span><span class="n">userinput_data</span><span class="p">,</span>
+    <span class="n">results_dataclass</span><span class="o">=</span><span class="n">results_data</span><span class="p">,</span>
+    <span class="n">error_analysis_dataclass</span><span class="o">=</span><span class="n">analysis_data</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Visualisation object created...
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># visualise temperature evolution as heatmap</span>
+<span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_temperature_heatmap</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">export_csv</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
 Plotting Temperature heatmap...
 </pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/quick_start_example_jupyter_run_35_1.png" src="../../_images/quick_start_example_jupyter_run_35_1.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># visualise salinity evolution as heatmap</span>
+<span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_salinity_heatmap</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Plotting Salinity heatmap...
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/quick_start_example_jupyter_run_36_1.png" src="../../_images/quick_start_example_jupyter_run_36_1.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># visualise liquidfraction evolution as heatmap</span>
+<span class="n">model_visualization_object</span><span class="o">.</span><span class="n">plot_liquidfraction_heatmap</span><span class="p">(</span><span class="n">savefig</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Plotting Liquid-Fraction heatmap...
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/quick_start_example_jupyter_run_37_1.png" src="../../_images/quick_start_example_jupyter_run_37_1.png" />
+</div>
 </div>
 </section>
 </section>
@@ -640,12 +901,22 @@ Plotting Temperature heatmap...
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Import-Packages">Import Packages</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Define-Inputs-and-Project-Output-paths">Define Inputs and Project Output paths</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Example-1:-Demo-to-activate-salt-process-model-with-heat-model">Example 1: Demo to activate salt process model with heat model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Import-Packages">Import Packages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Define-Inputs-and-Project-Output-paths">Define Inputs and Project Output paths</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Preprocessing">Preprocessing</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Model-settings">Model settings</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Run-model">Run model</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Visualization-of-Model:">Visualization of Model:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Example-2:-Demo-to-change-temperature-boundary-conditions-and-salt-initial-conditions-in-heat-solute-transport-simulation">Example 2: Demo to change temperature boundary conditions and salt initial conditions in heat-solute transport simulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Import Packages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Define Inputs and Project Output paths</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Preprocessing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">Model settings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Run model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Visualization of Model:</a></li>
 </ul>
 </li>
 </ul>

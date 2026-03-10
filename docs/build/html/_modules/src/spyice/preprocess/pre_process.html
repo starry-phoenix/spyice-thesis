@@ -449,6 +449,48 @@
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Applied Initial &amp; Boundary Conditions...&quot;</span><span class="p">)</span></div>
 
 
+<div class="viewcode-block" id="PreProcess.preprocess_jupyter">
+<a class="viewcode-back" href="../../../../api/spyice.preprocess.html#src.spyice.preprocess.PreProcess.preprocess_jupyter">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">preprocess_jupyter</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">PreprocessData</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Preprocesses the data before running the simulation.</span>
+<span class="sd">        This method sets up the initial conditions and boundary conditions for the simulation.</span>
+<span class="sd">        It calculates the solid enthalpy and updates the enthalpy based on temperature, salinity, and liquid fraction.</span>
+<span class="sd">        Finally, it initializes the ice thickness and prints a message indicating that the initial and boundary conditions have been applied.</span>
+<span class="sd">            Args:</span>
+<span class="sd">                None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">time_passed</span> <span class="o">=</span> <span class="n">set_up_iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_iterations</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid_timestep_dt</span><span class="p">)</span>
+        <span class="p">[</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">temperature</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">salinity</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">liquid_fraction</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">upwind_velocity</span><span class="p">,</span>
+        <span class="p">]</span> <span class="o">=</span> <span class="n">set_initial_conditions</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nz</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">boundary_salinity</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">initial_temperature</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">initial_salinity</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">initial_liquid_fraction</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">boundary_top_temperature</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">solid_enthalpy</span> <span class="o">=</span> <span class="n">update_enthalpy_solid_state</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">salinity</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nz</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">liquidus_relation_type</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">temperature_melt</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">enthalpy</span> <span class="o">=</span> <span class="n">update_enthalpy</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">temperature</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">salinity</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">liquid_fraction</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nz</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ice_thickness</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Updated Initial &amp; Boundary Conditions...&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span></div>
+
+
 <div class="viewcode-block" id="PreProcess.get_variables">
 <a class="viewcode-back" href="../../../../api/spyice.preprocess.html#src.spyice.preprocess.PreProcess.get_variables">[docs]</a>
     <span class="nd">@classmethod</span>
@@ -506,8 +548,10 @@
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">update_preprocess_dataclass</span><span class="p">(</span><span class="n">preprocess_dataclass</span><span class="p">,</span> <span class="n">userinput_dataclass</span><span class="p">:</span> <span class="n">UserInput</span><span class="p">):</span>
         <span class="c1">#updates preprocess dataclass with userinput</span>
+        <span class="n">updated_preprocess</span> <span class="o">=</span> <span class="n">PreProcess</span><span class="o">.</span><span class="n">set_dataclass_with_dataclass</span><span class="p">(</span><span class="n">preprocess_dataclass</span><span class="p">,</span> <span class="n">userinput_dataclass</span><span class="p">)</span>
+        <span class="n">updated_preprocess</span> <span class="o">=</span> <span class="n">PreProcess</span><span class="o">.</span><span class="n">preprocess_jupyter</span><span class="p">(</span><span class="n">updated_preprocess</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">PreProcess</span><span class="o">.</span><span class="n">set_dataclass_with_dataclass</span><span class="p">(</span><span class="n">preprocess_dataclass</span><span class="p">,</span> <span class="n">userinput_dataclass</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">updated_preprocess</span></div>
 
 
 <div class="viewcode-block" id="PreProcess.set_dataclass_with_dataclass">
