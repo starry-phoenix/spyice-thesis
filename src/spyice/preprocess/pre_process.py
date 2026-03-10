@@ -101,6 +101,45 @@ class PreProcess(UserInput, GeometrySettings, ResultsParams):
 
         print("Applied Initial & Boundary Conditions...")
 
+    @staticmethod
+    def preprocess_jupyter(self: PreprocessData):
+        """Preprocesses the data before running the simulation.
+        This method sets up the initial conditions and boundary conditions for the simulation.
+        It calculates the solid enthalpy and updates the enthalpy based on temperature, salinity, and liquid fraction.
+        Finally, it initializes the ice thickness and prints a message indicating that the initial and boundary conditions have been applied.
+            Args:
+                None
+        """
+
+        self.time_passed = set_up_iter(self.max_iterations, self.grid_timestep_dt)
+        [
+            self.temperature,
+            self.salinity,
+            self.liquid_fraction,
+            self.upwind_velocity,
+        ] = set_initial_conditions(
+            self.nz,
+            self.boundary_salinity,
+            self.initial_temperature,
+            self.initial_salinity,
+            self.initial_liquid_fraction,
+            self.boundary_top_temperature,
+        )
+        self.solid_enthalpy = update_enthalpy_solid_state(
+            self.salinity,
+            self.nz,
+            self.liquidus_relation_type,
+            self.temperature_melt,
+        )
+        self.enthalpy = update_enthalpy(
+            self.temperature, self.salinity, self.liquid_fraction, self.nz
+        )
+        self.ice_thickness, _ = 0, 0
+
+        print("Updated Initial & Boundary Conditions...")
+
+        return self
+
     @classmethod
     def get_variables(
         cls, config, out_dir_final: Path | str
@@ -150,8 +189,10 @@ class PreProcess(UserInput, GeometrySettings, ResultsParams):
     @staticmethod
     def update_preprocess_dataclass(preprocess_dataclass, userinput_dataclass: UserInput):
         #updates preprocess dataclass with userinput
+        updated_preprocess = PreProcess.set_dataclass_with_dataclass(preprocess_dataclass, userinput_dataclass)
+        updated_preprocess = PreProcess.preprocess_jupyter(updated_preprocess)
 
-        return PreProcess.set_dataclass_with_dataclass(preprocess_dataclass, userinput_dataclass)
+        return updated_preprocess
 
     @staticmethod
     def set_dataclass_with_dataclass(_preprocess_dataclass, _dataclass):

@@ -2,15 +2,13 @@ import math
 
 import matplotlib.pyplot as plt
 
-# TODO: check if the concentration is dependent on previous iterations or vice-versa
-# TODO: implement mushy layer consideration with liquid fraction check paper
 import numpy as np
 import scipy.optimize as opt
 from scipy.special import erfc
 
 from spyice.parameters.user_input import UserInput
 
-ui = UserInput()
+# ui = UserInput()
 
 
 class StefanProblem:
@@ -175,7 +173,7 @@ class StefanProblem:
         return 2 * lambda_stefan * np.sqrt(ui.constants.D_s * t)
 
 
-    def _plot_stefan_temp_twophase(z_depth=0.5):
+    def _plot_stefan_temp_twophase(ui, z_depth=0.5):
         dt = ui.grid_timestep_dt
         t_passed = 0
         temperature_array = []
@@ -203,5 +201,6 @@ class StefanProblem:
         plt.show()
         return temperature_array, salinity_arr
 
-if __name__ == "__main__":
-    StefanProblem._plot_stefan_temp_twophase()
+# if __name__ == "__main__":
+#     ui = UserInput()
+#     StefanProblem._plot_stefan_temp_twophase(ui = ui)
