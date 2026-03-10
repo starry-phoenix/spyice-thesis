@@ -28,11 +28,6 @@ from spyice.utils.helpers import export_residuals, t_total
 from spyice.utils.spyice_exceptions import ConvergenceError, InvalidPhaseError
 
 plt.style.use("spyice.utils.custom")
-# plt.rcParams.update(
-#     {
-#         "text.usetex": True,
-#     }
-# )
 plt.rcParams["text.latex.preamble"].join(
     [
         r"\usepackage{dashbox}",
@@ -173,7 +168,7 @@ class SeaIceModel:
         depth_arr = np.linspace(0, -self.preprocess_data.Z, self.preprocess_data.nz)
         ax1.plot(t_k, depth_arr, "r--")
         ax1.plot(t_stefan, depth_arr, "k")
-        if t_k_buffo is not None:
+        if self.preprocess_data.is_buffo:
             ax1.plot(t_k_buffo, depth_arr, "b-.", alpha=0.5)
         ax1.set_ylabel("Depth [m]")
         ax1.set_xlabel("Temperature [K]")
@@ -326,7 +321,6 @@ class SeaIceModel:
             source_term_temperature,
             source_term_salinity,
         )
-        # TODO: truncate field variables until boundary (thickness_index)
         (
             t_km1,
             s_km1,
@@ -484,8 +478,6 @@ class SeaIceModel:
         )
         residual_voller = 1
         # Run the while loop until convergence is reached
-        # FIXME: tolerance check and change for new enthalpy update for inhomognoeus physical values
-        # TODO: Document Voller method on overleaf
         while (
             ((residual_voller > self.preprocess_data.temperature_tolerance) & (stefan))
             or (t_err > self.preprocess_data.temperature_tolerance)
@@ -816,23 +808,6 @@ class SeaIceModel:
             self.preprocess_data.s_k_iter,
         ) = [], [], [], [], [], [], []
 
-        # parameter_to_record_and_reset_list = [
-        #     [self.preprocess_data.t_k_iter, self.preprocess_data.t_k_iter_all],
-        #     [self.preprocess_data.phi_k_iter, self.preprocess_data.phi_k_iter_all],
-        #     [self.preprocess_data.all_phi_iter, self.preprocess_data.all_phi_iter_all],
-        #     [
-        #         self.preprocess_data.t_k_before_convergence,
-        #         self.preprocess_data.t_k_before_convergence_all,
-        #     ],
-        #     [
-        #         self.preprocess_data.mush_indx_list,
-        #         self.preprocess_data.mush_indx_list_all,
-        #     ],
-        # ]
-
-        # for parameter_list, parameter_all_list in parameter_to_record_and_reset_list:
-        #     self.check_and_reset_any_iteration_data(parameter_list, parameter_all_list)
-
     def initialize_state_variables(self, t, t_km1, s_km1, phi_km1):
         """Initializes the state variables for the sea ice model.
 
@@ -989,9 +964,7 @@ class SeaIceModel:
             np.array([]),
             self.preprocess_data.upwind_velocity,
         )
-        # with alive_bar(self.preprocess_data.max_iterations, force_tty=True) as bar:
         for t in range(1, self.preprocess_data.max_iterations):
-            # time.sleep(0.005)
             if self.preprocess_data.is_buffo:
                 (
                     t_k_buffo,
@@ -1093,9 +1066,6 @@ class SeaIceModel:
             t_stefan, error_depth_t, thickness_stefan = (
                 self.choose_phase_type_iteration(t)
             )
-
-            # TODO: Add radiation and algae
-            # TODO: create a parameter script for algae model
             (
                 radiative_source_term,
                 salinity_source_term,
@@ -1163,7 +1133,6 @@ class SeaIceModel:
                 salinity_source_term,
                 buffo=self.preprocess_data.is_buffo,
             )
-            # bar()
 
             if t % 1000 == 0:
                 count += 1

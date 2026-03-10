@@ -203,10 +203,11 @@ def set_boundary_temperature(t_passed, temperature_bottom, **kwargs):
     """
 
     top_temp = kwargs.get("top_temp")
+    top_temp_value = kwargs.get("top_temp_value")
     if top_temp == "T_const_250":
         temperature_top = 250.0
     if top_temp == "Stefan":
-        temperature_top = boundary_top_temperature
+        temperature_top = top_temp_value
         temperature_bottom = temperature_bottom
     elif top_temp == "T_const_260":
         temperature_top = 260.0

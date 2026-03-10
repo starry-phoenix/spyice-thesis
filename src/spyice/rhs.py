@@ -6,7 +6,7 @@ from spyice.parameters.user_input import UserInput
 from spyice.preprocess.initial_boundary_conditions import boundary_condition
 
 ui = UserInput()
-temperature_melt, temperature_top = ui.temperature_melt, ui.boundary_top_temperature
+temperature_melt = ui.temperature_melt
 
 
 def apply_boundary_condition(
@@ -23,11 +23,12 @@ def apply_boundary_condition(
     nz,
     t_passed,
     salinity_initial,
-    _temperature_top,
+    temperature_top,
     is_stefan,
     is_buffo=False,
     is_voller=False,
     bc_neumann=None,
+    top_temp_type = "Stefan",
 ):
     """Creates the right hand side of the matrix equation considering source terms.
 
@@ -43,15 +44,14 @@ def apply_boundary_condition(
         nz (int): Number of computational nodes.
         t_passed (float): Time passed in seconds.
         salinity_initial (float): Initial salinity value.
-        _temperature_top (float): Top temperature value.
+        temperature_top (float): Top temperature value.
         is_stefan (bool): Indicates if Stefan condition is used.
         is_buffo (bool, optional): Indicates if Buffo condition is used. Defaults to False.
         bc_neumann (float, optional): Neumann boundary condition. Defaults to None.
-        float: The right hand side of the equation.
+        top_temp_type (str, optional): Stefan problem with Dirichlet conditions at top boundary
     """
     rhs_matrix = x_initial - factor3 * delta_upwind
 
-    # TODO: modified the boundary condition to the moving boundary condition
     if argument == "salinity":
         salinity_bc_top, salinity_bc_bottom = boundary_condition(
                     argument, t_passed, salinity_initial)
@@ -59,11 +59,11 @@ def apply_boundary_condition(
         if w[bottom_index] < 0:
             rhs_matrix[bottom_index:] += factor1[bottom_index:] * salinity_bc_bottom + factor2[bottom_index:]*salinity_bc_bottom
         else:
-            rhs_matrix[bottom_index:] += factor1[bottom_index:] * salinity_bc_bottom  #+ factor2[bottom_index:]*salinity_bc_bottom # Dirichlet
+            rhs_matrix[bottom_index] += factor1[bottom_index] * salinity_bc_bottom  #+ factor2[bottom_index:]*salinity_bc_bottom # Dirichlet
 
     elif argument == "temperature":
         temperature_bc_top, temperature_bc_bottom = boundary_condition(
-            argument, t_passed, salinity_initial, top_temp=_temperature_top
+            argument, t_passed, salinity_initial, top_temp=top_temp_type, top_temp_value=temperature_top
         )
         rhs_matrix = rhs_matrix + source
 
@@ -95,7 +95,7 @@ def apply_boundary_condition(
 
 
 def correct_for_brine_movement(
-    argument, x_initial, w, t_passed, nz, salinity_initial, top_temp
+    argument, x_initial, w, t_passed, nz, salinity_initial, top_temp, top_temp_type="Stefan",
 ):
     """Corrects for brine movement based on the given arguments.
 
@@ -112,8 +112,6 @@ def correct_for_brine_movement(
     Raises:
         None
     """
-    # TODO: where tp use x_upwind 
-
     x_upwind = np.zeros(nz)
     for i in range(1, nz - 1):
         if w[i] != 0:
@@ -140,7 +138,7 @@ def correct_for_brine_movement(
 
     elif argument == "temperature":
         temperature_bc_top, _ = boundary_condition(
-            argument, t_passed, salinity_initial, top_temp=top_temp
+            argument, t_passed, salinity_initial, top_temp_value=top_temp, top_temp=top_temp_type
         )
         x_upwind[0] = (
             x_initial[0] - temperature_bc_top

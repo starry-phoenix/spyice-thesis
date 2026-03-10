@@ -37,6 +37,7 @@ class AdvectionDiffusion:
         Buffo=False,
         Voller=False,
         bc_neumann=None,
+        top_temperature = None,
     ):
         """
         Args:
@@ -82,7 +83,10 @@ class AdvectionDiffusion:
         self.t_passed = t_passed
         self.S_IC = S_IC
         self.S_bc_top = "Dirichlet"
-        self.top_temp = top_temp  # OR "T_const_250" OR "T_const_260" OR "T_const_265" OR "T_W3" OR "Stefan"
+        if top_temperature:
+            self.top_temp = top_temperature
+        else:
+            AssertionError(f"{self.argument} boundary value missing!")
         ### Compute a, b, c, d
         self.Delta_W = np.zeros(nz)
         [self.a, self.b, self.c, self.d] = update_coefficients(
@@ -218,11 +222,9 @@ class AdvectionDiffusion:
                     if i > 0:
                         self.lower_A[i - 1] = -self.factor1_plus[i]
                 else:
-                    self.main_A[i] = (
-                        1
-                        + self.factor1_plus[i]
-                        + self.factor1_minus[i]
-                    )
+                    self.main_A[i] = 1
+                        # + self.factor1_plus[i]
+                        # + self.factor1_minus[i]
             else:
                 self.main_A[i] = 2 * self.factor1[i] + 1.0 - self.factor2[i]
                 if i < self.nz - 1:
@@ -327,7 +329,6 @@ class AdvectionDiffusion:
             self.temp_grad,
         )
 
-        # TODO: is X_wind necessary? since advective term is considered in the assemble_tridiagonal() matrix
         X_wind = correct_for_brine_movement(
             self.argument,
             self.X_initial,

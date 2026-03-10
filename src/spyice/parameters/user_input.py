@@ -204,7 +204,7 @@ class UserInput:
 
     # --- Model Switches ---
     is_stefan: bool = True
-    is_buffo: bool = True
+    is_buffo: bool = False
     is_voller: bool = False
     
     is_salinity_equation: bool = True
@@ -224,8 +224,8 @@ class UserInput:
     # --- Boundary and Geometry ---
     boundary_condition_type: BoundaryConditionType = BoundaryConditionType.DIRICHLET.value
     geometry_type: int = field(init=False)
-    boundary_salinity: float = field(init=False)
-    boundary_top_temperature: float = field(init=False)
+    boundary_salinity: float = 34.0
+    boundary_top_temperature: float = 265.0
     temperature_top_type: TopTemperatureType = TopTemperatureType.STEFAN.value
 
     # --- Tolerances ---
@@ -263,8 +263,6 @@ class UserInput:
         _dt_stability_validator(self.grid_resolution_dz, self.grid_timestep_dt)
 
         if isinstance(self.constants, RealConstants):
-            self.boundary_salinity = 34
-            self.boundary_top_temperature = 265
 
             # melt temperature affects the liquid relation: Frezchem or Normal in src/update_physical_values.py script
             method = InitialMeltTemperature.ONEPHASE.value

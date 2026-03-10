@@ -583,6 +583,7 @@ def update_temperature_and_salinity(
         Buffo=buffo,
         Voller=voller,
         bc_neumann=preprocess_data_object.temp_grad,
+        top_temperature=preprocess_data_object.boundary_top_temperature,
     )
     t_k, x_wind_t, A_before_correction = advection_diffusion_temp.unknowns_matrix(
         t_melt, _nonconstant_physical_properties
@@ -607,6 +608,7 @@ def update_temperature_and_salinity(
             Buffo=buffo,
             Voller=voller,
             bc_neumann=preprocess_data_object.temp_grad,
+            top_temperature=preprocess_data_object.boundary_top_temperature,
         )
         s_k, x_wind_s, S_before_correction = (
             advection_diffusion_salinity.unknowns_matrix(
@@ -651,6 +653,7 @@ def update_algae_transport(
         Buffo=buffo,
         Voller=voller,
         bc_neumann=preprocess_data_object.temp_grad,
+        top_temperature=preprocess_data_object.boundary_top_temperature,
     )
     nutrient_cn, x_wind_cn, _ = (
         advection_diffusion_algae.unknowns_matrix(
@@ -761,19 +764,6 @@ def update_state_variables(
         temperature_solidus = 0.0
         temperature_liquidus = 0.0
     elif stefan:
-
-        # phi update for a mixture using enthalpy equation
-        # FIXME: This method is not working as expected. Requires debugging
-        # phi_k = update_liquid_fraction_mixture_with_enthalpy_equation(
-        #     t_prev,
-        #     s_prev,
-        #     phi_initial,
-        #     h_k,
-        #     h_solid,
-        #     1.0,
-        #     _is_stefan=preprocess_data_object.is_stefan,
-        # )
-
         # phi update for a mixture using Faden method from paper "An optimum Enthalpy Approach for Melting and Solidification with Volume Change"
         phi_k, temperature_liquidus, temperature_solidus = update_liquid_fraction_mixture_with_under_relaxation(
             t_prev,
@@ -781,24 +771,6 @@ def update_state_variables(
             phi_prev,
             1.0,
             _is_stefan=preprocess_data_object.is_stefan,)  # returns an array of [phi, T_l, T_s]
-
-        # # phi update for a mixture using Voller method with under-relaxation
-        # phi_k = update_liquid_fraction_voller_under_relaxation(
-        #     t_prev,
-        #     s_prev,
-        #     t_initial,
-        #     phi_prev,
-        #     t_prev,
-        #     s_prev,
-        #     preprocess_data_object.nz,
-        #     temp_factor_3,
-        #     t_k_A_LHS_matrix_prev,
-        #     t_k_A_LHS_matrix_prev,
-        #     1.4,
-        #     _is_stefan=preprocess_data_object.is_stefan,
-        #     _pt2_system=False,
-        #     _nonconstant_physical_properties=False,
-        # )
         
         t_k, s_k, t_k_A_LHS_matrix, temp_factor_3, x_wind_temperature, x_wind_salinity = update_temperature_and_salinity(
             preprocess_data_object,
@@ -839,11 +811,6 @@ def update_state_variables(
             )
         else:
             nutrient_cn = np.zeros(len(nutrient_cn_prev))
-
-
-        # switch algae transport off
-        # nutrient_cn = 0.0*nutrient_cn
-
         t_k_melt = calculate_melting_temperature_from_salinity(s_k)
 
     elif buffo:
@@ -883,16 +850,11 @@ def update_state_variables(
         nutrient_cn = 0.0
     else:
         AssertionError("No method selected for liquid fraction update")
-
-    # Voller scheme: lower, main, upper diagonal of the matrix A of Ax = b
-
     # calculate brine velocity
     if not _is_diffusiononly_equation:
         brine_velocity = calculate_brine_velocity_upwindscheme(phi_k, phi_initial, preprocess_data_object.grid_resolution_dz, preprocess_data_object.grid_timestep_dt, preprocess_data_object.nz, _rho_ice, _rho_brine, thickness_index_prev)
     else:
         brine_velocity = np.zeros(preprocess_data_object.nz)
-    # TODO: investigate values of T_k, s_k, brine_velocity, nutrient_cn, t_k_A_LHS_matrix, temp_factor_3, t_k_melt, temperature_liquidus, temperature_solidus, x_wind_temperature, x_wind_salinity
-    # TODO: if T_k, s_k change then the initial values need to change 
     return h_k, h_solid, phi_k, t_k, s_k, brine_velocity, nutrient_cn, t_k_A_LHS_matrix, temp_factor_3, t_k_melt, temperature_liquidus, temperature_solidus, x_wind_temperature, x_wind_salinity
 
 
