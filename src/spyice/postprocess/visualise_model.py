@@ -448,7 +448,7 @@ class VisualiseModel:
             + ".csv"
         )
 
-    def plot_temperature_heatmap(self, savefig: bool = True, export_csv=False, show: bool = True):
+    def plot_temperature_heatmap(self, savefig: bool = True, export_csv=False, show: bool = False):
         """Plots the temperature heatmap."""
 
         print("Plotting Temperature heatmap...")
@@ -499,9 +499,9 @@ class VisualiseModel:
         plt.close(fig)
 
     def plot_salinity_heatmap(self, savefig: bool = True, show: bool = False):
-        """Plots the temperature heatmap."""
+        """Plots the Salinity heatmap."""
 
-        print("Plotting Temperature heatmap...")
+        print("Plotting Salinity heatmap...")
         x_axis_iter = np.arange(0, self.ui_object.max_iterations - 1, 1)
         heatmap_data = self.results_object.s_k_list[1:]
         fig, ax = plt.subplots()
@@ -543,10 +543,10 @@ class VisualiseModel:
             plt.show()
         plt.close(fig)
 
-    def plot_liquidfraction_heatmap(self, savefig: bool = True):
-        """Plots the temperature heatmap."""
+    def plot_liquidfraction_heatmap(self, savefig: bool = True, show=False):
+        """Plots the Liquidfraction heatmap."""
 
-        print("Plotting Temperature heatmap...")
+        print("Plotting Liquid-Fraction heatmap...")
         x_axis_iter = np.arange(0, self.ui_object.max_iterations - 1, 1)
         heatmap_data = self.results_object.phi_k_list[1:]
         fig, ax = plt.subplots()
@@ -583,6 +583,8 @@ class VisualiseModel:
                 self.ui_object.dir_output_name + "/Liquidfraction.pdf",
                 backend="pgf",
             )
+        if show:
+            plt.show()
         plt.close(fig)
 
     def plot_temperature_heatmap_as_gif(self):

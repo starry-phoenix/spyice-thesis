@@ -204,7 +204,7 @@ class UserInput:
 
     # --- Model Switches ---
     is_stefan: bool = True
-    is_buffo: bool = True
+    is_buffo: bool = False
     is_voller: bool = False
     
     is_salinity_equation: bool = True
@@ -258,9 +258,6 @@ class UserInput:
     nutrient_cn_dsi_ice: float = nutrient_cn_dsi_ice
     carbon_cc_ice_initial: float = carbon_cc_ice_initial
     carbon_cc_water_initial: float = carbon_cc_water_initial
-
-    boundary_salinity = 34
-    boundary_top_temperature = 265
 
     def __post_init__(self):
         _dt_stability_validator(self.grid_resolution_dz, self.grid_timestep_dt)

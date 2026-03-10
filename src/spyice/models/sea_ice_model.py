@@ -168,7 +168,7 @@ class SeaIceModel:
         depth_arr = np.linspace(0, -self.preprocess_data.Z, self.preprocess_data.nz)
         ax1.plot(t_k, depth_arr, "r--")
         ax1.plot(t_stefan, depth_arr, "k")
-        if t_k_buffo is not None:
+        if self.preprocess_data.is_buffo:
             ax1.plot(t_k_buffo, depth_arr, "b-.", alpha=0.5)
         ax1.set_ylabel("Depth [m]")
         ax1.set_xlabel("Temperature [K]")

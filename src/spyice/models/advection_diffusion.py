@@ -222,11 +222,9 @@ class AdvectionDiffusion:
                     if i > 0:
                         self.lower_A[i - 1] = -self.factor1_plus[i]
                 else:
-                    self.main_A[i] = (
-                        1
-                        + self.factor1_plus[i]
-                        + self.factor1_minus[i]
-                    )
+                    self.main_A[i] = 1
+                        # + self.factor1_plus[i]
+                        # + self.factor1_minus[i]
             else:
                 self.main_A[i] = 2 * self.factor1[i] + 1.0 - self.factor2[i]
                 if i < self.nz - 1:
