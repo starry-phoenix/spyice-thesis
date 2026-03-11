@@ -207,8 +207,8 @@ class UserInput:
     is_buffo: bool = False
     is_voller: bool = False
     
-    is_salinity_equation: bool = True
-    is_diffusiononly_equation: bool = False
+    is_salinity_equation: bool = False
+    is_diffusiononly_equation: bool = True
     is_algae_equation: bool = False
     is_radiation_equation: bool = False
     algae_model_BAL_type: str = "all"   # or "all" or "single"
@@ -274,6 +274,14 @@ class UserInput:
                 # self.initial_salinity = read_omegaconfig(self.config_data, "S_IC")
                 self.max_iterations = read_omegaconfig(self.config_data, "iter_max")
                 self.grid_resolution_dz = read_omegaconfig(self.config_data, "dz")
+                self.initial_salinity = self.config_data.get("ICBC", {}).get("S_IC", "default")
+                self.boundary_top_temperature = self.config_data.get("ICBC", {}).get("T_BC", "default")
+                self.is_diffusiononly_equation = self.config_data.get("model", {}).get("is_diffusiononly_equation", "default")
+                self.is_salinity_equation= self.config_data.get("model", {}).get("is_salinity_equation", "default")
+                self.is_algae_equation = self.config_data.get("model", {}).get("is_algae_equation", "default")
+                self.is_radiation_equation = self.config_data.get("model", {}).get("is_radiation_equation", "default")
+                self.algae_model_BAL_type = self.config_data.get("model", {}).get("algae_model_BAL_type", "default")
+
                 self.dir_output_name = create_output_directory(
                     self.dir_output_name_hydra,
                     self.initial_salinity,

@@ -180,10 +180,17 @@ class PreProcess(UserInput, GeometrySettings, ResultsParams):
         return UserInput(
             constants=self.constants,
             grid_timestep_dt=self.grid_timestep_dt,
+            grid_resolution_dz=self.grid_resolution_dz,
             initial_salinity=self.initial_salinity,
+            boundary_top_temperature=self.boundary_top_temperature,
             dir_output_name_hydra=self.dir_output_name_hydra,
             dir_output_name=self.dir_output_name,
             max_iterations=self.max_iterations,
+            is_diffusiononly_equation= self.is_diffusiononly_equation,
+            is_salinity_equation= self.is_salinity_equation,
+            is_radiation_equation= self.is_radiation_equation,
+            is_algae_equation= self.is_algae_equation,
+            algae_model_BAL_type= self.algae_model_BAL_type,
         )
 
     @staticmethod

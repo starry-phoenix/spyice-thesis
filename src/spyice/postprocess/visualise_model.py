@@ -448,16 +448,17 @@ class VisualiseModel:
             + ".csv"
         )
 
-    def plot_temperature_heatmap(self, savefig: bool = True, export_csv=False, show: bool = False):
+    def plot_temperature_heatmap(self, savefig: bool = True, export_csv=False, show: bool = False, ax=None, fig=None):
         """Plots the temperature heatmap."""
 
         print("Plotting Temperature heatmap...")
         x_axis_iter = np.arange(0, self.ui_object.max_iterations - 1, 1)
         heatmap_data = self.results_object.t_k_list[1:]
-        fig, ax = plt.subplots()
+        if (fig and ax) is None:
+            fig, ax = plt.subplots(figsize=(3,3.4))
         cax = ax.imshow(
             heatmap_data.T,
-            cmap="Blues",
+            cmap="plasma_r",
             aspect="auto",
             extent=[
                 0,
@@ -477,8 +478,6 @@ class VisualiseModel:
             colors='k',
             linewidths=0.5,
         )
-        ax.clabel(contour, fmt="%.1f", inline=True, fontsize=5, use_clabeltext=True)
-
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
         fig.colorbar(cax, ax=ax, label="Temperature [K]")
@@ -496,18 +495,22 @@ class VisualiseModel:
             )
         if show:
             plt.show()
-        plt.close(fig)
+        elif (fig and ax) is None:
+            plt.close(fig)
+        else:
+            pass
 
-    def plot_salinity_heatmap(self, savefig: bool = True, show: bool = False):
+    def plot_salinity_heatmap(self, savefig: bool = True, show: bool = False, ax=None, fig=None):
         """Plots the Salinity heatmap."""
 
         print("Plotting Salinity heatmap...")
         x_axis_iter = np.arange(0, self.ui_object.max_iterations - 1, 1)
         heatmap_data = self.results_object.s_k_list[1:]
-        fig, ax = plt.subplots()
+        if (fig and ax) is None:
+            fig, ax = plt.subplots(figsize=(3,3.4))
         cax = ax.imshow(
             heatmap_data.T,
-            cmap="Blues",
+            cmap="viridis_r",
             aspect="auto",
             extent=[
                 0,
@@ -528,8 +531,6 @@ class VisualiseModel:
             colors='k',
             linewidths=0.5,
         )
-        ax.clabel(contour, fmt="%.1f", inline=True, fontsize=5, use_clabeltext=True)
-
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
         fig.colorbar(cax, ax=ax, label="Salinity in ppt")
@@ -541,18 +542,22 @@ class VisualiseModel:
             )
         if show:
             plt.show()
-        plt.close(fig)
+        elif (fig and ax) is None:
+            plt.close(fig)
+        else:
+            pass
 
-    def plot_liquidfraction_heatmap(self, savefig: bool = True, show=False):
+    def plot_liquidfraction_heatmap(self, savefig: bool = True, show=False, ax=None, fig=None):
         """Plots the Liquidfraction heatmap."""
 
-        print("Plotting Liquid-Fraction heatmap...")
+        # print("Plotting Liquid-Fraction heatmap...")
         x_axis_iter = np.arange(0, self.ui_object.max_iterations - 1, 1)
         heatmap_data = self.results_object.phi_k_list[1:]
-        fig, ax = plt.subplots()
+        if (fig and ax) is None:
+            fig, ax = plt.subplots(figsize=(3,3.4))
         cax = ax.imshow(
             heatmap_data.T,
-            cmap="Blues",
+            cmap="cividis_r",
             aspect="auto",
             extent=[
                 0,
@@ -572,8 +577,6 @@ class VisualiseModel:
             colors='k',
             linewidths=0.5,
         )
-        ax.clabel(contour, fmt="%.1f", inline=True, fontsize=5, use_clabeltext=True)
-
         ax.set_xlabel(r"$t$ [hours]")
         ax.set_ylabel(r"Depth [$m$]")
         fig.colorbar(cax, ax=ax, label=r"Liquid Fraction")
@@ -585,7 +588,10 @@ class VisualiseModel:
             )
         if show:
             plt.show()
-        plt.close(fig)
+        elif (fig and ax) is None:
+            plt.close(fig)
+        else:
+            pass
 
     def plot_temperature_heatmap_as_gif(self):
         fps = 10
@@ -1191,7 +1197,7 @@ class VisualiseModel:
             )
         plt.close(fig)
 
-    def plot_carbon_concentration_multiplelayers(self, savefig: bool = True, show: bool = False):
+    def plot_carbon_concentration_multiplelayers(self, savefig: bool = True, show: bool = False, ax=None, fig=None):
         carbon_concentration = self.results_object.carbon_concentration_multiplelayers
         depth = self.results_object.thickness_list[-1]
         depth_index = int(self.results_object.thickness_index_total[-1]) + 1
@@ -1199,7 +1205,8 @@ class VisualiseModel:
         print("Plotting carbon concentration multiple layers...")
         x_axis_iter = np.arange(0, self.ui_object.max_iterations - 1, 1)
         heatmap_data = carbon_concentration[1:, :(depth_index)]
-        fig, ax = plt.subplots()
+        if (ax and fig) is None:
+            fig, ax = plt.subplots()
         cax = ax.imshow(
             heatmap_data.T,
             cmap="Greens",
@@ -1215,6 +1222,17 @@ class VisualiseModel:
         ax.set_ylabel(r"Depth [$m$]")
         fig.colorbar(cax, ax=ax, label=r"$C_C$ $[mmol/m^3]$")
 
+        X = np.linspace(0, len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600, heatmap_data.shape[0])
+        Y = np.linspace(0, depth, heatmap_data.shape[1])
+        X, Y = np.meshgrid(X, Y)
+        contour = ax.contour(
+            X,
+            Y,
+            heatmap_data.T,
+            colors='k',
+            linewidths=0.5,
+        )
+
         if savefig:
             fig.savefig(
                 self.ui_object.dir_output_name + "/carbon_concentration_multiplelayers.pdf",
@@ -1222,7 +1240,10 @@ class VisualiseModel:
             )
         if show:
             plt.show()
-        plt.close(fig)
+        elif (ax and fig) is None:
+            plt.close(fig)
+        else:
+            pass
 
     def plot_chla_bulk_concentration(self, savefig: bool = True):
         chla_bulk_concentration = self.create_2d_array(self.results_object.chla_bulk)
@@ -1317,13 +1338,14 @@ class VisualiseModel:
             )
         plt.close(fig)
 
-    def plot_nutrient_concentration_multiplelayers(self, savefig: bool = True, show: bool = False):
+    def plot_nutrient_concentration_multiplelayers(self, savefig: bool = True, show: bool = False, ax=None, fig=None):
         nutrient_concentration = self.results_object.nutrient_concentration_multiplelayers
 
         print("Plotting nutrient concentration of all layers: heatmap...")
         x_axis_iter = np.arange(0, self.ui_object.max_iterations - 1, 1)
         heatmap_data = nutrient_concentration[1:]
-        fig, ax = plt.subplots()
+        if (ax and fig) is None:
+            fig, ax = plt.subplots()
         cax = ax.imshow(
             heatmap_data.T,
             cmap="Greens",
@@ -1339,6 +1361,17 @@ class VisualiseModel:
         ax.set_ylabel(r"Depth [$m$]")
         fig.colorbar(cax, ax=ax, label=r"$C_N$ $[mmol/m^3]$")
 
+        X = np.linspace(0, len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600, heatmap_data.shape[0])
+        Y = np.linspace(0, 1.0, heatmap_data.shape[1])
+        X, Y = np.meshgrid(X, Y)
+        contour = ax.contour(
+            X,
+            Y,
+            heatmap_data.T,
+            colors='k',
+            linewidths=0.5,
+        )
+
         if savefig:
             fig.savefig(
                 self.ui_object.dir_output_name + "/nutrient_concentration_alllayers.pdf",
@@ -1346,7 +1379,10 @@ class VisualiseModel:
             )
         if show:
             plt.show()
-        plt.close(fig)
+        elif (fig and ax) is None:
+            plt.close(fig)
+        else:
+            pass
 
 
     def plot_photosynthetic_rate(self, savefig: bool = True):
@@ -1443,7 +1479,7 @@ class VisualiseModel:
             )
         plt.close(fig)
     
-    def plot_radiation_algae_multiplelayers(self, savefig: bool = True, show: bool = False):
+    def plot_radiation_algae_multiplelayers(self, savefig: bool = True, show: bool = False, ax=None, fig=None):
         radiation_algae = self.results_object.radiation_algae_multiplelayers
 
         depth = self.results_object.thickness_list[-1]
@@ -1452,7 +1488,8 @@ class VisualiseModel:
         print("Plotting algae radiation multiple layers...")
         x_axis_iter = np.arange(0, self.ui_object.max_iterations - 1, 1)
         heatmap_data = radiation_algae[1:, :depth_index]
-        fig, ax = plt.subplots()
+        if (ax and fig) is None:
+            fig, ax = plt.subplots()
         cax = ax.imshow(
             heatmap_data.T,
             cmap="Reds",
@@ -1468,6 +1505,17 @@ class VisualiseModel:
         ax.set_ylabel(r"Depth [$m$]")
         fig.colorbar(cax, ax=ax, label=r"$R^a$ $[W/m^2]$")
 
+        X = np.linspace(0, len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600, heatmap_data.shape[0])
+        Y = np.linspace(0, depth, heatmap_data.shape[1])
+        X, Y = np.meshgrid(X, Y)
+        contour = ax.contour(
+            X,
+            Y,
+            heatmap_data.T,
+            colors='k',
+            linewidths=0.5,
+        )
+
         if savefig:
             fig.savefig(
                 self.ui_object.dir_output_name + "/algae_radiation_multiplelayers.pdf",
@@ -1475,7 +1523,10 @@ class VisualiseModel:
             )
         if show:
             plt.show()
-        plt.close(fig)
+        elif (ax and fig) is None:
+            plt.close(fig)
+        else:
+            pass
 
     def plot_radiation_algae_dt_by_rho_c(self, savefig: bool = True):
         depth = self.results_object.thickness_list[-1]
@@ -1512,13 +1563,14 @@ class VisualiseModel:
             )
         plt.close(fig)
 
-    def plot_radiation_all(self, savefig: bool = True, show=False):
+    def plot_radiation_all(self, savefig: bool = True, show=False, ax=None, fig=None):
         radiation_algae = self.results_object.radiation_multiplelayers
 
         print("Plotting radiation ice and algae heatmap...")
         x_axis_iter = np.arange(0, self.ui_object.max_iterations - 1, 1)
         heatmap_data = radiation_algae[1:]
-        fig, ax = plt.subplots()
+        if (fig and ax) is None:
+            fig, ax = plt.subplots(figsize=(3,3.4))
         cax = ax.imshow(
             heatmap_data.T,
             cmap="Reds",
@@ -1534,6 +1586,17 @@ class VisualiseModel:
         ax.set_ylabel(r"Depth [$m$]")
         fig.colorbar(cax, ax=ax, label=r"$R^i + R^a$ $[W/m^2]$")
 
+        X = np.linspace(0, len(x_axis_iter) * self.ui_object.grid_timestep_dt / 3600, heatmap_data.shape[0])
+        Y = np.linspace(0, 1.0, heatmap_data.shape[1])
+        X, Y = np.meshgrid(X, Y)
+        contour = ax.contour(
+            X,
+            Y,
+            heatmap_data.T,
+            colors='k',
+            linewidths=0.5,
+        )
+
         if savefig:
             fig.savefig(
                 self.ui_object.dir_output_name + "/radiation_algae_heatmap_multiplelayers.pdf",
@@ -1541,7 +1604,10 @@ class VisualiseModel:
             )
         if show:
             plt.show()
-        plt.close(fig)
+        elif (fig and ax) is None:
+            plt.close(fig)
+        else:
+            pass
 
     def plot_nutrient_cn_profile(self, savefig: bool = True):
         time = len(self.results_object.nutrient_concentration_multiplelayers)
@@ -1648,20 +1714,20 @@ class VisualiseModel:
         plt.close()              
 
     
-    def plot_salinity_sourceterm_profile(self, savefig: bool = True, show=False):
+    def plot_salinity_sourceterm_profile(self, savefig: bool = True, show=False,ax=None, fig=None):
 
         time = len(self.results_object.salinity_source_term)
         depth_ = np.append(np.arange(0, 1, self.ui_object.grid_resolution_dz), 1.0)
-        
-        plt.figure(figsize=(4, 3))
-        plt.grid()
-        plt.plot(self.results_object.salinity_source_term[5, :], depth_, ':',label=r't=5s', color='black', linewidth=1)
-        plt.plot(self.results_object.salinity_source_term[int(time/2), :], depth_, label=rf't={int(time/2)}s', color='black', linewidth=1)
-        plt.plot(self.results_object.salinity_source_term[int(time -5), :], depth_, '--',label=rf't={time-5}s', color='black', linewidth=1)
-        plt.gca().invert_yaxis()
-        plt.xlabel(r'Salinity source term [kg]')
-        plt.ylabel(r'Depth [$m$]')
-        plt.legend()
+        if (ax and fig) is None:
+            fig, ax = plt.subplots(figsize=(4, 3))
+        ax.grid()
+        ax.plot(self.results_object.salinity_source_term[5, :], depth_, ':',label=r't=5s', color='black', linewidth=1)
+        ax.plot(self.results_object.salinity_source_term[int(time/2), :], depth_, label=rf't={int(time/2)}s', color='black', linewidth=1)
+        ax.plot(self.results_object.salinity_source_term[int(time -5), :], depth_, '--',label=rf't={time-5}s', color='black', linewidth=1)
+        fig.gca().invert_yaxis()
+        ax.set_xlabel(r'Salinity source term [kg]')
+        ax.set_ylabel(r'Depth [$m$]')
+        ax.legend()
         if savefig:
             plt.savefig(
                 self.ui_object.dir_output_name + "/salinitysourceterm_vertical_profile.pdf",
@@ -1669,22 +1735,25 @@ class VisualiseModel:
             )
         if show:
             plt.show()
-        plt.close()      
+        elif (ax and fig) is None:
+            plt.close()
+        else:
+            pass
 
-    def plot_radiation_profile(self, savefig: bool = True, show=False):
+    def plot_radiation_profile(self, savefig: bool = True, show=False, ax=None, fig=None):
 
         time = len(self.results_object.radiation_multiplelayers)
         depth_ = np.append(np.arange(0, 1, self.ui_object.grid_resolution_dz), 1.0)
-        
-        plt.figure(figsize=(4, 3))
-        plt.grid()
-        plt.plot(self.results_object.radiation_multiplelayers[5, :], depth_, ':',label=r't=5s', color='black', linewidth=1)
-        plt.plot(self.results_object.radiation_multiplelayers[int(time/2), :], depth_, label=rf't={int(time/2)}s', color='black', linewidth=1)
-        plt.plot(self.results_object.radiation_multiplelayers[int(time -5), :], depth_, '--',label=rf't={time-5}s', color='black', linewidth=1)
-        plt.gca().invert_yaxis()
-        plt.xlabel(r'$R^i$ + $R^a$ $[W/m^2]$')
-        plt.ylabel(r'Depth [$m$]')
-        plt.legend()
+        if (ax and fig) is None:
+            fig,ax = plt.subplots(figsize=(4, 3))
+        ax.grid()
+        ax.plot(self.results_object.radiation_multiplelayers[5, :], depth_, ':',label=r't=5s', color='black', linewidth=1)
+        ax.plot(self.results_object.radiation_multiplelayers[int(time/2), :], depth_, label=rf't={int(time/2)}s', color='black', linewidth=1)
+        ax.plot(self.results_object.radiation_multiplelayers[int(time -5), :], depth_, '--',label=rf't={time-5}s', color='black', linewidth=1)
+        fig.gca().invert_yaxis()
+        ax.set_xlabel(r'$R^i$ + $R^a$ $[W/m^2]$')
+        ax.set_ylabel(r'Depth [$m$]')
+        ax.legend()
         if savefig:
             plt.savefig(
                 self.ui_object.dir_output_name + "/radiation_vertical_profile.pdf",
@@ -1692,7 +1761,10 @@ class VisualiseModel:
             )
         if show:
             plt.show()
-        plt.close()    
+        elif (fig and ax) is None:
+            plt.close(fig)
+        else:
+            pass
     
     def plot_liquid_salinity_profile(self, savefig: bool = True):
         time = len(self.results_object.s_k_list)
@@ -1715,20 +1787,20 @@ class VisualiseModel:
             )
         plt.close()   
     
-    def plot_brinevelocity_profile(self, savefig: bool = True, show=False):
+    def plot_brinevelocity_profile(self, savefig: bool = True, show=False, ax=None, fig=None):
 
         time = len(self.results_object.brine_velocity_list)
         depth_ = np.append(np.arange(0, 1, self.ui_object.grid_resolution_dz), 1.0)
-        
-        plt.figure(figsize=(4, 3))
-        plt.grid()
-        plt.plot(self.results_object.brine_velocity_list[5, :], depth_, ':',label=r't=5s', color='black', linewidth=1)
-        plt.plot(self.results_object.brine_velocity_list[int(time/2), :], depth_, label=rf't={int(time/2)}s', color='black', linewidth=1)
-        plt.plot(self.results_object.brine_velocity_list[int(time -5), :], depth_, '--',label=rf't={time-5}s', color='black', linewidth=1)
-        plt.gca().invert_yaxis()
-        plt.xlabel(r'Brine velocity [m/s]')
-        plt.ylabel(r'Depth [$m$]')
-        plt.legend()
+        if (ax and fig) is None:
+            fig, ax = plt.subplots(figsize=(4, 3))
+        ax.grid()
+        ax.plot(self.results_object.brine_velocity_list[5, :], depth_, ':',label=r't=5s', color='black', linewidth=1)
+        ax.plot(self.results_object.brine_velocity_list[int(time/2), :], depth_, label=rf't={int(time/2)}s', color='black', linewidth=1)
+        ax.plot(self.results_object.brine_velocity_list[int(time -5), :], depth_, '--',label=rf't={time-5}s', color='black', linewidth=1)
+        fig.gca().invert_yaxis()
+        ax.set_xlabel(r'Brine velocity [m/s]')
+        ax.set_ylabel(r'Depth [$m$]')
+        ax.legend()
         if savefig:
             plt.savefig(
                 self.ui_object.dir_output_name + "/brinevelocity_vertical_profile.pdf",
@@ -1736,7 +1808,10 @@ class VisualiseModel:
             )
         if show:
             plt.show()
-        plt.close()     
+        elif (ax and fig) is None:
+            plt.close()
+        else:
+            pass
 
     def plot_temperature_3D(self, savefig:bool = True):
         time = len(self.results_object.t_k_list[1:])
