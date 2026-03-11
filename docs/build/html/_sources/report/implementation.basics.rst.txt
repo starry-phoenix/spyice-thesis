@@ -2,6 +2,13 @@
 Implementation basics
 ========================================
 
+.. figure:: images/code_structure.png
+    :align: center
+    :width: 600
+    :height: 300
+
+    caption
+
 The inputs are initialised and processed by the Prepossessing class. Here the 
 respective initial and boundary conditions are applied to the user-defined discrete finite difference mesh. The simulation model 
 is executed for the given number of maximum iterations which allows to model for a time period of (time step size) * (max iterations). At a given time :math:`$t$`, the numerical model is solved until it attains a convergence for field parameters temperature, salinity and volumetric liquid fraction whose pseudo code is given below in :ref:`code_pseudo`:

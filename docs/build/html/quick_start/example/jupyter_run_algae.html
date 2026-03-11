@@ -31,6 +31,7 @@
 <link href="../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/nbsphinx-code-cells.css?v=2aa19091" />
     <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=b6ad3417" />
   
@@ -43,6 +44,7 @@
     <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -359,7 +361,7 @@
   <section id="Guide-to-model-building-and-running-with-SPyice-for-biogeochemical-model">
 <h1>Guide to model building and running with SPyice for biogeochemical model<a class="headerlink" href="#Guide-to-model-building-and-running-with-SPyice-for-biogeochemical-model" title="Link to this heading">#</a></h1>
 <p>Demonstrates a simple example for a freezing sea ice model with heat-salinity-nutrient transport, gravity drainage, radiation and microalgae growth along with other default settings of initial conditions of 265K at the top boundary and Salinity of 34ppt choosing constant fixed Dirichlet boundary conditions. For the one phase distinct interface system where sea water is at melt temperature of 271.25K.</p>
-<p><img alt="93f799dbcb1946199daafeca49b232f9" class="no-scaled-link" src="../../_images/seaicemodel.png" style="width: 500px;" /></p>
+<p><img alt="fe5fff518c3641219d40e09381b0902c" class="no-scaled-link" src="../../_images/seaicemodel.png" style="width: 500px;" /></p>
 <section id="Import-Packages">
 <h2>Import Packages<a class="headerlink" href="#Import-Packages" title="Link to this heading">#</a></h2>
 <div class="nbinput nblast docutils container">
@@ -441,7 +443,7 @@ Preprocessing done.
 <section id="Model-settings">
 <h3>Model settings<a class="headerlink" href="#Model-settings" title="Link to this heading">#</a></h3>
 <p>for more info on all the model parameters have a look at the documentation: <a class="reference external" href="https://starry-phoenix.github.io/spyice-thesis/build/html/api/spyice.parameters.user_input.html">userinput</a></p>
-<p><img alt="8a32b27937184384b37b4ee1570dd8dc" class="no-scaled-link" src="../../_images/seaicemodel_algae_layers.png" style="width: 250px;" /></p>
+<p><img alt="0829ead24c6348a7ab51824521051b86" class="no-scaled-link" src="../../_images/seaicemodel_algae_layers.png" style="width: 250px;" /></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>

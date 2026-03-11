@@ -31,6 +31,7 @@
 <link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=b6ad3417" />
   
   <!-- So that users can add custom icons -->
@@ -42,6 +43,7 @@
     <script src="../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -372,7 +374,7 @@
 this project, a 1D advective-diffusion model predominantly diffusive in nature is implemented using finite differences. The
 numerical equations models thermal and brine effects on the sea ice system with the following set of equations <a class="reference internal" href="#equation-eq-mushylayer">(1)</a>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-mushylayer">
-<span class="eqno">(1)<a class="headerlink" href="#equation-eq-mushylayer" title="Link to this equation">#</a></span>\[ \begin{align}\begin{aligned}(\rho c)_{eff} \frac{\partial T}{\partial t} &amp;= \frac{\partial}{\partial z}\left(k_{eff} \frac{\partial T}{\partial z} \right) - \rho_{i}L \frac{\partial \phi}{\partial t}\\\phi \frac{\partial S_{br}}{\partial t} &amp;= \frac{\partial}{\partial z} \left( D_{eff} \frac{\partial S_{br}}{\partial z}\right) - \frac{\rho_{i}}{\rho_{br}} P_S S_{br} \frac{\partial \phi} {\partial t}\end{aligned}\end{align} \]</div>
+<span class="eqno">(1)<a class="headerlink" href="#equation-eq-mushylayer" title="Link to this equation">#</a></span>\[ \begin{align}\begin{aligned}    {\rho c}_{\text{eff}} \frac{\partial T}{\partial t} = -\rho_{l} c_l \textbf{w} \cdot   \nabla T + \nabla \cdot \left( \kappa_{\text{eff}} \nabla T \right) - \rho_{s} L \frac{\partial \phi}{\partial t} + Q\\    \phi \frac{\partial S}{\partial t} = - \textbf{w} \cdot \nabla S + \nabla \cdot \left( D_{\text{eff}} \nabla S \right) - \frac{\rho_s}{\rho_l} P_S S \frac{\partial \phi}{\partial t} + Q'\\    \nabla \cdot \textbf{w} = \left( \frac{\rho_s}{\rho_l} - 1 \right) \frac{\partial \phi}{\partial t}\\    \mu \textbf{w} = \Pi (-\nabla p + \rho g)\end{aligned}\end{align} \]</div>
 <p>Brine in a sea ice system propagates along a vertical column and the flux across boundaries is considered to be constant (CHECK!!)
 as shown in Fig(). The Dirichlet boundary conditions (essential boundary condition) is implemented at the top layer of the
 vertical column and the system is assumed to be at melting temperature of sea ice as <a class="reference internal" href="#equation-eq-liquidus-temp">(2)</a>:.</p>
@@ -381,9 +383,18 @@ vertical column and the system is assumed to be at melting temperature of sea ic
 <p>The linear numerical model is solved using the <em>Thomas tri-diagonal solver</em> <strong>(REF)</strong> which is for a positive definite diagonally dominant matrix <strong>(REF)</strong>. The
 conditional stability of the implicit numerical difference system is verified using the <em>Fourier stability criteria</em> <strong>(REF)</strong>. The model
 parameters used in this project are number of iterations, sea ice freezing duration, and initial salinity.</p>
+<p>The instabilities due to temperature and salinity gradients causing expulsion of salt in sea ice causing gravity drainage can be described using a parametrised equation as a function of Rayleigh number.</p>
+<div class="math notranslate nohighlight" id="equation-gravity-drainage">
+<span class="eqno">(3)<a class="headerlink" href="#equation-gravity-drainage" title="Link to this equation">#</a></span>\[ Ra = \frac{g(h_i - z) \rho_w \beta_w (S(z) - S_w) \Pi(\phi_{min})}{\kappa_s \eta}\]</div>
+<p>The transport of nutrients follows salt transport; therefore, the salt mass conservation equation can be used:</p>
+<div class="math notranslate nohighlight" id="equation-nutrient-transport">
+<span class="eqno">(4)<a class="headerlink" href="#equation-nutrient-transport" title="Link to this equation">#</a></span>\[\frac{\partial C}{\partial t} = -w \nabla C + \nabla \cdot \left( D_{\text{eff}} \nabla C \right).\]</div>
+<p>The micro-algal growth dynamics follows the Nicholson-Bailey model, which is a Malthusian model where the growth and depletion of algae and nutrients follows the law of exponential growth. Algal activity is associated with its byproduct, carbon concentration and the presence of algae with chlorophyll concentration,</p>
+<div class="math notranslate nohighlight" id="equation-nutrient-transport">
+<span class="eqno">(5)<a class="headerlink" href="#equation-nutrient-transport" title="Link to this equation">#</a></span>\[ \begin{align}\begin{aligned}\frac{d C_C}{d t} &amp;= (\mu - \lambda)C_C,\\\frac{d C_N}{d t} &amp;= r^N_C(-\mu + f\lambda)C_C,\end{aligned}\end{align} \]</div>
 <p><strong>Stefan Problem:</strong> So <span class="math notranslate nohighlight">\($\lambda$\)</span> giving the minimum absolute result is determined and used to compute the location of the phase change.</p>
 <div class="math notranslate nohighlight" id="equation-eq-stefanproblem">
-<span class="eqno">(3)<a class="headerlink" href="#equation-eq-stefanproblem" title="Link to this equation">#</a></span>\[-\dfrac{2sl\mathrm{e}^{-l^2}}{\sqrt{{\pi}}\operatorname{erf}\left(l\right)}-\dfrac{2s\mathrm{e}^{-2l^2}}{{\pi}\operatorname{erf}^2\left(l\right)}-1\]</div>
+<span class="eqno">(6)<a class="headerlink" href="#equation-eq-stefanproblem" title="Link to this equation">#</a></span>\[-\dfrac{2sl\mathrm{e}^{-l^2}}{\sqrt{{\pi}}\operatorname{erf}\left(l\right)}-\dfrac{2s\mathrm{e}^{-2l^2}}{{\pi}\operatorname{erf}^2\left(l\right)}-1\]</div>
 </section>
 
 

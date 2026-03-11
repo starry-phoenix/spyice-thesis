@@ -31,6 +31,7 @@
 <link href="../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=b6ad3417" />
   
   <!-- So that users can add custom icons -->
@@ -42,13 +43,11 @@
     <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'quick_start/example/_index';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Sea-Ice Model Package (SPyIce)" href="main_original.html" />
     <link rel="prev" title="Quick start guide to model building and running with SPyice" href="../../user_guide/jupyter_run.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -296,13 +295,7 @@
 <nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
-  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="main_original.html">Quick start example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="jupyter_run.html">Heat-Salt transport in sea ice</a></li>
-<li class="toctree-l1"><a class="reference internal" href="jupyter_run_radiation.html">Heat-Salt transport with radiation and gravity drainage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="jupyter_run_algae.html">Biogeochemical system response to transport mechanics</a></li>
-</ul>
-</div>
+  <div class="bd-toc-item navbar-nav"></div>
 </nav></div>
     </div>
   
@@ -355,13 +348,49 @@
                   
   <section id="examples">
 <h1>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="main_original.html">Quick start example</a></li>
-<li class="toctree-l1"><a class="reference internal" href="jupyter_run.html">Heat-Salt transport in sea ice</a></li>
-<li class="toctree-l1"><a class="reference internal" href="jupyter_run_radiation.html">Heat-Salt transport with radiation and gravity drainage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="jupyter_run_algae.html">Biogeochemical system response to transport mechanics</a></li>
-</ul>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 sd-g-3 sd-g-xs-3 sd-g-sm-3 sd-g-md-3 sd-g-lg-3 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Quick start example</div>
+<a class="reference internal image-reference" href="../../_images/main_original.png"><img alt="Quick start example" src="../../_images/main_original.png" style="width: 100%;" />
+</a>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="main_original.html"><span class="doc">Sea-Ice Model Package (SPyIce)</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Biogeochemical system response to transport mechanics</div>
+<a class="reference internal image-reference" href="../../_images/jupyter_run_algae.png"><img alt="Algae example" src="../../_images/jupyter_run_algae.png" style="width: 100%;" />
+</a>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="jupyter_run_algae.html"><span class="doc">Guide to model building and running with SPyice for biogeochemical model</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Heat-Salt transport in sea ice</div>
+<a class="reference internal image-reference" href="../../_images/jupyter_run.png"><img alt="Heat-Salt example" src="../../_images/jupyter_run.png" style="width: 100%;" />
+</a>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="jupyter_run.html"><span class="doc">Model building and running with SPyice for heat-salt transport system</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Heat-Salt transport with radiation and gravity drainage</div>
+<a class="reference internal image-reference" href="../../_images/jupyter_run_radiation.png"><img alt="Radiation example" src="../../_images/jupyter_run_radiation.png" style="width: 100%;" />
+</a>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="jupyter_run_radiation.html"><span class="doc">Guide to model building and running with SPyice for heat-salt transport with radiation</span></a></div>
+</div>
+</div>
 </div>
 </section>
 
@@ -383,15 +412,6 @@
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title">Quick start guide to model building and running with SPyice</p>
       </div>
-    </a>
-    <a class="right-next"
-       href="main_original.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Sea-Ice Model Package (SPyIce)</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>

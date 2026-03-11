@@ -30,7 +30,7 @@ extensions = [
     "sphinx.ext.viewcode",
     # "sphinxcontrib.pseudocode",
     # "sphinx_proof",
-    # "sphinx_design",
+    "sphinx_design",
     # "jupyter_sphinx",
     # "myst_parser",
     # "sphinx_favicon",

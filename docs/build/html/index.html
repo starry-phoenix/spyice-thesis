@@ -31,6 +31,7 @@
 <link href="_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=b6ad3417" />
   
   <!-- So that users can add custom icons -->
@@ -42,6 +43,7 @@
     <script src="_static/documentation_options.js?v=5929fcd5"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -317,8 +319,8 @@
                   
   <section id="sea-ice-model-package-spyice">
 <h1>Sea-Ice Model Package (SPyIce)<a class="headerlink" href="#sea-ice-model-package-spyice" title="Link to this heading">#</a></h1>
-<p>The SPyIce package is a software tool that enables 1D finite difference simulation for vertical transport equations. It specifically focuses on thermal diffusion with the influence of salinity and physical properties. The package utilizes the Thomas tridiagonal solver as the solver algorithm. With SPyIce, users can model and analyze the behavior of temperature, salinity, and other relevant variables in a vertical system. It provides a comprehensive framework for studying the thermal diffusion process and its interaction with salinity in various scenarios. Hydra is used to automate the simulation runs of the Sea-Ice Model. It is used to manage and run sea ice simulations, making it easier for users to explore different scenarios and optimize their models.
-You can also model microalgae bloom on sea ice and how nutrient transport, sunlight and radiation affects its growth with this package.</p>
+<p>The SPyIce package is a software tool that enables 1D finite difference simulation for vertical transport equations. It specifically focuses on thermal-solute advection-diffusion with the influence of desalination mechanisms and physical properties. The package utilizes the Thomas tridiagonal solver as the solver algorithm. With SPyIce, users can model and analyze the behavior of temperature, salinity, and other relevant variables in a vertical system. It provides a comprehensive framework for studying the thermal diffusion process and its interaction with salinity in various scenarios. Hydra is used to automate the simulation runs of the Sea-Ice Model. It is used to manage and run sea ice simulations, making it easier for users to explore different scenarios and optimize their models.
+You can also model microalgae bloom near the sea ice-ocean interface and how nutrient transport, sunlight and radiation affects its growth with this package.</p>
 <div class="pst-scrollable-table-container"><table class="table table-center">
 <colgroup>
 <col style="width: 33.3%" />
@@ -355,6 +357,53 @@ You can also model microalgae bloom on sea ice and how nutrient transport, sunli
 </table>
 </div>
 </section>
+<section id="examples">
+<h1>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h1>
+<div class="pst-scrollable-table-container"><table class="table table-center">
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+<col style="width: 25.0%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><figure class="align-center" id="id4">
+<a class="reference internal image-reference" href="_images/main_original.png"><img alt="_images/main_original.png" src="_images/main_original.png" style="width: 200px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="quick_start/example/main_original.html"><span class="doc">Quick start example</span></a></span><a class="headerlink" href="#id4" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</td>
+<td><figure class="align-center" id="id5">
+<a class="reference internal image-reference" href="_images/jupyter_run.png"><img alt="_images/jupyter_run.png" src="_images/jupyter_run.png" style="width: 200px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="quick_start/example/jupyter_run.html"><span class="doc">Heat-Salt transport in sea ice</span></a></span><a class="headerlink" href="#id5" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</td>
+<td><figure class="align-center" id="id6">
+<a class="reference internal image-reference" href="_images/jupyter_run_radiation.png"><img alt="_images/jupyter_run_radiation.png" src="_images/jupyter_run_radiation.png" style="width: 200px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="quick_start/example/jupyter_run_radiation.html"><span class="doc">Heat-Salt transport with radiation and gravity drainage</span></a></span><a class="headerlink" href="#id6" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</td>
+<td><figure class="align-center" id="id7">
+<a class="reference internal image-reference" href="_images/jupyter_run_algae.png"><img alt="_images/jupyter_run_algae.png" src="_images/jupyter_run_algae.png" style="width: 200px;" />
+</a>
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="quick_start/example/jupyter_run_algae.html"><span class="doc">Biogeochemical system response to transport mechanics</span></a></span><a class="headerlink" href="#id7" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
 <section id="contents">
 <h1>Contents<a class="headerlink" href="#contents" title="Link to this heading">#</a></h1>
 <div class="toctree-wrapper compound">
@@ -362,8 +411,7 @@ You can also model microalgae bloom on sea ice and how nutrient transport, sunli
 <li class="toctree-l1"><a class="reference internal" href="report/_index.html">About</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quick_start/installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api/_index.html">API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="user_guide/cmd_run.html">To run on command line</a></li>
-<li class="toctree-l1"><a class="reference internal" href="user_guide/jupyter_run.html">To run on jupyter notebook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide/_index.html">User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="quick_start/example/_index.html">Examples</a></li>
 </ul>
 </div>
@@ -408,6 +456,7 @@ You can also model microalgae bloom on sea ice and how nutrient transport, sunli
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Sea-Ice Model Package (SPyIce)</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">Examples</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#contents">Contents</a></li>
 </ul>
 

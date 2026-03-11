@@ -21,3 +21,9 @@ is performed using hydra python package. Hatch python project manager is used fo
 creating reproducible build ecosystem. OOP concepts are leveraged and the mediator design pattern is implemented 
 to improve sustainability of code. 
 
+.. figure:: images/MediatorPattern.png
+    :align: center
+    :height: 300
+    :width: 400
+
+    Diagram of mediator pattern implemented in this package
