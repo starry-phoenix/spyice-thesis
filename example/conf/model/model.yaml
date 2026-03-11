@@ -1,0 +1,5 @@
+is_diffusiononly_equation: True
+is_salinity_equation: False
+is_radiation_equation: False
+is_algae_equation: False
+algae_model_BAL_type: 'all'

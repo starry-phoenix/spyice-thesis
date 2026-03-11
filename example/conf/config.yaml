@@ -5,6 +5,8 @@ defaults:
   - dt: dt47
   - iter_max: iter_max1000
   - dz: dz0p01
+  - model: model
+  - ICBC: ICBC
   - override hydra/help: config_param_help
   - _self_
 
@@ -20,6 +22,8 @@ hydra:
       constants: real
       dt: glob(*)
       iter_max: iter_max1000
+      model: model
+      ICBC: ICBC
   job_logging:
     root:
       handlers: [console, file]
