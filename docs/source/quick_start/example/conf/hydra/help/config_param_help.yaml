@@ -45,7 +45,7 @@ template: |-
   2. python main_config.py -m dt=dt47
 
   Similarly, you can run the app for a defined dt and S_IC to give outputs for other defined iter_max by running:
-  3. python config_param.py -m dt=dt47 dz=dz0p1
+  3. python config_param.py -m dt=dt47 S_IC=S34
 
   The default settings are:
   -------
