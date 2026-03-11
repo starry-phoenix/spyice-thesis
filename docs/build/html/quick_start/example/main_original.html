@@ -361,9 +361,9 @@
 <h1>Sea-Ice Model Package (SPyIce)<a class="headerlink" href="#Sea-Ice-Model-Package-(SPyIce)" title="Link to this heading">#</a></h1>
 <p>The SPyIce package is a software tool that enables 1D finite difference simulation for vertical transport equations. It specifically focuses on thermal diffusion with the influence of salinity and physical properties. The package utilizes the Thomas tridiagonal solver as the solver algorithm. With SPyIce, users can model and analyze the behavior of temperature, salinity, and other relevant variables in a vertical system. It provides a comprehensive framework for studying the thermal diffusion
 process and its interaction with salinity in various scenarios. Hydra is used to automate the simulation runs of the Sea-Ice Model. It is used to manage and run sea ice simulations, making it easier for users to explore different scenarios and optimize their models.</p>
-<p><img alt="aa88ad0cb71c4b95be280ed4e1e41c1d" class="no-scaled-link" src="../../_images/seaice_withboundary.png" style="width: 250px;" /></p>
-<section id="Package-Demo-Example">
-<h2>Package Demo Example<a class="headerlink" href="#Package-Demo-Example" title="Link to this heading">#</a></h2>
+<p><img alt="96d2329484034eae8e04adbc4a7df67c" class="no-scaled-link" src="../../_images/seaice_withboundary.png" style="width: 250px;" /></p>
+<section id="Example-1:-Simple-simulation-without-automation-configuration">
+<h2>Example 1: Simple simulation without automation configuration<a class="headerlink" href="#Example-1:-Simple-simulation-without-automation-configuration" title="Link to this heading">#</a></h2>
 <section id="Import-Packages">
 <h3>Import Packages<a class="headerlink" href="#Import-Packages" title="Link to this heading">#</a></h3>
 <div class="nbinput nblast docutils container">
@@ -372,9 +372,6 @@ process and its interaction with salinity in various scenarios. Hydra is used to
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># creates a OmegaConf object from a dictionary</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="kn">from</span> <span class="nn">omegaconf</span> <span class="kn">import</span> <span class="n">OmegaConf</span>
 
 <span class="kn">from</span> <span class="nn">spyice.utils</span> <span class="kn">import</span> <span class="n">create_output_directory</span>
@@ -388,34 +385,64 @@ process and its interaction with salinity in various scenarios. Hydra is used to
 </section>
 <section id="Define-Inputs-and-Project-Output-paths">
 <h3>Define Inputs and Project Output paths<a class="headerlink" href="#Define-Inputs-and-Project-Output-paths" title="Link to this heading">#</a></h3>
+<section id="Constants-Configuration">
+<h4>Constants Configuration<a class="headerlink" href="#Constants-Configuration" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">constants:</span> <span class="pre">dict[str]</span></code> Specifies the type of physical constants used by the model (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;real&quot;</span></code> for real-world physical values or “debug” which assigns 0s and 1s).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dt:</span> <span class="pre">dict[float]</span></code> Simulation time step size used for each iteration of the numerical model.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">iter_max:</span> <span class="pre">dict[int]</span></code> Maximum number of time iterations for simulation where total simulation time = iter_max*dt.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dz:</span> <span class="pre">dict[float]</span></code> Vertical grid spacing defining the spatial resolution of the model domain.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">model:</span> <span class="pre">dict[bool</span> <span class="pre">|</span> <span class="pre">str]</span></code> Flags controlling which physical or biological equations are enabled in the simulation.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_diffusiononly_equation:</span> <span class="pre">bool</span></code> — Enables the heat diffusion-only transport equation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_salinity_equation:</span> <span class="pre">bool</span></code> — Activates the salinity transport equation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_radiation_equation:</span> <span class="pre">bool</span></code> — Includes the radiation/light transfer model.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">is_algae_equation:</span> <span class="pre">bool</span></code> — Enables the algae dynamics model.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">algae_model_BAL_type:</span> <span class="pre">str</span></code> — Specifies the BAL algae model variant (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;all&quot;</span></code> for all processes).</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ICBC:</span> <span class="pre">dict[str</span> <span class="pre">|</span> <span class="pre">float]</span></code> Initial conditions (IC) and boundary conditions (BC) for the simulation.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">S_IC:</span> <span class="pre">str</span></code> — Initial salinity condition identifier (e.g., <code class="docutils literal notranslate"><span class="pre">&quot;S_34&quot;</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">T_BC:</span> <span class="pre">float</span></code> — Temperature top/surface boundary condition value.</p></li>
+</ul>
+</li>
+</ul>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># creates a OmegaConf object from a dictionary for fast testing only for parameters: constants, dt, S_IC, iter_max, dz</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># creates a OmegaConf object from a dictionary for fast testing only for the above parameters</span>
 <span class="n">constants_dict</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;constants&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;constants&quot;</span><span class="p">:</span> <span class="s2">&quot;real&quot;</span><span class="p">},</span>
     <span class="s2">&quot;dt&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;dt&quot;</span><span class="p">:</span> <span class="mi">47</span><span class="p">},</span>
-    <span class="s2">&quot;S_IC&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;S_IC&quot;</span><span class="p">:</span> <span class="s2">&quot;S34&quot;</span><span class="p">},</span>
     <span class="s2">&quot;iter_max&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;iter_max&quot;</span><span class="p">:</span> <span class="mi">1500</span><span class="p">},</span>
     <span class="s2">&quot;dz&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;dz&quot;</span><span class="p">:</span> <span class="mf">0.01</span><span class="p">},</span>
+    <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;is_diffusiononly_equation&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;is_salinity_equation&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;is_radiation_equation&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;is_algae_equation&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;algae_model_BAL_type&quot;</span><span class="p">:</span> <span class="s2">&quot;all&quot;</span><span class="p">},</span>
+    <span class="s2">&quot;ICBC&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;S_IC&quot;</span><span class="p">:</span> <span class="s1">&#39;S_34&#39;</span><span class="p">,</span> <span class="s2">&quot;T_BC&quot;</span><span class="p">:</span> <span class="mf">265.0</span><span class="p">}</span>
 <span class="p">}</span>
-<span class="n">config_raw</span> <span class="o">=</span> <span class="n">OmegaConf</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">constants_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">config_raw</span> <span class="o">=</span> <span class="n">OmegaConf</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">constants_dict</span><span class="p">)</span>
 <span class="n">config</span> <span class="o">=</span> <span class="n">ConfigSort</span><span class="o">.</span><span class="n">getconfig_dataclass</span><span class="p">(</span><span class="n">config_raw</span><span class="p">,</span> <span class="n">config_type</span><span class="o">=</span><span class="s2">&quot;jupyter&quot;</span><span class="p">)</span>
 
 <span class="c1"># choose your output directory</span>
-<span class="n">base_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span>
-<span class="n">output_base_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">base_dir</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">)</span>
-<span class="n">wo_hydra_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_base_dir</span><span class="p">,</span> <span class="s2">&quot;without_hydra&quot;</span><span class="p">)</span>
-<span class="n">out_dir_final</span> <span class="o">=</span> <span class="n">create_output_directory</span><span class="p">(</span><span class="n">wo_hydra_dir</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">initial_salinity</span><span class="o">.</span><span class="n">S_IC</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;0.01&quot;</span><span class="p">,</span> <span class="s2">&quot;47&quot;</span><span class="p">,</span> <span class="s2">&quot;1500&quot;</span><span class="p">,</span> <span class="s2">&quot;example&quot;</span><span class="p">)</span>
+<span class="n">output_base_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../example/output/without_hydra&quot;</span><span class="p">)</span>
+<span class="n">out_dir_final</span> <span class="o">=</span> <span class="n">create_output_directory</span><span class="p">(</span><span class="n">output_base_dir</span><span class="p">,</span> <span class="s2">&quot;S34&quot;</span><span class="p">,</span><span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;0.01&quot;</span><span class="p">,</span> <span class="s2">&quot;47&quot;</span><span class="p">,</span> <span class="s2">&quot;1500&quot;</span><span class="p">,</span> <span class="s2">&quot;example&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </section>
+</section>
 <section id="Preprocessing,-Running-and-Analysis-of-Sea-Ice-Model">
 <h3>Preprocessing, Running and Analysis of Sea-Ice Model<a class="headerlink" href="#Preprocessing,-Running-and-Analysis-of-Sea-Ice-Model" title="Link to this heading">#</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># preprocess the data</span>
@@ -457,14 +484,14 @@ Residuals exported successfully.
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/quick_start_example_main_original_8_1.png" src="../../_images/quick_start_example_main_original_8_1.png" />
+<img alt="../../_images/quick_start_example_main_original_10_1.png" src="../../_images/quick_start_example_main_original_10_1.png" />
 </div>
 </div>
 </section>
 <section id="Visualization-of-Model-with-VisualiseModel">
 <h3>Visualization of Model with VisualiseModel<a class="headerlink" href="#Visualization-of-Model-with-VisualiseModel" title="Link to this heading">#</a></h3>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_visualization_object</span> <span class="o">=</span> <span class="n">VisualiseModel</span><span class="p">(</span>
@@ -484,7 +511,7 @@ Visualisation object created...
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plots the Temperature Difference between Analytical and Numerical Solutions</span>
@@ -500,8 +527,8 @@ Visualisation object created...
 Plotting Temperature errors using inf norm...
 </pre></div></div>
 </div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plots the interface tracking over time for Analytical and Numerical Solutions</span>
@@ -509,45 +536,46 @@ Plotting Temperature errors using inf norm...
 <br/></pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-Plotting Depth over time...
-</pre></div></div>
-</div>
+</section>
+</section>
+<section id="Example-2:-Simulation-with-Hydra-hierarchial-and-automation-configuration">
+<h2>Example 2: Simulation with Hydra hierarchial and automation configuration<a class="headerlink" href="#Example-2:-Simulation-with-Hydra-hierarchial-and-automation-configuration" title="Link to this heading">#</a></h2>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
 <span class="kn">from</span> <span class="nn">hydra</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">compose</span><span class="p">,</span>
     <span class="n">initialize</span><span class="p">,</span>
 <span class="p">)</span>
-<span class="kn">from</span> <span class="nn">omegaconf</span> <span class="kn">import</span> <span class="n">OmegaConf</span>
 
-<span class="c1"># import the main process class</span>
 <span class="kn">from</span> <span class="nn">spyice.main_process</span> <span class="kn">import</span> <span class="n">MainProcess</span>
 </pre></div>
 </div>
 </div>
 <div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># choose your output directory</span>
-<span class="n">base_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span>
-<span class="n">output_base_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">base_dir</span><span class="p">,</span> <span class="s2">&quot;output&quot;</span><span class="p">)</span>
+<span class="n">output_base_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../example/output/with_hydra&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<p>To run the Sea-Ice Model using Hydra and the <code class="docutils literal notranslate"><span class="pre">MainProcess</span></code> script, users simply need to initialize Hydra, load the configuration file, specify any desired overrides, and then create an instance of the <code class="docutils literal notranslate"><span class="pre">MainProcess</span></code> class. The <code class="docutils literal notranslate"><span class="pre">run_model()</span></code> method is then called to execute the simulation. This streamlined process makes it simple for users to run the model with different configurations and analyze the results.</p>
+<p>Model settings can be modified in the <code class="docutils literal notranslate"><span class="pre">example/conf</span></code> directory for:</p>
+<ul class="simple">
+<li><p>constants</p></li>
+<li><p>dt</p></li>
+<li><p>dz</p></li>
+<li><p>ICBC</p></li>
+<li><p>model</p></li>
+</ul>
+<p>or in the <code class="docutils literal notranslate"><span class="pre">overrides</span></code> option during initialize as seen in the next step.</p>
+<p>To run the Sea-Ice Model using Hydra and the <code class="docutils literal notranslate"><span class="pre">MainProcess</span></code> script, users simply need to initialize Hydra, load the configuration file, specify any desired overrides, and then create an instance of the <code class="docutils literal notranslate"><span class="pre">MainProcess</span></code> class. The <code class="docutils literal notranslate"><span class="pre">run_model()</span></code> method is then called to execute the simulation. This streamlined process makes it simple for users to run the model with different configurations and analyze the results whose outputs are stored in <strong>outputs</strong> directory as .</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">initialize</span><span class="p">(</span><span class="n">version_base</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">config_path</span><span class="o">=</span><span class="s2">&quot;conf&quot;</span><span class="p">):</span>
@@ -582,8 +610,6 @@ Postprocessing...
 Visualisation object created...
 Plotting Temperature heatmap...
 Plotting Liquid-Fraction heatmap...
-Plotting Salinity heatmap...
-Plotting Liqiudus-Solidus Temperature evolution at 0.1m...
 Postprocessing done.
 </pre></div></div>
 </div>
@@ -591,10 +617,9 @@ Postprocessing done.
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../../_images/quick_start_example_main_original_16_1.png" src="../../_images/quick_start_example_main_original_16_1.png" />
+<img alt="../../_images/quick_start_example_main_original_20_1.png" src="../../_images/quick_start_example_main_original_20_1.png" />
 </div>
 </div>
-</section>
 </section>
 </section>
 
@@ -645,13 +670,17 @@ Postprocessing done.
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Package-Demo-Example">Package Demo Example</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Example-1:-Simple-simulation-without-automation-configuration">Example 1: Simple simulation without automation configuration</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Import-Packages">Import Packages</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Define-Inputs-and-Project-Output-paths">Define Inputs and Project Output paths</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Define-Inputs-and-Project-Output-paths">Define Inputs and Project Output paths</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#Constants-Configuration">Constants Configuration</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Preprocessing,-Running-and-Analysis-of-Sea-Ice-Model">Preprocessing, Running and Analysis of Sea-Ice Model</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Visualization-of-Model-with-VisualiseModel">Visualization of Model with VisualiseModel</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Example-2:-Simulation-with-Hydra-hierarchial-and-automation-configuration">Example 2: Simulation with Hydra hierarchial and automation configuration</a></li>
 </ul>
   </nav></div>
 
