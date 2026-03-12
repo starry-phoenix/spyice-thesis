@@ -67,7 +67,6 @@ class Analysis:
         """
         # Calculates the errors of Numerical and Analytical using error norms one, two and infinity
         # norm(|T_k_list - T_Stefan_list|)
-        print("Calculating errors...")
         self.num_ana_temperature_diff = self.num_ana_temperature_diff
         T_k_Stefan_diff_L1norm, T_k_Stefan_diff_infnorm, T_k_Stefan_diff_L2norm = (
             self.calculate_errors(
@@ -168,7 +167,7 @@ class Analysis:
             AnalysisData: An instance of the AnalysisData class containing the error analysis results.
         """
 
-        print("Running error analysis...")
+        # print("Running error analysis...")
         error_analysis_object = cls(t_k_diff, t_stefan_diff)
         error_analysis_object.set_analysis()
         error_analysis_object.error_analytical_numerical()

@@ -14,22 +14,22 @@ from spyice.postprocess import Analysis
 
 np.seterr(divide="ignore", invalid="ignore")
 # .style.use("spyice.utils.custom")
-plt.style.use("spyice.utils.custom")
+#plt.style.use("spyice.utils.custom")
 # plt.rcParams.update(
 #     {
 #         "text.usetex": True,
 #     }
 # )
 # plt.rcParams["pgf.texsystem"] = "pdflatex"
-plt.rcParams["text.latex.preamble"].join(
-    [
-        r"\usepackage{dashbox}",
-        r"\setmainfont{xcolor}",
-    ]
-)
-plt.rcParams["animation.convert_path"] = Path(
-    "C:/Program Files/ImageMagick-7.1.1-Q16-HDRI/magick.exe"
-)
+# plt.rcParams["text.latex.preamble"].join(
+#     [
+#         r"\usepackage{dashbox}",
+#         r"\setmainfont{xcolor}",
+#     ]
+# )
+# plt.rcParams["animation.convert_path"] = Path(
+#     "C:/Program Files/ImageMagick-7.1.1-Q16-HDRI/magick.exe"
+# )
 
 
 class VisualiseModel:
@@ -113,8 +113,7 @@ class VisualiseModel:
 
         if savefig:
             fig.savefig(
-                self.ui_object.dir_output_name + "/Temperature_error_diff_num_ana.pdf",
-                backend="pgf",
+                self.ui_object.dir_output_name + "/Temperature_error_diff_num_ana.png",
             )
 
     def plot_error_temp(self, zoom_x: int, norm: str = "inf", savefig: bool = True):
@@ -192,7 +191,6 @@ class VisualiseModel:
         if savefig:
             fig1.savefig(
                 self.ui_object.dir_output_name + "/Temperature_error_num_and_ana",
-                backend="pgf",
             )
         plt.close(fig1)
 
@@ -211,7 +209,7 @@ class VisualiseModel:
         ax1.set_ylabel(r"$\Delta T$")
         ax1.set_title(arg1)
 
-    def plot_depth_over_time(self, savefig: bool = False):
+    def plot_depth_over_time(self, savefig: bool = False, show=False):
         """Plots the depth over time.
 
         Args:
@@ -267,9 +265,10 @@ class VisualiseModel:
 
         if savefig:
             fig.savefig(
-                self.ui_object.dir_output_name + "/Numerical_Analytical_Depth.pdf",
-                backend="pgf",
+                self.ui_object.dir_output_name + "/Numerical_Analytical_Depth.png",
             )
+        if show:
+            plt.show()
         plt.close(fig)
 
     def plot_depth_over_time_heatmap(self, savefig: bool = False):
@@ -338,8 +337,7 @@ class VisualiseModel:
         if savefig:
             fig.savefig(
                 self.ui_object.dir_output_name
-                + "/Numerical_Analytical_Depth_heatmap.pdf",
-                backend="pgf",
+                + "/Numerical_Analytical_Depth_heatmap.png",
             )
         plt.close(fig)
 
@@ -435,8 +433,7 @@ class VisualiseModel:
                 self.ui_object.dir_output_name
                 + "/Temperature evolution at"
                 + str(z_depth)
-                + "m.pdf",
-                backend="pgf",
+                + "m.png",
             )
         plt.close(fig1)
 
@@ -484,8 +481,7 @@ class VisualiseModel:
 
         if savefig:
             fig.savefig(
-                self.ui_object.dir_output_name + "/Temperature_heatmap.pdf",
-                backend="pgf",
+                self.ui_object.dir_output_name + "/Temperature_heatmap.png",
             )
         if export_csv:
             df_heatmap = pd.DataFrame(heatmap_data)
@@ -537,8 +533,7 @@ class VisualiseModel:
 
         if savefig:
             fig.savefig(
-                self.ui_object.dir_output_name + "/Salinity_heatmap.pdf",
-                backend="pgf",
+                self.ui_object.dir_output_name + "/Salinity_heatmap.png",
             )
         if show:
             plt.show()
@@ -583,8 +578,7 @@ class VisualiseModel:
 
         if savefig:
             fig.savefig(
-                self.ui_object.dir_output_name + "/Liquidfraction.pdf",
-                backend="pgf",
+                self.ui_object.dir_output_name + "/Liquidfraction.png",
             )
         if show:
             plt.show()
@@ -836,8 +830,7 @@ class VisualiseModel:
                 + self.ui_object.output_suffix
                 + "_"
                 + str(t)
-                + "m.pdf",
-                backend="pgf",
+                + "m.png",
             )
         plt.close()
 
@@ -874,8 +867,7 @@ class VisualiseModel:
                 + self.ui_object.output_suffix
                 + "_"
                 + str(t)
-                + "m.pdf",
-                backend="pgf",
+                + "m.png",
             )
         plt.close()
 
@@ -922,8 +914,7 @@ class VisualiseModel:
                 + self.ui_object.output_suffix
                 + "_"
                 + str(t)
-                + "m_heatmap_mushonly.pdf",
-                backend="pgf",
+                + "m_heatmap_mushonly.png",
             )
         plt.close(fig1)
 
@@ -992,8 +983,7 @@ class VisualiseModel:
                 + self.ui_object.output_suffix
                 + "_"
                 + str(t)
-                + "m_heatmap.pdf",
-                backend="pgf",
+                + "m_heatmap.png",
             )
         plt.close(fig1)
 
@@ -1009,8 +999,7 @@ class VisualiseModel:
 
         if savefig:
             plt.savefig(
-                f"{self.ui_object.dir_output_name}/LiquidFractionMush_iter_{self.ui_object.output_suffix}_{str(t)}m.pdf",
-                backend="pgf",
+                f"{self.ui_object.dir_output_name}/LiquidFractionMush_iter_{self.ui_object.output_suffix}_{str(t)}m.png",
             )
         plt.close()
 
@@ -1097,8 +1086,7 @@ class VisualiseModel:
 
         if savefig:
             plt.savefig(
-                f"{self.ui_object.dir_output_name}/Temperature_mush_response_{self.ui_object.output_suffix}.pdf",
-                backend="pgf",
+                f"{self.ui_object.dir_output_name}/Temperature_mush_response_{self.ui_object.output_suffix}.png",
             )
 
         plt.close()
@@ -1151,8 +1139,7 @@ class VisualiseModel:
                 self.ui_object.dir_output_name
                 + "/Liquidus-Solidus Temperature evolution at"
                 + str(z_depth)
-                + "m.pdf",
-                backend="pgf",
+                + "m.png",
             )
         plt.close(fig1)
     
@@ -1192,8 +1179,7 @@ class VisualiseModel:
 
         if savefig:
             fig.savefig(
-                self.ui_object.dir_output_name + "/carbon_concentration.pdf",
-                backend="pgf",
+                self.ui_object.dir_output_name + "/carbon_concentration.png",
             )
         plt.close(fig)
 
@@ -1235,8 +1221,7 @@ class VisualiseModel:
 
         if savefig:
             fig.savefig(
-                self.ui_object.dir_output_name + "/carbon_concentration_multiplelayers.pdf",
-                backend="pgf",
+                self.ui_object.dir_output_name + "/carbon_concentration_multiplelayers.png",
             )
         if show:
             plt.show()
@@ -1271,8 +1256,7 @@ class VisualiseModel:
 
         if savefig:
             fig.savefig(
-                self.ui_object.dir_output_name + "/chla_bulk_concentration.pdf",
-                backend="pgf",
+                self.ui_object.dir_output_name + "/chla_bulk_concentration.png",
             )
         plt.close(fig)
 
@@ -1302,8 +1286,7 @@ class VisualiseModel:
 
         if savefig:
             fig.savefig(
-                self.ui_object.dir_output_name + "/chla_bulk_concentration_multiplelayers.pdf",
-                backend="pgf",
+                self.ui_object.dir_output_name + "/chla_bulk_concentration_multiplelayers.png",
             )
         plt.close(fig)
 
@@ -1333,8 +1316,7 @@ class VisualiseModel:
 
         if savefig:
             fig.savefig(
-                self.ui_object.dir_output_name + "/nutrient_concentration.pdf",
-                backend="pgf",
+                self.ui_object.dir_output_name + "/nutrient_concentration.png",
             )
         plt.close(fig)
 
@@ -1374,8 +1356,7 @@ class VisualiseModel:
 
         if savefig:
             fig.savefig(
-                self.ui_object.dir_output_name + "/nutrient_concentration_alllayers.pdf",
-                backend="pgf",
+                self.ui_object.dir_output_name + "/nutrient_concentration_alllayers.png",
             )
         if show:
             plt.show()
@@ -1411,8 +1392,7 @@ class VisualiseModel:
 
         if savefig:
             fig.savefig(
-                self.ui_object.dir_output_name + "/photosynthetic_rate.pdf",
-                backend="pgf",
+                self.ui_object.dir_output_name + "/photosynthetic_rate.png",
             )
         plt.close(fig)
     
@@ -1442,8 +1422,7 @@ class VisualiseModel:
 
         if savefig:
             fig.savefig(
-                self.ui_object.dir_output_name + "/photosynthetic_rate_multiplelayers.pdf",
-                backend="pgf",
+                self.ui_object.dir_output_name + "/photosynthetic_rate_multiplelayers.png",
             )
         plt.close(fig)
 
@@ -1474,8 +1453,7 @@ class VisualiseModel:
 
         if savefig:
             fig.savefig(
-                self.ui_object.dir_output_name + "/algae_radiation.pdf",
-                backend="pgf",
+                self.ui_object.dir_output_name + "/algae_radiation.png",
             )
         plt.close(fig)
     
@@ -1518,8 +1496,7 @@ class VisualiseModel:
 
         if savefig:
             fig.savefig(
-                self.ui_object.dir_output_name + "/algae_radiation_multiplelayers.pdf",
-                backend="pgf",
+                self.ui_object.dir_output_name + "/algae_radiation_multiplelayers.png",
             )
         if show:
             plt.show()
@@ -1558,8 +1535,7 @@ class VisualiseModel:
 
         if savefig:
             fig.savefig(
-                self.ui_object.dir_output_name + "/algae_radiation_heating.pdf",
-                backend="pgf",
+                self.ui_object.dir_output_name + "/algae_radiation_heating.png",
             )
         plt.close(fig)
 
@@ -1599,8 +1575,7 @@ class VisualiseModel:
 
         if savefig:
             fig.savefig(
-                self.ui_object.dir_output_name + "/radiation_algae_heatmap_multiplelayers.pdf",
-                backend="pgf",
+                self.ui_object.dir_output_name + "/radiation_algae_heatmap_multiplelayers.png",
             )
         if show:
             plt.show()
@@ -1625,8 +1600,7 @@ class VisualiseModel:
         plt.legend()
         if savefig:
             plt.savefig(
-                self.ui_object.dir_output_name + "/nutrient_concentration_vertical_profile.pdf",
-                backend="pgf",
+                self.ui_object.dir_output_name + "/nutrient_concentration_vertical_profile.png",
             )
         plt.close()            
 
@@ -1645,8 +1619,7 @@ class VisualiseModel:
         plt.legend(loc='lower left')
         if savefig:
             plt.savefig(
-                self.ui_object.dir_output_name + "/salinity_concentration_vertical_profile.pdf",
-                backend="pgf",
+                self.ui_object.dir_output_name + "/salinity_concentration_vertical_profile.png",
             )
         plt.close()   
 
@@ -1665,8 +1638,7 @@ class VisualiseModel:
         plt.legend()
         if savefig:
             plt.savefig(
-                self.ui_object.dir_output_name + "/liquidfraction_concentration_vertical_profile.pdf",
-                backend="pgf",
+                self.ui_object.dir_output_name + "/liquidfraction_concentration_vertical_profile.png",
             )
         plt.close()        
 
@@ -1685,8 +1657,7 @@ class VisualiseModel:
         plt.legend()
         if savefig:
             plt.savefig(
-                self.ui_object.dir_output_name + "/temperature_3_vertical_profile.pdf",
-                backend="pgf",
+                self.ui_object.dir_output_name + "/temperature_3_vertical_profile.png",
             )
         plt.close()     
 
@@ -1706,8 +1677,7 @@ class VisualiseModel:
         plt.legend()
         if savefig:
             plt.savefig(
-                self.ui_object.dir_output_name + "/carbon_concentration_vertical_profile.pdf",
-                backend="pgf",
+                self.ui_object.dir_output_name + "/carbon_concentration_vertical_profile.png",
             )
         if show:
             plt.show()
@@ -1730,8 +1700,7 @@ class VisualiseModel:
         ax.legend()
         if savefig:
             plt.savefig(
-                self.ui_object.dir_output_name + "/salinitysourceterm_vertical_profile.pdf",
-                backend="pgf",
+                self.ui_object.dir_output_name + "/salinitysourceterm_vertical_profile.png",
             )
         if show:
             plt.show()
@@ -1756,8 +1725,7 @@ class VisualiseModel:
         ax.legend()
         if savefig:
             plt.savefig(
-                self.ui_object.dir_output_name + "/radiation_vertical_profile.pdf",
-                backend="pgf",
+                self.ui_object.dir_output_name + "/radiation_vertical_profile.png",
             )
         if show:
             plt.show()
@@ -1782,8 +1750,7 @@ class VisualiseModel:
         plt.legend()
         if savefig:
             plt.savefig(
-                self.ui_object.dir_output_name + "/liquidsalinity_concentration_vertical_profile.pdf",
-                backend="pgf",
+                self.ui_object.dir_output_name + "/liquidsalinity_concentration_vertical_profile.png",
             )
         plt.close()   
     
@@ -1803,8 +1770,7 @@ class VisualiseModel:
         ax.legend()
         if savefig:
             plt.savefig(
-                self.ui_object.dir_output_name + "/brinevelocity_vertical_profile.pdf",
-                backend="pgf",
+                self.ui_object.dir_output_name + "/brinevelocity_vertical_profile.png",
             )
         if show:
             plt.show()
@@ -1851,8 +1817,7 @@ class VisualiseModel:
 
         if savefig:
             plt.savefig(
-                self.ui_object.dir_output_name + "/temperature_3d_surface_profile.pdf",
-                backend="pgf",
+                self.ui_object.dir_output_name + "/temperature_3d_surface_profile.png",
             )
         plt.close(fig)
 
@@ -1888,7 +1853,6 @@ class VisualiseModel:
 
         if savefig:
             plt.savefig(
-                self.ui_object.dir_output_name + "/temperature_3d_contour_profile.pdf",
-                backend="pgf",
+                self.ui_object.dir_output_name + "/temperature_3d_contour_profile.png",
             )
         plt.close(fig)
