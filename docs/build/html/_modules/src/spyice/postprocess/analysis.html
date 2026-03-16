@@ -30,6 +30,7 @@
 <link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=b6ad3417" />
   
   <!-- So that users can add custom icons -->
@@ -41,6 +42,7 @@
     <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/src/spyice/postprocess/analysis';</script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
@@ -417,7 +419,6 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Calculates the errors of Numerical and Analytical using error norms one, two and infinity</span>
         <span class="c1"># norm(|T_k_list - T_Stefan_list|)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Calculating errors...&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">num_ana_temperature_diff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_ana_temperature_diff</span>
         <span class="n">T_k_Stefan_diff_L1norm</span><span class="p">,</span> <span class="n">T_k_Stefan_diff_infnorm</span><span class="p">,</span> <span class="n">T_k_Stefan_diff_L2norm</span> <span class="o">=</span> <span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">calculate_errors</span><span class="p">(</span>
@@ -527,7 +528,7 @@
 <span class="sd">            AnalysisData: An instance of the AnalysisData class containing the error analysis results.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Running error analysis...&quot;</span><span class="p">)</span>
+        <span class="c1"># print(&quot;Running error analysis...&quot;)</span>
         <span class="n">error_analysis_object</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">t_k_diff</span><span class="p">,</span> <span class="n">t_stefan_diff</span><span class="p">)</span>
         <span class="n">error_analysis_object</span><span class="o">.</span><span class="n">set_analysis</span><span class="p">()</span>
         <span class="n">error_analysis_object</span><span class="o">.</span><span class="n">error_analytical_numerical</span><span class="p">()</span>

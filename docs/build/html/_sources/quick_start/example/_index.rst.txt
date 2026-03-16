@@ -1,6 +1,3 @@
-Examples
-==========
-
 .. grid:: 2
    :gutter: 3
 
@@ -34,4 +31,12 @@ Examples
 
       .. image:: images/jupyter_run_radiation.png
          :alt: Radiation example
+         :width: 100%
+
+   .. grid-item-card:: Comparison of different inputs
+      :link: example-4-different-userinputs
+      :link-type: doc
+
+      .. image:: images/example-4.png
+         :alt: Different inputs
          :width: 100%

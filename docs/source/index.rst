@@ -38,7 +38,7 @@ Examples
 
 .. list-table::
    :align: center
-   :widths: 25 25 25 25
+   :widths: 20 20 20 20 20
 
    * - .. figure:: quick_start/example/images/main_original.png
          :width: 200px
@@ -63,6 +63,12 @@ Examples
          :align: center
 
          :doc:`Biogeochemical system response to transport mechanics <quick_start/example/jupyter_run_algae>`
+
+     - .. figure:: quick_start/example/images/example-4.png
+         :width: 200px
+         :align: center
+
+         :doc:`Comparison with different inputs <quick_start/example/example-4-different-userinputs>`
 
 #########
 Contents

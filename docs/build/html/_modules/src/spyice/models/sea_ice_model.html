@@ -30,6 +30,7 @@
 <link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=b6ad3417" />
   
   <!-- So that users can add custom icons -->
@@ -41,6 +42,7 @@
     <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/src/spyice/models/sea_ice_model';</script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
@@ -364,13 +366,13 @@
 <span class="kn">from</span> <span class="nn">spyice.utils.helpers</span> <span class="kn">import</span> <span class="n">export_residuals</span><span class="p">,</span> <span class="n">t_total</span>
 <span class="kn">from</span> <span class="nn">spyice.utils.spyice_exceptions</span> <span class="kn">import</span> <span class="n">ConvergenceError</span><span class="p">,</span> <span class="n">InvalidPhaseError</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">&quot;spyice.utils.custom&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;text.latex.preamble&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
-    <span class="p">[</span>
-        <span class="sa">r</span><span class="s2">&quot;\usepackage</span><span class="si">{dashbox}</span><span class="s2">&quot;</span><span class="p">,</span>
-        <span class="sa">r</span><span class="s2">&quot;\setmainfont</span><span class="si">{xcolor}</span><span class="s2">&quot;</span><span class="p">,</span>
-    <span class="p">]</span>
-<span class="p">)</span>
+<span class="c1"># plt.style.use(&quot;spyice.utils.custom&quot;)</span>
+<span class="c1"># plt.rcParams[&quot;text.latex.preamble&quot;].join(</span>
+<span class="c1">#     [</span>
+<span class="c1">#         r&quot;\usepackage{dashbox}&quot;,</span>
+<span class="c1">#         r&quot;\setmainfont{xcolor}&quot;,</span>
+<span class="c1">#     ]</span>
+<span class="c1"># )</span>
 
 
 <span class="k">def</span> <span class="nf">locate_ice_ocean_interface</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">dz</span><span class="p">,</span> <span class="n">nz</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -1299,7 +1301,7 @@
 <span class="sd">            None</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="n">fig1</span><span class="p">,</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># fig1, ax1 = plt.subplots(1, 1)</span>
         <span class="c1"># set nutrient concentration initial values</span>
         <span class="c1"># TODO: reorganize the init to another script</span>
         <span class="n">nutrient_cn_km1</span> <span class="o">=</span> <span class="p">(</span>
@@ -1518,19 +1520,18 @@
                 <span class="n">radiative_source_term</span><span class="p">,</span>
                 <span class="n">salinity_source_term</span><span class="p">,</span>
                 <span class="n">buffo</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">is_buffo</span><span class="p">,</span>
-            <span class="p">)</span>
+            <span class="p">)</span></div>
 
-            <span class="k">if</span> <span class="n">t</span> <span class="o">%</span> <span class="mi">1000</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">t_running</span><span class="p">(</span>
-                    <span class="n">fig1</span><span class="p">,</span> <span class="n">ax1</span><span class="p">,</span> <span class="n">t_stefan</span><span class="p">,</span> <span class="n">t_k</span><span class="o">=</span><span class="n">t_k</span><span class="p">,</span> <span class="n">t_k_buffo</span><span class="o">=</span><span class="n">t_k_buffo</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="n">count</span>
-                <span class="p">)</span>
 
-        <span class="n">fig1</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">preprocess_data</span><span class="o">.</span><span class="n">dir_output_name</span><span class="si">}</span><span class="s2">/TemperatureProfile.pdf&quot;</span><span class="p">,</span>
-            <span class="n">backend</span><span class="o">=</span><span class="s2">&quot;pgf&quot;</span><span class="p">,</span>
-        <span class="p">)</span></div>
+            <span class="c1"># if t % 1000 == 0:</span>
+            <span class="c1">#     count += 1</span>
+            <span class="c1">#     self.t_running(</span>
+            <span class="c1">#         fig1, ax1, t_stefan, t_k=t_k, t_k_buffo=t_k_buffo, count=count</span>
+            <span class="c1">#     )</span>
 
+        <span class="c1"># fig1.savefig(</span>
+        <span class="c1">#     f&quot;{self.preprocess_data.dir_output_name}/TemperatureProfile.png&quot;</span>
+        <span class="c1"># )</span>
 
 <div class="viewcode-block" id="SeaIceModel.calculate_source_terms">
 <a class="viewcode-back" href="../../../../api/spyice.models.html#src.spyice.models.SeaIceModel.calculate_source_terms">[docs]</a>
@@ -1659,7 +1660,6 @@
 <span class="sd">        Returns:</span>
 <span class="sd">            Results: The results dataclass object generated by running the sea ice model.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Running model...&quot;</span><span class="p">)</span>
         <span class="n">results_obj</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">dataclass</span><span class="p">,</span> <span class="n">user_dataclass</span><span class="p">)</span>
         <span class="n">results_obj</span><span class="o">.</span><span class="n">set_dataclass</span><span class="p">(</span><span class="n">dataclass</span><span class="p">)</span>
         <span class="n">results_obj</span><span class="o">.</span><span class="n">run_sea_ice_model</span><span class="p">()</span>
