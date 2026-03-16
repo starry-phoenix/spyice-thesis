@@ -9,3 +9,4 @@ User guide
   
   To run on command line <cmd_run>
   To run on jupyter notebook <jupyter_run>
+  To run tests, code formatting with hatch <hatch>
